@@ -1,12 +1,12 @@
-﻿using Godot;
-using MegaCrit.Sts2.Core.Combat;
+﻿using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Helpers;
 using MegaCrit.Sts2.Core.Models;
-using MegaCrit.Sts2.Core.Nodes.Rooms;
+using MegaCrit.Sts2.Core.MonsterMoves.Intents;
+using MegaCrit.Sts2.Core.MonsterMoves.MonsterMoveStateMachine;
 using MegaCrit.Sts2.Core.Nodes.Vfx;
 using MegaCrit.Sts2.Core.ValueProps;
 
@@ -63,49 +63,29 @@ public sealed class HypnotizedPower : IndomitablePower
     private async Task ApplySleepState()
     {
         Flash();
-        // 1. 施加 Stun 挂起下一回合意图，并重新给予 50 点格挡
-        await CreatureCmd.Stun(Owner, SleepMove);
+        // 1. 核心修改：直接注入包含 SleepIntent 的 MoveState，完美替换原有的 Stun
+        if (Owner.Monster is { MoveStateMachine: not null })
+        {
+            // 获取被打断前的状态 ID，以便苏醒后恢复原来的行动轨迹
+            var nextMoveId = Owner.Monster.MoveStateMachine.StateLog.Last().Id;
+            
+            // 构建自定义的睡眠状态，传入官方原生的 SleepIntent
+            var sleepState = new MoveState("HYPNOTIZED_SLEEP", SleepMove, new SleepIntent())
+            {
+                FollowUpStateId = nextMoveId,
+                MustPerformOnceBeforeTransitioning = true
+            };
+            
+            // 强制怪物立即执行该睡眠状态（这将自动把意图图标变更为 Zzz）
+            Owner.Monster.SetMoveImmediate(sleepState);
+        }
+        
         await CreatureCmd.GainBlock(Owner, 50m, ValueProp.Move, null);
         
-        // 2. 等待短暂延迟，确保 NStunnedVfx 的 CallDeferred 执行完毕
-        await Cmd.CustomScaledWait(0.01f, 0.05f);
-
-        var creatureNode = NCombatRoom.Instance?.GetCreatureNode(Owner);
-        if (creatureNode != null)
-        {
-            // 3. 精准抹除当前怪物的眩晕特效
-            Node? vfxContainer = NCombatRoom.Instance?.CombatVfxContainer;
-            if (vfxContainer != null)
-            {
-                var targetPos = creatureNode.GetTopOfHitbox(); 
-                foreach (var child in vfxContainer.GetChildren())
-                {
-                    if (child is NStunnedVfx stunVfx && stunVfx.GlobalPosition.DistanceTo(targetPos) < 10.0f)
-                    {
-                        stunVfx.QueueFreeSafely();
-                    }
-                }
-            }
-
-            // 4. 位置回退策略与挂载睡眠特效 (仅在尚未挂载时创建)
-            if (_sleepingVfx == null)
-            {
-                var sleepPosNode = creatureNode.GetSpecialNode<Marker2D>("%SleepVfxPos");
-                var intentPosNode = creatureNode.GetSpecialNode<Marker2D>("%IntentPos");
-
-                var spawnPos = creatureNode.GetTopOfHitbox(); 
-                if (sleepPosNode != null) spawnPos = sleepPosNode.GlobalPosition;
-                else if (intentPosNode != null) spawnPos = intentPosNode.GlobalPosition;
-
-                _sleepingVfx = NSleepingVfx.Create(spawnPos);
-
-                if (_sleepingVfx != null) 
-                {
-                    creatureNode.AddChildSafely(_sleepingVfx);
-                    _sleepingVfx.GlobalPosition = spawnPos;
-                }
-            }
-        }
+        // ==========================================
+        // 注意：这里已经彻底删除了之前用于抹除 StunVfx 的延迟与遍历和挂载睡眠特效的代码！
+        // 因为我们没有调用 CreatureCmd.Stun，引擎根本就不会生成眩晕星星。
+        // ==========================================
     }
 
     private async Task SleepMove(IReadOnlyList<Creature> targets) => await Task.CompletedTask;
