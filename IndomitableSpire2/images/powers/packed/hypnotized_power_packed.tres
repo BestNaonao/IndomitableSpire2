@@ -1,0 +1,7 @@
+[gd_resource type="AtlasTexture" load_steps=2 format=3 uid="uid://d4lothd2y435u"]
+
+[ext_resource type="Texture2D" uid="uid://bmseyuo1r8tq1" path="res://IndomitableSpire2/images/powers/packed/hypnotized_power_packed.png" id="1_sbl6x"]
+
+[resource]
+atlas = ExtResource("1_sbl6x")
+region = Rect2(0, 0, 64, 64)

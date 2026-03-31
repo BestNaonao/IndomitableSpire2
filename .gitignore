@@ -1,0 +1,27 @@
+# 基础屏蔽
+bin/
+
+# 缓存屏蔽
+/temp/
+obj/
+/*cache/
+
+# godot 屏蔽
+.godot/editor/
+.godot/imported/
+.godot/shader_cache/
+
+# --- IDE ---
+.idea/
+.vscode/
+.vs/
+*.suo
+*.user
+
+# 其他
+/packages/
+riderModule.iml
+/_ReSharper.Caches/
+# /IndomitableSpire2/animations/
+# /IndomitableSpire2/images
+# /IndomitableSpire2/scenes

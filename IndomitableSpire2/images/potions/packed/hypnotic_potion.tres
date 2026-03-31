@@ -1,0 +1,8 @@
+[gd_resource type="AtlasTexture" load_steps=2 format=3 uid="uid://f4g43ma17brm"]
+
+[ext_resource type="Texture2D" uid="uid://dka8mwuikqa3u" path="res://IndomitableSpire2/images/potions/hypnotic_potion.png" id="1_ra6oi"]
+
+[resource]
+atlas = ExtResource("1_ra6oi")
+region = Rect2(0, 0, 256, 256)
+margin = Rect2(1, 3, 2, 5)

@@ -1,0 +1,10 @@
+{
+  "INDOMITABLESPIRE2-HYPNOTIZED_POWER.description": "Forced into a deep slumber.",
+  "INDOMITABLESPIRE2-HYPNOTIZED_POWER.smartDescriptionAwake": "At the end of its turn, this creature will fall [gold]Asleep[/gold] and gain [blue]50[/blue] [gold]Block[/gold]. Taking unblocked damage reduces stacks by [blue]1[/blue]. [blue]{Amount}[/blue] remaining.",
+  "INDOMITABLESPIRE2-HYPNOTIZED_POWER.smartDescriptionSleeping": "Currently in a deep slumber. The creature is [gold]Asleep[/gold] and gains [blue]50[/blue] [gold]Block[/gold]. Reduces by [blue]1[/blue] at the end of its turn or when taking unblocked damage. [blue]{Amount}[/blue] remaining.",
+  "INDOMITABLESPIRE2-HYPNOTIZED_POWER.title": "Hypnotized",
+  "INDOMITABLESPIRE2-MOTIVATION_POWER.description": "Indomitable's motivation. Triggers special effects at 100 points.",
+  "INDOMITABLESPIRE2-MOTIVATION_POWER.smartDescription": "Currently at [blue]{MotivationAmount}[/blue] / [blue]100[/blue] Motivation. Reaching [blue]100[/blue] will [gold]Max[/gold] it out and unlock powerful exclusive effects.",
+  "INDOMITABLESPIRE2-MOTIVATION_POWER.smartDescriptionFull": "Motivation is [gold]Maxed[/gold] out!\\nIt will no longer decay. Ready for a full-scale sortie!",
+  "INDOMITABLESPIRE2-MOTIVATION_POWER.title": "Motivation"
+}

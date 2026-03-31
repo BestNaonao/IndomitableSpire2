@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://bxc01euenbkea"]
+
+[ext_resource type="SpineSkeletonDataResource" uid="uid://cdaw5y88qfyf5" path="res://animations/characters/ironclad/ironclad_skel_data.tres" id="1_uj8dg"]
+
+[node name="Test_tscn" type="Node2D"]
+
+[node name="SpineSprite" type="SpineSprite" parent="."]
+skeleton_data_res = ExtResource("1_uj8dg")
+preview_skin = "Default"
+preview_animation = "normal"
+preview_frame = false
+preview_time = 0.0
+scale = Vector2(0.28, 0.28)
