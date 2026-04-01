@@ -5,6 +5,6 @@
   "INDOMITABLESPIRE2-HYPNOTIZED_POWER.title": "催眠",
   "INDOMITABLESPIRE2-MOTIVATION_POWER.description": "不挠的干劲。到达100点后可触发特殊效果。",
   "INDOMITABLESPIRE2-MOTIVATION_POWER.smartDescription": "当前拥有 [blue]{MotivationAmount}[/blue] / [blue]100[/blue] 点干劲。当达到 [blue]100[/blue] 点时，不挠将会认真起来并解锁特殊效果。",
-  "INDOMITABLESPIRE2-MOTIVATION_POWER.smartDescriptionFull": "不挠已[gold]充满[/gold]干劲！\\n进度不会再衰减。随时准备全面出击！",
+  "INDOMITABLESPIRE2-MOTIVATION_POWER.smartDescriptionFull": "不挠已[gold]充满[/gold]干劲！\n进度不会再衰减。随时准备全面出击！",
   "INDOMITABLESPIRE2-MOTIVATION_POWER.title": "干劲"
 }

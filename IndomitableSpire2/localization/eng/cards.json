@@ -1,6 +1,8 @@
 {
-  "INDOMITABLESPIRE2-DEFEND_INDOMITABLE.title": "DefendIndomitable",
-  "INDOMITABLESPIRE2-DEFEND_INDOMITABLE.description": "",
-  "INDOMITABLESPIRE2-STRIKE_INDOMITABLE.title": "StrikeIndomitable",
-  "INDOMITABLESPIRE2-STRIKE_INDOMITABLE.description": ""
+  "INDOMITABLESPIRE2-DEFEND_INDOMITABLE.title": "Defend",
+  "INDOMITABLESPIRE2-DEFEND_INDOMITABLE.description": "Gain {Block:diff()} [gold]Block[/gold].",
+  "INDOMITABLESPIRE2-STRIKE_INDOMITABLE.title": "Strike",
+  "INDOMITABLESPIRE2-STRIKE_INDOMITABLE.description": "Deal {Damage:diff()} damage.",
+  "INDOMITABLESPIRE2-TAKE_A_BREAK.title": "Take a Break",
+  "INDOMITABLESPIRE2-TAKE_A_BREAK.description": "Heal [green]{Heal:diff()}[/green] HP.\nGain [blue]{MotivationPower:diff()}[/blue] [gold]Motivation[/gold].\nEnd your turn."
 }

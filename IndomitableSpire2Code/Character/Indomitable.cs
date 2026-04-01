@@ -51,7 +51,7 @@ public sealed class IndomitableCharacter : CustomCharacterModel
         ModelDb.Card<DefendIndomitable>(),
         ModelDb.Card<DefendIndomitable>(),
         ModelDb.Card<DefendIndomitable>(),
-        // ModelDb.Card<SomeSpecialStartingCard>() // 比如舰载机相关的特殊卡
+        ModelDb.Card<TakeABreak>(),
     ];
 
     public override IReadOnlyList<RelicModel> StartingRelics =>

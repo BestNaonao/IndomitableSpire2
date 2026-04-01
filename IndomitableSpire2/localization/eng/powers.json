@@ -5,6 +5,6 @@
   "INDOMITABLESPIRE2-HYPNOTIZED_POWER.title": "Hypnotized",
   "INDOMITABLESPIRE2-MOTIVATION_POWER.description": "Indomitable's motivation. Triggers special effects at 100 points.",
   "INDOMITABLESPIRE2-MOTIVATION_POWER.smartDescription": "Currently at [blue]{MotivationAmount}[/blue] / [blue]100[/blue] Motivation. Reaching [blue]100[/blue] will [gold]Max[/gold] it out and unlock powerful exclusive effects.",
-  "INDOMITABLESPIRE2-MOTIVATION_POWER.smartDescriptionFull": "Motivation is [gold]Maxed[/gold] out!\\nIt will no longer decay. Ready for a full-scale sortie!",
+  "INDOMITABLESPIRE2-MOTIVATION_POWER.smartDescriptionFull": "Motivation is [gold]Maxed[/gold] out!\nIt will no longer decay. Ready for a full-scale sortie!",
   "INDOMITABLESPIRE2-MOTIVATION_POWER.title": "Motivation"
 }

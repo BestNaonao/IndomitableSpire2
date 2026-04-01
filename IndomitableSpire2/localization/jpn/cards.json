@@ -1,6 +1,8 @@
 {
-  "INDOMITABLESPIRE2-DEFEND_INDOMITABLE.title": "DefendIndomitable",
-  "INDOMITABLESPIRE2-DEFEND_INDOMITABLE.description": "",
-  "INDOMITABLESPIRE2-STRIKE_INDOMITABLE.title": "StrikeIndomitable",
-  "INDOMITABLESPIRE2-STRIKE_INDOMITABLE.description": ""
+  "INDOMITABLESPIRE2-DEFEND_INDOMITABLE.title": "防御",
+  "INDOMITABLESPIRE2-DEFEND_INDOMITABLE.description": "{Block:diff()}[gold]ブロック[/gold]を得る。",
+  "INDOMITABLESPIRE2-STRIKE_INDOMITABLE.title": "ストライク",
+  "INDOMITABLESPIRE2-STRIKE_INDOMITABLE.description": "{Damage:diff()}ダメージを与える。",
+  "INDOMITABLESPIRE2-TAKE_A_BREAK.title": "小休止",
+  "INDOMITABLESPIRE2-TAKE_A_BREAK.description": "ＨＰを[green]{Heal:diff()}[/green]回復する。\n[gold]やる気[/gold]を[blue]{MotivationPower:diff()}[/blue]得る。\nターンを終了する。"
 }
