@@ -6,11 +6,8 @@ using MegaCrit.Sts2.Core.Localization.DynamicVars;
 
 namespace IndomitableSpire2.IndomitableSpire2Code.Cards.Basics;
 
-public sealed class TakeABreak() : IndomitableCard(0, CardType.Skill, CardRarity.Basic, TargetType.Self) // 继承自你的模组卡牌基类
+public sealed class TakeABreak() : IndomitableCard(0, CardType.Skill, CardRarity.Basic, TargetType.Self)
 {
-    // 0费，技能牌，基础稀有度，目标为自身
-
-    // 注册变量：3 点生命回复，15 点干劲
     protected override IEnumerable<DynamicVar> CanonicalVars => 
     [
         new HealVar(3M),
@@ -33,14 +30,12 @@ public sealed class TakeABreak() : IndomitableCard(0, CardType.Skill, CardRarity
             cardSource: this
         );
 
-        // 4. 强制结束回合 (参考了 VoidForm 的写法)
-        // 第二个参数 false 代表这不是由超时触发的结束
+        // 4. 强制结束回合 (参考了 VoidForm 的写法)，第二个参数 false 代表这是不可撤销的操作
         PlayerCmd.EndTurn(Owner, false);
     }
 
     protected override void OnUpgrade()
     {
-        // 升级效果：回复量 +1 (变为 4)，干劲获得量 +3 (变为 18)
         DynamicVars.Heal.UpgradeValueBy(1M);
         DynamicVars["MotivationPower"].UpgradeValueBy(3M);
     }
