@@ -1,0 +1,13 @@
+{
+  "TASHKENTSPIRE2-DISTANCE_POWER.description": "向前一步增加[blue]20[/blue]%造成伤害，增加[blue]10[/blue]%受到的伤害，向后一步则反之。",
+  "TASHKENTSPIRE2-DISTANCE_POWER.smartDescription_pos": "造成伤害增加[blue]{Amount}[/blue]%，受到伤害增加[blue]{Amount}[/blue]%。",
+  "TASHKENTSPIRE2-DISTANCE_POWER.smartDescription": "造成伤害与受到伤害无变化。",
+  "TASHKENTSPIRE2-DISTANCE_POWER.smartDescription_neg": "造成伤害减少[blue]{Amount}[/blue]%，受到伤害减少[blue]{Amount}[/blue]%。",
+  "TASHKENTSPIRE2-DISTANCE_POWER.title": "距离",
+  "TASHKENTSPIRE2-TORPEDO_POWER.description": "[gold]距离[/gold]不影响鱼雷造成的伤害，但释放时[gold]距离[/gold]影响造成伤害的剩余时间。",
+  "TASHKENTSPIRE2-TORPEDO_POWER.smartDescription": "在[blue]{Amount}[/blue]后回合结束时，对[gold]标记[/gold]最高的敌人造成[blue]{Amount}[/blue]伤害。",
+  "TASHKENTSPIRE2-TORPEDO_POWER.title": "鱼雷",
+  "TASHKENTSPIRE2-MARK_POWER.description": "受到攻击伤害时增加标记层数的伤害，然后层数减少[blue]1[/blue]。",
+  "TASHKENTSPIRE2-MARK_POWER.smartDescription": "受到攻击伤害时增加[blue]{Amount}[/blue]点伤害，然后层数减少[blue]1[/blue]。",
+  "TASHKENTSPIRE2-MARK_POWER.title": "标记"
+}

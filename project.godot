@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="IndomitableSpire2"
+config/name="TashkentSpire2"
 config/features=PackedStringArray("4.5", "C#", "Mobile")
 config/icon="res://icon.svg"
 
@@ -21,7 +21,7 @@ window/size/viewport_height=1080
 
 [dotnet]
 
-project/assembly_name="IndomitableSpire2"
+project/assembly_name="TashkentSpire2"
 
 [editor]
 

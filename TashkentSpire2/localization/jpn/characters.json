@@ -1,0 +1,16 @@
+{
+  "TASHKENTSPIRE2-TASHKENT_CHARACTER.title": "塔什干",
+  "TASHKENTSPIRE2-TASHKENT_CHARACTER.titleObject": "铜治酱",
+  "TASHKENTSPIRE2-TASHKENT_CHARACTER.pronounObject": "她",
+  "TASHKENTSPIRE2-TASHKENT_CHARACTER.pronounSubject": "她",
+  "TASHKENTSPIRE2-TASHKENT_CHARACTER.pronounPossessive": "她的",
+  "TASHKENTSPIRE2-TASHKENT_CHARACTER.possessiveAdjective": "她的",
+  "TASHKENTSPIRE2-TASHKENT_CHARACTER.description": "皇家所属光辉级大小姐航母的一员。\n在重视优雅、传统与荣耀的皇家舰船们当中，显得稍微有些缺乏干劲。虽然大多数时间在摸鱼，不过动起真格来还是很靠谱的。",
+  "TASHKENTSPIRE2-TASHKENT_CHARACTER.banter.alive.endTurnPing": "哈啊……还要多久才能结束呀？",
+  "TASHKENTSPIRE2-TASHKENT_CHARACTER.banter.dead.endTurnPing": "[sine]呼……zzz……[/sine]",
+  "TASHKENTSPIRE2-TASHKENT_CHARACTER.eventDeathPrevention": "哎……为了之后的茶会时间，只能再稍微认真一下了……",
+  "TASHKENTSPIRE2-TASHKENT_CHARACTER.aromaPrinciple": "[sine][blue]只要一动不动……麻烦就不会找上门来……大概吧。[/blue][/sine]",
+  "TASHKENTSPIRE2-TASHKENT_CHARACTER.goldMonologue": "[sine]有了这些，能买多少高级点心和红茶呢……[/sine]",
+  "TASHKENTSPIRE2-TASHKENT_CHARACTER.cardsModifierTitle": "塔什干卡牌",
+  "TASHKENTSPIRE2-TASHKENT_CHARACTER.cardsModifierDescription": "塔什干的卡牌现在会出现在奖励和商店中。"
+}

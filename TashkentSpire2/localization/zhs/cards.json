@@ -1,0 +1,10 @@
+{
+  "TASHKENTSPIRE2-DEFEND.title": "防御",
+  "TASHKENTSPIRE2-DEFEND.description": "获得{Block:diff()}点[gold]格挡[/gold]。",
+  "TASHKENTSPIRE2-STRIKE.title": "打击",
+  "TASHKENTSPIRE2-STRIKE.description": "造成{Damage:diff()}点伤害。",
+  "TASHKENTSPIRE2-LOAD_SHOT.title": "装填射击",
+  "TASHKENTSPIRE2-LOAD_SHOT.description": "。",
+  "TASHKENTSPIRE2-RETREAT_TORPEDO.title": "后撤雷",
+  "TASHKENTSPIRE2-RETREAT_TORPEDO.description": "。"
+}

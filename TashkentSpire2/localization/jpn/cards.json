@@ -1,0 +1,6 @@
+{
+  "TASHKENTSPIRE2-DEFEND.title": "Defend",
+  "TASHKENTSPIRE2-DEFEND.description": "获得{Block:diff()}点[gold]格挡[/gold]。",
+  "TASHKENTSPIRE2-STRIKE.title": "Strike",
+  "TASHKENTSPIRE2-STRIKE.description": "造成{Damage:diff()}点伤害。"
+}

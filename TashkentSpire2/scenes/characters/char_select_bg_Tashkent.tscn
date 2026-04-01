@@ -1,0 +1,23 @@
+[gd_scene load_steps=2 format=3 uid="uid://df65am7p1pjp0"]
+
+[ext_resource type="Texture2D" uid="uid://c3wnv4rg0h6gd" path="res://TashkentSpire2/images/charui/char_select_bg_Tashkent.jpg" id="1_nkj0x"]
+
+[node name="CharSelectBgTashkent" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -960.0
+offset_top = -523.0
+offset_right = 1600.0
+offset_bottom = 677.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(1280, 600)
+
+[node name="CharSelectBgTashkent" type="Sprite2D" parent="."]
+position = Vector2(840, 516)
+scale = Vector2(0.45, 0.45)
+texture = ExtResource("1_nkj0x")

@@ -1,6 +1,0 @@
-{
-  "INDOMITABLESPIRE2-DEFEND_INDOMITABLE.title": "DefendIndomitable",
-  "INDOMITABLESPIRE2-DEFEND_INDOMITABLE.description": "获得{Block:diff()}点[gold]格挡[/gold]。",
-  "INDOMITABLESPIRE2-STRIKE_INDOMITABLE.title": "StrikeIndomitable",
-  "INDOMITABLESPIRE2-STRIKE_INDOMITABLE.description": "造成{Damage:diff()}点伤害。"
-}

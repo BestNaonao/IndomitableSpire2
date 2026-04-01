@@ -1,0 +1,16 @@
+{
+  "TASHKENTSPIRE2-TASHKENT_CHARACTER.title": "塔什干",
+  "TASHKENTSPIRE2-TASHKENT_CHARACTER.titleObject": "塔什干",
+  "TASHKENTSPIRE2-TASHKENT_CHARACTER.pronounObject": "她",
+  "TASHKENTSPIRE2-TASHKENT_CHARACTER.pronounSubject": "她",
+  "TASHKENTSPIRE2-TASHKENT_CHARACTER.pronounPossessive": "她的",
+  "TASHKENTSPIRE2-TASHKENT_CHARACTER.possessiveAdjective": "她的",
+  "TASHKENTSPIRE2-TASHKENT_CHARACTER.description": "塔什干是北方联合的驱逐领舰，也被叫做“天蓝色的巡洋舰”。\n来到尖塔的少女，会像塞瓦斯托波尔那时一样努力战斗。\n",
+  "TASHKENTSPIRE2-TASHKENT_CHARACTER.banter.alive.endTurnPing": "同志酱，还没有结束吗……这样",
+  "TASHKENTSPIRE2-TASHKENT_CHARACTER.banter.dead.endTurnPing": "[sine]塔什干才没有输！[/sine]",
+  "TASHKENTSPIRE2-TASHKENT_CHARACTER.eventDeathPrevention": "你这…!塔什干还能再战斗！",
+  "TASHKENTSPIRE2-TASHKENT_CHARACTER.aromaPrinciple": "[sine][blue]我要回到同志酱身边……[/blue][/sine]",
+  "TASHKENTSPIRE2-TASHKENT_CHARACTER.goldMonologue": "[sine]这些金币绝对能帮得上同志酱呢……[/sine]",
+  "TASHKENTSPIRE2-TASHKENT_CHARACTER.cardsModifierTitle": "塔什干卡牌",
+  "TASHKENTSPIRE2-TASHKENT_CHARACTER.cardsModifierDescription": "塔什干的卡牌现在会出现在奖励和商店中。"
+}
