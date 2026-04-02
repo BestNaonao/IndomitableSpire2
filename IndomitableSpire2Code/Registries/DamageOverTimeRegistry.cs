@@ -92,7 +92,7 @@ public sealed class DamageOverTimeRegistry
             PatchMarginRight = ((NinePatchRect)poisonForeground).PatchMarginRight,
             PatchMarginBottom = ((NinePatchRect)poisonForeground).PatchMarginBottom,
             Visible = false,
-            // SelfModulate = currentProvider!.ForegroundColor,
+            SelfModulate = currentProvider!.ForegroundColor,
             ClipContents = true
         };
         
