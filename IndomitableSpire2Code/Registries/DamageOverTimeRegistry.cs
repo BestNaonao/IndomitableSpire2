@@ -37,10 +37,13 @@ public sealed class DamageOverTimeRegistry
     /// 注册持续伤害提供者
     public void Register(IDamageOverTimeProvider provider)
     {
-        if (_providers.Contains(provider)) return;
+        if (_providers.Any(p => p.DamageTypeId == provider.DamageTypeId))
+        {
+            throw new InvalidOperationException(
+                $"DotRegistry: DamageTypeId '{provider.DamageTypeId}' already registered by {_providers.First(p => p.DamageTypeId == provider.DamageTypeId).DisplayName}");
+        }
         _providers.Add(provider);
         _providers.Sort((a, b) => a.Priority.CompareTo(b.Priority));
-        MainFile.Logger.Info($"DotRegistry: Registered {provider.DisplayName} (Priority={provider.Priority})");
     }
 
     /// 获取所有提供者（按优先级排序）
