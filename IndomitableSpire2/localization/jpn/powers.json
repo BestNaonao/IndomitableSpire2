@@ -6,5 +6,8 @@
   "INDOMITABLESPIRE2-MOTIVATION_POWER.description": "インドミタブルのやる気。100に達すると特殊な効果を発動できる。",
   "INDOMITABLESPIRE2-MOTIVATION_POWER.smartDescription": "現在 [blue]{MotivationAmount}[/blue] / [blue]100[/blue] のやる気を持っています。[blue]100[/blue] に達すると、やる気が[gold]MAX[/gold]になり、強力な専用効果がアンロックされます。",
   "INDOMITABLESPIRE2-MOTIVATION_POWER.smartDescriptionFull": "やる気[gold]MAX[/gold]！\nこれ以上減少することはありません。いつでも全機発艦可能ですわ！",
-  "INDOMITABLESPIRE2-MOTIVATION_POWER.title": "やる気"
+  "INDOMITABLESPIRE2-MOTIVATION_POWER.title": "やる気",
+  "INDOMITABLESPIRE2-ON_FIRE_POWER.description": "ターン開始時と終了時に、最大ＨＰの一定割合の生命を失う。",
+  "INDOMITABLESPIRE2-ON_FIRE_POWER.smartDescription": "{OnPlayer:自身の|敵の}ターン開始時と終了時に、それぞれ最大ＨＰの[blue]{NextLostHpPercent}%[/blue]（[blue]{NextLostHpInt}[/blue]ダメージ）を失い、数値を[blue]1[/blue]減らす。現在までに焼失した合計ＨＰ：[blue]{TotalLostHpInt}[/blue]。",
+  "INDOMITABLESPIRE2-ON_FIRE_POWER.title": "炎上"
 }

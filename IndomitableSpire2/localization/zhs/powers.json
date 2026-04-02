@@ -6,5 +6,8 @@
   "INDOMITABLESPIRE2-MOTIVATION_POWER.description": "不挠的干劲。到达100点后可触发特殊效果。",
   "INDOMITABLESPIRE2-MOTIVATION_POWER.smartDescription": "当前拥有 [blue]{MotivationAmount}[/blue] / [blue]100[/blue] 点干劲。当达到 [blue]100[/blue] 点时，不挠将会认真起来并解锁特殊效果。",
   "INDOMITABLESPIRE2-MOTIVATION_POWER.smartDescriptionFull": "不挠已[gold]充满[/gold]干劲！\n进度不会再衰减。随时准备全面出击！",
-  "INDOMITABLESPIRE2-MOTIVATION_POWER.title": "干劲"
+  "INDOMITABLESPIRE2-MOTIVATION_POWER.title": "干劲",
+  "INDOMITABLESPIRE2-ON_FIRE_POWER.description": "在回合开始和回合结束时失去等同于最大生命值百分比的生命。",
+  "INDOMITABLESPIRE2-ON_FIRE_POWER.smartDescription": "在{OnPlayer:你的|其}回合开始和回合结束时，分别失去最大生命值 [blue]{NextLostHpPercent}%[/blue]（[blue]{NextLostHpInt}[/blue]点）的生命，随后层数减少[blue]1[/blue]。当前累计已烧灼 [blue]{TotalLostHpInt}[/blue] 点生命。",
+  "INDOMITABLESPIRE2-ON_FIRE_POWER.title": "起火"
 }

@@ -6,5 +6,8 @@
   "INDOMITABLESPIRE2-MOTIVATION_POWER.description": "Indomitable's motivation. Triggers special effects at 100 points.",
   "INDOMITABLESPIRE2-MOTIVATION_POWER.smartDescription": "Currently at [blue]{MotivationAmount}[/blue] / [blue]100[/blue] Motivation. Reaching [blue]100[/blue] will [gold]Max[/gold] it out and unlock powerful exclusive effects.",
   "INDOMITABLESPIRE2-MOTIVATION_POWER.smartDescriptionFull": "Motivation is [gold]Maxed[/gold] out!\nIt will no longer decay. Ready for a full-scale sortie!",
-  "INDOMITABLESPIRE2-MOTIVATION_POWER.title": "Motivation"
+  "INDOMITABLESPIRE2-MOTIVATION_POWER.title": "Motivation",
+  "INDOMITABLESPIRE2-ON_FIRE_POWER.description": "Loses a percentage of Max HP at the start and end of its turn.",
+  "INDOMITABLESPIRE2-ON_FIRE_POWER.smartDescription": "At the start and end of {OnPlayer:your|its} turn, loses [blue]{NextLostHpPercent}%[/blue] ([blue]{NextLostHpInt}[/blue]) of {OnPlayer:your|its} Max HP, then reduces stacks by [blue]1[/blue]. Total HP scorched so far: [blue]{TotalLostHpInt}[/blue].",
+  "INDOMITABLESPIRE2-ON_FIRE_POWER.title": "On Fire"
 }
