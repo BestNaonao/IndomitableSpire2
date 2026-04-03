@@ -47,10 +47,8 @@ public static class NHealthBarDotPatch
             return true;
         }
         
-        // 获取所有激活的持续伤害源
+        // 获取所有激活的持续伤害源，没有持续伤害时交给原方法
         var dotSources = DamageOverTimeRegistry.Instance.GetActiveDotSources(____creature);
-        
-        // 没有持续伤害时交给原方法
         if (dotSources.Count == 0) return true;
         
         // 获取所有前景控件
@@ -59,24 +57,21 @@ public static class NHealthBarDotPatch
             x => DamageOverTimeRegistry.Instance.GetOrCreateForeground(__instance, x.Provider.DamageTypeId)
         );
         
-        var doomAmount = ____creature.GetPowerAmount<DoomPower>();
-        
         var currentHpWidth = (float)getFgWidthMethod.Invoke(__instance, [____creature.CurrentHp, maxFgWidth])!;
-        var num1 = currentHpWidth - maxFgWidth;
         
         // 无敌状态
         if (____creature.ShowsInfiniteHp)
         {
             ____hpForeground.SelfModulate = new Color("C5BBED");
             ____hpForeground.Visible = true;
-            ____hpForeground.OffsetRight = num1;
+            ____hpForeground.OffsetRight = currentHpWidth - maxFgWidth;
             HideAllDotForegrounds(foregroundControls, ____poisonForeground, ____doomForeground);
             return false;
         }
         
         // 重置所有前景
         ____hpForeground.Visible = true;
-        ____hpForeground.OffsetRight = num1;
+        ____hpForeground.OffsetRight = currentHpWidth - maxFgWidth;
         HideAllDotForegrounds(foregroundControls, ____poisonForeground, ____doomForeground);
         
         // ========== 循环计算致死性与显示条 ==========
@@ -84,30 +79,38 @@ public static class NHealthBarDotPatch
         
         foreach (var (provider, damage) in dotSources)
         {
-            // 计算当前伤害源在伤害前剩余血量的宽度（右位置），伤害条的右边界偏移量逻辑相同
+            // 寻找并显示伤害条，计算当前伤害触发前剩余血量的宽度（右位置）
             var currentForeground = foregroundControls[provider.DamageTypeId];
             currentForeground.Visible = true;
             currentForeground.OffsetRight = currentHpWidth - maxFgWidth;
             
-            // 如果伤害源致死，则占据全部剩余血条
-            if (damage >= remainingHp)
-            {
-                currentForeground.OffsetLeft = 0.0f;
-                ____hpForeground.Visible = false;
-                return false;
-            }
-            
-            // 非致死时计算剩余伤害后的血量和新的剩余血条长度，计算左边界偏移量
-            remainingHp -= damage;
-            var patchMarginLeft = ((NinePatchRect)currentForeground).PatchMarginLeft;
+            // 计算剩余伤害后的血量和新的剩余血条长度
+            remainingHp = Math.Max(0, remainingHp - damage);
             currentHpWidth = (float)getFgWidthMethod.Invoke(__instance, [remainingHp, maxFgWidth])!;
+            var patchMarginLeft = ((NinePatchRect)currentForeground).PatchMarginLeft;
             currentForeground.OffsetLeft = Math.Max(0.0f, currentHpWidth - patchMarginLeft);
-            ____hpForeground.OffsetRight = currentHpWidth - maxFgWidth;
+            MainFile.Logger.Info($"DebugPatch {provider.DamageTypeId}: OffsetLeft={currentForeground.OffsetLeft}, OffsetRight={currentForeground.OffsetRight}, MaxFgWidth={maxFgWidth}");
+            
+            // 如果伤害源致死，则占据全部剩余血条，并隐藏剩余HP条
+            if (remainingHp > 0) continue;
+            ____hpForeground.Visible = false;
+            break;
         }
+        if (____hpForeground.Visible) ____hpForeground.OffsetRight = currentHpWidth - maxFgWidth;
         
-        // 2. 若灾厄致死，则让原方法处理
-        var isDoomLethal = doomAmount > 0 && doomAmount >= remainingHp;
-        return isDoomLethal;
+        var mask = __instance.GetNodeOrNull<Control>("%HpForegroundContainer/Mask");
+        foreach (var child in mask.GetChildren().ToList()) MainFile.Logger.Info($"DebugPatch: {child.Name}");
+        
+        // 2. 手动渲染灾厄并拦截原方法
+        if (____creature.GetPowerAmount<DoomPower>() is var doomAmount and > 0 && remainingHp > 0)
+        {
+            ____doomForeground.Visible = true;
+            var doomHpWidth = (float)getFgWidthMethod.Invoke(__instance, [doomAmount, maxFgWidth])!;
+            ____doomForeground.OffsetRight = Math.Min(currentHpWidth - maxFgWidth, doomHpWidth - maxFgWidth);
+            MainFile.Logger.Info($"DebugPatch Doom Provided: OffsetLeft={____doomForeground.OffsetLeft}, OffsetRight={____doomForeground.OffsetRight}, MaxFgWidth={maxFgWidth}");
+        }
+
+        return false;
     }
 
     [HarmonyPatch(typeof(NHealthBar), "RefreshText")]

@@ -96,10 +96,10 @@ public sealed class DamageOverTimeRegistry
             ClipContents = true
         };
         
-        mask.AddChild(foreground);
-        
         // 按注册顺序排列节点
         var allChildren = mask.GetChildren().ToList();
+        mask.AddChild(foreground);
+        
         var poisonIndex = allChildren.IndexOf(poisonForeground);
         if (poisonIndex >= 0)
         {
@@ -109,7 +109,9 @@ public sealed class DamageOverTimeRegistry
                 .Select(child => allChildren.IndexOf(child))
                 .OrderBy(idx => idx)
                 .ToList();
-        
+            
+            MainFile.Logger.Info($"Found DotIndexes: [{string.Join(", ", dotNodesIndexesAfterPoison)}]");
+            
             // 找到第一个优先级 >= 当前优先级的节点位置
             var insertIndex = poisonIndex + 1; // 默认插在 Poison 之后
         
@@ -123,7 +125,7 @@ public sealed class DamageOverTimeRegistry
             }
         
             mask.MoveChild(foreground, insertIndex);
-            MainFile.Logger.Info($"DotRegistry: Moved {damageTypeId} to index {insertIndex} (Priority={currentPriority})");
+            MainFile.Logger.Info($"DotRegistry: Moved {damageTypeId} to index {insertIndex} (Priority={currentPriority}), PoisonIndex={poisonIndex}");
         }
         
         MainFile.Logger.Info($"DotRegistry: Created foreground control for {damageTypeId}");
