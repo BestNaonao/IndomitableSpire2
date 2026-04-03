@@ -21,29 +21,28 @@ public static class NHealthBarDotPatch
     private static void Ready_Postfix(NHealthBar __instance)
     {
         // 预创建所有注册的前景控件
-        foreach (var provider in DamageOverTimeRegistry.Instance.GetProviders())
-        {
+        foreach (var provider in DamageOverTimeRegistry.Instance.GetProviders()) 
             DamageOverTimeRegistry.Instance.GetOrCreateForeground(__instance, provider.DamageTypeId);
-        }
+        
+        // 挂载 TreeExiting 委托，将生命周期绑定到原生的 Godot 信号上，自动从 Registry 的字典中剔除它
+        var creatureField = AccessTools.Field(typeof(NHealthBar), "_creature");
+        __instance.TreeExiting += () => 
+            DamageOverTimeRegistry.Instance.Cleanup(__instance, ((Creature)creatureField.GetValue(__instance)!).Name);
     }
 
     [HarmonyPatch(typeof(NHealthBar), "RefreshForeground")]
     [HarmonyPrefix]
-    private static bool RefreshForeground_Prefix(
-        NHealthBar __instance, 
-        Creature ____creature, 
-        Control ____hpForeground, 
-        Control ____poisonForeground, 
-        Control ____doomForeground)
+    private static bool RefreshForeground_Prefix(NHealthBar __instance, 
+        Creature ____creature, Control ____hpForeground, Control ____poisonForeground, Control ____doomForeground)
     {
         var maxFgWidthProp = AccessTools.Property(typeof(NHealthBar), "MaxFgWidth");
         var maxFgWidth = (float)maxFgWidthProp!.GetValue(__instance)!;
         var getFgWidthMethod = AccessTools.Method(typeof(NHealthBar), "GetFgWidth", [typeof(int), typeof(float)]);
         
         // 死亡状态清理
-        if (____creature.IsDead || ____creature.CurrentHp <= 0)
+        if (____creature.CurrentHp <= 0)
         {
-            DamageOverTimeRegistry.Instance.Cleanup(__instance);
+            DamageOverTimeRegistry.Instance.HideAll(__instance);
             return true;
         }
         
@@ -57,26 +56,23 @@ public static class NHealthBarDotPatch
             x => DamageOverTimeRegistry.Instance.GetOrCreateForeground(__instance, x.Provider.DamageTypeId)
         );
         
-        var currentHpWidth = (float)getFgWidthMethod.Invoke(__instance, [____creature.CurrentHp, maxFgWidth])!;
+        var remainingHp = ____creature.CurrentHp;
+        var currentHpWidth = (float)getFgWidthMethod.Invoke(__instance, [remainingHp, maxFgWidth])!;
+        
+        // 重置所有前景
+        ____hpForeground.Visible = true;
+        ____hpForeground.OffsetRight = currentHpWidth - maxFgWidth;
+        foreach (var control in foregroundControls.Values) control.Visible = false;
+        ____poisonForeground.Visible = ____doomForeground.Visible = false;
         
         // 无敌状态
         if (____creature.ShowsInfiniteHp)
         {
             ____hpForeground.SelfModulate = new Color("C5BBED");
-            ____hpForeground.Visible = true;
-            ____hpForeground.OffsetRight = currentHpWidth - maxFgWidth;
-            HideAllDotForegrounds(foregroundControls, ____poisonForeground, ____doomForeground);
             return false;
         }
         
-        // 重置所有前景
-        ____hpForeground.Visible = true;
-        ____hpForeground.OffsetRight = currentHpWidth - maxFgWidth;
-        HideAllDotForegrounds(foregroundControls, ____poisonForeground, ____doomForeground);
-        
         // ========== 循环计算致死性与显示条 ==========
-        var remainingHp = ____creature.CurrentHp;
-        
         foreach (var (provider, damage) in dotSources)
         {
             // 寻找并显示伤害条，计算当前伤害触发前剩余血量的宽度（右位置）
@@ -89,7 +85,6 @@ public static class NHealthBarDotPatch
             currentHpWidth = (float)getFgWidthMethod.Invoke(__instance, [remainingHp, maxFgWidth])!;
             var patchMarginLeft = ((NinePatchRect)currentForeground).PatchMarginLeft;
             currentForeground.OffsetLeft = Math.Max(0.0f, currentHpWidth - patchMarginLeft);
-            MainFile.Logger.Info($"DebugPatch {provider.DamageTypeId}: OffsetLeft={currentForeground.OffsetLeft}, OffsetRight={currentForeground.OffsetRight}, MaxFgWidth={maxFgWidth}");
             
             // 如果伤害源致死，则占据全部剩余血条，并隐藏剩余HP条
             if (remainingHp > 0) continue;
@@ -98,17 +93,12 @@ public static class NHealthBarDotPatch
         }
         if (____hpForeground.Visible) ____hpForeground.OffsetRight = currentHpWidth - maxFgWidth;
         
-        var mask = __instance.GetNodeOrNull<Control>("%HpForegroundContainer/Mask");
-        foreach (var (child, idx) in mask.GetChildren().ToList().Select((c,i) => (c, i))) 
-            MainFile.Logger.Info($"DebugPatch Layer{idx}: {child.Name}");
-        
         // 2. 手动渲染灾厄并拦截原方法
         if (____creature.GetPowerAmount<DoomPower>() is var doomAmount and > 0 && remainingHp > 0)
         {
             ____doomForeground.Visible = true;
             var doomHpWidth = (float)getFgWidthMethod.Invoke(__instance, [doomAmount, maxFgWidth])!;
             ____doomForeground.OffsetRight = Math.Min(currentHpWidth - maxFgWidth, doomHpWidth - maxFgWidth);
-            MainFile.Logger.Info($"DebugPatch Doom Provided: OffsetLeft={____doomForeground.OffsetLeft}, OffsetRight={____doomForeground.OffsetRight}, MaxFgWidth={maxFgWidth}");
         }
 
         return false;
@@ -116,12 +106,8 @@ public static class NHealthBarDotPatch
 
     [HarmonyPatch(typeof(NHealthBar), "RefreshText")]
     [HarmonyPrefix]
-    private static bool RefreshText_Prefix(
-        NHealthBar __instance, 
-        Creature ____creature,
-        MegaLabel ____hpLabel, 
-        TextureRect ____infinityTex, 
-        Control ____doomForeground)
+    private static bool RefreshText_Prefix(NHealthBar __instance, 
+        Creature ____creature, MegaLabel ____hpLabel, TextureRect ____infinityTex, Control ____doomForeground)
     {
         if (____creature.IsDead || ____creature.CurrentHp <= 0)
             return true;
@@ -164,15 +150,5 @@ public static class NHealthBarDotPatch
         ____hpLabel.SetTextAutoSize($"{____creature.CurrentHp}/{____creature.MaxHp}");
         
         return false;
-    }
-    
-    private static void HideAllDotForegrounds(
-        Dictionary<string, Control> dotControls, 
-        Control poisonForeground, 
-        Control doomForeground)
-    {
-        foreach (var control in dotControls.Values) control.Visible = false;
-        poisonForeground.Visible = false;
-        doomForeground.Visible = false;
     }
 }

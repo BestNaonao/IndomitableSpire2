@@ -141,12 +141,18 @@ public sealed class DamageOverTimeRegistry
         return foreground;
     }
     
-    /// 清理血条的所有前景控件
-    public void Cleanup(NHealthBar healthBar)
+    /// 清理血条在字典中的引用（真正的内存回收）
+    public void Cleanup(NHealthBar healthBar, string creatureName)
     {
-        if (!_foregroundControls.TryRemove(healthBar, out var controls)) return;
-        foreach (var control in controls.Values) control.QueueFree();
-        MainFile.Logger.Info($"DotRegistry: Cleaned up foreground controls for health bar");
+        if (!_foregroundControls.TryRemove(healthBar, out _)) return;
+        MainFile.Logger.Info($"DotRegistry: Cleaned up dictionary references for the exiting health bar of {creatureName}.");
+    }
+
+    /// 仅仅隐藏血条的前景控件（用于死亡状态）
+    public void HideAll(NHealthBar healthBar)
+    {
+        if (!_foregroundControls.TryGetValue(healthBar, out var controls)) return;
+        foreach (var control in controls.Values.Where(GodotObject.IsInstanceValid)) control.Visible = false;
     }
     
     /// 获取生物身上所有激活的持续伤害提供者
