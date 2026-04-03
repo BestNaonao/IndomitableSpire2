@@ -19,6 +19,7 @@ public sealed class DamageOverTimeRegistry
     /// 获取所有已注册的 DOT 类型
     private HashSet<string> RegisteredTypes => _providers.Select(p => p.DamageTypeId).ToHashSet();
 
+    /// 按伤害类型获取提供者
     private IDamageOverTimeProvider? GetProvider(string damageTypeId)
     {
         return _providers.FirstOrDefault(p => p.DamageTypeId == damageTypeId);
@@ -93,7 +94,18 @@ public sealed class DamageOverTimeRegistry
             PatchMarginBottom = ((NinePatchRect)poisonForeground).PatchMarginBottom,
             Visible = false,
             SelfModulate = currentProvider!.ForegroundColor,
-            ClipContents = true
+            ClipChildren = CanvasItem.ClipChildrenMode.AndDraw,
+            TextureFilter = CanvasItem.TextureFilterEnum.Linear,
+            TextureRepeat = CanvasItem.TextureRepeatEnum.Disabled,
+            LayoutMode = 1,
+            LayoutDirection = Control.LayoutDirectionEnum.Inherited,
+            AnchorsPreset = 15,
+            AnchorRight = 1.0f,
+            AnchorBottom = 1.0f,
+            OffsetTop = -4.0f,
+            OffsetBottom = 4.0f,
+            GrowHorizontal = Control.GrowDirection.Both,
+            GrowVertical = Control.GrowDirection.Both
         };
         
         // 按注册顺序排列节点
@@ -110,15 +122,12 @@ public sealed class DamageOverTimeRegistry
                 .OrderBy(idx => idx)
                 .ToList();
             
-            MainFile.Logger.Info($"Found DotIndexes: [{string.Join(", ", dotNodesIndexesAfterPoison)}]");
-            
             // 找到第一个优先级 >= 当前优先级的节点位置
             var insertIndex = poisonIndex + 1; // 默认插在 Poison 之后
         
             foreach (var existingIndex in dotNodesIndexesAfterPoison)
             {
                 var existingProvider = GetProvider(allChildren[existingIndex].Name);
-
                 if (existingProvider == null || existingProvider.Priority < currentPriority) continue;
                 insertIndex = existingIndex;
                 break;

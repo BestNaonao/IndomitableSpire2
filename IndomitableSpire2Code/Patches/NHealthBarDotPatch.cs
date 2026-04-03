@@ -99,7 +99,8 @@ public static class NHealthBarDotPatch
         if (____hpForeground.Visible) ____hpForeground.OffsetRight = currentHpWidth - maxFgWidth;
         
         var mask = __instance.GetNodeOrNull<Control>("%HpForegroundContainer/Mask");
-        foreach (var child in mask.GetChildren().ToList()) MainFile.Logger.Info($"DebugPatch: {child.Name}");
+        foreach (var (child, idx) in mask.GetChildren().ToList().Select((c,i) => (c, i))) 
+            MainFile.Logger.Info($"DebugPatch Layer{idx}: {child.Name}");
         
         // 2. 手动渲染灾厄并拦截原方法
         if (____creature.GetPowerAmount<DoomPower>() is var doomAmount and > 0 && remainingHp > 0)
@@ -135,9 +136,6 @@ public static class NHealthBarDotPatch
         var dotSources = DamageOverTimeRegistry.Instance.GetActiveDotSources(____creature);
         var doomAmount = ____creature.GetPowerAmount<DoomPower>();
         
-        Color fontColor;
-        Color outlineColor;
-        
         // ========== 循环检查致死性 ==========
         var remainingHp = ____creature.CurrentHp;
         IDamageOverTimeProvider? lethalProvider = null;
@@ -152,34 +150,14 @@ public static class NHealthBarDotPatch
             remainingHp -= damage;
         }
         
-        // 检查灾厄致死
-        var isDoomLethal = doomAmount > 0 && doomAmount >= remainingHp;
-        
-        if (lethalProvider != null)
-        {
-            // 持续伤害致死
-            fontColor = lethalProvider.LethalFontColor;
-            outlineColor = lethalProvider.LethalOutlineColor;
-            MainFile.Logger.Info($"DotPatch Text: {lethalProvider.DisplayName} Lethal");
-        }
-        else if (isDoomLethal)
-        {
-            // 灾厄致死
-            fontColor = new Color("FB8DFF");
-            outlineColor = new Color("2D1263");
-        }
-        else if (____creature.Block <= 0)
-        {
-            // 无格挡
-            fontColor = DefaultFontColor;
-            outlineColor = DefaultOutlineColor;
-        }
-        else
-        {
-            // 有格挡
-            fontColor = DefaultFontColor;
-            outlineColor = BlockOutlineColor;
-        }
+        var (fontColor, outlineColor) =
+            lethalProvider != null  // 持续伤害致死
+                ? (lethalProvider.LethalFontColor, lethalProvider.LethalOutlineColor)
+                : doomAmount > 0 && doomAmount >= remainingHp   // 灾厄致死
+                    ? (new Color("FB8DFF"), new Color("2D1263"))
+                    : ____creature.Block > 0    // 有无格挡
+                        ? (DefaultFontColor, BlockOutlineColor)
+                        : (DefaultFontColor, DefaultOutlineColor);
 
         ____hpLabel.AddThemeColorOverride(ThemeConstants.Label.FontColor, fontColor);
         ____hpLabel.AddThemeColorOverride(ThemeConstants.Label.FontOutlineColor, outlineColor);
