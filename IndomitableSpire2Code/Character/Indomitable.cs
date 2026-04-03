@@ -74,7 +74,12 @@ public sealed class IndomitableCharacter : CustomCharacterModel
     // 获取休息点的视觉场景
     public override string CustomRestSiteAnimPath => CustomVisualPath;
     // 获取商店的视觉场景
-    public override string CustomMerchantAnimPath => CustomVisualPath;
+    public override string CustomMerchantAnimPath => CurrentSkin switch
+    {
+        IndomitableSkin.Default => "res://IndomitableSpire2/scenes/merchant/indomitable_merchant.tscn",
+        IndomitableSkin.Maid    => "res://IndomitableSpire2/scenes/merchant/indomitable_maid_merchant.tscn",
+        _                       => "res://IndomitableSpire2/scenes/merchant/indomitable_merchant.tscn"
+    };
     
     // ... 同样的方式替换选人界面的立绘、头像等 ...
     public override string CustomCharacterSelectBg =>               // 选择界面背景
