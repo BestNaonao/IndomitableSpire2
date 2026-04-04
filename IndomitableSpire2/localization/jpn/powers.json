@@ -9,5 +9,8 @@
   "INDOMITABLESPIRE2-MOTIVATION_POWER.title": "やる気",
   "INDOMITABLESPIRE2-ON_FIRE_POWER.description": "ターン開始時と終了時に、最大ＨＰの一定割合の生命を失う。",
   "INDOMITABLESPIRE2-ON_FIRE_POWER.smartDescription": "{OnPlayer:自身の|敵の}ターン開始時と終了時に、それぞれ最大ＨＰの[blue]{NextLostHpPercent}%[/blue]（[blue]{NextLostHpInt}[/blue]ダメージ）を失い、数値を[blue]1[/blue]減らす。現在までに焼失した合計ＨＰ：[blue]{TotalLostHpInt}[/blue]。",
-  "INDOMITABLESPIRE2-ON_FIRE_POWER.title": "炎上"
+  "INDOMITABLESPIRE2-ON_FIRE_POWER.title": "炎上",
+  "INDOMITABLESPIRE2-FLOODING_POWER.description": "ターン開始時と終了時に、最大ＨＰの一定割合の生命を失う。非攻撃の意図を持つ場合、受けるダメージが増加する。",
+  "INDOMITABLESPIRE2-FLOODING_POWER.smartDescription": "{OnPlayer:自身の|敵の}ターン開始時と終了時に、それぞれ最大ＨＰの[blue]{NextLostHpPercent}%[/blue]（[blue]{NextLostHpInt}[/blue]ダメージ）を失い、数値を[blue]1[/blue]減らす。現在までに水没した合計ＨＰ：[blue]{TotalLostHpInt}[/blue]。\nこの生物が非攻撃の意図を1つでも持っている場合、受ける攻撃ダメージが[blue]{DamageIncreasePercent}%[/blue]（1層につき5%）増加する。",
+  "INDOMITABLESPIRE2-FLOODING_POWER.title": "浸水"
 }

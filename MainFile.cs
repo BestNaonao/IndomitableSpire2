@@ -1,5 +1,6 @@
 using Godot;
 using HarmonyLib;
+using IndomitableSpire2.IndomitableSpire2Code.Providers;
 using IndomitableSpire2.IndomitableSpire2Code.Providers.DotProviders;
 using IndomitableSpire2.IndomitableSpire2Code.Registries;
 using MegaCrit.Sts2.Core.Modding;
@@ -23,6 +24,7 @@ public partial class MainFile : Node
         // 注册中毒、起火，未来可以轻松添加更多
         registry.Register(new PoisonDotProvider());
         registry.Register(new OnFireDotProvider());
+        registry.Register(new FloodingDotProvider());
         
         Logger.Info("Dot providers registered successfully");
         
