@@ -3,7 +3,6 @@ using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Relics;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
-using MegaCrit.Sts2.Core.Localization.DynamicVars;
 
 namespace TashkentSpire2.TashkentSpire2Code.Relics;
 
@@ -20,14 +19,13 @@ public sealed class EjectionStart : TashkentRelic
     protected override string PackedIconOutlinePath => 
         "res://TashkentSpire2/images/relics/outline/ShikikanDakimakura_outline.tres";
     
-    public override async Task AfterTurnEnd(PlayerChoiceContext choiceContext, CombatSide side)
+    public override async Task BeforeSideTurnStart(PlayerChoiceContext choiceContext, CombatSide side, CombatState combatState)
     {
-        // 如果角色已经死亡，直接跳过（参考了燃烧之血的防崩溃处理）
-        if (side != Owner.Creature.Side || Owner.Creature.IsDead)
-            return;
-
-        Flash();
-        await CreatureCmd.Heal(Owner.Creature, DynamicVars.Heal.BaseValue);
-        // await PowerCmd.Apply<MotivationPower>(Owner.Creature, DynamicVars["MotivationPower"].BaseValue, Owner.Creature, null);
+        if (side == base.Owner.Creature.Side)
+        {
+            Flash();
+            await PowerCmd.Apply<DistancePower>(base.Owner.Creature, 1m, base.Owner.Creature, null);
+            await PowerCmd.Apply<BackAfterTurnPower>(base.Owner.Creature, 1m, base.Owner.Creature, null);
+        }
     }
 }

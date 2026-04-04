@@ -10,7 +10,7 @@ public sealed class RetreatTorpedo() : TashkentCard(1, CardType.Skill, CardRarit
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        await PowerCmd.Apply<DistancePower>(base.Owner.Creature, 1m, base.Owner.Creature, this);
+        await PowerCmd.Apply<DistancePower>(base.Owner.Creature, -1m, base.Owner.Creature, this);
     }
     
     protected override void OnUpgrade()

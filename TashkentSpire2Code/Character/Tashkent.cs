@@ -57,7 +57,7 @@ public sealed class TashkentCharacter : CustomCharacterModel
 
     public override IReadOnlyList<RelicModel> StartingRelics =>
     [
-        
+        ModelDb.Relic<EjectionStart>()
     ];
 
     public static TashkentSkin CurrentSkin { get; set; } = TashkentSkin.Default;
