@@ -34,6 +34,8 @@ public sealed class FloodingPower : DOTPower
 
     public override bool TryModifyPowerAmountReceived(PowerModel canonicalPower, Creature target, decimal amount, Creature? applier, out decimal modifiedAmount)
     {
+        if (canonicalPower.Id != Id || target != Owner)
+            return base.TryModifyPowerAmountReceived(canonicalPower, target, amount, applier, out modifiedAmount);
         var nextAmount = Amount + amount;
         DynamicVars["DamageIncreasePercent"].BaseValue = nextAmount * 5m;
         // 基础逻辑

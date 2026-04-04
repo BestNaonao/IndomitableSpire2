@@ -45,6 +45,7 @@ public sealed class DamageOverTimeRegistry
         }
         _providers.Add(provider);
         _providers.Sort((a, b) => a.Priority.CompareTo(b.Priority));
+        MainFile.Logger.Info($"DotRegistry: Registered DamageOverTimeProviders : {string.Join(" | ",  _providers.Select(p => p.DisplayName))}");
     }
 
     /// 获取所有提供者（按优先级排序）
@@ -124,20 +125,19 @@ public sealed class DamageOverTimeRegistry
             
             // 找到第一个优先级 >= 当前优先级的节点位置
             var insertIndex = poisonIndex + 1; // 默认插在 Poison 之后
-        
+            
             foreach (var existingIndex in dotNodesIndexesAfterPoison)
             {
                 var existingProvider = GetProvider(allChildren[existingIndex].Name);
-                if (existingProvider == null || existingProvider.Priority < currentPriority) continue;
-                insertIndex = existingIndex;
-                break;
+                // 如果找到了优先级比自己大的节点，说明应该插在它的前面
+                if (existingProvider != null && existingProvider.Priority > currentPriority) break;
+                // 否则，说明当前节点的优先级比它大，应该叠在它的上面（即排在它的后面）
+                insertIndex = existingIndex + 1;
             }
-        
+            
             mask.MoveChild(foreground, insertIndex);
-            MainFile.Logger.Info($"DotRegistry: Moved {damageTypeId} to index {insertIndex} (Priority={currentPriority}), PoisonIndex={poisonIndex}");
+            MainFile.Logger.Info($"DotRegistry: Created foreground control for {damageTypeId} and Moved it to index {insertIndex} (Priority={currentPriority}), PoisonIndex={poisonIndex}");
         }
-        
-        MainFile.Logger.Info($"DotRegistry: Created foreground control for {damageTypeId}");
         return foreground;
     }
     
