@@ -11,7 +11,7 @@ namespace TashkentSpire2.TashkentSpire2Code.Powers;
 
 public class DistancePower : TashkentPower
 {
-    private const string VarKey = "Dist";
+    private const string VarKey = "Tashkent_Distance";
     
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;
@@ -27,8 +27,7 @@ public class DistancePower : TashkentPower
     
     public override bool TryModifyPowerAmountReceived(PowerModel canonicalPower, Creature target, decimal amount, Creature? giver, out decimal modifiedAmount)
     {
-        if (canonicalPower.Id == this.Id)
-        {
+        if (canonicalPower.Id == this.Id) {
             int potential = CurrentDist + (int)amount;
             int clamped = Mathf.Clamp(potential, -5, 5);
             
@@ -50,39 +49,26 @@ public class DistancePower : TashkentPower
     
     public override decimal ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource)
     {
-        if (!props.HasFlag(ValueProp.Move) || props.HasFlag(ValueProp.Unpowered))
-        {
+        if (!props.HasFlag(ValueProp.Unpowered) || cardSource == null)
             return 1m;
-        }
-        if (cardSource == null)
-        {
-            return 1m;
-        }
         
         decimal multiplier = 1m;
         
         if (dealer == base.Owner)
-        {
             multiplier *= (1m + (decimal)CurrentDist * 0.2m);
-        }
-        
         if (target == base.Owner)
-        {
             multiplier *= (1m + (decimal)CurrentDist * 0.1m);
-        }
 
         return multiplier;
     }
     
     public override async Task AfterPowerAmountChanged(PowerModel power, decimal oldAmount, Creature? __, CardModel? cardSource)
     {
-        if (power == this)
-        {
+        if (power == this) {
             int newAmount = Mathf.Clamp(base.Amount, -5, 5);
             int delta = newAmount - CurrentDist;
 
-            if (delta != 0)
-            {
+            if (delta != 0) {
                 base.DynamicVars[VarKey].BaseValue = newAmount;
                 await UpdateCreaturePositions(delta);
                 InvokeDisplayAmountChanged();
@@ -97,12 +83,8 @@ public class DistancePower : TashkentPower
         result.Add(base.Owner);
 
         if (base.Owner.Pets != null)
-        {
             foreach (var pet in base.Owner.Pets)
-            {
                 result.Add(pet);
-            }
-        }
 
         return result;
     }
@@ -122,8 +104,7 @@ public class DistancePower : TashkentPower
             NCreature? node = NCombatRoom.Instance.GetCreatureNode(creature);
             if (node == null) continue;
 
-            if (tween == null)
-            {
+            if (tween == null) {
                 tween = NCombatRoom.Instance.CreateTween()
                     .SetParallel()
                     .SetEase(Tween.EaseType.Out)
@@ -139,8 +120,7 @@ public class DistancePower : TashkentPower
         }
 
         if (tween != null)
-        {
             await tween.ToSignal(tween, Tween.SignalName.Finished);
-        }
+        
     }
 }
