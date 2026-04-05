@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://7ys661uum8y"]
+[gd_scene load_steps=2 format=3 uid="uid://7ys661uum8y"]
 
 [ext_resource type="SpineSkeletonDataResource" uid="uid://wnk1hqit8iih" path="res://IndomitableSpire2/animations/characters/indomitable_maid/indomitable_maid_spine.tres" id="1_7a1jy"]
 

@@ -1,0 +1,7 @@
+[gd_resource type="AtlasTexture" load_steps=2 format=3 uid="uid://dfaawiu86m84w"]
+
+[ext_resource type="Texture2D" uid="uid://dy5rp1d52ph40" path="res://IndomitableSpire2/images/powers/packed/flooding_power_packed.png" id="1_brurt"]
+
+[resource]
+atlas = ExtResource("1_brurt")
+region = Rect2(0, 0, 64, 64)

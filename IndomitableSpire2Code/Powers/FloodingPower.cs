@@ -18,8 +18,9 @@ public sealed class FloodingPower : DOTPower
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         base.CanonicalVars.Append(new DynamicVar("DamageIncreasePercent", 0m));
     
-    // TODO: 重写智能描述以区分玩家和怪物
-    // protected override string SmartDescriptionLocKey => 
+    protected override string SmartDescriptionLocKey => HasNonAttackIntent 
+        ? $"{Id.Entry}.smartDescriptionFull"
+        : $"{Id.Entry}.smartDescription";
     
     public override string CustomBigIconPath => 
         "res://IndomitableSpire2/images/powers/big/flooding_power.png";
@@ -41,6 +42,10 @@ public sealed class FloodingPower : DOTPower
         // 基础逻辑
         return base.TryModifyPowerAmountReceived(canonicalPower, target, amount, applier, out modifiedAmount);
     }
+
+    // 判断当前意图列表中是否包含【非攻击】且【非死亡攻击】的意图
+    private bool HasNonAttackIntent => Owner.Monster != null && Owner.Monster.NextMove.Intents.Any(intent =>
+        intent.IntentType != IntentType.Attack && intent.IntentType != IntentType.DeathBlow);
     
     // ========== 核心机制：基于意图的动态易伤乘区 ==========
     public override decimal ModifyDamageMultiplicative(
@@ -48,12 +53,8 @@ public sealed class FloodingPower : DOTPower
     {
         // 确保受到攻击的是拥有者怪物本身，且是享受力量加成的正常攻击
         var isPoweredAttack = props.HasFlag(ValueProp.Move) && !props.HasFlag(ValueProp.Unpowered);
-        if (target != Owner || !isPoweredAttack || Owner.Monster == null)
-            return 1m;
-        
-        // 判断当前意图列表中是否包含【非攻击】且【非致死攻击】的意图，每层进水增加 5% 承受伤害 (0.05m)
-        return Owner.Monster.NextMove.Intents.Any(intent => 
-                intent.IntentType != IntentType.Attack && intent.IntentType != IntentType.DeathBlow) ? 
-            1m + Amount * 0.05m : 1m;
+        // 有非攻击意图的怪物在每层进水下增加 5% 承受伤害
+        return target != Owner || !isPoweredAttack || !HasNonAttackIntent
+            ? 1m : 1m + Amount * 0.05m;  
     }
 }
