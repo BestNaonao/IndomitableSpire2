@@ -3,11 +3,9 @@ using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
-using MegaCrit.Sts2.Core.Helpers;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.MonsterMoves.Intents;
 using MegaCrit.Sts2.Core.MonsterMoves.MonsterMoveStateMachine;
-using MegaCrit.Sts2.Core.Nodes.Vfx;
 using MegaCrit.Sts2.Core.ValueProps;
 
 namespace IndomitableSpire2.IndomitableSpire2Code.Powers;
@@ -17,7 +15,6 @@ public sealed class HypnotizedPower : IndomitablePower
     public override PowerType Type => PowerType.Debuff;
     public override PowerStackType StackType => PowerStackType.Counter;
     
-    private NSleepingVfx? _sleepingVfx;
     // 用于精准区分“欲催眠状态”和“已催眠状态”
     public bool IsSleeping { get; private set; }
     
@@ -28,7 +25,7 @@ public sealed class HypnotizedPower : IndomitablePower
     
     public override string CustomBigIconPath => 
         "res://IndomitableSpire2/images/powers/big/hypnotized_power.png";
-    public override string CustomPackedIconPath =>
+    public override string CustomPackedIconPath => 
         "res://IndomitableSpire2/images/powers/packed/hypnotized_power_packed.tres";
 
     public override async Task AfterTurnEnd(PlayerChoiceContext choiceContext, CombatSide side)
@@ -46,16 +43,11 @@ public sealed class HypnotizedPower : IndomitablePower
             // Tm_2 结束：怪物处于睡眠状态，回合结束时扣减层数
             await PowerCmd.Decrement(this);
             
-            if (Amount <= 0)
-            {
-                // 直接移除能力，触发 AfterRemoved 钩子进行清理
+            // 归零直接移除能力，触发 AfterRemoved 钩子进行清理；剩余层数大于 0，继续维持睡眠、重置格挡、清理多余眩晕特效
+            if (Amount <= 0) 
                 await PowerCmd.Remove(this);
-            }
-            else
-            {
-                // 健壮性处理：剩余层数大于 0，继续维持睡眠、重置格挡、清理多余眩晕特效
+            else 
                 await ApplySleepState();
-            }
         }
     }
 
@@ -81,11 +73,6 @@ public sealed class HypnotizedPower : IndomitablePower
         }
         
         await CreatureCmd.GainBlock(Owner, 50m, ValueProp.Move, null);
-        
-        // ==========================================
-        // 注意：这里已经彻底删除了之前用于抹除 StunVfx 的延迟与遍历和挂载睡眠特效的代码！
-        // 因为我们没有调用 CreatureCmd.Stun，引擎根本就不会生成眩晕星星。
-        // ==========================================
     }
 
     private async Task SleepMove(IReadOnlyList<Creature> targets) => await Task.CompletedTask;
@@ -95,11 +82,8 @@ public sealed class HypnotizedPower : IndomitablePower
         if (target == Owner && result.UnblockedDamage > 0 && IsSleeping)
         {
             await PowerCmd.Decrement(this);
-            if (Amount <= 0)
-            {
-                // 同样直接移除能力，依赖 AfterRemoved 钩子兜底
-                await PowerCmd.Remove(this);
-            }
+            // 归零直接移除能力，依赖 AfterRemoved 钩子兜底
+            if (Amount <= 0) await PowerCmd.Remove(this);
         }
     }
 
@@ -107,13 +91,6 @@ public sealed class HypnotizedPower : IndomitablePower
     public override Task AfterRemoved(Creature oldOwner)
     {
         IsSleeping = false;
-
-        if (_sleepingVfx == null) return Task.CompletedTask;
-        _sleepingVfx.Stop();
-        _sleepingVfx.QueueFreeSafely(); 
-        _sleepingVfx = null;
-
-        // 因为原本的钩子签名是 Task，且里面只有同步代码，我们返回 CompletedTask 消除飘绿警告
         return Task.CompletedTask;
     }
 }
