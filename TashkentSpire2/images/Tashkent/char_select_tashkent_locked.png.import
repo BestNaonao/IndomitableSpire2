@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dmyb2wix820ii"
-path="res://.godot/imported/mod_image.png-4ca0d2862d7aab02190b58c8003e4544.ctex"
+uid="uid://ddblwyvfifjjp"
+path="res://.godot/imported/char_select_tashkent_locked.png-81bce02d7ecfb7197f4d5b9435f7caf9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://TashkentSpire2/mod_image.png"
-dest_files=["res://.godot/imported/mod_image.png-4ca0d2862d7aab02190b58c8003e4544.ctex"]
+source_file="res://TashkentSpire2/images/Tashkent/char_select_tashkent_locked.png"
+dest_files=["res://.godot/imported/char_select_tashkent_locked.png-81bce02d7ecfb7197f4d5b9435f7caf9.ctex"]
 
 [params]
 

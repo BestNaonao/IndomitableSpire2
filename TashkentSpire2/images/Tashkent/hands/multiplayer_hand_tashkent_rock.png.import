@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c6lrpe7f4sxpl"
-path="res://.godot/imported/bunao.png-00b2bef6bc1bfff0447fa91f11d84bb1.ctex"
+uid="uid://bwi6rlm5ur5i"
+path="res://.godot/imported/multiplayer_hand_tashkent_rock.png-ff98d854d0c5b63b76c01d6388fae7b7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://TashkentSpire2/animations/characters/Tashkent/bunao.png"
-dest_files=["res://.godot/imported/bunao.png-00b2bef6bc1bfff0447fa91f11d84bb1.ctex"]
+source_file="res://TashkentSpire2/images/Tashkent/hands/multiplayer_hand_tashkent_rock.png"
+dest_files=["res://.godot/imported/multiplayer_hand_tashkent_rock.png-ff98d854d0c5b63b76c01d6388fae7b7.ctex"]
 
 [params]
 

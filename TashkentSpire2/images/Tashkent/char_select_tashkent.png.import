@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dc0beyqvbijuw"
-path="res://.godot/imported/character_icon_indomitable.png-a3b13529ab71eeb58d80a259012a9ccd.ctex"
+uid="uid://bt7o7y02xculr"
+path="res://.godot/imported/char_select_tashkent.png-c31c5edbfb6c873b7aa3c593143413ea.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://TashkentSpire2/images/charui/character_icon_indomitable.png"
-dest_files=["res://.godot/imported/character_icon_indomitable.png-a3b13529ab71eeb58d80a259012a9ccd.ctex"]
+source_file="res://TashkentSpire2/images/Tashkent/char_select_tashkent.png"
+dest_files=["res://.godot/imported/char_select_tashkent.png-c31c5edbfb6c873b7aa3c593143413ea.ctex"]
 
 [params]
 

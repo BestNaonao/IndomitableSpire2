@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d3yf182garscm"
-path="res://.godot/imported/char_select_indomitable_locked.png-7cc73d755bd971d09f576ce02631a5cf.ctex"
+uid="uid://b831ml3s454hv"
+path="res://.godot/imported/multiplayer_hand_tashkent_scissors.png-dc3a5161459c1b5fc03c45d84ab95471.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://TashkentSpire2/images/charui/char_select_indomitable_locked.png"
-dest_files=["res://.godot/imported/char_select_indomitable_locked.png-7cc73d755bd971d09f576ce02631a5cf.ctex"]
+source_file="res://TashkentSpire2/images/Tashkent/hands/multiplayer_hand_tashkent_scissors.png"
+dest_files=["res://.godot/imported/multiplayer_hand_tashkent_scissors.png-dc3a5161459c1b5fc03c45d84ab95471.ctex"]
 
 [params]
 
