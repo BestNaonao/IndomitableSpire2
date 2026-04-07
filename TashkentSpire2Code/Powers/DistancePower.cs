@@ -17,8 +17,10 @@ public class DistancePower : TashkentPower
     public override PowerStackType StackType => PowerStackType.Counter;
     public override bool AllowNegative => true;
     
-    public override string CustomBigIconPath => "res://TashkentSpire2/images/powers/big/hypnotized_power.png";
-    public override string CustomPackedIconPath => "res://TashkentSpire2/images/powers/packed/hypnotized_power_packed.tres";
+    public override string CustomBigIconPath => 
+        "res://TashkentSpire2/images/powers/big/distance_power.png";
+    public override string CustomPackedIconPath => 
+        "res://TashkentSpire2/images/powers/packed/distance_power_packed.tres";
     
     protected override IEnumerable<DynamicVar> CanonicalVars => 
         new List<DynamicVar> { new DynamicVar(VarKey, 0m) };
@@ -101,17 +103,17 @@ public class DistancePower : TashkentPower
         {
             if (creature.IsDead) continue;
 
-            NCreature? node = NCombatRoom.Instance.GetCreatureNode(creature);
+            NCreature? node = NCombatRoom.Instance?.GetCreatureNode(creature);
             if (node == null) continue;
 
             if (tween == null) {
-                tween = NCombatRoom.Instance.CreateTween()
+                tween = NCombatRoom.Instance?.CreateTween()
                     .SetParallel()
                     .SetEase(Tween.EaseType.Out)
                     .SetTrans(Tween.TransitionType.Cubic);
             }
 
-            tween.TweenProperty(
+            tween?.TweenProperty(
                 node,
                 "global_position:x",
                 node.GlobalPosition.X + moveDistance,

@@ -1,6 +1,6 @@
 [gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://cuhsxeswx1qg7"]
 
-[ext_resource type="Texture2D" uid="uid://cahsdo1al5ath" path="res://IndomitableSpire2/images/transitions/indomitable_transition.png" id="1_3hrfg"]
+[ext_resource type="Texture2D" uid="uid://cahsdo1al5ath" path="res://TashkentSpire2/images/transitions/indomitable_transition.png" id="1_3hrfg"]
 
 [sub_resource type="Shader" id="Shader_spnx5"]
 code = "shader_type canvas_item;

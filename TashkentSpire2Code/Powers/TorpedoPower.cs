@@ -13,10 +13,13 @@ namespace TashkentSpire2.TashkentSpire2Code.Powers;
 public class TorpedoPower : TashkentPower
 {
     public override PowerType Type => PowerType.Buff;
-
     public override PowerStackType StackType => PowerStackType.Counter;
-
     public override bool IsInstanced => true;
+    
+    public override string CustomBigIconPath => 
+        "res://TashkentSpire2/images/powers/big/torpedo_power.png";
+    public override string CustomPackedIconPath => 
+        "res://TashkentSpire2/images/powers/packed/torpedo_power_packed.tres";
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(40m, ValueProp.Unpowered)];
 

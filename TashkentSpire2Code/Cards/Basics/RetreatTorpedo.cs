@@ -16,7 +16,7 @@ public sealed class RetreatTorpedo() : TashkentCard(1, CardType.Skill, CardRarit
     {
         var temp = new TorpedoPower();
         int value = temp.ComputeTurns();
-        (await PowerCmd.Apply<TorpedoPower>(base.Owner.Creature, value, base.Owner.Creature, this)).SetDamage(base.DynamicVars["Tashkent_Torpedo"].BaseValue);
+        (await PowerCmd.Apply<TorpedoPower>(base.Owner.Creature, value, base.Owner.Creature, this))?.SetDamage(base.DynamicVars["Tashkent_Torpedo"].BaseValue);
         await PowerCmd.Apply<DistancePower>(base.Owner.Creature, -base.DynamicVars["Tashkent_Retreat"].BaseValue, base.Owner.Creature, this);
     }
     

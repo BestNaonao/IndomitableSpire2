@@ -3,8 +3,6 @@ using BaseLib.Abstracts;
 using Godot;
 using TashkentSpire2.TashkentSpire2Code.Cards.Basics;
 using TashkentSpire2.TashkentSpire2Code.Relics;
-using MegaCrit.Sts2.Core.Animation;
-using MegaCrit.Sts2.Core.Bindings.MegaSpine;
 using MegaCrit.Sts2.Core.Entities.Characters;
 using MegaCrit.Sts2.Core.Models;
 
@@ -52,20 +50,19 @@ public sealed class TashkentCharacter : CustomCharacterModel
         ModelDb.Relic<EjectionStart>()
     ];
     
-    // 获取休息点的视觉场景
-    public override string CustomRestSiteAnimPath => CustomVisualPath;
-    // 获取商店的视觉场景
-    public override string CustomMerchantAnimPath => CustomVisualPath;
-    
-    public override string CustomIconTexturePath => 
-        "res://TashkentSpire2/images/Tashkent/character_icon_tashkent.png"; //小头像
-    public override string CustomCharacterSelectIconPath => 
-        "res://TashkentSpire2/images/Tashkent/char_select_tashkent.png"; //选择时
-    public override string CustomCharacterSelectLockedIconPath => 
-        "res://TashkentSpire2/images/Tashkent/char_select_tashkent_locked.png"; //未解锁
+    public override string CustomIconTexturePath =>                 //选择时
+        "res://TashkentSpire2/images/Tashkent/character_icon_tashkent.png";  
+    public override string CustomCharacterSelectIconPath =>         //选择时
+        "res://TashkentSpire2/images/Tashkent/char_select_tashkent.png"; 
+    public override string CustomCharacterSelectLockedIconPath =>   //未解锁
+        "res://TashkentSpire2/images/Tashkent/char_select_tashkent_locked.png"; 
     public override string CustomMapMarkerPath =>                   // 地图标记
-        "res://TashkentSpire2/images/charui/map_marker_Tashkent.png";
+        "res://TashkentSpire2/images/Tashkent/map_marker_tashkent.png";
     
+    public override string CustomRestSiteAnimPath =>                // 获取商店的视觉场景
+        "res://TashkentSpire2/scenes/characters/tashkent_rest_site.tscn";  
+    public override string CustomMerchantAnimPath =>                // 获取商店的视觉场景
+        "res://TashkentSpire2/scenes/characters/tashkent_merchant.tscn";       
     public override string CustomCharacterSelectBg =>               // 选择界面背景
         "res://TashkentSpire2/scenes/characters/char_select_bg_Tashkent.tscn";
     public override string CustomCharacterSelectTransitionPath =>   // 选择专场素材
@@ -78,7 +75,7 @@ public sealed class TashkentCharacter : CustomCharacterModel
         "res://TashkentSpire2/scenes/vfx/card_trail_Tashkent.tscn";
     
     public override string CustomArmPointingTexturePath =>
-        "res://TashkentSpire2/images/Tashkent/hands/multiplayer_hand_tashkent_point.jpg";
+        "res://TashkentSpire2/images/Tashkent/hands/multiplayer_hand_tashkent_point.png";
     public override string CustomArmRockTexturePath =>
         "res://TashkentSpire2/images/Tashkent/hands/multiplayer_hand_tashkent_rock.png";
     public override string CustomArmPaperTexturePath =>

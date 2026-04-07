@@ -10,8 +10,10 @@ public class BackAfterTurnPower : TashkentPower
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;
     
-    public override string CustomBigIconPath => "res://TashkentSpire2/images/powers/big/hypnotized_power.png";
-    public override string CustomPackedIconPath => "res://TashkentSpire2/images/powers/packed/hypnotized_power_packed.tres";
+    public override string CustomBigIconPath => 
+        "res://TashkentSpire2/images/powers/big/backafterturn_power.png";
+    public override string CustomPackedIconPath => 
+        "res://TashkentSpire2/images/powers/packed/backafterturn_power_packed.tres";
 
     public override async Task AfterTurnEnd(PlayerChoiceContext choiceContext, CombatSide side)
     {

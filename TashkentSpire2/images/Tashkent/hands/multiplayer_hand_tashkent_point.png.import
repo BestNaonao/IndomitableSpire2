@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d4apfbc8okd4w"
-path="res://.godot/imported/power.png-37221d94612c1df402c1869eb2aa670a.ctex"
+uid="uid://cjf35g67sv0bk"
+path="res://.godot/imported/multiplayer_hand_tashkent_point.png-50ff06df72b2957358512aa06cf8315c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://TashkentSpire2/images/powers/power.png"
-dest_files=["res://.godot/imported/power.png-37221d94612c1df402c1869eb2aa670a.ctex"]
+source_file="res://TashkentSpire2/images/Tashkent/hands/multiplayer_hand_tashkent_point.png"
+dest_files=["res://.godot/imported/multiplayer_hand_tashkent_point.png-50ff06df72b2957358512aa06cf8315c.ctex"]
 
 [params]
 
