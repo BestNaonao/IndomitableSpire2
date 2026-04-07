@@ -4,5 +4,7 @@
   "INDOMITABLESPIRE2-STRIKE_INDOMITABLE.title": "ストライク",
   "INDOMITABLESPIRE2-STRIKE_INDOMITABLE.description": "{Damage:diff()}ダメージを与える。",
   "INDOMITABLESPIRE2-TAKE_A_BREAK.title": "小休止",
-  "INDOMITABLESPIRE2-TAKE_A_BREAK.description": "ＨＰを[green]{Heal:diff()}[/green]回復する。\n[gold]やる気[/gold]を[blue]{MotivationPower:diff()}[/blue]得る。\nターンを終了する。"
+  "INDOMITABLESPIRE2-TAKE_A_BREAK.description": "ＨＰを[green]{Heal:diff()}[/green]回復する。\n[gold]やる気[/gold]を[blue]{MotivationPower:diff()}[/blue]得る。\nターンを終了する。",
+  "INDOMITABLESPIRE2-IGNITE.title": "点火",
+  "INDOMITABLESPIRE2-IGNITE.description": "[gold]やる気[/gold]が[blue]30[/blue]以上の場合のみプレイできる。\n{Damage:diff()}ダメージを与える。\n[gold]炎上[/gold] [blue]{OnFirePower:diff()}[/blue]を付与する"
 }

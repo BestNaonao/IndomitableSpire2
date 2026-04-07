@@ -52,6 +52,7 @@ public sealed class IndomitableCharacter : CustomCharacterModel
         ModelDb.Card<DefendIndomitable>(),
         ModelDb.Card<DefendIndomitable>(),
         ModelDb.Card<TakeABreak>(),
+        ModelDb.Card<Ignite>()
     ];
 
     public override IReadOnlyList<RelicModel> StartingRelics =>
