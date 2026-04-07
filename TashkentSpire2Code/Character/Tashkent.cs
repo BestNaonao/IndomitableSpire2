@@ -29,8 +29,7 @@ public sealed class TashkentCharacter : CustomCharacterModel
     public override CardPoolModel CardPool => ModelDb.CardPool<TashkentCardPool>();
     public override PotionPoolModel PotionPool => ModelDb.PotionPool<TashkentPotionPool>();
     public override RelicPoolModel RelicPool => ModelDb.RelicPool<TashkentRelicPool>();
-
-    // 设置初始卡组
+    
     public override IEnumerable<CardModel> StartingDeck =>
     [
         ModelDb.Card<Strike>(),
@@ -41,7 +40,7 @@ public sealed class TashkentCharacter : CustomCharacterModel
         ModelDb.Card<Defend>(),
         ModelDb.Card<Defend>(),
         ModelDb.Card<Defend>(),
-        // ModelDb.Card<LoadShot>(),
+        ModelDb.Card<LoadShot>(),
         ModelDb.Card<RetreatTorpedo>()
     ];
 

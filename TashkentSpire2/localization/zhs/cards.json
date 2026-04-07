@@ -5,6 +5,8 @@
   "TASHKENTSPIRE2-STRIKE.description": "造成{Damage:diff()}点伤害。",
   "TASHKENTSPIRE2-LOAD_SHOT.title": "装填射击",
   "TASHKENTSPIRE2-LOAD_SHOT.description": "给予{MarkPower:diff()}层 [gold]标记[/gold]。",
+  "TASHKENTSPIRE2-LOAD_SHOT_LOAD.title": "装填射击:装填",
+  "TASHKENTSPIRE2-LOAD_SHOT_LOAD.description": "给予{MarkPower:diff()}层 [gold]标记[/gold]。",
   "TASHKENTSPIRE2-RETREAT_TORPEDO.title": "后撤雷",
   "TASHKENTSPIRE2-RETREAT_TORPEDO.description": "[gold]鱼雷[/gold]{Tashkent_Torpedo:diff()}。\n[gold]后撤[/gold]{Tashkent_Retreat:diff()}。",
   "TASHKENTSPIRE2-ARTILLERY_STRIKE.title": "炮火打击",
