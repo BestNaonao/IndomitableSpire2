@@ -33,16 +33,6 @@ public sealed class FloodingPower : DOTPower
         base.Update();
     }
 
-    public override bool TryModifyPowerAmountReceived(PowerModel canonicalPower, Creature target, decimal amount, Creature? applier, out decimal modifiedAmount)
-    {
-        if (canonicalPower.Id != Id || target != Owner)
-            return base.TryModifyPowerAmountReceived(canonicalPower, target, amount, applier, out modifiedAmount);
-        var nextAmount = Amount + amount;
-        DynamicVars["DamageIncreasePercent"].BaseValue = nextAmount * 5m;
-        // 基础逻辑
-        return base.TryModifyPowerAmountReceived(canonicalPower, target, amount, applier, out modifiedAmount);
-    }
-
     // 判断当前意图列表中是否包含【非攻击】且【非死亡攻击】的意图
     private bool HasNonAttackIntent => Owner.Monster != null && Owner.Monster.NextMove.Intents.Any(intent =>
         intent.IntentType != IntentType.Attack && intent.IntentType != IntentType.DeathBlow);

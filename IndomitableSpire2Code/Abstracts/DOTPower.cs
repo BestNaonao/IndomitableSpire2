@@ -10,11 +10,12 @@ using MegaCrit.Sts2.Core.ValueProps;
 
 namespace IndomitableSpire2.IndomitableSpire2Code.Abstracts;
 
+// ReSharper disable once InconsistentNaming for Special Abbreviation
 public abstract class DOTPower : IndomitablePower
 {
     public override PowerType Type => PowerType.Debuff;
     public override PowerStackType StackType => PowerStackType.Counter;
-    
+    // 每回合前后损失生命占最大生命的百分比
     public virtual decimal Proportion => 0.01m;
     
     // 注册需要精确维护的四个动态变量
@@ -42,23 +43,12 @@ public abstract class DOTPower : IndomitablePower
         InvokeDisplayAmountChanged();
     }
     
-    public override Task AfterApplied(Creature? applier, CardModel? cardSource)
+    // 【修改】：统一接管初次应用、层数增加、层数减少的 UI 更新，代替原先的钩子方法
+    public override Task AfterPowerAmountChanged(PowerModel power, decimal amount, Creature? applier, CardModel? cardSource)
     {
-        Update();
+        // 确保触发的是当前能力自身的层数变化
+        if (power == this) Update();
         return Task.CompletedTask;
-    }
-    
-    // 拦截层数变化，实时更新UI预览
-    public override bool TryModifyPowerAmountReceived(PowerModel canonicalPower, Creature target, decimal amount, Creature? applier, out decimal modifiedAmount)
-    {
-        modifiedAmount = amount;
-        if (canonicalPower.Id != Id || target != Owner) return false;
-        // 预测未来的层数并更新UI
-        var nextAmount = Amount + amount;
-        DynamicVars["NextLostHpPercent"].BaseValue = nextAmount * 100 * Proportion;
-        var exactNext = Owner.MaxHp * nextAmount * Proportion;
-        DynamicVars["NextLostHpInt"].BaseValue = Math.Floor(DynamicVars["TotalLostHpExact"].BaseValue + exactNext) - DynamicVars["TotalLostHpInt"].BaseValue;
-        return false;
     }
     
     // 核心伤害逻辑提取
@@ -72,12 +62,11 @@ public abstract class DOTPower : IndomitablePower
         
         // 2. 提取需要扣除的整数部分
         var damageToDeal = (int)Math.Floor(DynamicVars["TotalLostHpExact"].BaseValue) - (int)DynamicVars["TotalLostHpInt"].BaseValue;
-
         if (damageToDeal > 0)
         {
             DynamicVars["TotalLostHpInt"].BaseValue += damageToDeal;
-            // 造成无视格挡、不受力量影响的绝对伤害（模仿 Poison）
             Flash();
+            // 造成无视格挡、不受力量影响的绝对伤害（模仿 Poison）
             await CreatureCmd.Damage(new ThrowingPlayerChoiceContext(), Owner, damageToDeal, ValueProp.Unblockable | ValueProp.Unpowered, null, null);
         }
 
@@ -90,13 +79,12 @@ public abstract class DOTPower : IndomitablePower
         else await Cmd.CustomScaledWait(0.1f, 0.25f);
     }
 
-    // 回合开始时触发一次
+    // 回合开始时和结束时各触发一次
     public override async Task AfterSideTurnStart(CombatSide side, CombatState combatState)
     {
         if (side == Owner.Side) await TriggerDamage();
     }
 
-    // 回合结束时再触发一次
     public override async Task BeforeTurnEndEarly(PlayerChoiceContext choiceContext, CombatSide side)
     {
         if (side == Owner.Side) await TriggerDamage();
