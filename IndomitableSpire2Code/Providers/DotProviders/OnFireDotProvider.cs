@@ -24,8 +24,5 @@ public sealed class OnFireDotProvider : IDamageOverTimeProvider
         return power?.GetNextDamage() ?? 0;
     }
     
-    public bool HasPower(Creature creature)
-    {
-        return creature.GetPower<OnFirePower>() is { Amount: > 0 };
-    }
+    public bool HasPower(Creature creature) => creature.GetPowerAmount<OnFirePower>() > 0;
 }

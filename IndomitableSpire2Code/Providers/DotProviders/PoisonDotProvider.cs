@@ -24,8 +24,5 @@ public sealed class PoisonDotProvider : IDamageOverTimeProvider
         return power?.CalculateTotalDamageNextTurn() ?? 0;
     }
     
-    public bool HasPower(Creature creature)
-    {
-        return creature.GetPower<PoisonPower>() is { };
-    }
+    public bool HasPower(Creature creature) => creature.GetPowerAmount<PoisonPower>() > 0;
 }
