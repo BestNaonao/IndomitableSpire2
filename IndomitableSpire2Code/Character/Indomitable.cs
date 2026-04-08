@@ -86,34 +86,34 @@ public sealed class IndomitableCharacter : CustomCharacterModel
     public override string CustomArmPaperTexturePath => CurrentSkin switch
     {
         IndomitableSkin.Default => "res://IndomitableSpire2/images/charui/hands/multiplayer_hand_indomitable_paper.png",
-        IndomitableSkin.Maid => "res://IndomitableSpire2/images/charui/hands/multiplayer_hand_indomitable_maid_paper.png",
-        _ => "res://IndomitableSpire2/images/charui/hands/multiplayer_hand_indomitable_paper.png"
+        IndomitableSkin.Maid    => "res://IndomitableSpire2/images/charui/hands/multiplayer_hand_indomitable_maid_paper.png",
+        _                       => "res://IndomitableSpire2/images/charui/hands/multiplayer_hand_indomitable_paper.png"
     };
 
     public override string CustomArmPointingTexturePath => CurrentSkin switch
     {
         IndomitableSkin.Default => $"res://IndomitableSpire2/images/charui/hands/multiplayer_hand_indomitable_point{new Random().Next(1, 4)}.png",
-        IndomitableSkin.Maid => $"res://IndomitableSpire2/images/charui/hands/multiplayer_hand_indomitable_maid_point{new Random().Next(1, 4)}.png",
-        _ => $"res://IndomitableSpire2/images/charui/hands/multiplayer_hand_indomitable_point{new Random().Next(1, 4)}.png"
+        IndomitableSkin.Maid    => $"res://IndomitableSpire2/images/charui/hands/multiplayer_hand_indomitable_maid_point{new Random().Next(1, 4)}.png",
+        _                       => $"res://IndomitableSpire2/images/charui/hands/multiplayer_hand_indomitable_point{new Random().Next(1, 4)}.png"
     };
 
     public override string CustomArmRockTexturePath => CurrentSkin switch
     {
         IndomitableSkin.Default => "res://IndomitableSpire2/images/charui/hands/multiplayer_hand_indomitable_rock.png",
-        IndomitableSkin.Maid => "res://IndomitableSpire2/images/charui/hands/multiplayer_hand_indomitable_maid_rock.png",
-        _ => "res://IndomitableSpire2/images/charui/hands/multiplayer_hand_indomitable_rock.png"
+        IndomitableSkin.Maid    => "res://IndomitableSpire2/images/charui/hands/multiplayer_hand_indomitable_maid_rock.png",
+        _                       => "res://IndomitableSpire2/images/charui/hands/multiplayer_hand_indomitable_rock.png"
     };
 
     public override string CustomArmScissorsTexturePath => CurrentSkin switch
     {
         IndomitableSkin.Default => "res://IndomitableSpire2/images/charui/hands/multiplayer_hand_indomitable_scissors.png",
-        IndomitableSkin.Maid => "res://IndomitableSpire2/images/charui/hands/multiplayer_hand_indomitable_maid_scissors.png",
-        _ => "res://IndomitableSpire2/images/charui/hands/multiplayer_hand_indomitable_scissors.png"
+        IndomitableSkin.Maid    => "res://IndomitableSpire2/images/charui/hands/multiplayer_hand_indomitable_maid_scissors.png",
+        _                       => "res://IndomitableSpire2/images/charui/hands/multiplayer_hand_indomitable_scissors.png"
     };
     
     // ... 同样的方式替换选人界面的立绘、头像等 ...
     public override string CustomCharacterSelectBg =>               // 选择界面背景
-        "res://IndomitableSpire2/scenes/characters/char_select_bg_indomitable.tscn";
+        $"res://IndomitableSpire2/scenes/characters/char_select_bg_indomitable_{new Random().Next(1, 5)}.tscn";
     public override string CustomCharacterSelectIconPath =>         // 选择界面图标
         "res://IndomitableSpire2/images/charui/char_select_indomitable.png";
     public override string CustomCharacterSelectLockedIconPath =>   // 选择锁定图标
