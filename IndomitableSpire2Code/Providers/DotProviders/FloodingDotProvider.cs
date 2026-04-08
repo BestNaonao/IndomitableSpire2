@@ -3,7 +3,7 @@ using MegaCrit.Sts2.Core.Entities.Creatures;
 using IndomitableSpire2.IndomitableSpire2Code.Abstracts;
 using IndomitableSpire2.IndomitableSpire2Code.Powers;
 
-namespace IndomitableSpire2.IndomitableSpire2Code.Providers;
+namespace IndomitableSpire2.IndomitableSpire2Code.Providers.DotProviders;
 
 /// <summary>
 /// 进水持续伤害提供者
@@ -27,8 +27,5 @@ public sealed class FloodingDotProvider : IDamageOverTimeProvider
         return power?.GetNextDamage() ?? 0; 
     }
     
-    public bool HasPower(Creature creature)
-    {
-        return creature.GetPower<FloodingPower>() is { Amount: > 0 };
-    }
+    public bool HasPower(Creature creature) => creature.GetPowerAmount<FloodingPower>() > 0;
 }
