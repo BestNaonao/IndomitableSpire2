@@ -4,16 +4,18 @@ using Godot;
 
 namespace IndomitableSpire2.IndomitableSpire2Code.Character;
 
-public sealed class IndomitableCardPool : CustomCardPoolModel, ICustomEnergyIconPool
+public sealed class IndomitableCardPool : CustomCardPoolModel
 {
     // 卡池的唯一标识符
     public override string Title => IndomitableCharacter.CharacterId;
     // 使用 BaseLib 的标准格式生成 EnergyColorName
     public override string EnergyColorName => CustomEnergyIconPatches.GetEnergyColorName(Id);
     // public override string EnergyColorName => IndomitableCharacter.CharacterId;
-
-    // 基础卡牌背景框材质，如果没有自定义材质，可以使用游戏原版的
-    public override string CardFrameMaterialPath => "card_frame_blue"; 
+    
+    // 基础卡牌背景框材质，选择直接硬编码 HSV (色相、饱和度、明度) 的值来微调：
+    public override float H => 0.114f;
+    public override float S => 0.30f;
+    public override float V => 2.25f;
     
     // BaseLib 提供的 ShaderColor，用于对基础卡牌材质进行染色
     public override Color ShaderColor => new("E6F0FA"); // 淡蓝色/纯白色
@@ -26,7 +28,4 @@ public sealed class IndomitableCardPool : CustomCardPoolModel, ICustomEnergyIcon
         "res://IndomitableSpire2/images/packed/sprite_fonts/indomitable_energy_icon_original.png";
     public override string TextEnergyIconPath => 
         "res://IndomitableSpire2/images/packed/sprite_fonts/indomitable_energy_icon.png";
-    
-    // 未来可能需要重写：
-    // protected override IEnumerable<CardModel> FilterThroughEpochs
 }
