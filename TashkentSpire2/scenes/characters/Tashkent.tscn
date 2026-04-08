@@ -1,4 +1,6 @@
-[gd_scene format=3 uid="uid://bx2e67qjfw3kq"]
+[gd_scene load_steps=2 format=3 uid="uid://bx2e67qjfw3kq"]
+
+[ext_resource type="Texture2D" uid="uid://b73ixjpx0hd0" path="res://TashkentSpire2/images/Tashkent/Tashkent_character.png" id="1_v075x"]
 
 [node name="Tashkent" type="Node2D"]
 
@@ -28,3 +30,8 @@ position = Vector2(0, -270)
 
 [node name="TalkPos" type="Marker2D" parent="."]
 position = Vector2(0, -360)
+
+[node name="TashkentCharacter" type="Sprite2D" parent="."]
+position = Vector2(-11, -117.00001)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("1_v075x")

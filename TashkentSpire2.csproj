@@ -111,10 +111,6 @@
         <Folder Include="TashkentSpire2\scenes\vfx\energy\" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Content Include="TashkentSpire2Code\python_scripts\energy_icon_generator.py" />
-    </ItemGroup>
-
     <Target Name="CheckDependencyPaths">
         <Error
                 Text=" Slay the Spire 2 data not found at path '$(Sts2DataDir)'"

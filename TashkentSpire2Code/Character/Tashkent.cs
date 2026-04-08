@@ -3,6 +3,7 @@ using BaseLib.Abstracts;
 using Godot;
 using TashkentSpire2.TashkentSpire2Code.Cards.Basics;
 using TashkentSpire2.TashkentSpire2Code.Relics;
+using TashkentSpire2.TashkentSpire2Code.Config;
 using MegaCrit.Sts2.Core.Entities.Characters;
 using MegaCrit.Sts2.Core.Models;
 
@@ -58,9 +59,13 @@ public sealed class TashkentCharacter : CustomCharacterModel
     public override string CustomMapMarkerPath =>                   // 地图标记
         "res://TashkentSpire2/images/Tashkent/map_marker_tashkent.png";
     
-    public override string CustomRestSiteAnimPath =>                // 获取商店的视觉场景
+    public override string CustomVisualPath =>                      //人物模型
+        "res://TashkentSpire2/scenes/Tashkent_character.tscn";
+    public override string CustomTrailPath =>                       // 卡牌轨迹特效
+        "res://TashkentSpire2/scenes/vfx/card_trail_Tashkent.tscn";
+    public override string CustomRestSiteAnimPath =>                // 篝火休息
         "res://TashkentSpire2/scenes/characters/tashkent_rest_site.tscn";  
-    public override string CustomMerchantAnimPath =>                // 获取商店的视觉场景
+    public override string CustomMerchantAnimPath =>                // 商店场景
         "res://TashkentSpire2/scenes/characters/tashkent_merchant.tscn";       
     public override string CustomCharacterSelectBg =>               // 选择界面背景
         "res://TashkentSpire2/scenes/characters/char_select_bg_Tashkent.tscn";
@@ -70,17 +75,35 @@ public sealed class TashkentCharacter : CustomCharacterModel
         "res://TashkentSpire2/scenes/characters/Tashkent_icon.tscn";
     public override string CustomEnergyCounterPath =>               // 能量计数器
         "res://TashkentSpire2/scenes/combat/energy_counters/Tashkent_energy_counter.tscn";
-    public override string CustomTrailPath =>                       // 卡牌轨迹特效
-        "res://TashkentSpire2/scenes/vfx/card_trail_Tashkent.tscn";
+    
+    // public override string CustomArmPointingTexturePath =>
+    //     "res://TashkentSpire2/images/Tashkent/hands/multiplayer_hand_tashkent_point.png";
+    // public override string CustomArmRockTexturePath =>
+    //     "res://TashkentSpire2/images/Tashkent/hands/multiplayer_hand_tashkent_rock.png";
+    // public override string CustomArmPaperTexturePath =>
+    //     "res://TashkentSpire2/images/Tashkent/hands/multiplayer_hand_tashkent_paper.png";
+    // public override string CustomArmScissorsTexturePath =>
+    //     "res://TashkentSpire2/images/Tashkent/hands/multiplayer_hand_tashkent_scissors.png";
     
     public override string CustomArmPointingTexturePath =>
-        "res://TashkentSpire2/images/Tashkent/hands/multiplayer_hand_tashkent_point.png";
+        TashkentConfig.MultiplayerModeModel == FjordMosaicMode.Hands
+            ? "res://TashkentSpire2/images/Tashkent/hands/multiplayer_hand_tashkent_point.png"
+            : "res://TashkentSpire2/images/Tashkent/feet/multiplayer_foot_tashkent_point.png";
+
     public override string CustomArmRockTexturePath =>
-        "res://TashkentSpire2/images/Tashkent/hands/multiplayer_hand_tashkent_rock.png";
+        TashkentConfig.MultiplayerModeModel == FjordMosaicMode.Hands
+            ? "res://TashkentSpire2/images/Tashkent/hands/multiplayer_hand_tashkent_rock.png"
+            : "res://TashkentSpire2/images/Tashkent/feet/multiplayer_foot_tashkent_rock.png";
+
     public override string CustomArmPaperTexturePath =>
-        "res://TashkentSpire2/images/Tashkent/hands/multiplayer_hand_tashkent_paper.png";
+        TashkentConfig.MultiplayerModeModel == FjordMosaicMode.Hands
+            ? "res://TashkentSpire2/images/Tashkent/hands/multiplayer_hand_tashkent_paper.png"
+            : "res://TashkentSpire2/images/Tashkent/feet/multiplayer_foot_tashkent_paper.png";
+
     public override string CustomArmScissorsTexturePath =>
-        "res://TashkentSpire2/images/Tashkent/hands/multiplayer_hand_tashkent_scissors.png";
+        TashkentConfig.MultiplayerModeModel == FjordMosaicMode.Hands
+            ? "res://TashkentSpire2/images/Tashkent/hands/multiplayer_hand_tashkent_scissors.png"
+            : "res://TashkentSpire2/images/Tashkent/feet/multiplayer_foot_tashkent_scissors.png";
 
     // // 原版逻辑构建动作映射，传入 Spine 文件中实际命名的动作字符串
     // public override CreatureAnimator SetupCustomAnimationStates(MegaSprite controller) => SetupAnimationState(
