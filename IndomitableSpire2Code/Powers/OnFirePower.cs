@@ -9,6 +9,13 @@ public sealed class OnFirePower : DOTPower // 继承自你的基类
     public override Color AmountLabelColor => new("FFA200");
     public override decimal Proportion => 0.005m;
     
+    // --- BaseLib 血条预测配置 ---
+    // 血条颜色：橙色
+    public override Color ForecastBarColor => new("FFA200"); 
+    // 致死文本颜色：金色
+    public override Color ForecastLethalTextColor => new("FFD700"); 
+    public override int ForecastOrder => 10;
+    
     // TODO: 重写智能描述以区分玩家和怪物
     // protected override string SmartDescriptionLocKey => 
     

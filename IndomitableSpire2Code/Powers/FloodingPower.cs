@@ -13,6 +13,13 @@ public sealed class FloodingPower : DOTPower
     // 使用天蓝色作为进水的层数显示颜色
     public override Color AmountLabelColor => new("33CCFF");
     public override decimal Proportion => 0.01m;
+    
+    // --- BaseLib 血条预测配置 ---
+    // 血条颜色：天蓝色
+    public override Color ForecastBarColor => new("33CCFF"); 
+    // 致死文本颜色：亮青色 (BaseLib 会自动压暗它来做描边)
+    public override Color ForecastLethalTextColor => new("88FFFF");
+    public override int ForecastOrder => 15;
 
     // 注册变量池，新增 DamageIncreasePercent 用于 UI 动态显示易伤比例
     protected override IEnumerable<DynamicVar> CanonicalVars =>
