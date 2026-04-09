@@ -2,16 +2,12 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d32akmuwo843b"
-path="res://.godot/imported/defend.png-8ed97c17646e404ef20abc06d4b0b42f.ctex"
-metadata={
-"vram_texture": false
-}
+uid="uid://b5731jv8naf6f"
+valid=false
 
 [deps]
 
-source_file="res://TashkentSpire2/images/card_portraits/defend.png"
-dest_files=["res://.godot/imported/defend.png-8ed97c17646e404ef20abc06d4b0b42f.ctex"]
+source_file="res://TashkentSpire2/images/card_portraits/retreat_torpedo.png"
 
 [params]
 

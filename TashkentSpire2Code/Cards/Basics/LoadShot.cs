@@ -32,7 +32,7 @@ public sealed class LoadShot() : AmmuCard(1, CardType.Attack, CardRarity.Basic, 
 
     protected override TashkentCard CreateLordType()
     {
-        var card = new LoadShot_Load();
+        var card = new LoadShotLoad();
         if (IsUpgraded)
             CardCmd.Upgrade(card);
         return card;

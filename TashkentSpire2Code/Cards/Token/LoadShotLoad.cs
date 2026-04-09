@@ -9,7 +9,7 @@ using TashkentSpire2.TashkentSpire2Code.Cards.Basics;
 namespace TashkentSpire2.TashkentSpire2Code.Cards.Token;
 
 [Pool(typeof(TokenCardPool))]
-public class LoadShot_Load() : TashkentCard(1, CardType.Skill, CardRarity.Token, TargetType.Self)
+public class LoadShotLoad() : TashkentCard(1, CardType.Skill, CardRarity.Token, TargetType.Self)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [

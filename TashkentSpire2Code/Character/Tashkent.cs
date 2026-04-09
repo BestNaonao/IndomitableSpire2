@@ -60,13 +60,13 @@ public sealed class TashkentCharacter : CustomCharacterModel
         "res://TashkentSpire2/images/Tashkent/map_marker_tashkent.png";
     
     public override string CustomVisualPath =>                      //人物模型
-        "res://TashkentSpire2/scenes/Tashkent_character.tscn";
-    public override string CustomTrailPath =>                       // 卡牌轨迹特效
-        "res://TashkentSpire2/scenes/vfx/card_trail_Tashkent.tscn";
-    public override string CustomRestSiteAnimPath =>                // 篝火休息
-        "res://TashkentSpire2/scenes/characters/tashkent_rest_site.tscn";  
-    public override string CustomMerchantAnimPath =>                // 商店场景
-        "res://TashkentSpire2/scenes/characters/tashkent_merchant.tscn";       
+        "res://TashkentSpire2/scenes/characters/Tashkent.tscn";
+    // public override string CustomTrailPath =>                       // 卡牌轨迹特效
+    //     "res://TashkentSpire2/scenes/vfx/card_trail_Tashkent.tscn";
+    // public override string CustomRestSiteAnimPath =>                // 篝火休息
+    //     "res://TashkentSpire2/scenes/characters/tashkent_rest_site.tscn";  
+    // public override string CustomMerchantAnimPath =>                // 商店场景
+    //     "res://TashkentSpire2/scenes/characters/tashkent_merchant.tscn";       
     public override string CustomCharacterSelectBg =>               // 选择界面背景
         "res://TashkentSpire2/scenes/characters/char_select_bg_Tashkent.tscn";
     public override string CustomCharacterSelectTransitionPath =>   // 选择专场素材

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d32akmuwo843b"
-path="res://.godot/imported/defend.png-8ed97c17646e404ef20abc06d4b0b42f.ctex"
+uid="uid://b0q6dnlub21f7"
+path="res://.godot/imported/tashkent_transition.png-1709f69a40ebe1bab4959c31aff3787d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://TashkentSpire2/images/card_portraits/defend.png"
-dest_files=["res://.godot/imported/defend.png-8ed97c17646e404ef20abc06d4b0b42f.ctex"]
+source_file="res://TashkentSpire2/images/transitions/tashkent_transition.png"
+dest_files=["res://.godot/imported/tashkent_transition.png-1709f69a40ebe1bab4959c31aff3787d.ctex"]
 
 [params]
 

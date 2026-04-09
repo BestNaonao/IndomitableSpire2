@@ -1,0 +1,39 @@
+[gd_scene load_steps=2 format=3 uid="uid://by0n2cgqdp4pd"]
+
+[ext_resource type="Texture2D" uid="uid://dxddngylgi6d8" path="res://TashkentSpire2/images/vfx/energy_test_big.png" id="1_he1j0"]
+
+[node name="TashkentEnergyCounter" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="Node2D" type="Node2D" parent="."]
+unique_name_in_owner = true
+
+[node name="Control" type="Control" parent="."]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TextureRect" type="TextureRect" parent="Control"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Control" type="Control" parent="Control"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="EnergyTestBig" type="Sprite2D" parent="Control/Control"]
+position = Vector2(12, 11)
+texture = ExtResource("1_he1j0")
+
+[node name="Node2D2" type="Node2D" parent="."]
+unique_name_in_owner = true
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "3/3"
