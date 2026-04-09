@@ -8,5 +8,5 @@
   "INDOMITABLESPIRE2-IGNITE.title": "点燃",
   "INDOMITABLESPIRE2-IGNITE.description": "只有在[gold]干劲[/gold]达到[blue]30[/blue]点及以上时才能打出。\n造成{Damage:diff()}点伤害。\n给予[blue]{OnFirePower:diff()}[/blue]层[gold]起火[/gold]。",
   "INDOMITABLESPIRE2-DUAL_PURPOSE_GUN.title": "4.5英寸高平两用炮",
-  "INDOMITABLESPIRE2-DUAL_PURPOSE_GUN.description": "造成{Damage:diff()}点伤害。\n在你的回合结束时，如果这张牌在你的[gold]手牌[/gold]中且本回合未被你打出，则获得{Block:diff()}点[gold]格挡[/gold]。{InCombat:\n{WillAutoBlock:cond:>0?[green]（将自动防空获得格挡）[/green]|[red]（本回合已平射，将不获得格挡）[/red]}|}"
+  "INDOMITABLESPIRE2-DUAL_PURPOSE_GUN.description": "造成{Damage:diff()}点伤害。\n在你的回合结束时，如果这张牌在你的[gold]手牌[/gold]中且本回合未被你打出，则获得{Block:diff()}点[gold]格挡[/gold]。{InCombat:\n{WillAutoBlock:cond:>0?[green]（将自动防空获得格挡）[/green]|[red]（本回合已打出过）[/red]}|}"
 }

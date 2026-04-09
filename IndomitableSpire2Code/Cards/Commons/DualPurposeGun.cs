@@ -9,11 +9,11 @@ namespace IndomitableSpire2.IndomitableSpire2Code.Cards.Commons;
 
 public sealed class DualPurposeGun() : IndomitableCard(1, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
 {
-    // 必须重写此属性，以便游戏系统能自动在卡牌旁边展示“格挡：防止受到生命损伤”的悬浮提示框
+    // 重写此属性，以便游戏系统能自动在卡牌旁边展示“格挡的悬浮提示框
     public override bool GainsBlock => true;
     
     // 提取复用逻辑：这张牌这回合是否被打出过？
-    private bool HasBeenPlayedThisTurn => CombatState != null && CombatManager.Instance.History.CardPlaysFinished
+    private bool HasBeenPlayedThisTurn => CombatManager.Instance.History.CardPlaysFinished
         .Any(e => e.HappenedThisTurn(CombatState) && e.CardPlay.Card == this);
     
     protected override IEnumerable<DynamicVar> CanonicalVars =>
@@ -61,7 +61,7 @@ public sealed class DualPurposeGun() : IndomitableCard(1, CardType.Attack, CardR
     
     protected override void OnUpgrade()
     {
-        // 升级效果：伤害 +3，格挡 +3
+        // 升级效果：伤害 +3，格挡 +2
         DynamicVars.Damage.UpgradeValueBy(3M);
         DynamicVars.Block.UpgradeValueBy(2M);
     }
