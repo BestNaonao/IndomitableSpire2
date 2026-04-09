@@ -11,7 +11,11 @@ public sealed class DualPurposeGun() : IndomitableCard(1, CardType.Attack, CardR
 {
     // 必须重写此属性，以便游戏系统能自动在卡牌旁边展示“格挡：防止受到生命损伤”的悬浮提示框
     public override bool GainsBlock => true;
-
+    
+    // 提取复用逻辑：这张牌这回合是否被打出过？
+    private bool HasBeenPlayedThisTurn => CombatState != null && CombatManager.Instance.History.CardPlaysFinished
+        .Any(e => e.HappenedThisTurn(CombatState) && e.CardPlay.Card == this);
+    
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
         new DamageVar(7M, ValueProp.Move),
@@ -20,14 +24,9 @@ public sealed class DualPurposeGun() : IndomitableCard(1, CardType.Attack, CardR
         new CalculationBaseVar(0M),             // 使用 CalculatedVar 所必要的
         new CalculationExtraVar(1M),    // 使用 CalculatedVar 所必要的
         new CalculatedVar("WillAutoBlock").WithMultiplier((card, _) => 
-        {
-            if (card.CombatState == null) return 1M;
-            var playedThisTurn = CombatManager.Instance.History.CardPlaysFinished
-                .Any(e => e.HappenedThisTurn(card.CombatState) && e.CardPlay.Card == card);
-            return playedThisTurn ? 0M : 1M;
-        })
+            ((DualPurposeGun)card).HasBeenPlayedThisTurn ? 0M : 1M)
     ];
-
+    
     // ========== 核心机制：统一在 OnPlay 中处理效果 ==========
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
@@ -48,26 +47,18 @@ public sealed class DualPurposeGun() : IndomitableCard(1, CardType.Attack, CardR
                 .Execute(choiceContext);
         }
     }
-
+    
     // ========== 触发机制：回合结束的判定与自动打出 ==========
-    public override bool HasTurnEndInHandEffect => true;
-
+    public override bool HasTurnEndInHandEffect => !HasBeenPlayedThisTurn;
+    
     public override async Task OnTurnEndInHand(PlayerChoiceContext choiceContext)
     {
-        // 再次严谨判断：即使在手中，也要确保它没有通过特殊手段（如弹回、全息影像）被打出又回到手中
-        var playedThisTurn = CombatManager.Instance.History.CardPlaysFinished
-            .Any(e => e.HappenedThisTurn(CombatState) && e.CardPlay.Card == this);
-
-        if (!playedThisTurn)
-        {
-            // 未打出时：高射防空（留在手中自动提供格挡）
-            await Cmd.Wait(0.25f); // 停顿一下，给予玩家防空机制触发的视觉反馈节奏
-            
-            // 触发自动打出！框架会负责将卡牌移入打出区 -> 调用 OnPlay(isAutoPlay=true) -> 移入弃牌堆
-            await CardCmd.AutoPlay(choiceContext, this, null);
-        }
+        // 既然能进到这里，说明 HasTurnEndInHandEffect 必定为 true，即本回合未被打出。
+        // 触发自动打出：高射防空（留在手中自动提供格挡）
+        await Cmd.Wait(0.25f); // 停顿一下，给予玩家防空机制触发的视觉反馈节奏
+        await CardCmd.AutoPlay(choiceContext, this, null);
     }
-
+    
     protected override void OnUpgrade()
     {
         // 升级效果：伤害 +3，格挡 +3
