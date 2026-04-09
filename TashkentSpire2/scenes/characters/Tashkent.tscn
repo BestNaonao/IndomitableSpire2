@@ -4,6 +4,11 @@
 
 [node name="Tashkent" type="Node2D"]
 
+[node name="TashkentCharacter" type="Sprite2D" parent="."]
+position = Vector2(-11, -117.00001)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("1_v075x")
+
 [node name="Visuals" type="Node2D" parent="."]
 unique_name_in_owner = true
 
@@ -30,8 +35,3 @@ position = Vector2(0, -270)
 
 [node name="TalkPos" type="Marker2D" parent="."]
 position = Vector2(0, -360)
-
-[node name="TashkentCharacter" type="Sprite2D" parent="."]
-position = Vector2(-11, -117.00001)
-scale = Vector2(0.3, 0.3)
-texture = ExtResource("1_v075x")

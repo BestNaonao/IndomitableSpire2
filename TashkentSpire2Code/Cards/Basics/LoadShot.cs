@@ -10,7 +10,10 @@ namespace TashkentSpire2.TashkentSpire2Code.Cards.Basics;
 public sealed class LoadShot() : AmmuCard(1, CardType.Attack, CardRarity.Basic, TargetType.AnyEnemy)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new DamageVar(10M, ValueProp.Move)];
+    [
+        new DamageVar(10M, ValueProp.Move),
+        new AmmunitionDynamicVar(1M)
+    ];
 
     protected override int GetInitialAmmo() => 1;
     protected override async Task OnPlayEffect(PlayerChoiceContext ctx, CardPlay play)

@@ -1,6 +1,8 @@
+using BaseLib.Config;
 using Godot;
 using HarmonyLib;
 using MegaCrit.Sts2.Core.Modding;
+using TashkentSpire2.TashkentSpire2Code.Config;
 
 namespace TashkentSpire2;
 
@@ -17,6 +19,8 @@ public partial class MainFile : Node
 	{
 		Harmony harmony = new(ModId);
 
+		ModConfigRegistry.Register(ModId, new TashkentConfig());
+		
 		harmony.PatchAll();
 		
 		Logger.Info("Tashkent mod loaded");

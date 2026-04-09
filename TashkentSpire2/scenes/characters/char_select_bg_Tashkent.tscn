@@ -18,10 +18,6 @@ grow_vertical = 2
 pivot_offset = Vector2(1280, 600)
 
 [node name="CharSelectBgTashkent" type="Sprite2D" parent="."]
-position = Vector2(808, 523)
-scale = Vector2(0.5, 0.5)
-
-[node name="CharSelectBgTashkent2" type="Sprite2D" parent="."]
-position = Vector2(813, 527)
+position = Vector2(815, 534)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("1_671wg")

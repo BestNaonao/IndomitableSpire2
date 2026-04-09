@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://cmvq0ttd4au5f"]
+
+[ext_resource type="Texture2D" uid="uid://u43bobsjw7et" path="res://TashkentSpire2/images/vfx/flower.png" id="1_xehmj"]
+
+[node name="CardTailTashkent" type="Node2D"]
+
+[node name="Flower" type="Sprite2D" parent="."]
+position = Vector2(1, -2)
+texture = ExtResource("1_xehmj")

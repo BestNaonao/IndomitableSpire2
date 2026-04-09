@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b5731jv8naf6f"
-path="res://.godot/imported/retreat_torpedo.png-e984d3b97d43f1b4b3789fa6db534602.ctex"
+uid="uid://bjwove56pgwsd"
+path="res://.godot/imported/card.png-29fb44f3ebb21c9d977b155cb17959fd.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://TashkentSpire2/images/card_portraits/retreat_torpedo.png"
-dest_files=["res://.godot/imported/retreat_torpedo.png-e984d3b97d43f1b4b3789fa6db534602.ctex"]
+source_file="res://TashkentSpire2/images/card_portraits/big/card.png"
+dest_files=["res://.godot/imported/card.png-29fb44f3ebb21c9d977b155cb17959fd.ctex"]
 
 [params]
 
