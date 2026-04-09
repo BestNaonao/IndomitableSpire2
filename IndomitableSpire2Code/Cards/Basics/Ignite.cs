@@ -34,14 +34,12 @@ public sealed class Ignite() : IndomitableCard(1, CardType.Attack, CardRarity.Ba
         
         // 2. 如果目标存活，施加起火
         if (cardPlay.Target is { IsAlive: true })
-        {
             await PowerCmd.Apply<OnFirePower>(
                 target: cardPlay.Target, 
                 amount: DynamicVars["OnFirePower"].BaseValue, 
                 applier: Owner.Creature, 
                 cardSource: this
             );
-        }
     }
 
     protected override void OnUpgrade()

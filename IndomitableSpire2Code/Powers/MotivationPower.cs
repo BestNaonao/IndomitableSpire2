@@ -35,14 +35,11 @@ public sealed class MotivationPower : IndomitablePower // 继承自你的能力�
         // 如果是战斗开始的初始化 (你代码里写的 Apply 1)，代表 0 干劲，保持 MotivationAmount 为 0。
         // 但如果未来有卡牌直接赋予了多层（比如直接 Apply 5），我们要将其吸收进动态变量。
         if (Amount > 1)
-        {
             DynamicVars["MotivationAmount"].BaseValue = Amount;
-        }
 
         // 彻底锁死引擎层面的 Amount 为 1，保证能力图标永远不会被销毁
         SetAmount(1, silent: true);
         InvokeDisplayAmountChanged();
-
         return Task.CompletedTask;
     }
 
@@ -50,47 +47,34 @@ public sealed class MotivationPower : IndomitablePower // 继承自你的能力�
     public override bool TryModifyPowerAmountReceived(
         PowerModel canonicalPower,
         Creature target,
-        Decimal amount,
+        decimal amount,
         Creature? applier,
-        out Decimal modifiedAmount)
+        out decimal modifiedAmount)
     {
         modifiedAmount = amount;
 
         // 确保拦截的是我们自己，且目标是拥有者
-        if (canonicalPower.Id == Id && target == Owner)
-        {
-            // 已满且试图减少，直接屏蔽
-            if (IsCompleted && amount < 0)
-            {
-                modifiedAmount = 0M;
-                return true;
-            }
+        if (canonicalPower.Id != Id || target != Owner) return false;
+        
+        // 强制 modifiedAmount 为 0，保护底层的 Amount 永远不被修改
+        modifiedAmount = 0M;
+        
+        // 已满且试图减少，直接屏蔽
+        if (IsCompleted && amount < 0) return true;
 
-            // 计算实际的增减量（防止溢出 100 或跌破 0 导致的特效数值错误）
-            var currentAmount = DynamicVars["MotivationAmount"].BaseValue;
-            var newAmount = Math.Clamp(currentAmount + amount, 0M, MaxAmount);
-            var actualChange = (int)(newAmount - currentAmount);
+        // 计算实际的增减量（防止溢出 100 或跌破 0 导致的特效数值错误）
+        var currentAmount = DynamicVars["MotivationAmount"].BaseValue;
+        var newAmount = Math.Clamp(currentAmount + amount, 0M, MaxAmount);
+        var actualChange = (int)(newAmount - currentAmount);
 
-            // 如果实际数值确实发生了变化
-            if (actualChange != 0)
-            {
-                DynamicVars["MotivationAmount"].BaseValue = newAmount;
-                InvokeDisplayAmountChanged();
+        // 如果实际数值确实发生了变化
+        if (actualChange == 0) return true;
+        DynamicVars["MotivationAmount"].BaseValue = newAmount;
+        InvokeDisplayAmountChanged();
 
-                // 【核心魔法：手动触发引擎的标准 VFX 和 SFX 广播！】
-                // 传入 this (当前能力), actualChange (变动差值), silent: false (允许播放特效)
-                Owner.InvokePowerModified(this, actualChange, silent: false);
-                
-                // 可选：让能力图标本身闪烁一下黄光
-                Flash(); 
-            }
-
-            // 强制 modifiedAmount 为 0，保护底层的 Amount 永远不被修改
-            modifiedAmount = 0M;
-            return true;
-        }
-
-        return false;
+        // 【核心魔法：手动触发引擎的标准 VFX 和 SFX 广播！silent: false (允许播放特效)】
+        Owner.InvokePowerModified(this, actualChange, silent: false);
+        return true;
     }
 
     // 供其他卡牌或遗物调用的归零使用的快捷方法
