@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://cl44l3vqar6tb" path="res://src/Core/Nodes/Vfx/NCardTrail.cs" id="3_nvhcf"]
 [ext_resource type="Texture2D" uid="uid://co4rdu87x6mcr" path="res://images/packed/vfx/trail2.png" id="4_ipfil"]
 ; 【注意】这里换成你自制的粒子贴图路径，比如白花或羽毛的png
-[ext_resource type="Texture2D" uid="uid://dei8x6t6dipu6" path="res://IndomitableSpire2/images/vfx/flower.png" id="1_dhuoq"]
+[ext_resource type="Texture2D" uid="uid://u43bobsjw7et" path="res://IndomitableSpire2/images/vfx/flower.png" id="1_dhuoq"]
 [ext_resource type="Texture2D" uid="uid://bexbor35725ag" path="res://images/vfx/vfx_ghostly_power_up/sparkle.png" id="6_hwp8s"]
 [ext_resource type="Texture2D" uid="uid://bk4gpfmy1awke" path="res://images/packed/vfx/small_card_silhouette.png" id="7_toy7j"]
 [ext_resource type="CanvasItemMaterial" uid="uid://c4ycqv0gdxvmr" path="res://themes/canvas_item_material_additive_shared.tres" id="shared_additive_mat"]

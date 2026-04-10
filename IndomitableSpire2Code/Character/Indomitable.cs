@@ -73,7 +73,12 @@ public sealed class IndomitableCharacter : CustomCharacterModel
         _                       => "res://IndomitableSpire2/scenes/characters/indomitable.tscn"
     };
     // 获取休息点的视觉场景
-    public override string CustomRestSiteAnimPath => CustomVisualPath;
+    public override string CustomRestSiteAnimPath => CurrentSkin switch
+    {
+        IndomitableSkin.Default => "res://IndomitableSpire2/scenes/characters/indomitable_rest_site.tscn",
+        IndomitableSkin.Maid    => "res://IndomitableSpire2/scenes/characters/indomitable_maid_rest_site.tscn",
+        _                       => "res://IndomitableSpire2/scenes/characters/indomitable_rest_site.tscn"
+    };
     // 获取商店的视觉场景
     public override string CustomMerchantAnimPath => CurrentSkin switch
     {
