@@ -5,7 +5,7 @@ namespace TashkentSpire2.TashkentSpire2Code;
 
 public class AmmunitionDynamicVar : DynamicVar
 {
-    public const string Key = "Tashkent_Ammunition";
+    public const string Key = "TashkentSpire2-Ammu";
 
     public static readonly string LocKey = Key.ToUpperInvariant();
 

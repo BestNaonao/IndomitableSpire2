@@ -13,7 +13,9 @@ public class ArtilleryStrike() : TashkentCard(1, CardType.Attack, CardRarity.Com
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new DamageVar(3M, ValueProp.Move),
         new RepeatVar(4),
-        new AmmunitionDynamicVar(1M)
+        new AmmunitionDynamicVar(1M),
+        new LoadDynamicVar(1M),
+        new AmmuMaxDynamicVar(1M)
     ];
     
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)

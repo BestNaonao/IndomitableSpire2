@@ -100,10 +100,8 @@
 
     <ItemGroup>
         <Folder Include="TashkentSpire2Code\Cards\Ancient\" />
-        <Folder Include="TashkentSpire2Code\Cards\Common\" />
         <Folder Include="TashkentSpire2Code\Cards\Multiplay\" />
         <Folder Include="TashkentSpire2Code\Cards\Rare\" />
-        <Folder Include="TashkentSpire2Code\Cards\Uncommon\" />
         <Folder Include="TashkentSpire2\images\card_portraits\big\"/>
         <Folder Include="TashkentSpire2\images\packed\sprite_fonts\" />
         <Folder Include="TashkentSpire2\images\powers\big\"/>

@@ -5,7 +5,7 @@ namespace TashkentSpire2.TashkentSpire2Code;
 
 public class RetreatDynamicVar : DynamicVar
 {
-    public const string Key = "Tashkent_Retreat";
+    public const string Key = "TashkentSpire2-Retreat";
 
     public static readonly string LocKey = Key.ToUpperInvariant();
 

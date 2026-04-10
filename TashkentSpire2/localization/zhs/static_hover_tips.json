@@ -6,5 +6,11 @@
   "TASHKENTSPIRE2-CHARGE.title": "突进",
   "TASHKENTSPIRE2-CHARGE.description": "距离增加，最多不超过[blue]5[/blue]。",
   "TASHKENTSPIRE2-RETREAT.title": "后撤",
-  "TASHKENTSPIRE2-RETREAT.description": "距离减少，最少不低于[blue]-5[/blue]。"
+  "TASHKENTSPIRE2-RETREAT.description": "距离减少，最少不低于[blue]-5[/blue]。",
+  "TASHKENTSPIRE2-AMMU.title": "弹药",
+  "TASHKENTSPIRE2-AMMU.description": "可用弹药数，可以跨战斗保存，弹药为[blue]0[/blue]时无法使用打出弹药的效果。",
+  "TASHKENTSPIRE2-AMMU-MAX.title": "弹药最大值",
+  "TASHKENTSPIRE2-AMMU-MAX.description": "可装载的弹药最大值。",
+  "TASHKENTSPIRE2-LOAD.title": "装填",
+  "TASHKENTSPIRE2-LOAD.description": "增加弹药数量。"
 }

@@ -5,7 +5,7 @@ namespace TashkentSpire2.TashkentSpire2Code;
 
 public class TorpedoDynamicVar : DynamicVar
 {
-    public const string Key = "Tashkent_Torpedo";
+    public const string Key = "TashkentSpire2-Torpedo";
 
     public static readonly string LocKey = Key.ToUpperInvariant();
 

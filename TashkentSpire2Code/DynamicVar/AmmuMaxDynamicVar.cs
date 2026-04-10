@@ -3,13 +3,13 @@ using MegaCrit.Sts2.Core.Localization.DynamicVars;
 
 namespace TashkentSpire2.TashkentSpire2Code;
 
-public class ChargeDynamicVar : DynamicVar
+public class AmmuMaxDynamicVar : DynamicVar
 {
-    public const string Key = "TashkenSpire2-Charge";
+    public const string Key = "TashkentSpire2-Ammu-Max";
 
     public static readonly string LocKey = Key.ToUpperInvariant();
 
-    public ChargeDynamicVar(decimal baseValue) : base(Key, baseValue)
+    public AmmuMaxDynamicVar(decimal baseValue) : base(Key, baseValue)
     {
         this.WithTooltip(LocKey);
     }

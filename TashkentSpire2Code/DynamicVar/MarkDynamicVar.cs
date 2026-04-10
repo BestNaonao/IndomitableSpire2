@@ -5,7 +5,7 @@ namespace TashkentSpire2.TashkentSpire2Code;
 
 public class MarkDynamicVar : DynamicVar
 {
-    public const string Key = "Tashkent_Mark";
+    public const string Key = "TashkentSpire2-Mark";
 
     public static readonly string LocKey = Key.ToUpperInvariant();
 
