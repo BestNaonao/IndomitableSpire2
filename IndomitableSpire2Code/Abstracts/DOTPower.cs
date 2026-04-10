@@ -13,7 +13,7 @@ using MegaCrit.Sts2.Core.ValueProps;
 namespace IndomitableSpire2.IndomitableSpire2Code.Abstracts;
 
 // ReSharper disable once InconsistentNaming for Special Abbreviation
-public abstract class DOTPower : IndomitablePower, IHealthBarForecastSource
+public abstract class DOTPower : IndomitablePower
 {
     public override PowerType Type => PowerType.Debuff;
     public override PowerStackType StackType => PowerStackType.Counter;
@@ -22,11 +22,11 @@ public abstract class DOTPower : IndomitablePower, IHealthBarForecastSource
     
     // --- BaseLib 血条预测配置 ---
     // 1. 血条的实际颜色
-    public abstract Color ForecastBarColor { get; }
+    protected abstract Color ForecastBarColor { get; }
     // 2. 致死时的文字颜色
-    public abstract Color ForecastLethalTextColor { get; }
+    protected abstract Color ForecastLethalTextColor { get; }
     // 3. 排序层级
-    public abstract int ForecastOrder { get; }
+    protected abstract int ForecastOrder { get; }
     
     // 注册需要精确维护的四个动态变量
     protected override IEnumerable<DynamicVar> CanonicalVars =>
@@ -101,7 +101,7 @@ public abstract class DOTPower : IndomitablePower, IHealthBarForecastSource
     }
     
     // 【新增】：实现 BaseLib 对血条的接口要求的方法
-    public new IEnumerable<HealthBarForecastSegment> GetHealthBarForecastSegments(HealthBarForecastContext context)
+    public override IEnumerable<HealthBarForecastSegment> GetHealthBarForecastSegments(HealthBarForecastContext context)
     {
         var damage = GetNextDamage();
         if (damage > 0)

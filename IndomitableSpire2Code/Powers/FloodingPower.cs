@@ -16,10 +16,10 @@ public sealed class FloodingPower : DOTPower
     
     // --- BaseLib 血条预测配置 ---
     // 血条颜色：天蓝色
-    public override Color ForecastBarColor => new("33CCFF"); 
+    protected override Color ForecastBarColor => new("33CCFF"); 
     // 致死文本颜色：亮青色 (BaseLib 会自动压暗它来做描边)
-    public override Color ForecastLethalTextColor => new("88FFFF");
-    public override int ForecastOrder => 15;
+    protected override Color ForecastLethalTextColor => new("88FFFF");
+    protected override int ForecastOrder => 15;
 
     // 注册变量池，新增 DamageIncreasePercent 用于 UI 动态显示易伤比例
     protected override IEnumerable<DynamicVar> CanonicalVars =>
@@ -51,7 +51,6 @@ public sealed class FloodingPower : DOTPower
         // 确保受到攻击的是拥有者怪物本身，且是享受力量加成的正常攻击
         var isPoweredAttack = props.HasFlag(ValueProp.Move) && !props.HasFlag(ValueProp.Unpowered);
         // 有非攻击意图的怪物在每层进水下增加 5% 承受伤害
-        return target != Owner || !isPoweredAttack || !HasNonAttackIntent
-            ? 1m : 1m + Amount * 0.05m;  
+        return target == Owner && isPoweredAttack && HasNonAttackIntent ? 1m + Amount * 0.05m : 1m;  
     }
 }
