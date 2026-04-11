@@ -22,11 +22,6 @@ public sealed class HypnotizedPower : IndomitablePower
     protected override string SmartDescriptionLocKey => IsSleeping
         ? $"{Id.Entry}.smartDescriptionSleeping"
         : $"{Id.Entry}.smartDescriptionAwake";
-    
-    public override string CustomBigIconPath => 
-        "res://IndomitableSpire2/images/powers/big/hypnotized_power.png";
-    public override string CustomPackedIconPath => 
-        "res://IndomitableSpire2/images/powers/packed/hypnotized_power_packed.tres";
 
     public override async Task AfterTurnEnd(PlayerChoiceContext choiceContext, CombatSide side)
     {

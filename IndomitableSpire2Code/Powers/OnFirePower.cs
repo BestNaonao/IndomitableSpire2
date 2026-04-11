@@ -18,9 +18,4 @@ public sealed class OnFirePower : DOTPower // 继承自你的基类
     
     // TODO: 重写智能描述以区分玩家和怪物
     // protected override string SmartDescriptionLocKey => 
-    
-    public override string CustomBigIconPath => 
-        "res://IndomitableSpire2/images/powers/big/on_fire_power.png";
-    public override string CustomPackedIconPath =>
-        "res://IndomitableSpire2/images/powers/packed/on_fire_power_packed.tres";
 }

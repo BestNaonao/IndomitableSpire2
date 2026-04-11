@@ -24,11 +24,6 @@ public sealed class MotivationPower : IndomitablePower // 继承自你的能力�
         ? $"{Id.Entry}.smartDescriptionFull"
         : $"{Id.Entry}.smartDescription";
 
-    public override string CustomBigIconPath => 
-        "res://IndomitableSpire2/images/powers/big/motivation_power.png";
-    public override string CustomPackedIconPath =>
-        "res://IndomitableSpire2/images/powers/packed/motivation_power_packed.tres";
-
     // 4. 处理首次获得该能力的情况 (接管初始 Amount)
     public override Task AfterApplied(Creature? applier, CardModel? cardSource)
     {

@@ -28,11 +28,6 @@ public sealed class FloodingPower : DOTPower
     protected override string SmartDescriptionLocKey => HasNonAttackIntent 
         ? $"{Id.Entry}.smartDescriptionFull"
         : $"{Id.Entry}.smartDescription";
-    
-    public override string CustomBigIconPath => 
-        "res://IndomitableSpire2/images/powers/big/flooding_power.png";
-    public override string CustomPackedIconPath =>
-        "res://IndomitableSpire2/images/powers/packed/flooding_power_packed.tres";
 
     protected override void Update()
     {
