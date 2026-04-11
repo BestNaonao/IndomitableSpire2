@@ -1,6 +1,10 @@
 using Godot;
 using HarmonyLib;
+using IndomitableSpire2.IndomitableSpire2Code.Providers;
+using IndomitableSpire2.IndomitableSpire2Code.Registries;
 using MegaCrit.Sts2.Core.Modding;
+using MegaCrit.Sts2.Core.Models.Powers;
+using MegaCrit.Sts2.Core.Models.Relics;
 
 namespace IndomitableSpire2;
 
@@ -15,12 +19,25 @@ public partial class MainFile : Node
 
     public static void Initialize()
     {
-        Logger.Info("Dot providers registered successfully");
+        InitializeBlockRetentionProviders();
+        Logger.Info("Block Retention Providers registered successfully");
         
         Harmony harmony = new(ModId);
 
         harmony.PatchAll();
         
         Logger.Info("Indomitable mod loaded");
+    }
+    
+    /// <summary>
+    /// 在 Mod 加载、应用 Harmony 补丁前调用此方法
+    /// </summary>
+    private static void InitializeBlockRetentionProviders()
+    {
+        // 注册官方的格挡保留模型
+        BlockRetentionRegistry.Register(typeof(BarricadePower), new BarricadeProvider());
+        BlockRetentionRegistry.Register(typeof(BlurPower), new BlurProvider());
+        BlockRetentionRegistry.Register(typeof(BurrowedPower), new BurrowedProvider());
+        BlockRetentionRegistry.Register(typeof(SturdyClamp), new SturdyClampProvider());
     }
 }
