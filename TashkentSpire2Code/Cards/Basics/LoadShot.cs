@@ -44,14 +44,12 @@ public sealed class LoadShot() : TashkentCard(1, CardType.Attack, CardRarity.Bas
                 .FromCard(this)
                 .Targeting(cardPlay.Target)
                 .Execute(context);
-            
             CurrentAmmu = ammu - 1;
         }
         else
         {
             int load = DynamicVars["TashkentSpire2-Load"].IntValue;
             int max = DynamicVars["TashkentSpire2-Ammu-Max"].IntValue;
-
             CurrentAmmu = Math.Min(CurrentAmmu + load, max);
         }
     }
