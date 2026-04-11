@@ -1,4 +1,5 @@
-﻿using MegaCrit.Sts2.Core.Commands;
+﻿using IndomitableSpire2.IndomitableSpire2Code.Abstracts;
+using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -8,7 +9,7 @@ using MegaCrit.Sts2.Core.ValueProps;
 
 namespace IndomitableSpire2.IndomitableSpire2Code.Powers;
 
-public sealed class IllustriousAegisPower : IndomitablePower
+public sealed class IllustriousAegisPower : IndomitablePower, IBlockRetentionProvider
 {
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;
@@ -83,11 +84,20 @@ public sealed class IllustriousAegisPower : IndomitablePower
     
     public override bool ShouldClearBlock(Creature creature) => Owner != creature;
     
+    // IBlockRetentionProvider 接口实现区域
+    public bool ShouldAggregate => true;
+    
+    public int CalculateRetainedBlock(AbstractModel sourceModel, Creature creature)
+    {
+        return Amount;
+    }
+    
     public void OnRetentionTriggered(AbstractModel sourceModel, Creature creature)
     {
         Flash();
     }
     
+    // 内部数据类
     private class AegisData
     {
         public int HealAmount { get; set; }
