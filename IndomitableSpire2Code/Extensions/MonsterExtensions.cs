@@ -10,8 +10,9 @@ public static class MonsterExtensions
     /// </summary>
     public static AttackIntent? GetAttackIntent(this MonsterModel monster)
     {
-        // 过滤并获取第一个攻击相关的意图
-        return monster.NextMove.Intents.OfType<AttackIntent>().FirstOrDefault();
+        // 【防御性编程】：如果怪物已经死亡或战斗状态丢失，它就没有意图伤害
+        return !monster.Creature.IsAlive ? null :
+            monster.NextMove.Intents.OfType<AttackIntent>().FirstOrDefault();
     }
 
     /// <summary>
