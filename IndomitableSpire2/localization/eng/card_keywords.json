@@ -1,3 +1,16 @@
 {
-  
+  "INDOMITABLESPIRE2-CARRIER_AIRCRAFT.title": "Carrier Aircraft",
+  "INDOMITABLESPIRE2-CARRIER_AIRCRAFT.description": "A special type of card that triggers effects applied to Carrier Aircraft. Has Durability and is immune to Thorns.",
+  "INDOMITABLESPIRE2-FIGHTER.title": "Fighter",
+  "INDOMITABLESPIRE2-FIGHTER.description": "A Carrier Aircraft classified as a Fighter, triggering effects applied to Fighters. Usually provides [gold]Block[/gold] or counterattack capabilities.",
+  "INDOMITABLESPIRE2-ATTACKER.title": "Attacker",
+  "INDOMITABLESPIRE2-ATTACKER.description": "A Carrier Aircraft classified as an Attacker, triggering effects applied to Attackers. Usually features flexible, targeted damage.",
+  "INDOMITABLESPIRE2-TORPEDO_BOMBER.title": "Torpedo Bomber",
+  "INDOMITABLESPIRE2-TORPEDO_BOMBER.description": "A Carrier Aircraft classified as a Torpedo Bomber, triggering effects applied to Torpedo Bombers. May apply [gold]Flooded[/gold] or [gold]Armor-Breaking[/gold] effects.",
+  "INDOMITABLESPIRE2-DIVE_BOMBER.title": "Dive Bomber",
+  "INDOMITABLESPIRE2-DIVE_BOMBER.description": "A Carrier Aircraft classified as a Dive Bomber, triggering effects applied to Dive Bombers. Usually bypasses some of the enemy's defense mechanisms.",
+  "INDOMITABLESPIRE2-LEVEL_BOMBER.title": "Level Bomber",
+  "INDOMITABLESPIRE2-LEVEL_BOMBER.description": "A Carrier Aircraft classified as a Level Bomber, triggering effects applied to Level Bombers. Usually features [gold]AoE damage[/gold] effects.",
+  "INDOMITABLESPIRE2-SKIP_BOMBER.title": "Skip Bomber",
+  "INDOMITABLESPIRE2-SKIP_BOMBER.description": "A Carrier Aircraft classified as a Skip Bomber, triggering effects applied to Skip Bombers. May deal multi-hit combo damage."
 }

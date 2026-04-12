@@ -1,3 +1,16 @@
 {
-  
+  "INDOMITABLESPIRE2-CARRIER_AIRCRAFT.title": "舰载机",
+  "INDOMITABLESPIRE2-CARRIER_AIRCRAFT.description": "特殊类型的卡牌，能够触发应用于舰载机的效果，具有耐久，免疫荆棘。",
+  "INDOMITABLESPIRE2-FIGHTER.title": "战斗机",
+  "INDOMITABLESPIRE2-FIGHTER.description": "战斗机性质的舰载机，能够触发应用于战斗机的效果。通常提供[gold]格挡[/gold]或反击能力。",
+  "INDOMITABLESPIRE2-ATTACKER.title": "攻击机",
+  "INDOMITABLESPIRE2-ATTACKER.description": "攻击机性质的舰载机，能够触发应用于攻击机的效果。通常具有灵活的指向性伤害。",
+  "INDOMITABLESPIRE2-TORPEDO_BOMBER.title": "鱼雷轰炸机",
+  "INDOMITABLESPIRE2-TORPEDO_BOMBER.description": "鱼雷轰炸机性质的舰载机，能够触发应用于鱼雷轰炸机的效果。可能造成[gold]进水[/gold]或[gold]破甲[/gold]效果。",
+  "INDOMITABLESPIRE2-DIVE_BOMBER.title": "俯冲轰炸机",
+  "INDOMITABLESPIRE2-DIVE_BOMBER.description": "俯冲轰炸机性质的舰载机，能够触发应用于俯冲轰炸机的效果。通常能绕过敌方的部分防御机制。",
+  "INDOMITABLESPIRE2-LEVEL_BOMBER.title": "水平轰炸机",
+  "INDOMITABLESPIRE2-LEVEL_BOMBER.description": "水平轰炸机性质的舰载机，能够触发应用于水平轰炸机的效果。通常具有[gold]群体伤害[/gold]效果。",
+  "INDOMITABLESPIRE2-SKIP_BOMBER.title": "跳弹轰炸机",
+  "INDOMITABLESPIRE2-SKIP_BOMBER.description": "跳弹轰炸机性质的舰载机，能够触发应用于跳弹轰炸机的效果。可能造成多次连击伤害。"
 }

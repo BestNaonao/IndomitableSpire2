@@ -1,0 +1,16 @@
+﻿using BaseLib.Patches.Content;
+using MegaCrit.Sts2.Core.Entities.Cards;
+
+namespace IndomitableSpire2.IndomitableSpire2Code.Enums;
+
+public static class IndomitableTags
+{
+    // 用于代码逻辑检测：if (card.Tags.Contains(IndomitableTags.Fighter)) ...
+    [CustomEnum] public static CardTag CarrierAircraft;
+    [CustomEnum] public static CardTag Fighter;
+    [CustomEnum] public static CardTag Attacker;
+    [CustomEnum] public static CardTag TorpedoBomber;
+    [CustomEnum] public static CardTag DiveBomber;
+    [CustomEnum] public static CardTag LevelBomber;
+    [CustomEnum] public static CardTag SkipBomber;
+}
