@@ -77,7 +77,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Alchyr.Sts2.BaseLib" Version="0.3.0" PrivateAssets="All" />
+        <PackageReference Include="Alchyr.Sts2.BaseLib" Version="3.0.1" PrivateAssets="All" />
         <PackageReference Include="Alchyr.Sts2.ModAnalyzers" Version="0.1.6" />
         <AdditionalFiles Include="IndomitableSpire2/localization/**/*.json"/>
     </ItemGroup>
@@ -101,6 +101,7 @@
     </ItemGroup>
 
     <ItemGroup>
+        <Folder Include="IndomitableSpire2Code\Deprecated\Providers\" />
         <Folder Include="IndomitableSpire2\images\card_portraits\big\"/>
         <Folder Include="IndomitableSpire2\images\packed\sprite_fonts\" />
         <Folder Include="IndomitableSpire2\images\powers\big\"/>

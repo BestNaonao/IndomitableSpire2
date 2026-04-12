@@ -1,14 +1,14 @@
-﻿using System;
-using HarmonyLib;
-using MegaCrit.Sts2.Core.Animation;
-using MegaCrit.Sts2.Core.Bindings.MegaSpine;
-using MegaCrit.Sts2.Core.Modding;
-using MegaCrit.Sts2.Core.Models;
-using MegaCrit.Sts2.Core.Models.Characters;
-using MegaCrit.Sts2.Core.Nodes.Combat;
-
-namespace IndomitableSpire2.IndomitableSpire2Code.Patches;
-
+﻿// using System;
+// using HarmonyLib;
+// using MegaCrit.Sts2.Core.Animation;
+// using MegaCrit.Sts2.Core.Bindings.MegaSpine;
+// using MegaCrit.Sts2.Core.Modding;
+// using MegaCrit.Sts2.Core.Models;
+// using MegaCrit.Sts2.Core.Models.Characters;
+// using MegaCrit.Sts2.Core.Nodes.Combat;
+//
+// namespace IndomitableSpire2.IndomitableSpire2Code.Patches;
+//
 // [ModInitializer("Init")]
 // public static class Entry
 // {
