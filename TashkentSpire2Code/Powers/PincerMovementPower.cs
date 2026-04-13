@@ -5,21 +5,21 @@ using MegaCrit.Sts2.Core.ValueProps;
 
 namespace TashkentSpire2.TashkentSpire2Code.Powers;
 
-public class MarkPower : TashkentPower
+public class PincerMovementPower : TashkentPower
 {
-    public override PowerType Type => PowerType.Debuff;
+    public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;
     
     public override string CustomBigIconPath => 
         "res://TashkentSpire2/images/powers/big/mark_power.png";
     public override string CustomPackedIconPath => 
         "res://TashkentSpire2/images/powers/packed/mark_power_packed.tres";
-    
-    public override decimal ModifyDamageAdditive(Creature? target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource)
+
+    public override decimal ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource)
     {
-        if (target != base.Owner || !props.HasFlag(ValueProp.Unpowered) || cardSource == null)
-            return 0m;
+        if (dealer != this.Owner || this.Owner?.CombatState == null || base.Owner.CombatState.CurrentSide == base.Owner.Side)
+            return 1M;
         
-        return base.Amount;
+        return 2M;
     }
 }

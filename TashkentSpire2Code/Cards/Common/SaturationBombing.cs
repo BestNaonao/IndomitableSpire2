@@ -5,18 +5,19 @@ using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Saves.Runs;
 using MegaCrit.Sts2.Core.ValueProps;
 using TashkentSpire2.TashkentSpire2Code.Commands;
+using TashkentSpire2.TashkentSpire2Code.Keywords;
 
 namespace TashkentSpire2.TashkentSpire2Code.Cards.Common;
 
 public class SaturationBombing() : TashkentCard(2, CardType.Attack, CardRarity.Common, TargetType.AllEnemies)
 {
-    protected override HashSet<CardTag> CanonicalTags => [CardTag.Strike];
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [TashkentKeyword.Barrage];
     
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new DamageVar(5M, ValueProp.Move),
         new AmmunitionDynamicVar(0M),
         new LoadDynamicVar(1M),
-        new AmmuMaxDynamicVar(2M)
+        new AmmuMaxDynamicVar(6M)
     ];
     
     private int _currentAmmu = 1;
@@ -37,18 +38,31 @@ public class SaturationBombing() : TashkentCard(2, CardType.Attack, CardRarity.C
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         ArgumentNullException.ThrowIfNull(cardPlay.Target, nameof(cardPlay.Target));
+        ArgumentNullException.ThrowIfNull(CombatState);
         
         int ammu = CurrentAmmu;
 
         if (ammu > 0)
         {
-            await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
-                .WithHitCount(DynamicVars.Repeat.IntValue)
-                .FromCard(this)
-                .Targeting(cardPlay.Target)
-                .WithHitFx("vfx/vfx_attack_slash")
-                .Execute(choiceContext);
-            CurrentAmmu = ammu - 1;
+            if (this.CanonicalKeywords.Contains(TashkentKeyword.Barrage))
+            {
+                await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
+                    .WithHitCount(ammu)
+                    .FromCard(this)
+                    .TargetingAllOpponents(CombatState)
+                    .WithHitFx("vfx/vfx_attack_slash")
+                    .Execute(choiceContext);
+                CurrentAmmu = 0;
+            }
+            else
+            {
+                await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
+                    .FromCard(this)
+                    .TargetingAllOpponents(CombatState)
+                    .WithHitFx("vfx/vfx_attack_slash")
+                    .Execute(choiceContext);
+                CurrentAmmu = ammu - 1;
+            }
         }
         else
         {

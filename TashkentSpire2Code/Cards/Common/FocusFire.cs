@@ -77,7 +77,5 @@ public class FocusFire() : TashkentCard(1, CardType.Attack, CardRarity.Common, T
     protected override void OnUpgrade()
     {
         DynamicVars.Damage.UpgradeValueBy(1M);
-        DynamicVars["TashkentSpire2-Ammu"].UpgradeValueBy(1M);
-        DynamicVars["TashkentSpire2-Ammu-Max"].UpgradeValueBy(1M);
     }
 }

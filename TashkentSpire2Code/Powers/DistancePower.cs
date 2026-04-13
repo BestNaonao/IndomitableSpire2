@@ -23,7 +23,12 @@ public class DistancePower : TashkentPower
         "res://TashkentSpire2/images/powers/packed/distance_power_packed.tres";
     
     protected override IEnumerable<DynamicVar> CanonicalVars => 
-        new List<DynamicVar> { new DynamicVar(VarKey, 0m) };
+        new List<DynamicVar>
+        {
+            new DynamicVar(VarKey, 0M),
+            new DynamicVar("Increase", 0M),
+            new DynamicVar("Decrease", 0M)
+        };
     
     private int CurrentDist => (int)base.DynamicVars[VarKey].BaseValue;
     
@@ -40,10 +45,19 @@ public class DistancePower : TashkentPower
         return false;
     }
     
+    private void RefreshDerivedVars()
+    {
+        int dist = CurrentDist;
+
+        base.DynamicVars["Increase"].BaseValue = dist * 20;
+        base.DynamicVars["Decrease"].BaseValue = dist * 10;
+    }
+    
     public override async Task AfterApplied(Creature? applier, CardModel? cardSource)
     {
         int initialAmount = Mathf.Clamp(base.Amount, -5, 5);
         base.DynamicVars[VarKey].BaseValue = initialAmount;
+        RefreshDerivedVars();
         
         await UpdateCreaturePositions(initialAmount);
         InvokeDisplayAmountChanged();
@@ -72,6 +86,8 @@ public class DistancePower : TashkentPower
 
             if (delta != 0) {
                 base.DynamicVars[VarKey].BaseValue = newAmount;
+                RefreshDerivedVars();
+                
                 await UpdateCreaturePositions(delta);
                 InvokeDisplayAmountChanged();
             }
