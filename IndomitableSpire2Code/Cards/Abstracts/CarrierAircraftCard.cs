@@ -18,7 +18,10 @@ public abstract class CarrierAircraftCard(
     bool autoAdd = true
     ) : IndomitableCard(baseCost, type, rarity, target, showInCardLibrary, autoAdd)
 {
+    // 基础最大耐久
     protected abstract int MaxDurability { get; set; }
+    // 升级时提升的耐久值（子类可覆写，默认为 2）
+    protected abstract int UpgradeDurabilityAmount { get; set; }
 
     // 强制赋予基础舰载机的 Tag 和 Keyword
     protected abstract IEnumerable<CardKeyword> SubclassKeywords { get; }
@@ -63,8 +66,7 @@ public abstract class CarrierAircraftCard(
     }
 
     /// <summary>
-    /// 舰载机专用的打出抽象方法。
-    /// 子类在此处编写伤害或辅助逻辑，并按需调用 CalculateAndApplyDurabilityLoss。
+    /// 舰载机专用的打出抽象方法。子类在此处编写伤害或辅助逻辑。
     /// </summary>
     /// <returns>返回伤害结果列表，若无伤害（如纯技能牌）可返回 null</returns>
     protected abstract Task<IEnumerable<DamageResult>?> OnAircraftPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay);
@@ -96,5 +98,15 @@ public abstract class CarrierAircraftCard(
         if (maxDurabilityLoss > 0)
             DynamicVars["Durability"].BaseValue = Math.Max(0, DynamicVars["Durability"].BaseValue - maxDurabilityLoss);
         // 触发变量更新以刷新卡面 UI
+    }
+    
+    /// <summary>
+    /// 供子类在 OnUpgrade 中调用的打包升级方法，同时提高当前耐久和最大耐久，并同步更新 UI
+    /// </summary>
+    protected void UpgradeDurability()
+    {
+        if (UpgradeDurabilityAmount <= 0) return;
+        DynamicVars["MaxDurability"].UpgradeValueBy(UpgradeDurabilityAmount);
+        DynamicVars["Durability"].UpgradeValueBy(UpgradeDurabilityAmount);
     }
 }
