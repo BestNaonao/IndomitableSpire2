@@ -5,7 +5,7 @@ namespace TashkentSpire2.TashkentSpire2Code;
 
 public class ChargeDynamicVar : DynamicVar
 {
-    public const string Key = "TashkenSpire2-Charge";
+    public const string Key = "TashkentSpire2-Charge";
 
     public static readonly string LocKey = Key.ToUpperInvariant();
 

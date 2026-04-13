@@ -17,15 +17,18 @@ public class FocusFire() : TashkentCard(1, CardType.Attack, CardRarity.Common, T
         new AmmunitionDynamicVar(1M),
         new LoadDynamicVar(1M),
         new AmmuMaxDynamicVar(1M),
-        new CalculatedDamageVar(ValueProp.Move)
+        new CalculationBaseVar(0M),
+        new CalculationExtraVar(1M),
+        new CalculatedVar("TashkentHits")
             .WithMultiplier((CardModel card, Creature? _) =>
             {
-                return card.Owner.PlayerCombatState.AllCards.Sum(c =>
+                return card.Owner?.PlayerCombatState?.AllCards?.Sum(c =>
                 {
-                    if (c.DynamicVars.TryGetValue("TashkentSpire2-Ammu", out var ammuVar))
+                    if (c.DynamicVars != null &&
+                        c.DynamicVars.TryGetValue("TashkentSpire2-Ammu", out var ammuVar))
                         return ammuVar.IntValue;
                     return 0;
-                });
+                }) ?? 0;
             })
     ];
     
@@ -52,12 +55,15 @@ public class FocusFire() : TashkentCard(1, CardType.Attack, CardRarity.Common, T
 
         if (ammu > 0)
         {
+            int hits = (int)((CalculatedVar)DynamicVars["TashkentHits"])
+                .Calculate(cardPlay.Target);
+
             await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
-                .WithHitCount(DynamicVars.CalculatedDamage.IntValue)
-                .FromCard(this)
+                .WithHitCount(hits).FromCard(this)
                 .Targeting(cardPlay.Target)
                 .WithHitFx("vfx/vfx_attack_slash")
                 .Execute(choiceContext);
+                
             CurrentAmmu = ammu - 1;
         }
         else

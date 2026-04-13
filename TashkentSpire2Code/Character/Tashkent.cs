@@ -13,17 +13,17 @@ public sealed class TashkentCharacter : CustomCharacterModel
 {
     public const string CharacterId = "Tashkent";
     public override CharacterGender Gender => CharacterGender.Feminine;
-    internal static readonly Color TopicColor = new("9A72A1");
+    internal static readonly Color TopicColor = new("#9A72A1");
     public override Color NameColor => TopicColor;
     protected override CharacterModel? UnlocksAfterRunAs => null;
     public override int StartingHp => 70; // 初始血量
     public override int StartingGold => 99; // 初始金币
     
     // 小地图、对话、能量球相关的颜色设置
-    public override Color EnergyLabelOutlineColor => new Color("1E283CF");
-    public override Color DialogueColor => new("AAAAAA");
-    public override Color MapDrawingColor => new("9A72A1");
-    public override Color RemoteTargetingLineColor => new("AAAAAA");
+    public override Color EnergyLabelOutlineColor => new Color("1E283CFF");
+    public override Color DialogueColor => new("#AAAAAA");
+    public override Color MapDrawingColor => new("#9A72A1");
+    public override Color RemoteTargetingLineColor => new("#AAAAAA");
     public override Color RemoteTargetingLineOutline => Colors.Black;
     
     // 在这里添加角色的卡池、药水池和遗物池

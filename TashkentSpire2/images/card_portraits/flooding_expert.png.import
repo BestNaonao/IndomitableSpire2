@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dka8mwuikqa3u"
-path="res://.godot/imported/hypnotic_potion.png-1a8a9f3d4dead72aba74b3398b1ce45d.ctex"
+uid="uid://drft2wowj836u"
+path="res://.godot/imported/flooding_expert.png-2d667f036b878644e96d34a5d4be5f04.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://TashkentSpire2/images/potions/hypnotic_potion.png"
-dest_files=["res://.godot/imported/hypnotic_potion.png-1a8a9f3d4dead72aba74b3398b1ce45d.ctex"]
+source_file="res://TashkentSpire2/images/card_portraits/flooding_expert.png"
+dest_files=["res://.godot/imported/flooding_expert.png-2d667f036b878644e96d34a5d4be5f04.ctex"]
 
 [params]
 

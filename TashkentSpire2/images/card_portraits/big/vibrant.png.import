@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b3kfsbrgov2vi"
-path="res://.godot/imported/ha.png-ca7cd205005646142b41f38c805fcde1.ctex"
+uid="uid://oip746plbeox"
+path="res://.godot/imported/vibrant.png-3553f95edba7dedd799833312d02f743.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://TashkentSpire2/images/card_portraits/big/ha.png"
-dest_files=["res://.godot/imported/ha.png-ca7cd205005646142b41f38c805fcde1.ctex"]
+source_file="res://TashkentSpire2/images/card_portraits/big/vibrant.png"
+dest_files=["res://.godot/imported/vibrant.png-3553f95edba7dedd799833312d02f743.ctex"]
 
 [params]
 

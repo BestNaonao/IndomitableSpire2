@@ -11,7 +11,7 @@ namespace TashkentSpire2.TashkentSpire2Code.Cards.Uncommon;
 public class Mobile() : TashkentCard(0, CardType.Skill, CardRarity.Uncommon, TargetType.Self)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new DynamicVar("Power", 1m)
+        new DynamicVar("MobilePower", 1m)
     ];
     
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [
@@ -21,7 +21,7 @@ public class Mobile() : TashkentCard(0, CardType.Skill, CardRarity.Uncommon, Tar
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
-        await PowerCmd.Apply<MobilePower>(base.Owner.Creature, base.DynamicVars["Power"].BaseValue, base.Owner.Creature, this);
+        await PowerCmd.Apply<MobilePower>(base.Owner.Creature, base.DynamicVars["MobilePower"].BaseValue, base.Owner.Creature, this);
     }
     
     protected override void OnUpgrade()

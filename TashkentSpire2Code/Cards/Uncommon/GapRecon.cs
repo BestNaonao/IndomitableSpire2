@@ -20,6 +20,6 @@ public class GapRecon() : TashkentCard(1, CardType.Power, CardRarity.Uncommon, T
     
     protected override void OnUpgrade()
     {
-        base.DynamicVars["Power"].UpgradeValueBy(1M);
+        base.DynamicVars["GapReconPower"].UpgradeValueBy(1M);
     }
 }

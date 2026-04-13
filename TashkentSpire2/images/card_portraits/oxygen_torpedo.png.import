@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c2618xcsv4hqc"
-path="res://.godot/imported/hypnotic_potion_outline.png-bce73adcbad5ce8671d27b216d6c6907.ctex"
+uid="uid://0rqjivdmkyr3"
+path="res://.godot/imported/oxygen_torpedo.png-30067bfa9722fb05157c924129ae15e4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://TashkentSpire2/images/potions/hypnotic_potion_outline.png"
-dest_files=["res://.godot/imported/hypnotic_potion_outline.png-bce73adcbad5ce8671d27b216d6c6907.ctex"]
+source_file="res://TashkentSpire2/images/card_portraits/oxygen_torpedo.png"
+dest_files=["res://.godot/imported/oxygen_torpedo.png-30067bfa9722fb05157c924129ae15e4.ctex"]
 
 [params]
 

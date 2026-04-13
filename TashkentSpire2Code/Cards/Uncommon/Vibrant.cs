@@ -20,6 +20,6 @@ public class Vibrant() : TashkentCard(1, CardType.Power, CardRarity.Uncommon, Ta
 
     protected override void OnUpgrade()
     {
-        base.DynamicVars["Power"].UpgradeValueBy(1M);
+        base.DynamicVars["VibrantPower"].UpgradeValueBy(1M);
     }
 }
