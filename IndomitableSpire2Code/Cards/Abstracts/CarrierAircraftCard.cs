@@ -1,5 +1,6 @@
 ﻿using IndomitableSpire2.IndomitableSpire2Code.Enums;
 using IndomitableSpire2.IndomitableSpire2Code.Extensions;
+using IndomitableSpire2.IndomitableSpire2Code.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
@@ -23,26 +24,26 @@ public abstract class CarrierAircraftCard(
     protected abstract int MaxDurability { get; set; }
     // 升级时提升的耐久值（子类可覆写，默认为 2）
     protected abstract int UpgradeDurabilityAmount { get; set; }
-
+    
     // 强制赋予基础舰载机的 Tag 和 ExtraHoverTips
     protected abstract IEnumerable<CardTag> SubclassTags { get; }
-
+    
     protected override HashSet<CardTag> CanonicalTags => 
         [IndomitableTags.CarrierAircraft, ..SubclassTags];
-
+    
     protected override IEnumerable<IHoverTip> ExtraHoverTips => 
     [
         HoverTipFactory.FromKeyword(IndomitableKeywords.CarrierAircraft),
         HoverTipFactory.FromKeyword(IndomitableKeywords.Durability)
     ];
-
-    // 注册耐久度动态变量，用于 UI 展现
+    
+    // 注册耐久度动态变量，用于 UI 展现：使用我们自定义的 DurabilityVar 替代普通的 DynamicVar
     protected override IEnumerable<DynamicVar> CanonicalVars => 
     [
-        new("Durability", MaxDurability),
+        new DurabilityVar("Durability", MaxDurability),
         new("MaxDurability", MaxDurability)
     ];
-
+    
     // 封装原本的 OnPlay，使其成为模板方法（Template Method）
     protected sealed override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
@@ -56,9 +57,13 @@ public abstract class CarrierAircraftCard(
             var hitEnemies = damageResults
                 .Select(r => r.Receiver)
                 .Where(c => c is { IsAlive: true, IsEnemy: true });
-            CalculateAndApplyDurabilityLoss(hitEnemies);
+            
+            // 【核心改动】：先计算，再应用
+            var loss = CalculateDurabilityLoss(hitEnemies);
+            if (loss > 0)
+                DynamicVars["Durability"].BaseValue = Math.Max(0, DynamicVars["Durability"].BaseValue - loss);
         }
-
+        
         // 3. 如果耐久归零，触发消耗
         if (DynamicVars["Durability"].BaseValue <= 0)
         {
@@ -67,21 +72,21 @@ public abstract class CarrierAircraftCard(
             // SfxCmd.Play("event:/sfx/enemy/enemy_attacks/automaton/automaton_death");
         }
     }
-
+    
     /// <summary>
     /// 舰载机专用的打出抽象方法。子类在此处编写伤害或辅助逻辑。
     /// </summary>
     /// <returns>返回伤害结果列表，若无伤害（如纯技能牌）可返回 null</returns>
     protected abstract Task<IEnumerable<DamageResult>?> OnAircraftPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay);
-
+    
     /// <summary>
-    /// 完全向子类隐藏的耐久损失方法。根据受击目标集合的意图计算耐久损失。
+    /// 根据受击目标集合的攻击意图计算耐久损失。
     /// </summary>
-    private void CalculateAndApplyDurabilityLoss(IEnumerable<Creature> targets)
+    public int CalculateDurabilityLoss(IEnumerable<Creature> targets)
     {
-        if (CombatState == null) return;
-
-        var maxDurabilityLoss = (from enemy in targets.Select(c => c.Monster).OfType<MonsterModel>()
+        if (CombatState == null) return 0;
+        // 直接计算并返回耐久损失
+        return (from enemy in targets.Select(c => c.Monster).OfType<MonsterModel>()
                 where enemy.Creature.IsAlive
                 let singleDamage = enemy.GetIntentSingleDamage()
                 let hitCount = enemy.GetIntentHitCount()
@@ -96,11 +101,6 @@ public abstract class CarrierAircraftCard(
                 }
                 select lossPerHit * hitCount).Prepend(0)
             .Max();
-
-        // 扣除耐久
-        if (maxDurabilityLoss > 0)
-            DynamicVars["Durability"].BaseValue = Math.Max(0, DynamicVars["Durability"].BaseValue - maxDurabilityLoss);
-        // 触发变量更新以刷新卡面 UI
     }
     
     /// <summary>
