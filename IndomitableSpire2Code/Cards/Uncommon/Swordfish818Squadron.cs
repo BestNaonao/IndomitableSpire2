@@ -18,7 +18,7 @@ public sealed class Swordfish818Squadron() : CarrierAircraftCard(2, CardType.Att
     protected override int MaxDurability { get; set; } = 8;
     protected override int UpgradeDurabilityAmount { get; set; } = 2;
     
-    protected override IEnumerable<CardKeyword> SubclassKeywords => [IndomitableKeywords.TorpedoBomber];
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [IndomitableKeywords.TorpedoBomber];
     protected override IEnumerable<CardTag> SubclassTags => [IndomitableTags.TorpedoBomber];
     
     protected override IEnumerable<DynamicVar> CanonicalVars =>

@@ -12,7 +12,7 @@
   "INDOMITABLESPIRE2-ILLUSTRIOUS_AEGIS.title": "Illustrious Aegis",
   "INDOMITABLESPIRE2-ILLUSTRIOUS_AEGIS.description": "Grant any player {Block:diff()} [gold]Block[/gold].\nThis Block is retained at the end of your turn, and heals [green]{Heal:diff()}[/green] HP when fully broken.",
   "INDOMITABLESPIRE2-SWORDFISH_BOMBER.title": "Swordfish",
-  "INDOMITABLESPIRE2-SWORDFISH_BOMBER.description": "Deal {Damage:diff()} damage. Apply {FloodingPower:diff()} [blue]Flooded[/blue].\n(Durability: {Durability} / {MaxDurability})",
+  "INDOMITABLESPIRE2-SWORDFISH_BOMBER.description": "Deal {Damage:diff()} damage.\nApply {FloodingPower:diff()} [blue]Flooded[/blue].\n([gold]Durability[/gold]: {Durability} / {MaxDurability})",
   "INDOMITABLESPIRE2-SWORDFISH818_SQUADRON.title": "Swordfish (818 Sqn.)",
-  "INDOMITABLESPIRE2-SWORDFISH818_SQUADRON.description": "Deal {Damage:diff()} damage. Apply {FloodingPower:diff()} [blue]Flooded[/blue].\nIf the target intends to attack or escape, apply [gold]Slow[/gold].\n(Durability: {Durability} / {MaxDurability})"
+  "INDOMITABLESPIRE2-SWORDFISH818_SQUADRON.description": "Deal {Damage:diff()} damage. Apply {FloodingPower:diff()} [blue]Flooded[/blue].\nIf the enemy intends to attack or escape, apply [gold]Slow[/gold].\n([gold]Durability[/gold]: {Durability} / {MaxDurability})"
 }

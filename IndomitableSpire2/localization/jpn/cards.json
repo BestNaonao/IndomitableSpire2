@@ -12,7 +12,7 @@
   "INDOMITABLESPIRE2-ILLUSTRIOUS_AEGIS.title": "イラストリアス・イージス",
   "INDOMITABLESPIRE2-ILLUSTRIOUS_AEGIS.description": "任意のプレイヤーに[gold]ブロック[/gold]を{Block:diff()}与える。\nこのブロックはターン終了時に保持され、完全に砕けた時、ＨＰを[green]{Heal:diff()}[/green]回復する。",
   "INDOMITABLESPIRE2-SWORDFISH_BOMBER.title": "ソードフィッシュ",
-  "INDOMITABLESPIRE2-SWORDFISH_BOMBER.description": "{Damage:diff()}ダメージを与える。[blue]浸水[/blue]を{FloodingPower:diff()}与える。\n（耐久：{Durability}/{MaxDurability}）",
+  "INDOMITABLESPIRE2-SWORDFISH_BOMBER.description": "{Damage:diff()}ダメージを与える。\n[blue]浸水[/blue]を{FloodingPower:diff()}与える。\n（[gold]耐久[/gold]：{Durability}/{MaxDurability}）",
   "INDOMITABLESPIRE2-SWORDFISH818_SQUADRON.title": "ソードフィッシュ(第818飛行隊)",
-  "INDOMITABLESPIRE2-SWORDFISH818_SQUADRON.description": "{Damage:diff()}ダメージを与える。[blue]浸水[/blue]を{FloodingPower:diff()}与える。\nターゲットが攻撃または逃亡を意図している場合、[gold]スロウ[/gold]を与える。\n（耐久：{Durability}/{MaxDurability}）"
+  "INDOMITABLESPIRE2-SWORDFISH818_SQUADRON.description": "{Damage:diff()}ダメージを与える。[blue]浸水[/blue]を{FloodingPower:diff()}与える。\n敵が攻撃または逃亡を予定している場合、[gold]スロウ[/gold]を与える。\n（[gold]耐久[/gold]：{Durability}/{MaxDurability}）"
 }

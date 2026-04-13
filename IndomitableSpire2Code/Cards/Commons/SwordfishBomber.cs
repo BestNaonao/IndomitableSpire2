@@ -14,10 +14,10 @@ public sealed class SwordfishBomber() : CarrierAircraftCard(1, CardType.Attack, 
 {
     protected override int MaxDurability { get; set; } = 7;
     protected override int UpgradeDurabilityAmount { get; set; } = 3;
-
-    protected override IEnumerable<CardKeyword> SubclassKeywords => [IndomitableKeywords.TorpedoBomber];
+    
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [IndomitableKeywords.TorpedoBomber];
     protected override IEnumerable<CardTag> SubclassTags => [IndomitableTags.TorpedoBomber];
-
+    
     // 优雅地继承父类的耐久变量，并追加伤害与进水变量
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
@@ -25,7 +25,7 @@ public sealed class SwordfishBomber() : CarrierAircraftCard(1, CardType.Attack, 
         new DamageVar(7M, ValueProp.Move),
         new PowerVar<FloodingPower>(2M)
     ];
-
+    
     protected override async Task<IEnumerable<DamageResult>?> OnAircraftPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         ArgumentNullException.ThrowIfNull(cardPlay.Target, nameof(cardPlay.Target));
@@ -34,7 +34,7 @@ public sealed class SwordfishBomber() : CarrierAircraftCard(1, CardType.Attack, 
             .FromCard(this)
             .Targeting(cardPlay.Target)
             .Execute(choiceContext);
-
+        
         // 如果目标承受了鱼雷伤害后仍然存活，则施加进水效果
         if (cardPlay.Target is { IsAlive: true })
         {
@@ -45,10 +45,9 @@ public sealed class SwordfishBomber() : CarrierAircraftCard(1, CardType.Attack, 
                 cardSource: this
             );
         }
-
         return attackCmd.Results;
     }
-
+    
     protected override void OnUpgrade()
     {
         DynamicVars.Damage.UpgradeValueBy(3M);

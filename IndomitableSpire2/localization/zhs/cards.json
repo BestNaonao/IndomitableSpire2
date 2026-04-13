@@ -12,7 +12,7 @@
   "INDOMITABLESPIRE2-ILLUSTRIOUS_AEGIS.title": "光辉的庇护",
   "INDOMITABLESPIRE2-ILLUSTRIOUS_AEGIS.description": "给予任意玩家{Block:diff()}点[gold]格挡[/gold]。\n该格挡在回合结束时保留，并且在完全碎裂时，回复[green]{Heal:diff()}[/green]点生命。",
   "INDOMITABLESPIRE2-SWORDFISH_BOMBER.title": "剑鱼鱼雷机",
-  "INDOMITABLESPIRE2-SWORDFISH_BOMBER.description": "造成{Damage:diff()}点伤害。给予{FloodingPower:diff()}层[blue]进水[/blue]。\n（耐久：{Durability}/{MaxDurability}）",
+  "INDOMITABLESPIRE2-SWORDFISH_BOMBER.description": "造成{Damage:diff()}点伤害。\n给予{FloodingPower:diff()}层[blue]进水[/blue]。\n（[gold]耐久[/gold]：{Durability}/{MaxDurability}）",
   "INDOMITABLESPIRE2-SWORDFISH818_SQUADRON.title": "剑鱼(818中队)",
-  "INDOMITABLESPIRE2-SWORDFISH818_SQUADRON.description": "造成{Damage:diff()}点伤害。给予{FloodingPower:diff()}层[blue]进水[/blue]。\n如果目标意图攻击或逃跑，则给予[gold]缓慢[/gold]。\n（耐久：{Durability}/{MaxDurability}）"
+  "INDOMITABLESPIRE2-SWORDFISH818_SQUADRON.description": "造成{Damage:diff()}点伤害。给予{FloodingPower:diff()}层[blue]进水[/blue]。\n如果敌人的意图是攻击或逃跑，则给予[gold]缓慢[/gold]。\n（[gold]耐久[/gold]：{Durability}/{MaxDurability}）"
 }
