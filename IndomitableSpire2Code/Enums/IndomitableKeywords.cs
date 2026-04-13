@@ -32,4 +32,8 @@ public static class IndomitableKeywords
     // 跳弹轰炸机
     [CustomEnum("skip_bomber"), KeywordProperties(AutoKeywordPosition.Before)]
     public static CardKeyword SkipBomber;
+    
+    // 耐久度
+    [CustomEnum("durability"), KeywordProperties(AutoKeywordPosition.Before)]
+    public static CardKeyword Durability;
 }

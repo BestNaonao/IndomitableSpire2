@@ -4,6 +4,7 @@ using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 
@@ -23,15 +24,17 @@ public abstract class CarrierAircraftCard(
     // 升级时提升的耐久值（子类可覆写，默认为 2）
     protected abstract int UpgradeDurabilityAmount { get; set; }
 
-    // 强制赋予基础舰载机的 Tag 和 Keyword
-    protected abstract IEnumerable<CardKeyword> SubclassKeywords { get; }
+    // 强制赋予基础舰载机的 Tag 和 ExtraHoverTips
     protected abstract IEnumerable<CardTag> SubclassTags { get; }
-
-    public override IEnumerable<CardKeyword> CanonicalKeywords => 
-        [IndomitableKeywords.CarrierAircraft, ..SubclassKeywords];
 
     protected override HashSet<CardTag> CanonicalTags => 
         [IndomitableTags.CarrierAircraft, ..SubclassTags];
+
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => 
+    [
+        HoverTipFactory.FromKeyword(IndomitableKeywords.CarrierAircraft),
+        HoverTipFactory.FromKeyword(IndomitableKeywords.Durability)
+    ];
 
     // 注册耐久度动态变量，用于 UI 展现
     protected override IEnumerable<DynamicVar> CanonicalVars => 
