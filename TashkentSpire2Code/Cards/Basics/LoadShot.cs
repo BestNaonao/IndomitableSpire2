@@ -4,6 +4,7 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Saves.Runs;
 using MegaCrit.Sts2.Core.ValueProps;
+using TashkentSpire2.TashkentSpire2Code.Commands;
 
 namespace TashkentSpire2.TashkentSpire2Code.Cards.Basics;
 
@@ -32,7 +33,7 @@ public sealed class LoadShot() : TashkentCard(1, CardType.Attack, CardRarity.Bas
         }
     }
     
-    protected override async Task OnPlay(PlayerChoiceContext context, CardPlay cardPlay)
+    protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         ArgumentNullException.ThrowIfNull(cardPlay.Target);
 
@@ -43,14 +44,14 @@ public sealed class LoadShot() : TashkentCard(1, CardType.Attack, CardRarity.Bas
             await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
                 .FromCard(this)
                 .Targeting(cardPlay.Target)
-                .Execute(context);
+                .Execute(choiceContext);
             CurrentAmmu = ammu - 1;
         }
         else
         {
             int load = DynamicVars["TashkentSpire2-Load"].IntValue;
-            int max = DynamicVars["TashkentSpire2-Ammu-Max"].IntValue;
-            CurrentAmmu = Math.Min(CurrentAmmu + load, max);
+
+            await Loadcmd.Execute(choiceContext, this, load);
         }
     }
     

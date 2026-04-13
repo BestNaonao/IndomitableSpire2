@@ -5,5 +5,7 @@ namespace TashkentSpire2.TashkentSpire2Code.Keywords;
 
 public class TashkentKeyword
 {
-
+    [CustomEnum("Barrage")]
+    [KeywordProperties(AutoKeywordPosition.Before)]
+    public static CardKeyword Barrage;
 }

@@ -12,6 +12,7 @@ public sealed class RetreatTorpedo() : TashkentCard(1, CardType.Skill, CardRarit
         new TorpedoDynamicVar(18M),
         new RetreatDynamicVar(1M)
     ];
+    
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         var temp = new TorpedoPower();

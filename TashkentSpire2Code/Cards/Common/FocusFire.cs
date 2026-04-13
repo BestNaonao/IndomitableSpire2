@@ -6,6 +6,7 @@ using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Saves.Runs;
 using MegaCrit.Sts2.Core.ValueProps;
+using TashkentSpire2.TashkentSpire2Code.Commands;
 
 namespace TashkentSpire2.TashkentSpire2Code.Cards.Common;
 
@@ -62,8 +63,8 @@ public class FocusFire() : TashkentCard(1, CardType.Attack, CardRarity.Common, T
         else
         {
             int load = DynamicVars["TashkentSpire2-Load"].IntValue;
-            int max = DynamicVars["TashkentSpire2-Ammu-Max"].IntValue;
-            CurrentAmmu = Math.Min(CurrentAmmu + load, max);
+
+            await Loadcmd.Execute(choiceContext, this, load);
         }
     }
     

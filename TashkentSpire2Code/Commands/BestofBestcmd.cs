@@ -4,7 +4,7 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 
-namespace Watcher.Code.Commands;
+namespace TashkentSpire2.TashkentSpire2Code.Commands;
 
 public static class BestofBestCmd
 {

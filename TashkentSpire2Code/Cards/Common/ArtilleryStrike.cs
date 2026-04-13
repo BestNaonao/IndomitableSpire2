@@ -4,6 +4,7 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Saves.Runs;
 using MegaCrit.Sts2.Core.ValueProps;
+using TashkentSpire2.TashkentSpire2Code.Commands;
 
 namespace TashkentSpire2.TashkentSpire2Code.Cards.Common;
 
@@ -12,11 +13,11 @@ public class ArtilleryStrike() : TashkentCard(1, CardType.Attack, CardRarity.Com
     protected override HashSet<CardTag> CanonicalTags => [CardTag.Strike];
     
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new DamageVar(4M, ValueProp.Move),
+        new DamageVar(3M, ValueProp.Move),
         new RepeatVar(4),
         new AmmunitionDynamicVar(1M),
         new LoadDynamicVar(2M),
-        new AmmuMaxDynamicVar(2M)
+        new AmmuMaxDynamicVar(2M),
     ];
     
     private int _currentAmmu = 1;
@@ -53,8 +54,8 @@ public class ArtilleryStrike() : TashkentCard(1, CardType.Attack, CardRarity.Com
         else
         {
             int load = DynamicVars["TashkentSpire2-Load"].IntValue;
-            int max = DynamicVars["TashkentSpire2-Ammu-Max"].IntValue;
-            CurrentAmmu = Math.Min(CurrentAmmu + load, max);
+
+            await Loadcmd.Execute(choiceContext, this, load);
         }
     }
     

@@ -75,7 +75,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Alchyr.Sts2.BaseLib" Version="0.2.6" PrivateAssets="All" />
+        <PackageReference Include="Alchyr.Sts2.BaseLib" Version="3.0.1" PrivateAssets="All" />
         <PackageReference Include="Alchyr.Sts2.ModAnalyzers" Version="0.1.6" />
         <AdditionalFiles Include="TashkentSpire2/localization/**/*.json"/>
     </ItemGroup>
@@ -99,7 +99,6 @@
     </ItemGroup>
 
     <ItemGroup>
-        <Folder Include="TashkentSpire2Code\Cards\Ancient\" />
         <Folder Include="TashkentSpire2Code\Cards\Multiplay\" />
         <Folder Include="TashkentSpire2Code\Cards\Rare\" />
         <Folder Include="TashkentSpire2\images\card_portraits\big\"/>

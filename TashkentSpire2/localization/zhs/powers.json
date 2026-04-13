@@ -15,5 +15,20 @@
   "TASHKENTSPIRE2-MARK_POWER.title": "标记",
   "TASHKENTSPIRE2-VIBRANT_POWER.description": "当你获得能力时，获得[gold]格挡[/gold]。",
   "TASHKENTSPIRE2-VIBRANT_POWER.smartDescription": "当你获得能力时，获得[blue]{Amount}[/blue]点[gold]格挡[/gold]。",
-  "TASHKENTSPIRE2-VIBRANT_POWER.title": "活力迸发"
+  "TASHKENTSPIRE2-VIBRANT_POWER.title": "活力迸发",
+  "TASHKENTSPIRE2-FLOODING_EXPERT_POWER.description": "当你[gold]鱼雷[/gold]命中时，对敌人施加[gold]虚弱[/gold]、[gold]易伤[/gold]、[gold]标记[/gold]。",
+  "TASHKENTSPIRE2-FLOODING_EXPERT_POWER.smartDescription": "当你[gold]鱼雷[/gold]命中时，施加[blue]{Amount}[/blue]层[gold]虚弱[/gold]、[blue]{Amount}[/blue]层[gold]易伤[/gold]、[blue]{Amount}[/blue]层[gold]标记[/gold]。",
+  "TASHKENTSPIRE2-FLOODING_EXPERT_POWER.title": "进水专家",
+  "TASHKENTSPIRE2-DROWN_MY_SORROW_POWER.description": "将抽到的[gold]状态[/gold]变化为[gold]伏特加[/gold]。",
+  "TASHKENTSPIRE2-DROWN_MY_SORROW_POWER.smartDescription": "将抽到的[gold]状态[/gold]变化为[gold]伏特加[/gold]。",
+  "TASHKENTSPIRE2-DROWN_MY_SORROW_POWER.title": "何以解忧",
+  "TASHKENTSPIRE2-FULL_SALVO_POWER.description": "下张[gold]弹药[/gold]牌可以免费打出。",
+  "TASHKENTSPIRE2-FULL_SALVO_POWER.smartDescription": "下[blue]{Amount}[/blue]张[gold]弹药[/gold]牌可以免费打出。",
+  "TASHKENTSPIRE2-FULL_SALVO_POWER.title": "全弹发射",
+  "TASHKENTSPIRE2-GAP_RECON_POWER.description": "你的回合结束时，对所有敌人给予[gold]标记[/gold]。",
+  "TASHKENTSPIRE2-GAP_RECON_POWER.smartDescription": "你的回合结束时，对所有敌人给予[blue]{Amount}[/blue]层[gold]标记[/gold]。",
+  "TASHKENTSPIRE2-GAP_RECON_POWER.title": "见缝查侦",
+  "TASHKENTSPIRE2-MOBILE_POWER.description": "每当你在本回合打出卡牌时，在本回合获得[blue]1[/blue]点[gold]敏捷[/gold]。",
+  "TASHKENTSPIRE2-MOBILE_POWER.smartDescription": "每当你在本回合打出卡牌时，在本回合获得[blue]{Amount}[/blue]点[gold]敏捷[/gold]。",
+  "TASHKENTSPIRE2-MOBILE_POWER.title": "跳洗"
 }

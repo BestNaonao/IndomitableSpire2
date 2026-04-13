@@ -6,20 +6,22 @@ using TashkentSpire2.TashkentSpire2Code.Powers;
 
 namespace TashkentSpire2.TashkentSpire2Code.Cards.Common;
 
-public class IlluminationRound() : TashkentCard(1, CardType.Skill, CardRarity.Common, TargetType.AnyEnemy)
+public class FireControlLockOn() : TashkentCard(2, CardType.Skill, CardRarity.Common, TargetType.AnyEnemy)
 {
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Retain];
+    
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new MarkDynamicVar(5M)
+        new MarkDynamicVar(7M)
     ];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
-        await PowerCmd.Apply<MarkPower>(cardPlay.Target, DynamicVars["TashkentSpire2-Mark"].BaseValue, base.Owner.Creature, this);
+        await PowerCmd.Apply<MarkPower>(cardPlay.Target, base.DynamicVars["TashkentSpire2-Mark"].BaseValue, base.Owner.Creature, this);
     }
     
     protected override void OnUpgrade()
     {
-        DynamicVars["TashkentSpire2-Mark"].UpgradeValueBy(2M);
+        DynamicVars["TashkentSpire2-Mark"].UpgradeValueBy(3M);
     }
 }

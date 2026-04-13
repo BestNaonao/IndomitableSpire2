@@ -4,6 +4,7 @@ using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Helpers;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.Nodes.Rooms;
 using MegaCrit.Sts2.Core.Nodes.Vfx;
 using MegaCrit.Sts2.Core.ValueProps;
@@ -92,6 +93,14 @@ public class TorpedoPower : TashkentPower
         await Cmd.CustomScaledWait(0.2f, 0.4f);
 
         await CreatureCmd.Damage(choiceContext, target, base.DynamicVars.Damage, base.Owner);
+        
+        int floodingAmount = (int)(base.Owner?.GetPower<FloodingExpertPower>()?.Amount ?? 0m);
+        if (floodingAmount > 0)
+        {
+            await PowerCmd.Apply<WeakPower>(target, (decimal)floodingAmount, base.Owner, null);
+            await PowerCmd.Apply<VulnerablePower>(target, (decimal)floodingAmount, base.Owner, null);
+            await PowerCmd.Apply<MarkPower>(target, (decimal)floodingAmount, base.Owner, null);
+        }
 
         await PowerCmd.Remove(this);
     }
