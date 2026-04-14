@@ -14,5 +14,7 @@
   "INDOMITABLESPIRE2-SKIP_BOMBER.title": "跳弹轰炸机",
   "INDOMITABLESPIRE2-SKIP_BOMBER.description": "跳弹轰炸机性质的舰载机，能够触发应用于跳弹轰炸机的效果。可能造成多次连击伤害。",
   "INDOMITABLESPIRE2-DURABILITY.title": "耐久",
-  "INDOMITABLESPIRE2-DURABILITY.description": "该卡牌攻击具有攻击意图的敌人会根据反击强度损失耐久，耐久归零时[gold]消耗[/gold]。"
+  "INDOMITABLESPIRE2-DURABILITY.description": "该卡牌攻击具有攻击意图的敌人会根据反击强度损失耐久，耐久归零时[gold]消耗[/gold]。",
+  "INDOMITABLESPIRE2-FORMATION.title": "编队",
+  "INDOMITABLESPIRE2-FORMATION.description": "打出时，将你[gold]抽牌堆[/gold]或[gold]弃牌堆[/gold]中的一张随机同名牌放入你的[gold]手牌[/gold]。"
 }

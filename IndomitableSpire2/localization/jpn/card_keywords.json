@@ -14,5 +14,7 @@
   "INDOMITABLESPIRE2-SKIP_BOMBER.title": "反跳爆撃機",
   "INDOMITABLESPIRE2-SKIP_BOMBER.description": "反跳爆撃機としての性質を持つ艦載機。反跳爆撃機に適用される効果を誘発できる。連続ヒットダメージを与えることがある。",
   "INDOMITABLESPIRE2-DURABILITY.title": "耐久",
-  "INDOMITABLESPIRE2-DURABILITY.description": "攻撃を意図している敵を攻撃すると、敵の攻撃ダメージに応じて耐久を失う。耐久が0になると[gold]廃棄[/gold]される。"
+  "INDOMITABLESPIRE2-DURABILITY.description": "攻撃を意図している敵を攻撃すると、敵の攻撃ダメージに応じて耐久を失う。耐久が0になると[gold]廃棄[/gold]される。",
+  "INDOMITABLESPIRE2-FORMATION.title": "編隊",
+  "INDOMITABLESPIRE2-FORMATION.description": "プレイ時、[gold]山札[/gold]または[gold]捨て札[/gold]にあるランダムな同名カードを1枚[gold]手札[/gold]に加える。"
 }

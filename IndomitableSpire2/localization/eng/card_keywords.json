@@ -14,5 +14,7 @@
   "INDOMITABLESPIRE2-SKIP_BOMBER.title": "Skip Bomber",
   "INDOMITABLESPIRE2-SKIP_BOMBER.description": "A Carrier Aircraft classified as a Skip Bomber, triggering effects applied to Skip Bombers. May deal multi-hit combo damage.",
   "INDOMITABLESPIRE2-DURABILITY.title": "Durability",
-  "INDOMITABLESPIRE2-DURABILITY.description": "Loses durability based on the target's attack damage when attacking an enemy intending to attack. [gold]Exhaust[/gold] when durability reaches zero."
+  "INDOMITABLESPIRE2-DURABILITY.description": "Loses durability based on the target's attack damage when attacking an enemy intending to attack. [gold]Exhaust[/gold] when durability reaches zero.",
+  "INDOMITABLESPIRE2-FORMATION.title": "Formation",
+  "INDOMITABLESPIRE2-FORMATION.description": "When played, put a random card with the same name from your [gold]Draw Pile[/gold] or [gold]Discard Pile[/gold] into your [gold]Hand[/gold]."
 }
