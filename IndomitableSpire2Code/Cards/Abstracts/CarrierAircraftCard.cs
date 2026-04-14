@@ -1,4 +1,5 @@
-﻿using IndomitableSpire2.IndomitableSpire2Code.Enums;
+﻿using BaseLib.Extensions;
+using IndomitableSpire2.IndomitableSpire2Code.Enums;
 using IndomitableSpire2.IndomitableSpire2Code.Extensions;
 using IndomitableSpire2.IndomitableSpire2Code.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Commands;
@@ -33,14 +34,13 @@ public abstract class CarrierAircraftCard(
     
     protected override IEnumerable<IHoverTip> ExtraHoverTips => 
     [
-        HoverTipFactory.FromKeyword(IndomitableKeywords.CarrierAircraft),
-        HoverTipFactory.FromKeyword(IndomitableKeywords.Durability)
+        HoverTipFactory.FromKeyword(IndomitableKeywords.CarrierAircraft)
     ];
     
     // 注册耐久度动态变量，用于 UI 展现：使用我们自定义的 DurabilityVar 替代普通的 DynamicVar
     protected override IEnumerable<DynamicVar> CanonicalVars => 
     [
-        new DurabilityVar("Durability", MaxDurability),
+        new DurabilityVar("Durability", MaxDurability).WithTooltip(),
         new("MaxDurability", MaxDurability)
     ];
     

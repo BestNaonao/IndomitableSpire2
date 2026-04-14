@@ -1,3 +1,4 @@
 {
-  
+  "INDOMITABLESPIRE2-DURABILITY.title": "Durability",
+  "INDOMITABLESPIRE2-DURABILITY.description": "Loses durability based on the target's attack damage when attacking an enemy intending to attack. [gold]Exhaust[/gold] when durability reaches zero."
 }

@@ -36,8 +36,4 @@ public static class IndomitableKeywords
     // 编队：在卡牌末尾显示，代表小队增援机制
     [CustomEnum("formation"), KeywordProperties(AutoKeywordPosition.After)]
     public static CardKeyword Formation;
-    
-    // 耐久度
-    [CustomEnum("durability"), KeywordProperties(AutoKeywordPosition.Before)]
-    public static CardKeyword Durability;
 }

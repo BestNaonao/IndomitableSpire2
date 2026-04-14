@@ -1,3 +1,4 @@
 {
-  
+  "INDOMITABLESPIRE2-DURABILITY.title": "耐久",
+  "INDOMITABLESPIRE2-DURABILITY.description": "攻撃を意図している敵を攻撃すると、敵の攻撃ダメージに応じて耐久を失う。耐久が0になると[gold]廃棄[/gold]される。"
 }
