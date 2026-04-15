@@ -17,7 +17,7 @@
   "INDOMITABLESPIRE2-ILLUSTRIOUS_AEGIS_POWER.description": "ブロックの一部を保持し、完全に砕けた時にＨＰを回復する。",
   "INDOMITABLESPIRE2-ILLUSTRIOUS_AEGIS_POWER.smartDescription": "ダメージをブロックした時、同じ値だけ数値を減らす。数値が0になった時、ＨＰを[green]{Heal}[/green]回復する。\nターン終了時、追加で[blue]{Amount}[/blue]の[gold]ブロック[/gold]を保持する。\n[purple]複数の加護効果は順番に発動する。[/purple]",
   "INDOMITABLESPIRE2-ILLUSTRIOUS_AEGIS_POWER.title": "光輝の加護",
-  "INDOMITABLESPIRE2-ARMOR_BREAK_POWER.description": "",
-  "INDOMITABLESPIRE2-ARMOR_BREAK_POWER.smartDescription": "",
-  "INDOMITABLESPIRE2-ARMOR_BREAK_POWER.title": "破甲"
+  "INDOMITABLESPIRE2-ARMOR_BREAK_POWER.description": "攻撃ダメージを受ける前に、スタック数に等しい[gold]ブロック[/gold]を失う。",
+  "INDOMITABLESPIRE2-ARMOR_BREAK_POWER.smartDescription": "[blue]{Amount}[/blue]ターンの間、攻撃ダメージを受ける前に、スタック数に等しい[gold]ブロック[/gold]を失う。",
+  "INDOMITABLESPIRE2-ARMOR_BREAK_POWER.title": "装甲破壊"
 }

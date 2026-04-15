@@ -17,7 +17,7 @@
   "INDOMITABLESPIRE2-ILLUSTRIOUS_AEGIS_POWER.description": "Retains some Block and provides healing when fully broken.",
   "INDOMITABLESPIRE2-ILLUSTRIOUS_AEGIS_POWER.smartDescription": "When blocking damage, lose an equal amount of stacks. When stacks reach 0, heal [green]{Heal}[/green] HP.\nAt the end of your turn, retain an additional [blue]{Amount}[/blue] [gold]Block[/gold].\n[purple]Multiple Aegis effects trigger sequentially.[/purple]",
   "INDOMITABLESPIRE2-ILLUSTRIOUS_AEGIS_POWER.title": "Illustrious Aegis",
-  "INDOMITABLESPIRE2-ARMOR_BREAK_POWER.description": "",
-  "INDOMITABLESPIRE2-ARMOR_BREAK_POWER.smartDescription": "",
-  "INDOMITABLESPIRE2-ARMOR_BREAK_POWER.title": "破甲"
+  "INDOMITABLESPIRE2-ARMOR_BREAK_POWER.description": "Before taking attack damage, lose [gold]Block[/gold] equal to this power's stack.",
+  "INDOMITABLESPIRE2-ARMOR_BREAK_POWER.smartDescription": "For [blue]{Amount}[/blue] turns, before taking attack damage, lose [gold]Block[/gold] equal to this power's stack.",
+  "INDOMITABLESPIRE2-ARMOR_BREAK_POWER.title": "Armor Break"
 }

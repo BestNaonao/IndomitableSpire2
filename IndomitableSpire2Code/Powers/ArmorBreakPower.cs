@@ -27,21 +27,22 @@ public sealed class ArmorBreakPower : CustomPowerModel
         Creature? dealer, 
         CardModel? cardSource)
     {
-        // 如果是有效攻击且目标确实还有格挡
-        if (target == Owner && props.IsPoweredAttack() && target.Block > 0)
+        // 确保是该能力拥有者受到伤害，且是正常的攻击伤害
+        if (target != Owner || amount <= 0 || !props.IsPoweredAttack())
+            return;
+
+        // 如果目标当前拥有格挡，则在受到实质伤害前剥离格挡
+        if (target.Block > 0)
         {
-            Flash(); // 闪烁能力图标
-            // 失去等同于层数的格挡
-            await CreatureCmd.LoseBlock(target, Amount);
+            Flash();
+            await CreatureCmd.LoseBlock(target, Math.Min(target.Block, Amount));
         }
     }
     
     // 机制补充：在拥有者的回合结束时，层数减少 1
     public override async Task AfterTurnEnd(PlayerChoiceContext choiceContext, CombatSide side)
     {
-        if (side != CombatSide.Enemy)
-        {
+        if (side == CombatSide.Enemy)
             await PowerCmd.TickDownDuration(this);
-        }
     }
 }

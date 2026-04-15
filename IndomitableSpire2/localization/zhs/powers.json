@@ -17,7 +17,7 @@
   "INDOMITABLESPIRE2-ILLUSTRIOUS_AEGIS_POWER.description": "保留部分格挡，并在完全碎裂时提供生命回复。",
   "INDOMITABLESPIRE2-ILLUSTRIOUS_AEGIS_POWER.smartDescription": "格挡伤害时减少等量层数，当层数归零时，回复[green]{Heal}[/green]点生命。\n你的回合结束时，额外保留[blue]{Amount}[/blue]点[gold]格挡[/gold]。\n[purple]多个庇护效果依次触发。[/purple]",
   "INDOMITABLESPIRE2-ILLUSTRIOUS_AEGIS_POWER.title": "光辉的庇护",
-  "INDOMITABLESPIRE2-ARMOR_BREAK_POWER.description": "",
-  "INDOMITABLESPIRE2-ARMOR_BREAK_POWER.smartDescription": "",
+  "INDOMITABLESPIRE2-ARMOR_BREAK_POWER.description": "受到攻击伤害前，失去等同于层数的[gold]格挡[/gold]。",
+  "INDOMITABLESPIRE2-ARMOR_BREAK_POWER.smartDescription": "[blue]{Amount}[/blue]回合内，受到攻击伤害前，失去等同于层数的[gold]格挡[/gold]。",
   "INDOMITABLESPIRE2-ARMOR_BREAK_POWER.title": "破甲"
 }
