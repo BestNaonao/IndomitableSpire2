@@ -28,7 +28,7 @@ public class VodkaFeast() : TashkentCard(1, CardType.Skill, CardRarity.Rare, Tar
             select c;
         foreach (Creature creature in enumerable)
         {
-            List<Vodka> cards = Vodka.Create(creature.Player, base.DynamicVars.Cards.IntValue, base.CombatState).ToList();
+            List<Vodka> cards = Vodka.Create(creature.Player!, base.DynamicVars.Cards.IntValue, base.CombatState).ToList();
             IReadOnlyList<CardPileAddResult> results = await CardPileCmd.AddGeneratedCardsToCombat(cards, PileType.Draw, addedByPlayer: true, CardPilePosition.Random);
             if (LocalContext.IsMe(creature))
             {
@@ -38,5 +38,5 @@ public class VodkaFeast() : TashkentCard(1, CardType.Skill, CardRarity.Rare, Tar
 
     }
     
-    protected override void OnUpgrade() => DynamicVars.Block.UpgradeValueBy(8M);
+    protected override void OnUpgrade() => DynamicVars.Cards.UpgradeValueBy(1m);
 }
