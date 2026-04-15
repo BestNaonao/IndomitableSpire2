@@ -20,7 +20,7 @@ public class TorpedoPower : TashkentPower
     public override string CustomBigIconPath => 
         "res://TashkentSpire2/images/powers/big/torpedo_power.png";
     public override string CustomPackedIconPath => 
-        "res://TashkentSpire2/images/powers/packed/torpedo_power_packed.tres";
+        "res://TashkentSpire2/images/powers/packed/torpedo_power.png";
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(40m, ValueProp.Unpowered)];
 
@@ -42,6 +42,7 @@ public class TorpedoPower : TashkentPower
 
         return 3;
     }
+    
     public void SetDamage(decimal damage)
     {
         AssertMutable();

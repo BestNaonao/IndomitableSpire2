@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://m33phck2qyxa"
-path="res://.godot/imported/petals_collection.png-945aadb554682062350ff0575b3504c5.ctex"
+uid="uid://shrjpmiopbfy"
+path="res://.godot/imported/backafterturn_power.png-06d4b4f1c0f20a0c44d84a02f64d41f5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://TashkentSpire2/images/vfx/petals_collection.png"
-dest_files=["res://.godot/imported/petals_collection.png-945aadb554682062350ff0575b3504c5.ctex"]
+source_file="res://TashkentSpire2/images/powers/packed/backafterturn_power.png"
+dest_files=["res://.godot/imported/backafterturn_power.png-06d4b4f1c0f20a0c44d84a02f64d41f5.ctex"]
 
 [params]
 

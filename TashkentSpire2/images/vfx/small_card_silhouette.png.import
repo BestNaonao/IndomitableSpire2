@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bfybjgue0ocjp"
-path="res://.godot/imported/cross_rhombus_collection_small.png-86bcb8013dad4de80a38f6232d11fa21.ctex"
+uid="uid://26yk0sl832s0"
+path="res://.godot/imported/small_card_silhouette.png-de47d497ed863d9f538583c78ae26f34.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://TashkentSpire2/images/vfx/cross_rhombus_collection_small.png"
-dest_files=["res://.godot/imported/cross_rhombus_collection_small.png-86bcb8013dad4de80a38f6232d11fa21.ctex"]
+source_file="res://TashkentSpire2/images/vfx/small_card_silhouette.png"
+dest_files=["res://.godot/imported/small_card_silhouette.png-de47d497ed863d9f538583c78ae26f34.ctex"]
 
 [params]
 

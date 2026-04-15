@@ -21,7 +21,7 @@ public sealed class TashkentCharacter : CustomCharacterModel
     
     // 小地图、对话、能量球相关的颜色设置
     public override Color EnergyLabelOutlineColor => new Color("1E283CFF");
-    public override Color DialogueColor => new("#AAAAAA");
+    public override Color DialogueColor => new("#9A72A1");
     public override Color MapDrawingColor => new("#9A72A1");
     public override Color RemoteTargetingLineColor => new("#AAAAAA");
     public override Color RemoteTargetingLineOutline => Colors.Black;

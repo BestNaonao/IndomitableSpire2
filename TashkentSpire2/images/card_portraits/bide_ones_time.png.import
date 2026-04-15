@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dxddngylgi6d8"
-path="res://.godot/imported/energy_test_big.png-5b07af805f77a222c071f7ed2a08377f.ctex"
+uid="uid://bnu4iea3toeet"
+path="res://.godot/imported/bide_ones_time.png-f96a83b8695331bcff1ba09e2a0a8fa6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://TashkentSpire2/images/vfx/energy_test_big.png"
-dest_files=["res://.godot/imported/energy_test_big.png-5b07af805f77a222c071f7ed2a08377f.ctex"]
+source_file="res://TashkentSpire2/images/card_portraits/bide_ones_time.png"
+dest_files=["res://.godot/imported/bide_ones_time.png-f96a83b8695331bcff1ba09e2a0a8fa6.ctex"]
 
 [params]
 

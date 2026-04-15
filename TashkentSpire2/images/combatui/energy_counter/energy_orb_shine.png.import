@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d4lodxx3rgv31"
-path="res://.godot/imported/indomitable_energy_icon_original.png-3ac5529bbac79105e59e9bb59247867d.ctex"
+uid="uid://k1rwdpxn04u2"
+path="res://.godot/imported/energy_orb_shine.png-394680b012e0a06a84006e3f2d7d4b1f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://TashkentSpire2/images/packed/sprite_fonts/indomitable_energy_icon_original.png"
-dest_files=["res://.godot/imported/indomitable_energy_icon_original.png-3ac5529bbac79105e59e9bb59247867d.ctex"]
+source_file="res://TashkentSpire2/images/combatui/energy_counter/energy_orb_shine.png"
+dest_files=["res://.godot/imported/energy_orb_shine.png-394680b012e0a06a84006e3f2d7d4b1f.ctex"]
 
 [params]
 

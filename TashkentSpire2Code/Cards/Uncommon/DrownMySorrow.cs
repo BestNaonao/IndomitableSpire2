@@ -1,7 +1,9 @@
 ﻿using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using TashkentSpire2.TashkentSpire2Code.Cards.Token;
 using TashkentSpire2.TashkentSpire2Code.Powers;
 
 namespace TashkentSpire2.TashkentSpire2Code.Cards.Uncommon;
@@ -11,6 +13,9 @@ public class DrownMySorrow() : TashkentCard(1, CardType.Power, CardRarity.Uncomm
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new PowerVar<DrownMySorrowPower>(1M)
     ];
+
+    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+        [HoverTipFactory.FromCard<Vodka>()];
     
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {

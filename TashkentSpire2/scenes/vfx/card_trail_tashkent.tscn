@@ -1,9 +1,93 @@
-[gd_scene load_steps=2 format=3 uid="uid://cmvq0ttd4au5f"]
+[gd_scene load_steps=13 format=3 uid="uid://kwebjfkpq4tl"]
 
-[ext_resource type="Texture2D" uid="uid://u43bobsjw7et" path="res://TashkentSpire2/images/vfx/flower.png" id="1_xehmj"]
+[ext_resource type="Texture2D" uid="uid://w3ocatw41jdn" path="res://TashkentSpire2/images/vfx/trail.png" id="1_e5exw"]
+[ext_resource type="Texture2D" uid="uid://ci7ts6qwe2xd7" path="res://TashkentSpire2/images/vfx/bear.png" id="1_uhu2p"]
+[ext_resource type="Script" uid="uid://b07nawfj6puyy" path="res://TashkentSpire2Code/Vfx/CardTrailTashkent.cs" id="3_0gxic"]
+[ext_resource type="Texture2D" uid="uid://26yk0sl832s0" path="res://TashkentSpire2/images/vfx/small_card_silhouette.png" id="3_7ptav"]
+[ext_resource type="Script" uid="uid://1ox7i7xb36v6" path="res://TashkentSpire2Code/Vfx/TrailTashkent.cs" id="3_c7yhj"]
 
-[node name="CardTailTashkent" type="Node2D"]
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_w018a"]
 
-[node name="Flower" type="Sprite2D" parent="."]
-position = Vector2(1, -2)
-texture = ExtResource("1_xehmj")
+[sub_resource type="Curve" id="Curve_xaxga"]
+_data = [Vector2(0, 0.111), 0.0, 0.0, 0, 0, Vector2(0.84, 0.664), -2.61, -2.61, 0, 0, Vector2(0.922, 0.943), 0.0, 0.0, 0, 0, Vector2(1, 0.686), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="Gradient" id="Gradient_xaxga"]
+offsets = PackedFloat32Array(0, 0.16994382, 0.8848315, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.10674157, 0.10674157, 0.10674157, 1, 1, 1, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_gu6k8"]
+
+[sub_resource type="Curve" id="Curve_gu6k8"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.801, 0.517), -3.158, -3.158, 0, 0, Vector2(0.901, 0.367), 0.0, 0.0, 0, 0, Vector2(0.938, 0.931), 0.0, 0.0, 0, 0, Vector2(1, 0.742), 0.0, 0.0, 0, 0]
+point_count = 5
+
+[sub_resource type="Gradient" id="Gradient_e05df"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_cp3bt"]
+
+[node name="CardTrailTashkent" type="Node2D"]
+show_behind_parent = true
+script = ExtResource("3_0gxic")
+
+[node name="Trails" type="Node2D" parent="."]
+
+[node name="OuterTrail" type="Line2D" parent="Trails"]
+modulate = Color(0.61960787, 1, 1, 1)
+material = SubResource("CanvasItemMaterial_w018a")
+width = 96.0
+width_curve = SubResource("Curve_xaxga")
+gradient = SubResource("Gradient_xaxga")
+texture = ExtResource("1_e5exw")
+texture_mode = 2
+joint_mode = 2
+script = ExtResource("3_c7yhj")
+
+[node name="InnerTrail" type="Line2D" parent="Trails"]
+modulate = Color(1, 0.69803923, 1, 1)
+material = SubResource("CanvasItemMaterial_gu6k8")
+width = 64.0
+width_curve = SubResource("Curve_gu6k8")
+gradient = SubResource("Gradient_e05df")
+texture = ExtResource("1_e5exw")
+texture_mode = 2
+joint_mode = 2
+script = ExtResource("3_c7yhj")
+
+[node name="Sprites" type="Node2D" parent="."]
+
+[node name="BigSparks" type="CPUParticles2D" parent="Sprites"]
+material = SubResource("CanvasItemMaterial_cp3bt")
+amount = 16
+texture = ExtResource("1_uhu2p")
+lifetime = 2.0
+randomness = 0.5
+lifetime_randomness = 1.0
+fract_delta = false
+emission_shape = 3
+emission_rect_extents = Vector2(24, 24)
+direction = Vector2(5, -5)
+gravity = Vector2(0, 0)
+initial_velocity_min = 16.0
+initial_velocity_max = 32.0
+angular_velocity_min = -32.0
+angular_velocity_max = 32.0
+damping_min = 1.0
+damping_max = 5.0
+angle_min = -180.0
+angle_max = 180.0
+scale_amount_min = 0.2
+scale_amount_max = 0.8
+color = Color(0.8352941, 0.87058824, 1, 1)
+
+[node name="LittleSparks" type="CPUParticles2D" parent="Sprites"]
+amount = 16
+lifetime = 2.0
+
+[node name="Sprite2D" type="Sprite2D" parent="Sprites"]
+scale = Vector2(1.1, 1.054)
+texture = ExtResource("3_7ptav")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Sprites"]
+scale = Vector2(0.9, 0.9)
+texture = ExtResource("3_7ptav")

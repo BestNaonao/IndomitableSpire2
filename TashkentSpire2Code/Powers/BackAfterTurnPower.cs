@@ -13,7 +13,7 @@ public class BackAfterTurnPower : TashkentPower
     public override string CustomBigIconPath => 
         "res://TashkentSpire2/images/powers/big/backafterturn_power.png";
     public override string CustomPackedIconPath => 
-        "res://TashkentSpire2/images/powers/packed/backafterturn_power_packed.tres";
+        "res://TashkentSpire2/images/powers/packed/backafterturn_power.png";
 
     public override async Task AfterTurnEnd(PlayerChoiceContext choiceContext, CombatSide side)
     {

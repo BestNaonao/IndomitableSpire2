@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dfv45cjiw8q4c"
-path="res://.godot/imported/energy_test.png-91bc7da09df241814a3312d75aa68738.ctex"
+uid="uid://w3ocatw41jdn"
+path="res://.godot/imported/trail.png-c2d24db7bd770db8c1ba3d326ef0e514.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://TashkentSpire2/images/vfx/energy_test.png"
-dest_files=["res://.godot/imported/energy_test.png-91bc7da09df241814a3312d75aa68738.ctex"]
+source_file="res://TashkentSpire2/images/vfx/trail.png"
+dest_files=["res://.godot/imported/trail.png-c2d24db7bd770db8c1ba3d326ef0e514.ctex"]
 
 [params]
 

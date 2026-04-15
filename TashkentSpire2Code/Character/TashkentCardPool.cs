@@ -24,9 +24,9 @@ public sealed class TashkentCardPool : CustomCardPoolModel, ICustomEnergyIconPoo
     
     // UI中使用的大能量图标路径（如能量球显示），和文本中使用的能量图标路径（如卡牌描述）
     public override string BigEnergyIconPath => 
-        "res://TashkentSpire2/images/packed/sprite_fonts/indomitable_energy_icon_original.png";
+        "res://TashkentSpire2/images/packed/sprite_fonts/tashkent_energy_icon_original.png";
     public override string TextEnergyIconPath => 
-        "res://TashkentSpire2/images/packed/sprite_fonts/indomitable_energy_icon.png";
+        "res://TashkentSpire2/images/packed/sprite_fonts/tashkent_energy_icon.png";
     
     // 未来可能需要重写：
     // protected override IEnumerable<CardModel> FilterThroughEpochs

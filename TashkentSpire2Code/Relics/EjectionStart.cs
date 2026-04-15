@@ -9,15 +9,13 @@ namespace TashkentSpire2.TashkentSpire2Code.Relics;
 public sealed class EjectionStart : TashkentRelic
 {
     public override RelicRarity Rarity => RelicRarity.Starter;
-
-    // 大图标（通常用于查看遗物大图和通关结算）
+    
     protected override string BigIconPath => 
-        "res://TashkentSpire2/images/relics/big/ShikikanDakimakura.png";
-    // 小图标和轮廓图的路径
+        "res://TashkentSpire2/images/relics/big/EjectionStart.png";
     public override string PackedIconPath => 
-        "res://TashkentSpire2/images/relics/packed/ShikikanDakimakura_packed.tres";
+        "res://TashkentSpire2/images/relics/packed/EjectionStart.png";
     protected override string PackedIconOutlinePath => 
-        "res://TashkentSpire2/images/relics/outline/ShikikanDakimakura_outline.tres";
+        "res://TashkentSpire2/images/relics/outline/EjectionStart.png";
     
     public override async Task BeforeSideTurnStart(PlayerChoiceContext choiceContext, CombatSide side, CombatState combatState)
     {

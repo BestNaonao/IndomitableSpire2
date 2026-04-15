@@ -13,7 +13,7 @@ public class MarkPower : TashkentPower
     public override string CustomBigIconPath => 
         "res://TashkentSpire2/images/powers/big/mark_power.png";
     public override string CustomPackedIconPath => 
-        "res://TashkentSpire2/images/powers/packed/mark_power_packed.tres";
+        "res://TashkentSpire2/images/powers/packed/mark_power.png";
     
     public override decimal ModifyDamageAdditive(Creature? target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource)
     {

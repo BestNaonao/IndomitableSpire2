@@ -20,7 +20,7 @@ public abstract class TashkentCard(
     bool autoAdd = true
 ) : CustomCardModel(baseCost, type, rarity, target, showInCardLibrary, autoAdd)
 {
-    public sealed override string CustomPortraitPath => $"{Id.Entry.RemovePrefix().ToLowerInvariant()}.png".CardImagePath();
+    public sealed override string CustomPortraitPath => $"{Id.Entry.RemovePrefix().ToLowerInvariant()}.png".BigCardImagePath();
     
     public override async Task BeforeHandDraw(Player player, PlayerChoiceContext ctx, CombatState state)
     {

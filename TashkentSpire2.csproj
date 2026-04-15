@@ -79,16 +79,19 @@
         <PackageReference Include="Alchyr.Sts2.ModAnalyzers" Version="0.1.6" />
         <AdditionalFiles Include="TashkentSpire2/localization/**/*.json"/>
     </ItemGroup>
- 
+
     <ItemGroup>
-        <Compile Remove="TashkentSpire2/**"/>
-        <Compile Remove="materials/**"/>
-        <Compile Remove="shaders/**"/>
-        <Compile Remove="images/**"/>
-        <EmbeddedResource Remove="TashkentSpire2/**"/>
-        <EmbeddedResource Remove="materials/**"/>
-        <EmbeddedResource Remove="shaders/**"/>
-        <EmbeddedResource Remove="images/**"/>
+        <Compile Remove="materials/**" />
+        <Compile Remove="shaders/**" />
+        <Compile Remove="images/**" />
+        <Compile Remove="TashkentSpire2/images/**" />
+        <Compile Remove="TashkentSpire2/scenes/**" />
+        <Compile Remove="TashkentSpire2/materials/**" />
+        <Compile Remove="TashkentSpire2/shaders/**" />
+        <EmbeddedResource Remove="TashkentSpire2/**" />
+        <EmbeddedResource Remove="materials/**" />
+        <EmbeddedResource Remove="shaders/**" />
+        <EmbeddedResource Remove="images/**" />
     </ItemGroup>
 
     <ItemGroup>

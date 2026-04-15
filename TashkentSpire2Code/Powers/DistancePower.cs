@@ -20,7 +20,7 @@ public class DistancePower : TashkentPower
     public override string CustomBigIconPath => 
         "res://TashkentSpire2/images/powers/big/distance_power.png";
     public override string CustomPackedIconPath => 
-        "res://TashkentSpire2/images/powers/packed/distance_power_packed.tres";
+        "res://TashkentSpire2/images/powers/packed/distance_power.png";
     
     protected override IEnumerable<DynamicVar> CanonicalVars => 
         new List<DynamicVar>
@@ -65,7 +65,7 @@ public class DistancePower : TashkentPower
     
     public override decimal ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource)
     {
-        if (!props.HasFlag(ValueProp.Unpowered) || cardSource == null)
+        if (!props.HasFlag(ValueProp.Move) || cardSource == null)
             return 1m;
         
         decimal multiplier = 1m;
