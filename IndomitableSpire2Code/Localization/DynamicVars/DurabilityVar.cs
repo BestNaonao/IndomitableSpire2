@@ -30,9 +30,8 @@ public class DurabilityVar(string name, decimal baseValue) : DynamicVar(name, ba
         var potentialTargets = new List<Creature>();
         
         // 1. 如果是群攻预览 (AOE)，或者多目标选择，抓取全场敌人
-        if (previewMode == CardPreviewMode.MultiCreatureTargeting || 
-            aircraftCard.TargetType == TargetType.AllEnemies || 
-            aircraftCard.TargetType == TargetType.RandomEnemy)
+        if (previewMode == CardPreviewMode.MultiCreatureTargeting && 
+            aircraftCard.TargetType is TargetType.AllEnemies or TargetType.RandomEnemy)
             potentialTargets.AddRange(aircraftCard.CombatState.HittableEnemies);
         
         // 2. 如果是单体指向，并且当前鼠标确切指着一个存活的敌人
