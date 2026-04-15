@@ -2,12 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://oio0e14uj7ki"
-valid=false
+uid="uid://ds6na818p4sgu"
+path="res://.godot/imported/drownmysorrow_power.png-c7c1ed7b02b8a67d43c004dcddd2361a.ctex"
+metadata={
+"vram_texture": false
+}
 
 [deps]
 
-source_file="res://TashkentSpire2/images/card_portraits/load_shot.png"
+source_file="res://TashkentSpire2/images/powers/packed/drownmysorrow_power.png"
+dest_files=["res://.godot/imported/drownmysorrow_power.png-c7c1ed7b02b8a67d43c004dcddd2361a.ctex"]
 
 [params]
 

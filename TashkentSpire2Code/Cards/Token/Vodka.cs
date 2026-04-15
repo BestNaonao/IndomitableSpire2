@@ -1,5 +1,7 @@
-﻿using MegaCrit.Sts2.Core.Commands;
+﻿using MegaCrit.Sts2.Core.Combat;
+using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models.Powers;
@@ -12,6 +14,23 @@ public class Vodka() : TashkentCard(0, CardType.Status, CardRarity.Token, Target
         new PowerVar<VigorPower>(3M),
         new CardsVar(1)
     ];
+    
+    public static async Task<IEnumerable<Vodka>> CreateInHand(Player owner, int amount, CombatState combatState)
+    {
+        IEnumerable<Vodka> vodkas = Create(owner, amount, combatState);
+        await CardPileCmd.AddGeneratedCardsToCombat(vodkas, PileType.Hand, addedByPlayer: true);
+        return vodkas;
+    }
+
+    public static IEnumerable<Vodka> Create(Player owner, int amount, CombatState combatState)
+    {
+        List<Vodka> list = new List<Vodka>();
+        for (int i = 0; i < amount; i++)
+        {
+            list.Add(combatState.CreateCard<Vodka>(owner));
+        }
+        return list;
+    }
     
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {

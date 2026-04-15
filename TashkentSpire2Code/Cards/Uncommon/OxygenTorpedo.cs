@@ -14,9 +14,9 @@ public class OxygenTorpedo() : TashkentCard(2, CardType.Skill, CardRarity.Uncomm
     
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        var temp = new TorpedoPower();
-        int value = temp.ComputeTurns();
-        (await PowerCmd.Apply<TorpedoPower>(base.Owner.Creature, value, base.Owner.Creature, this))?.SetDamage(base.DynamicVars["TashkentSpire2-Torpedo"].BaseValue);
+        int turns = TorpedoPower.ComputeTurns(base.Owner.Creature);
+        (await PowerCmd.Apply<TorpedoPower>(base.Owner.Creature, (decimal)turns, base.Owner.Creature, this))
+            ?.SetDamage(DynamicVars["TashkentSpire2-Torpedo"].BaseValue);
     }
     
     protected override void OnUpgrade()

@@ -18,11 +18,8 @@ public class Retreat() : TashkentCard(1, CardType.Skill, CardRarity.Common, Targ
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        var num = await CreatureCmd.GainBlock(Owner.Creature, DynamicVars.Block, cardPlay);
-        if (num < DynamicVars.Block.BaseValue)
-        {
-            await CreatureCmd.GainBlock(Owner.Creature, new BlockVar(1M, ValueProp.Unpowered), cardPlay);
-        }
+        await CreatureCmd.GainBlock(Owner.Creature, DynamicVars.Block, cardPlay);
+        
         await PowerCmd.Apply<DistancePower>(base.Owner.Creature, -base.DynamicVars["TashkentSpire2-Retreat"].BaseValue, base.Owner.Creature, this);
     }
     

@@ -16,7 +16,7 @@ public class VibrantPower : TashkentPower
     public override string CustomPackedIconPath => 
         "res://TashkentSpire2/images/powers/packed/mark_power.png";
     
-    public override async Task BeforePowerAmountChanged(PowerModel power, decimal amount, Creature target, Creature? applier, CardModel? cardSource)
+    public override async Task AfterPowerAmountChanged(PowerModel power, decimal amount, Creature? applier, CardModel? cardSource)
     {
         if (power.Owner == base.Owner)
         {

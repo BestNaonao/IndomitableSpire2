@@ -2,12 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://oio0e14uj7ki"
-valid=false
+uid="uid://csiv2jrwwsfu2"
+path="res://.godot/imported/mark_power.png-bf25dc3e4b7d3a48dcfa7f3242e2b8ae.ctex"
+metadata={
+"vram_texture": false
+}
 
 [deps]
 
-source_file="res://TashkentSpire2/images/card_portraits/load_shot.png"
+source_file="res://TashkentSpire2/images/powers/big/mark_power.png"
+dest_files=["res://.godot/imported/mark_power.png-bf25dc3e4b7d3a48dcfa7f3242e2b8ae.ctex"]
 
 [params]
 

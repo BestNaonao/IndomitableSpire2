@@ -86,22 +86,22 @@ public sealed class TashkentCharacter : CustomCharacterModel
     //     "res://TashkentSpire2/images/Tashkent/hands/multiplayer_hand_tashkent_scissors.png";
     
     public override string CustomArmPointingTexturePath =>
-        TashkentConfig.MultiplayerModeModel == FjordMosaicMode.Hands
+        TashkentConfig.多人模式使用哪种模型 == FjordMosaicMode.手部模型
             ? "res://TashkentSpire2/images/Tashkent/hands/multiplayer_hand_tashkent_point.png"
             : "res://TashkentSpire2/images/Tashkent/feet/multiplayer_foot_tashkent_point.png";
 
     public override string CustomArmRockTexturePath =>
-        TashkentConfig.MultiplayerModeModel == FjordMosaicMode.Hands
+        TashkentConfig.多人模式使用哪种模型 == FjordMosaicMode.手部模型
             ? "res://TashkentSpire2/images/Tashkent/hands/multiplayer_hand_tashkent_rock.png"
             : "res://TashkentSpire2/images/Tashkent/feet/multiplayer_foot_tashkent_rock.png";
 
     public override string CustomArmPaperTexturePath =>
-        TashkentConfig.MultiplayerModeModel == FjordMosaicMode.Hands
+        TashkentConfig.多人模式使用哪种模型 == FjordMosaicMode.手部模型
             ? "res://TashkentSpire2/images/Tashkent/hands/multiplayer_hand_tashkent_paper.png"
             : "res://TashkentSpire2/images/Tashkent/feet/multiplayer_foot_tashkent_paper.png";
 
     public override string CustomArmScissorsTexturePath =>
-        TashkentConfig.MultiplayerModeModel == FjordMosaicMode.Hands
+        TashkentConfig.多人模式使用哪种模型 == FjordMosaicMode.手部模型
             ? "res://TashkentSpire2/images/Tashkent/hands/multiplayer_hand_tashkent_scissors.png"
             : "res://TashkentSpire2/images/Tashkent/feet/multiplayer_foot_tashkent_scissors.png";
 

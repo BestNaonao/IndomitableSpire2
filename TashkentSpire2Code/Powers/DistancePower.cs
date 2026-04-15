@@ -1,8 +1,10 @@
 ﻿using Godot;
+using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.Nodes.Combat;
 using MegaCrit.Sts2.Core.Nodes.Rooms;
 using MegaCrit.Sts2.Core.ValueProps;
@@ -65,7 +67,7 @@ public class DistancePower : TashkentPower
     
     public override decimal ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource)
     {
-        if (!props.HasFlag(ValueProp.Move) || cardSource == null)
+        if (dealer == this.Owner && (!props.HasFlag(ValueProp.Move) || cardSource == null))
             return 1m;
         
         decimal multiplier = 1m;
@@ -89,7 +91,28 @@ public class DistancePower : TashkentPower
                 RefreshDerivedVars();
                 
                 await UpdateCreaturePositions(delta);
+                
+                await SyncSandpitPower(delta);  //契合沙虫机制
+                
                 InvokeDisplayAmountChanged();
+            }
+        }
+    }
+    
+    private async Task SyncSandpitPower(int delta)
+    {
+        var sandpitEnemies = base.CombatState?.Enemies.Where(c => c.HasPower<SandpitPower>());
+    
+        if (sandpitEnemies == null) return;
+
+        foreach (var enemy in sandpitEnemies)
+        {
+            var sandpitPower = enemy.Powers.OfType<SandpitPower>()
+                .FirstOrDefault(s => s.Target == base.Owner);
+
+            if (sandpitPower != null)
+            {
+                await PowerCmd.ModifyAmount(sandpitPower, (decimal)delta, enemy, null);
             }
         }
     }

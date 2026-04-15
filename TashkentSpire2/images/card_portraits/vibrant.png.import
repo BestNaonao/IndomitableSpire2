@@ -3,15 +3,11 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://b8h8l3mdujqio"
-path="res://.godot/imported/vibrant.png-89e621487661f768ed8208bd1306192b.ctex"
-metadata={
-"vram_texture": false
-}
+valid=false
 
 [deps]
 
 source_file="res://TashkentSpire2/images/card_portraits/vibrant.png"
-dest_files=["res://.godot/imported/vibrant.png-89e621487661f768ed8208bd1306192b.ctex"]
 
 [params]
 

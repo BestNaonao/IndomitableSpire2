@@ -17,14 +17,15 @@ public class FateGuidedTorpedo() : TashkentCard(1, CardType.Skill, CardRarity.Un
         new EnergyVar(0)
     ];
     
-    protected override bool IsPlayable => (Owner?.Creature?.GetPowerAmount<DistancePower>() ?? 0) <= -2;
+    protected override bool IsPlayable => (Owner?.Creature?.GetPowerAmount<DistancePower>() ?? 0) <= -1;
     
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        var temp = new TorpedoPower();
-        int value = temp.ComputeTurns();
-        (await PowerCmd.Apply<TorpedoPower>(base.Owner.Creature, value, base.Owner.Creature, this))?.SetDamage(base.DynamicVars["TashkentSpire2-Torpedo"].BaseValue);
-        (await PowerCmd.Apply<TorpedoPower>(base.Owner.Creature, value, base.Owner.Creature, this))?.SetDamage(base.DynamicVars["TashkentSpire2-Torpedo"].BaseValue);
+        int turns = TorpedoPower.ComputeTurns(base.Owner.Creature);
+        (await PowerCmd.Apply<TorpedoPower>(base.Owner.Creature, (decimal)turns, base.Owner.Creature, this))
+            ?.SetDamage(DynamicVars["TashkentSpire2-Torpedo"].BaseValue);
+        (await PowerCmd.Apply<TorpedoPower>(base.Owner.Creature, (decimal)turns, base.Owner.Creature, this))
+            ?.SetDamage(DynamicVars["TashkentSpire2-Torpedo"].BaseValue);
         
         var num = await CreatureCmd.GainBlock(Owner.Creature, DynamicVars.Block, cardPlay);
         if (num < DynamicVars.Block.BaseValue)

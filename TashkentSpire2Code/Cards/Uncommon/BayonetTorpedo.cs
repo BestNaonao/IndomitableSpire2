@@ -16,9 +16,9 @@ public class BayonetTorpedo() : TashkentCard(1, CardType.Skill, CardRarity.Uncom
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         await PowerCmd.Apply<DistancePower>(base.Owner.Creature, base.DynamicVars["TashkentSpire2-Charge"].BaseValue, base.Owner.Creature, this);
-        var temp = new TorpedoPower();
-        int value = temp.ComputeTurns();
-        (await PowerCmd.Apply<TorpedoPower>(base.Owner.Creature, value, base.Owner.Creature, this))?.SetDamage(base.DynamicVars["TashkentSpire2-Torpedo"].BaseValue);
+        int turns = TorpedoPower.ComputeTurns(base.Owner.Creature);
+        (await PowerCmd.Apply<TorpedoPower>(base.Owner.Creature, (decimal)turns, base.Owner.Creature, this))
+            ?.SetDamage(DynamicVars["TashkentSpire2-Torpedo"].BaseValue);
     }
     
     protected override void OnUpgrade()

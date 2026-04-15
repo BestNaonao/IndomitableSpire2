@@ -18,14 +18,11 @@ public class Intercept() : TashkentCard(1, CardType.Skill, CardRarity.Common, Ta
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        var num = await CreatureCmd.GainBlock(Owner.Creature, DynamicVars.Block, cardPlay);
-        if (num < DynamicVars.Block.BaseValue)
-        {
-            await CreatureCmd.GainBlock(Owner.Creature, new BlockVar(1M, ValueProp.Unpowered), cardPlay);
-        }
-        var temp = new TorpedoPower();
-        int value = temp.ComputeTurns();
-        (await PowerCmd.Apply<TorpedoPower>(base.Owner.Creature, value, base.Owner.Creature, this))?.SetDamage(base.DynamicVars["TashkentSpire2-Torpedo"].BaseValue);
+        await CreatureCmd.GainBlock(Owner.Creature, DynamicVars.Block, cardPlay);
+        
+        int turns = TorpedoPower.ComputeTurns(base.Owner.Creature);
+        (await PowerCmd.Apply<TorpedoPower>(base.Owner.Creature, (decimal)turns, base.Owner.Creature, this))
+            ?.SetDamage(DynamicVars["TashkentSpire2-Torpedo"].BaseValue);
     }
     
     protected override void OnUpgrade()

@@ -1,5 +1,6 @@
 ﻿using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
+using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Helpers;
@@ -22,11 +23,11 @@ public class TorpedoPower : TashkentPower
     public override string CustomPackedIconPath => 
         "res://TashkentSpire2/images/powers/packed/torpedo_power.png";
 
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(40m, ValueProp.Unpowered)];
-
-    public int ComputeTurns()
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(0m, ValueProp.Unpowered)];
+    
+    public static int ComputeTurns(Creature owner)
     {
-        var distPower = base.Owner.GetPower<DistancePower>();
+        var distPower = owner.GetPower<DistancePower>();
         int dist = distPower != null ? (int)distPower.Amount : 0;
 
         if (distPower == null || dist == -1 || dist == 0 || dist == 1)

@@ -16,11 +16,7 @@ public sealed class Defend() : TashkentCard(1, CardType.Skill, CardRarity.Basic,
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        var num = await CreatureCmd.GainBlock(Owner.Creature, DynamicVars.Block, cardPlay);
-        if (num < DynamicVars.Block.BaseValue)
-        {
-            await CreatureCmd.GainBlock(Owner.Creature, new BlockVar(1M, ValueProp.Unpowered), cardPlay);
-        }
+        await CreatureCmd.GainBlock(Owner.Creature, DynamicVars.Block, cardPlay);
     }
     
     protected override void OnUpgrade() => DynamicVars.Block.UpgradeValueBy(3M);

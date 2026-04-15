@@ -2,12 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://oio0e14uj7ki"
-valid=false
+uid="uid://cojkye3dcibgs"
+path="res://.godot/imported/weather_the_storm_together.png-d52086f222267eb4d5a54566cd63257f.ctex"
+metadata={
+"vram_texture": false
+}
 
 [deps]
 
-source_file="res://TashkentSpire2/images/card_portraits/load_shot.png"
+source_file="res://TashkentSpire2/images/card_portraits/big/weather_the_storm_together.png"
+dest_files=["res://.godot/imported/weather_the_storm_together.png-d52086f222267eb4d5a54566cd63257f.ctex"]
 
 [params]
 

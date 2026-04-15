@@ -2,12 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://oio0e14uj7ki"
-valid=false
+uid="uid://dqfu5vicyumx3"
+path="res://.godot/imported/vodka_feast.png-4c8fa9c71db6dfbb40009cdade882558.ctex"
+metadata={
+"vram_texture": false
+}
 
 [deps]
 
-source_file="res://TashkentSpire2/images/card_portraits/load_shot.png"
+source_file="res://TashkentSpire2/images/card_portraits/big/vodka_feast.png"
+dest_files=["res://.godot/imported/vodka_feast.png-4c8fa9c71db6dfbb40009cdade882558.ctex"]
 
 [params]
 

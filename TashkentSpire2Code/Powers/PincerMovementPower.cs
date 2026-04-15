@@ -19,7 +19,7 @@ public class PincerMovementPower : TashkentPower
 
     public override decimal ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource)
     {
-        if (dealer != this.Owner || this.Owner?.CombatState == null || base.Owner.CombatState.CurrentSide == base.Owner.Side)
+        if (dealer != this.Owner || this.Owner?.CombatState == null || props.HasFlag(ValueProp.Move))
             return 1M;
         
         return 2M;

@@ -19,11 +19,8 @@ public class ReinforcedSteel() : TashkentCard(2, CardType.Skill, CardRarity.Comm
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        var num = await CreatureCmd.GainBlock(Owner.Creature, DynamicVars.Block, cardPlay);
-        if (num < DynamicVars.Block.BaseValue)
-        {
-            await CreatureCmd.GainBlock(Owner.Creature, new BlockVar(1M, ValueProp.Unpowered), cardPlay);
-        }
+        await CreatureCmd.GainBlock(Owner.Creature, DynamicVars.Block, cardPlay);
+        
         await PowerCmd.Apply<PlatingPower>(base.Owner.Creature, base.DynamicVars["PlatingPower"].BaseValue, base.Owner.Creature, this);
     }
     

@@ -17,12 +17,10 @@ public class TorpedoSea() : TashkentCard(2, CardType.Skill, CardRarity.Uncommon,
     {
         for (int i = 0; i < DynamicVars.Repeat.IntValue; i++)
         {
-            var temp = new TorpedoPower();
-            int value = temp.ComputeTurns();
-        
-            (await PowerCmd.Apply<TorpedoPower>(base.Owner.Creature, value, base.Owner.Creature, this))?.SetDamage(base.DynamicVars["TashkentSpire2-Torpedo"].BaseValue);
+            int turns = TorpedoPower.ComputeTurns(base.Owner.Creature);
+            (await PowerCmd.Apply<TorpedoPower>(base.Owner.Creature, (decimal)turns, base.Owner.Creature, this))
+                ?.SetDamage(DynamicVars["TashkentSpire2-Torpedo"].BaseValue);
         }
-        
     }
     
     protected override void OnUpgrade() => DynamicVars.Repeat.UpgradeValueBy(1M);
