@@ -1,9 +1,9 @@
-﻿using HarmonyLib;
-using Godot;
+﻿using Godot;
+using HarmonyLib;
 using IndomitableSpire2.IndomitableSpire2Code.Character;
-using MegaCrit.Sts2.Core.Nodes.RestSite;
 using MegaCrit.Sts2.Core.Bindings.MegaSpine;
 using MegaCrit.Sts2.Core.Nodes.Combat;
+using MegaCrit.Sts2.Core.Nodes.RestSite;
 using MegaCrit.Sts2.Core.Random;
 
 namespace IndomitableSpire2.IndomitableSpire2Code.Patches;

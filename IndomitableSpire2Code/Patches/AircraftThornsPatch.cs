@@ -1,7 +1,7 @@
 ﻿using HarmonyLib;
+using IndomitableSpire2.IndomitableSpire2Code.Cards.Abstracts;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Powers;
-using IndomitableSpire2.IndomitableSpire2Code.Cards.Abstracts;
 
 namespace IndomitableSpire2.IndomitableSpire2Code.Patches;
 

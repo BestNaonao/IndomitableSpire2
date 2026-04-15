@@ -1,7 +1,7 @@
-﻿using MegaCrit.Sts2.Core.Entities.Cards;
+﻿using IndomitableSpire2.IndomitableSpire2Code.Cards.Abstracts;
+using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
-using IndomitableSpire2.IndomitableSpire2Code.Cards.Abstracts;
 using MegaCrit.Sts2.Core.Models;
 
 namespace IndomitableSpire2.IndomitableSpire2Code.Localization.DynamicVars;
