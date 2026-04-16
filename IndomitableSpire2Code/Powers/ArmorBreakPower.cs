@@ -1,5 +1,4 @@
-﻿using BaseLib.Abstracts;
-using Godot;
+﻿using Godot;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Creatures;
@@ -10,7 +9,7 @@ using MegaCrit.Sts2.Core.ValueProps;
 
 namespace IndomitableSpire2.IndomitableSpire2Code.Powers;
 
-public sealed class ArmorBreakPower : CustomPowerModel
+public sealed class ArmorBreakPower : IndomitablePower
 {
     public override PowerType Type => PowerType.Debuff;
     public override PowerStackType StackType => PowerStackType.Counter;
