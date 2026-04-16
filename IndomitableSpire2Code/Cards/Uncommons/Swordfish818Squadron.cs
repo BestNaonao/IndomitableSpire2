@@ -10,7 +10,7 @@ using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.ValueProps;
 
-namespace IndomitableSpire2.IndomitableSpire2Code.Cards.Uncommon;
+namespace IndomitableSpire2.IndomitableSpire2Code.Cards.Uncommons;
 
 public sealed class Swordfish818Squadron() : CarrierAircraftCard(2, CardType.Attack, CardRarity.Uncommon, TargetType.AnyEnemy)
 {

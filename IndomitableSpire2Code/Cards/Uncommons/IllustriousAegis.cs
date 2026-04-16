@@ -5,7 +5,7 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.ValueProps;
 
-namespace IndomitableSpire2.IndomitableSpire2Code.Cards.Uncommon;
+namespace IndomitableSpire2.IndomitableSpire2Code.Cards.Uncommons;
 
 public sealed class IllustriousAegis() : IndomitableCard(2, CardType.Skill, CardRarity.Uncommon, TargetType.AnyPlayer)
 {
