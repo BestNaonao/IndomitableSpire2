@@ -5,7 +5,7 @@ using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.ValueProps;
 using TashkentSpire2.TashkentSpire2Code.Powers;
 
-namespace TashkentSpire2.TashkentSpire2Code.Cards.Basics;
+namespace TashkentSpire2.TashkentSpire2Code.Cards.Common;
 
 public class Intercept() : TashkentCard(1, CardType.Skill, CardRarity.Common, TargetType.Self)
 {

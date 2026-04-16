@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://4mbns7o6j4k6"]
+
+[ext_resource type="Texture2D" uid="uid://cmej5410sn2yb" path="res://TashkentSpire2/images/orbs/module_orb.png" id="1_3dvb1"]
+
+[node name="ModuleOrb" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("1_3dvb1")

@@ -11,7 +11,7 @@ namespace TashkentSpire2.TashkentSpire2Code.Powers;
 public class DrownMySorrowPower : TashkentPower
 {
     public override PowerType Type => PowerType.Buff;
-    public override PowerStackType StackType => PowerStackType.Single;
+    public override PowerStackType StackType => PowerStackType.Counter;
     
     public override string CustomBigIconPath => 
         "res://TashkentSpire2/images/powers/big/drownmysorrow_power.png";

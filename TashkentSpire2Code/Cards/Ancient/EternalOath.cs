@@ -9,13 +9,13 @@ namespace TashkentSpire2.TashkentSpire2Code.Cards.Ancient;
 public class EternalOath() : TashkentCard(2, CardType.Power, CardRarity.Ancient, TargetType.Self)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new PowerVar<FloodingExpertPower>(1M)
+        new PowerVar<EternalOathPower>(1M)
     ];
     
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
-        await PowerCmd.Apply<FloodingExpertPower>(base.Owner.Creature, base.DynamicVars["Power"].BaseValue, base.Owner.Creature, this);
+        await PowerCmd.Apply<EternalOathPower>(base.Owner.Creature, base.DynamicVars["EternalOathPower"].BaseValue, base.Owner.Creature, this);
     }
     
     protected override void OnUpgrade()

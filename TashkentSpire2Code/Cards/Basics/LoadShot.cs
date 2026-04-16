@@ -6,6 +6,7 @@ using MegaCrit.Sts2.Core.Saves.Runs;
 using MegaCrit.Sts2.Core.ValueProps;
 using TashkentSpire2.TashkentSpire2Code.Commands;
 using TashkentSpire2.TashkentSpire2Code.Keywords;
+using TashkentSpire2.TashkentSpire2Code.Tags;
 
 namespace TashkentSpire2.TashkentSpire2Code.Cards.Basics;
 
@@ -18,6 +19,8 @@ public sealed class LoadShot() : TashkentCard(1, CardType.Attack, CardRarity.Bas
         new LoadDynamicVar(1M),
         new AmmuMaxDynamicVar(2M)
     ];
+    
+    protected override HashSet<CardTag> CanonicalTags => [TashkentTags.Ammunition];
     
     private int _currentAmmu = 1;
     

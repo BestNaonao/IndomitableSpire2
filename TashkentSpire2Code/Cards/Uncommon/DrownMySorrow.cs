@@ -11,7 +11,7 @@ namespace TashkentSpire2.TashkentSpire2Code.Cards.Uncommon;
 public class DrownMySorrow() : TashkentCard(1, CardType.Power, CardRarity.Uncommon, TargetType.Self)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new PowerVar<DrownMySorrowPower>(1M)
+        new PowerVar<DrownMySorrowPower>(2M)
     ];
 
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
@@ -20,11 +20,11 @@ public class DrownMySorrow() : TashkentCard(1, CardType.Power, CardRarity.Uncomm
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
-        await PowerCmd.Apply<DrownMySorrowPower>(base.Owner.Creature, base.DynamicVars["Power"].BaseValue, base.Owner.Creature, this);
+        await PowerCmd.Apply<DrownMySorrowPower>(base.Owner.Creature, base.DynamicVars["DrownMySorrowPower"].BaseValue, base.Owner.Creature, this);
     }
     
     protected override void OnUpgrade()
     {
-        AddKeyword(CardKeyword.Innate);
+        base.DynamicVars["DrownMySorrowPower"].UpgradeValueBy(1M);
     }
 }

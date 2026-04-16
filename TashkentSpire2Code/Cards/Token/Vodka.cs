@@ -15,6 +15,8 @@ public class Vodka() : TashkentCard(0, CardType.Status, CardRarity.Token, Target
         new CardsVar(1)
     ];
     
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
+    
     public static async Task<IEnumerable<Vodka>> CreateInHand(Player owner, int amount, CombatState combatState)
     {
         IEnumerable<Vodka> vodkas = Create(owner, amount, combatState);
@@ -35,7 +37,7 @@ public class Vodka() : TashkentCard(0, CardType.Status, CardRarity.Token, Target
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         await PowerCmd.Apply<VigorPower>(base.Owner.Creature, base.DynamicVars["VigorPower"].IntValue, base.Owner.Creature, this);
-        await CardPileCmd.Draw(choiceContext, base.DynamicVars["CardsVar"].IntValue, base.Owner);
+        await CardPileCmd.Draw(choiceContext, base.DynamicVars.Cards.IntValue, base.Owner);
     }
 
     protected override void OnUpgrade()

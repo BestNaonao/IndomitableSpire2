@@ -1,10 +1,10 @@
 [gd_scene load_steps=13 format=3 uid="uid://kwebjfkpq4tl"]
 
+[ext_resource type="Script" uid="uid://b07nawfj6puyy" path="res://TashkentSpire2Code/Scripts/CardTrailTashkent.cs" id="1_c7yhj"]
 [ext_resource type="Texture2D" uid="uid://w3ocatw41jdn" path="res://TashkentSpire2/images/vfx/trail.png" id="1_e5exw"]
 [ext_resource type="Texture2D" uid="uid://ci7ts6qwe2xd7" path="res://TashkentSpire2/images/vfx/bear.png" id="1_uhu2p"]
-[ext_resource type="Script" path="res://TashkentSpire2Code/Vfx/CardTrailTashkent.cs" id="3_0gxic"]
+[ext_resource type="Script" uid="uid://1ox7i7xb36v6" path="res://TashkentSpire2Code/Scripts/TrailTashkent.cs" id="3_0gxic"]
 [ext_resource type="Texture2D" uid="uid://26yk0sl832s0" path="res://TashkentSpire2/images/vfx/small_card_silhouette.png" id="3_7ptav"]
-[ext_resource type="Script" path="res://TashkentSpire2Code/Vfx/TrailTashkent.cs" id="3_c7yhj"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_w018a"]
 
@@ -28,7 +28,7 @@ point_count = 5
 
 [node name="CardTrailTashkent" type="Node2D"]
 show_behind_parent = true
-script = ExtResource("3_0gxic")
+script = ExtResource("1_c7yhj")
 
 [node name="Trails" type="Node2D" parent="."]
 
@@ -41,7 +41,7 @@ gradient = SubResource("Gradient_xaxga")
 texture = ExtResource("1_e5exw")
 texture_mode = 2
 joint_mode = 2
-script = ExtResource("3_c7yhj")
+script = ExtResource("3_0gxic")
 
 [node name="InnerTrail" type="Line2D" parent="Trails"]
 modulate = Color(1, 0.69803923, 1, 1)
@@ -52,7 +52,7 @@ gradient = SubResource("Gradient_e05df")
 texture = ExtResource("1_e5exw")
 texture_mode = 2
 joint_mode = 2
-script = ExtResource("3_c7yhj")
+script = ExtResource("3_0gxic")
 
 [node name="Sprites" type="Node2D" parent="."]
 

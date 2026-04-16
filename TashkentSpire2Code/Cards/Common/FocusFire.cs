@@ -13,7 +13,7 @@ namespace TashkentSpire2.TashkentSpire2Code.Cards.Common;
 public class FocusFire() : TashkentCard(1, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new DamageVar(2M, ValueProp.Move),
+        new DamageVar(4M, ValueProp.Move),
         new AmmunitionDynamicVar(1M),
         new LoadDynamicVar(1M),
         new AmmuMaxDynamicVar(1M),

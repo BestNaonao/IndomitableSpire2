@@ -9,7 +9,7 @@ namespace TashkentSpire2.TashkentSpire2Code.Cards.Uncommon;
 public class Vibrant() : TashkentCard(1, CardType.Power, CardRarity.Uncommon, TargetType.Self)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new PowerVar<VibrantPower>(2M)
+        new PowerVar<VibrantPower>(1M)
     ];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
