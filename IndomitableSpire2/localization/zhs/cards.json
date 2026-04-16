@@ -18,5 +18,9 @@
   "INDOMITABLESPIRE2-SEA_HORNET_FIGHTER.title": "海大黄蜂 F.20",
   "INDOMITABLESPIRE2-SEA_HORNET_FIGHTER.description": "[gold]耐久[/gold]：{Durability}/{MaxDurability}\n造成{Damage:diff()}点伤害{Repeat}次。\n给予[blue]{OnFirePower:diff()}[/blue]层[gold]起火[/gold]。",
   "INDOMITABLESPIRE2-SEA_HORNET_BOMBER.title": "海大黄蜂(轰炸挂载)",
-  "INDOMITABLESPIRE2-SEA_HORNET_BOMBER.description": "[gold]耐久[/gold]：{Durability}/{MaxDurability}\n对所有敌人造成{Damage:diff()}点伤害{Repeat}次。\n给予所有敌人[blue]{OnFirePower:diff()}[/blue]层[gold]起火[/gold]。"
+  "INDOMITABLESPIRE2-SEA_HORNET_BOMBER.description": "[gold]耐久[/gold]：{Durability}/{MaxDurability}\n对所有敌人造成{Damage:diff()}点伤害{Repeat}次。\n给予所有敌人[blue]{OnFirePower:diff()}[/blue]层[gold]起火[/gold]。",
+  "INDOMITABLESPIRE2-BARRACUDA_MK2.title": "梭鱼 Mk.II",
+  "INDOMITABLESPIRE2-BARRACUDA_MK2.description": "[gold]耐久[/gold]：{Durability}/{MaxDurability}\n造成{Damage:diff()}点伤害。给予[blue]{FloodingPower:diff()}[/blue]层[blue]进水[/blue]与[blue]{ArmorBreakPower:diff()}[/blue]层[gold]破甲[/gold]。",
+  "INDOMITABLESPIRE2-BARRACUDA831_SQUADRON.title": "梭鱼(831中队)",
+  "INDOMITABLESPIRE2-BARRACUDA831_SQUADRON.description": "[gold]耐久[/gold]：{Durability}/{MaxDurability}\n对拥有[gold]格挡[/gold]的目标造成翻倍伤害（{Damage:diff()}点）。给予等同于单倍伤害的[gold]破甲[/gold]。"
 }

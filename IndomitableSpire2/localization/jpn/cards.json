@@ -18,5 +18,9 @@
   "INDOMITABLESPIRE2-SEA_HORNET_FIGHTER.title": "シーホーネット F.20",
   "INDOMITABLESPIRE2-SEA_HORNET_FIGHTER.description": "[gold]耐久[/gold]：{Durability}/{MaxDurability}\n{Damage:diff()}ダメージを{Repeat}回与える。\n[blue]{OnFirePower:diff()}[/blue]の[gold]炎上[/gold]を与える。",
   "INDOMITABLESPIRE2-SEA_HORNET_BOMBER.title": "シーホーネット(爆装)",
-  "INDOMITABLESPIRE2-SEA_HORNET_BOMBER.description": "[gold]耐久[/gold]：{Durability}/{MaxDurability}\n敵全体に{Damage:diff()}ダメージを{Repeat}回与える。\n敵全体に[blue]{OnFirePower:diff()}[/blue]の[gold]炎上[/gold]を与える。"
+  "INDOMITABLESPIRE2-SEA_HORNET_BOMBER.description": "[gold]耐久[/gold]：{Durability}/{MaxDurability}\n敵全体に{Damage:diff()}ダメージを{Repeat}回与える。\n敵全体に[blue]{OnFirePower:diff()}[/blue]の[gold]炎上[/gold]を与える。",
+  "INDOMITABLESPIRE2-BARRACUDA_MK2.title": "バラクーダ Mk.II",
+  "INDOMITABLESPIRE2-BARRACUDA_MK2.description": "[gold]耐久[/gold]：{Durability}/{MaxDurability}\n{Damage:diff()}ダメージを与える。[blue]浸水[/blue]を[blue]{FloodingPower:diff()}[/blue]、[gold]装甲破壊[/gold]を[blue]{ArmorBreakPower:diff()}[/blue]与える。",
+  "INDOMITABLESPIRE2-BARRACUDA831_SQUADRON.title": "バラクーダ(第831飛行隊)",
+  "INDOMITABLESPIRE2-BARRACUDA831_SQUADRON.description": "[gold]耐久[/gold]：{Durability}/{MaxDurability}\nターゲットが[gold]ブロック[/gold]を持っている場合、2倍のダメージ（{Damage:diff()}ダメージ）を与える。単倍ダメージに等しい[gold]装甲破壊[/gold]を与える。"
 }
