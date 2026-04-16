@@ -15,7 +15,7 @@ public sealed class ArmorBreakPower : IndomitablePower
     public override PowerStackType StackType => PowerStackType.Counter;
     
     // 使用橙金色作为破甲层数的高亮颜色
-    public override Color AmountLabelColor => new("FFB84D"); 
+    public override Color AmountLabelColor => new("909090"); 
     
     // 核心机制：在承受伤害之前结算破甲
     public override async Task BeforeDamageReceived(
