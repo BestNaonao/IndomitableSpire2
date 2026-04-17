@@ -1,0 +1,4 @@
+﻿{
+  "INDOMITABLESPIRE2-RECON_TO_HAND": "Choose up to {Amount:plural:a card|[blue]{}[/blue] cards} to put into your [gold]Hand[/gold].",
+  "INDOMITABLESPIRE2-RECON_TO_DISCARD": "Choose up to {Amount:plural:a card|[blue]{}[/blue] cards} to [gold]Discard[/gold]."
+}
