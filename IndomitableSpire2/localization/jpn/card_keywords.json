@@ -1,18 +1,14 @@
 {
   "INDOMITABLESPIRE2-CARRIER_AIRCRAFT.title": "艦載機",
   "INDOMITABLESPIRE2-CARRIER_AIRCRAFT.description": "艦載機に適用される効果を誘発できる特殊なカード。耐久値を持ち、トゲ（Thorns）を無効化する。",
-  "INDOMITABLESPIRE2-FIGHTER.title": "戦闘機",
-  "INDOMITABLESPIRE2-FIGHTER.description": "戦闘機としての性質を持つ艦載機。戦闘機に適用される効果を誘発できる。通常は[gold]ブロック[/gold]や反撃能力を提供する。",
-  "INDOMITABLESPIRE2-ATTACKER.title": "攻撃機",
-  "INDOMITABLESPIRE2-ATTACKER.description": "攻撃機としての性質を持つ艦載機。攻撃機に適用される効果を誘発できる。通常は柔軟なターゲット指定ダメージを持つ。",
+  "INDOMITABLESPIRE2-STRIKE_FIGHTER.title": "戦闘攻撃機",
+  "INDOMITABLESPIRE2-STRIKE_FIGHTER.description": "制空と打撃の両方の性質を持つ艦載機。関連する効果を誘発できる。通常は[gold]ブロック[/gold]を提供するか、戦術的な効果を与える。",
   "INDOMITABLESPIRE2-TORPEDO_BOMBER.title": "雷撃機",
-  "INDOMITABLESPIRE2-TORPEDO_BOMBER.description": "雷撃機としての性質を持つ艦載機。雷撃機に適用される効果を誘発できる。[gold]浸水[/gold]や[gold]装甲破壊[/gold]を与えることがある。",
+  "INDOMITABLESPIRE2-TORPEDO_BOMBER.description": "雷撃機としての性質を持つ艦載機。関連する効果を誘発できる。[blue]浸水[/blue]や[gold]装甲破壊[/gold]を与えることがある。",
   "INDOMITABLESPIRE2-DIVE_BOMBER.title": "急降下爆撃機",
-  "INDOMITABLESPIRE2-DIVE_BOMBER.description": "急降下爆撃機としての性質を持つ艦載機。急降下爆撃機に適用される効果を誘発できる。通常は敵の一部防御ギミックを無視できる。",
+  "INDOMITABLESPIRE2-DIVE_BOMBER.description": "急降下爆撃機としての性質を持つ艦載機。関連する効果を誘発できる。通常は敵の一部防御ギミックを無視できる。",
   "INDOMITABLESPIRE2-LEVEL_BOMBER.title": "水平爆撃機",
-  "INDOMITABLESPIRE2-LEVEL_BOMBER.description": "水平爆撃機としての性質を持つ艦載機。水平爆撃機に適用される効果を誘発できる。通常は[gold]全体ダメージ[/gold]を持つ。",
-  "INDOMITABLESPIRE2-SKIP_BOMBER.title": "反跳爆撃機",
-  "INDOMITABLESPIRE2-SKIP_BOMBER.description": "反跳爆撃機としての性質を持つ艦載機。反跳爆撃機に適用される効果を誘発できる。連続ヒットダメージを与えることがある。",
+  "INDOMITABLESPIRE2-LEVEL_BOMBER.description": "水平爆撃機としての性質を持つ艦載機。関連する効果を誘発できる。通常は[gold]全体ダメージ[/gold]効果を持つ。",
   "INDOMITABLESPIRE2-FORMATION.title": "編隊",
   "INDOMITABLESPIRE2-FORMATION.description": "プレイ時、[gold]山札[/gold]または[gold]捨て札[/gold]にあるランダムな同名カードを1枚[gold]手札[/gold]に加える。"
 }
