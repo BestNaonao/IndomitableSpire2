@@ -18,7 +18,10 @@ public sealed class SeaHornetBomber() : CarrierAircraftCard(2, CardType.Attack, 
     protected override int UpgradeDurabilityAmount { get; set; } = 5;
     
     // 关键字：水平轰炸机 (最前) + 编队 (最后)
-    public override IEnumerable<CardKeyword> CanonicalKeywords => [IndomitableKeywords.LevelBomber, IndomitableKeywords.Formation];
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [
+        IndomitableKeywords.LevelBomber, 
+        IndomitableKeywords.Formation
+    ];
     protected override IEnumerable<CardTag> SubclassTags => [IndomitableTags.LevelBomber];
     
     protected override IEnumerable<DynamicVar> CanonicalVars =>
@@ -41,19 +44,14 @@ public sealed class SeaHornetBomber() : CarrierAircraftCard(2, CardType.Attack, 
             .Execute(choiceContext);
         
         // 挂载炸弹洗地，对所有存活的被击中敌人附加起火
-        foreach (var enemy in CombatState.HittableEnemies)
-        {
-            if (enemy.IsAlive)
-                await PowerCmd.Apply<OnFirePower>(
-                    target: enemy,
-                    amount: DynamicVars["OnFirePower"].BaseValue,
-                    applier: Owner.Creature,
-                    cardSource: this,
-                    silent: true
-                );
-        }
+        await PowerCmd.Apply<OnFirePower>(
+            CombatState.HittableEnemies,
+            DynamicVars["OnFirePower"].BaseValue,
+            Owner.Creature,
+            this
+        );
         
-        // 核心机制：呼叫编队，群鲨出动
+        // 核心机制：呼叫编队，群蜂出动
         await CustomCardPileCmd.DrawSameCardAsync(this);
         return attackCmd.Results;
     }

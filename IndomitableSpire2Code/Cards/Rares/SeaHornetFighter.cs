@@ -17,9 +17,12 @@ public sealed class SeaHornetFighter() : CarrierAircraftCard(2, CardType.Attack,
     protected override int MaxDurability { get; set; } = 15;
     protected override int UpgradeDurabilityAmount { get; set; } = 3;
     
-    // 关键字：战斗机 (加在最前) + 编队 (加在最后)
-    public override IEnumerable<CardKeyword> CanonicalKeywords => [IndomitableKeywords.Fighter, IndomitableKeywords.Formation];
-    protected override IEnumerable<CardTag> SubclassTags => [IndomitableTags.Fighter];
+    // 关键字：战斗攻击机 (加在最前) + 编队 (加在最后)
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [
+        IndomitableKeywords.StrikeFighter, 
+        IndomitableKeywords.Formation
+    ];
+    protected override IEnumerable<CardTag> SubclassTags => [IndomitableTags.StrikeFighter];
     
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
@@ -37,20 +40,16 @@ public sealed class SeaHornetFighter() : CarrierAircraftCard(2, CardType.Attack,
             .WithHitCount(DynamicVars.Repeat.IntValue)
             .FromCard(this)
             .Targeting(cardPlay.Target)
-            // 推荐搭配激烈的机炮或火箭弹特效
-            .WithHitFx("vfx/vfx_fire_burst") 
+            .WithHitFx("vfx/vfx_fire_burst") // 推荐搭配激烈的机炮或火箭弹特效
             .Execute(choiceContext);
         
         if (cardPlay.Target is { IsAlive: true })
-        {
             await PowerCmd.Apply<OnFirePower>(
                 target: cardPlay.Target,
                 amount: DynamicVars["OnFirePower"].BaseValue,
                 applier: Owner.Creature,
-                cardSource: this,
-                silent: true
+                cardSource: this
             );
-        }
         
         // 核心机制：呼叫编队，补充手牌
         await CustomCardPileCmd.DrawSameCardAsync(this);
