@@ -20,7 +20,7 @@
   "INDOMITABLESPIRE2-ARMOR_BREAK_POWER.description": "攻撃ダメージを受ける前に、スタック数に等しい[gold]ブロック[/gold]を失う。",
   "INDOMITABLESPIRE2-ARMOR_BREAK_POWER.smartDescription": "[blue]{Amount}[/blue]ターンの間、攻撃ダメージを受ける前に、スタック数に等しい[gold]ブロック[/gold]を失う。",
   "INDOMITABLESPIRE2-ARMOR_BREAK_POWER.title": "装甲破壊",
-  "INDOMITABLESPIRE2-INTERCEPTED_POWER.description": "ターン終了時まで[gold]筋力[/gold]を失う。",
-  "INDOMITABLESPIRE2-INTERCEPTED_POWER.smartDescription": "ターン終了時まで[gold]筋力[/gold]を[blue]{Amount}[/blue]失う。",
+  "INDOMITABLESPIRE2-INTERCEPTED_POWER.description": "このターン終了時まで、敵の[gold]筋力[/gold]を失う。",
+  "INDOMITABLESPIRE2-INTERCEPTED_POWER.smartDescription": "このターン終了時まで、[gold]筋力[/gold]を[blue]{Amount}[/blue]失う。",
   "INDOMITABLESPIRE2-INTERCEPTED_POWER.title": "迎撃"
 }

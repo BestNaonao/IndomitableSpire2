@@ -20,7 +20,7 @@
   "INDOMITABLESPIRE2-ARMOR_BREAK_POWER.description": "Before taking attack damage, lose [gold]Block[/gold] equal to this power's stack.",
   "INDOMITABLESPIRE2-ARMOR_BREAK_POWER.smartDescription": "For [blue]{Amount}[/blue] turns, before taking attack damage, lose [gold]Block[/gold] equal to this power's stack.",
   "INDOMITABLESPIRE2-ARMOR_BREAK_POWER.title": "Armor Break",
-  "INDOMITABLESPIRE2-INTERCEPTED_POWER.description": "Lose [gold]Strength[/gold] until the end of this turn.",
+  "INDOMITABLESPIRE2-INTERCEPTED_POWER.description": "Enemy Lose [gold]Strength[/gold] until the end of this turn.",
   "INDOMITABLESPIRE2-INTERCEPTED_POWER.smartDescription": "Lose [blue]{Amount}[/blue] [gold]Strength[/gold] until the end of this turn.",
   "INDOMITABLESPIRE2-INTERCEPTED_POWER.title": "Intercepted"
 }
