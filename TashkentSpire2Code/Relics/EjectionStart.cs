@@ -1,6 +1,7 @@
 ﻿using TashkentSpire2.TashkentSpire2Code.Powers;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
+using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Relics;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 
@@ -17,9 +18,9 @@ public sealed class EjectionStart : TashkentRelic
     protected override string PackedIconOutlinePath => 
         "res://TashkentSpire2/images/relics/outline/EjectionStart.png";
     
-    public override async Task BeforeSideTurnStart(PlayerChoiceContext choiceContext, CombatSide side, CombatState combatState)
+    public override async Task AfterBlockCleared(Creature creature)
     {
-        if (side == base.Owner.Creature.Side)
+        if (creature == base.Owner.Creature)
         {
             Flash();
             await PowerCmd.Apply<DistancePower>(base.Owner.Creature, 1m, base.Owner.Creature, null);

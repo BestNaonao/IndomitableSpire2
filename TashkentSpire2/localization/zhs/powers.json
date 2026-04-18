@@ -18,7 +18,7 @@
   "TASHKENTSPIRE2-FLOODING_EXPERT_POWER.smartDescription": "当你[gold]鱼雷[/gold]命中时，施加[blue]{Amount}[/blue]层[gold]虚弱[/gold]、[blue]{Amount}[/blue]层[gold]易伤[/gold]、[blue]{Amount}[/blue]层[gold]标记[/gold]。",
   "TASHKENTSPIRE2-FLOODING_EXPERT_POWER.title": "进水专家",
   "TASHKENTSPIRE2-DROWN_MY_SORROW_POWER.description": "将抽到的[gold]状态[/gold]变化为[gold]伏特加[/gold]。",
-  "TASHKENTSPIRE2-DROWN_MY_SORROW_POWER.smartDescription": "将抽到前[blue]{Amount}[/blue]张[gold]状态[/gold]变化为[gold]伏特加[/gold]。",
+  "TASHKENTSPIRE2-DROWN_MY_SORROW_POWER.smartDescription": "本回合还剩[blue]{RemainAmount:diff()}[/blue]次可以将抽到的[gold]状态[/gold]变化为[gold]伏特加[/gold]。",
   "TASHKENTSPIRE2-DROWN_MY_SORROW_POWER.title": "何以解忧",
   "TASHKENTSPIRE2-FULL_SALVO_POWER.description": "下张[gold]弹药[/gold]牌可以免费打出。",
   "TASHKENTSPIRE2-FULL_SALVO_POWER.smartDescription": "下[blue]{Amount}[/blue]张[gold]弹药[/gold]牌可以免费打出。",
@@ -37,5 +37,8 @@
   "TASHKENTSPIRE2-FATE_GUIDED_TORPEDO_POWER.title": "随缘雷",
   "TASHKENTSPIRE2-ETERNAL_OATH_POWER.description": "在战斗结束时，你可以从你的[gold]牌组[/gold]中选一张牌附魔[pink]“誓约”[/pink]。",
   "TASHKENTSPIRE2-ETERNAL_OATH_POWER.smartDescription": "在战斗结束时，你可以从你的[gold]牌组[/gold]中选[blue]{Amount}[/blue]张牌附魔[pink]“誓约”[/pink]。",
-  "TASHKENTSPIRE2-ETERNAL_OATH_POWER.title": "永恒誓约"
+  "TASHKENTSPIRE2-ETERNAL_OATH_POWER.title": "永恒誓约",
+  "TASHKENTSPIRE2-DEFEND_TERRITORIAL_WATERS_POWER.description": "你每[gold]突进[/gold]一定[gold]距离[/gold]时，获得[gold]能量[/gold]。",
+  "TASHKENTSPIRE2-DEFEND_TERRITORIAL_WATERS_POWER.smartDescription": "你每突进[blue]{BasePower}[/blue]时，获得{Amount:energyIcons()}。",
+  "TASHKENTSPIRE2-DEFEND_TERRITORIAL_WATERS_POWER.title": "保卫领海"
 }

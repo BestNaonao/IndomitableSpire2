@@ -8,7 +8,7 @@ using MegaCrit.Sts2.Core.Models.Powers;
 
 namespace TashkentSpire2.TashkentSpire2Code.Cards.Token;
 
-public class Vodka() : TashkentCard(0, CardType.Status, CardRarity.Token, TargetType.Self)
+public class Vodka() : TashkentCard(0, CardType.Skill, CardRarity.Token, TargetType.Self)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new PowerVar<VigorPower>(3M),
@@ -42,6 +42,6 @@ public class Vodka() : TashkentCard(0, CardType.Status, CardRarity.Token, Target
 
     protected override void OnUpgrade()
     {
-        base.DynamicVars["VigorPower"].UpgradeValueBy(3M);
+        base.DynamicVars["VigorPower"].UpgradeValueBy(2M);
     }
 }

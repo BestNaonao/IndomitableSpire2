@@ -17,9 +17,9 @@ public sealed class TashkentCardPool : CustomCardPoolModel, ICustomEnergyIconPoo
     public override string CardFrameMaterialPath => "card_frame_blue"; 
     
     // BaseLib 提供的 ShaderColor，用于对基础卡牌材质进行染色
-    public override Color ShaderColor => new("E6F0FA"); // 淡蓝色/纯白色
-    public override Color DeckEntryCardColor => new("88BBDD");
-    public override Color EnergyOutlineColor => Colors.Black;
+    public override Color ShaderColor => new("00B2FF");
+    public override Color DeckEntryCardColor => new("FFB2FF");
+    public override Color EnergyOutlineColor => Colors.Pink;
     public override bool IsColorless => false;
     
     // UI中使用的大能量图标路径（如能量球显示），和文本中使用的能量图标路径（如卡牌描述）
