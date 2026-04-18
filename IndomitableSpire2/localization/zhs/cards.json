@@ -22,5 +22,9 @@
   "INDOMITABLESPIRE2-BARRACUDA_MK2.title": "梭鱼 Mk.II",
   "INDOMITABLESPIRE2-BARRACUDA_MK2.description": "[gold]耐久[/gold]：{Durability}/{MaxDurability}\n造成{Damage:diff()}点伤害。给予[blue]{FloodingPower:diff()}[/blue]层[blue]进水[/blue]与[blue]{ArmorBreakPower:diff()}[/blue]层[gold]破甲[/gold]。",
   "INDOMITABLESPIRE2-BARRACUDA831_SQUADRON.title": "梭鱼(831中队)",
-  "INDOMITABLESPIRE2-BARRACUDA831_SQUADRON.description": "[gold]耐久[/gold]：{Durability}/{MaxDurability}\n对拥有[gold]格挡[/gold]的目标造成翻倍伤害（{Damage:diff()}点）。给予等同于单倍伤害的[gold]破甲[/gold]。"
+  "INDOMITABLESPIRE2-BARRACUDA831_SQUADRON.description": "[gold]耐久[/gold]：{Durability}/{MaxDurability}\n对拥有[gold]格挡[/gold]的目标造成翻倍伤害（{Damage:diff()}点）。给予等同于单倍伤害的[gold]破甲[/gold]。",
+  "INDOMITABLESPIRE2-SEAFIRE_F46.title": "海喷火 F.46",
+  "INDOMITABLESPIRE2-SEAFIRE_F46.description": "[gold]耐久[/gold]：{Durability}/{MaxDurability}\n造成{Damage:diff()}点伤害。如果敌人的意图是攻击，则[gold]截击[/gold][blue]{InterceptedPower:diff()}[/blue]，否则获得[blue]{Block:diff()}[/blue]点[gold]格挡[/gold]。",
+  "INDOMITABLESPIRE2-SEAFIRE_FR47.title": "海喷火 FR.47",
+  "INDOMITABLESPIRE2-SEAFIRE_FR47.description": "[gold]耐久[/gold]：{Durability}/{MaxDurability}\n造成{Damage:diff()}点伤害{Repeat}次。\n给予[blue]{VulnerablePower:diff()}[/blue]层[gold]易伤[/gold]。\n[gold]侦察[/gold][blue]{Recon:diff()}[/blue]。"
 }

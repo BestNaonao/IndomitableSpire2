@@ -22,5 +22,9 @@
   "INDOMITABLESPIRE2-BARRACUDA_MK2.title": "バラクーダ Mk.II",
   "INDOMITABLESPIRE2-BARRACUDA_MK2.description": "[gold]耐久[/gold]：{Durability}/{MaxDurability}\n{Damage:diff()}ダメージを与える。[blue]浸水[/blue]を[blue]{FloodingPower:diff()}[/blue]、[gold]装甲破壊[/gold]を[blue]{ArmorBreakPower:diff()}[/blue]与える。",
   "INDOMITABLESPIRE2-BARRACUDA831_SQUADRON.title": "バラクーダ(第831飛行隊)",
-  "INDOMITABLESPIRE2-BARRACUDA831_SQUADRON.description": "[gold]耐久[/gold]：{Durability}/{MaxDurability}\nターゲットが[gold]ブロック[/gold]を持っている場合、2倍のダメージ（{Damage:diff()}ダメージ）を与える。単倍ダメージに等しい[gold]装甲破壊[/gold]を与える。"
+  "INDOMITABLESPIRE2-BARRACUDA831_SQUADRON.description": "[gold]耐久[/gold]：{Durability}/{MaxDurability}\nターゲットが[gold]ブロック[/gold]を持っている場合、2倍のダメージ（{Damage:diff()}ダメージ）を与える。単倍ダメージに等しい[gold]装甲破壊[/gold]を与える。",
+  "INDOMITABLESPIRE2-SEAFIRE_F46.title": "シーファイア F.46",
+  "INDOMITABLESPIRE2-SEAFIRE_F46.description": "[gold]耐久[/gold]：{Durability}/{MaxDurability}\n{Damage:diff()}ダメージを与える。敵が攻撃を予定している場合、[gold]迎撃[/gold] [blue]{InterceptedPower:diff()}[/blue]。そうでない場合、[blue]{Block:diff()}[/blue][gold]ブロック[/gold]を得る。",
+  "INDOMITABLESPIRE2-SEAFIRE_FR47.title": "シーファイア FR.47",
+  "INDOMITABLESPIRE2-SEAFIRE_FR47.description": "[gold]耐久[/gold]：{Durability}/{MaxDurability}\n{Damage:diff()}ダメージを{Repeat}回与える。\n[gold]弱体[/gold]を[blue]{VulnerablePower:diff()}[/blue]与える。\n[gold]偵察[/gold][blue]{Recon:diff()}[/blue]。"
 }

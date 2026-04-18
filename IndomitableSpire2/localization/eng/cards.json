@@ -22,5 +22,9 @@
   "INDOMITABLESPIRE2-BARRACUDA_MK2.title": "Barracuda Mk.II",
   "INDOMITABLESPIRE2-BARRACUDA_MK2.description": "[gold]Durability[/gold]: {Durability}/{MaxDurability}\nDeal {Damage:diff()} damage. Apply [blue]{FloodingPower:diff()}[/blue] [blue]Flooded[/blue] and [blue]{ArmorBreakPower:diff()}[/blue] [gold]Armor Break[/gold].",
   "INDOMITABLESPIRE2-BARRACUDA831_SQUADRON.title": "Barracuda (831 Sqn.)",
-  "INDOMITABLESPIRE2-BARRACUDA831_SQUADRON.description": "[gold]Durability[/gold]: {Durability}/{MaxDurability}\nDeal double damage ({Damage:diff()}) to targets with [gold]Block[/gold]. Apply [gold]Armor Break[/gold] equal to the un-doubled damage."
+  "INDOMITABLESPIRE2-BARRACUDA831_SQUADRON.description": "[gold]Durability[/gold]: {Durability}/{MaxDurability}\nDeal double damage ({Damage:diff()}) to targets with [gold]Block[/gold]. Apply [gold]Armor Break[/gold] equal to the un-doubled damage.",
+  "INDOMITABLESPIRE2-SEAFIRE_F46.title": "Seafire F.46",
+  "INDOMITABLESPIRE2-SEAFIRE_F46.description": "[gold]Durability[/gold]: {Durability}/{MaxDurability}\nDeal {Damage:diff()} damage. If the enemy intends to attack, apply [blue]{InterceptedPower:diff()}[/blue] [gold]Intercepted[/gold], otherwise gain [blue]{Block:diff()}[/blue] [gold]Block[/gold].",
+  "INDOMITABLESPIRE2-SEAFIRE_FR47.title": "Seafire FR.47",
+  "INDOMITABLESPIRE2-SEAFIRE_FR47.description": "[gold]Durability[/gold]: {Durability}/{MaxDurability}\nDeal {Damage:diff()} damage {Repeat} times.\nApply [blue]{VulnerablePower:diff()}[/blue] [gold]Vulnerable[/gold].\n[gold]Recon[/gold] [blue]{Recon:diff()}[/blue]."
 }
