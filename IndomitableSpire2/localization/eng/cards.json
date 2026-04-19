@@ -26,5 +26,8 @@
   "INDOMITABLESPIRE2-SEAFIRE_F46.title": "Seafire F.46",
   "INDOMITABLESPIRE2-SEAFIRE_F46.description": "[gold]Durability[/gold]: {Durability}/{MaxDurability}\nDeal {Damage:diff()} damage. If the enemy intends to attack, apply [blue]{InterceptedPower:diff()}[/blue] [gold]Intercepted[/gold], otherwise gain [blue]{Block:diff()}[/blue] [gold]Block[/gold].",
   "INDOMITABLESPIRE2-SEAFIRE_FR47.title": "Seafire FR.47",
-  "INDOMITABLESPIRE2-SEAFIRE_FR47.description": "[gold]Durability[/gold]: {Durability}/{MaxDurability}\nDeal {Damage:diff()} damage {Repeat} times.\nApply [blue]{VulnerablePower:diff()}[/blue] [gold]Vulnerable[/gold].\n[gold]Recon[/gold] [blue]{Recon:diff()}[/blue]."
+  "INDOMITABLESPIRE2-SEAFIRE_FR47.description": "[gold]Durability[/gold]: {Durability}/{MaxDurability}\nDeal {Damage:diff()} damage {Repeat} times.\nApply [blue]{VulnerablePower:diff()}[/blue] [gold]Vulnerable[/gold].\n[gold]Recon[/gold] [blue]{Recon:diff()}[/blue].",
+  "INDOMITABLESPIRE2-TACTICAL_TRAINING.title": "Tactical Training",
+  "INDOMITABLESPIRE2-TACTICAL_TRAINING.description": "Choose a [gold]Carrier Aircraft[/gold] card in your [gold]Hand[/gold]. Gain [blue]{SpecialPowerAmount:diff()}[/blue] corresponding Aviation power (or generic [gold]Aviation[/gold] if without sub-type).",
+  "INDOMITABLESPIRE2-TACTICAL_TRAINING.selectionScreenPrompt": "Choose a Carrier Aircraft card for Tactical Training."
 }

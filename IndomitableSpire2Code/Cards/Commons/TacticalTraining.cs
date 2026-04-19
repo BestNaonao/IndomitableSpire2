@@ -5,6 +5,7 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using IndomitableSpire2.IndomitableSpire2Code.Enums;
 using IndomitableSpire2.IndomitableSpire2Code.Powers;
+using MegaCrit.Sts2.Core.HoverTips;
 
 namespace IndomitableSpire2.IndomitableSpire2Code.Cards.Commons;
 
@@ -15,6 +16,9 @@ public sealed class TacticalTraining() : IndomitableCard(0, CardType.Skill, Card
     
     // 使用 MagicVar 控制层数，基础 20 层，升级 25 层
     protected override IEnumerable<DynamicVar> CanonicalVars => [new("SpecialPowerAmount", 20M)];
+    
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => 
+        [HoverTipFactory.FromKeyword(IndomitableKeywords.CarrierAircraft), HoverTipFactory.FromPower<AviationPower>()];
     
     // 【核心限制】：只有手牌中包含至少一张带有“舰载机”标签的牌时，此卡才亮起可打出
     protected override bool IsPlayable => PileType.Hand.GetPile(Owner).Cards.Any(c => c.Tags.Contains(IndomitableTags.CarrierAircraft));
@@ -46,7 +50,7 @@ public sealed class TacticalTraining() : IndomitableCard(0, CardType.Skill, Card
                 await PowerCmd.Apply<AviationPower>(Owner.Creature, amount, Owner.Creature, this);
         }
     }
-
+    
     protected override void OnUpgrade()
     {
         DynamicVars["SpecialPowerAmount"].UpgradeValueBy(5M);
