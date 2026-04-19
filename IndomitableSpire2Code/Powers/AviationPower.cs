@@ -14,6 +14,9 @@ public class AviationPower : IndomitablePower
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;
     
+    // 允许为负数
+    public override bool AllowNegative => true;
+    
     // 使用明亮的金黄色作为航空Buff的标志色
     public override Color AmountLabelColor => new("FFD800");
     
