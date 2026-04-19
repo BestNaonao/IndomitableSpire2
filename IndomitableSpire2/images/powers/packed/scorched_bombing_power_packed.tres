@@ -1,0 +1,7 @@
+[gd_resource type="AtlasTexture" load_steps=2 format=3 uid="uid://c3gcox6a4nhv1"]
+
+[ext_resource type="Texture2D" uid="uid://csibh5qrt4rrk" path="res://IndomitableSpire2/images/powers/packed/scorched_bombing_power_packed.png" id="1_n1xyl"]
+
+[resource]
+atlas = ExtResource("1_n1xyl")
+region = Rect2(0, 0, 64, 64)

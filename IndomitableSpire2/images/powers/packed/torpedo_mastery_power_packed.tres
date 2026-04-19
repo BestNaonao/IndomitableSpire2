@@ -1,0 +1,7 @@
+[gd_resource type="AtlasTexture" load_steps=2 format=3 uid="uid://mvokd3sgb2ir"]
+
+[ext_resource type="Texture2D" uid="uid://bbkdtbqfnrtiq" path="res://IndomitableSpire2/images/powers/packed/torpedo_mastery_power_packed.png" id="1_sisna"]
+
+[resource]
+atlas = ExtResource("1_sisna")
+region = Rect2(0, 0, 64, 64)
