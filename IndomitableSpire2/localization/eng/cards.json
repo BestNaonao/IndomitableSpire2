@@ -33,5 +33,10 @@
   "INDOMITABLESPIRE2-TROUBLE_HANDLING.title": "Trouble Handling",
   "INDOMITABLESPIRE2-TROUBLE_HANDLING.description": "Gain [blue]{MotivationPower:diff()}[/blue] [gold]Motivation[/gold].\nAdd 2 [gold]Indolent[/gold] into your [gold]Discard Pile[/gold].",
   "INDOMITABLESPIRE2-INDOLENT.title": "Indolent",
-  "INDOMITABLESPIRE2-INDOLENT.description": "Whenever you draw this card, lose {MotivationLoss} [gold]Motivation[/gold].\nDiscard a card."
+  "INDOMITABLESPIRE2-INDOLENT.description": "Whenever you draw this card, lose {MotivationLoss} [gold]Motivation[/gold].\nDiscard a card.",
+  "INDOMITABLESPIRE2-REFRESH.title": "Refresh",
+  "INDOMITABLESPIRE2-REFRESH.description": "Gain {Energy:energyIcons()}.\nDraw {Cards:diff()} {Cards:plural:card|cards}. Discard 1 card.",
+  "INDOMITABLESPIRE2-ART_OF_RESTING.title": "Art of Resting",
+  "INDOMITABLESPIRE2-ART_OF_RESTING.banter": "All forms of relaxation serve a purpose, and are DEFINITELY not slacking off.",
+  "INDOMITABLESPIRE2-ART_OF_RESTING.description": "[gold]Transform[/gold] all [gold]Indolent[/gold] cards in your piles into [gold]Refresh[/gold].\nWhenever you create a Status card, [gold]Transform[/gold] it into a [gold]Refresh[/gold]."
 }

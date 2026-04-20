@@ -33,5 +33,10 @@
   "INDOMITABLESPIRE2-TROUBLE_HANDLING.title": "トラブル処理",
   "INDOMITABLESPIRE2-TROUBLE_HANDLING.description": "[gold]やる気[/gold]を[blue]{MotivationPower:diff()}[/blue]得る。\n[gold]怠惰[/gold]を2枚[gold]捨て札[/gold]に加える。",
   "INDOMITABLESPIRE2-INDOLENT.title": "怠惰",
-  "INDOMITABLESPIRE2-INDOLENT.description": "このカードを引くたび、[gold]やる気[/gold]を{MotivationLoss}失う。\nカードを1枚捨てる。"
+  "INDOMITABLESPIRE2-INDOLENT.description": "このカードを引くたび、[gold]やる気[/gold]を{MotivationLoss}失う。\nカードを1枚捨てる。",
+  "INDOMITABLESPIRE2-REFRESH.title": "養神",
+  "INDOMITABLESPIRE2-REFRESH.description": "{Energy:energyIcons()}を得る。\nカードを{Cards:diff()}枚引く。カードを1枚捨てる。",
+  "INDOMITABLESPIRE2-ART_OF_RESTING.title": "休息の芸術",
+  "INDOMITABLESPIRE2-ART_OF_RESTING.banter": "休むのはそれなりの目的があってのこと、サボりとは違いますわ。全っ然！",
+  "INDOMITABLESPIRE2-ART_OF_RESTING.description": "すべての[gold]怠惰[/gold]を[gold]養神[/gold]に[gold]変化[/gold]させる。\n状態異常を作成するたび、それを[gold]養神[/gold]に[gold]変化[/gold]させる。"
 }

@@ -33,5 +33,10 @@
   "INDOMITABLESPIRE2-TROUBLE_HANDLING.title": "应付麻烦",
   "INDOMITABLESPIRE2-TROUBLE_HANDLING.description": "获得[blue]{MotivationPower:diff()}[/blue]点[gold]干劲[/gold]。\n将2张[gold]慵懒[/gold]加入你的[gold]弃牌堆[/gold]。",
   "INDOMITABLESPIRE2-INDOLENT.title": "慵懒",
-  "INDOMITABLESPIRE2-INDOLENT.description": "每当你抽到这张牌时，失去{MotivationLoss}点[gold]干劲[/gold]。\n打出时选择一张[gold]手牌[/gold]并[gold]丢弃[/gold]。"
+  "INDOMITABLESPIRE2-INDOLENT.description": "每当你抽到这张牌时，失去{MotivationLoss}点[gold]干劲[/gold]。\n打出时选择一张[gold]手牌[/gold]并[gold]丢弃[/gold]。",
+  "INDOMITABLESPIRE2-REFRESH.title": "养神",
+  "INDOMITABLESPIRE2-REFRESH.description": "获得{Energy:energyIcons()}。\n抽{Cards:diff()}张牌，丢弃1张牌。",
+  "INDOMITABLESPIRE2-ART_OF_RESTING.title": "休息的艺术",
+  "INDOMITABLESPIRE2-ART_OF_RESTING.banter": "任何休息都是有意义的，绝不是单纯的偷懒，嗯，绝不是。",
+  "INDOMITABLESPIRE2-ART_OF_RESTING.description": "将你所有牌堆中的[gold]慵懒[/gold]全部[gold]变化[/gold]为[gold]养神[/gold]。\n每当你生成状态牌时，将其[gold]变化[/gold]为[gold]养神[/gold]。"
 }
