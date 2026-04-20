@@ -42,5 +42,8 @@
   "INDOMITABLESPIRE2-SCORCHED_BOMBING_POWER.description": "焦土爆撃は[gold]水平爆撃機[/gold]カードのアタックダメージと得る[gold]ブロック[/gold]を増加させる。",
   "INDOMITABLESPIRE2-SCORCHED_BOMBING_POWER.remoteDescription": "[gold]{OwnerName}[/gold]の[gold]水平爆撃機[/gold]カードのアタックダメージと得る[gold]ブロック[/gold]が[blue]{Amount:abs()}%[/blue]{Amount:cond:<0?減少|増加}する。",
   "INDOMITABLESPIRE2-SCORCHED_BOMBING_POWER.smartDescription": "自身の[gold]水平爆撃機[/gold]カードのアタックダメージと得る[gold]ブロック[/gold]が[blue]{Amount:abs()}%[/blue]{Amount:cond:<0?減少|増加}する。",
-  "INDOMITABLESPIRE2-SCORCHED_BOMBING_POWER.title": "焦土爆撃"
+  "INDOMITABLESPIRE2-SCORCHED_BOMBING_POWER.title": "焦土爆撃",
+  "INDOMITABLESPIRE2-ART_OF_RESTING_POWER.description": "状態異常を作成するたび、それを[gold]養神[/gold]に[gold]変化[/gold]させる。",
+  "INDOMITABLESPIRE2-ART_OF_RESTING_POWER.smartDescription": "状態異常を作成するたび、それを[gold]養神[/gold]に[gold]変化[/gold]させる。",
+  "INDOMITABLESPIRE2-ART_OF_RESTING_POWER.title": "休息の芸術"
 }

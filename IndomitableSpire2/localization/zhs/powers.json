@@ -42,5 +42,8 @@
   "INDOMITABLESPIRE2-SCORCHED_BOMBING_POWER.description": "增加[gold]水平轰炸机[/gold]牌的攻击伤害与从中获得的[gold]格挡[/gold]。",
   "INDOMITABLESPIRE2-SCORCHED_BOMBING_POWER.remoteDescription": "[gold]{OwnerName}[/gold]的[gold]水平轰炸机[/gold]牌的攻击伤害与[gold]格挡[/gold]值{Amount:cond:<0?减少|增加}[blue]{Amount:abs()}%[/blue]。",
   "INDOMITABLESPIRE2-SCORCHED_BOMBING_POWER.smartDescription": "你的[gold]水平轰炸机[/gold]牌的攻击伤害与[gold]格挡[/gold]值{Amount:cond:<0?减少|增加}[blue]{Amount:abs()}%[/blue]。",
-  "INDOMITABLESPIRE2-SCORCHED_BOMBING_POWER.title": "焦土轰炸"
+  "INDOMITABLESPIRE2-SCORCHED_BOMBING_POWER.title": "焦土轰炸",
+  "INDOMITABLESPIRE2-ART_OF_RESTING_POWER.description": "每当你生成状态牌时，将其[gold]变化[/gold]为[gold]养神[/gold]。",
+  "INDOMITABLESPIRE2-ART_OF_RESTING_POWER.smartDescription": "每当你生成状态牌时，将其[gold]变化[/gold]为[gold]养神[/gold]。",
+  "INDOMITABLESPIRE2-ART_OF_RESTING_POWER.title": "休息的艺术"
 }

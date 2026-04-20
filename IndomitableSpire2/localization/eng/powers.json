@@ -42,5 +42,8 @@
   "INDOMITABLESPIRE2-SCORCHED_BOMBING_POWER.description": "Improves attack damage and [gold]Block[/gold] gained from [gold]Level Bomber[/gold] cards.",
   "INDOMITABLESPIRE2-SCORCHED_BOMBING_POWER.remoteDescription": "{Amount:cond:<0?Decreases|Increases} attack damage and [gold]Block[/gold] gained from [gold]{OwnerName}'s[/gold] [gold]Level Bomber[/gold] cards by [blue]{Amount:abs()}%[/blue].",
   "INDOMITABLESPIRE2-SCORCHED_BOMBING_POWER.smartDescription": "{Amount:cond:<0?Decreases|Increases} attack damage and [gold]Block[/gold] gained from your [gold]Level Bomber[/gold] cards by [blue]{Amount:abs()}%[/blue].",
-  "INDOMITABLESPIRE2-SCORCHED_BOMBING_POWER.title": "Scorched Bombing"
+  "INDOMITABLESPIRE2-SCORCHED_BOMBING_POWER.title": "Scorched Bombing",
+  "INDOMITABLESPIRE2-ART_OF_RESTING_POWER.description": "Whenever you create a Status card, [gold]Transform[/gold] it into a [gold]Refresh[/gold].",
+  "INDOMITABLESPIRE2-ART_OF_RESTING_POWER.smartDescription": "Whenever you create a Status card, [gold]Transform[/gold] it into a [gold]Refresh[/gold].",
+  "INDOMITABLESPIRE2-ART_OF_RESTING_POWER.title": "Art of Resting"
 }
