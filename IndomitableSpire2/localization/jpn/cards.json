@@ -29,5 +29,9 @@
   "INDOMITABLESPIRE2-SEAFIRE_FR47.description": "[gold]耐久[/gold]：{Durability}/{MaxDurability}\n{Damage:diff()}ダメージを{Repeat}回与える。\n[gold]弱体[/gold]を[blue]{VulnerablePower:diff()}[/blue]与える。\n[gold]偵察[/gold][blue]{Recon:diff()}[/blue]。",
   "INDOMITABLESPIRE2-TACTICAL_TRAINING.title": "戦術研究",
   "INDOMITABLESPIRE2-TACTICAL_TRAINING.description": "[gold]手札[/gold]にある[gold]艦載機[/gold]カードを1枚選び。その機種に対応する航空[blue]{SpecialPowerAmount:diff()}[/blue]を得る（機種がない場合は通常の[gold]航空[/gold]）。",
-  "INDOMITABLESPIRE2-TACTICAL_TRAINING.selectionScreenPrompt": "艦載機カードを1枚選び。"
+  "INDOMITABLESPIRE2-TACTICAL_TRAINING.selectionScreenPrompt": "艦載機カードを1枚選び。",
+  "INDOMITABLESPIRE2-TROUBLE_HANDLING.title": "トラブル処理",
+  "INDOMITABLESPIRE2-TROUBLE_HANDLING.description": "[gold]やる気[/gold]を[blue]{MotivationPower:diff()}[/blue]得る。\n[gold]怠惰[/gold]を2枚[gold]捨て札[/gold]に加える。",
+  "INDOMITABLESPIRE2-INDOLENT.title": "怠惰",
+  "INDOMITABLESPIRE2-INDOLENT.description": "このカードを引くたび、[gold]やる気[/gold]を{MotivationLoss}失う。\nカードを1枚捨てる。"
 }

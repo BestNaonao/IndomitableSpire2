@@ -29,5 +29,9 @@
   "INDOMITABLESPIRE2-SEAFIRE_FR47.description": "[gold]耐久[/gold]：{Durability}/{MaxDurability}\n造成{Damage:diff()}点伤害{Repeat}次。\n给予[blue]{VulnerablePower:diff()}[/blue]层[gold]易伤[/gold]。\n[gold]侦察[/gold][blue]{Recon:diff()}[/blue]。",
   "INDOMITABLESPIRE2-TACTICAL_TRAINING.title": "战术研习",
   "INDOMITABLESPIRE2-TACTICAL_TRAINING.description": "选择[gold]手牌[/gold]中的一张[gold]舰载机[/gold]牌，获得[blue]{SpecialPowerAmount:diff()}[/blue]层该机种的航空能力（无类型则为通用[gold]航空[/gold]）。",
-  "INDOMITABLESPIRE2-TACTICAL_TRAINING.selectionScreenPrompt": "选择一张舰载机牌进行战术研习。"
+  "INDOMITABLESPIRE2-TACTICAL_TRAINING.selectionScreenPrompt": "选择一张舰载机牌进行战术研习。",
+  "INDOMITABLESPIRE2-TROUBLE_HANDLING.title": "应付麻烦",
+  "INDOMITABLESPIRE2-TROUBLE_HANDLING.description": "获得[blue]{MotivationPower:diff()}[/blue]点[gold]干劲[/gold]。\n将2张[gold]慵懒[/gold]加入你的[gold]弃牌堆[/gold]。",
+  "INDOMITABLESPIRE2-INDOLENT.title": "慵懒",
+  "INDOMITABLESPIRE2-INDOLENT.description": "每当你抽到这张牌时，失去{MotivationLoss}点[gold]干劲[/gold]。\n打出时选择一张[gold]手牌[/gold]并[gold]丢弃[/gold]。"
 }
