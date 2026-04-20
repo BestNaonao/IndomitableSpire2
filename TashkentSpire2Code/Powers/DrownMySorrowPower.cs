@@ -12,7 +12,7 @@ using TashkentSpire2.TashkentSpire2Code.Cards.Token;
 
 namespace TashkentSpire2.TashkentSpire2Code.Powers;
 
-public class DrownMySorrowPower : TashkentPower
+public sealed class DrownMySorrowPower : TashkentPower
 {
     private const string RemainKey = "RemainAmount";
 

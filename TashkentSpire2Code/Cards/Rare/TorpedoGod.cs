@@ -1,6 +1,6 @@
 ﻿namespace TashkentSpire2.TashkentSpire2Code.Cards.Rare;
 
-public class TorpedoGod
+public sealed class TorpedoGod
 {
     
 }

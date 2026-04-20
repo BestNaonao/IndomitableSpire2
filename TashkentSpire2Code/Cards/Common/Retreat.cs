@@ -7,7 +7,7 @@ using TashkentSpire2.TashkentSpire2Code.Powers;
 
 namespace TashkentSpire2.TashkentSpire2Code.Cards.Common;
 
-public class Retreat() : TashkentCard(1, CardType.Skill, CardRarity.Common, TargetType.Self)
+public sealed class Retreat() : TashkentCard(1, CardType.Skill, CardRarity.Common, TargetType.Self)
 {
     public override bool GainsBlock => true;
     

@@ -9,7 +9,7 @@ using TashkentSpire2.TashkentSpire2Code.Powers;
 
 namespace TashkentSpire2.TashkentSpire2Code.Cards.Common;
 
-public class Emergency() : TashkentCard(1, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
+public sealed class Emergency() : TashkentCard(1, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new DamageVar(8M, ValueProp.Move),
@@ -27,7 +27,7 @@ public class Emergency() : TashkentCard(1, CardType.Attack, CardRarity.Common, T
         
         if (!base.Keywords.Contains(CardKeyword.Exhaust) && !base.ExhaustOnNextPlay)
         {
-            await CardPileCmd.Add(this, PileType.Draw, CardPilePosition.Top);
+            await CardPileCmd.Add(this, PileType.Draw, CardPilePosition.Random);
         }
     }
     

@@ -6,7 +6,7 @@ using TashkentSpire2.TashkentSpire2Code.Powers;
 
 namespace TashkentSpire2.TashkentSpire2Code.Cards.Common;
 
-public class FireControlLockOn() : TashkentCard(2, CardType.Skill, CardRarity.Common, TargetType.AnyEnemy)
+public sealed class FireControlLockOn() : TashkentCard(2, CardType.Skill, CardRarity.Common, TargetType.AnyEnemy)
 {
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Retain];
     

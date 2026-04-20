@@ -9,7 +9,7 @@ using TashkentSpire2.TashkentSpire2Code.Keywords;
 
 namespace TashkentSpire2.TashkentSpire2Code.Cards.Common;
 
-public class SaturationBombing() : TashkentCard(2, CardType.Attack, CardRarity.Common, TargetType.AllEnemies)
+public sealed class SaturationBombing() : TashkentCard(2, CardType.Attack, CardRarity.Common, TargetType.AllEnemies)
 {
     public override IEnumerable<CardKeyword> CanonicalKeywords => [TashkentKeyword.Barrage];
     

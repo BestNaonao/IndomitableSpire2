@@ -2,7 +2,7 @@
 
 namespace TashkentSpire2.TashkentSpire2Code.Powers;
 
-public class FloodingExpertPower : TashkentPower
+public sealed class FloodingExpertPower : TashkentPower
 {
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;

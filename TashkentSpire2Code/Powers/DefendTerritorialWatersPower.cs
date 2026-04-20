@@ -4,7 +4,7 @@ using MegaCrit.Sts2.Core.Localization.DynamicVars;
 
 namespace TashkentSpire2.TashkentSpire2Code.Powers;
 
-public class DefendTerritorialWatersPower : TashkentPower
+public sealed class DefendTerritorialWatersPower : TashkentPower
 {
     private class Data
     {

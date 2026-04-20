@@ -5,7 +5,7 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 
 namespace TashkentSpire2.TashkentSpire2Code.Powers;
 
-public class GapReconPower : TashkentPower
+public sealed class GapReconPower : TashkentPower
 {
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;

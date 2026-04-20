@@ -7,7 +7,7 @@ using MegaCrit.Sts2.Core.ValueProps;
 
 namespace TashkentSpire2.TashkentSpire2Code.Cards.Multiplay;
 
-public class WeatherTheStormTogether() : TashkentCard(1, CardType.Skill, CardRarity.Uncommon, TargetType.AnyAlly)
+public sealed class WeatherTheStormTogether() : TashkentCard(1, CardType.Skill, CardRarity.Uncommon, TargetType.AnyAlly)
 {
     public override CardMultiplayerConstraint MultiplayerConstraint => CardMultiplayerConstraint.MultiplayerOnly;
 

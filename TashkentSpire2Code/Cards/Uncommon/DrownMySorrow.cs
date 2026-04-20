@@ -8,7 +8,7 @@ using TashkentSpire2.TashkentSpire2Code.Powers;
 
 namespace TashkentSpire2.TashkentSpire2Code.Cards.Uncommon;
 
-public class DrownMySorrow() : TashkentCard(1, CardType.Power, CardRarity.Uncommon, TargetType.Self)
+public sealed class DrownMySorrow() : TashkentCard(1, CardType.Power, CardRarity.Uncommon, TargetType.Self)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new PowerVar<DrownMySorrowPower>(2M)

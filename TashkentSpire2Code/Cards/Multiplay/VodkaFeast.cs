@@ -9,7 +9,7 @@ using TashkentSpire2.TashkentSpire2Code.Cards.Token;
 
 namespace TashkentSpire2.TashkentSpire2Code.Cards.Multiplay;
 
-public class VodkaFeast() : TashkentCard(1, CardType.Skill, CardRarity.Rare, TargetType.AllAllies)
+public sealed class VodkaFeast() : TashkentCard(1, CardType.Skill, CardRarity.Rare, TargetType.AllAllies)
 {
     public override CardMultiplayerConstraint MultiplayerConstraint => CardMultiplayerConstraint.MultiplayerOnly;
     

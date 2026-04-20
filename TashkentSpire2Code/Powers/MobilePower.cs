@@ -10,7 +10,7 @@ using MegaCrit.Sts2.Core.Models.Powers;
 
 namespace TashkentSpire2.TashkentSpire2Code.Powers;
 
-public class MobilePower : TashkentPower
+public sealed class MobilePower : TashkentPower
 {
     private class Data
 	{

@@ -1,6 +1,6 @@
 ﻿namespace TashkentSpire2.TashkentSpire2Code.Cards.Uncommon;
 
-public class TargetShip
+public sealed class TargetShip
 {
     
 }

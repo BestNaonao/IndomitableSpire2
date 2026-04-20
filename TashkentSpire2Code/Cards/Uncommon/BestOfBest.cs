@@ -5,7 +5,7 @@ using TashkentSpire2.TashkentSpire2Code.Commands;
 
 namespace TashkentSpire2.TashkentSpire2Code.Cards.Uncommon;
 
-public class BestOfBest() : TashkentCard(1, CardType.Skill, CardRarity.Uncommon, TargetType.Self)
+public sealed class BestOfBest() : TashkentCard(1, CardType.Skill, CardRarity.Uncommon, TargetType.Self)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new CardsVar(3)

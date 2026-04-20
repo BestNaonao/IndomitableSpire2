@@ -7,7 +7,7 @@ using TashkentSpire2.TashkentSpire2Code.Cards.Token;
 
 namespace TashkentSpire2.TashkentSpire2Code.Cards.Common;
 
-public class PreparatoryAction() : TashkentCard(1, CardType.Skill, CardRarity.Common, TargetType.Self)
+public sealed class PreparatoryAction() : TashkentCard(1, CardType.Skill, CardRarity.Common, TargetType.Self)
 {
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
     
@@ -21,6 +21,11 @@ public class PreparatoryAction() : TashkentCard(1, CardType.Skill, CardRarity.Co
         ArgumentNullException.ThrowIfNull(CombatState);
         CardModel card1 = base.CombatState.CreateCard<ChargePreparation>(base.Owner);
         CardModel card2 = base.CombatState.CreateCard<RetreatPreparation>(base.Owner);
+        if (this.IsUpgraded)
+        {
+            CardCmd.Upgrade(card1);
+            CardCmd.Upgrade(card2);
+        }
         await CardPileCmd.AddGeneratedCardToCombat(card1, PileType.Hand, addedByPlayer: true);
         await CardPileCmd.AddGeneratedCardToCombat(card2, PileType.Hand, addedByPlayer: true);
     }

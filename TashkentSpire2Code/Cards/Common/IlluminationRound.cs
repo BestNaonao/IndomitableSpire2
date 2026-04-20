@@ -6,7 +6,7 @@ using TashkentSpire2.TashkentSpire2Code.Powers;
 
 namespace TashkentSpire2.TashkentSpire2Code.Cards.Common;
 
-public class IlluminationRound() : TashkentCard(1, CardType.Skill, CardRarity.Common, TargetType.AnyEnemy)
+public sealed class IlluminationRound() : TashkentCard(1, CardType.Skill, CardRarity.Common, TargetType.AnyEnemy)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new MarkDynamicVar(5M)

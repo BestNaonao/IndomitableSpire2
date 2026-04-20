@@ -6,7 +6,7 @@ using MegaCrit.Sts2.Core.ValueProps;
 
 namespace TashkentSpire2.TashkentSpire2Code.Cards.Common;
 
-public class BideOnesTime() : TashkentCard(1, CardType.Skill, CardRarity.Common, TargetType.Self)
+public sealed class BideOnesTime() : TashkentCard(1, CardType.Skill, CardRarity.Common, TargetType.Self)
 {
     public override bool GainsBlock => true;
     

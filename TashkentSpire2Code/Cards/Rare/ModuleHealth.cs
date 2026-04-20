@@ -6,7 +6,7 @@ using TashkentSpire2.TashkentSpire2Code.Orb;
 
 namespace TashkentSpire2.TashkentSpire2Code.Cards.Rare;
 
-public class ModuleHealth() : TashkentCard(1, CardType.Power, CardRarity.Rare, TargetType.Self)
+public sealed class ModuleHealth() : TashkentCard(1, CardType.Power, CardRarity.Rare, TargetType.Self)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new DynamicVar("Orbs", 1m)

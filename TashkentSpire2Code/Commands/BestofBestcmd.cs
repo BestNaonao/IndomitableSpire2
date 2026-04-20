@@ -14,9 +14,13 @@ public static class BestofBestCmd
 
         var drawPile = PileType.Draw.GetPile(player);
         var cardsToScry = drawPile.Cards.Take(amount).ToList();
-
-
-        if (!cardsToScry.Any()) return;
+        
+        if (!cardsToScry.Any())
+        {
+            await CardPileCmd.Draw(choiceContext, amount, player);
+            return;
+        }
+        
         var prefs = new CardSelectorPrefs(
             CardSelectorPrefs.DiscardSelectionPrompt,
             0,

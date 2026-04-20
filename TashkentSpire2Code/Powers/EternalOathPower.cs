@@ -4,7 +4,7 @@ using MegaCrit.Sts2.Core.Rooms;
 
 namespace TashkentSpire2.TashkentSpire2Code.Powers;
 
-public class EternalOathPower : TashkentPower
+public sealed class EternalOathPower : TashkentPower
 {
     public override PowerType Type => PowerType.Buff;
 

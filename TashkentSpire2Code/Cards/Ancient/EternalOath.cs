@@ -6,7 +6,7 @@ using TashkentSpire2.TashkentSpire2Code.Powers;
 
 namespace TashkentSpire2.TashkentSpire2Code.Cards.Ancient;
 
-public class EternalOath() : TashkentCard(2, CardType.Power, CardRarity.Ancient, TargetType.Self)
+public sealed class EternalOath() : TashkentCard(2, CardType.Power, CardRarity.Ancient, TargetType.Self)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new PowerVar<EternalOathPower>(1M)

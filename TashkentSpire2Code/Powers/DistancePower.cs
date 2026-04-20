@@ -11,7 +11,7 @@ using MegaCrit.Sts2.Core.ValueProps;
 
 namespace TashkentSpire2.TashkentSpire2Code.Powers;
 
-public class DistancePower : TashkentPower
+public sealed class DistancePower : TashkentPower
 {
     private const string VarKey = "Tashkent_Distance";
     

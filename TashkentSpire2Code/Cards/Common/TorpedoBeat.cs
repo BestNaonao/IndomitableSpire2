@@ -6,7 +6,7 @@ using TashkentSpire2.TashkentSpire2Code.Powers;
 
 namespace TashkentSpire2.TashkentSpire2Code.Cards.Common;
 
-public class TorpedoBeat() : TashkentCard(1, CardType.Skill, CardRarity.Common, TargetType.Self)
+public sealed class TorpedoBeat() : TashkentCard(1, CardType.Skill, CardRarity.Common, TargetType.Self)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new TorpedoDynamicVar(18M),

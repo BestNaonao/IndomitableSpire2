@@ -8,7 +8,7 @@ using TashkentSpire2.TashkentSpire2Code.Powers;
 
 namespace TashkentSpire2.TashkentSpire2Code.Cards.Uncommon;
 
-public class Mobile() : TashkentCard(0, CardType.Skill, CardRarity.Uncommon, TargetType.Self)
+public sealed class Mobile() : TashkentCard(0, CardType.Skill, CardRarity.Uncommon, TargetType.Self)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new DynamicVar("MobilePower", 1m)

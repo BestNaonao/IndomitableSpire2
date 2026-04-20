@@ -4,7 +4,7 @@ using MegaCrit.Sts2.Core.Entities.Powers;
 
 namespace TashkentSpire2.TashkentSpire2Code.Powers;
 
-public class FateGuidedTorpedoPower : TashkentPower
+public sealed class FateGuidedTorpedoPower : TashkentPower
 {
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;

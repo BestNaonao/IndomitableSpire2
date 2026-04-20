@@ -9,7 +9,7 @@ using MegaCrit.Sts2.Core.ValueProps;
 
 namespace TashkentSpire2.TashkentSpire2Code.Orb;
 
-public class ModuleOrb : CustomOrbModel
+public sealed class ModuleOrb : CustomOrbModel
 {
     private const decimal BaseValue = 10m;
     

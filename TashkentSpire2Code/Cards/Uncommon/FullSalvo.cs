@@ -7,7 +7,7 @@ using TashkentSpire2.TashkentSpire2Code.Powers;
 
 namespace TashkentSpire2.TashkentSpire2Code.Cards.Uncommon;
 
-public class FullSalvo() : TashkentCard(2, CardType.Attack, CardRarity.Uncommon, TargetType.AnyEnemy)
+public sealed class FullSalvo() : TashkentCard(2, CardType.Attack, CardRarity.Uncommon, TargetType.AnyEnemy)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(14M, ValueProp.Move)];
     

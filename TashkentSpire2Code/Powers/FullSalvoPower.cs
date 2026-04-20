@@ -6,7 +6,7 @@ using TashkentSpire2.TashkentSpire2Code.Tags;
 
 namespace TashkentSpire2.TashkentSpire2Code.Powers;
 
-public class FullSalvoPower : TashkentPower
+public sealed class FullSalvoPower : TashkentPower
 {
     public override PowerType Type => PowerType.Buff;
     
