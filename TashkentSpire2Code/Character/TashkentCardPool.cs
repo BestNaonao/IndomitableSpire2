@@ -14,12 +14,14 @@ public sealed class TashkentCardPool : CustomCardPoolModel, ICustomEnergyIconPoo
     // public override string EnergyColorName => IndomitableCharacter.CharacterId;
 
     // 基础卡牌背景框材质，如果没有自定义材质，可以使用游戏原版的
-    public override string CardFrameMaterialPath => "card_frame_blue"; 
+    public override float H => 0.114f;
+    public override float S => 0.30f;
+    public override float V => 2.25f;
     
     // BaseLib 提供的 ShaderColor，用于对基础卡牌材质进行染色
     public override Color ShaderColor => new("00B2FF");
     public override Color DeckEntryCardColor => new("FFB2FF");
-    public override Color EnergyOutlineColor => Colors.Pink;
+    public override Color EnergyOutlineColor => Colors.Plum;
     public override bool IsColorless => false;
     
     // UI中使用的大能量图标路径（如能量球显示），和文本中使用的能量图标路径（如卡牌描述）

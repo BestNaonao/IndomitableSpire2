@@ -11,9 +11,9 @@
   "TASHKENTSPIRE2-MARK_POWER.description": "受到攻击伤害时增加标记层数的伤害，然后层数减少[blue]1[/blue]。",
   "TASHKENTSPIRE2-MARK_POWER.smartDescription": "受到攻击伤害时增加[blue]{Amount}[/blue]点伤害，然后层数减少[blue]1[/blue]。",
   "TASHKENTSPIRE2-MARK_POWER.title": "标记",
-  "TASHKENTSPIRE2-VIBRANT_POWER.description": "当你获得能力时，获得[gold]格挡[/gold]。",
-  "TASHKENTSPIRE2-VIBRANT_POWER.smartDescription": "当你获得能力时，获得[blue]{Amount}[/blue]点[gold]格挡[/gold]。",
-  "TASHKENTSPIRE2-VIBRANT_POWER.title": "活力迸发",
+  "TASHKENTSPIRE2-SYNERGISM_POWER.description": "当你能力变化时，获得[gold]格挡[/gold]。",
+  "TASHKENTSPIRE2-SYNERGISM_POWER.smartDescription": "当你能力变化时，获得[blue]{Amount}[/blue]点[gold]格挡[/gold]。",
+  "TASHKENTSPIRE2-SYNERGISM_POWER.title": "协同",
   "TASHKENTSPIRE2-FLOODING_EXPERT_POWER.description": "当你[gold]鱼雷[/gold]命中时，对敌人施加[gold]虚弱[/gold]、[gold]易伤[/gold]、[gold]标记[/gold]。",
   "TASHKENTSPIRE2-FLOODING_EXPERT_POWER.smartDescription": "当你[gold]鱼雷[/gold]命中时，施加[blue]{Amount}[/blue]层[gold]虚弱[/gold]、[blue]{Amount}[/blue]层[gold]易伤[/gold]、[blue]{Amount}[/blue]层[gold]标记[/gold]。",
   "TASHKENTSPIRE2-FLOODING_EXPERT_POWER.title": "进水专家",
@@ -39,6 +39,6 @@
   "TASHKENTSPIRE2-ETERNAL_OATH_POWER.smartDescription": "在战斗结束时，你可以从你的[gold]牌组[/gold]中选[blue]{Amount}[/blue]张牌附魔[pink]“誓约”[/pink]。",
   "TASHKENTSPIRE2-ETERNAL_OATH_POWER.title": "永恒誓约",
   "TASHKENTSPIRE2-DEFEND_TERRITORIAL_WATERS_POWER.description": "你每[gold]突进[/gold]一定[gold]距离[/gold]时，获得[gold]能量[/gold]。",
-  "TASHKENTSPIRE2-DEFEND_TERRITORIAL_WATERS_POWER.smartDescription": "你每突进[blue]{BasePower}[/blue]时，获得{Amount:energyIcons()}。",
+  "TASHKENTSPIRE2-DEFEND_TERRITORIAL_WATERS_POWER.smartDescription": "你突进[blue]{Amount}[/blue]时，获得{Energy:energyIcons()}。(当前累计: [gold]{Progress}[/gold])",
   "TASHKENTSPIRE2-DEFEND_TERRITORIAL_WATERS_POWER.title": "保卫领海"
 }

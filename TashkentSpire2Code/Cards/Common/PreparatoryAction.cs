@@ -7,7 +7,7 @@ using TashkentSpire2.TashkentSpire2Code.Cards.Token;
 
 namespace TashkentSpire2.TashkentSpire2Code.Cards.Common;
 
-public class PreparatoryAction() : TashkentCard(1, CardType.Skill, CardRarity.Common, TargetType.AnyEnemy)
+public class PreparatoryAction() : TashkentCard(1, CardType.Skill, CardRarity.Common, TargetType.Self)
 {
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
     

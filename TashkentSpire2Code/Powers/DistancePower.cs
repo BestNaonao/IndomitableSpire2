@@ -19,6 +19,8 @@ public class DistancePower : TashkentPower
     public override PowerStackType StackType => PowerStackType.Counter;
     public override bool AllowNegative => true;
     
+    public override int DisplayAmount => base.DynamicVars[VarKey].IntValue;
+    
     public override string CustomBigIconPath => 
         "res://TashkentSpire2/images/powers/big/distance_power.png";
     public override string CustomPackedIconPath => 
@@ -34,13 +36,16 @@ public class DistancePower : TashkentPower
     
     private int CurrentDist => (int)base.DynamicVars[VarKey].BaseValue;
     
+    private int MapToDist(int amount) => amount - 10;
+    
     public override bool TryModifyPowerAmountReceived(PowerModel canonicalPower, Creature target, decimal amount, Creature? giver, out decimal modifiedAmount)
     {
         if (canonicalPower.Id == this.Id) {
-            int potential = CurrentDist + (int)amount;
-            int clamped = Mathf.Clamp(potential, -5, 5);
+
+            int potential = base.Amount + (int)amount;
+            int clamped = Mathf.Clamp(potential, 5, 15);
             
-            modifiedAmount = clamped - CurrentDist;
+            modifiedAmount = clamped - base.Amount;
             return true;
         }
         modifiedAmount = amount;
@@ -57,11 +62,11 @@ public class DistancePower : TashkentPower
     
     public override async Task AfterApplied(Creature? applier, CardModel? cardSource)
     {
-        int initialAmount = Mathf.Clamp(base.Amount, -5, 5);
-        base.DynamicVars[VarKey].BaseValue = initialAmount;
-        RefreshDerivedVars();
+        int dist = MapToDist(base.Amount); 
+        base.DynamicVars[VarKey].BaseValue = dist;
         
-        await UpdateCreaturePositions(initialAmount);
+        RefreshDerivedVars();
+        await UpdateCreaturePositions(dist);
         InvokeDisplayAmountChanged();
     }
     
@@ -83,19 +88,31 @@ public class DistancePower : TashkentPower
     public override async Task AfterPowerAmountChanged(PowerModel power, decimal oldAmount, Creature? __, CardModel? cardSource)
     {
         if (power == this) {
-            int newAmount = Mathf.Clamp(base.Amount, -5, 5);
-            int delta = newAmount - CurrentDist;
+            int newDist = MapToDist(base.Amount);
+            int delta = newDist - CurrentDist;
 
             if (delta != 0) {
-                base.DynamicVars[VarKey].BaseValue = newAmount;
+                base.DynamicVars[VarKey].BaseValue = newDist;
                 RefreshDerivedVars();
-                
                 await UpdateCreaturePositions(delta);
+                await SyncSandpitPower(delta);
                 
-                await SyncSandpitPower(delta);  //契合沙虫机制
-                
+                await NotifyDistanceChanged(delta);
                 InvokeDisplayAmountChanged();
             }
+        }
+    }
+    
+    private async Task NotifyDistanceChanged(int delta)
+    {
+        if (delta == 0) return;
+
+        var powers = Owner.Powers
+            .OfType<DefendTerritorialWatersPower>();
+
+        foreach (var p in powers)
+        {
+            await p.OnDistanceChanged(delta);
         }
     }
     

@@ -6,21 +6,20 @@ using TashkentSpire2.TashkentSpire2Code.Powers;
 
 namespace TashkentSpire2.TashkentSpire2Code.Cards.Uncommon;
 
-public class DefendTerritorialWaters() : TashkentCard(1, CardType.Power, CardRarity.Uncommon, TargetType.Self)
+public class Synergism() : TashkentCard(1, CardType.Power, CardRarity.Uncommon, TargetType.Self)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new PowerVar<DefendTerritorialWatersPower>(3M),
-        new EnergyVar(1)
+        new PowerVar<SynergismPower>(1M)
     ];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
-        await PowerCmd.Apply<DefendTerritorialWatersPower>(base.Owner.Creature, base.DynamicVars["DefendTerritorialWatersPower"].BaseValue, base.Owner.Creature, this);
+        await PowerCmd.Apply<SynergismPower>(base.Owner.Creature, base.DynamicVars["SynergismPower"].BaseValue, base.Owner.Creature, this);
     }
 
     protected override void OnUpgrade()
     {
-        base.DynamicVars["DefendTerritorialWatersPower"].UpgradeValueBy(-1M);
+        base.DynamicVars["SynergismPower"].UpgradeValueBy(1M);
     }
 }

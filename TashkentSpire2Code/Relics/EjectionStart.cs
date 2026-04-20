@@ -1,9 +1,8 @@
 ﻿using TashkentSpire2.TashkentSpire2Code.Powers;
-using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
-using MegaCrit.Sts2.Core.Entities.Creatures;
+using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Relics;
-using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.Rooms;
 
 namespace TashkentSpire2.TashkentSpire2Code.Relics;
 
@@ -18,9 +17,18 @@ public sealed class EjectionStart : TashkentRelic
     protected override string PackedIconOutlinePath => 
         "res://TashkentSpire2/images/relics/outline/EjectionStart.png";
     
-    public override async Task AfterBlockCleared(Creature creature)
+    public override async Task AfterRoomEntered(AbstractRoom room)
     {
-        if (creature == base.Owner.Creature)
+        if (room is CombatRoom)
+        {
+            Flash();
+            await PowerCmd.Apply<DistancePower>(base.Owner.Creature, 10m, base.Owner.Creature, null);
+        }
+    }
+    
+    public override async Task AfterEnergyReset(Player player)
+    {
+        if (player == base.Owner)
         {
             Flash();
             await PowerCmd.Apply<DistancePower>(base.Owner.Creature, 1m, base.Owner.Creature, null);

@@ -13,7 +13,7 @@ public class ReinforcedSteel() : TashkentCard(2, CardType.Skill, CardRarity.Comm
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
     
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new BlockVar(7M, ValueProp.Move),
+        new BlockVar(11M, ValueProp.Move),
         new PowerVar<PlatingPower>(4M)
     ];
 

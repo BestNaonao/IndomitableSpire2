@@ -1,25 +1,22 @@
 ﻿using MegaCrit.Sts2.Core.Entities.Cards;
-using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
-using TashkentSpire2.TashkentSpire2Code.Powers;
 
 namespace TashkentSpire2.TashkentSpire2Code.Cards.Uncommon;
 
-public class Vibrant() : TashkentCard(1, CardType.Power, CardRarity.Uncommon, TargetType.Self)
+public class Vibrant() : TashkentCard(1, CardType.Skill, CardRarity.Uncommon, TargetType.Self)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new PowerVar<VibrantPower>(1M)
+        new CardsVar(1)
     ];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
-        await PowerCmd.Apply<VibrantPower>(base.Owner.Creature, base.DynamicVars["VibrantPower"].BaseValue, base.Owner.Creature, this);
+        ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
     }
-
+    
     protected override void OnUpgrade()
     {
-        base.DynamicVars["VibrantPower"].UpgradeValueBy(1M);
+        base.EnergyCost.UpgradeBy(-1);
     }
 }

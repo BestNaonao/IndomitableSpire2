@@ -8,7 +8,10 @@ namespace TashkentSpire2.TashkentSpire2Code.Cards.Token;
 
 public class ChargePreparation() : TashkentCard(0, CardType.Skill, CardRarity.Token, TargetType.Self)
 {
-    public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Retain];
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [
+        CardKeyword.Retain,
+        CardKeyword.Exhaust
+    ];
     
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new ChargeDynamicVar(2M)

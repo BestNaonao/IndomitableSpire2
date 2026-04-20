@@ -38,14 +38,12 @@ public sealed class TashkentCharacter : CustomCharacterModel
     [
         ModelDb.Card<Emergency>(),
         ModelDb.Card<Emergency>(),
-        ModelDb.Card<FateGuidedTorpedo>(),
-        ModelDb.Card<FateGuidedTorpedo>(),
-        ModelDb.Card<DrownMySorrow>(),
-        ModelDb.Card<DrownMySorrow>(),
-        ModelDb.Card<ShellCasing>(),
-        ModelDb.Card<ShellCasing>(),
-        ModelDb.Card<ShellCasing>(),
-        ModelDb.Card<ShellCasing>(),
+        ModelDb.Card<DefendTerritorialWaters>(),
+        ModelDb.Card<DefendTerritorialWaters>(),
+        ModelDb.Card<PreparatoryAction>(),
+        ModelDb.Card<PreparatoryAction>(),
+        ModelDb.Card<PreparatoryAction>(),
+        ModelDb.Card<PreparatoryAction>(),
         ModelDb.Card<LoadShot>(),
         ModelDb.Card<RetreatTorpedo>()
     ];
