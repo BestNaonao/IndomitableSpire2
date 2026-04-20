@@ -5,9 +5,9 @@ using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.ValueProps;
 using TashkentSpire2.TashkentSpire2Code.Powers;
 
-namespace TashkentSpire2.TashkentSpire2Code.Cards.Common;
+namespace TashkentSpire2.TashkentSpire2Code.Cards.Uncommon;
 
-public sealed class CombinedArtilleryAndTorpedo() : TashkentCard(1, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
+public sealed class CombinedArtilleryAndTorpedo() : TashkentCard(1, CardType.Attack, CardRarity.Uncommon, TargetType.AnyEnemy)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new DamageVar(9M, ValueProp.Move)

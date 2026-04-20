@@ -40,5 +40,11 @@
   "TASHKENTSPIRE2-ETERNAL_OATH_POWER.title": "永恒誓约",
   "TASHKENTSPIRE2-DEFEND_TERRITORIAL_WATERS_POWER.description": "你每[gold]突进[/gold]一定[gold]距离[/gold]时，获得[gold]能量[/gold]。",
   "TASHKENTSPIRE2-DEFEND_TERRITORIAL_WATERS_POWER.smartDescription": "你突进[blue]{Amount}[/blue]时，获得{Energy:energyIcons()}。(当前累计: [gold]{Progress}[/gold])",
-  "TASHKENTSPIRE2-DEFEND_TERRITORIAL_WATERS_POWER.title": "保卫领海"
+  "TASHKENTSPIRE2-DEFEND_TERRITORIAL_WATERS_POWER.title": "保卫领海",
+  "TASHKENTSPIRE2-COUNTERATTACK_POWER.description": "你身上的[gold]标记[/gold]不在增加伤害而是减少伤害，但每回合开始时失去所有层数。你给予敌人[gold]标记[/gold]时同时给予自己[gold]标记[/gold]。",
+  "TASHKENTSPIRE2-COUNTERATTACK_POWER.smartDescription": "你身上的[gold]标记[/gold]不在增加伤害而是减少伤害，但每回合开始时失去所有层数。你给予敌人[gold]标记[/gold]时同时给予自己{Amount}层[gold]标记[/gold]。",
+  "TASHKENTSPIRE2-COUNTERATTACK_POWER.title": "转守为攻",
+  "TASHKENTSPIRE2-THE_FINAL_FRONT_POWER.description": "每当你攻击命中敌人时，给予其[gold]标记[/gold]。",
+  "TASHKENTSPIRE2-THE_FINAL_FRONT_POWER.smartDescription": "每当你攻击命中敌人时，给予其{Amount}层[gold]标记[/gold]。",
+  "TASHKENTSPIRE2-THE_FINAL_FRONT_POWER.title": "最后前线"
 }

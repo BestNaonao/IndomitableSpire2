@@ -45,6 +45,6 @@ public sealed class Vodka() : TashkentCard(0, CardType.Skill, CardRarity.Token, 
 
     protected override void OnUpgrade()
     {
-        base.DynamicVars["VigorPower"].UpgradeValueBy(2M);
+        DynamicVars["VigorPower"].UpgradeValueBy(2M);
     }
 }

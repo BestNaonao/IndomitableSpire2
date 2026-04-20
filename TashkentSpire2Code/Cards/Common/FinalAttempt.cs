@@ -3,15 +3,14 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.ValueProps;
-using TashkentSpire2.TashkentSpire2Code.Powers;
 
-namespace TashkentSpire2.TashkentSpire2Code.Cards.Uncommon;
+namespace TashkentSpire2.TashkentSpire2Code.Cards.Common;
 
-public sealed class PincerMovement() : TashkentCard(1, CardType.Attack, CardRarity.Uncommon, TargetType.AnyEnemy)
+public class FinalAttempt() : TashkentCard(2, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new DamageVar(9M, ValueProp.Move),
-        new DynamicVar("PincerMovementPower", 2M)
+        new DamageVar(12M, ValueProp.Move),
+        new CardsVar(3)
     ];
     
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
@@ -24,12 +23,11 @@ public sealed class PincerMovement() : TashkentCard(1, CardType.Attack, CardRari
             .WithHitFx("vfx/vfx_attack_slash")
             .Execute(choiceContext);
         
-        await PowerCmd.Apply<PincerMovementPower>(base.Owner.Creature, base.DynamicVars["PincerMovementPower"].BaseValue, base.Owner.Creature, this);
+        
     }
     
     protected override void OnUpgrade()
     {
-        DynamicVars.Damage.UpgradeValueBy(3M);
-        base.DynamicVars["PincerMovementPower"].UpgradeValueBy(1M);
+        DynamicVars.Damage.UpgradeValueBy(6M);
     }
 }

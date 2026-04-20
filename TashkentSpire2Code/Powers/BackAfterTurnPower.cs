@@ -2,6 +2,7 @@
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.HoverTips;
 
 namespace TashkentSpire2.TashkentSpire2Code.Powers;
 
@@ -15,6 +16,8 @@ public sealed class BackAfterTurnPower : TashkentPower
     public override string CustomPackedIconPath => 
         "res://TashkentSpire2/images/powers/packed/backafterturn_power.png";
 
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<DistancePower>()];
+    
     public override async Task AfterTurnEnd(PlayerChoiceContext choiceContext, CombatSide side)
     {
         if (side == base.Owner.Side)
