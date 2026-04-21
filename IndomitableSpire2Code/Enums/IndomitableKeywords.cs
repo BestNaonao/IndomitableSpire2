@@ -28,4 +28,8 @@ public static class IndomitableKeywords
     // 编队：在卡牌末尾显示，代表小队增援机制
     [CustomEnum("formation"), KeywordProperties(AutoKeywordPosition.After)]
     public static CardKeyword Formation;
+    
+    // 委托：完成任务，和队友获得奖励
+    [CustomEnum("commission"), KeywordProperties(AutoKeywordPosition.Before)]
+    public static CardKeyword Commission;
 }

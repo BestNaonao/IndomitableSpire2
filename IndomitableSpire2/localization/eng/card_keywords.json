@@ -10,5 +10,7 @@
   "INDOMITABLESPIRE2-LEVEL_BOMBER.title": "Level Bomber",
   "INDOMITABLESPIRE2-LEVEL_BOMBER.description": "A Carrier Aircraft classified as a Level Bomber, triggering related effects. Usually features [gold]AoE Damage[/gold].",
   "INDOMITABLESPIRE2-FORMATION.title": "Formation",
-  "INDOMITABLESPIRE2-FORMATION.description": "When played, put a random card with the same name from your [gold]Draw Pile[/gold] or [gold]Discard Pile[/gold] into your [gold]Hand[/gold]."
+  "INDOMITABLESPIRE2-FORMATION.description": "When played, put a random card with the same name from your [gold]Draw Pile[/gold] or [gold]Discard Pile[/gold] into your [gold]Hand[/gold].",
+  "INDOMITABLESPIRE2-COMMISSION.title": "Commission",
+  "INDOMITABLESPIRE2-COMMISSION.description": "Unplayable until completed. When played, both you and the player who gave it to you gain rewards."
 }

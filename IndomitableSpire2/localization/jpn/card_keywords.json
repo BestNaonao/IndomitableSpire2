@@ -10,5 +10,7 @@
   "INDOMITABLESPIRE2-LEVEL_BOMBER.title": "水平爆撃機",
   "INDOMITABLESPIRE2-LEVEL_BOMBER.description": "水平爆撃機としての性質を持つ艦載機。関連する効果を誘発できる。通常は[gold]全体ダメージ[/gold]効果を持つ。",
   "INDOMITABLESPIRE2-FORMATION.title": "編隊",
-  "INDOMITABLESPIRE2-FORMATION.description": "プレイ時、[gold]山札[/gold]または[gold]捨て札[/gold]にあるランダムな同名カードを1枚[gold]手札[/gold]に加える。"
+  "INDOMITABLESPIRE2-FORMATION.description": "プレイ時、[gold]山札[/gold]または[gold]捨て札[/gold]にあるランダムな同名カードを1枚[gold]手札[/gold]に加える。",
+  "INDOMITABLESPIRE2-COMMISSION.title": "委託",
+  "INDOMITABLESPIRE2-COMMISSION.description": "未達成時はプレイできない。条件を満たしてプレイすると、あなたとこのカードを与えたプレイヤーが共に報酬を得て。"
 }
