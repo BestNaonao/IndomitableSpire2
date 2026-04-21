@@ -36,16 +36,14 @@ public sealed class TashkentCharacter : CustomCharacterModel
     
     public override IEnumerable<CardModel> StartingDeck =>
     [
-        ModelDb.Card<Guerrilla>(),
-        ModelDb.Card<Guerrilla>(),
+        ModelDb.Card<Tactics>(),
+        ModelDb.Card<Tactics>(),
         ModelDb.Card<Rescue>(),
         ModelDb.Card<Rescue>(),
-        ModelDb.Card<IlluminationRound>(),
-        ModelDb.Card<IlluminationRound>(),
-        ModelDb.Card<WavePiercingDagger>(),
-        ModelDb.Card<WavePiercingDagger>(),
-        ModelDb.Card<WellRounded>(),
-        ModelDb.Card<WellRounded>(),
+        ModelDb.Card<FightBack>(),
+        ModelDb.Card<FightBack>(),
+        ModelDb.Card<TorpedoTorpedoTorpedo>(),
+        ModelDb.Card<TorpedoTorpedoTorpedo>(),
         ModelDb.Card<LoadShot>(),
         ModelDb.Card<RetreatTorpedo>()
     ];

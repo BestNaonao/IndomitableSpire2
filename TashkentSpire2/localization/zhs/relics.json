@@ -4,5 +4,5 @@
   "TASHKENTSPIRE2-EJECTION_START.description": "在你的回合开始时，[gold]突进[/gold][blue]1[/blue]；在你的回合结束时，[gold]后撤[/gold][blue]1[/blue]。",
   "TASHKENTSPIRE2-ENGINE_BOOST.title": "引擎增压",
   "TASHKENTSPIRE2-ENGINE_BOOST.flavor": "Ура！见证塔什干的机动吧！",
-  "TASHKENTSPIRE2-ENGINE_BOOST.description": "在你的回合开始时，[gold]突进[/gold][blue]2[/blue]；在你的回合结束时，[gold]后撤[/gold][blue]2[/blue]。"
+  "TASHKENTSPIRE2-ENGINE_BOOST.description": "在你的回合开始时，[gold]突进[/gold][blue]3[/blue]；在你的回合结束时，[gold]后撤[/gold][blue]3[/blue]。"
 }

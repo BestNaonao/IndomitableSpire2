@@ -47,7 +47,8 @@ public sealed class TorpedoPower : TashkentPower
     public void SetDamage(decimal damage)
     {
         AssertMutable();
-        base.DynamicVars.Damage.BaseValue = damage;
+        int oxygenBonus = (int)(Owner?.GetPower<OxygenTorpedoPower>()?.Amount ?? 0m);
+        base.DynamicVars.Damage.BaseValue = damage + oxygenBonus;
     }
 
     public override async Task BeforeTurnEnd(PlayerChoiceContext choiceContext, CombatSide side)
@@ -68,40 +69,63 @@ public sealed class TorpedoPower : TashkentPower
         if (enemies.Count == 0)
             return;
 
-        var enemyMarks = enemies
-            .Select(e => new
-            {
-                Enemy = e,
-                Mark = (int)(e.GetPower<MarkPower>()?.Amount ?? 0m)
-            })
-            .ToList();
+        var godPower = base.Owner?.GetPower<TorpedoGodPower>();
 
-        int maxMark = enemyMarks.Max(x => x.Mark);
-
-        var candidates = enemyMarks
-            .Where(x => x.Mark == maxMark)
-            .Select(x => x.Enemy)
-            .ToList();
-
-        var target = candidates.Count > 0
-            ? candidates[new Random().Next(candidates.Count)]
-            : null;
-
-        if (target == null)
-            return;
-
-        NCombatRoom.Instance?.CombatVfxContainer.AddChildSafely(NFireSmokePuffVfx.Create(target));
-
-        await Cmd.CustomScaledWait(0.2f, 0.4f);
-
-        await CreatureCmd.Damage(choiceContext, target, base.DynamicVars.Damage, base.Owner);
-        
-        int floodingAmount = (int)(base.Owner?.GetPower<FloodingExpertPower>()?.Amount ?? 0m);
-        if (floodingAmount > 0)
+        if (godPower != null)
         {
-            await PowerCmd.Apply<WeakPower>(target, (decimal)floodingAmount, base.Owner, null);
-            await PowerCmd.Apply<VulnerablePower>(target, (decimal)floodingAmount, base.Owner, null);
-            await PowerCmd.Apply<MarkPower>(target, (decimal)floodingAmount, base.Owner, null);
+            foreach (var e in enemies)
+            {
+                NCombatRoom.Instance?.CombatVfxContainer.AddChildSafely(NFireSmokePuffVfx.Create(e));
+                await Cmd.CustomScaledWait(0.2f, 0.4f);
+
+                await CreatureCmd.Damage(choiceContext, e, base.DynamicVars.Damage, base.Owner!);
+
+                int floodingAmount = (int)(base.Owner?.GetPower<FloodingExpertPower>()?.Amount ?? 0m);
+                if (floodingAmount > 0)
+                {
+                    await PowerCmd.Apply<WeakPower>(e, (decimal)floodingAmount, base.Owner, null);
+                    await PowerCmd.Apply<VulnerablePower>(e, (decimal)floodingAmount, base.Owner, null);
+                    await PowerCmd.Apply<MarkPower>(e, (decimal)floodingAmount, base.Owner, null);
+                }
+            }
+        }
+        else
+        {
+            var enemyMarks = enemies
+                .Select(e => new
+                {
+                    Enemy = e,
+                    Mark = (int)(e.GetPower<MarkPower>()?.Amount ?? 0m)
+                })
+                .ToList();
+
+            int maxMark = enemyMarks.Max(x => x.Mark);
+
+            var candidates = enemyMarks
+                .Where(x => x.Mark == maxMark)
+                .Select(x => x.Enemy)
+                .ToList();
+
+            var target = candidates.Count > 0
+                ? candidates[new Random().Next(candidates.Count)]
+                : null;
+
+            if (target == null)
+                return;
+
+            NCombatRoom.Instance?.CombatVfxContainer.AddChildSafely(NFireSmokePuffVfx.Create(target));
+
+            await Cmd.CustomScaledWait(0.2f, 0.4f);
+
+            await CreatureCmd.Damage(choiceContext, target, base.DynamicVars.Damage, base.Owner!);
+        
+            int floodingAmount = (int)(base.Owner?.GetPower<FloodingExpertPower>()?.Amount ?? 0m);
+            if (floodingAmount > 0)
+            {
+                await PowerCmd.Apply<WeakPower>(target, (decimal)floodingAmount, base.Owner, null);
+                await PowerCmd.Apply<VulnerablePower>(target, (decimal)floodingAmount, base.Owner, null);
+                await PowerCmd.Apply<MarkPower>(target, (decimal)floodingAmount, base.Owner, null);
+            }
         }
 
         await PowerCmd.Remove(this);

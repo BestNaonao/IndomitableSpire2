@@ -46,5 +46,20 @@
   "TASHKENTSPIRE2-COUNTERATTACK_POWER.title": "转守为攻",
   "TASHKENTSPIRE2-THE_FINAL_FRONT_POWER.description": "每当你攻击命中敌人时，给予其[gold]标记[/gold]。",
   "TASHKENTSPIRE2-THE_FINAL_FRONT_POWER.smartDescription": "每当你攻击命中敌人时，给予其{Amount}层[gold]标记[/gold]。",
-  "TASHKENTSPIRE2-THE_FINAL_FRONT_POWER.title": "最后前线"
+  "TASHKENTSPIRE2-THE_FINAL_FRONT_POWER.title": "最后前线",
+  "TASHKENTSPIRE2-WAVE_PIERCING_DAGGER_POWER.description": "你的下次攻击命中敌人时，获得等同于造成伤害数的[gold]格挡[/gold]。",
+  "TASHKENTSPIRE2-WAVE_PIERCING_DAGGER_POWER.smartDescription": "你的下{Amount}次攻击命中敌人时，获得等同于造成伤害数的[gold]格挡[/gold]。",
+  "TASHKENTSPIRE2-WAVE_PIERCING_DAGGER_POWER.title": "破浪尖刀",
+  "TASHKENTSPIRE2-OXYGEN_TORPEDO_POWER.description": "你的[gold]鱼雷[/gold]基础伤害增加。",
+  "TASHKENTSPIRE2-OXYGEN_TORPEDO_POWER.smartDescription": "你的[gold]鱼雷[/gold]基础伤害增加{Amount}点。",
+  "TASHKENTSPIRE2-OXYGEN_TORPEDO_POWER.title": "酸素鱼雷",
+  "TASHKENTSPIRE2-ATTACK_TO_DRAW_POWER.description": "每当你打出[gold]攻击牌[/gold]后，抽一张牌。",
+  "TASHKENTSPIRE2-ATTACK_TO_DRAW_POWER.smartDescription": "每当你打出[gold]攻击牌[/gold]后，抽一张牌，还剩{Amount}次。",
+  "TASHKENTSPIRE2-ATTACK_TO_DRAW_POWER.title": "攻击后抽牌",
+  "TASHKENTSPIRE2-TORPEDO_GOD_POWER.description": "你的[gold]鱼雷[/gold]可以攻击全部敌人。",
+  "TASHKENTSPIRE2-TORPEDO_GOD_POWER.smartDescription": "你的[gold]鱼雷[/gold]可以攻击全部敌人。",
+  "TASHKENTSPIRE2-TORPEDO_GOD_POWER.title": "雷神",
+  "TASHKENTSPIRE2-WINTER_RESOLVE_POWER.description": "在你的回合开始时，抽一张牌然后将一张牌[gold]变化[/gold]为[gold]伏特加[/gold]。",
+  "TASHKENTSPIRE2-WINTER_RESOLVE_POWER.smartDescription": "在你的回合开始时，抽{Amount}张牌然后将{Amount}张牌[gold]变化[/gold]为[gold]伏特加[/gold]。",
+  "TASHKENTSPIRE2-WINTER_RESOLVE_POWER.title": "凛冬意志"
 }
