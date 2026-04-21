@@ -39,7 +39,7 @@
   "INDOMITABLESPIRE2-ART_OF_RESTING.title": "Art of Resting",
   "INDOMITABLESPIRE2-ART_OF_RESTING.banter": "All forms of relaxation serve a purpose, and are DEFINITELY not slacking off.",
   "INDOMITABLESPIRE2-ART_OF_RESTING.description": "[gold]Transform[/gold] all [gold]Indolent[/gold] cards in your piles into [gold]Refresh[/gold].\nWhenever you create a Status card, [gold]Transform[/gold] it into a [gold]Refresh[/gold].",
-  
+
   "INDOMITABLESPIRE2-DISPATCH_COMMISSION.title": "Dispatch Commission",
   "INDOMITABLESPIRE2-DISPATCH_COMMISSION.description": "Another player adds 1 random{IfUpgraded:show: [gold]Upgraded[/gold]} [gold]Commission[/gold] card to their [gold]Hand[/gold].",
   "INDOMITABLESPIRE2-OIL_COMMISSION.title": "Oilfield Development",

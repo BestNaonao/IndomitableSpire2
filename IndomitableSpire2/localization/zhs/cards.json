@@ -49,5 +49,5 @@
   "INDOMITABLESPIRE2-TRANSPORT_COMMISSION.title": "货物运输",
   "INDOMITABLESPIRE2-TRANSPORT_COMMISSION.description": "[gold]进度[/gold]：{Progress}/{MaxProgress}\n累计抽取{MaxProgress}张牌后可打出。\n你和委托方各抽{Cards:diff()}张牌。",
   "INDOMITABLESPIRE2-ESCORT_COMMISSION.title": "商船护卫",
-  "INDOMITABLESPIRE2-ESCORT_COMMISSION.description": "[gold]进度[/gold]：{Progress}/{MaxProgress}\n累计获得{MaxProgress}点[gold]格挡[/gold]后可打出。\n战斗结束后你和委托方各获得{Gold:diff()}[gold]金币[/gold]。",
+  "INDOMITABLESPIRE2-ESCORT_COMMISSION.description": "[gold]进度[/gold]：{Progress}/{MaxProgress}\n累计获得{MaxProgress}点[gold]格挡[/gold]后可打出。\n战斗结束后你和委托方各获得{Gold:diff()}[gold]金币[/gold]。"
 }

@@ -39,7 +39,7 @@
   "INDOMITABLESPIRE2-ART_OF_RESTING.title": "休息の芸術",
   "INDOMITABLESPIRE2-ART_OF_RESTING.banter": "休むのはそれなりの目的があってのこと、サボりとは違いますわ。全っ然！",
   "INDOMITABLESPIRE2-ART_OF_RESTING.description": "すべての[gold]怠惰[/gold]を[gold]養神[/gold]に[gold]変化[/gold]させる。\n状態異常を作成するたび、それを[gold]養神[/gold]に[gold]変化[/gold]させる。",
-  
+
   "INDOMITABLESPIRE2-DISPATCH_COMMISSION.title": "委託発令",
   "INDOMITABLESPIRE2-DISPATCH_COMMISSION.description": "他のプレイヤー1人は、ランダムな{IfUpgraded:show:[gold]アップグレード[/gold]済みの}[gold]委託[/gold]カードを1枚[gold]手札[/gold]に加える。",
   "INDOMITABLESPIRE2-OIL_COMMISSION.title": "油田開発",
