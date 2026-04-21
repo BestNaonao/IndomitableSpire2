@@ -101,7 +101,6 @@
     </ItemGroup>
 
     <ItemGroup>
-        <Folder Include="IndomitableSpire2Code\Cards\Colorless\" />
         <Folder Include="IndomitableSpire2Code\Deprecated\Providers\" />
         <Folder Include="IndomitableSpire2\images\card_portraits\big\"/>
         <Folder Include="IndomitableSpire2\images\packed\sprite_fonts\" />
