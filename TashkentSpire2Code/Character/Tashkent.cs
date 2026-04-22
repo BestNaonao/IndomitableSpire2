@@ -7,8 +7,6 @@ using TashkentSpire2.TashkentSpire2Code.Config;
 using MegaCrit.Sts2.Core.Entities.Characters;
 using MegaCrit.Sts2.Core.Models;
 using TashkentSpire2.TashkentSpire2Code.Cards.Common;
-using TashkentSpire2.TashkentSpire2Code.Cards.Rare;
-using TashkentSpire2.TashkentSpire2Code.Cards.Uncommon;
 
 namespace TashkentSpire2.TashkentSpire2Code.Character;
 
@@ -36,14 +34,14 @@ public sealed class TashkentCharacter : CustomCharacterModel
     
     public override IEnumerable<CardModel> StartingDeck =>
     [
-        ModelDb.Card<Tactics>(),
-        ModelDb.Card<Tactics>(),
-        ModelDb.Card<Rescue>(),
-        ModelDb.Card<Rescue>(),
-        ModelDb.Card<FightBack>(),
-        ModelDb.Card<FightBack>(),
-        ModelDb.Card<TorpedoTorpedoTorpedo>(),
-        ModelDb.Card<TorpedoTorpedoTorpedo>(),
+        ModelDb.Card<SaturationBombing>(),
+        ModelDb.Card<SaturationBombing>(),
+        ModelDb.Card<Strike>(),
+        ModelDb.Card<Strike>(),
+        ModelDb.Card<Defend>(),
+        ModelDb.Card<Defend>(),
+        ModelDb.Card<Defend>(),
+        ModelDb.Card<Defend>(),
         ModelDb.Card<LoadShot>(),
         ModelDb.Card<RetreatTorpedo>()
     ];

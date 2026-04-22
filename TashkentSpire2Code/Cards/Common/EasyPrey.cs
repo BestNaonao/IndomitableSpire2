@@ -10,7 +10,7 @@ namespace TashkentSpire2.TashkentSpire2Code.Cards.Common;
 public sealed class EasyPrey() : TashkentCard(1, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new DamageVar(5M, ValueProp.Move),
+        new DamageVar(4M, ValueProp.Move),
         new MarkDynamicVar(3M),
         new RepeatVar(2)
     ];

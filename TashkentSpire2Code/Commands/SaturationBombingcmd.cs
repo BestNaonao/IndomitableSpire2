@@ -17,7 +17,7 @@ public static class SaturationBombingcmd
         var selected = (await CardSelectCmd.FromHandForDiscard(
             choiceContext,
             player,
-            new CardSelectorPrefs(new LocString("UI", "DiscardToReload"), 0, 999),
+            new CardSelectorPrefs(new LocString("cards", targetCard.Id.Entry + ".selectionScreenPrompt"), 0, 999),
             null,
             targetCard)).ToList();
 

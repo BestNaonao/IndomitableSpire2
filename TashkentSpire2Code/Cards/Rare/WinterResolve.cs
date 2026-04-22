@@ -8,7 +8,7 @@ using TashkentSpire2.TashkentSpire2Code.Powers;
 
 namespace TashkentSpire2.TashkentSpire2Code.Cards.Rare;
 
-public sealed class WinterResolve() : TashkentCard(1, CardType.Power, CardRarity.Uncommon, TargetType.Self)
+public sealed class WinterResolve() : TashkentCard(1, CardType.Power, CardRarity.Rare, TargetType.Self)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new PowerVar<WinterResolvePower>(1M)

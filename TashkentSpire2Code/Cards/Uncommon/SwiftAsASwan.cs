@@ -11,7 +11,7 @@ public sealed class SwiftAsASwan() : TashkentCard(1, CardType.Skill, CardRarity.
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new CardsVar(1),
         new PowerVar<AttackToDrawPower>(1M),
-        new RetreatDynamicVar(1M)
+        new RetreatDynamicVar(3M)
     ];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)

@@ -4,13 +4,12 @@ using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
-using MegaCrit.Sts2.Core.Saves.Runs;
 using MegaCrit.Sts2.Core.ValueProps;
 using TashkentSpire2.TashkentSpire2Code.Commands;
 
 namespace TashkentSpire2.TashkentSpire2Code.Cards.Common;
 
-public sealed class FocusFire() : TashkentCard(1, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
+public sealed class FocusFire() : AmmunitionCard(1, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new DamageVar(4M, ValueProp.Move),
@@ -32,46 +31,26 @@ public sealed class FocusFire() : TashkentCard(1, CardType.Attack, CardRarity.Co
             })
     ];
     
-    private int _currentAmmu = 1;
-    
-    [SavedProperty]
-    public int CurrentAmmu
-    {
-        get => _currentAmmu;
-        set
-        {
-            AssertMutable();
-            _currentAmmu = value;
-            
-            base.DynamicVars["TashkentSpire2-Ammu"].BaseValue = _currentAmmu;
-        }
-    }
-    
-    protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+    protected override async Task OnPlayWithAmmu(PlayerChoiceContext choiceContext, CardPlay cardPlay, int ammu)
     {
         ArgumentNullException.ThrowIfNull(cardPlay.Target, nameof(cardPlay.Target));
+        ArgumentNullException.ThrowIfNull(CombatState);
         
-        int ammu = CurrentAmmu;
+        int hits = (int)((CalculatedVar)DynamicVars["TashkentHits"])
+            .Calculate(cardPlay.Target);
 
-        if (ammu > 0)
-        {
-            int hits = (int)((CalculatedVar)DynamicVars["TashkentHits"])
-                .Calculate(cardPlay.Target);
+        await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
+            .WithHitCount(hits).FromCard(this)
+            .Targeting(cardPlay.Target)
+            .WithHitFx("vfx/vfx_attack_slash")
+            .Execute(choiceContext);
+        UpdateAmmuGlobal(ammu - 1);
+    }
 
-            await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
-                .WithHitCount(hits).FromCard(this)
-                .Targeting(cardPlay.Target)
-                .WithHitFx("vfx/vfx_attack_slash")
-                .Execute(choiceContext);
-                
-            CurrentAmmu = ammu - 1;
-        }
-        else
-        {
-            int load = DynamicVars["TashkentSpire2-Load"].IntValue;
-
-            await Loadcmd.Execute(choiceContext, this, load);
-        }
+    protected override async Task OnPlayWithoutAmmu(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+    {
+        int load = DynamicVars["TashkentSpire2-Load"].IntValue;
+        await Loadcmd.Execute(choiceContext, this, load);
     }
     
     protected override void OnUpgrade()

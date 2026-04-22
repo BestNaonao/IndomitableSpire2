@@ -10,8 +10,6 @@ namespace TashkentSpire2.TashkentSpire2Code.Cards.Rare;
 
 public sealed class TorpedoTorpedoTorpedo() : TashkentCard(2, CardType.Skill, CardRarity.Rare, TargetType.Self)
 {
-    public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
-    
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new TorpedoDynamicVar(18M),
         new CalculationBaseVar(0M),
@@ -39,6 +37,6 @@ public sealed class TorpedoTorpedoTorpedo() : TashkentCard(2, CardType.Skill, Ca
     
     protected override void OnUpgrade()
     {
-        RemoveKeyword(CardKeyword.Exhaust);
+        base.EnergyCost.UpgradeBy(-1);
     }
 }

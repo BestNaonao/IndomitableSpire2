@@ -9,8 +9,8 @@ namespace TashkentSpire2.TashkentSpire2Code.Cards.Uncommon;
 public sealed class DrawFire() : TashkentCard(0, CardType.Skill, CardRarity.Uncommon, TargetType.Self)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new MarkDynamicVar(2M),
-        new EnergyVar(1)
+        new MarkDynamicVar(3M),
+        new EnergyVar(2)
     ];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)

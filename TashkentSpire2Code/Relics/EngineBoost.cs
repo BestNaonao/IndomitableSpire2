@@ -1,8 +1,9 @@
-﻿using TashkentSpire2.TashkentSpire2Code.Powers;
+﻿using MegaCrit.Sts2.Core.Combat;
+using TashkentSpire2.TashkentSpire2Code.Powers;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Relics;
-using MegaCrit.Sts2.Core.Rooms;
+using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 
 namespace TashkentSpire2.TashkentSpire2Code.Relics;
 
@@ -17,11 +18,11 @@ public sealed class EngineBoost : TashkentRelic
     protected override string PackedIconOutlinePath => 
         "res://TashkentSpire2/images/relics/outline/EngineBoost.png";
     
-    public override async Task AfterRoomEntered(AbstractRoom room)
+    public override async Task BeforeSideTurnStart(PlayerChoiceContext choiceContext, CombatSide side,
+        CombatState combatState)
     {
-        if (room is CombatRoom)
+        if (side == base.Owner.Creature.Side && combatState.RoundNumber <= 1)
         {
-            Flash();
             await PowerCmd.Apply<DistancePower>(base.Owner.Creature, 10m, base.Owner.Creature, null);
         }
     }

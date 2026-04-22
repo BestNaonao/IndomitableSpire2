@@ -1,8 +1,8 @@
-﻿using MegaCrit.Sts2.Core.Combat;
+﻿using MegaCrit.Sts2.Core.CardSelection;
+using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
-using MegaCrit.Sts2.Core.Extensions;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 
@@ -17,26 +17,38 @@ public sealed class BackInAction() : TashkentCard(2, CardType.Skill, CardRarity.
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         ArgumentNullException.ThrowIfNull(CombatState);
-        CardPile discardPile = PileType.Discard.GetPile(base.Owner);
         
-        var cardsToPlay = discardPile.Cards
-            .Where(c => !c.Keywords.Contains(CardKeyword.Unplayable)) 
-            .ToList()
-            .StableShuffle(base.Owner.RunState.Rng.Shuffle)
-            .Take(2)
+        var candidates = PileType.Discard.GetPile(base.Owner).Cards
+            .Where(c => !c.Keywords.Contains(CardKeyword.Unplayable))
             .ToList();
         
-        foreach (var card in cardsToPlay)
+        if (candidates.Count == 0)
+        {
+            return;
+        }
+        
+        var selectedList = await CardSelectCmd.FromSimpleGrid(
+            choiceContext,
+            candidates,
+            base.Owner,
+            new CardSelectorPrefs(base.SelectionScreenPrompt, 2) 
+        );
+        
+        foreach (var card in selectedList)
         {
             if (CombatManager.Instance.IsOverOrEnding)
             {
                 break;
             }
-
-            Creature target = null;
+            
+            Creature? target = null;
             if (card.TargetType == TargetType.AnyEnemy)
             {
-                target = base.Owner.RunState.Rng.CombatTargets.NextItem(base.CombatState.HittableEnemies)!;
+                var enemies = base.CombatState.HittableEnemies;
+                if (enemies != null && enemies.Any())
+                {
+                    target = base.Owner.RunState.Rng.CombatTargets.NextItem(enemies);
+                }
             }
             
             await CardCmd.AutoPlay(choiceContext, card, target);
