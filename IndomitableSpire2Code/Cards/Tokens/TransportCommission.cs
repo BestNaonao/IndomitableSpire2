@@ -8,16 +8,16 @@ using MegaCrit.Sts2.Core.Models;
 
 namespace IndomitableSpire2.IndomitableSpire2Code.Cards.Tokens;
 
-public sealed class TransportCommission() : CommissionCard(CardType.Skill, CardRarity.Common, TargetType.Self)
+public sealed class TransportCommission() : CommissionCard(TargetType.Self)
 {
-    protected override int MaxProgressAmount => 10;
-
+    protected override int InitialMaxProgressAmount => 10;
+    
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
         ..base.CanonicalVars,
         new CardsVar(4)
     ];
-
+    
     // 监听抽牌
     public override Task AfterCardDrawn(PlayerChoiceContext choiceContext, CardModel card, bool fromHandDraw)
     {
@@ -30,7 +30,7 @@ public sealed class TransportCommission() : CommissionCard(CardType.Skill, CardR
     {
         await CardPileCmd.Draw(choiceContext, DynamicVars.Cards.BaseValue, player);
     }
-
+    
     protected override void OnUpgrade()
     {
         DynamicVars.Cards.UpgradeValueBy(1M);

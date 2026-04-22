@@ -4,54 +4,71 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
-using IndomitableSpire2.IndomitableSpire2Code.Enums;
 using MegaCrit.Sts2.Core.Models.CardPools;
+using MegaCrit.Sts2.Core.Platform;
+using MegaCrit.Sts2.Core.Runs;
 
 namespace IndomitableSpire2.IndomitableSpire2Code.Cards.Abstracts;
 
-[Pool(typeof(TokenCardPool))]
-public abstract class CommissionCard(CardType type, CardRarity rarity,TargetType target) 
-    : CustomCardModel(0, type, rarity, target)
+[Pool(typeof(QuestCardPool))]
+public abstract class CommissionCard(TargetType target) 
+    : CustomCardModel(0, CardType.Quest, CardRarity.Quest, target)
 {
+    private Player? _delegator; // 必须声明后备字段
+    
     // 记录是谁派发了这张委托
-    public Player? Delegator { get; set; }
+    public Player? Delegator
+    {
+        get => _delegator;
+        set
+        {
+            _delegator = value;
+            ((StringVar) DynamicVars["DelegatorName"]).StringValue = value == null ? "" :
+                PlatformUtil.GetPlayerName(RunManager.Instance.NetService.Platform, value.NetId);
+        }
+    }
     
     // 仅限多人模式
     public override CardMultiplayerConstraint MultiplayerConstraint => CardMultiplayerConstraint.MultiplayerOnly;
     
-    // 子类必须实现的最大进度
-    protected abstract int MaxProgressAmount { get; }
+    // 子类必须实现的最大进度初始值
+    protected abstract int InitialMaxProgressAmount { get; }
     
     // 强制赋予委托和消耗关键字
-    public override IEnumerable<CardKeyword> CanonicalKeywords => [IndomitableKeywords.Commission, CardKeyword.Exhaust];
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
     
     // 注册进度变量
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
         new("Progress", 0m),
-        new("MaxProgress", MaxProgressAmount)
+        new("MaxProgress", InitialMaxProgressAmount),
+        new StringVar("DelegatorName")
     ];
     
-    public int CurrentProgress => (int)DynamicVars["Progress"].BaseValue;
+    public int CurrentProgress => DynamicVars["Progress"].IntValue;
+    public int MaxProgressAmount => DynamicVars["MaxProgress"].IntValue;
+    public bool IsCompleted => CurrentProgress >= MaxProgressAmount;
     
     // 当进度满时，卡牌自动高亮闪烁金光
-    protected override bool ShouldGlowGoldInternal => CurrentProgress >= MaxProgressAmount;
+    protected override bool ShouldGlowGoldInternal => IsCompleted;
     
     // 核心限制：进度未满时绝对不可打出
-    protected override bool IsPlayable => base.IsPlayable && CurrentProgress >= MaxProgressAmount;
+    protected override bool IsPlayable => base.IsPlayable && IsCompleted;
     
     /// <summary>
     /// 供子类在各大钩子（Hook）中调用的增加进度方法
     /// </summary>
     protected void AddProgress(int amount)
     {
-        if (amount <= 0 || CurrentProgress >= MaxProgressAmount) return;
-        var newProgress = Math.Min(MaxProgressAmount, CurrentProgress + amount);
-        DynamicVars["Progress"].BaseValue = newProgress;
+        if (amount > 0 && !IsCompleted)
+            DynamicVars["Progress"].BaseValue = Math.Min(MaxProgressAmount, CurrentProgress + amount);
     }
     
     protected sealed override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
+        // 避免被倾泻、抉择抉择等牌无条件打出获得奖励
+        if (!IsCompleted) return;
+        
         // 1. 给予持卡方（自己）奖励
         await GrantReward(choiceContext, Owner);
         

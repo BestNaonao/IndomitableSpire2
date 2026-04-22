@@ -11,10 +11,10 @@ using MegaCrit.Sts2.Core.Models;
 
 namespace IndomitableSpire2.IndomitableSpire2Code.Cards.Tokens;
 
-public sealed class ExerciseCommission() : CommissionCard(CardType.Skill, CardRarity.Uncommon, TargetType.Self)
+public sealed class ExerciseCommission() : CommissionCard(TargetType.Self)
 {
-    protected override int MaxProgressAmount => 100;
-
+    protected override int InitialMaxProgressAmount => 100;
+    
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
         ..base.CanonicalVars,
@@ -29,7 +29,7 @@ public sealed class ExerciseCommission() : CommissionCard(CardType.Skill, CardRa
             AddProgress(result.TotalDamage); // 记录总伤害
         return Task.CompletedTask;
     }
-
+    
     protected override async Task GrantReward(PlayerChoiceContext choiceContext, Player player)
     {
         await PowerCmd.Apply<StrengthPower>(player.Creature, DynamicVars["PowerAmount"].BaseValue, Owner.Creature, this);

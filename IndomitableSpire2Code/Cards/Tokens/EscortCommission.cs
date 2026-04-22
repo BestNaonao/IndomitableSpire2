@@ -11,16 +11,16 @@ using MegaCrit.Sts2.Core.Models;
 
 namespace IndomitableSpire2.IndomitableSpire2Code.Cards.Tokens;
 
-public sealed class EscortCommission() : CommissionCard(CardType.Skill, CardRarity.Rare, TargetType.Self)
+public sealed class EscortCommission() : CommissionCard(TargetType.Self)
 {
-    protected override int MaxProgressAmount => 30;
-
+    protected override int InitialMaxProgressAmount => 30;
+    
     protected override IEnumerable<DynamicVar> CanonicalVars => 
     [
         ..base.CanonicalVars,
         new GoldVar(20)
     ];
-
+    
     // 监听格挡获取
     public override Task AfterBlockGained(Creature creature, decimal amount, ValueProp props, CardModel? cardSource)
     {

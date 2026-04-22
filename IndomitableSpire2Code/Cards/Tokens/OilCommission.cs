@@ -8,15 +8,16 @@ using MegaCrit.Sts2.Core.Localization.DynamicVars;
 
 namespace IndomitableSpire2.IndomitableSpire2Code.Cards.Tokens;
 
-public sealed class OilCommission() : CommissionCard(CardType.Skill, CardRarity.Uncommon, TargetType.Self), IAfterEnergyGainedSubscriber
+public sealed class OilCommission() : CommissionCard(TargetType.Self), IAfterEnergyGainedSubscriber
 {
-    protected override int MaxProgressAmount => 6;
+    protected override int InitialMaxProgressAmount => 6;
     
     // 添加能量变量
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
         new("Progress", 0m),
-        new EnergyVar("MaxProgress", MaxProgressAmount),
+        new EnergyVar("MaxProgress", InitialMaxProgressAmount),
+        new StringVar("DelegatorName"),
         new EnergyVar(3)
     ];
     
@@ -27,12 +28,12 @@ public sealed class OilCommission() : CommissionCard(CardType.Skill, CardRarity.
             AddProgress((int)finalAmount);
         return Task.CompletedTask;
     }
-
+    
     protected override async Task GrantReward(PlayerChoiceContext choiceContext, Player player)
     {
         await PlayerCmd.GainEnergy(DynamicVars.Energy.BaseValue, player);
     }
-
+    
     protected override void OnUpgrade()
     {
         DynamicVars["MaxProgress"].UpgradeValueBy(-1);
