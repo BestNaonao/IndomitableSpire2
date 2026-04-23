@@ -39,15 +39,15 @@
   "INDOMITABLESPIRE2-ART_OF_RESTING.title": "Art of Resting",
   "INDOMITABLESPIRE2-ART_OF_RESTING.banter": "All forms of relaxation serve a purpose, and are DEFINITELY not slacking off.",
   "INDOMITABLESPIRE2-ART_OF_RESTING.description": "[gold]Transform[/gold] all [gold]Indolent[/gold] cards in your piles into [gold]Refresh[/gold].\nWhenever you create a Status card, [gold]Transform[/gold] it into a [gold]Refresh[/gold].",
-
+  
   "INDOMITABLESPIRE2-DISPATCH_COMMISSION.title": "Dispatch Commission",
   "INDOMITABLESPIRE2-DISPATCH_COMMISSION.description": "Another player adds 1 random{IfUpgraded:show: [gold]Upgraded[/gold]} [gold]Commission[/gold] card to their [gold]Hand[/gold].",
-  "INDOMITABLESPIRE2-OIL_COMMISSION.title": "Oilfield Development",
-  "INDOMITABLESPIRE2-OIL_COMMISSION.description": "Playable after gaining {MaxProgress:energyIcons()}{InCombat: ({Progress}/{MaxProgress})|}.\nYou and the Delegator each gain {Energy:energyIcons()}.",
+  "INDOMITABLESPIRE2-OIL_COMMISSION.title": "Oilfield Dev.",
+  "INDOMITABLESPIRE2-OIL_COMMISSION.description": "Playable after gaining {MaxProgress:energyIcons()}{InCombat: ({Progress}/{MaxProgress})|}.\nYou and {InCombat:[gold]{DelegatorName}[/gold]|the Delegator} each gain {Energy:energyIcons()}.",
   "INDOMITABLESPIRE2-EXERCISE_COMMISSION.title": "Fleet Exercise",
-  "INDOMITABLESPIRE2-EXERCISE_COMMISSION.description": "Playable after dealing {MaxProgress} damage to enemies{InCombat: ({Progress}/{MaxProgress})|}.\nYou and the Delegator each gain {PowerAmount:diff()} [gold]Strength[/gold] and [gold]Dexterity[/gold].",
+  "INDOMITABLESPIRE2-EXERCISE_COMMISSION.description": "Playable after dealing {MaxProgress} damage to enemies{InCombat: ({Progress}/{MaxProgress})|}.\nYou and {InCombat:[gold]{DelegatorName}[/gold]|the Delegator} each gain {PowerAmount:diff()} [gold]Strength[/gold] and [gold]Dexterity[/gold].",
   "INDOMITABLESPIRE2-TRANSPORT_COMMISSION.title": "Cargo Transport",
-  "INDOMITABLESPIRE2-TRANSPORT_COMMISSION.description": "Playable after drawing {MaxProgress} cards{InCombat: ({Progress}/{MaxProgress})|}.\nYou and the Delegator each draw {Cards:diff()} {Cards:plural:card|cards}.",
+  "INDOMITABLESPIRE2-TRANSPORT_COMMISSION.description": "Playable after drawing {MaxProgress} cards{InCombat: ({Progress}/{MaxProgress})|}.\nYou and {InCombat:[gold]{DelegatorName}[/gold]|the Delegator} each draw {Cards:diff()} {Cards:plural:card|cards}.",
   "INDOMITABLESPIRE2-ESCORT_COMMISSION.title": "Merchant Escort",
-  "INDOMITABLESPIRE2-ESCORT_COMMISSION.description": "Playable after gaining {MaxProgress} [gold]Block[/gold]{InCombat: ({Progress}/{MaxProgress})|}.\nYou and the Delegator each gain {Gold:diff()} [gold]Gold[/gold] after combat."
+  "INDOMITABLESPIRE2-ESCORT_COMMISSION.description": "Playable after gaining {MaxProgress} [gold]Block[/gold]{InCombat: ({Progress}/{MaxProgress})|}.\nAfter combat, you and {InCombat:[gold]{DelegatorName}[/gold]|the Delegator} each gain {Gold:diff()} [gold]Gold[/gold]."
 }
