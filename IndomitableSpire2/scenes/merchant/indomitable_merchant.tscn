@@ -1,8 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://iqe617q3kbqq"]
+[gd_scene load_steps=3 format=3 uid="uid://iqe617q3kbqq"]
 
 [ext_resource type="SpineSkeletonDataResource" uid="uid://dqmymblseh6vu" path="res://IndomitableSpire2/animations/characters/indomitable/indomitable_spine.tres" id="1_71gix"]
+[ext_resource type="Script" uid="uid://b2ww8leotjikm" path="res://src/Core/Nodes/Screens/Shops/NMerchantCharacter.cs" id="1_8o68q"]
 
 [node name="IndomitableMerchant" type="Node2D"]
+script = ExtResource("1_8o68q")
 
 [node name="SpineSprite" type="SpineSprite" parent="."]
 skeleton_data_res = ExtResource("1_71gix")
