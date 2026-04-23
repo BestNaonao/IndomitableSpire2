@@ -6,7 +6,7 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using IndomitableSpire2.IndomitableSpire2Code.Cards.Abstracts;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 
-namespace IndomitableSpire2.IndomitableSpire2Code.Cards.Tokens;
+namespace IndomitableSpire2.IndomitableSpire2Code.Cards.Others;
 
 public sealed class OilCommission() : CommissionCard(TargetType.Self), IAfterEnergyGainedSubscriber
 {

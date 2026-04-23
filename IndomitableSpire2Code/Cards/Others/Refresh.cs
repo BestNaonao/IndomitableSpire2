@@ -8,7 +8,7 @@ using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models.CardPools;
 
-namespace IndomitableSpire2.IndomitableSpire2Code.Cards.Tokens;
+namespace IndomitableSpire2.IndomitableSpire2Code.Cards.Others;
 
 [Pool(typeof(TokenCardPool))]
 public sealed class Refresh() : CustomCardModel(0, CardType.Skill, CardRarity.Token, TargetType.Self)

@@ -1,4 +1,4 @@
-﻿using IndomitableSpire2.IndomitableSpire2Code.Cards.Statuses;
+﻿using IndomitableSpire2.IndomitableSpire2Code.Cards.Others;
 using IndomitableSpire2.IndomitableSpire2Code.Powers;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;

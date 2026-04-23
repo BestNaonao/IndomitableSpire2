@@ -9,7 +9,7 @@ using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.CardPools;
 
-namespace IndomitableSpire2.IndomitableSpire2Code.Cards.Statuses;
+namespace IndomitableSpire2.IndomitableSpire2Code.Cards.Others;
 
 [Pool(typeof(StatusCardPool))]
 public sealed class Indolent() : CustomCardModel(1, CardType.Status, CardRarity.Status, TargetType.Self)

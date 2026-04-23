@@ -9,7 +9,7 @@ using IndomitableSpire2.IndomitableSpire2Code.Cards.Abstracts;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 
-namespace IndomitableSpire2.IndomitableSpire2Code.Cards.Tokens;
+namespace IndomitableSpire2.IndomitableSpire2Code.Cards.Others;
 
 public sealed class ExerciseCommission() : CommissionCard(TargetType.Self)
 {
