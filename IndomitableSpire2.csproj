@@ -111,6 +111,7 @@
 
     <ItemGroup>
       <Content Include="IndomitableSpire2Code\python_scripts\energy_icon_generator.py" />
+      <Content Include="IndomitableSpire2Code\python_scripts\json_sort.py" />
     </ItemGroup>
 
     <Target Name="CheckDependencyPaths">
