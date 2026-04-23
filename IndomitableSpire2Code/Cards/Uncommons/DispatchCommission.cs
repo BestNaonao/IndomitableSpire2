@@ -1,19 +1,24 @@
 ﻿using IndomitableSpire2.IndomitableSpire2Code.Cards.Abstracts;
+using IndomitableSpire2.IndomitableSpire2Code.Enums;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Factories;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.CardPools;
 
 namespace IndomitableSpire2.IndomitableSpire2Code.Cards.Uncommons;
 
-public sealed class DispatchCommission() : IndomitableCard(1, CardType.Skill, CardRarity.Uncommon, TargetType.AnyPlayer)
+public sealed class DispatchCommission() : IndomitableCard(1, CardType.Skill, CardRarity.Uncommon, TargetType.AnyAlly)
 {
     // 仅限多人模式可用
     public override CardMultiplayerConstraint MultiplayerConstraint => CardMultiplayerConstraint.MultiplayerOnly;
     
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
+    
+    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+        [HoverTipFactory.FromKeyword(IndomitableKeywords.Commission)];
     
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
@@ -22,7 +27,7 @@ public sealed class DispatchCommission() : IndomitableCard(1, CardType.Skill, Ca
         await CreatureCmd.TriggerAnim(Owner.Creature, "Cast", Owner.Character.CastAnimDelay);
         
         // 1. 【动态过滤】：获取衍生牌池中的所有牌，并筛选出所有继承自 CommissionCard 的子类
-        IEnumerable<CardModel> allCommissions = ModelDb.CardPool<TokenCardPool>().AllCards.OfType<CommissionCard>();
+        IEnumerable<CardModel> allCommissions = ModelDb.CardPool<QuestCardPool>().AllCards.OfType<CommissionCard>();
         
         // 2. 【安全生成】：利用官方工厂随机抽取 1 张，它会自动绑定 CombatState 并处理各种联机状态！
         var card = CardFactory.GetDistinctForCombat(
