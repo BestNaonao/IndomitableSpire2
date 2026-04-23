@@ -14,7 +14,7 @@ public sealed class WellRounded() : TashkentCard(3, CardType.Attack, CardRarity.
     
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new DamageVar(12M, ValueProp.Move),
-        new BlockVar(18M, ValueProp.Move),
+        new BlockVar(16M, ValueProp.Move),
         new MarkDynamicVar(6M),
         new PowerVar<VigorPower>(6M)
     ];

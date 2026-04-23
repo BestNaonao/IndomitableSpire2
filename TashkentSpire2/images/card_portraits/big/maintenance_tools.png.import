@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d2cxg4uc7h6ph"
-path="res://.godot/imported/multiplayer_hand_tashkent_rock.png-ff98d854d0c5b63b76c01d6388fae7b7.ctex"
+uid="uid://bcr82dqw5bhaq"
+path="res://.godot/imported/maintenance_tools.png-3381b2f75fc96b11d2e845a0c3c4ceeb.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://TashkentSpire2/images/Tashkent/hands/multiplayer_hand_tashkent_rock.png"
-dest_files=["res://.godot/imported/multiplayer_hand_tashkent_rock.png-ff98d854d0c5b63b76c01d6388fae7b7.ctex"]
+source_file="res://TashkentSpire2/images/card_portraits/big/maintenance_tools.png"
+dest_files=["res://.godot/imported/maintenance_tools.png-3381b2f75fc96b11d2e845a0c3c4ceeb.ctex"]
 
 [params]
 

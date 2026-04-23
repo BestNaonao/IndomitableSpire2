@@ -22,7 +22,6 @@ public sealed class ArtilleryStrike() : AmmunitionCard(1, CardType.Attack, CardR
     
     protected override async Task OnPlayWithAmmu(PlayerChoiceContext choiceContext, CardPlay cardPlay, int ammu)
     {
-        ArgumentNullException.ThrowIfNull(cardPlay.Target, nameof(cardPlay.Target));
         ArgumentNullException.ThrowIfNull(CombatState);
         
         if (this.CanonicalKeywords.Contains(TashkentKeyword.Barrage))
@@ -37,6 +36,7 @@ public sealed class ArtilleryStrike() : AmmunitionCard(1, CardType.Attack, CardR
         }
         else
         {
+            ArgumentNullException.ThrowIfNull(cardPlay.Target, nameof(cardPlay.Target));
             await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
                 .WithHitCount(DynamicVars.Repeat.IntValue)
                 .FromCard(this)

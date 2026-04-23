@@ -27,6 +27,10 @@ public sealed class VodkaFeast() : TashkentCard(1, CardType.Skill, CardRarity.Ra
         foreach (Creature creature in enumerable)
         {
             List<Vodka> cards = Vodka.Create(creature.Player!, base.DynamicVars.Cards.IntValue, base.CombatState).ToList();
+            foreach (Vodka item in cards)
+            {
+                CardCmd.Upgrade(item);
+            }
             IReadOnlyList<CardPileAddResult> results = await CardPileCmd.AddGeneratedCardsToCombat(cards, PileType.Draw, addedByPlayer: true, CardPilePosition.Random);
             if (LocalContext.IsMe(creature))
             {

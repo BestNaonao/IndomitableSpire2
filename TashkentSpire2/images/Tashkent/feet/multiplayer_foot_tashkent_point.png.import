@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ds4uhcacromii"
-path="res://.godot/imported/oath_enchantment.png.png-0e8786d1bf5e6b62c81354eac733d258.ctex"
+uid="uid://crdhn282glvcx"
+path="res://.godot/imported/multiplayer_foot_tashkent_point.png-4277438faa4ffd18f9e7898aa7b08131.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://TashkentSpire2/images/enchantment/oath_enchantment.png.png"
-dest_files=["res://.godot/imported/oath_enchantment.png.png-0e8786d1bf5e6b62c81354eac733d258.ctex"]
+source_file="res://TashkentSpire2/images/Tashkent/feet/multiplayer_foot_tashkent_point.png"
+dest_files=["res://.godot/imported/multiplayer_foot_tashkent_point.png-4277438faa4ffd18f9e7898aa7b08131.ctex"]
 
 [params]
 

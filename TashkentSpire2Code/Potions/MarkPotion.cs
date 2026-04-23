@@ -27,6 +27,9 @@ public sealed class MarkPotion : TashkentPotion
          HoverTipFactory.FromPower<MarkPower>()
      ];
      
+     public override string CustomPackedImagePath => "res://TashkentSpire2/images/potions/mark_potion.png";
+     public override string CustomPackedOutlinePath => "res://TashkentSpire2/images/potions/mark_potion_outline.png";
+     
      protected override async Task OnUse(PlayerChoiceContext choiceContext, Creature? target)
      {
          ArgumentNullException.ThrowIfNull(target);

@@ -40,7 +40,7 @@ public sealed class DistancePower : TashkentPower
     
     public override bool TryModifyPowerAmountReceived(PowerModel canonicalPower, Creature target, decimal amount, Creature? giver, out decimal modifiedAmount)
     {
-        if (canonicalPower.Id == this.Id) {
+        if (canonicalPower.Id == this.Id && target == this.Owner) {
 
             int potential = base.Amount + (int)amount;
             int clamped = Mathf.Clamp(potential, 5, 15);

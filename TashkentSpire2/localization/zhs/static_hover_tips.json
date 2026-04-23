@@ -12,7 +12,5 @@
   "TASHKENTSPIRE2-AMMU-MAX.title": "弹药最大值",
   "TASHKENTSPIRE2-AMMU-MAX.description": "可装载的弹药最大值。",
   "TASHKENTSPIRE2-LOAD.title": "装填",
-  "TASHKENTSPIRE2-LOAD.description": "在弹药为[blue]0[/blue]时执行，装填X份弹药，然后执行后续效果。",
-  "TASHKENTSPIRE2-MODULE.title": "模块",
-  "TASHKENTSPIRE2-MODULE.description": "充能球：持有时单次最多受到一定量伤害，激发时恢复自身血量。"
+  "TASHKENTSPIRE2-LOAD.description": "在弹药为[blue]0[/blue]时执行，装填X份弹药，然后执行后续效果。"
 }

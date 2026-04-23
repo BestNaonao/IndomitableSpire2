@@ -15,13 +15,12 @@ public sealed class LoadShot() : AmmunitionCard(1, CardType.Attack, CardRarity.B
         new DamageVar(10M, ValueProp.Move),
         new AmmunitionDynamicVar(1M),
         new LoadDynamicVar(1M),
-        new AmmuMaxDynamicVar(2M),
+        new AmmuMaxDynamicVar(3M),
         new MarkDynamicVar(2M)
     ];
 
     protected override async Task OnPlayWithAmmu(PlayerChoiceContext choiceContext, CardPlay cardPlay, int ammu)
     {
-        ArgumentNullException.ThrowIfNull(cardPlay.Target, nameof(cardPlay.Target));
         ArgumentNullException.ThrowIfNull(CombatState);
         
         if (this.CanonicalKeywords.Contains(TashkentKeyword.Barrage))
@@ -36,6 +35,7 @@ public sealed class LoadShot() : AmmunitionCard(1, CardType.Attack, CardRarity.B
         }
         else
         {
+            ArgumentNullException.ThrowIfNull(cardPlay.Target, nameof(cardPlay.Target));
             await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
                 .FromCard(this)
                 .Targeting(cardPlay.Target)

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cfws3aqlc233"
-path="res://.godot/imported/_power.png-210c99bde49db28c237260aff60a2a8b.ctex"
+uid="uid://cp3v6iieo3sh0"
+path="res://.godot/imported/multiplayer_foot_tashkent_rock.png-cc80a65c715e36c278dd097bc0960362.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://TashkentSpire2/images/powers/packed/_power.png"
-dest_files=["res://.godot/imported/_power.png-210c99bde49db28c237260aff60a2a8b.ctex"]
+source_file="res://TashkentSpire2/images/Tashkent/feet/multiplayer_foot_tashkent_rock.png"
+dest_files=["res://.godot/imported/multiplayer_foot_tashkent_rock.png-cc80a65c715e36c278dd097bc0960362.ctex"]
 
 [params]
 

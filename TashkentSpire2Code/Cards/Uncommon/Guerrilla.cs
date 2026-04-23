@@ -18,9 +18,12 @@ public sealed class Guerrilla() : TashkentCard(0, CardType.Attack, CardRarity.Un
     {
         ArgumentNullException.ThrowIfNull(cardPlay.Target, nameof(cardPlay.Target));
         
-        if (cardPlay.Target != null && cardPlay.Target.HasPower<MarkPower>())
+        if (cardPlay.Target != null)
         {
-            await CardPileCmd.Draw(choiceContext, base.DynamicVars.Cards.IntValue, base.Owner);
+            if (cardPlay.Target.HasPower<MarkPower>())
+            {
+                await CardPileCmd.Draw(choiceContext, base.DynamicVars.Cards.IntValue, base.Owner);
+            }
             await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
                 .FromCard(this)
                 .Targeting(cardPlay.Target)

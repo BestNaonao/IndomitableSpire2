@@ -1,6 +1,7 @@
 ﻿using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Saves.Runs;
+using TashkentSpire2.TashkentSpire2Code.Tags;
 
 namespace TashkentSpire2.TashkentSpire2Code.Cards;
 
@@ -17,6 +18,8 @@ public abstract class AmmunitionCard(
     TargetType target
 ) : TashkentCard(baseCost, type, rarity, target), IAmmunitionCard
 {
+    protected override HashSet<CardTag> CanonicalTags => [TashkentTags.Ammunition];
+    
     private int _currentAmmu = -1;
 
     [SavedProperty]

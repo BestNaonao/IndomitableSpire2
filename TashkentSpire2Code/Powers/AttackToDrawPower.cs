@@ -22,7 +22,7 @@ public sealed class AttackToDrawPower : TashkentPower
             return;
         }
         
-        await CardPileCmd.Draw(context, base.DynamicVars.Cards.BaseValue, base.Owner.Player);
+        await CardPileCmd.Draw(context, 1, base.Owner.Player);
         
         await PowerCmd.Decrement(this);
     }

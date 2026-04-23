@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d2cxg4uc7h6ph"
-path="res://.godot/imported/multiplayer_hand_tashkent_rock.png-ff98d854d0c5b63b76c01d6388fae7b7.ctex"
+uid="uid://biw625cousnhn"
+path="res://.godot/imported/eternaloath_power.png-a3a1f70b3dcc248aba727a7a7f41d6ba.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://TashkentSpire2/images/Tashkent/hands/multiplayer_hand_tashkent_rock.png"
-dest_files=["res://.godot/imported/multiplayer_hand_tashkent_rock.png-ff98d854d0c5b63b76c01d6388fae7b7.ctex"]
+source_file="res://TashkentSpire2/images/powers/packed/eternaloath_power.png"
+dest_files=["res://.godot/imported/eternaloath_power.png-a3a1f70b3dcc248aba727a7a7f41d6ba.ctex"]
 
 [params]
 

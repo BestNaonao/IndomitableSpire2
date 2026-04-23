@@ -8,8 +8,14 @@ using TashkentSpire2.TashkentSpire2Code.Keywords;
 
 namespace TashkentSpire2.TashkentSpire2Code.Cards.Common;
 
-public sealed class SaturationBombing() : AmmunitionCard(1, CardType.Attack, CardRarity.Common, TargetType.AllEnemies)
+public sealed class SaturationBombing() : AmmunitionCard(2, CardType.Attack, CardRarity.Common, TargetType.AllEnemies)
 {
+    public override void AfterCreated()
+    {
+        base.AfterCreated();
+        this.BaseReplayCount = 1;
+    }
+    
     public override IEnumerable<CardKeyword> CanonicalKeywords => [TashkentKeyword.Barrage];
     
     protected override IEnumerable<DynamicVar> CanonicalVars => [
@@ -21,7 +27,6 @@ public sealed class SaturationBombing() : AmmunitionCard(1, CardType.Attack, Car
     
     protected override async Task OnPlayWithAmmu(PlayerChoiceContext choiceContext, CardPlay cardPlay, int ammu)
     {
-        ArgumentNullException.ThrowIfNull(cardPlay.Target, nameof(cardPlay.Target));
         ArgumentNullException.ThrowIfNull(CombatState);
         
         if (this.CanonicalKeywords.Contains(TashkentKeyword.Barrage))

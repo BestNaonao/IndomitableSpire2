@@ -25,8 +25,8 @@ public class OathEnchantment : CustomEnchantmentModel
         HoverTipFactory.FromKeyword(CardKeyword.Retain)
     ];
     
-    protected override string? CustomIconPath => "res://TashkentSpire2/images/enchantment/oath_enchantment.png";  //64x64
-    
+    protected override string? CustomIconPath => "res://TashkentSpire2/images/enchantment/oath_enchantment.png";
+
     // public override bool CanEnchant(CardModel card) // 决定是否可以附魔到某张卡牌上
     // { }
     

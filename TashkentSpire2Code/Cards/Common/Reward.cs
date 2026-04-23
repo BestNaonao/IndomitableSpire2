@@ -8,32 +8,26 @@ using TashkentSpire2.TashkentSpire2Code.Cards.Token;
 
 namespace TashkentSpire2.TashkentSpire2Code.Cards.Common;
 
-public sealed class MaterialPreparation() : TashkentCard(1, CardType.Skill, CardRarity.Common, TargetType.Self)
+public sealed class Reward() : TashkentCard(1, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
 {
-    public override bool GainsBlock => true;
-    
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new BlockVar(7M, ValueProp.Move),
+        new DamageVar(5M, ValueProp.Move),
         new CardsVar(1)
     ];
-
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromCard<Vodka>(base.IsUpgraded)];
+    
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromCard<Vodka>()];
     
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
+        ArgumentNullException.ThrowIfNull(cardPlay.Target, nameof(cardPlay.Target));
         ArgumentNullException.ThrowIfNull(CombatState);
+        await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
+            .FromCard(this)
+            .Targeting(cardPlay.Target)
+            .WithHitFx("vfx/vfx_attack_slash")
+            .Execute(choiceContext);
         
-        await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
-        await CreatureCmd.GainBlock(base.Owner.Creature, base.DynamicVars.Block, cardPlay);
         List<Vodka> list = Vodka.Create(base.Owner, base.DynamicVars.Cards.IntValue, base.CombatState).ToList();
-        
-        if (base.IsUpgraded)
-        {
-            foreach (Vodka item in list)
-            {
-                CardCmd.Upgrade(item);
-            }
-        }
         
         foreach (Vodka item in list)
         {
@@ -43,6 +37,6 @@ public sealed class MaterialPreparation() : TashkentCard(1, CardType.Skill, Card
     
     protected override void OnUpgrade()
     {
-        DynamicVars.Block.UpgradeValueBy(2M);
+        DynamicVars.Cards.UpgradeValueBy(1M);
     }
 }
