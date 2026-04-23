@@ -1,4 +1,5 @@
 using Godot;
+using Godot.Bridge;
 using HarmonyLib;
 using IndomitableSpire2.IndomitableSpire2Code.Providers;
 using IndomitableSpire2.IndomitableSpire2Code.Registries;
@@ -24,6 +25,9 @@ public partial class MainFile : Node
         Harmony harmony = new(ModId);
 
         harmony.PatchAll();
+        
+        // 使得场景文件可以加载自定义脚本
+        ScriptManagerBridge.LookupScriptsInAssembly(typeof(MainFile).Assembly);
         
         Logger.Info("Indomitable mod loaded");
     }
