@@ -28,4 +28,8 @@ public sealed class IndomitableMaidCharacter : Indomitable
 
     public override string CustomArmScissorsTexturePath => 
         "res://IndomitableSpire2/images/charui/hands/multiplayer_hand_indomitable_maid_scissors.png";
+
+    public override bool HideFromVanillaCharacterSelect => true;
+
+    public override bool AllowInVanillaRandomCharacterSelect => true;
 }
