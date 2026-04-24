@@ -16,6 +16,7 @@ public enum IndomitableSkin
     Maid
 }
 
+// 【核心】：必须是 abstract，该类只是玩法数据的容器，不是一个具体角色
 public abstract class Indomitable : CustomCharacterModel
 {
     public const string CharacterId = "Indomitable";
@@ -59,62 +60,6 @@ public abstract class Indomitable : CustomCharacterModel
     [
         ModelDb.Relic<ShikikanDakimakura>()
     ];
-    
-    // 逻辑控制开关：当前选择的皮肤。
-    // 设置为 static 方便以后在 UI 界面（如 CharacterSelectScreen）的按钮点击事件中直接修改：
-    // IndomitableCharacter.CurrentSkin = IndomitableSkin.Maid;
-    public static IndomitableSkin CurrentSkin { get; set; } = IndomitableSkin.Default;
-    
-    // 根据 CurrentSkin 动态获取 CustomVisualPath，指向 Godot 导出的角色视觉场景 (tscn) 包路径
-    public override string CustomVisualPath => CurrentSkin switch
-    {
-        IndomitableSkin.Default => "res://IndomitableSpire2/scenes/characters/indomitable.tscn",
-        IndomitableSkin.Maid    => "res://IndomitableSpire2/scenes/characters/indomitable_maid.tscn",
-        _                       => "res://IndomitableSpire2/scenes/characters/indomitable.tscn"
-    };
-    // 获取休息点的视觉场景
-    public override string CustomRestSiteAnimPath => CurrentSkin switch
-    {
-        IndomitableSkin.Default => "res://IndomitableSpire2/scenes/characters/indomitable_rest_site.tscn",
-        IndomitableSkin.Maid    => "res://IndomitableSpire2/scenes/characters/indomitable_maid_rest_site.tscn",
-        _                       => "res://IndomitableSpire2/scenes/characters/indomitable_rest_site.tscn"
-    };
-    // 获取商店的视觉场景
-    public override string CustomMerchantAnimPath => CurrentSkin switch
-    {
-        IndomitableSkin.Default => "res://IndomitableSpire2/scenes/merchant/indomitable_merchant.tscn",
-        IndomitableSkin.Maid    => "res://IndomitableSpire2/scenes/merchant/indomitable_maid_merchant.tscn",
-        _                       => "res://IndomitableSpire2/scenes/merchant/indomitable_merchant.tscn"
-    };
-    
-    // 人物手模图片(石头剪刀布和指向)
-    public override string CustomArmPaperTexturePath => CurrentSkin switch
-    {
-        IndomitableSkin.Default => "res://IndomitableSpire2/images/charui/hands/multiplayer_hand_indomitable_paper.png",
-        IndomitableSkin.Maid    => "res://IndomitableSpire2/images/charui/hands/multiplayer_hand_indomitable_maid_paper.png",
-        _                       => "res://IndomitableSpire2/images/charui/hands/multiplayer_hand_indomitable_paper.png"
-    };
-
-    public override string CustomArmPointingTexturePath => CurrentSkin switch
-    {
-        IndomitableSkin.Default => $"res://IndomitableSpire2/images/charui/hands/multiplayer_hand_indomitable_point{new Random().Next(1, 4)}.png",
-        IndomitableSkin.Maid    => $"res://IndomitableSpire2/images/charui/hands/multiplayer_hand_indomitable_maid_point{new Random().Next(1, 4)}.png",
-        _                       => $"res://IndomitableSpire2/images/charui/hands/multiplayer_hand_indomitable_point{new Random().Next(1, 4)}.png"
-    };
-
-    public override string CustomArmRockTexturePath => CurrentSkin switch
-    {
-        IndomitableSkin.Default => "res://IndomitableSpire2/images/charui/hands/multiplayer_hand_indomitable_rock.png",
-        IndomitableSkin.Maid    => "res://IndomitableSpire2/images/charui/hands/multiplayer_hand_indomitable_maid_rock.png",
-        _                       => "res://IndomitableSpire2/images/charui/hands/multiplayer_hand_indomitable_rock.png"
-    };
-
-    public override string CustomArmScissorsTexturePath => CurrentSkin switch
-    {
-        IndomitableSkin.Default => "res://IndomitableSpire2/images/charui/hands/multiplayer_hand_indomitable_scissors.png",
-        IndomitableSkin.Maid    => "res://IndomitableSpire2/images/charui/hands/multiplayer_hand_indomitable_maid_scissors.png",
-        _                       => "res://IndomitableSpire2/images/charui/hands/multiplayer_hand_indomitable_scissors.png"
-    };
     
     // ... 同样的方式替换选人界面的立绘、头像等 ...
     public override string CustomCharacterSelectBg =>               // 选择界面背景
