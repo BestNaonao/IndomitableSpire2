@@ -23,14 +23,7 @@ public sealed class EjectionStart : TashkentRelic
         if (player == base.Owner && combatState.CurrentSide == base.Owner.Creature.Side)
         {
             Flash();
-            if (combatState.RoundNumber <= 1)
-            {
-                await PowerCmd.Apply<DistancePower>(base.Owner.Creature, 11m, base.Owner.Creature, null);
-            }
-            else
-            {
-                await PowerCmd.Apply<DistancePower>(base.Owner.Creature, 1m, base.Owner.Creature, null);
-            }
+            await PowerCmd.Apply<DistancePower>(base.Owner.Creature, 1m, base.Owner.Creature, null);
             await PowerCmd.Apply<BackAfterTurnPower>(base.Owner.Creature, 1m, base.Owner.Creature, null);
         }
     }

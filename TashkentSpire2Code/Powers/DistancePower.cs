@@ -40,12 +40,11 @@ public sealed class DistancePower : TashkentPower
     
     public override bool TryModifyPowerAmountReceived(PowerModel canonicalPower, Creature target, decimal amount, Creature? giver, out decimal modifiedAmount)
     {
-        if (canonicalPower.Id == this.Id && target == this.Owner) {
-
-            int potential = base.Amount + (int)amount;
+        if (canonicalPower.Id == this.Id && target == this.Owner)
+        {
+            int potential = (int)base.Amount + (int)amount;
             int clamped = Mathf.Clamp(potential, 5, 15);
-            
-            modifiedAmount = clamped - base.Amount;
+            modifiedAmount = (decimal)(clamped - (int)base.Amount);
             return true;
         }
         modifiedAmount = amount;
@@ -62,11 +61,20 @@ public sealed class DistancePower : TashkentPower
     
     public override async Task AfterApplied(Creature? applier, CardModel? cardSource)
     {
-        int dist = MapToDist(base.Amount); 
-        base.DynamicVars[VarKey].BaseValue = dist;
+        if (base.Amount < 5m)
+        {
+            await PowerCmd.ModifyAmount(this, 10m, base.Owner, cardSource);
+            return;
+        }
         
+        int targetDist = MapToDist(base.Amount);
+        base.DynamicVars[VarKey].BaseValue = targetDist;
         RefreshDerivedVars();
-        await UpdateCreaturePositions(dist);
+
+        if (targetDist != 0)
+        {
+            await UpdateCreaturePositions(targetDist);
+        }
         InvokeDisplayAmountChanged();
     }
     
@@ -119,17 +127,21 @@ public sealed class DistancePower : TashkentPower
     
     public override async Task AfterPowerAmountChanged(PowerModel power, decimal oldAmount, Creature? __, CardModel? cardSource)
     {
-        if (power == this) {
+        if (power == this)
+        {
             int newDist = MapToDist(base.Amount);
-            int delta = newDist - CurrentDist;
+            int lastLogicalDist = (int)base.DynamicVars[VarKey].BaseValue;
+            int delta = newDist - lastLogicalDist;
 
-            if (delta != 0) {
+            if (delta != 0)
+            {
                 base.DynamicVars[VarKey].BaseValue = newDist;
                 RefreshDerivedVars();
+                
                 await UpdateCreaturePositions(delta);
                 await SyncSandpitPower(delta);
-                
                 await NotifyDistanceChanged(delta);
+                
                 InvokeDisplayAmountChanged();
             }
         }

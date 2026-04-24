@@ -23,14 +23,7 @@ public sealed class EngineBoost : TashkentRelic
         if (player == base.Owner && combatState.CurrentSide == base.Owner.Creature.Side)
         {
             Flash();
-            if (combatState.RoundNumber <= 1)
-            {
-                await PowerCmd.Apply<DistancePower>(base.Owner.Creature, 13m, base.Owner.Creature, null);
-            }
-            else
-            {
-                await PowerCmd.Apply<DistancePower>(base.Owner.Creature, 3m, base.Owner.Creature, null);
-            }
+            await PowerCmd.Apply<DistancePower>(base.Owner.Creature, 3m, base.Owner.Creature, null);
             await PowerCmd.Apply<BackAfterTurnPower>(base.Owner.Creature, 3m, base.Owner.Creature, null);
         }
     }
