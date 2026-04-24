@@ -8,17 +8,22 @@ using TashkentSpire2.TashkentSpire2Code.Keywords;
 
 namespace TashkentSpire2.TashkentSpire2Code.Cards.Common;
 
-public sealed class VersatilePerson() : AmmunitionCard(1, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
+public sealed class VersatilePerson() : AmmunitionCard(0, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
 {
     public override bool GainsBlock => true;
     
+    public override void AfterCreated()
+    {
+        base.AfterCreated();
+        this.BaseReplayCount = 1;
+    }
+    
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new DamageVar(7M, ValueProp.Move),
-        new BlockVar(5M, ValueProp.Move),
-        new RepeatVar(4),
+        new DamageVar(4M, ValueProp.Move),
+        new BlockVar(4M, ValueProp.Move),
         new AmmunitionDynamicVar(1M),
-        new LoadDynamicVar(2M),
-        new AmmuMaxDynamicVar(2M),
+        new LoadDynamicVar(1M),
+        new AmmuMaxDynamicVar(3M),
     ];
     
     protected override async Task OnPlayWithAmmu(PlayerChoiceContext choiceContext, CardPlay cardPlay, int ammu)

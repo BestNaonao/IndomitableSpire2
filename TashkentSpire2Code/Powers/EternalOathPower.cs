@@ -24,7 +24,10 @@ public sealed class EternalOathPower : TashkentPower
     
     public override async Task AfterCombatEnd(CombatRoom room)
     {
-        Player? player = room.CombatState.Players.FirstOrDefault();
+        if (this.Owner.Player == null || this.Owner.IsDead) return;
+        
+        Player? player = room.CombatState.Players.FirstOrDefault(p => p.NetId == this.Owner.Player.NetId);
+        
         if (player == null) return;
 
         for (int i = 0; i < base.Amount; i++)

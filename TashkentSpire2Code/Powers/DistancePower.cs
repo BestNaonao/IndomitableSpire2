@@ -76,11 +76,43 @@ public sealed class DistancePower : TashkentPower
             return 1m;
         
         decimal multiplier = 1m;
+        int dist = CurrentDist;
         
+        var surrounded = base.Owner.GetPower<SurroundedPower>();
+
         if (dealer == base.Owner)
-            multiplier *= (1m + (decimal)CurrentDist * 0.2m);
+        {
+            int effectiveDist = dist;
+            if (surrounded != null && target != null)
+            {
+                bool isTargetAtBack = false;
+                if (surrounded.Facing == SurroundedPower.Direction.Right && target.HasPower<BackAttackLeftPower>()) 
+                    isTargetAtBack = true;
+                else if (surrounded.Facing == SurroundedPower.Direction.Left && target.HasPower<BackAttackRightPower>())
+                    isTargetAtBack = true;
+
+                if (isTargetAtBack) effectiveDist = -dist;
+            }
+            
+            multiplier *= (1m + (decimal)effectiveDist * 0.2m);
+        }
+
         if (target == base.Owner)
-            multiplier *= (1m + (decimal)CurrentDist * 0.1m);
+        {
+            int effectiveDist = dist;
+            if (surrounded != null && dealer != null)
+            {
+                bool isDealerAtBack = false;
+                if (surrounded.Facing == SurroundedPower.Direction.Right && dealer.HasPower<BackAttackLeftPower>())
+                    isDealerAtBack = true;
+                else if (surrounded.Facing == SurroundedPower.Direction.Left && dealer.HasPower<BackAttackRightPower>())
+                    isDealerAtBack = true;
+
+                if (isDealerAtBack) effectiveDist = -dist;
+            }
+            
+            multiplier *= (1m + (decimal)effectiveDist * 0.1m);
+        }
 
         return multiplier;
     }
@@ -129,7 +161,7 @@ public sealed class DistancePower : TashkentPower
 
             if (sandpitPower != null)
             {
-                await PowerCmd.ModifyAmount(sandpitPower, (decimal)delta, enemy, null);
+                await PowerCmd.ModifyAmount(sandpitPower, -(decimal)delta, enemy, null);
             }
         }
     }

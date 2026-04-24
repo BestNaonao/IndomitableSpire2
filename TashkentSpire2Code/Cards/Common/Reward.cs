@@ -11,7 +11,7 @@ namespace TashkentSpire2.TashkentSpire2Code.Cards.Common;
 public sealed class Reward() : TashkentCard(1, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new DamageVar(5M, ValueProp.Move),
+        new DamageVar(6M, ValueProp.Move),
         new CardsVar(1)
     ];
     

@@ -8,6 +8,8 @@ namespace TashkentSpire2.TashkentSpire2Code.Cards.Rare;
 
 public sealed class MaintenanceTools() : TashkentCard(1, CardType.Power, CardRarity.Rare, TargetType.Self)
 {
+    public override bool CanBeGeneratedInCombat => false;
+    
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new PowerVar<RegenPower>(4M)
     ];

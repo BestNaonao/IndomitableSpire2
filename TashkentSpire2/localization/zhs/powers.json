@@ -61,5 +61,8 @@
   "TASHKENTSPIRE2-TORPEDO_GOD_POWER.title": "雷神",
   "TASHKENTSPIRE2-WINTER_RESOLVE_POWER.description": "在你的回合开始时，抽一张牌然后将一张牌[gold]变化[/gold]为[gold]伏特加[/gold]。",
   "TASHKENTSPIRE2-WINTER_RESOLVE_POWER.smartDescription": "在你的回合开始时，抽{Amount}张牌然后将{Amount}张牌[gold]变化[/gold]为[gold]伏特加[/gold]。",
-  "TASHKENTSPIRE2-WINTER_RESOLVE_POWER.title": "凛冬意志"
+  "TASHKENTSPIRE2-WINTER_RESOLVE_POWER.title": "凛冬意志",
+  "TASHKENTSPIRE2-BREAK_THROUGH_ON_ALL_FRONTS_POWER.description": "每回合开始时，选择一张手中的[gold]弹药[/gold]牌[gold]装填[/gold]。",
+  "TASHKENTSPIRE2-BREAK_THROUGH_ON_ALL_FRONTS_POWER.smartDescription": "每回合开始时，选择{Amount}张手中的[gold]弹药[/gold]牌[gold]装填[/gold]。",
+  "TASHKENTSPIRE2-BREAK_THROUGH_ON_ALL_FRONTS_POWER.title": "全线突破"
 }

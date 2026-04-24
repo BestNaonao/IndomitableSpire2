@@ -12,11 +12,11 @@ namespace TashkentSpire2.TashkentSpire2Code.Cards.Basics;
 public sealed class LoadShot() : AmmunitionCard(1, CardType.Attack, CardRarity.Basic, TargetType.AnyEnemy)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new DamageVar(10M, ValueProp.Move),
+        new DamageVar(12M, ValueProp.Move),
         new AmmunitionDynamicVar(1M),
         new LoadDynamicVar(1M),
         new AmmuMaxDynamicVar(3M),
-        new MarkDynamicVar(2M)
+        new MarkDynamicVar(3M)
     ];
 
     protected override async Task OnPlayWithAmmu(PlayerChoiceContext choiceContext, CardPlay cardPlay, int ammu)
@@ -59,6 +59,6 @@ public sealed class LoadShot() : AmmunitionCard(1, CardType.Attack, CardRarity.B
     {
         DynamicVars.Damage.UpgradeValueBy(4M);
         DynamicVars["TashkentSpire2-Load"].UpgradeValueBy(1M);
-        DynamicVars["TashkentSpire2-Mark"].UpgradeValueBy(1M);
+        DynamicVars["TashkentSpire2-Mark"].UpgradeValueBy(2M);
     }
 }
