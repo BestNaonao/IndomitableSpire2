@@ -16,7 +16,7 @@ public enum IndomitableSkin
     Maid
 }
 
-public sealed class IndomitableCharacter : CustomCharacterModel
+public abstract class Indomitable : CustomCharacterModel
 {
     public const string CharacterId = "Indomitable";
     public override CharacterGender Gender => CharacterGender.Feminine;

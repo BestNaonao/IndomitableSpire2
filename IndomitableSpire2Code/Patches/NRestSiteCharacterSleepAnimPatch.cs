@@ -15,7 +15,7 @@ public static class NRestSiteCharacterSleepAnimPatch
     public static bool Prefix(NRestSiteCharacter __instance)
     {
         // 判断是否是我们的不挠角色，如果是原版角色，返回 true，让官方的 _Ready 正常执行
-        if (__instance.Player.Character is not IndomitableCharacter) return true;
+        if (__instance.Player.Character is not Indomitable) return true;
         var inst = Traverse.Create(__instance);
         
         // 第一步：复刻官方的节点绑定（避免 UI 瘫痪）

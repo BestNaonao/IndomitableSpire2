@@ -14,7 +14,7 @@ public static class PatchCombatStateAddPlayer
     public static void Postfix(CombatState __instance, Player player)
     {
         // 当有玩家被加入战斗状态时触发
-        if (player.Character is not IndomitableCharacter) return;
+        if (player.Character is not Indomitable) return;
         var targetCreature = player.Creature;
         if (targetCreature.IsDead) return;
         MainFile.Logger.Info("Harmony Patch: Indomitable entered combat!");
