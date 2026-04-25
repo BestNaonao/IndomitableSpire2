@@ -4,6 +4,7 @@ using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Relics;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.Models;
 
 namespace TashkentSpire2.TashkentSpire2Code.Relics;
 
@@ -26,5 +27,10 @@ public sealed class EjectionStart : TashkentRelic
             await PowerCmd.Apply<DistancePower>(base.Owner.Creature, 1m, base.Owner.Creature, null);
             await PowerCmd.Apply<BackAfterTurnPower>(base.Owner.Creature, 1m, base.Owner.Creature, null);
         }
+    }
+    
+    public override RelicModel? GetUpgradeReplacement()
+    {
+        return ModelDb.Relic<EngineBoost>();
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Godot;
+using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
@@ -78,6 +79,26 @@ public sealed class DistancePower : TashkentPower
         InvokeDisplayAmountChanged();
     }
     
+    private bool _isSyncing = false;
+    
+    private bool HasActiveSandpit()
+    {
+        if (base.CombatState == null) return false;
+        return base.CombatState.Enemies.Any(e => e.HasPower<SandpitPower>());
+    }
+    
+    public override async Task AfterSideTurnStart(CombatSide side, CombatState combatState)
+    {
+        if (side == CombatSide.Enemy && HasActiveSandpit())
+        {
+            _isSyncing = true;  // 加锁
+
+            await PowerCmd.ModifyAmount(this, 1m, base.Owner, null);
+            
+            _isSyncing = false;
+        }
+    }
+    
     public override decimal ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource)
     {
         if (dealer == this.Owner && (!props.HasFlag(ValueProp.Move) || cardSource == null))
@@ -138,8 +159,17 @@ public sealed class DistancePower : TashkentPower
                 base.DynamicVars[VarKey].BaseValue = newDist;
                 RefreshDerivedVars();
                 
-                await UpdateCreaturePositions(delta);
-                await SyncSandpitPower(delta);
+                if (!_isSyncing)
+                {
+                    _isSyncing = true;
+                    await SyncSandpitPower(delta);
+                    _isSyncing = false;
+                }
+                if (!HasActiveSandpit())
+                {
+                    await UpdateCreaturePositions(delta);
+                }
+
                 await NotifyDistanceChanged(delta);
                 
                 InvokeDisplayAmountChanged();

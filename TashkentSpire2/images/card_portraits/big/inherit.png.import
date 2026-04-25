@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c5kvrilj3ntn8"
-path="res://.godot/imported/EjectionStart_outline.png-27d98863e5e79886b668be6a3f1c78bf.ctex"
+uid="uid://bcakkftp7coi"
+path="res://.godot/imported/inherit.png-444f394f66735729fb21353ee47aae24.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://TashkentSpire2/images/relics/outline/EjectionStart_outline.png"
-dest_files=["res://.godot/imported/EjectionStart_outline.png-27d98863e5e79886b668be6a3f1c78bf.ctex"]
+source_file="res://TashkentSpire2/images/card_portraits/big/inherit.png"
+dest_files=["res://.godot/imported/inherit.png-444f394f66735729fb21353ee47aae24.ctex"]
 
 [params]
 

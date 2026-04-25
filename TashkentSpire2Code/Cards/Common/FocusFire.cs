@@ -11,6 +11,18 @@ namespace TashkentSpire2.TashkentSpire2Code.Cards.Common;
 
 public sealed class FocusFire() : AmmunitionCard(1, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
 {
+    public override void AfterCreated()
+    {
+        base.AfterCreated();
+        this.BaseReplayCount = 1;
+    }
+    
+    protected override void AfterDeserialized()
+    {
+        base.AfterDeserialized();
+        this.BaseReplayCount = 1; 
+    }
+    
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new DamageVar(4M, ValueProp.Move),
         new AmmunitionDynamicVar(1M),

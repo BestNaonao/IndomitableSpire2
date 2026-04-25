@@ -12,15 +12,9 @@ public sealed class VersatilePerson() : AmmunitionCard(0, CardType.Attack, CardR
 {
     public override bool GainsBlock => true;
     
-    public override void AfterCreated()
-    {
-        base.AfterCreated();
-        this.BaseReplayCount = 1;
-    }
-    
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new DamageVar(4M, ValueProp.Move),
-        new BlockVar(4M, ValueProp.Move),
+        new DamageVar(6M, ValueProp.Move),
+        new BlockVar(6M, ValueProp.Move),
         new AmmunitionDynamicVar(1M),
         new LoadDynamicVar(1M),
         new AmmuMaxDynamicVar(3M),
@@ -61,7 +55,7 @@ public sealed class VersatilePerson() : AmmunitionCard(0, CardType.Attack, CardR
     
     protected override void OnUpgrade()
     {
-        DynamicVars.Damage.UpgradeValueBy(1M);
-        DynamicVars.Block.UpgradeValueBy(1M);
+        DynamicVars.Damage.UpgradeValueBy(3M);
+        DynamicVars.Block.UpgradeValueBy(3M);
     }
 }

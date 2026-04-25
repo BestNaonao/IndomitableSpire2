@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cxergvpvdby77"
-path="res://.godot/imported/EngineBoost_outline.png-b91762c292c1e4960abc03919ea19d79.ctex"
+uid="uid://cg5k3fhgeaccc"
+path="res://.godot/imported/YummyCookie_tashkent.png-31f7c0c82955508ccaaf7ca3b59ee3d4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://TashkentSpire2/images/relics/outline/EngineBoost_outline.png"
-dest_files=["res://.godot/imported/EngineBoost_outline.png-b91762c292c1e4960abc03919ea19d79.ctex"]
+source_file="res://TashkentSpire2/images/relics/packed/YummyCookie_tashkent.png"
+dest_files=["res://.godot/imported/YummyCookie_tashkent.png-31f7c0c82955508ccaaf7ca3b59ee3d4.ctex"]
 
 [params]
 

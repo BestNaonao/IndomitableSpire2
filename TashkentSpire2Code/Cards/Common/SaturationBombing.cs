@@ -16,6 +16,12 @@ public sealed class SaturationBombing() : AmmunitionCard(2, CardType.Attack, Car
         this.BaseReplayCount = 1;
     }
     
+    protected override void AfterDeserialized()
+    {
+        base.AfterDeserialized();
+        this.BaseReplayCount = 1; 
+    }
+    
     public override IEnumerable<CardKeyword> CanonicalKeywords => [TashkentKeyword.Barrage];
     
     protected override IEnumerable<DynamicVar> CanonicalVars => [
@@ -55,5 +61,5 @@ public sealed class SaturationBombing() : AmmunitionCard(2, CardType.Attack, Car
         await SaturationBombingcmd.Execute(choiceContext, this.Owner, this);
     }
     
-    protected override void OnUpgrade() => DynamicVars.Damage.UpgradeValueBy(2M);
+    protected override void OnUpgrade() => DynamicVars.Damage.UpgradeValueBy(3M);
 }

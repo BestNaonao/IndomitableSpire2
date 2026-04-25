@@ -8,7 +8,6 @@ public enum FjordMosaicMode
     腿部模型
 }
 
-[HoverTipsByDefault]
 public sealed class TashkentConfig : SimpleModConfig
 {
     public static FjordMosaicMode 多人模式使用哪种模型 { get; set; } = FjordMosaicMode.手部模型;

@@ -12,12 +12,23 @@ public sealed class ArtilleryStrike() : AmmunitionCard(1, CardType.Attack, CardR
 {
     protected override HashSet<CardTag> CanonicalTags => [CardTag.Strike];
     
+    public override void AfterCreated()
+    {
+        base.AfterCreated();
+        this.BaseReplayCount = 3;
+    }
+    
+    protected override void AfterDeserialized()
+    {
+        base.AfterDeserialized();
+        this.BaseReplayCount = 3; 
+    }
+    
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new DamageVar(3M, ValueProp.Move),
-        new RepeatVar(4),
-        new AmmunitionDynamicVar(1M),
-        new LoadDynamicVar(2M),
-        new AmmuMaxDynamicVar(2M),
+        new AmmunitionDynamicVar(3M),
+        new LoadDynamicVar(3M),
+        new AmmuMaxDynamicVar(6M),
     ];
     
     protected override async Task OnPlayWithAmmu(PlayerChoiceContext choiceContext, CardPlay cardPlay, int ammu)
@@ -27,7 +38,7 @@ public sealed class ArtilleryStrike() : AmmunitionCard(1, CardType.Attack, CardR
         if (this.CanonicalKeywords.Contains(TashkentKeyword.Barrage))
         {
             await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
-                .WithHitCount(ammu * DynamicVars.Repeat.IntValue)
+                .WithHitCount(ammu)
                 .FromCard(this)
                 .TargetingAllOpponents(CombatState)
                 .WithHitFx("vfx/vfx_attack_slash")
@@ -38,7 +49,6 @@ public sealed class ArtilleryStrike() : AmmunitionCard(1, CardType.Attack, CardR
         {
             ArgumentNullException.ThrowIfNull(cardPlay.Target, nameof(cardPlay.Target));
             await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
-                .WithHitCount(DynamicVars.Repeat.IntValue)
                 .FromCard(this)
                 .Targeting(cardPlay.Target)
                 .WithHitFx("vfx/vfx_attack_slash")

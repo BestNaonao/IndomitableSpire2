@@ -1,11 +1,14 @@
 ﻿using System.Runtime.InteropServices;
 using BaseLib.Abstracts;
+using BaseLib.Patches.UI;
 using Godot;
 using TashkentSpire2.TashkentSpire2Code.Cards.Basics;
 using TashkentSpire2.TashkentSpire2Code.Relics;
 using TashkentSpire2.TashkentSpire2Code.Config;
 using MegaCrit.Sts2.Core.Entities.Characters;
 using MegaCrit.Sts2.Core.Models;
+using TashkentSpire2.TashkentSpire2Code.Cards.Ancient;
+using TashkentSpire2.TashkentSpire2Code.Cards.Rare;
 
 namespace TashkentSpire2.TashkentSpire2Code.Character;
 
@@ -36,7 +39,7 @@ public sealed class TashkentCharacter : CustomCharacterModel
         ModelDb.Card<Strike>(),
         ModelDb.Card<Strike>(),
         ModelDb.Card<Strike>(),
-        ModelDb.Card<Strike>(),
+        ModelDb.Card<PoseidonForm>(),
         ModelDb.Card<Defend>(),
         ModelDb.Card<Defend>(),
         ModelDb.Card<Defend>(),
@@ -49,6 +52,13 @@ public sealed class TashkentCharacter : CustomCharacterModel
     [
         ModelDb.Relic<EjectionStart>()
     ];
+    
+    public override string CustomAttackSfx => 
+        "res://TashkentSpire2/sfx/tashkent_attacksfx.mp3";
+    public override string CustomCastSfx => 
+        "res://TashkentSpire2/sfx/tashkent_castsfx.mp3";
+    public override string CustomDeathSfx => 
+        "res://TashkentSpire2/sfx/tashkent_deathsfx.mp3";
     
     public override string CustomIconTexturePath =>                 //选择时
         "res://TashkentSpire2/images/Tashkent/character_icon_tashkent.png";  
@@ -105,6 +115,13 @@ public sealed class TashkentCharacter : CustomCharacterModel
             ? "res://TashkentSpire2/images/Tashkent/hands/multiplayer_hand_tashkent_scissors.png"
             : "res://TashkentSpire2/images/Tashkent/feet/multiplayer_foot_tashkent_scissors.png";
 
+    public override RelicIconData? CustomYummyCookie =>
+        new RelicIconData(
+            BigIconPath: "res://TashkentSpire2/images/relics/big/YummyCookie_tashkent.png",
+            PackedIconPath: "res://TashkentSpire2/images/relics/packed/YummyCookie_tashkent.png",
+            PackedIconOutlinePath: "res://TashkentSpire2/images/relics/outline/YummyCookie_tashkent.png"
+        );
+    
     // // 原版逻辑构建动作映射，传入 Spine 文件中实际命名的动作字符串
     // public override CreatureAnimator SetupCustomAnimationStates(MegaSprite controller) => SetupAnimationState(
     //     controller: controller, 
