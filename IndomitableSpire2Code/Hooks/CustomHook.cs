@@ -1,5 +1,7 @@
 ﻿using IndomitableSpire2.IndomitableSpire2Code.Abstracts;
+using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Players;
+using MegaCrit.Sts2.Core.Models;
 
 namespace IndomitableSpire2.IndomitableSpire2Code.Hooks;
 
@@ -18,6 +20,26 @@ public static class CustomHook
                 await subscriber.AfterEnergyGained(player, amount);
                 
                 // 【核心细节】：必须调用 InvokeExecutionFinished()，这是 STS2 引擎内部管理状态机的必要步骤
+                model.InvokeExecutionFinished();
+            }
+        }
+    }
+
+    public static async Task AfterDynamicVarAmountChanged(
+        AbstractModel sourceModel,
+        decimal originalAmount,
+        decimal offsetAmount,
+        Creature target,
+        Creature? applier)
+    {
+        if (target.CombatState == null) return;
+        
+        // 使用原版的 IterateHookListeners 来遍历当前战斗中所有合法的监听器模型
+        foreach (var model in target.CombatState.IterateHookListeners())
+        {
+            if (model is IAfterDynamicVarAmountChangedSubscriber subscriber)
+            {
+                await subscriber.AfterDynamicVarAmountChanged(sourceModel, originalAmount, offsetAmount, target, applier);
                 model.InvokeExecutionFinished();
             }
         }
