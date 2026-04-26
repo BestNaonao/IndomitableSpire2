@@ -13,7 +13,7 @@ namespace IndomitableSpire2.IndomitableSpire2Code.Cards.Others;
 
 public sealed class ExerciseCommission() : CommissionCard(TargetType.Self)
 {
-    protected override int InitialMaxProgressAmount => 100;
+    protected override int InitialMaxProgressAmount => 50;
     
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
