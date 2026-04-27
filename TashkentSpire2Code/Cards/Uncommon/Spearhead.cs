@@ -10,6 +10,7 @@ public sealed class Spearhead() : TashkentCard(1, CardType.Power, CardRarity.Unc
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new PowerVar<SpearheadPower>(1M),
+        new EnergyVar(1),
         new PowerVar<MarkPreTurnPower>(2M)
     ];
 

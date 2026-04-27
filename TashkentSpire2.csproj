@@ -102,7 +102,6 @@
     </ItemGroup>
 
     <ItemGroup>
-        <Folder Include="TashkentSpire2Code\Reward\" />
         <Folder Include="TashkentSpire2\images\card_portraits\big\"/>
         <Folder Include="TashkentSpire2\images\packed\sprite_fonts\" />
         <Folder Include="TashkentSpire2\images\powers\big\"/>

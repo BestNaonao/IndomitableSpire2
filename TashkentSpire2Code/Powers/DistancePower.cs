@@ -15,12 +15,15 @@ namespace TashkentSpire2.TashkentSpire2Code.Powers;
 public sealed class DistancePower : TashkentPower
 {
     private const string VarKey = "Tashkent_Distance";
+    private bool _isSyncing = false;
+    private bool _isFlipping = false;
     
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;
     public override bool AllowNegative => true;
     
-    public override int DisplayAmount => base.DynamicVars[VarKey].IntValue;
+    private int CurrentDist => (int)base.DynamicVars[VarKey].BaseValue;
+    public override int DisplayAmount => CurrentDist;
     
     public override string CustomBigIconPath => 
         "res://TashkentSpire2/images/powers/big/distance_power.png";
@@ -35,9 +38,26 @@ public sealed class DistancePower : TashkentPower
             new DynamicVar("Decrease", 0M)
         };
     
-    private int CurrentDist => (int)base.DynamicVars[VarKey].BaseValue;
-    
     private int MapToDist(int amount) => amount - 10;
+    
+    public async Task OnDirectionFlipped()
+    {
+        if (_isSyncing) return;
+        
+        _isSyncing = true;
+        _isFlipping = true;
+
+        decimal targetAmount = 20m - base.Amount;
+        decimal delta = targetAmount - base.Amount;
+        
+        if (delta != 0)
+        {
+            await PowerCmd.ModifyAmount(this, delta, base.Owner, null);
+        }
+
+        _isFlipping = false;
+        _isSyncing = false;
+    }
     
     public override bool TryModifyPowerAmountReceived(PowerModel canonicalPower, Creature target, decimal amount, Creature? giver, out decimal modifiedAmount)
     {
@@ -79,8 +99,6 @@ public sealed class DistancePower : TashkentPower
         InvokeDisplayAmountChanged();
     }
     
-    private bool _isSyncing = false;
-    
     private bool HasActiveSandpit()
     {
         if (base.CombatState == null) return false;
@@ -103,45 +121,28 @@ public sealed class DistancePower : TashkentPower
     {
         if (dealer == this.Owner && (!props.HasFlag(ValueProp.Move) || cardSource == null))
             return 1m;
-        
-        decimal multiplier = 1m;
-        int dist = CurrentDist;
-        
+
+        int dist = CurrentDist; 
+        if (dist == 0) return 1m;
+
+        int enemySide = 1;
+        Creature? enemy = (dealer == base.Owner) ? target : dealer;
+        if (enemy == null) return 1m;
+
+        if (enemy.HasPower<BackAttackLeftPower>()) enemySide = -1;
+
         var surrounded = base.Owner.GetPower<SurroundedPower>();
+        int playerFacing = (surrounded != null && surrounded.Facing == SurroundedPower.Direction.Left) ? -1 : 1;
+
+        bool isFrontEnemy = (enemySide == playerFacing);
+
+        decimal multiplier = 1m;
+        decimal weight = isFrontEnemy ? (decimal)dist : -(decimal)dist;
 
         if (dealer == base.Owner)
-        {
-            int effectiveDist = dist;
-            if (surrounded != null && target != null)
-            {
-                bool isTargetAtBack = false;
-                if (surrounded.Facing == SurroundedPower.Direction.Right && target.HasPower<BackAttackLeftPower>()) 
-                    isTargetAtBack = true;
-                else if (surrounded.Facing == SurroundedPower.Direction.Left && target.HasPower<BackAttackRightPower>())
-                    isTargetAtBack = true;
-
-                if (isTargetAtBack) effectiveDist = -dist;
-            }
-            
-            multiplier *= (1m + (decimal)effectiveDist * 0.2m);
-        }
-
-        if (target == base.Owner)
-        {
-            int effectiveDist = dist;
-            if (surrounded != null && dealer != null)
-            {
-                bool isDealerAtBack = false;
-                if (surrounded.Facing == SurroundedPower.Direction.Right && dealer.HasPower<BackAttackLeftPower>())
-                    isDealerAtBack = true;
-                else if (surrounded.Facing == SurroundedPower.Direction.Left && dealer.HasPower<BackAttackRightPower>())
-                    isDealerAtBack = true;
-
-                if (isDealerAtBack) effectiveDist = -dist;
-            }
-            
-            multiplier *= (1m + (decimal)effectiveDist * 0.1m);
-        }
+            multiplier *= (1m + weight * 0.2m);
+        else if (target == base.Owner)
+            multiplier *= (1m + weight * 0.1m);
 
         return multiplier;
     }
@@ -152,9 +153,9 @@ public sealed class DistancePower : TashkentPower
         {
             int newDist = MapToDist(base.Amount);
             int lastLogicalDist = (int)base.DynamicVars[VarKey].BaseValue;
-            int delta = newDist - lastLogicalDist;
+            int deltaDist = newDist - lastLogicalDist;
 
-            if (delta != 0)
+            if (deltaDist != 0)
             {
                 base.DynamicVars[VarKey].BaseValue = newDist;
                 RefreshDerivedVars();
@@ -162,16 +163,15 @@ public sealed class DistancePower : TashkentPower
                 if (!_isSyncing)
                 {
                     _isSyncing = true;
-                    await SyncSandpitPower(delta);
+                    await SyncSandpitPower(deltaDist);
                     _isSyncing = false;
                 }
-                if (!HasActiveSandpit())
-                {
-                    await UpdateCreaturePositions(delta);
-                }
 
-                await NotifyDistanceChanged(delta);
-                
+                if (!_isFlipping)
+                {
+                    await UpdateCreaturePositions(deltaDist);
+                }
+                await NotifyDistanceChanged(deltaDist);
                 InvokeDisplayAmountChanged();
             }
         }
@@ -224,35 +224,20 @@ public sealed class DistancePower : TashkentPower
     private async Task UpdateCreaturePositions(int delta)
     {
         if (delta == 0) return;
+        var surrounded = base.Owner.GetPower<SurroundedPower>();
+        bool isFacingLeft = surrounded != null && surrounded.Facing == SurroundedPower.Direction.Left;
 
-        float moveDistance = delta * 50f;
+        float moveDir = isFacingLeft ? -1f : 1f;
+        float moveDistance = delta * 50f * moveDir;
 
         Tween? tween = null;
-
         foreach (Creature creature in GetOwnerAndPets())
         {
-            if (creature.IsDead) continue;
-
             NCreature? node = NCombatRoom.Instance?.GetCreatureNode(creature);
-            if (node == null) continue;
-
-            if (tween == null) {
-                tween = NCombatRoom.Instance?.CreateTween()
-                    .SetParallel()
-                    .SetEase(Tween.EaseType.Out)
-                    .SetTrans(Tween.TransitionType.Cubic);
-            }
-
-            tween?.TweenProperty(
-                node,
-                "global_position:x",
-                node.GlobalPosition.X + moveDistance,
-                0.25f
-            );
+            if (node == null || creature.IsDead) continue;
+            if (tween == null) tween = NCombatRoom.Instance?.CreateTween().SetParallel().SetEase(Tween.EaseType.Out).SetTrans(Tween.TransitionType.Cubic);
+            tween?.TweenProperty(node, "global_position:x", node.GlobalPosition.X + moveDistance, 0.25f);
         }
-
-        if (tween != null)
-            await tween.ToSignal(tween, Tween.SignalName.Finished);
-        
+        if (tween != null) await tween.ToSignal(tween, Tween.SignalName.Finished);
     }
 }

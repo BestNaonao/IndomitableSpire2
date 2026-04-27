@@ -93,7 +93,7 @@
   "TASHKENTSPIRE2-RESCUE.title": "救援",
   "TASHKENTSPIRE2-RESCUE.description": "[gold]手牌[/gold]中随机{IfUpgraded:show:X+1|X}张牌本回合可以免费打出一次。",
   "TASHKENTSPIRE2-SPEARHEAD.title": "尖兵",
-  "TASHKENTSPIRE2-SPEARHEAD.description": "在每个回合开始时获得{Energy:energyIcons()}并给予自身{TashkentSpire2-Mark:diff()}层[gold]标记[/gold]。",
+  "TASHKENTSPIRE2-SPEARHEAD.description": "在每个回合开始时获得{Energy:energyIcons()}并给予自身{MarkPreTurnPower:diff()}层[gold]标记[/gold]。",
   "TASHKENTSPIRE2-SUPPLE_AS_A_WAVE.title": "翩若惊鸿",
   "TASHKENTSPIRE2-SUPPLE_AS_A_WAVE.description": "[gold]突进[/gold]{TashkentSpire2-Charge:diff()}。\n造成{Damage:diff()}点伤害。",
   "TASHKENTSPIRE2-SWIFT_AS_A_SWAN.title": "婉若游龙",
