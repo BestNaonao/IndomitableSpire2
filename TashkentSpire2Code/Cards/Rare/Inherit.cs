@@ -13,12 +13,14 @@ public sealed class Inherit() : TashkentCard(0, CardType.Skill, CardRarity.Rare,
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
     
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new CardsVar(3),
+        new CardsVar(2),
         new EnergyVar(1)
     ];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
+        await CardPileCmd.Draw(choiceContext, base.DynamicVars.Cards.IntValue, base.Owner);
+        
         var selected = (await CardSelectCmd.FromHand(
             choiceContext,
             this.Owner,

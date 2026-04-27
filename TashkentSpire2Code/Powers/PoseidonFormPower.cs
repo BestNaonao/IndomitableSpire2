@@ -1,4 +1,5 @@
 ﻿using MegaCrit.Sts2.Core.Combat;
+using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Players;
@@ -14,6 +15,8 @@ public sealed class PoseidonFormPower : TashkentPower
     private const string RemainKey = "RemainAmount";
     private CardModel? _triggeringCard;
     private int _usedThisTurn = 0;
+    
+    private bool _isDuplicating = false; 
 
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;
@@ -38,14 +41,29 @@ public sealed class PoseidonFormPower : TashkentPower
         await Task.CompletedTask;
     }
     
-    public override Task AfterPowerAmountChanged(PowerModel power, decimal amount, Creature? applier, CardModel? cardSource)
+    public override async Task AfterPowerAmountChanged(PowerModel power, decimal amount, Creature? applier, CardModel? cardSource)
     {
         if (power == this)
         {
             base.DynamicVars[RemainKey].BaseValue = this.Amount - _usedThisTurn;
             InvokeDisplayAmountChanged();
         }
-        return Task.CompletedTask;
+
+        if (_isDuplicating) return;
+
+        if (base.DynamicVars[RemainKey].BaseValue > 0 && 
+            cardSource != null && 
+            cardSource == _triggeringCard && 
+            power.GetTypeForAmount(amount) == PowerType.Buff &&
+            power.IsInstanced && 
+            power.StackType != PowerStackType.Single)
+        {
+            _isDuplicating = true;
+            
+            await PowerCmd.Apply(power, base.Owner, amount, applier, cardSource);
+            
+            _isDuplicating = false;
+        }
     }
 
     public override Task BeforeHandDraw(Player player, PlayerChoiceContext choiceContext, CombatState combatState)
@@ -59,6 +77,8 @@ public sealed class PoseidonFormPower : TashkentPower
 
     public override Task BeforePowerAmountChanged(PowerModel power, decimal amount, Creature target, Creature? applier, CardModel? cardSource)
     {
+        if (_isDuplicating) return Task.CompletedTask;
+
         if (base.DynamicVars[RemainKey].BaseValue <= 0 || cardSource == null) 
             return Task.CompletedTask;
         
@@ -66,6 +86,9 @@ public sealed class PoseidonFormPower : TashkentPower
             return Task.CompletedTask;
         
         if (power.GetTypeForAmount(amount) != PowerType.Buff) 
+            return Task.CompletedTask;
+        
+        if (power.StackType == PowerStackType.Single) 
             return Task.CompletedTask;
         
         if (_triggeringCard == null)
@@ -78,11 +101,19 @@ public sealed class PoseidonFormPower : TashkentPower
 
     public override decimal ModifyPowerAmountGiven(PowerModel power, Creature giver, decimal amount, Creature? target, CardModel? cardSource)
     {
+        if (_isDuplicating) return amount;
+
         if (base.DynamicVars[RemainKey].BaseValue > 0 && 
             cardSource != null && 
             cardSource == _triggeringCard && 
             power.GetTypeForAmount(amount) == PowerType.Buff)
         {
+            if (power.StackType == PowerStackType.Single) 
+                return amount;
+            
+            if (power.IsInstanced) 
+                return amount;
+            
             return amount * 2m;
         }
 

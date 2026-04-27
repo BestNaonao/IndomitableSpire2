@@ -29,12 +29,13 @@ public sealed class TidebreakerHunt() : TashkentCard(4, CardType.Attack, CardRar
     
     public override async Task AfterCardExhausted(PlayerChoiceContext choiceContext, CardModel card, bool causedByEthereal)
     {
-        await CardPileCmd.Draw(choiceContext, base.DynamicVars.Cards.IntValue, base.Owner);
-        
-        if (card == this && this.CanonicalEnergyCost > 0)
+        if (card == this)
         {
             CardModel cardclone = CreateClone();
-            cardclone.EnergyCost.AddThisCombat(-1);
+            if (this.CanonicalEnergyCost > 0)
+            {
+                cardclone.EnergyCost.AddThisCombat(-1);
+            }
             await CardPileCmd.AddGeneratedCardToCombat(cardclone, PileType.Hand, addedByPlayer: true);
         }
     }

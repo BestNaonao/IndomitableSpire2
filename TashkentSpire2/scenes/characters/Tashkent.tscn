@@ -1,16 +1,16 @@
-[gd_scene load_steps=2 format=3 uid="uid://bx2e67qjfw3kq"]
+[gd_scene load_steps=3 format=3 uid="uid://bx2e67qjfw3kq"]
 
+[ext_resource type="Script" uid="uid://dixp6jmv3an2i" path="res://TashkentSpire2Code/Scripts/NCreatureVisualsTashkent.cs" id="1_afy05"]
 [ext_resource type="Texture2D" uid="uid://b73ixjpx0hd0" path="res://TashkentSpire2/images/Tashkent/Tashkent_character.png" id="1_v075x"]
 
 [node name="Tashkent" type="Node2D"]
+script = ExtResource("1_afy05")
 
-[node name="TashkentCharacter" type="Sprite2D" parent="."]
+[node name="Visuals" type="Sprite2D" parent="."]
+unique_name_in_owner = true
 position = Vector2(-11, -117.00001)
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("1_v075x")
-
-[node name="Visuals" type="Node2D" parent="."]
-unique_name_in_owner = true
 
 [node name="Bounds" type="Control" parent="."]
 unique_name_in_owner = true

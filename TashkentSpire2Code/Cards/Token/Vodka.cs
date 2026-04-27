@@ -14,7 +14,7 @@ namespace TashkentSpire2.TashkentSpire2Code.Cards.Token;
 public sealed class Vodka() : TashkentCard(0, CardType.Skill, CardRarity.Token, TargetType.Self)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new PowerVar<VigorPower>(3M),
+        new PowerVar<VigorPower>(2M),
         new CardsVar(1)
     ];
     

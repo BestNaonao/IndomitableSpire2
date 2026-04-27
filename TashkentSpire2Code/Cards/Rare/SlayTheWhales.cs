@@ -18,21 +18,51 @@ public sealed class SlayTheWhales() : TashkentCard(2, CardType.Attack, CardRarit
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         ArgumentNullException.ThrowIfNull(cardPlay.Target, nameof(cardPlay.Target));
+        ArgumentNullException.ThrowIfNull(CombatState);
+        
         if (base.IsUpgraded)
         {
-            await PowerCmd.Apply<DistancePower>(base.Owner.Creature, -DynamicVars["TashkentSpire2-Retreat"].BaseValue, base.Owner.Creature, null);
+            await PowerCmd.Apply<DistancePower>(
+                base.Owner.Creature, 
+                -DynamicVars["TashkentSpire2-Retreat"].BaseValue, 
+                base.Owner.Creature, 
+                this
+            );
         }
-        
-        do
+
+        while (true)
         {
             await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
                 .FromCard(this)
                 .Targeting(cardPlay.Target)
                 .WithHitFx("vfx/vfx_attack_slash")
                 .Execute(choiceContext);
-            await PowerCmd.Apply<DistancePower>(base.Owner!.Creature, DynamicVars["TashkentSpire2-Charge"].BaseValue, base.Owner.Creature, null);
+            
+            var distPower = base.Owner.Creature.GetPower<DistancePower>();
+            if (distPower != null && distPower.Amount >= 15m)
+            {
+                break;
+            }
+            
+            await PowerCmd.Apply<DistancePower>(
+                base.Owner.Creature, 
+                DynamicVars["TashkentSpire2-Charge"].BaseValue, 
+                base.Owner.Creature, 
+                this
+            );
+            await PowerCmd.Apply<BackAfterTurnPower>(
+                base.Owner.Creature,
+                DynamicVars["TashkentSpire2-Retreat"].BaseValue,
+                base.Owner.Creature,
+                this
+            );
+
+            bool allInfinite = Owner.Creature.CombatState?.HittableEnemies.All(c => c.ShowsInfiniteHp) ?? true;
+            if (cardPlay.Target.IsDead || allInfinite)
+            {
+                break;
+            }
         }
-        while ((int)(base.Owner?.Creature.GetPower<DistancePower>()?.Amount ?? 0m) < 5);
     }
     
     protected override void OnUpgrade()
