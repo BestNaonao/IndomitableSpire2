@@ -13,8 +13,8 @@ public sealed class ReinforcedSteel() : TashkentCard(2, CardType.Skill, CardRari
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
     
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new BlockVar(10M, ValueProp.Move),
-        new PowerVar<PlatingPower>(4M)
+        new BlockVar(8M, ValueProp.Move),
+        new PowerVar<PlatingPower>(6M)
     ];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)

@@ -1,0 +1,27 @@
+﻿using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.Commands;
+using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using TashkentSpire2.TashkentSpire2Code.Powers;
+
+namespace TashkentSpire2.TashkentSpire2Code.Cards.Uncommon;
+
+public sealed class Spearhead() : TashkentCard(1, CardType.Power, CardRarity.Uncommon, TargetType.Self)
+{
+    protected override IEnumerable<DynamicVar> CanonicalVars => [
+        new PowerVar<SpearheadPower>(1M),
+        new PowerVar<MarkPreTurnPower>(2M)
+    ];
+
+    protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+    {
+        await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
+        await PowerCmd.Apply<SpearheadPower>(base.Owner.Creature, base.DynamicVars["SpearheadPower"].BaseValue, base.Owner.Creature, this);
+        await PowerCmd.Apply<MarkPreTurnPower>(base.Owner.Creature, base.DynamicVars["MarkPreTurnPower"].BaseValue, base.Owner.Creature, this);
+    }
+
+    protected override void OnUpgrade()
+    {
+        base.DynamicVars["MarkPreTurnPower"].UpgradeValueBy(-1M);
+    }
+}

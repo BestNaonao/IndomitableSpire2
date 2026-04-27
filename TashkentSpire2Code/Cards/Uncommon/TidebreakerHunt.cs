@@ -7,10 +7,10 @@ using MegaCrit.Sts2.Core.ValueProps;
 
 namespace TashkentSpire2.TashkentSpire2Code.Cards.Uncommon;
 
-public sealed class TidebreakerHunt() : TashkentCard(4, CardType.Attack, CardRarity.Uncommon, TargetType.AnyEnemy)
+public sealed class TidebreakerHunt() : TashkentCard(4, CardType.Attack, CardRarity.Uncommon, TargetType.AllEnemies)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new DamageVar(22M, ValueProp.Move),
+        new DamageVar(20M, ValueProp.Move),
         new EnergyVar(1)
     ];
     
@@ -18,11 +18,11 @@ public sealed class TidebreakerHunt() : TashkentCard(4, CardType.Attack, CardRar
     
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        ArgumentNullException.ThrowIfNull(cardPlay.Target, nameof(cardPlay.Target));
+        ArgumentNullException.ThrowIfNull(CombatState);
         
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
             .FromCard(this)
-            .Targeting(cardPlay.Target)
+            .TargetingAllOpponents(CombatState)
             .WithHitFx("vfx/vfx_attack_slash")
             .Execute(choiceContext);
     }
