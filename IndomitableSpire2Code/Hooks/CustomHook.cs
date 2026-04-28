@@ -27,6 +27,7 @@ public static class CustomHook
 
     public static async Task AfterDynamicVarAmountChanged(
         AbstractModel sourceModel,
+        string variableName,
         decimal originalAmount,
         decimal offsetAmount,
         Creature target,
@@ -39,7 +40,7 @@ public static class CustomHook
         {
             if (model is IAfterDynamicVarAmountChangedSubscriber subscriber)
             {
-                await subscriber.AfterDynamicVarAmountChanged(sourceModel, originalAmount, offsetAmount, target, applier);
+                await subscriber.AfterDynamicVarAmountChanged(sourceModel, variableName, originalAmount, offsetAmount, target, applier);
                 model.InvokeExecutionFinished();
             }
         }

@@ -10,6 +10,7 @@ public interface IAfterDynamicVarAmountChangedSubscriber
 {
     public Task AfterDynamicVarAmountChanged(
         AbstractModel sourceModel,
+        string variableName,
         decimal originalAmount,
         decimal offsetAmount,
         Creature target,
