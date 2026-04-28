@@ -1,4 +1,6 @@
-﻿using MegaCrit.Sts2.Core.Commands;
+﻿using IndomitableSpire2.IndomitableSpire2Code.Abstracts;
+using IndomitableSpire2.IndomitableSpire2Code.Hooks;
+using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
@@ -7,7 +9,7 @@ using MegaCrit.Sts2.Core.Models.Powers;
 
 namespace IndomitableSpire2.IndomitableSpire2Code.Powers;
 
-public sealed class MotivationPower : IndomitablePower // 继承自你的能力基类
+public sealed class MotivationPower : IndomitablePower, IAfterDynamicVarAmountChangedSubscriber
 {
     public const int MaxAmount = 100;
     public const int TransProportion = 10;
@@ -41,7 +43,7 @@ public sealed class MotivationPower : IndomitablePower // 继承自你的能力�
         InvokeDisplayAmountChanged();
         
         // 事后处理，确保活力图标出现在干劲图标出现后
-        _ = AfterAmountChanged(amount, applier, null);
+        _ = CustomHook.AfterDynamicVarAmountChanged(this, "MotivationAmount", 0, amount, Owner, applier);
         return Task.CompletedTask;
     }
     
@@ -78,18 +80,17 @@ public sealed class MotivationPower : IndomitablePower // 继承自你的能力�
         }
         
         // 事后处理，确保活力图标出现在干劲图标出现后
-        _ = AfterAmountChanged(oldAmount + amount, applier, null);
+        _ = CustomHook.AfterDynamicVarAmountChanged(this, "MotivationAmount", oldAmount, amount, Owner, applier);
         return true;
     }
     
-    private async Task AfterAmountChanged(decimal proposed, Creature? applier, CardModel? cardSource)
+    public async Task AfterDynamicVarAmountChanged(AbstractModel sourceModel, string variableName, decimal originalAmount,
+        decimal offsetAmount, Creature target, Creature? applier)
     {
-        if (proposed > MaxAmount)
-        {
-            var vigorToApply = Math.Floor((proposed - MaxAmount) / TransProportion);
-            if (vigorToApply > 0) 
-                await PowerCmd.Apply<VigorPower>(Owner, vigorToApply, applier, cardSource);
-        }
+        if (sourceModel is not MotivationPower || !variableName.Equals("MotivationAmount") || target != Owner || offsetAmount < 0) return;
+        var vigorToApply = Math.Floor((originalAmount + offsetAmount - MaxAmount) / TransProportion);
+        if (vigorToApply > 0)
+            await PowerCmd.Apply<VigorPower>(Owner, vigorToApply, applier, null);
     }
     
     // 供其他卡牌或遗物调用的归零使用的快捷方法
