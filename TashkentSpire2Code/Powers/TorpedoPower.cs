@@ -107,7 +107,7 @@ public sealed class TorpedoPower : TashkentPower
                 .ToList();
 
             var target = candidates.Count > 0
-                ? candidates[new Random().Next(candidates.Count)]
+                ? base.Owner?.Player?.RunState.Rng.CombatTargets.NextItem(candidates)
                 : null;
 
             if (target == null)

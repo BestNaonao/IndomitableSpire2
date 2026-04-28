@@ -12,5 +12,7 @@
   "TASHKENTSPIRE2-AMMU-MAX.title": "弹药最大值",
   "TASHKENTSPIRE2-AMMU-MAX.description": "可装载的弹药最大值。",
   "TASHKENTSPIRE2-LOAD.title": "装填",
-  "TASHKENTSPIRE2-LOAD.description": "在弹药为[blue]0[/blue]时执行，装填X份弹药，然后执行后续效果。"
+  "TASHKENTSPIRE2-LOAD.description": "在弹药为[blue]0[/blue]时执行，装填X份弹药，然后执行后续效果。",
+  "TASHKENTSPIRE2_SUMMON_DYNAMIC.description": "以[blue]{Summon}[/blue]生命值召唤[gold]左爪[/gold]与[gold]右爪[/gold]。\n如果已经召唤，则在本场战斗中将其最大生命值提升[blue]{Summon}[/blue]点。",
+  "TASHKENTSPIRE2_SUMMON_DYNAMIC.title": "召唤{Summon}"
 }

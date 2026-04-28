@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://cietjfmvsoftn"]
+
+[ext_resource type="Script" uid="uid://dixp6jmv3an2i" path="res://TashkentSpire2Code/Scripts/NCreatureVisualsTashkent.cs" id="1_lma4v"]
+[ext_resource type="Texture2D" uid="uid://d3fupmrei6np7" path="res://TashkentSpire2/images/minions/minion_left.png" id="2_m7erx"]
+
+[node name="MinionLeft" type="Node2D"]
+script = ExtResource("1_lma4v")
+
+[node name="Visuals" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -71)
+scale = Vector2(0.07, 0.07)
+texture = ExtResource("2_m7erx")
+
+[node name="Bounds" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="CenterPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+
+[node name="IntentPos" type="Marker2D" parent="."]
+unique_name_in_owner = true

@@ -1,7 +1,9 @@
 ﻿using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using TashkentSpire2.TashkentSpire2Code.Commands;
 using TashkentSpire2.TashkentSpire2Code.Powers;
 
 namespace TashkentSpire2.TashkentSpire2Code.Cards.Rare;
@@ -9,13 +11,18 @@ namespace TashkentSpire2.TashkentSpire2Code.Cards.Rare;
 public sealed class GoneWithTheWind() : TashkentCard(1, CardType.Power, CardRarity.Rare, TargetType.Self)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new PowerVar<GoneWithTheWindPower>(4M)
+        new PowerVar<GoneWithTheWindPower>(4M),
+        new SummonVar(1M)
     ];
 
+    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+        [HoverTipFactory.Static(StaticHoverTip.SummonDynamic, base.DynamicVars.Summon)];
+    
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
         await PowerCmd.Apply<GoneWithTheWindPower>(base.Owner.Creature, base.DynamicVars["GoneWithTheWindPower"].BaseValue, base.Owner.Creature, this);
+        await MinionSummoncmd.Summon(choiceContext, base.Owner, base.DynamicVars.Summon.BaseValue, this);
     }
 
     protected override void OnUpgrade()

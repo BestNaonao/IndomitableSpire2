@@ -82,5 +82,8 @@
   "TASHKENTSPIRE2-SPEARHEAD_POWER.title": "尖兵",
   "TASHKENTSPIRE2-MARK_PRE_TURN_POWER.description": "每回合开始时自己获得[blue]1[/blue]层[gold]标记[/gold]。",
   "TASHKENTSPIRE2-MARK_PRE_TURN_POWER.smartDescription": "每回合开始时自己获得{Amount}层[gold]标记[/gold]。",
-  "TASHKENTSPIRE2-MARK_PRE_TURN_POWER.title": "每回合标记"
+  "TASHKENTSPIRE2-MARK_PRE_TURN_POWER.title": "每回合标记",
+  "TASHKENTSPIRE2-BARREL_MODIFICATION_POWER.description": "当你[gold]装填[/gold]时，获得[gold]活力[gold]。",
+  "TASHKENTSPIRE2-BARREL_MODIFICATION_POWER.smartDescription": "当你[gold]装填[/gold]时，获得{Amount}点[gold]活力[gold]。",
+  "TASHKENTSPIRE2-BARREL_MODIFICATION_POWER.title": "炮膛改装"
 }

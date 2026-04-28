@@ -1,6 +1,9 @@
-﻿using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+﻿using MegaCrit.Sts2.Core.Commands;
+using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Models.Powers;
 using TashkentSpire2.TashkentSpire2Code.Cards;
+using TashkentSpire2.TashkentSpire2Code.Powers;
 
 namespace TashkentSpire2.TashkentSpire2Code.Commands;
 
@@ -18,6 +21,12 @@ public static class Loadcmd
             
             int newValue = Math.Min(ammuCard.CurrentAmmu + amount, max);
             ammuCard.UpdateAmmuGlobal(newValue);
+        }
+        
+        int vigorAmount = (int)(targetCard.Owner?.Creature.GetPower<BarrelModificationPower>()?.Amount ?? 0m);
+        if (vigorAmount > 0 && targetCard.Owner?.Creature != null)
+        {
+            await PowerCmd.Apply<VigorPower>(targetCard.Owner.Creature, (decimal)vigorAmount, targetCard.Owner.Creature, null);
         }
         
         await Task.CompletedTask;

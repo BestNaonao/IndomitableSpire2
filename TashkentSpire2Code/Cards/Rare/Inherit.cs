@@ -42,6 +42,6 @@ public sealed class Inherit() : TashkentCard(0, CardType.Skill, CardRarity.Rare,
     
     protected override void OnUpgrade()
     {
-        DynamicVars.Cards.UpgradeValueBy(2M);
+        DynamicVars.Cards.UpgradeValueBy(1M);
     }
 }

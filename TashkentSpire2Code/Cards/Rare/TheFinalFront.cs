@@ -20,6 +20,6 @@ public sealed class TheFinalFront() : TashkentCard(2, CardType.Power, CardRarity
 
     protected override void OnUpgrade()
     {
-        base.EnergyCost.UpgradeBy(-1);
+        base.DynamicVars["TheFinalFrontPower"].UpgradeValueBy(1M);
     }
 }

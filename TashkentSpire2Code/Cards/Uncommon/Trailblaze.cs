@@ -5,13 +5,14 @@ using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.ValueProps;
 using TashkentSpire2.TashkentSpire2Code.Powers;
 
-namespace TashkentSpire2.TashkentSpire2Code.Cards.Common;
+namespace TashkentSpire2.TashkentSpire2Code.Cards.Uncommon;
 
-public sealed class Charge() : TashkentCard(1, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
+public sealed class Trailblaze() : TashkentCard(1, CardType.Attack, CardRarity.Uncommon, TargetType.AnyEnemy)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new DamageVar(9M, ValueProp.Move),
-        new ChargeDynamicVar(2M)
+        new DamageVar(7M, ValueProp.Move),
+        new ChargeDynamicVar(2M),
+        new PowerVar<BackAfterTurnPower>(2M)
     ];
     
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
@@ -25,6 +26,7 @@ public sealed class Charge() : TashkentCard(1, CardType.Attack, CardRarity.Commo
             .Execute(choiceContext);
         
         await PowerCmd.Apply<DistancePower>(base.Owner.Creature, base.DynamicVars["TashkentSpire2-Charge"].BaseValue, base.Owner.Creature, this);
+        await PowerCmd.Apply<BackAfterTurnPower>(base.Owner.Creature, base.DynamicVars["BackAfterTurnPower"].BaseValue, base.Owner.Creature, null);
     }
     
     protected override void OnUpgrade() => DynamicVars.Damage.UpgradeValueBy(3M);
