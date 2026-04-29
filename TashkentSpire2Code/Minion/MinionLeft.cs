@@ -1,5 +1,8 @@
-﻿using MegaCrit.Sts2.Core.Entities.Creatures;
+﻿using MegaCrit.Sts2.Core.Commands;
+using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Players;
+using TashkentSpire2.TashkentSpire2Code.Actions;
+using TashkentSpire2.TashkentSpire2Code.Powers;
 
 namespace TashkentSpire2.TashkentSpire2Code.Minion;
 
@@ -18,8 +21,12 @@ public sealed class MinionLeft : MinionModel
     public const string PowerAttackAnimName = "debuff";
     public const string SleepAnimName = "_ignore/string_rigging";
 
-    public override Task OnSummon(Player owner, Creature self, MinionSummonOptions options)
+    public override async Task OnSummon(Player owner, Creature self, MinionSummonOptions options)
     {
-        return Task.CompletedTask;
+        var power = owner?.Creature.GetPower<GoneWithTheWindPower>();
+        if (power != null)
+        {
+            await PowerCmd.Apply<MinionLeftAction>(self, 1m, self, null, false);
+        }
     }
 }

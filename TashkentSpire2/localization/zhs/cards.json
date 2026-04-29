@@ -143,7 +143,7 @@
   "TASHKENTSPIRE2-FLESH_MEMORY.title": "躯体本能",
   "TASHKENTSPIRE2-FLESH_MEMORY.description": "获得{Block:diff()}点[gold]格挡[/gold]。\n抽{Cards:diff()}张牌。\n每当你打出[gold]弹药[/gold]牌，就将这张牌放入你的[gold]手牌[/gold]中。",
   "TASHKENTSPIRE2-GONE_WITH_THE_WIND.title": "来去如风",
-  "TASHKENTSPIRE2-GONE_WITH_THE_WIND.description": "//未完成//\n你每回合有{GoneWithTheWindPower:diff()}次可以随意[gold]突进[/gold]和[gold]后撤[/gold]。",
+  "TASHKENTSPIRE2-GONE_WITH_THE_WIND.description": "你每个回合内有{GoneWithTheWindPower:diff()}次可以随意[gold]突进[/gold]和[gold]后撤[/gold]。",
   "TASHKENTSPIRE2-INHERIT.title": "传承",
   "TASHKENTSPIRE2-INHERIT.selectionScreenPrompt": "选择任意张牌将其消耗。",
   "TASHKENTSPIRE2-INHERIT.description": "抽{Cards:diff()}张牌。\n[gold]消耗[/gold]任意张手牌，每[gold]消耗[/gold]一张\n获得{Energy:energyIcons()}。",

@@ -1,4 +1,10 @@
 {
+  "TASHKENTSPIRE2-MINION_LEFT_ACTION.description": "点击以[gold]后撤[/gold]。",
+  "TASHKENTSPIRE2-MINION_LEFT_ACTION.smartDescription": "点击以[gold]后撤[/gold]{Amount}。",
+  "TASHKENTSPIRE2-MINION_LEFT_ACTION.title": "后撤",
+  "TASHKENTSPIRE2-MINION_RIGHT_ACTION.description": "点击以[gold]突进[/gold]。",
+  "TASHKENTSPIRE2-MINION_RIGHT_ACTION.smartDescription": "点击以[gold]突进[/gold]{Amount}。",
+  "TASHKENTSPIRE2-MINION_RIGHT_ACTION.title": "突进",
   "TASHKENTSPIRE2-DISTANCE_POWER.description": "向前一步增加[blue]20[/blue]%造成伤害，增加[blue]10[/blue]%受到的伤害，向后一步则反之。",
   "TASHKENTSPIRE2-DISTANCE_POWER.smartDescription": "造成伤害增加[blue]{Increase}[/blue]%，受到伤害增加[blue]{Decrease}[/blue]%。",
   "TASHKENTSPIRE2-DISTANCE_POWER.title": "距离",
