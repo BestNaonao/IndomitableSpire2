@@ -1,12 +1,14 @@
-[gd_scene load_steps=8 format=3 uid="uid://b0mvwdui2m1co"]
+[gd_scene load_steps=9 format=3 uid="uid://b0mvwdui2m1co"]
 
 [ext_resource type="Texture2D" uid="uid://d2hwpbhnyc107" path="res://IndomitableSpire2/images/packed/common_ui/settings_tiny_left_arrow.png" id="1_xmuu2"]
 [ext_resource type="Texture2D" uid="uid://bu863sfnd0rsm" path="res://IndomitableSpire2/images/packed/common_ui/settings_tiny_left_arrow_darken.png" id="2_t2grs"]
 [ext_resource type="Texture2D" uid="uid://dsybg0qf3mgb7" path="res://IndomitableSpire2/images/packed/common_ui/settings_tiny_left_arrow_lighten.png" id="3_d4gem"]
-[ext_resource type="SpineSkeletonDataResource" uid="uid://dqmymblseh6vu" path="res://IndomitableSpire2/animations/characters/indomitable/indomitable_spine.tres" id="4_2cd87"]
 [ext_resource type="Texture2D" uid="uid://b4ghyacsqbtk1" path="res://IndomitableSpire2/images/packed/common_ui/settings_tiny_right_arrow.png" id="5_f4blb"]
 [ext_resource type="Texture2D" uid="uid://d2xm0e3rqc0p7" path="res://IndomitableSpire2/images/packed/common_ui/settings_tiny_right_arrow_darken.png" id="6_w0q1i"]
 [ext_resource type="Texture2D" uid="uid://cxupmbh4g8m7v" path="res://IndomitableSpire2/images/packed/common_ui/settings_tiny_right_arrow_lighten.png" id="7_pxjrv"]
+[ext_resource type="Script" uid="uid://dtfio45agppyj" path="res://addons/mega_text/MegaLabel.cs" id="8_megalabel"]
+[ext_resource type="Script" uid="uid://b0jom1nr7l4hr" path="res://IndomitableSpire2Code/Nodes/SkinSelectPanel.cs" id="9_panel"]
+[ext_resource type="FontVariation" uid="uid://c71uw4aqpsn1b" path="res://themes/spectral_glphy_space_two.tres" id="4_jv337"]
 
 [node name="SkinSelectPanel" type="Control"]
 layout_mode = 3
@@ -18,7 +20,7 @@ grow_vertical = 2
 pivot_offset = Vector2(1280, 600)
 size_flags_horizontal = 3
 size_flags_vertical = 3
-;script = ExtResource("")
+script = ExtResource("9_panel")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 custom_minimum_size = Vector2(700, 400)
@@ -46,22 +48,28 @@ texture_pressed = ExtResource("2_t2grs")
 texture_hover = ExtResource("3_d4gem")
 stretch_mode = 0
 
-[node name="SpineSprite" type="SpineSprite" parent="HBoxContainer"]
-skeleton_data_res = ExtResource("4_2cd87")
-preview_skin = "Default"
-preview_animation = "normal"
-preview_frame = false
-preview_time = 0.0
-position = Vector2(360, 270)
-;script = ExtResource("")
+[node name="VisualContainer" type="Control" parent="HBoxContainer"]
+custom_minimum_size = Vector2(300, 400)
+layout_mode = 2
+size_flags_horizontal = 6
 
 [node name="SkinNameLabel" type="Label" parent="HBoxContainer"]
 custom_minimum_size = Vector2(420, 100)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 8
-text = "皮肤名称"
+theme_override_colors/font_color = Color(0.937255, 0.784314, 0.317647, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.25098)
+theme_override_constants/outline_size = 12
+theme_override_fonts/font = ExtResource("4_jv337")
+theme_override_font_sizes/font_size = 48
+text = "Indomitable"
 horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("8_megalabel")
+MinFontSize = 24
+MaxFontSize = 48
+AutoSizeEnabled = true
 
 [node name="RightArrow" type="TextureButton" parent="HBoxContainer"]
 custom_minimum_size = Vector2(128, 0)
