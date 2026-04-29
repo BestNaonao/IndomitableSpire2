@@ -11,17 +11,17 @@ namespace IndomitableSpire2.IndomitableSpire2Code.Nodes;
 [GlobalClass]
 public partial class SkinSelectPanel : Control
 {
-    private TextureButton _leftArrow;
-    private TextureButton _rightArrow;
-    private Control _visualContainer;   // 替换为占位的 Control 容器
-    private Node2D _currentVisualNode;  // 记录当前实例化的模型节点，用于在切换时销毁
-    private MegaLabel _skinNameLabel;
-
-    private NCharacterSelectScreen _selectScreen;
+    private TextureButton _leftArrow = null!;
+    private TextureButton _rightArrow = null!;
+    private Control _visualContainer = null!;   // 替换为占位的 Control 容器
+    private MegaLabel _skinNameLabel = null!;
+    private NCharacterSelectScreen _selectScreen = null!;
+    
+    private Node2D? _currentVisualNode;  // 记录当前实例化的模型节点，用于在切换时销毁
     private int _currentIndex;
     
     // 直接使用角色模型列表
-    private static readonly List<Indomitable> _skins = 
+    private static readonly List<Indomitable> Skins = 
     [
         ModelDb.Character<IndomitableCharacter>(),
         ModelDb.Character<IndomitableMaidCharacter>()
@@ -37,41 +37,37 @@ public partial class SkinSelectPanel : Control
         _leftArrow.Pressed += OnLeftPressed;
         _rightArrow.Pressed += OnRightPressed;
     }
-
+    
     // 每次选中该角色时被调用（包括重进界面）
     public void ShowAndSync(NCharacterSelectScreen screen)
     {
-        _selectScreen = screen; // 及时更新为当前最新的选角屏幕（大厅对象可能已重建）
+        _selectScreen = screen; // 及时更新为当前最新的角色选择屏幕（大厅对象可能已重建）
         Visible = true;
+        var skin = Skins[_currentIndex];
         
-        var skin = _skins[_currentIndex];
-        
-        // 【核心修复】：官方的 SelectCharacter 会将大厅重置为原皮
         // 我们必须在这里强行将大厅重写为当前皮肤面板记忆的皮肤！
         _selectScreen.Lobby.SetLocalCharacter(skin);
         
         // 如果是初次打开，UI节点还没加载，则渲染它（避免每次点击按钮重复加载导致闪烁）
         if (!IsInstanceValid(_currentVisualNode))
-        {
             RenderSkinVisuals(skin);
-        }
     }
-
+    
     private void OnLeftPressed()
     {
-        _currentIndex = (_currentIndex + _skins.Count - 1) % _skins.Count;
+        _currentIndex = (_currentIndex + Skins.Count - 1) % Skins.Count;
         UpdateUI();
     }
-
+    
     private void OnRightPressed()
     {
-        _currentIndex = (_currentIndex + 1) % _skins.Count;
+        _currentIndex = (_currentIndex + 1) % Skins.Count;
         UpdateUI();
     }
-
+    
     private void UpdateUI()
     {
-        var skin = _skins[_currentIndex];
+        var skin = Skins[_currentIndex];
         RenderSkinVisuals(skin);
         _selectScreen.Lobby.SetLocalCharacter(skin);
         

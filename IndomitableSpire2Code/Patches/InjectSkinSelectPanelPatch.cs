@@ -11,8 +11,8 @@ namespace IndomitableSpire2.IndomitableSpire2Code.Patches;
 [HarmonyPatch(typeof(NCharacterSelectScreen), nameof(NCharacterSelectScreen.SelectCharacter))]
 public static class InjectSkinSelectPanelPatch
 {
-    private static SkinSelectPanel _panelInstance;
-
+    private static SkinSelectPanel? _panelInstance;
+    
     [HarmonyPostfix]
     public static void Postfix(NCharacterSelectScreen __instance, CharacterModel characterModel)
     {
@@ -36,13 +36,8 @@ public static class InjectSkinSelectPanelPatch
             // 强制面板将其内部记忆的皮肤状态同步给大厅！
             _panelInstance.ShowAndSync(__instance);
         }
-        else
-        {
-            // 点击别的角色时，优雅地隐藏该组件
-            if (GodotObject.IsInstanceValid(_panelInstance))
-            {
-                _panelInstance.Visible = false;
-            }
-        }
+        // 点击别的角色时，优雅地隐藏该组件
+        else if (GodotObject.IsInstanceValid(_panelInstance)) 
+            _panelInstance.Visible = false;
     }
 }
