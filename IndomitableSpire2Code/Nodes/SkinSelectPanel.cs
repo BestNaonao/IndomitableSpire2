@@ -21,7 +21,11 @@ public partial class SkinSelectPanel : Control
     private int _currentIndex;
     
     // 直接使用角色模型列表
-    private List<Indomitable> _skins;
+    private static readonly List<Indomitable> _skins = 
+    [
+        ModelDb.Character<IndomitableCharacter>(),
+        ModelDb.Character<IndomitableMaidCharacter>()
+    ];
     
     public override void _Ready()
     {
@@ -34,21 +38,23 @@ public partial class SkinSelectPanel : Control
         _rightArrow.Pressed += OnRightPressed;
     }
 
-    public void Initialize(NCharacterSelectScreen screen, CharacterModel currentCharacter)
+    // 每次选中该角色时被调用（包括重进界面）
+    public void ShowAndSync(NCharacterSelectScreen screen)
     {
-        _selectScreen = screen;
+        _selectScreen = screen; // 及时更新为当前最新的选角屏幕（大厅对象可能已重建）
+        Visible = true;
         
-        // 直接从 ModelDb 获取继承了基类的角色实例
-        _skins =
-        [
-            ModelDb.Character<IndomitableCharacter>(),
-            ModelDb.Character<IndomitableMaidCharacter>()
-        ];
-
-        _currentIndex = _skins.FindIndex(s => s == currentCharacter);
-        if (_currentIndex < 0) _currentIndex = 0;
-
-        UpdateUI();
+        var skin = _skins[_currentIndex];
+        
+        // 【核心修复】：官方的 SelectCharacter 会将大厅重置为原皮
+        // 我们必须在这里强行将大厅重写为当前皮肤面板记忆的皮肤！
+        _selectScreen.Lobby.SetLocalCharacter(skin);
+        
+        // 如果是初次打开，UI节点还没加载，则渲染它（避免每次点击按钮重复加载导致闪烁）
+        if (!IsInstanceValid(_currentVisualNode))
+        {
+            RenderSkinVisuals(skin);
+        }
     }
 
     private void OnLeftPressed()
@@ -66,42 +72,40 @@ public partial class SkinSelectPanel : Control
     private void UpdateUI()
     {
         var skin = _skins[_currentIndex];
-
+        RenderSkinVisuals(skin);
+        _selectScreen.Lobby.SetLocalCharacter(skin);
+        
+        // 播放当前皮肤的专属选人音效
+        // SfxCmd.Play(skin.CharacterSelectSfx);
+    }
+    
+    // 专注处理 UI 视觉的替换
+    private void RenderSkinVisuals(Indomitable skin)
+    {
         // 1. 清理上一套皮肤的节点
         if (IsInstanceValid(_currentVisualNode))
         {
             _visualContainer.RemoveChild(_currentVisualNode);
             _currentVisualNode.QueueFree();
         }
-
+        
         // 2. 动态加载并实例化 CustomVisualPath 对应的场景
         var scene = ResourceLoader.Load<PackedScene>(skin.CustomVisualPath);
         if (scene != null)
         {
             _currentVisualNode = scene.Instantiate<Node2D>();
             _visualContainer.AddChild(_currentVisualNode);
-            
-            // 将 Node2D 相对 Control 容器居中并向下移动（因为角色的原点通常在脚底）
             _currentVisualNode.Position = Vector2.Zero; 
             
             // 尝试获取模型内的 SpineSprite 并播放待机动画
-            // 你的模型场景中设置了 unique_name_in_owner = true，可以直接用 "%Visuals" 查找
             var spineNode = _currentVisualNode.GetNodeOrNull<Node>("%Visuals");
             if (spineNode != null)
             {
-                // 将 Godot 的节点强制包装为 MegaCrit 提供的 C++ 桥接精灵
                 var megaSprite = new MegaSprite((Variant)(GodotObject)spineNode);
-                
-                // 播放名为 "normal" 的动画，true 表示循环，轨道 0
                 megaSprite.GetAnimationState().SetAnimation("normal");
             }
         }
-
-        // 3. 获取多语言软编码文本，并进行网络同步
-        _skinNameLabel.SetTextAutoSize(new LocString("characters", $"{skin.Id.Entry}.title").GetFormattedText());
-        _selectScreen.Lobby.SetLocalCharacter(skin);
-        
-        // 4. 播放当前皮肤的专属选人音效
-        // SfxCmd.Play(skin.CharacterSelectSfx);
+        // 3. 获取多语言软编码文本
+        _skinNameLabel.SetTextAutoSize(new LocString("characters", $"{skin.Id.Entry}.skinName").GetFormattedText());
     }
 }

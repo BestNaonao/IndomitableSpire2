@@ -32,9 +32,9 @@ public static class InjectSkinSelectPanelPatch
                     // 调整挂载后的坐标（可能需要根据实际渲染效果微调）
                     _panelInstance.Position = new Vector2(400, 0); 
                 }
-                _panelInstance.Initialize(__instance, characterModel);
             }
-            _panelInstance.Visible = true;
+            // 强制面板将其内部记忆的皮肤状态同步给大厅！
+            _panelInstance.ShowAndSync(__instance);
         }
         else
         {
