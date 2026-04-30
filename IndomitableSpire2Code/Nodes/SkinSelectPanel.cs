@@ -32,7 +32,7 @@ public partial class SkinSelectPanel : Control
         _leftArrow = GetNode<TextureButton>("VBoxContainer/HBoxContainer/LeftArrow");
         _rightArrow = GetNode<TextureButton>("VBoxContainer/HBoxContainer/RightArrow");
         _visualContainer = GetNode<Control>("VBoxContainer/HBoxContainer/VisualContainer");
-        _skinNameLabel = GetNode<MegaLabel>("VBoxContainer/SkinNameLabel");
+        _skinNameLabel = GetNode<MegaLabel>("VBoxContainer/LabelContainer/SkinNameLabel");
         
         _leftArrow.Pressed += OnLeftPressed;
         _rightArrow.Pressed += OnRightPressed;
@@ -93,8 +93,8 @@ public partial class SkinSelectPanel : Control
             _visualContainer.AddChild(_currentVisualNode);
             
             // 【核心修复】：将 Node2D 的位置定在 VisualContainer 的中下方
-            // 容器宽度是 300，高度是 400。X=150 是水平居中，Y=350 是将脚底放在偏下部。
-            _currentVisualNode.Position = new Vector2(150, 350);
+            // 容器宽度是 300，高度是 400。X=150 是水平居中，Y=250 是将脚底放在偏下部。
+            _currentVisualNode.Position = new Vector2(150, 250);
             
             // 尝试获取模型内的 SpineSprite 并播放待机动画
             var spineNode = _currentVisualNode.GetNodeOrNull<Node>("%Visuals");

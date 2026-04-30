@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://b0mvwdui2m1co"]
+[gd_scene load_steps=10 format=3 uid="uid://b0mvwdui2m1co"]
 
 [ext_resource type="Texture2D" uid="uid://d2hwpbhnyc107" path="res://IndomitableSpire2/images/packed/common_ui/settings_tiny_left_arrow.png" id="1_xmuu2"]
 [ext_resource type="Texture2D" uid="uid://bu863sfnd0rsm" path="res://IndomitableSpire2/images/packed/common_ui/settings_tiny_left_arrow_darken.png" id="2_t2grs"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://dtfio45agppyj" path="res://addons/mega_text/MegaLabel.cs" id="8_megalabel"]
 [ext_resource type="Script" uid="uid://b0jom1nr7l4hr" path="res://IndomitableSpire2Code/Nodes/SkinSelectPanel.cs" id="9_panel"]
 [ext_resource type="FontVariation" uid="uid://c71uw4aqpsn1b" path="res://themes/spectral_glphy_space_two.tres" id="4_jv337"]
+[ext_resource type="Texture2D" uid="uid://bxngoh7qrw8fa" path="res://images/ui/tiny_nine_patch.png" id="10_np"]
 
 [node name="SkinSelectPanel" type="Control"]
 layout_mode = 3
@@ -23,7 +24,7 @@ size_flags_vertical = 3
 script = ExtResource("9_panel")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
-custom_minimum_size = Vector2(700, 500)
+custom_minimum_size = Vector2(700, 360)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -31,9 +32,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = 177.0
-offset_top = -250.0
+offset_top = -180.0
 offset_right = 877.0
-offset_bottom = 250.0
+offset_bottom = 180.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -54,7 +55,7 @@ texture_hover = ExtResource("3_d4gem")
 stretch_mode = 3
 
 [node name="VisualContainer" type="Control" parent="VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(300, 400)
+custom_minimum_size = Vector2(300, 300)
 layout_mode = 2
 size_flags_horizontal = 6
 
@@ -69,11 +70,27 @@ texture_pressed = ExtResource("6_w0q1i")
 texture_hover = ExtResource("7_pxjrv")
 stretch_mode = 3
 
-[node name="SkinNameLabel" type="Label" parent="VBoxContainer"]
-custom_minimum_size = Vector2(420, 100)
+[node name="LabelContainer" type="MarginContainer" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
+theme_override_constants/margin_left = -20
+theme_override_constants/margin_top = -10
+theme_override_constants/margin_right = -20
+theme_override_constants/margin_bottom = -10
+
+[node name="Background" type="NinePatchRect" parent="VBoxContainer/LabelContainer"]
+modulate = Color(0, 0, 0, 0.450)
+layout_mode = 2
+texture = ExtResource("10_np")
+patch_margin_left = 12
+patch_margin_top = 12
+patch_margin_right = 12
+patch_margin_bottom = 12
+
+[node name="SkinNameLabel" type="Label" parent="VBoxContainer/LabelContainer"]
+custom_minimum_size = Vector2(420, 100)
+layout_mode = 2
 theme_override_colors/font_color = Color(0.937255, 0.784314, 0.317647, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 0.25098)
 theme_override_constants/outline_size = 12
