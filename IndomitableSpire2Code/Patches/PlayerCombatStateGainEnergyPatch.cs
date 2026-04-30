@@ -1,7 +1,7 @@
 ﻿using HarmonyLib;
-using MegaCrit.Sts2.Core.Entities.Players;
 using IndomitableSpire2.IndomitableSpire2Code.Hooks;
 using MegaCrit.Sts2.Core.Commands;
+using MegaCrit.Sts2.Core.Entities.Players;
 
 namespace IndomitableSpire2.IndomitableSpire2Code.Patches;
 
