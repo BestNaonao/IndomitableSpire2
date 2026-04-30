@@ -9,6 +9,8 @@
   "INDOMITABLESPIRE2-IGNITE.description": "Can only be played if you have at least [blue]30[/blue] [gold]Motivation[/gold].\nDeal {Damage:diff()} damage.\nApply [blue]{OnFirePower:diff()}[/blue] [gold]On Fire[/gold].",
   "INDOMITABLESPIRE2-DUAL_PURPOSE_GUN.title": "4.5-Inch Dual-Purpose Gun",
   "INDOMITABLESPIRE2-DUAL_PURPOSE_GUN.description": "Deal {Damage:diff()} damage.\nAt the end of your turn, if this card is in your [gold]hand[/gold] and hasn't been played this turn, gain {Block:diff()} [gold]Block[/gold].{InCombat:\n{WillAutoBlock:cond:>0?[green](Will gain Block)[/green]|[red](Already played this turn)[/red]}|}",
+  "INDOMITABLESPIRE2-ZIGZAG_MANEUVER.title": "Zigzag Maneuver",
+  "INDOMITABLESPIRE2-ZIGZAG_MANEUVER.description": "Can only be played if you have at least [blue]20[/blue] [gold]Motivation[/gold].\nGain {Block:diff()} Block.\nGain {DexterityPower:diff()} [gold]Dexterity[/gold] this turn.",
   "INDOMITABLESPIRE2-ILLUSTRIOUS_AEGIS.title": "Illustrious Aegis",
   "INDOMITABLESPIRE2-ILLUSTRIOUS_AEGIS.description": "Grant any player {Block:diff()} [gold]Block[/gold].\nThis Block is retained at the end of your turn, and heals [green]{Heal:diff()}[/green] HP when fully broken.",
   "INDOMITABLESPIRE2-SWORDFISH_BOMBER.title": "Swordfish",

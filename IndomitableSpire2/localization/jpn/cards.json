@@ -9,6 +9,8 @@
   "INDOMITABLESPIRE2-IGNITE.description": "[gold]やる気[/gold]が[blue]30[/blue]以上の場合のみプレイできる。\n{Damage:diff()}ダメージを与える。\n[gold]炎上[/gold] [blue]{OnFirePower:diff()}[/blue]を付与する",
   "INDOMITABLESPIRE2-DUAL_PURPOSE_GUN.title": "4.5インチ両用砲",
   "INDOMITABLESPIRE2-DUAL_PURPOSE_GUN.description": "{Damage:diff()}ダメージを与える。\nターン終了時、このカードが[gold]手札[/gold]にあり、このターンにプレイされていなければ、[gold]ブロック[/gold]を{Block:diff()}得る。{InCombat:\n{WillAutoBlock:cond:>0?[green]（ブロックを得る）[/green]|[red]（このターンにプレイ済み）[/red]}|}",
+  "INDOMITABLESPIRE2-ZIGZAG_MANEUVER.title": "ジグザグ機動",
+  "INDOMITABLESPIRE2-ZIGZAG_MANEUVER.description": "[gold]やる気[/gold]が[blue]20[/blue]以上の場合のみプレイできる。\nブロックを{Block:diff()}得る。\nターン終了時まで[gold]敏捷[/gold]{DexterityPower:diff()}を得る。",
   "INDOMITABLESPIRE2-ILLUSTRIOUS_AEGIS.title": "イラストリアス・イージス",
   "INDOMITABLESPIRE2-ILLUSTRIOUS_AEGIS.description": "任意のプレイヤーに[gold]ブロック[/gold]を{Block:diff()}与える。\nこのブロックはターン終了時に保持され、完全に砕けた時、ＨＰを[green]{Heal:diff()}[/green]回復する。",
   "INDOMITABLESPIRE2-SWORDFISH_BOMBER.title": "ソードフィッシュ",
