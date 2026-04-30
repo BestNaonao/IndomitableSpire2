@@ -13,7 +13,7 @@
   "INDOMITABLESPIRE2-INDOMITABLE_CHARACTER.goldMonologue": "[sine]これだけあれば、最高級の紅茶とお茶菓子がどれほど買えることやら……[/sine]",
   "INDOMITABLESPIRE2-INDOMITABLE_CHARACTER.cardsModifierTitle": "インドミタブルのカード",
   "INDOMITABLESPIRE2-INDOMITABLE_CHARACTER.cardsModifierDescription": "インドミタブルのカードが報酬やショップに出現するようになります。",
-  "INDOMITABLESPIRE2-INDOMITABLE_CHARACTER.skinName": "デフォルト",
+  "INDOMITABLESPIRE2-INDOMITABLE_CHARACTER.skinName": "通常服",
   
   "INDOMITABLESPIRE2-INDOMITABLE_MAID_CHARACTER.title": "インドミタブル",
   "INDOMITABLESPIRE2-INDOMITABLE_MAID_CHARACTER.titleObject": "インドミタブル",
@@ -29,5 +29,5 @@
   "INDOMITABLESPIRE2-INDOMITABLE_MAID_CHARACTER.goldMonologue": "[sine]これだけあれば、最高級の紅茶とお茶菓子がどれほど買えることやら……[/sine]",
   "INDOMITABLESPIRE2-INDOMITABLE_MAID_CHARACTER.cardsModifierTitle": "インドミタブルのカード",
   "INDOMITABLESPIRE2-INDOMITABLE_MAID_CHARACTER.cardsModifierDescription": "インドミタブルのカードが報酬やショップに出現するようになります。",
-  "INDOMITABLESPIRE2-INDOMITABLE_MAID_CHARACTER.skinName": "ロイヤルメイド"
+  "INDOMITABLESPIRE2-INDOMITABLE_MAID_CHARACTER.skinName": "怠け者メイド"
 }

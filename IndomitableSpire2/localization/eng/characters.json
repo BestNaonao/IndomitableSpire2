@@ -13,7 +13,7 @@
   "INDOMITABLESPIRE2-INDOMITABLE_CHARACTER.goldMonologue": "[sine]I wonder how much premium black tea and pastries I can buy with this...[/sine]",
   "INDOMITABLESPIRE2-INDOMITABLE_CHARACTER.cardsModifierTitle": "Indomitable Cards",
   "INDOMITABLESPIRE2-INDOMITABLE_CHARACTER.cardsModifierDescription": "Indomitable's cards will now appear in card rewards and shops.",
-  "INDOMITABLESPIRE2-INDOMITABLE_CHARACTER.skinName": "Default Outfit",
+  "INDOMITABLESPIRE2-INDOMITABLE_CHARACTER.skinName": "Default Attire",
   
   "INDOMITABLESPIRE2-INDOMITABLE_MAID_CHARACTER.title": "Indomitable",
   "INDOMITABLESPIRE2-INDOMITABLE_MAID_CHARACTER.titleObject": "Indomitable",
@@ -29,5 +29,5 @@
   "INDOMITABLESPIRE2-INDOMITABLE_MAID_CHARACTER.goldMonologue": "[sine]I wonder how much premium black tea and pastries I can buy with this...[/sine]",
   "INDOMITABLESPIRE2-INDOMITABLE_MAID_CHARACTER.cardsModifierTitle": "Indomitable Cards",
   "INDOMITABLESPIRE2-INDOMITABLE_MAID_CHARACTER.cardsModifierDescription": "Indomitable's cards will now appear in card rewards and shops.",
-  "INDOMITABLESPIRE2-INDOMITABLE_MAID_CHARACTER.skinName": "Royal Maid"
+  "INDOMITABLESPIRE2-INDOMITABLE_MAID_CHARACTER.skinName": "Unmotivated Maid"
 }
