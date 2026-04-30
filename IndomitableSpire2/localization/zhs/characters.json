@@ -13,7 +13,8 @@
   "INDOMITABLESPIRE2-INDOMITABLE_CHARACTER.goldMonologue": "[sine]有了这些，能买多少高级点心和红茶呢……[/sine]",
   "INDOMITABLESPIRE2-INDOMITABLE_CHARACTER.cardsModifierTitle": "不挠卡牌",
   "INDOMITABLESPIRE2-INDOMITABLE_CHARACTER.cardsModifierDescription": "不挠的卡牌现在会出现在奖励和商店中。",
-
+  "INDOMITABLESPIRE2-INDOMITABLE_CHARACTER.skinName": "默认装束",
+  
   "INDOMITABLESPIRE2-INDOMITABLE_MAID_CHARACTER.title": "不挠",
   "INDOMITABLESPIRE2-INDOMITABLE_MAID_CHARACTER.titleObject": "不挠",
   "INDOMITABLESPIRE2-INDOMITABLE_MAID_CHARACTER.pronounObject": "她",
@@ -27,6 +28,6 @@
   "INDOMITABLESPIRE2-INDOMITABLE_MAID_CHARACTER.aromaPrinciple": "[sine][blue]只要一动不动……麻烦就不会找上门来……大概吧。[/blue][/sine]",
   "INDOMITABLESPIRE2-INDOMITABLE_MAID_CHARACTER.goldMonologue": "[sine]有了这些，能买多少高级点心和红茶呢……[/sine]",
   "INDOMITABLESPIRE2-INDOMITABLE_MAID_CHARACTER.cardsModifierTitle": "不挠卡牌",
-  "INDOMITABLESPIRE2-INDOMITABLE_MAID_CHARACTER.cardsModifierDescription": "不挠的卡牌现在会出现在奖励和商店中。"
-
+  "INDOMITABLESPIRE2-INDOMITABLE_MAID_CHARACTER.cardsModifierDescription": "不挠的卡牌现在会出现在奖励和商店中。",
+  "INDOMITABLESPIRE2-INDOMITABLE_MAID_CHARACTER.skinName": "皇家女仆"
 }
