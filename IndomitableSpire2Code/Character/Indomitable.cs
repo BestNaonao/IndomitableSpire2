@@ -23,6 +23,8 @@ public abstract class Indomitable : CustomCharacterModel
     public override CharacterGender Gender => CharacterGender.Feminine;
     internal static readonly Color TopicColor = new("FFFFFF");
     
+    public abstract IndomitableSkin CurrentSkin { get; }
+    
     // 角色名称的颜色，STS2 使用 Godot 的 Color 结构体
     public override Color NameColor => TopicColor; // 替换为不挠的主题色，比如白色或淡蓝
 
