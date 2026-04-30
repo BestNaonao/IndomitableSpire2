@@ -19,7 +19,5 @@ public sealed class ZigzagManeuverPower : IndomitableTemporaryPower
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<DexterityPower>()];
     
     protected override Func<Creature, decimal, Creature?, CardModel?, bool, Task> ApplyPowerFunc =>
-        (target, amount, applier, source, silent) => 
-            // 获得临时敏捷，直接传入 amount 即可
-            PowerCmd.Apply<DexterityPower>(target, amount, applier, source, silent);
+        PowerCmd.Apply<DexterityPower>;
 }
