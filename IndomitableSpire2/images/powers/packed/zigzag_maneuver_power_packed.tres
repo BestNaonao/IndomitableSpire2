@@ -1,0 +1,7 @@
+[gd_resource type="AtlasTexture" load_steps=2 format=3 uid="uid://cq0rvxrej7m3t"]
+
+[ext_resource type="Texture2D" uid="uid://bdq8upd07gmi0" path="res://IndomitableSpire2/images/powers/packed/zigzag_maneuver_power_packed.png" id="1_gmxuk"]
+
+[resource]
+atlas = ExtResource("1_gmxuk")
+region = Rect2(0, 0, 64, 64)
