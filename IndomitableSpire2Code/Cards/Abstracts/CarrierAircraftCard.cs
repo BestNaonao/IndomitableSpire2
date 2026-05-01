@@ -61,11 +61,11 @@ public abstract class CarrierAircraftCard(
             // 【核心改动】：先计算，再应用
             var loss = CalculateDurabilityLoss(hitEnemies);
             if (loss > 0)
-                DynamicVars["Durability"].BaseValue = Math.Max(0, DynamicVars["Durability"].BaseValue - loss);
+                DynamicVars.Durability().BaseValue = Math.Max(0, DynamicVars.Durability().BaseValue - loss);
         }
         
         // 3. 如果耐久归零，触发消耗
-        if (DynamicVars["Durability"].BaseValue <= 0)
+        if (DynamicVars.Durability().BaseValue <= 0)
         {
             await CardCmd.Exhaust(choiceContext, this);
             // 可选：播放飞机坠毁的音效，强化反馈感
@@ -109,7 +109,7 @@ public abstract class CarrierAircraftCard(
     protected void UpgradeDurability()
     {
         if (UpgradeDurabilityAmount <= 0) return;
-        DynamicVars["MaxDurability"].UpgradeValueBy(UpgradeDurabilityAmount);
-        DynamicVars["Durability"].UpgradeValueBy(UpgradeDurabilityAmount);
+        DynamicVars.MaxDurability().UpgradeValueBy(UpgradeDurabilityAmount);
+        DynamicVars.Durability().UpgradeValueBy(UpgradeDurabilityAmount);
     }
 }
