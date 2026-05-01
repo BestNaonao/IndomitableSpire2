@@ -1,7 +1,9 @@
+using Godot;
 using MegaCrit.Sts2.Core.Nodes.Screens.Shops;
 
 namespace IndomitableSpire2.IndomitableSpire2Code.Nodes;
 
+[GlobalClass]
 public partial class IndomitableMerchantCharacter : NMerchantCharacter
 {
     public override void _Ready()
