@@ -72,10 +72,6 @@ public abstract class Indomitable : CustomCharacterModel
         "res://IndomitableSpire2/images/charui/char_select_indomitable_locked.png";
     public override string CustomCharacterSelectTransitionPath =>   // 选择专场素材
         "res://IndomitableSpire2/materials/indomitable_transition_mat.tres";
-    public override string CustomIconTexturePath =>                 // 小图标
-        "res://IndomitableSpire2/images/charui/character_icon_indomitable.png";
-    public override string CustomIconPath =>                        // 角色图标场景
-        "res://IndomitableSpire2/scenes/characters/indomitable_icon.tscn";
     public override string CustomMapMarkerPath =>                   // 地图标记
         "res://IndomitableSpire2/images/charui/map_marker_indomitable.png";
     public override string CustomEnergyCounterPath =>               // 能量计数器

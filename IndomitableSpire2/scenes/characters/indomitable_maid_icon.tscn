@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://b60ywf7wtl8bk"]
 
-[ext_resource type="Texture2D" uid="uid://dc0beyqvbijuw" path="res://IndomitableSpire2/images/charui/character_icon_indomitable.png" id="1_31vp5"]
+[ext_resource type="Texture2D" uid="uid://cabjf21enyhcu" path="res://IndomitableSpire2/images/charui/character_icon_indomitable_maid.png" id="1_31vp5"]
 
 [node name="IndomitableMaidIcon" type="TextureRect"]
 anchors_preset = 15

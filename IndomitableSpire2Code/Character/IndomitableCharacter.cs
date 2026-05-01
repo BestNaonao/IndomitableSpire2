@@ -15,6 +15,12 @@ public sealed class IndomitableCharacter : Indomitable
     // 获取商店的视觉场景
     public override string CustomMerchantAnimPath => 
         "res://IndomitableSpire2/scenes/merchant/indomitable_merchant.tscn";
+    // 小图标
+    public override string CustomIconTexturePath => 
+        "res://IndomitableSpire2/images/charui/character_icon_indomitable.png";
+    // 角色图标场景
+    public override string CustomIconPath => 
+        "res://IndomitableSpire2/scenes/characters/indomitable_icon.tscn";
     
     // 人物手模图片(石头剪刀布和指向)
     public override string CustomArmPaperTexturePath => 
