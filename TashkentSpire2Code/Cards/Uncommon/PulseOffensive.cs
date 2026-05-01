@@ -6,24 +6,11 @@ using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.ValueProps;
 using TashkentSpire2.TashkentSpire2Code.Commands;
-using TashkentSpire2.TashkentSpire2Code.Keywords;
 
 namespace TashkentSpire2.TashkentSpire2Code.Cards.Uncommon;
 
 public sealed class PulseOffensive() : AmmunitionCard(2, CardType.Attack, CardRarity.Uncommon, TargetType.AllEnemies)
 {
-    public override void AfterCreated()
-    {
-        base.AfterCreated();
-        this.BaseReplayCount = 1;
-    }
-    
-    protected override void AfterDeserialized()
-    {
-        base.AfterDeserialized();
-        this.BaseReplayCount = 1; 
-    }
-    
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new DamageVar(10M, ValueProp.Move),
         new AmmunitionDynamicVar(0M),
@@ -33,34 +20,16 @@ public sealed class PulseOffensive() : AmmunitionCard(2, CardType.Attack, CardRa
         new PowerVar<VulnerablePower>(2M)
     ];
     
-    protected override async Task OnPlayWithAmmu(PlayerChoiceContext choiceContext, CardPlay cardPlay, int ammu)
+    protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        ArgumentNullException.ThrowIfNull(CombatState);
+        ArgumentNullException.ThrowIfNull(cardPlay.Target, nameof(cardPlay.Target));
         
-        if (this.CanonicalKeywords.Contains(TashkentKeyword.Barrage))
-        {
-            await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
-                .WithHitCount(ammu)
-                .FromCard(this)
-                .TargetingAllOpponents(CombatState)
-                .WithHitFx("vfx/vfx_attack_slash")
-                .Execute(choiceContext);
-            UpdateAmmuGlobal(0);
-        }
-        else
-        {
-            await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
-                .FromCard(this)
-                .TargetingAllOpponents(CombatState)
-                .WithHitFx("vfx/vfx_attack_slash")
-                .Execute(choiceContext);
-            UpdateAmmuGlobal(ammu - 1);
-        }
-    }
-
-    protected override async Task OnPlayWithoutAmmu(PlayerChoiceContext choiceContext, CardPlay cardPlay)
-    {
-        ArgumentNullException.ThrowIfNull(CombatState);
+        await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
+            .FromCard(this)
+            .TargetingAllOpponents(CombatState)
+            .WithHitFx("vfx/vfx_attack_slash")
+            .Execute(choiceContext);
+        UpdateAmmuGlobal(CurrentAmmu - 1);
         
         int load = DynamicVars["TashkentSpire2-Load"].IntValue;
         await Loadcmd.Execute(choiceContext, this, load);

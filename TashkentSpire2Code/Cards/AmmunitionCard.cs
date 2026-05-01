@@ -1,5 +1,4 @@
 ﻿using MegaCrit.Sts2.Core.Entities.Cards;
-using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Saves.Runs;
 using TashkentSpire2.TashkentSpire2Code.Tags;
 
@@ -59,21 +58,6 @@ public abstract class AmmunitionCard(
         if (base.DeckVersion is IAmmunitionCard masterCard)
         {
             masterCard.CurrentAmmu = clampedValue;
-        }
-    }
-
-    protected abstract Task OnPlayWithAmmu(PlayerChoiceContext choiceContext, CardPlay cardPlay, int ammu);
-    protected abstract Task OnPlayWithoutAmmu(PlayerChoiceContext choiceContext, CardPlay cardPlay);
-
-    protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
-    {
-        if (CurrentAmmu > 0)
-        {
-            await OnPlayWithAmmu(choiceContext, cardPlay, CurrentAmmu);
-        }
-        else
-        {
-            await OnPlayWithoutAmmu(choiceContext, cardPlay);
         }
     }
 }

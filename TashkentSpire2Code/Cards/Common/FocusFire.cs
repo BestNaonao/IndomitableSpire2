@@ -11,23 +11,11 @@ namespace TashkentSpire2.TashkentSpire2Code.Cards.Common;
 
 public sealed class FocusFire() : AmmunitionCard(1, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
 {
-    public override void AfterCreated()
-    {
-        base.AfterCreated();
-        this.BaseReplayCount = 1;
-    }
-    
-    protected override void AfterDeserialized()
-    {
-        base.AfterDeserialized();
-        this.BaseReplayCount = 1; 
-    }
-    
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new DamageVar(4M, ValueProp.Move),
-        new AmmunitionDynamicVar(1M),
-        new LoadDynamicVar(1M),
-        new AmmuMaxDynamicVar(1M),
+        new AmmunitionDynamicVar(6M),
+        new LoadDynamicVar(6M),
+        new AmmuMaxDynamicVar(6M),
         new CalculationBaseVar(0M),
         new CalculationExtraVar(1M),
         new CalculatedVar("TashkentHits")
@@ -43,7 +31,7 @@ public sealed class FocusFire() : AmmunitionCard(1, CardType.Attack, CardRarity.
             })
     ];
     
-    protected override async Task OnPlayWithAmmu(PlayerChoiceContext choiceContext, CardPlay cardPlay, int ammu)
+    protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         ArgumentNullException.ThrowIfNull(cardPlay.Target, nameof(cardPlay.Target));
         ArgumentNullException.ThrowIfNull(CombatState);
@@ -56,11 +44,8 @@ public sealed class FocusFire() : AmmunitionCard(1, CardType.Attack, CardRarity.
             .Targeting(cardPlay.Target)
             .WithHitFx("vfx/vfx_attack_slash")
             .Execute(choiceContext);
-        UpdateAmmuGlobal(ammu - 1);
-    }
-
-    protected override async Task OnPlayWithoutAmmu(PlayerChoiceContext choiceContext, CardPlay cardPlay)
-    {
+        UpdateAmmuGlobal(CurrentAmmu - 1);
+        
         int load = DynamicVars["TashkentSpire2-Load"].IntValue;
         await Loadcmd.Execute(choiceContext, this, load);
     }

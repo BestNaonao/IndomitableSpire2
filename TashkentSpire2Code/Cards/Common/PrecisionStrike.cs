@@ -7,11 +7,11 @@ using TashkentSpire2.TashkentSpire2Code.Powers;
 
 namespace TashkentSpire2.TashkentSpire2Code.Cards.Common;
 
-public sealed class PrecisionStrike() : TashkentCard(1, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
+public sealed class PrecisionStrike() : TashkentCard(0, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new DamageVar(6M, ValueProp.Move),
-        new MarkDynamicVar(3M)
+        new DamageVar(4M, ValueProp.Move),
+        new MarkDynamicVar(2M)
     ];
     
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)

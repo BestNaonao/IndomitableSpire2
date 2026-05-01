@@ -3,19 +3,17 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.ValueProps;
-using TashkentSpire2.TashkentSpire2Code.Commands;
+using TashkentSpire2.TashkentSpire2Code.Powers;
 
-namespace TashkentSpire2.TashkentSpire2Code.Cards.Common;
+namespace TashkentSpire2.TashkentSpire2Code.Cards.Token;
 
-public sealed class ArtilleryStrike() : AmmunitionCard(1, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
+public sealed class Pursuit() : TashkentCard(0, CardType.Attack, CardRarity.Token, TargetType.AnyEnemy)
 {
-    protected override HashSet<CardTag> CanonicalTags => [CardTag.Strike];
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
     
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new DamageVar(3M, ValueProp.Move),
-        new AmmunitionDynamicVar(3M),
-        new LoadDynamicVar(3M),
-        new AmmuMaxDynamicVar(6M),
+        new DamageVar(7M, ValueProp.Move),
+        new MarkDynamicVar(2M)
     ];
     
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
@@ -27,11 +25,13 @@ public sealed class ArtilleryStrike() : AmmunitionCard(1, CardType.Attack, CardR
             .Targeting(cardPlay.Target)
             .WithHitFx("vfx/vfx_attack_slash")
             .Execute(choiceContext);
-        UpdateAmmuGlobal(CurrentAmmu - 1);
         
-        int load = DynamicVars["TashkentSpire2-Load"].IntValue;
-        await Loadcmd.Execute(choiceContext, this, load);
+        await PowerCmd.Apply<MarkPower>(cardPlay.Target, base.DynamicVars["TashkentSpire2-Mark"].BaseValue, base.Owner.Creature, this);
     }
     
-    protected override void OnUpgrade() => DynamicVars.Damage.UpgradeValueBy(1M);
+    protected override void OnUpgrade()
+    {
+        DynamicVars.Damage.UpgradeValueBy(2M);
+        DynamicVars["TashkentSpire2-Mark"].UpgradeValueBy(1M);
+    }
 }

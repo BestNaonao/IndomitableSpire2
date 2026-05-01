@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://defadeijmgrm7"
-path="res://.godot/imported/versatile_person.png-6e978ee05f99f8d768848bac689ead9e.ctex"
+uid="uid://dcjksgesrwf6e"
+path="res://.godot/imported/tashkent_common_attack.png-66a71df42f68b92da87796b75b3ca974.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://TashkentSpire2/images/card_portraits/big/versatile_person.png"
-dest_files=["res://.godot/imported/versatile_person.png-6e978ee05f99f8d768848bac689ead9e.ctex"]
+source_file="res://TashkentSpire2/images/card_frames/attack/tashkent_common_attack.png"
+dest_files=["res://.godot/imported/tashkent_common_attack.png-66a71df42f68b92da87796b75b3ca974.ctex"]
 
 [params]
 

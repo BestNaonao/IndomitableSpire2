@@ -37,6 +37,6 @@ public sealed class TorpedoTorpedoTorpedo() : TashkentCard(2, CardType.Skill, Ca
     
     protected override void OnUpgrade()
     {
-        base.EnergyCost.UpgradeBy(-1);
+        AddKeyword(CardKeyword.Retain);
     }
 }

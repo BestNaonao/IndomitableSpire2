@@ -14,7 +14,7 @@ public sealed class NestingDoll() : TashkentCard(1, CardType.Attack, CardRarity.
     
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new CalculationBaseVar(6m),
+        new CalculationBaseVar(4m),
         new ExtraDamageVar(2m),
         new CalculatedDamageVar(ValueProp.Move).WithMultiplier((CardModel card, Creature? _) =>
             card.Owner.PlayerCombatState?.ExhaustPile.Cards.Count((CardModel c) => c is NestingDoll) ?? 0)

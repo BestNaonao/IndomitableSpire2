@@ -8,53 +8,50 @@ using TashkentSpire2.TashkentSpire2Code.Cards.Ancient;
 using TashkentSpire2.TashkentSpire2Code.Commands;
 using TashkentSpire2.TashkentSpire2Code.Keywords;
 using TashkentSpire2.TashkentSpire2Code.Powers;
+using TashkentSpire2.TashkentSpire2Code.Tags;
 
 namespace TashkentSpire2.TashkentSpire2Code.Cards.Basics;
 
 public sealed class LoadShot() : AmmunitionCard(1, CardType.Attack, CardRarity.Basic, TargetType.AnyEnemy)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new DamageVar(14M, ValueProp.Move),
-        new AmmunitionDynamicVar(1M),
+        new DamageVar(7M, ValueProp.Move),
+        new AmmunitionDynamicVar(0M),
         new LoadDynamicVar(1M),
-        new AmmuMaxDynamicVar(3M),
+        new AmmuMaxDynamicVar(6M),
         new MarkDynamicVar(3M)
     ];
 
-    protected override async Task OnPlayWithAmmu(PlayerChoiceContext choiceContext, CardPlay cardPlay, int ammu)
-    {
-        ArgumentNullException.ThrowIfNull(CombatState);
-        
-        if (this.CanonicalKeywords.Contains(TashkentKeyword.Barrage))
-        {
-            await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
-                .WithHitCount(ammu)
-                .FromCard(this)
-                .TargetingAllOpponents(CombatState)
-                .WithHitFx("vfx/vfx_attack_slash")
-                .Execute(choiceContext);
-            UpdateAmmuGlobal(0);
-        }
-        else
-        {
-            ArgumentNullException.ThrowIfNull(cardPlay.Target, nameof(cardPlay.Target));
-            await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
-                .FromCard(this)
-                .Targeting(cardPlay.Target)
-                .WithHitFx("vfx/vfx_attack_slash")
-                .Execute(choiceContext);
-            UpdateAmmuGlobal(ammu - 1);
-        }
-    }
-
-    protected override async Task OnPlayWithoutAmmu(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+    protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         ArgumentNullException.ThrowIfNull(cardPlay.Target, nameof(cardPlay.Target));
         
+        int shellsLoaded = await GetShellCountcmd.Execute(choiceContext, Owner, (int)CurrentAmmu,this.Keywords.Contains(TashkentKeyword.Barrage));
+        if (shellsLoaded > 0)
+        {
+            if (shellsLoaded >= 2)
+            {
+                await PowerCmd.Apply<MarkPower>(cardPlay.Target, DynamicVars["TashkentSpire2-Mark"].BaseValue,Owner.Creature,this);
+            }
+            
+            for (int i = 0; i < shellsLoaded; i++)
+            {
+                await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
+                    .FromCard(this)
+                    .Targeting(cardPlay.Target)
+                    .WithHitFx("vfx/vfx_attack_slash")
+                    .Execute(choiceContext);
+            }
+            UpdateAmmuGlobal(CurrentAmmu - shellsLoaded);
+        }
+    }
+    
+    public override async Task AfterCardDrawn(PlayerChoiceContext choiceContext, CardModel card, bool fromHandDraw)
+    {
+        if (card != this) return;
+        
         int load = DynamicVars["TashkentSpire2-Load"].IntValue;
         await Loadcmd.Execute(choiceContext, this, load);
-        
-        await PowerCmd.Apply<MarkPower>(cardPlay.Target, base.DynamicVars["TashkentSpire2-Mark"].BaseValue, base.Owner.Creature, this);
     }
     
     public CardModel GetTranscendenceTransformedCard()
@@ -65,7 +62,6 @@ public sealed class LoadShot() : AmmunitionCard(1, CardType.Attack, CardRarity.B
     protected override void OnUpgrade()
     {
         DynamicVars.Damage.UpgradeValueBy(4M);
-        DynamicVars["TashkentSpire2-Load"].UpgradeValueBy(1M);
         DynamicVars["TashkentSpire2-Mark"].UpgradeValueBy(2M);
     }
 }

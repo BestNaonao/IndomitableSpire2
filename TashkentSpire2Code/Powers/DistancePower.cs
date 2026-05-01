@@ -240,4 +240,19 @@ public sealed class DistancePower : TashkentPower
         }
         if (tween != null) await tween.ToSignal(tween, Tween.SignalName.Finished);
     }
+    
+    public async Task ModifyAmountFromEscape(decimal delta, CardModel cardSource)
+    {
+        if (_isSyncing) return;
+    
+        _isSyncing = true;
+        try 
+        {
+            await PowerCmd.ModifyAmount(this, delta, base.Owner, cardSource);
+        }
+        finally 
+        {
+            _isSyncing = false;
+        }
+    }
 }
