@@ -1,4 +1,5 @@
-﻿using IndomitableSpire2.IndomitableSpire2Code.Powers;
+﻿using IndomitableSpire2.IndomitableSpire2Code.Extensions;
+using IndomitableSpire2.IndomitableSpire2Code.Powers;
 using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -10,18 +11,21 @@ namespace IndomitableSpire2.IndomitableSpire2Code.Cards.Commons;
 public sealed class WorkArrangement() : IndomitableCard(0, CardType.Skill, CardRarity.Common, TargetType.Self)
 {
     // 注册变量：抽 2 张牌
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new CardsVar(2)];
-
-    // 核心限制：必须有至少 10 点干劲才能打出
-    protected override bool IsPlayable => 
-        CombatState != null && Owner.Creature.GetPower<MotivationPower>() is { DisplayAmount: >= 10 };
-
+    protected override IEnumerable<DynamicVar> CanonicalVars => 
+    [
+        new CardsVar(2),
+        new PowerVar<MotivationPower>("MotivationConsume", 10M)
+    ];
+    
+    // 核心限制：必须有足够的干劲才能打出
+    protected override bool IsPlayable => this.HasEnoughMotivation();
+    
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         // 1. 消耗干劲：通过施加负数的能力层数来实现扣除
         await PowerCmd.Apply<MotivationPower>(
             target: Owner.Creature, 
-            amount: -10M, 
+            amount: -DynamicVars.MotivationConsume().BaseValue, 
             applier: Owner.Creature, 
             cardSource: this
         );
@@ -37,7 +41,7 @@ public sealed class WorkArrangement() : IndomitableCard(0, CardType.Skill, CardR
         if (card != null)
             await CardPileCmd.Add(card, PileType.Draw);
     }
-
+    
     protected override void OnUpgrade()
     {
         // 升级效果：抽牌数 +1 (变为抽 3)

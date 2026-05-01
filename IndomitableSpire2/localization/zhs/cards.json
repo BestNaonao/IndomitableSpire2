@@ -12,7 +12,7 @@
   "INDOMITABLESPIRE2-ZIGZAG_MANEUVER.title": "之字机动",
   "INDOMITABLESPIRE2-ZIGZAG_MANEUVER.description": "只有在[gold]干劲[/gold]达到[blue]20[/blue]点及以上时才能打出。\n获得{Block:diff()}点格挡。\n在本回合获得{DexterityPower:diff()}点[gold]敏捷[/gold]。",
   "INDOMITABLESPIRE2-WORK_ARRANGEMENT.title": "工作安排",
-  "INDOMITABLESPIRE2-WORK_ARRANGEMENT.description": "消耗[blue]10[/blue]点[gold]干劲[/gold]。\n抽{Cards:diff()}张牌。\n将一张手牌放到你的[gold]抽牌堆[/gold]的底部。",
+  "INDOMITABLESPIRE2-WORK_ARRANGEMENT.description": "消耗[blue]{MotivationConsume:diff()}[/blue]点[gold]干劲[/gold]。\n抽{Cards:diff()}张牌。\n将一张手牌放到你的[gold]抽牌堆[/gold]的底部。",
   "INDOMITABLESPIRE2-WORK_ARRANGEMENT.selectionScreenPrompt": "选择一张牌放到你的抽牌堆底。",
   "INDOMITABLESPIRE2-ILLUSTRIOUS_AEGIS.title": "光辉的庇护",
   "INDOMITABLESPIRE2-ILLUSTRIOUS_AEGIS.description": "给予任意玩家{Block:diff()}点[gold]格挡[/gold]。\n该格挡在回合结束时保留，并且在完全碎裂时，回复[green]{Heal:diff()}[/green]点生命。",

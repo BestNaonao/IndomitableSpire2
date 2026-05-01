@@ -12,7 +12,7 @@
   "INDOMITABLESPIRE2-ZIGZAG_MANEUVER.title": "Zigzag Maneuver",
   "INDOMITABLESPIRE2-ZIGZAG_MANEUVER.description": "Can only be played if you have at least [blue]20[/blue] [gold]Motivation[/gold].\nGain {Block:diff()} Block.\nGain {DexterityPower:diff()} [gold]Dexterity[/gold] this turn.",
   "INDOMITABLESPIRE2-WORK_ARRANGEMENT.title": "Work Arrangement",
-  "INDOMITABLESPIRE2-WORK_ARRANGEMENT.description": "Consume [blue]10[/blue] [gold]Motivation[/gold].\nDraw {Cards:diff()} cards.\nPut a card from your hand on the bottom of your [gold]Draw Pile[/gold].",
+  "INDOMITABLESPIRE2-WORK_ARRANGEMENT.description": "Consume [blue]{MotivationConsume:diff()}[/blue] [gold]Motivation[/gold].\nDraw {Cards:diff()} cards.\nPut a card from your hand on the bottom of your [gold]Draw Pile[/gold].",
   "INDOMITABLESPIRE2-WORK_ARRANGEMENT.selectionScreenPrompt": "Choose a card to put on the bottom of your Draw Pile.",
   "INDOMITABLESPIRE2-ILLUSTRIOUS_AEGIS.title": "Illustrious Aegis",
   "INDOMITABLESPIRE2-ILLUSTRIOUS_AEGIS.description": "Grant any player {Block:diff()} [gold]Block[/gold].\nThis Block is retained at the end of your turn, and heals [green]{Heal:diff()}[/green] HP when fully broken.",
