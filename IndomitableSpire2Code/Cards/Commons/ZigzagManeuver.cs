@@ -1,4 +1,6 @@
-﻿using IndomitableSpire2.IndomitableSpire2Code.Powers;
+﻿using IndomitableSpire2.IndomitableSpire2Code.Extensions;
+using IndomitableSpire2.IndomitableSpire2Code.Localization.DynamicVars;
+using IndomitableSpire2.IndomitableSpire2Code.Powers;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -18,12 +20,12 @@ public sealed class ZigzagManeuver() : IndomitableCard(1, CardType.Skill, CardRa
     protected override IEnumerable<DynamicVar> CanonicalVars => 
     [
         new BlockVar(5M, ValueProp.Move),
-        new PowerVar<DexterityPower>(2M)
+        new PowerVar<DexterityPower>(2M),
+        new MotivationRequireVar(20M)
     ];
     
     // 核心限制：必须有至少 10 点干劲才能打出
-    protected override bool IsPlayable => 
-        CombatState != null && Owner.Creature.GetPower<MotivationPower>() is { DisplayAmount: >= 20 };
+    protected override bool IsPlayable => this.MeetsMotivationRequirement();
     
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
@@ -31,7 +33,7 @@ public sealed class ZigzagManeuver() : IndomitableCard(1, CardType.Skill, CardRa
         await CreatureCmd.TriggerAnim(Owner.Creature, "Cast", Owner.Character.CastAnimDelay);
         
         // 2. 获得格挡
-        var num = await CreatureCmd.GainBlock(Owner.Creature, DynamicVars.Block, cardPlay);
+        await CreatureCmd.GainBlock(Owner.Creature, DynamicVars.Block, cardPlay);
         
         // 3. 获得本回合敏捷 (核心：这里施加的是 之字机动能力 临时敏捷)
         await PowerCmd.Apply<ZigzagManeuverPower>(

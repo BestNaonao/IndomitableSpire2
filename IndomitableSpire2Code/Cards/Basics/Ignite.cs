@@ -1,4 +1,6 @@
-﻿using IndomitableSpire2.IndomitableSpire2Code.Powers;
+﻿using IndomitableSpire2.IndomitableSpire2Code.Extensions;
+using IndomitableSpire2.IndomitableSpire2Code.Localization.DynamicVars;
+using IndomitableSpire2.IndomitableSpire2Code.Powers;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -16,13 +18,13 @@ public sealed class Ignite() : IndomitableCard(1, CardType.Attack, CardRarity.Ba
     protected override IEnumerable<DynamicVar> CanonicalVars => 
     [
         new DamageVar(8M, ValueProp.Move),
-        new PowerVar<OnFirePower>(3M)
+        new PowerVar<OnFirePower>(3M),
+        new MotivationRequireVar(30M)
     ];
-
+    
     // 核心限制：重写 IsPlayable 属性
-    protected override bool IsPlayable => 
-        CombatState != null && Owner.Creature.GetPower<MotivationPower>() is { DisplayAmount: >= 30 };
-
+    protected override bool IsPlayable => this.MeetsMotivationRequirement();
+    
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         ArgumentNullException.ThrowIfNull(cardPlay.Target, nameof(cardPlay.Target));
@@ -41,7 +43,7 @@ public sealed class Ignite() : IndomitableCard(1, CardType.Attack, CardRarity.Ba
                 cardSource: this
             );
     }
-
+    
     protected override void OnUpgrade()
     {
         // 升级效果：伤害 +3，起火层数 +1
