@@ -1,53 +1,37 @@
-﻿using IndomitableSpire2.IndomitableSpire2Code.Abstracts;
-using IndomitableSpire2.IndomitableSpire2Code.Hooks;
-using MegaCrit.Sts2.Core.Commands;
-using MegaCrit.Sts2.Core.Entities.Creatures;
+﻿using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
-using MegaCrit.Sts2.Core.Models.Powers;
 
 namespace IndomitableSpire2.IndomitableSpire2Code.Powers;
 
-public sealed class MotivationPower : IndomitablePower, IAfterDynamicVarAmountChangedSubscriber
+public sealed class MotivationPower : IndomitablePower
 {
     public const int MaxAmount = 100;
-    public const int TransProportion = 10;
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;
     
-    // 1. 注册动态变量 MotivationAmount，初始值为 0
     protected override IEnumerable<DynamicVar> CanonicalVars => [new("MotivationAmount", 0M)];
     
-    // 2. 显示层数直接绑定到动态变量
-    public override int DisplayAmount => DynamicVars["MotivationAmount"].IntValue;
-    
+    // 1. 【核心映射】：底层 Amount 永远比显示值大 1，防止跌到 0 被引擎移除
+    public override int DisplayAmount => Amount - 1;
     public bool IsCompleted => DisplayAmount >= MaxAmount;
     
-    // 3. 动态文本切换：根据是否充满，返回不同的本地化键值
+    // 2. 动态文本切换：根据是否充满，返回不同的本地化键值
     protected override string SmartDescriptionLocKey => IsCompleted
         ? $"{Id.Entry}.smartDescriptionFull"
         : $"{Id.Entry}.smartDescription";
     
-    // 4. 处理首次获得该能力的情况 (接管初始 Amount)
+    // 3. 首次获得能力：补偿那 1 点的偏移量
     public override Task AfterApplied(Creature? applier, CardModel? cardSource)
     {
-        // 如果是战斗开始的初始化 (你代码里写的 Apply 1)，代表 0 干劲，保持 MotivationAmount 为 0。
-        // 但如果未来有卡牌直接赋予了多层（比如直接 Apply 5），我们要将其吸收进动态变量。
-        var amount = Amount;
-        if (amount > 1)
-            DynamicVars["MotivationAmount"].BaseValue = Math.Min(amount, MaxAmount);
-        
-        // 彻底锁死引擎层面的 Amount 为 1，保证能力图标永远不会被销毁
-        SetAmount(1, silent: true);
-        InvokeDisplayAmountChanged();
-        
-        // 事后处理，确保活力图标出现在干劲图标出现后
-        _ = CustomHook.AfterDynamicVarAmountChanged(this, "MotivationAmount", 0, amount, Owner, applier);
+        // 引擎默认按卡牌给的数值设置了 Amount。我们需要默默 +1 垫底。
+        SetAmount(Amount + 1, silent: true);
+        DynamicVars["MotivationAmount"].BaseValue = DisplayAmount;
         return Task.CompletedTask;
     }
     
-    // 5. 拦截后续所有对该能力的层数修改 (PowerCmd.Apply)
+    // 4. 处理下限截断与“满级不掉”的锁死机制
     public override bool TryModifyPowerAmountReceived(
         PowerModel canonicalPower,
         Creature target,
@@ -56,51 +40,52 @@ public sealed class MotivationPower : IndomitablePower, IAfterDynamicVarAmountCh
         out decimal modifiedAmount)
     {
         modifiedAmount = amount;
-        
-        // 确保拦截的是我们自己，且目标是拥有者
         if (canonicalPower.Id != Id || target != Owner) return false;
         
-        // 强制 modifiedAmount 为 0，保护底层的 Amount 永远不被修改
-        modifiedAmount = 0M;
+        // 锁定机制：如果已经满级，且外界试图扣除干劲，则偏移量强行归 0
+        if (IsCompleted && amount < 0)
+            modifiedAmount = 0M;
         
-        // 已满且试图减少，直接屏蔽
-        if (IsCompleted && amount < 0) return true;
+        // 下限保护：不能让底层 Amount 跌破 1（否则图标消失），计算刚好跌到 1 的差值
+        else if (Amount + amount < 1)
+            modifiedAmount = 1 - Amount;
         
-        // 计算实际的增减量（防止溢出 100 或跌破 0 导致的特效数值错误）
-        var oldAmount = DynamicVars["MotivationAmount"].BaseValue;
-        var newAmount = Math.Clamp(oldAmount + amount, 0M, MaxAmount);
-        var actualChange = (int)(newAmount - oldAmount);
-        
-        // 如果实际数值确实发生了变化，则手动触发引擎的标准 VFX 和 SFX 广播。
-        if (actualChange != 0)
-        {
-            DynamicVars["MotivationAmount"].BaseValue = newAmount;
-            InvokeDisplayAmountChanged();
-            Owner.InvokePowerModified(this, actualChange, silent: false);
-        }
-        
-        // 事后处理，确保活力图标出现在干劲图标出现后
-        _ = CustomHook.AfterDynamicVarAmountChanged(this, "MotivationAmount", oldAmount, amount, Owner, applier);
         return true;
     }
     
-    public async Task AfterDynamicVarAmountChanged(AbstractModel sourceModel, string variableName, decimal originalAmount,
-        decimal offsetAmount, Creature target, Creature? applier)
+    // 5. 处理上限截断与溢出联动（这是在引擎生效后触发的）
+    public override async Task AfterPowerAmountChanged(PowerModel power, decimal amount, Creature? applier, CardModel? cardSource)
     {
-        if (sourceModel is not MotivationPower || !variableName.Equals("MotivationAmount") || target != Owner || offsetAmount < 0) return;
-        var vigorToApply = Math.Floor((originalAmount + offsetAmount - MaxAmount) / TransProportion);
-        if (vigorToApply > 0)
-            await PowerCmd.Apply<VigorPower>(Owner, vigorToApply, applier, null);
+        if (power != this) return;
+        
+        // 如果底层 Amount 超过了最大值 (100 + 1)
+        if (Amount > MaxAmount + 1)
+        {
+            var overflow = Amount - (MaxAmount + 1);
+            
+            // 默默将数值切回上限，不触发二次特效
+            SetAmount(MaxAmount + 1, silent: true);
+            
+            // 触发联动：干劲迸发
+            foreach (var burstPower in Owner.Powers.OfType<MotivationBurstPower>().ToList())
+                await burstPower.ProcessOverflow(overflow, applier, cardSource);
+        }
+        
+        // 6. 更新动态变量，仅供本地化文本渲染
+        DynamicVars["MotivationAmount"].BaseValue = DisplayAmount;
     }
     
-    // 供其他卡牌或遗物调用的归零使用的快捷方法
+    // 供其他卡牌/遗物归零使用的快捷方法
     public void Restart()
     {
         var actualChange = -DisplayAmount;
         if (actualChange == 0) return;
-        DynamicVars["MotivationAmount"].BaseValue = 0M;
-        InvokeDisplayAmountChanged();
-        // 归零时同样触发一次“减少”的特效和音效
+        
+        // 默默归底
+        SetAmount(1, silent: true);
+        DynamicVars["MotivationAmount"].BaseValue = DisplayAmount;
+        
+        // 手动触发原版的红字减少特效
         Owner.InvokePowerModified(this, actualChange, silent: false);
         Flash();
     }
