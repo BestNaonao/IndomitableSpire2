@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cgd3f6muqnd1p"
-path="res://.godot/imported/tashkent_attack.png-df84ae9d20723be715fa086c44a69279.ctex"
+uid="uid://bca086igdcwf2"
+path="res://.godot/imported/placeholder_controller_icon.png-7c94cc358b0815e3ed18e5eeb3b84254.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://TashkentSpire2/images/card_frames/attack/tashkent_attack.png"
-dest_files=["res://.godot/imported/tashkent_attack.png-df84ae9d20723be715fa086c44a69279.ctex"]
+source_file="res://TashkentSpire2/images/combatui/placeholder_controller_icon.png"
+dest_files=["res://.godot/imported/placeholder_controller_icon.png-7c94cc358b0815e3ed18e5eeb3b84254.ctex"]
 
 [params]
 

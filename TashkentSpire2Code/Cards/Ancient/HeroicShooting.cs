@@ -21,7 +21,7 @@ public sealed class HeroicShooting() : AmmunitionCard(0, CardType.Attack, CardRa
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        ArgumentNullException.ThrowIfNull(cardPlay.Target, nameof(cardPlay.Target));
+        ArgumentNullException.ThrowIfNull(CombatState);
         
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
             .FromCard(this)

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cgd3f6muqnd1p"
-path="res://.godot/imported/tashkent_attack.png-df84ae9d20723be715fa086c44a69279.ctex"
+uid="uid://d11e8iwpe46eh"
+path="res://.godot/imported/base.png-2b4892d6d35828bf268589e0598d8d14.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://TashkentSpire2/images/card_frames/attack/tashkent_attack.png"
-dest_files=["res://.godot/imported/tashkent_attack.png-df84ae9d20723be715fa086c44a69279.ctex"]
+source_file="res://TashkentSpire2/images/card_frames/base.png"
+dest_files=["res://.godot/imported/base.png-2b4892d6d35828bf268589e0598d8d14.ctex"]
 
 [params]
 

@@ -8,7 +8,6 @@ using TashkentSpire2.TashkentSpire2Code.Cards.Ancient;
 using TashkentSpire2.TashkentSpire2Code.Commands;
 using TashkentSpire2.TashkentSpire2Code.Keywords;
 using TashkentSpire2.TashkentSpire2Code.Powers;
-using TashkentSpire2.TashkentSpire2Code.Tags;
 
 namespace TashkentSpire2.TashkentSpire2Code.Cards.Basics;
 
@@ -42,7 +41,7 @@ public sealed class LoadShot() : AmmunitionCard(1, CardType.Attack, CardRarity.B
                     .WithHitFx("vfx/vfx_attack_slash")
                     .Execute(choiceContext);
             }
-            UpdateAmmuGlobal(CurrentAmmu - shellsLoaded);
+            UpdateAmmuGlobal(Math.Max(CurrentAmmu - shellsLoaded, 0));
         }
     }
     

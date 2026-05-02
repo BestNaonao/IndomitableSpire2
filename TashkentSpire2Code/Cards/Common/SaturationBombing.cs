@@ -23,15 +23,17 @@ public sealed class SaturationBombing() : AmmunitionCard(2, CardType.Attack, Car
     {
         ArgumentNullException.ThrowIfNull(CombatState);
         
+        await SaturationBombingcmd.Execute(choiceContext, this.Owner, this);
+        
+        int shellsLoaded = await GetShellCountcmd.Execute(choiceContext, Owner, (int)CurrentAmmu,this.Keywords.Contains(TashkentKeyword.Barrage));
+
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
-            .WithHitCount(CurrentAmmu)
+            .WithHitCount(shellsLoaded)
             .FromCard(this)
             .TargetingAllOpponents(CombatState)
             .WithHitFx("vfx/vfx_attack_slash")
             .Execute(choiceContext);
-        UpdateAmmuGlobal(0);
-        
-        await SaturationBombingcmd.Execute(choiceContext, this.Owner, this);
+        UpdateAmmuGlobal(Math.Max(CurrentAmmu - shellsLoaded, 0));
     }
     
     protected override void OnUpgrade() => DynamicVars.Damage.UpgradeValueBy(3M);

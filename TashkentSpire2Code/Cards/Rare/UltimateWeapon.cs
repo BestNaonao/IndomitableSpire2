@@ -36,7 +36,7 @@ public sealed class UltimateWeapon() : AmmunitionCard(2, CardType.Attack, CardRa
         
         await DamageCmd.Attack(base.DynamicVars.CalculatedDamage)
             .FromCard(this)
-            .TargetingAllOpponents(CombatState)
+            .Targeting(cardPlay.Target)
             .WithHitFx("vfx/vfx_attack_slash")
             .Execute(choiceContext);
         UpdateAmmuGlobal(CurrentAmmu - 1);

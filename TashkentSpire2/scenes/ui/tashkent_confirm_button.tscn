@@ -1,0 +1,67 @@
+[gd_scene load_steps=5 format=3 uid="uid://bdy0w265b8okt"]
+
+[ext_resource type="Script" uid="uid://c6n3es6yqskpk" path="res://TashkentSpire2Code/Scripts/NConfirmButtonTashkent.cs" id="1_hma7g"]
+[ext_resource type="Texture2D" uid="uid://clq758uak1nco" path="res://TashkentSpire2/images/powers/big/mobile_power.png" id="2_2vfvx"]
+[ext_resource type="Texture2D" uid="uid://bca086igdcwf2" path="res://TashkentSpire2/images/combatui/placeholder_controller_icon.png" id="3_ki7v4"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6klvc"]
+
+[node name="ConfirmButton" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 1760.0
+offset_top = 726.0
+offset_right = 1960.0
+offset_bottom = 836.0
+pivot_offset = Vector2(180, 40)
+script = ExtResource("1_hma7g")
+
+[node name="Shadow" type="TextureRect" parent="."]
+modulate = Color(0, 0, 0, 0.15686275)
+layout_mode = 0
+offset_left = -49.0
+offset_top = -15.0
+offset_right = 218.0
+offset_bottom = 135.0
+texture = ExtResource("2_2vfvx")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Outline" type="TextureRect" parent="."]
+modulate = Color(0.8901961, 0.65882355, 1, 0.36862746)
+layout_mode = 0
+offset_left = -49.0
+offset_top = -17.0
+offset_right = 209.0
+offset_bottom = 139.0
+texture = ExtResource("2_2vfvx")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Image" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = -53.0
+offset_top = -13.0
+offset_right = 214.0
+offset_bottom = 137.0
+texture = ExtResource("2_2vfvx")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Icon" type="TextureRect" parent="Image"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ControllerIcon" type="TextureRect" parent="Image"]
+material = SubResource("ShaderMaterial_6klvc")
+layout_mode = 0
+offset_left = -9.0
+offset_top = 11.0
+offset_right = 231.0
+offset_bottom = 131.0
+scale = Vector2(0.5, 0.5)
+pivot_offset = Vector2(256, 128)
+texture = ExtResource("3_ki7v4")
+expand_mode = 1
+stretch_mode = 5
