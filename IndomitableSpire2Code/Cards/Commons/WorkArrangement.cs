@@ -1,4 +1,5 @@
 ﻿using IndomitableSpire2.IndomitableSpire2Code.Extensions;
+using IndomitableSpire2.IndomitableSpire2Code.Localization.DynamicVars;
 using IndomitableSpire2.IndomitableSpire2Code.Powers;
 using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Commands;
@@ -14,11 +15,11 @@ public sealed class WorkArrangement() : IndomitableCard(0, CardType.Skill, CardR
     protected override IEnumerable<DynamicVar> CanonicalVars => 
     [
         new CardsVar(2),
-        new PowerVar<MotivationPower>("MotivationConsume", 10M)
+        new MotivationConsumeVar(10M)   // 使用专属变量类
     ];
     
     // 核心限制：必须有足够的干劲才能打出
-    protected override bool IsPlayable => this.HasEnoughMotivation();
+    protected override bool IsPlayable => this.CanAffordMotivationCost();
     
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
