@@ -44,6 +44,8 @@
   "INDOMITABLESPIRE2-ART_OF_RESTING.title": "休息的艺术",
   "INDOMITABLESPIRE2-ART_OF_RESTING.banter": "任何休息都是有意义的，绝不是单纯的偷懒，嗯，绝不是。",
   "INDOMITABLESPIRE2-ART_OF_RESTING.description": "将你所有牌堆中的[gold]慵懒[/gold]全部[gold]变化[/gold]为[gold]养神[/gold]。\n每当你生成状态牌时，将其[gold]变化[/gold]为[gold]养神[/gold]。",
+  "INDOMITABLESPIRE2-MOTIVATION_BURST.title": "干劲迸发",
+  "INDOMITABLESPIRE2-MOTIVATION_BURST.description": "你每过量获得[blue]20[/blue]点[gold]干劲[/gold]，\n就获得[blue]{MotivationBurstPower:diff()}[/blue]点[gold]活力[/gold]。",
   
   "INDOMITABLESPIRE2-DISPATCH_COMMISSION.title": "派发委托",
   "INDOMITABLESPIRE2-DISPATCH_COMMISSION.description": "将一张随机的{IfUpgraded:show:[gold]升级过的[/gold]}[gold]委托[/gold]牌添加至一位其他玩家的[gold]手牌[/gold]中。",
