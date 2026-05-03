@@ -47,6 +47,9 @@
   "INDOMITABLESPIRE2-MOTIVATION_BURST.title": "干劲迸发",
   "INDOMITABLESPIRE2-MOTIVATION_BURST.description": "你每过量获得[blue]20[/blue]点[gold]干劲[/gold]，\n就获得[blue]{MotivationBurstPower:diff()}[/blue]点[gold]活力[/gold]。",
   
+  "INDOMITABLESPIRE2-SCORCHING_FLAME_RAIN.title": "灼天焰雨",
+  "INDOMITABLESPIRE2-SCORCHING_FLAME_RAIN.description": "只有在[gold]干劲[/gold]达到[blue]{MotivationRequire:diff()}[/blue]点及以上时才能打出。\n对所有敌人造成{Damage:diff()}点伤害。\n给予所有敌人[blue]{OnFirePower:diff()}[/blue]层[gold]起火[/gold]。",
+  
   "INDOMITABLESPIRE2-DISPATCH_COMMISSION.title": "派发委托",
   "INDOMITABLESPIRE2-DISPATCH_COMMISSION.description": "将一张随机的{IfUpgraded:show:[gold]升级过的[/gold]}[gold]委托[/gold]牌添加至一位其他玩家的[gold]手牌[/gold]中。",
   "INDOMITABLESPIRE2-OIL_COMMISSION.title": "油田开发",

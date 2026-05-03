@@ -46,6 +46,9 @@
   "INDOMITABLESPIRE2-ART_OF_RESTING.description": "[gold]Transform[/gold] all [gold]Indolent[/gold] cards in your piles into [gold]Refresh[/gold].\nWhenever you create a Status card, [gold]Transform[/gold] it into a [gold]Refresh[/gold].",
   "INDOMITABLESPIRE2-MOTIVATION_BURST.title": "Motivation Burst",
   "INDOMITABLESPIRE2-MOTIVATION_BURST.description": "Every [blue]20[/blue] excess [gold]Motivation[/gold] you gain,\ngain [blue]{MotivationBurstPower:diff()}[/blue] [gold]Vigor[/gold].",
+
+  "INDOMITABLESPIRE2-SCORCHING_FLAME_RAIN.title": "Scorching Flame Rain",
+  "INDOMITABLESPIRE2-SCORCHING_FLAME_RAIN.description": "Can only be played if you have at least [blue]{MotivationRequire:diff()}[/blue] [gold]Motivation[/gold].\nDeal {Damage:diff()} damage to ALL enemies.\nApply [blue]{OnFirePower:diff()}[/blue] [gold]On Fire[/gold] to ALL enemies.",
   
   "INDOMITABLESPIRE2-DISPATCH_COMMISSION.title": "Dispatch Commission",
   "INDOMITABLESPIRE2-DISPATCH_COMMISSION.description": "Another player adds 1 random{IfUpgraded:show: [gold]Upgraded[/gold]} [gold]Commission[/gold] card to their [gold]Hand[/gold].",
