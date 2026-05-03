@@ -48,5 +48,8 @@
   "INDOMITABLESPIRE2-SCORCHED_BOMBING_POWER.title": "焦土轰炸",
   "INDOMITABLESPIRE2-ART_OF_RESTING_POWER.description": "每当你生成状态牌时，将其[gold]变化[/gold]为[gold]养神[/gold]。",
   "INDOMITABLESPIRE2-ART_OF_RESTING_POWER.smartDescription": "每当你生成状态牌时，将其[gold]变化[/gold]为[gold]养神[/gold]。",
-  "INDOMITABLESPIRE2-ART_OF_RESTING_POWER.title": "休息的艺术"
+  "INDOMITABLESPIRE2-ART_OF_RESTING_POWER.title": "休息的艺术",
+  "INDOMITABLESPIRE2-MOTIVATION_BURST_POWER.description": "每当你获得[blue]{OverflowThreshold}[/blue]点溢出的[gold]干劲[/gold]时，获得[blue]1[/blue]点[gold]活力[/gold]。",
+  "INDOMITABLESPIRE2-MOTIVATION_BURST_POWER.smartDescription": "每当你获得[blue]{OverflowThreshold}[/blue]点溢出的[gold]干劲[/gold]时，获得[blue]{Amount}[/blue]点[gold]活力[/gold]。",
+  "INDOMITABLESPIRE2-MOTIVATION_BURST_POWER.title": "干劲迸发"
 }

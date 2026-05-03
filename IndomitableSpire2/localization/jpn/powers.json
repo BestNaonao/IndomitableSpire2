@@ -48,5 +48,8 @@
   "INDOMITABLESPIRE2-SCORCHED_BOMBING_POWER.title": "焦土爆撃",
   "INDOMITABLESPIRE2-ART_OF_RESTING_POWER.description": "状態異常を作成するたび、それを[gold]養神[/gold]に[gold]変化[/gold]させる。",
   "INDOMITABLESPIRE2-ART_OF_RESTING_POWER.smartDescription": "状態異常を作成するたび、それを[gold]養神[/gold]に[gold]変化[/gold]させる。",
-  "INDOMITABLESPIRE2-ART_OF_RESTING_POWER.title": "休息の芸術"
+  "INDOMITABLESPIRE2-ART_OF_RESTING_POWER.title": "休息の芸術",
+  "INDOMITABLESPIRE2-MOTIVATION_BURST_POWER.description": "溢れた[gold]やる気[/gold]を[blue]{OverflowThreshold}[/blue]得るたび、[gold]活力[/gold]を1得る。",
+  "INDOMITABLESPIRE2-MOTIVATION_BURST_POWER.smartDescription": "溢れた[gold]やる気[/gold]を[blue]{OverflowThreshold}[/blue]得るたび、[gold]活力[/gold]を[blue]{Amount}[/blue]得る。",
+  "INDOMITABLESPIRE2-MOTIVATION_BURST_POWER.title": "やる気爆発"
 }

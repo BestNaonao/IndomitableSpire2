@@ -48,5 +48,8 @@
   "INDOMITABLESPIRE2-SCORCHED_BOMBING_POWER.title": "Scorched Bombing",
   "INDOMITABLESPIRE2-ART_OF_RESTING_POWER.description": "Whenever you create a Status card, [gold]Transform[/gold] it into a [gold]Refresh[/gold].",
   "INDOMITABLESPIRE2-ART_OF_RESTING_POWER.smartDescription": "Whenever you create a Status card, [gold]Transform[/gold] it into a [gold]Refresh[/gold].",
-  "INDOMITABLESPIRE2-ART_OF_RESTING_POWER.title": "Art of Resting"
+  "INDOMITABLESPIRE2-ART_OF_RESTING_POWER.title": "Art of Resting",
+  "INDOMITABLESPIRE2-MOTIVATION_BURST_POWER.description": "Every [blue]{OverflowThreshold}[/blue] excess [gold]Motivation[/gold] you gain, gain [blue]1[/blue] [gold]Vigor[/gold].",
+  "INDOMITABLESPIRE2-MOTIVATION_BURST_POWER.smartDescription": "Every [blue]{OverflowThreshold}[/blue] excess [gold]Motivation[/gold] you gain, gain [blue]{Amount}[/blue] [gold]Vigor[/gold].",
+  "INDOMITABLESPIRE2-MOTIVATION_BURST_POWER.title": "Motivation Burst"
 }

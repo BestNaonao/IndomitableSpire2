@@ -1,0 +1,7 @@
+[gd_resource type="AtlasTexture" load_steps=2 format=3 uid="uid://cvxlm3sbshxop"]
+
+[ext_resource type="Texture2D" uid="uid://vo5g4s11kq80" path="res://IndomitableSpire2/images/powers/packed/motivation_burst_power_packed.png" id="1_1phix"]
+
+[resource]
+atlas = ExtResource("1_1phix")
+region = Rect2(0, 0, 64, 64)
