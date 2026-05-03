@@ -33,7 +33,9 @@ public abstract class IndomitableCard(
             
             var normalPath = $"{Id.Entry.RemovePrefix().ToLowerInvariant()}.png".BigCardImagePath();
             _cachedPortraitPath = ResourceLoader.Exists(normalPath)
-                ? normalPath : "beta/indomitable_beta_card.png".CardImagePath();
+                ? normalPath : Rarity != CardRarity.Ancient ? 
+                    "beta/indomitable_beta_card.png".CardImagePath() : 
+                    "beta/indomitable_beta_ancient_card.png".CardImagePath();
             
             return _cachedPortraitPath;
         }
