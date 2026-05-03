@@ -21,6 +21,9 @@ public sealed class IndomitableMaidCharacter : Indomitable
     // 角色图标场景
     public override string CustomIconPath => 
         "res://IndomitableSpire2/scenes/characters/indomitable_maid_icon.tscn";
+    // 角色图标轮廓
+    public override string CustomIconOutlineTexturePath => 
+        "res://IndomitableSpire2/images/ui/character_icon_indomitable_maid_outline.png";
     
     // 人物手模图片(石头剪刀布和指向)
     public override string CustomArmPaperTexturePath => 
