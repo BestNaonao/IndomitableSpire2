@@ -1,5 +1,4 @@
 ﻿using MegaCrit.Sts2.Core.Combat;
-using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Players;
@@ -15,108 +14,44 @@ public sealed class PoseidonFormPower : TashkentPower
     private const string RemainKey = "RemainAmount";
     private CardModel? _triggeringCard;
     private int _usedThisTurn = 0;
-    
-    private bool _isDuplicating = false; 
+    private bool _hasTriggered = false;
 
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;
-
+    
     public override string CustomBigIconPath => 
         "res://TashkentSpire2/images/powers/big/poseidon_form_power.png";
     public override string CustomPackedIconPath => 
         "res://TashkentSpire2/images/powers/packed/poseidon_form_power.png";
     
-    public override int DisplayAmount => base.DynamicVars[RemainKey].IntValue;
-
-    protected override IEnumerable<DynamicVar> CanonicalVars =>
-    [
-        new DynamicVar(RemainKey, 0m)
-    ];
+    public override int DisplayAmount => (int)this.Amount - _usedThisTurn;
     
-    public override async Task AfterApplied(Creature? applier, CardModel? cardSource)
-    { 
-        base.DynamicVars[RemainKey].BaseValue = this.Amount;
-        Flash();
-        InvokeDisplayAmountChanged();
-        await Task.CompletedTask;
-    }
-    
-    public override async Task AfterPowerAmountChanged(PowerModel power, decimal amount, Creature? applier, CardModel? cardSource)
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new DynamicVar(RemainKey, 0m)];
+
+    public override Task BeforeCardPlayed(CardPlay cardPlay)
     {
-        if (power == this)
+        if (DisplayAmount > 0)
         {
-            base.DynamicVars[RemainKey].BaseValue = this.Amount - _usedThisTurn;
-            InvokeDisplayAmountChanged();
+            _triggeringCard = cardPlay.Card;
+            _hasTriggered = false;
         }
-
-        if (_isDuplicating) return;
-
-        if (base.DynamicVars[RemainKey].BaseValue > 0 && 
-            cardSource != null && 
-            cardSource == _triggeringCard && 
-            power.GetTypeForAmount(amount) == PowerType.Buff &&
-            power.IsInstanced && 
-            power.StackType != PowerStackType.Single)
+        else
         {
-            _isDuplicating = true;
-            
-            await PowerCmd.Apply(power, base.Owner, amount, applier, cardSource);
-            
-            _isDuplicating = false;
+            _triggeringCard = null;
         }
-    }
-
-    public override Task BeforeHandDraw(Player player, PlayerChoiceContext choiceContext, CombatState combatState)
-    {
-        _triggeringCard = null;
-        _usedThisTurn = 0;
-        base.DynamicVars[RemainKey].BaseValue = this.Amount;
-        InvokeDisplayAmountChanged();
-        return Task.CompletedTask;
-    }
-
-    public override Task BeforePowerAmountChanged(PowerModel power, decimal amount, Creature target, Creature? applier, CardModel? cardSource)
-    {
-        if (_isDuplicating) return Task.CompletedTask;
-
-        if (base.DynamicVars[RemainKey].BaseValue <= 0 || cardSource == null) 
-            return Task.CompletedTask;
-        
-        if (applier != base.Owner.Player?.Creature || target.Side != base.Owner.Player?.Creature.Side) 
-            return Task.CompletedTask;
-        
-        if (power.GetTypeForAmount(amount) != PowerType.Buff) 
-            return Task.CompletedTask;
-        
-        if (power.StackType == PowerStackType.Single) 
-            return Task.CompletedTask;
-        
-        if (_triggeringCard == null)
-        {
-            _triggeringCard = cardSource;
-        }
-
         return Task.CompletedTask;
     }
 
     public override decimal ModifyPowerAmountGiven(PowerModel power, Creature giver, decimal amount, Creature? target, CardModel? cardSource)
     {
-        if (_isDuplicating) return amount;
-
-        if (base.DynamicVars[RemainKey].BaseValue > 0 && 
-            cardSource != null && 
-            cardSource == _triggeringCard && 
-            power.GetTypeForAmount(amount) == PowerType.Buff)
+        if (DisplayAmount > 0 && amount > 0 && _triggeringCard != null && 
+            cardSource == _triggeringCard && power.GetTypeForAmount(amount) == PowerType.Buff)
         {
-            if (power.StackType == PowerStackType.Single) 
-                return amount;
-            
-            if (power.IsInstanced) 
-                return amount;
-            
+            if (power.StackType == PowerStackType.Single) return amount;
+
+            _hasTriggered = true; 
             return amount * 2m;
         }
-
         return amount;
     }
 
@@ -124,15 +59,26 @@ public sealed class PoseidonFormPower : TashkentPower
     {
         if (cardPlay.Card == _triggeringCard)
         {
-            Flash();
+            if (_hasTriggered)
+            {
+                Flash();
+                _usedThisTurn++;
+
+                InvokeDisplayAmountChanged();
+            }
+
             _triggeringCard = null;
-            
-            _usedThisTurn++;
-            base.DynamicVars[RemainKey].BaseValue = this.Amount - _usedThisTurn;
-            
-            InvokeDisplayAmountChanged();
+            _hasTriggered = false;
         }
-        
         await base.AfterCardPlayed(context, cardPlay);
+    }
+
+    public override Task BeforeHandDraw(Player player, PlayerChoiceContext choiceContext, CombatState combatState)
+    {
+        _triggeringCard = null;
+        _hasTriggered = false;
+        _usedThisTurn = 0;
+        InvokeDisplayAmountChanged();
+        return Task.CompletedTask;
     }
 }

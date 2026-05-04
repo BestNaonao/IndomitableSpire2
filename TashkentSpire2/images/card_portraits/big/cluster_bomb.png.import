@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bjwove56pgwsd"
-path="res://.godot/imported/card.png-29fb44f3ebb21c9d977b155cb17959fd.ctex"
+uid="uid://cy5akg7y5ca3a"
+path="res://.godot/imported/cluster_bomb.png-4ad88ab38df766fea4c241452ec03dd4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://TashkentSpire2/images/card_portraits/big/card.png"
-dest_files=["res://.godot/imported/card.png-29fb44f3ebb21c9d977b155cb17959fd.ctex"]
+source_file="res://TashkentSpire2/images/card_portraits/big/cluster_bomb.png"
+dest_files=["res://.godot/imported/cluster_bomb.png-4ad88ab38df766fea4c241452ec03dd4.ctex"]
 
 [params]
 
