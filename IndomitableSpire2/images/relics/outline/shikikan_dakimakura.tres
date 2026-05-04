@@ -1,6 +1,6 @@
 [gd_resource type="AtlasTexture" load_steps=2 format=3 uid="uid://di88arfviwr05"]
 
-[ext_resource type="Texture2D" uid="uid://bajl5s47fk24e" path="res://IndomitableSpire2/images/relics/outline/ShikikanDakimakura_outline.png" id="1_knyc6"]
+[ext_resource type="Texture2D" uid="uid://bajl5s47fk24e" path="res://IndomitableSpire2/images/relics/outline/shikikan_dakimakura.png" id="1_knyc6"]
 
 [resource]
 atlas = ExtResource("1_knyc6")

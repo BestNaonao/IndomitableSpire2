@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bq8qm50rn8n5y"
-path="res://.godot/imported/relic.png-d0ba5bb1a501ad1dda398a09eeabbab0.ctex"
+uid="uid://bokkljk45kqbh"
+path="res://.godot/imported/shikikan_dakimakura.png-6ad6d697c3b3ad522b959b73a123abb9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://IndomitableSpire2/images/relics/relic.png"
-dest_files=["res://.godot/imported/relic.png-d0ba5bb1a501ad1dda398a09eeabbab0.ctex"]
+source_file="res://IndomitableSpire2/images/relics/packed/shikikan_dakimakura.png"
+dest_files=["res://.godot/imported/shikikan_dakimakura.png-6ad6d697c3b3ad522b959b73a123abb9.ctex"]
 
 [params]
 
