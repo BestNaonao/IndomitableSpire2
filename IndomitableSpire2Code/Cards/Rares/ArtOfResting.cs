@@ -24,20 +24,19 @@ public sealed class ArtOfResting() : IndomitableCard(2, CardType.Power, CardRari
     {
         if (Owner.PlayerCombatState is null) return;
         
-        // 播放台词
+        // 1. 播放施法动画，以及播放台词
+        await CreatureCmd.TriggerAnim(Owner.Creature, "Cast", Owner.Character.CastAnimDelay);
         TalkCmd.Play(RestingDialogue, Owner.Creature, VfxColor.Gold, VfxDuration.VeryLong);
+        
+        // 2. 极其优雅地全堆查找：遍历该玩家所有牌堆（抽牌、弃牌、手牌、消耗），找到所有“慵懒”，将之前积攒的“慵懒”统统转化为“养神”
         var indolentCards = Owner.Piles
             .SelectMany(p => p.Cards)
             .Where(c => c is Indolent)
             .ToList();
-        // 1. 极其优雅地全堆查找：遍历该玩家所有牌堆（抽牌、弃牌、手牌、消耗），找到所有“慵懒”，将之前积攒的“慵懒”统统转化为“养神”
         foreach (var original in indolentCards)
-        {
-            var refreshCard = CombatState!.CreateCard<Refresh>(Owner);
-            await CardCmd.Transform(original, refreshCard);
-        }
+            await CardCmd.Transform(original, CombatState!.CreateCard<Refresh>(Owner));
         
-        // 2. 赋予休息的艺术能力，处理未来生成的状态牌
+        // 3. 赋予休息的艺术能力，处理未来生成的状态牌
         await PowerCmd.Apply<ArtOfRestingPower>(Owner.Creature, 1M, Owner.Creature, this);
     }
     
