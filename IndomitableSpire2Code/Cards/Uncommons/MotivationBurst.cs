@@ -1,9 +1,9 @@
-﻿using MegaCrit.Sts2.Core.Commands;
+﻿using IndomitableSpire2.IndomitableSpire2Code.Powers;
+using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
-using IndomitableSpire2.IndomitableSpire2Code.Powers;
 using MegaCrit.Sts2.Core.Models.Powers;
 
 namespace IndomitableSpire2.IndomitableSpire2Code.Cards.Uncommons;
@@ -18,10 +18,7 @@ public sealed class MotivationBurst() : IndomitableCard(1, CardType.Power, CardR
     ];
     
     // 注册变量：基础给予 2 层干劲迸发能力
-    protected override IEnumerable<DynamicVar> CanonicalVars => 
-    [
-        new PowerVar<MotivationBurstPower>(2M)
-    ];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<MotivationBurstPower>(2M)];
     
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
