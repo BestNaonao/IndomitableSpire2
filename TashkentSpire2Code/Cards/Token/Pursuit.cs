@@ -1,6 +1,8 @@
 ﻿using BaseLib.Utils;
+using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models.CardPools;
@@ -30,6 +32,23 @@ public sealed class Pursuit() : TashkentCard(0, CardType.Attack, CardRarity.Toke
             .Execute(choiceContext);
         
         await PowerCmd.Apply<MarkPower>(cardPlay.Target, base.DynamicVars["TashkentSpire2-Mark"].BaseValue, base.Owner.Creature, this);
+    }
+    
+    public static async Task<IEnumerable<Pursuit>> CreateInHand(Player owner, int amount, CombatState combatState)
+    {
+        IEnumerable<Pursuit> Pursuits = Create(owner, amount, combatState);
+        await CardPileCmd.AddGeneratedCardsToCombat(Pursuits, PileType.Hand, addedByPlayer: true);
+        return Pursuits;
+    }
+    
+    public static IEnumerable<Pursuit> Create(Player owner, int amount, CombatState combatState)
+    {
+        List<Pursuit> list = new List<Pursuit>();
+        for (int i = 0; i < amount; i++)
+        {
+            list.Add(combatState.CreateCard<Pursuit>(owner));
+        }
+        return list;
     }
     
     protected override void OnUpgrade()

@@ -50,8 +50,10 @@ stretch_mode = 5
 
 [node name="Icon" type="TextureRect" parent="Image"]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = 88.0
+offset_top = 28.0
+offset_right = 168.0
+offset_bottom = 108.0
 
 [node name="ControllerIcon" type="TextureRect" parent="Image"]
 material = SubResource("ShaderMaterial_6klvc")

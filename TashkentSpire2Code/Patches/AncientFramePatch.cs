@@ -5,69 +5,61 @@ using MegaCrit.Sts2.Core.Assets;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Nodes.Cards;
 using TashkentSpire2.TashkentSpire2Code.Cards;
-
 namespace TashkentSpire2.TashkentSpire2Code.Patches;
 
 [HarmonyPatch(typeof(NCard), "Reload")]
 public static class AncientFramePatch
 {
+    private static AtlasTexture? _vanillaAncientTexture;
+
     static void Postfix(NCard __instance)
     {
         if (__instance?.Model == null) return;
 
-        if (__instance.Model.Rarity != (CardRarity)5)
-            return;
-        
-        if (__instance.Model is not TashkentCard)
-            return;
-        
-        var field = NCardReflectionFields.AncientBorderField;
-        if (field == null) return;
+        var borderField = NCardReflectionFields.AncientBorderField;
+        if (borderField == null) return;
 
-        var border = field.GetValue(__instance) as TextureRect;
+        var border = borderField.GetValue(__instance) as TextureRect;
         if (border == null) return;
 
-        Texture2D? tex = null;
-        if (__instance.Model.Type == (CardType)1)
+        bool isTashkent = __instance.Model is TashkentCard;
+        bool isAncient = __instance.Model.Rarity == (CardRarity)5;
+
+        if (isAncient && isTashkent)
         {
-            tex = PreloadManager.Cache.GetAsset<Texture2D>(
-                "res://TashkentSpire2/images/card_frames/tashkent_ancient.png");
+            string myPath = (__instance.Model.Type == (CardType)1)
+                ? "res://TashkentSpire2/images/card_frames/tashkent_ancient.png"
+                : "res://TashkentSpire2/images/card_frames/tashkent_ancient_power.png";
+
+            var customTex = PreloadManager.Cache.GetAsset<Texture2D>(myPath);
+            if (customTex != null) border.Texture = customTex;
         }
         else
         {
-            tex = PreloadManager.Cache.GetAsset<Texture2D>(
-                "res://TashkentSpire2/images/card_frames/tashkent_ancient_power.png");
-        }
-        
+            if (border.Texture != null && border.Texture.ResourcePath.Contains("TashkentSpire2"))
+            {
+                if (_vanillaAncientTexture == null)
+                {
+                    var atlas = PreloadManager.Cache.GetAsset<Texture2D>("res://images/atlases/compressed_0.png");
+                    if (atlas != null)
+                    {
+                        _vanillaAncientTexture = new AtlasTexture();
+                        _vanillaAncientTexture.Atlas = atlas;
 
-        if (tex != null)
-        {
-            border.Texture = tex;
+                        _vanillaAncientTexture.Region = new Rect2(1, 1, 821, 1148);
+                    }
+                }
+
+                if (_vanillaAncientTexture != null)
+                {
+                    border.Texture = _vanillaAncientTexture;
+                }
+            }
         }
     }
 }
 
 public static class NCardReflectionFields
 {
-    public static readonly FieldInfo? AncientTextBgField = typeof(NCard).GetField("_ancientTextBg", BindingFlags.Instance | BindingFlags.NonPublic);
-
     public static readonly FieldInfo? AncientBorderField = typeof(NCard).GetField("_ancientBorder", BindingFlags.Instance | BindingFlags.NonPublic);
-
-    public static readonly FieldInfo? AncientBannerField = typeof(NCard).GetField("_ancientBanner", BindingFlags.Instance | BindingFlags.NonPublic);
-
-    public static readonly FieldInfo? AncientPortraitField = typeof(NCard).GetField("_ancientPortrait", BindingFlags.Instance | BindingFlags.NonPublic);
-
-    public static readonly FieldInfo? PortraitField = typeof(NCard).GetField("_portrait", BindingFlags.Instance | BindingFlags.NonPublic);
-
-    public static readonly FieldInfo? PortraitBorderField = typeof(NCard).GetField("_portraitBorder", BindingFlags.Instance | BindingFlags.NonPublic);
-
-    public static readonly FieldInfo? FrameField = typeof(NCard).GetField("_frame", BindingFlags.Instance | BindingFlags.NonPublic);
-
-    public static readonly FieldInfo? BannerField = typeof(NCard).GetField("_banner", BindingFlags.Instance | BindingFlags.NonPublic);
-
-    public static readonly FieldInfo? TypePlaqueField = typeof(NCard).GetField("_typePlaque", BindingFlags.Instance | BindingFlags.NonPublic);
-
-    public static readonly FieldInfo? TypeLabelField = typeof(NCard).GetField("_typeLabel", BindingFlags.Instance | BindingFlags.NonPublic);
-
-    public static readonly FieldInfo? PortraitCanvasGroupField = typeof(NCard).GetField("_portraitCanvasGroup", BindingFlags.Instance | BindingFlags.NonPublic);
 }

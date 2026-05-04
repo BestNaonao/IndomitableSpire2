@@ -1,16 +1,19 @@
-﻿using MegaCrit.Sts2.Core.Commands;
+﻿using MegaCrit.Sts2.Core.CardSelection;
+using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.ValueProps;
-using TashkentSpire2.TashkentSpire2Code.Powers;
+using TashkentSpire2.TashkentSpire2Code.Afflictions;
 
 namespace TashkentSpire2.TashkentSpire2Code.Cards.Uncommon;
 
 public sealed class CombinedArtilleryAndTorpedo() : TashkentCard(1, CardType.Attack, CardRarity.Uncommon, TargetType.AnyEnemy)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new DamageVar(9M, ValueProp.Move)
+        new DamageVar(4M, ValueProp.Move),
+        new RepeatVar(2)
     ];
     
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
@@ -23,8 +26,20 @@ public sealed class CombinedArtilleryAndTorpedo() : TashkentCard(1, CardType.Att
             .WithHitFx("vfx/vfx_attack_slash")
             .Execute(choiceContext);
         
-        
+        CardSelectorPrefs cardSelectorPrefs = new CardSelectorPrefs(base.SelectionScreenPrompt, 1);
+        CardModel? card = (await CardSelectCmd.FromHand(
+            choiceContext, 
+            base.Owner, 
+            cardSelectorPrefs, 
+            c => c.Affliction == null, 
+            this
+        )).FirstOrDefault();
+
+        if (card != null)
+        {
+            await CardCmd.Afflict<TorpedoAffliction>(card, 1M);
+        }
     }
     
-    protected override void OnUpgrade() => DynamicVars.Damage.UpgradeValueBy(3M);
+    protected override void OnUpgrade() => DynamicVars.Damage.UpgradeValueBy(2M);
 }

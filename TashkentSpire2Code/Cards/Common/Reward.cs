@@ -27,12 +27,7 @@ public sealed class Reward() : TashkentCard(1, CardType.Attack, CardRarity.Commo
             .WithHitFx("vfx/vfx_attack_slash")
             .Execute(choiceContext);
         
-        List<Vodka> list = Vodka.Create(base.Owner, base.DynamicVars.Cards.IntValue, base.CombatState).ToList();
-        
-        foreach (Vodka item in list)
-        {
-            await CardPileCmd.AddGeneratedCardToCombat(item, PileType.Hand, addedByPlayer: true);
-        }
+        await Vodka.CreateInHand(base.Owner, base.DynamicVars.Cards.IntValue, base.CombatState);
     }
     
     protected override void OnUpgrade()

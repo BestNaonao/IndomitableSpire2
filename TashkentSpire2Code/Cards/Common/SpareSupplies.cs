@@ -5,8 +5,11 @@ using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using MegaCrit.Sts2.Core.Models;
+using TashkentSpire2.TashkentSpire2Code.Cards.Status;
 using TashkentSpire2.TashkentSpire2Code.Cards.Token;
 using TashkentSpire2.TashkentSpire2Code.Commands;
+using TashkentSpire2.TashkentSpire2Code.Keywords;
 
 namespace TashkentSpire2.TashkentSpire2Code.Cards.Common;
 
@@ -18,6 +21,7 @@ public sealed class SpareSupplies() : AmmunitionCard(0, CardType.Skill, CardRari
         new AmmunitionDynamicVar(0M),
         new LoadDynamicVar(1M),
         new AmmuMaxDynamicVar(6M),
+        new ShotDynamicVar(2M),
         new EnergyVar(1),
         new CardsVar(1)
     ];
@@ -26,18 +30,40 @@ public sealed class SpareSupplies() : AmmunitionCard(0, CardType.Skill, CardRari
     
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        await PlayerCmd.GainEnergy(base.DynamicVars.Energy.BaseValue, base.Owner);
-        UpdateAmmuGlobal(CurrentAmmu - 1);
-
-        if (true)
-        {
-            ArgumentNullException.ThrowIfNull(CombatState);
+        ArgumentNullException.ThrowIfNull(CombatState);
         
-            List<Vodka> list = Vodka.Create(base.Owner, base.DynamicVars.Cards.IntValue, base.CombatState).ToList();
-            foreach (Vodka item in list)
+        int shellsLoaded = await GetShellCountcmd.Execute(choiceContext, Owner, (int)CurrentAmmu,this.Keywords.Contains(TashkentKeyword.Barrage));
+        if (shellsLoaded > 0)
+        {
+            if (shellsLoaded >= DynamicVars["TashkentSpire2-Shot"].BaseValue)
             {
-                await CardPileCmd.AddGeneratedCardToCombat(item, PileType.Hand, addedByPlayer: true);
+                List<Vodka> list = Vodka.Create(base.Owner, base.DynamicVars.Cards.IntValue, base.CombatState).ToList();
+                foreach (Vodka item in list)
+                {
+                    if (this.IsUpgraded)
+                    {
+                        CardCmd.Upgrade(item);
+                    }
+                    await CardPileCmd.AddGeneratedCardToCombat(item, PileType.Hand, addedByPlayer: true);
+                }
             }
+            
+            for (int i = 0; i < shellsLoaded; i++)
+            {
+                await PlayerCmd.GainEnergy(base.DynamicVars.Energy.BaseValue, base.Owner);
+            }
+            int num = Math.Max(shellsLoaded - CurrentAmmu, 0);
+            if (num > 0 && this.Keywords.Contains(TashkentKeyword.Barrage))
+            {
+                List<CardModel> list = new List<CardModel>();
+                for (int i = 0; i < num; i++)
+                {
+                    list.Add(base.CombatState.CreateCard<ShellCasing>(base.Owner));
+                }
+                await CardPileCmd.AddGeneratedCardsToCombat(list, PileType.Hand, addedByPlayer: true);
+            }
+            
+            UpdateAmmuGlobal(Math.Max(CurrentAmmu - shellsLoaded, 0));
         }
     }
     

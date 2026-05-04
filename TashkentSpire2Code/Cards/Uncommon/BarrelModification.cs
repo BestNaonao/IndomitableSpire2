@@ -9,7 +9,7 @@ namespace TashkentSpire2.TashkentSpire2Code.Cards.Uncommon;
 public sealed class BarrelModification() : TashkentCard(1, CardType.Power, CardRarity.Uncommon, TargetType.Self)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new PowerVar<BarrelModificationPower>(3M)
+        new PowerVar<BarrelModificationPower>(2M)
     ];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)

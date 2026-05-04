@@ -9,6 +9,8 @@ using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.Nodes.Rooms;
 using MegaCrit.Sts2.Core.Nodes.Vfx;
 using MegaCrit.Sts2.Core.ValueProps;
+using TashkentSpire2.TashkentSpire2Code.Cards.Uncommon;
+using TashkentSpire2.TashkentSpire2Code.Commands;
 
 namespace TashkentSpire2.TashkentSpire2Code.Powers;
 
@@ -128,6 +130,19 @@ public sealed class TorpedoPower : TashkentPower
             }
         }
 
+        var reloadCards = base.Owner?.Player?.Piles
+            .SelectMany(p => p.Cards)
+            .OfType<TorpedoReload>();
+
+        if (reloadCards != null)
+        {
+            foreach (var card in reloadCards)
+            {
+                int load = card.DynamicVars["TashkentSpire2-Load"].IntValue;
+                await Loadcmd.Execute(choiceContext, card, load);
+            }
+        }
+        
         await PowerCmd.Remove(this);
     }
 }

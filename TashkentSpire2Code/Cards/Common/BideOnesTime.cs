@@ -12,6 +12,7 @@ namespace TashkentSpire2.TashkentSpire2Code.Cards.Common;
 public sealed class BideOnesTime() : TashkentCard(1, CardType.Skill, CardRarity.Common, TargetType.Self)
 {
     public override bool GainsBlock => true;
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Retain];
     
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new BlockVar(8M, ValueProp.Move),
@@ -21,8 +22,8 @@ public sealed class BideOnesTime() : TashkentCard(1, CardType.Skill, CardRarity.
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         await CreatureCmd.GainBlock(Owner.Creature, DynamicVars.Block, cardPlay);
-        CardSelectorPrefs cardSelectorPrefs = new CardSelectorPrefs(base.SelectionScreenPrompt, 1);
         
+        CardSelectorPrefs cardSelectorPrefs = new CardSelectorPrefs(base.SelectionScreenPrompt, 1);
         CardModel? card = (await CardSelectCmd.FromHand(
             choiceContext, 
             base.Owner, 

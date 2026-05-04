@@ -12,7 +12,9 @@
   "TASHKENTSPIRE2-AMMU-MAX.title": "弹药最大值",
   "TASHKENTSPIRE2-AMMU-MAX.description": "可装载的弹药最大值。",
   "TASHKENTSPIRE2-LOAD.title": "装填",
-  "TASHKENTSPIRE2-LOAD.description": "花费[gold]弹药[/gold]执行额外效果。",
+  "TASHKENTSPIRE2-LOAD.description": "增加此卡的[gold]弹药[/gold]数。",
+  "TASHKENTSPIRE2-SHOT.title": "发射",
+  "TASHKENTSPIRE2-SHOT.description": "花费至少多少[gold]弹药[/gold]以执行额外效果。",
   "TASHKENTSPIRE2_SUMMON_DYNAMIC.title": "召唤{Summon}",
   "TASHKENTSPIRE2_SUMMON_DYNAMIC.description": "以[blue]{Summon}[/blue]生命值召唤[gold]突进[/gold]与[gold]后撤[/gold]。"
 }

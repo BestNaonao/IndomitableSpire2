@@ -16,9 +16,9 @@ public sealed class CoreBreakdownPower : TashkentPower
     public override PowerStackType StackType => PowerStackType.Counter;
     
     public override string CustomBigIconPath => 
-        "res://TashkentSpire2/images/powers/big/flooding_expert_power.png";
+        "res://TashkentSpire2/images/powers/big/core_breakdown_power.png";
     public override string CustomPackedIconPath => 
-        "res://TashkentSpire2/images/powers/packed/flooding_expert_power.png";
+        "res://TashkentSpire2/images/powers/packed/core_breakdown_power.png";
 
     private bool _shouldIgnoreNextInstance;
 

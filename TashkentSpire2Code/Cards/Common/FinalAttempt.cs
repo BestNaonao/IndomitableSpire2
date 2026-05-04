@@ -51,6 +51,6 @@ public class FinalAttempt() : TashkentCard(2, CardType.Attack, CardRarity.Common
     
     protected override void OnUpgrade()
     {
-        DynamicVars.Damage.UpgradeValueBy(6M);
+        DynamicVars.Damage.UpgradeValueBy(4M);
     }
 }

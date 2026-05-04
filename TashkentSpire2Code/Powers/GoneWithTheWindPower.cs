@@ -55,13 +55,14 @@ private const string RemainKey = "Tashkent_GoneRemain";
         return Task.CompletedTask;
     }
     
-    public override async Task BeforeTurnEnd(PlayerChoiceContext choiceContext, CombatSide side)
+    public override Task BeforeTurnEnd(PlayerChoiceContext choiceContext, CombatSide side)
     {
         if (side != base.Owner.Side)
-            return;
+            return Task.CompletedTask;
         
         _reduce = (int)this.Amount;
         SyncRemainAmount();
+        return Task.CompletedTask;
     }
     
     public async Task<bool> TryConsumeCharge()

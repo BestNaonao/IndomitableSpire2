@@ -5,6 +5,7 @@ using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.ValueProps;
 using TashkentSpire2.TashkentSpire2Code.Cards.Ancient;
+using TashkentSpire2.TashkentSpire2Code.Cards.Status;
 using TashkentSpire2.TashkentSpire2Code.Commands;
 using TashkentSpire2.TashkentSpire2Code.Keywords;
 using TashkentSpire2.TashkentSpire2Code.Powers;
@@ -18,17 +19,19 @@ public sealed class LoadShot() : AmmunitionCard(1, CardType.Attack, CardRarity.B
         new AmmunitionDynamicVar(0M),
         new LoadDynamicVar(1M),
         new AmmuMaxDynamicVar(6M),
-        new MarkDynamicVar(3M)
+        new MarkDynamicVar(2M),
+        new ShotDynamicVar(2M)
     ];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         ArgumentNullException.ThrowIfNull(cardPlay.Target, nameof(cardPlay.Target));
+        ArgumentNullException.ThrowIfNull(CombatState);
         
         int shellsLoaded = await GetShellCountcmd.Execute(choiceContext, Owner, (int)CurrentAmmu,this.Keywords.Contains(TashkentKeyword.Barrage));
         if (shellsLoaded > 0)
         {
-            if (shellsLoaded >= 2)
+            if (shellsLoaded >= DynamicVars["TashkentSpire2-Shot"].BaseValue)
             {
                 await PowerCmd.Apply<MarkPower>(cardPlay.Target, DynamicVars["TashkentSpire2-Mark"].BaseValue,Owner.Creature,this);
             }
@@ -41,6 +44,17 @@ public sealed class LoadShot() : AmmunitionCard(1, CardType.Attack, CardRarity.B
                     .WithHitFx("vfx/vfx_attack_slash")
                     .Execute(choiceContext);
             }
+            int num = Math.Max(shellsLoaded - CurrentAmmu, 0);
+            if (num > 0 && this.Keywords.Contains(TashkentKeyword.Barrage))
+            {
+                List<CardModel> list = new List<CardModel>();
+                for (int i = 0; i < num; i++)
+                {
+                    list.Add(base.CombatState.CreateCard<ShellCasing>(base.Owner));
+                }
+                await CardPileCmd.AddGeneratedCardsToCombat(list, PileType.Hand, addedByPlayer: true);
+            }
+            
             UpdateAmmuGlobal(Math.Max(CurrentAmmu - shellsLoaded, 0));
         }
     }
@@ -60,7 +74,7 @@ public sealed class LoadShot() : AmmunitionCard(1, CardType.Attack, CardRarity.B
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Damage.UpgradeValueBy(4M);
-        DynamicVars["TashkentSpire2-Mark"].UpgradeValueBy(2M);
+        DynamicVars.Damage.UpgradeValueBy(2M);
+        DynamicVars["TashkentSpire2-Mark"].UpgradeValueBy(1M);
     }
 }

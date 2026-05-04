@@ -12,7 +12,7 @@ public sealed class Retreat() : TashkentCard(1, CardType.Skill, CardRarity.Commo
     public override bool GainsBlock => true;
     
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new BlockVar(7M, ValueProp.Move),
+        new BlockVar(8M, ValueProp.Move),
         new RetreatDynamicVar(1M)
     ];
 

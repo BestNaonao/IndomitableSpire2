@@ -2,7 +2,9 @@
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.ValueProps;
+using TashkentSpire2.TashkentSpire2Code.Cards.Status;
 using TashkentSpire2.TashkentSpire2Code.Commands;
 using TashkentSpire2.TashkentSpire2Code.Keywords;
 
@@ -10,12 +12,9 @@ namespace TashkentSpire2.TashkentSpire2Code.Cards.Common;
 
 public sealed class SaturationBombing() : AmmunitionCard(2, CardType.Attack, CardRarity.Common, TargetType.AllEnemies)
 {
-    public override IEnumerable<CardKeyword> CanonicalKeywords => [TashkentKeyword.Barrage];
-    
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new DamageVar(5M, ValueProp.Move),
-        new AmmunitionDynamicVar(0M),
-        new LoadDynamicVar(0M),
+        new AmmunitionDynamicVar(3M),
         new AmmuMaxDynamicVar(6M)
     ];
     
@@ -33,6 +32,17 @@ public sealed class SaturationBombing() : AmmunitionCard(2, CardType.Attack, Car
             .TargetingAllOpponents(CombatState)
             .WithHitFx("vfx/vfx_attack_slash")
             .Execute(choiceContext);
+        int num = Math.Max(shellsLoaded - CurrentAmmu, 0);
+        if (num > 0 && this.Keywords.Contains(TashkentKeyword.Barrage))
+        {
+            List<CardModel> list = new List<CardModel>();
+            for (int i = 0; i < num; i++)
+            {
+                list.Add(base.CombatState.CreateCard<ShellCasing>(base.Owner));
+            }
+            await CardPileCmd.AddGeneratedCardsToCombat(list, PileType.Hand, addedByPlayer: true);
+        }
+        
         UpdateAmmuGlobal(Math.Max(CurrentAmmu - shellsLoaded, 0));
     }
     

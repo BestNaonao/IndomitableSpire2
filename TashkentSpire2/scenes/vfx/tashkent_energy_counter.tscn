@@ -1,123 +1,129 @@
-[gd_scene load_steps=12 format=3 uid="uid://by0n2cgqdp4pd"]
+[gd_scene load_steps=11 format=3 uid="uid://by0n2cgqdp4pd"]
 
-[ext_resource type="Texture2D" uid="uid://k1rwdpxn04u2" path="res://TashkentSpire2/images/combatui/energy_counter/energy_orb_shine.png" id="1_l3a6u"]
-[ext_resource type="Texture2D" uid="uid://ndte67bqlpsi" path="res://TashkentSpire2/images/combatui/energy_counter/energy_orb_burst.png" id="1_outs1"]
+[ext_resource type="Script" uid="uid://vfn0vs2swfs7" path="res://TashkentSpire2Code/Scripts/NEnergyCounterTashkent.cs" id="1_76wkg"]
 [ext_resource type="Texture2D" uid="uid://cqgvm8pw3eio8" path="res://TashkentSpire2/images/combatui/energy_counter/Layer1.png" id="2_4s6m4"]
+[ext_resource type="PackedScene" uid="uid://dphwo60m1eu7s" path="res://TashkentSpire2/scenes/vfx/TashkentEnergyVfxBack.tscn" id="2_o2if5"]
 [ext_resource type="Texture2D" uid="uid://v0fm7sibh1rr" path="res://TashkentSpire2/images/combatui/energy_counter/Layer2.png" id="3_e0jbg"]
 [ext_resource type="Texture2D" uid="uid://b8nddibpo328d" path="res://TashkentSpire2/images/combatui/energy_counter/Layer3.png" id="4_76wkg"]
 [ext_resource type="Texture2D" uid="uid://blbarbrhmeam5" path="res://TashkentSpire2/images/combatui/energy_counter/Layer4.png" id="5_o2if5"]
-
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_pglnf"]
-
-[sub_resource type="Curve" id="Curve_ios20"]
-
-[sub_resource type="Gradient" id="Gradient_7ul6p"]
-offsets = PackedFloat32Array(0, 0.333, 0.5, 0.667, 1)
-colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
-
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_l3a6u"]
-
-[sub_resource type="Gradient" id="Gradient_pglnf"]
-offsets = PackedFloat32Array(0, 0.333, 0.5, 0.667, 1)
-colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+[ext_resource type="Texture2D" uid="uid://clm800joq8est" path="res://TashkentSpire2/images/combatui/energy_counter/Layer5.png" id="7_o2if5"]
+[ext_resource type="Script" uid="uid://bmor3nrxukenc" path="res://TashkentSpire2Code/Scripts/MegaLabelTashkent.cs" id="8_o2if5"]
+[ext_resource type="PackedScene" uid="uid://dgxqno563xp3u" path="res://TashkentSpire2/scenes/vfx/TashkentEnergyVfxFront.tscn" id="8_wij7b"]
+[ext_resource type="FontFile" uid="uid://df5rj1oegsvgx" path="res://TashkentSpire2/fonts/kreon_bold.ttf" id="9_wij7b"]
 
 [node name="TashkentEnergyCounter" type="Control"]
 layout_mode = 3
 anchors_preset = 0
+offset_right = 128.0
+offset_bottom = 128.0
+pivot_offset = Vector2(64, 64)
+script = ExtResource("1_76wkg")
 
-[node name="BurstBack" type="CPUParticles2D" parent="."]
+[node name="EnergyVfxBack" parent="." instance=ExtResource("2_o2if5")]
 unique_name_in_owner = true
-material = SubResource("CanvasItemMaterial_pglnf")
-position = Vector2(65, 63)
-emitting = false
-amount = 1
-texture = ExtResource("1_l3a6u")
-one_shot = true
-local_coords = true
-gravity = Vector2(0, 0)
-angular_velocity_min = 30.0
-angular_velocity_max = 30.0
-radial_accel_max = 10.0
-angle_max = 260.0
-scale_amount_min = 0.45
-scale_amount_max = 0.45
-scale_amount_curve = SubResource("Curve_ios20")
-color = Color(0.6039216, 0.44705883, 0.6313726, 1)
-color_ramp = SubResource("Gradient_7ul6p")
+position = Vector2(64, 64)
 
 [node name="Layers" type="Control" parent="."]
 unique_name_in_owner = true
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Layer1" type="TextureRect" parent="Layers"]
-layout_mode = 0
-offset_right = 128.0
-offset_bottom = 128.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource("2_4s6m4")
 expand_mode = 1
+stretch_mode = 5
 
 [node name="RotationLayers" type="Control" parent="Layers"]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Layer2" type="TextureRect" parent="Layers/RotationLayers"]
-layout_mode = 0
-offset_right = 128.0
-offset_bottom = 128.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 pivot_offset = Vector2(64, 64)
 texture = ExtResource("3_e0jbg")
 expand_mode = 1
 
 [node name="Layer3" type="TextureRect" parent="Layers/RotationLayers"]
-layout_mode = 0
-offset_right = 128.0
-offset_bottom = 128.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 pivot_offset = Vector2(64, 64)
 texture = ExtResource("4_76wkg")
 expand_mode = 1
 
 [node name="Layer4" type="TextureRect" parent="Layers"]
-layout_mode = 0
-offset_right = 128.0
-offset_bottom = 128.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource("5_o2if5")
 expand_mode = 1
 
-[node name="BurstFront" type="CPUParticles2D" parent="."]
+[node name="Layer5" type="TextureRect" parent="Layers"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_o2if5")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="EnergyVfxFront" parent="." instance=ExtResource("8_wij7b")]
 unique_name_in_owner = true
-material = SubResource("CanvasItemMaterial_l3a6u")
-position = Vector2(65, 63)
-emitting = false
-amount = 1
-texture = ExtResource("1_outs1")
-lifetime = 0.5
-one_shot = true
-local_coords = true
-gravity = Vector2(0, 0)
-angular_velocity_min = 30.0
-angular_velocity_max = 30.0
-radial_accel_max = 10.0
-angle_max = 260.0
-color = Color(1, 0.27450982, 1, 1)
-color_ramp = SubResource("Gradient_pglnf")
+position = Vector2(64, 64)
 
 [node name="Label" type="Label" parent="."]
-layout_mode = 0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 offset_left = 16.0
 offset_top = -29.0
-offset_right = 112.0
-offset_bottom = 157.0
-theme_override_colors/font_color = Color(0.94509804, 0.9607843, 1, 1)
+offset_right = -16.0
+offset_bottom = 29.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.9439689, 0.6639611, 0.9999998, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
-theme_override_colors/font_outline_color = Color(0.8352941, 0.41960785, 1, 1)
+theme_override_colors/font_outline_color = Color(0.2733229, 0.120026, 0.33406317, 1)
 theme_override_constants/shadow_offset_x = 3
 theme_override_constants/shadow_offset_y = 2
 theme_override_constants/outline_size = 16
 theme_override_constants/shadow_outline_size = 16
+theme_override_fonts/font = ExtResource("9_wij7b")
 theme_override_font_sizes/font_size = 36
 text = "3/3"
 horizontal_alignment = 1
 vertical_alignment = 1
+script = ExtResource("8_o2if5")
+MinFontSize = 32
+MaxFontSize = 36
+theme_override_fonts/font = ExtResource("9_wij7b")

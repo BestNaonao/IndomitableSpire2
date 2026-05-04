@@ -10,7 +10,7 @@ namespace TashkentSpire2.TashkentSpire2Code.Cards.Common;
 public sealed class Charge() : TashkentCard(1, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new DamageVar(9M, ValueProp.Move),
+        new DamageVar(10M, ValueProp.Move),
         new ChargeDynamicVar(2M)
     ];
     
