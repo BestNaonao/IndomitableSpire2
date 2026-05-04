@@ -1,4 +1,6 @@
 ﻿using IndomitableSpire2.IndomitableSpire2Code.Cards.Others;
+using IndomitableSpire2.IndomitableSpire2Code.Extensions;
+using IndomitableSpire2.IndomitableSpire2Code.Localization.DynamicVars;
 using IndomitableSpire2.IndomitableSpire2Code.Powers;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -18,14 +20,14 @@ public sealed class TroubleHandling() : IndomitableCard(0, CardType.Skill, CardR
     ];
     
     // 使用 PowerVar 控制干劲获取量
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<MotivationPower>(30M)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new MotivationGainVar(30M)];
     
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         // 1. 获得干劲
         await PowerCmd.Apply<MotivationPower>(
             target: Owner.Creature,
-            amount: DynamicVars["MotivationPower"].BaseValue,
+            amount: DynamicVars.MotivationGain().BaseValue,
             applier: Owner.Creature,
             cardSource: this
         );
@@ -46,6 +48,6 @@ public sealed class TroubleHandling() : IndomitableCard(0, CardType.Skill, CardR
     protected override void OnUpgrade()
     {
         // 升级后增加 10 点干劲
-        DynamicVars["MotivationPower"].UpgradeValueBy(10M);
+        DynamicVars.MotivationGain().UpgradeValueBy(10M);
     }
 }

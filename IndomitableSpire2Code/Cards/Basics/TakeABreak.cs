@@ -1,4 +1,6 @@
-﻿using IndomitableSpire2.IndomitableSpire2Code.Powers;
+﻿using IndomitableSpire2.IndomitableSpire2Code.Extensions;
+using IndomitableSpire2.IndomitableSpire2Code.Localization.DynamicVars;
+using IndomitableSpire2.IndomitableSpire2Code.Powers;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -14,7 +16,7 @@ public sealed class TakeABreak() : IndomitableCard(0, CardType.Skill, CardRarity
     protected override IEnumerable<DynamicVar> CanonicalVars => 
     [
         new HealVar(3M),
-        new PowerVar<MotivationPower>(15M)
+        new MotivationGainVar(15M)
     ];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
@@ -28,7 +30,7 @@ public sealed class TakeABreak() : IndomitableCard(0, CardType.Skill, CardRarity
         // 3. 获得干劲
         await PowerCmd.Apply<MotivationPower>(
             target: Owner.Creature, 
-            amount: DynamicVars["MotivationPower"].BaseValue, 
+            amount: DynamicVars.MotivationGain().BaseValue, 
             applier: Owner.Creature, 
             cardSource: this
         );
@@ -40,6 +42,6 @@ public sealed class TakeABreak() : IndomitableCard(0, CardType.Skill, CardRarity
     protected override void OnUpgrade()
     {
         DynamicVars.Heal.UpgradeValueBy(1M);
-        DynamicVars["MotivationPower"].UpgradeValueBy(3M);
+        DynamicVars.MotivationGain().UpgradeValueBy(3M);
     }
 }
