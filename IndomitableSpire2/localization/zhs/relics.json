@@ -1,5 +1,5 @@
 {
   "INDOMITABLESPIRE2-SHIKIKAN_DAKIMAKURA.title": "指挥官形抱枕",
   "INDOMITABLESPIRE2-SHIKIKAN_DAKIMAKURA.flavor": "只要抱着它，连最让人头疼的出击任务都能在梦里忘得一干二净呢……呼哈……",
-  "INDOMITABLESPIRE2-SHIKIKAN_DAKIMAKURA.description": "在你的回合结束时，回复[green]{Heal}[/green]点生命，获得[blue]{MotivationPower}[/blue]点[gold]干劲[/gold]。"
+  "INDOMITABLESPIRE2-SHIKIKAN_DAKIMAKURA.description": "在你的回合结束时，回复[green]{Heal}[/green]点生命，获得[blue]{MotivationGain}[/blue]点[gold]干劲[/gold]。"
 }
