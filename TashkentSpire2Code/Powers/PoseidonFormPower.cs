@@ -22,9 +22,9 @@ public sealed class PoseidonFormPower : TashkentPower
     public override PowerStackType StackType => PowerStackType.Counter;
 
     public override string CustomBigIconPath => 
-        "res://TashkentSpire2/images/powers/big/mark_power.png";
+        "res://TashkentSpire2/images/powers/big/poseidon_form_power.png";
     public override string CustomPackedIconPath => 
-        "res://TashkentSpire2/images/powers/packed/mark_power.png";
+        "res://TashkentSpire2/images/powers/packed/poseidon_form_power.png";
     
     public override int DisplayAmount => base.DynamicVars[RemainKey].IntValue;
 

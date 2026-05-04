@@ -31,7 +31,7 @@ public sealed class TorpedoPower : TashkentPower
     {
         var distPower = owner.GetPower<DistancePower>();
         int dist = distPower != null ? (int)distPower.Amount : 0;
-
+        dist -= 10;
         if (distPower == null || dist == -1 || dist == 0 || dist == 1)
             return 3;
         if (dist == -2 || dist == -3)

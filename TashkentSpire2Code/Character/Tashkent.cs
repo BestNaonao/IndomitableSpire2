@@ -64,6 +64,8 @@ public sealed class TashkentCharacter : CustomCharacterModel
 		"res://TashkentSpire2/images/Tashkent/character_icon_tashkent.png";  
 	public override string CustomCharacterSelectIconPath =>         //选择时
 		"res://TashkentSpire2/images/Tashkent/char_select_tashkent.png"; 
+	public override string CustomIconOutlineTexturePath =>			//带边框
+		"res://TashkentSpire2/images/Tashkent/character_icon_tashkent_outline.png"; 
 	public override string CustomCharacterSelectLockedIconPath =>   //未解锁
 		"res://TashkentSpire2/images/Tashkent/char_select_tashkent_locked.png"; 
 	public override string CustomMapMarkerPath =>                   // 地图标记

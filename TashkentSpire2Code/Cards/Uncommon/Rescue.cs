@@ -8,6 +8,8 @@ public sealed class Rescue() : TashkentCard(0, CardType.Skill, CardRarity.Uncomm
 {
     protected override bool HasEnergyCostX => true;
     
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Ethereal];
+    
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);

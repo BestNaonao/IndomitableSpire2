@@ -10,11 +10,11 @@ namespace TashkentSpire2.TashkentSpire2Code.Cards.Uncommon;
 
 public sealed class NestingDoll() : TashkentCard(1, CardType.Attack, CardRarity.Uncommon, TargetType.AnyEnemy)
 {
-    public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Ethereal];
     
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new CalculationBaseVar(4m),
+        new CalculationBaseVar(6m),
         new ExtraDamageVar(2m),
         new CalculatedDamageVar(ValueProp.Move).WithMultiplier((CardModel card, Creature? _) =>
             card.Owner.PlayerCombatState?.ExhaustPile.Cards.Count((CardModel c) => c is NestingDoll) ?? 0)
@@ -39,7 +39,7 @@ public sealed class NestingDoll() : TashkentCard(1, CardType.Attack, CardRarity.
     
     protected override void OnUpgrade()
     {
-        AddKeyword(CardKeyword.Ethereal);
+        AddKeyword(CardKeyword.Exhaust);
         base.DynamicVars.ExtraDamage.UpgradeValueBy(1m);
     }
 }
