@@ -52,7 +52,7 @@ public sealed class SeaHornetFighter() : CarrierAircraftCard(2, CardType.Attack,
             );
         
         // 核心机制：呼叫编队，补充手牌
-        await CustomCardPileCmd.DrawSameCardAsync(this);
+        await CustomCardPileCmd.FormationCmd(this);
         return attackCmd.Results;
     }
     

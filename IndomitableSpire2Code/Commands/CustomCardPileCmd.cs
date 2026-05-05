@@ -17,7 +17,7 @@ public class CustomCardPileCmd
         var availableCards = CardPile.GetCards(card.Owner, PileType.Draw, PileType.Discard);
         
         // 2. 筛选同类卡牌：判断 ModelId 是否一致。注意：用 c != card 防止极小概率下把自己给抽上来。
-        var validTargets = availableCards.Where(c => c.Id == card.Id && c != card && c.CostsEnergyOrStars(true)).ToList();
+        var validTargets = availableCards.Where(c => c.Id == card.Id && c != card).ToList();
         if (validTargets.Count == 0)
             return null; // 牌库和弃牌堆里都没有这张牌的其他复制品了
         
@@ -27,5 +27,12 @@ public class CustomCardPileCmd
         
         // 4. 调用官方卡牌移动指令，将选中的卡牌加入手牌。这会自动处理 UI 动画、卡牌位置插值以及触发相关的钩子（Hook）。
         return await CardPileCmd.Add(selectedCard, PileType.Hand);
+    }
+    
+    public static async Task<CardPileAddResult?> FormationCmd(CardModel card)
+    {
+        if (card.CostsEnergyOrStars(true))
+            return await DrawSameCardAsync(card);
+        return null;
     }
 }
