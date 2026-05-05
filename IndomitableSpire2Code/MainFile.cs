@@ -7,7 +7,7 @@ using MegaCrit.Sts2.Core.Modding;
 using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.Models.Relics;
 
-namespace IndomitableSpire2;
+namespace IndomitableSpire2.IndomitableSpire2Code;
 
 [ModInitializer(nameof(Initialize))]
 public partial class MainFile : Node

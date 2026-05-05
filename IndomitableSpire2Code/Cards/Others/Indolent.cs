@@ -1,5 +1,7 @@
 ﻿using BaseLib.Abstracts;
 using BaseLib.Utils;
+using IndomitableSpire2.IndomitableSpire2Code.Extensions;
+using IndomitableSpire2.IndomitableSpire2Code.Localization.DynamicVars;
 using IndomitableSpire2.IndomitableSpire2Code.Powers;
 using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Commands;
@@ -21,7 +23,7 @@ public sealed class Indolent() : CustomCardModel(1, CardType.Status, CardRarity.
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
     
     // 注册失去干劲的变量，供文本调用
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new("MotivationLoss", 10M)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new MotivationConsumeVar(10M)];
     
     // 核心机制 1：抽到时失去干劲
     public override async Task AfterCardDrawn(PlayerChoiceContext choiceContext, CardModel card, bool fromHandDraw)
@@ -30,7 +32,7 @@ public sealed class Indolent() : CustomCardModel(1, CardType.Status, CardRarity.
         await Cmd.Wait(0.25f);
         await PowerCmd.Apply<MotivationPower>(
             target: Owner.Creature,
-            amount: -DynamicVars["MotivationLoss"].BaseValue,
+            amount: -DynamicVars.MotivationConsume().BaseValue,
             applier: Owner.Creature,
             cardSource: this
         );
