@@ -46,7 +46,9 @@
   "INDOMITABLESPIRE2-ART_OF_RESTING.description": "すべての[gold]怠惰[/gold]を[gold]養神[/gold]に[gold]変化[/gold]させる。\n状態異常を作成するたび、それを[gold]養神[/gold]に[gold]変化[/gold]させる。",
   "INDOMITABLESPIRE2-MOTIVATION_BURST.title": "やる気爆発",
   "INDOMITABLESPIRE2-MOTIVATION_BURST.description": "溢れた[gold]やる気[/gold]を[blue]20[/blue]得るたび、\n[gold]活力[/gold]を[blue]{MotivationBurstPower:diff()}[/blue]得る。",
-
+  "INDOMITABLESPIRE2-EMERGENCY_TAKEOFF.title": "緊急発艦",
+  "INDOMITABLESPIRE2-EMERGENCY_TAKEOFF.description": "[gold]山札[/gold]からランダムな[gold]艦載機[/gold]かアタックを1枚[gold]手札[/gold]に加える（艦載機を優先）。\nこのターン、それはコストを支払わずにプレイできる。",
+  
   "INDOMITABLESPIRE2-SCORCHING_FLAME_RAIN.title": "灼天の焔雨",
   "INDOMITABLESPIRE2-SCORCHING_FLAME_RAIN.description": "[gold]やる気[/gold]が[blue]{MotivationRequire:diff()}[/blue]以上の場合のみプレイできる。\nすべての敵に{Damage:diff()}ダメージを与える。\nすべての敵に[gold]炎上[/gold] [blue]{OnFirePower:diff()}[/blue]を付与する。",
   

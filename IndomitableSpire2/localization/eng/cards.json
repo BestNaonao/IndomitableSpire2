@@ -46,7 +46,9 @@
   "INDOMITABLESPIRE2-ART_OF_RESTING.description": "[gold]Transform[/gold] all [gold]Indolent[/gold] cards in your piles into [gold]Refresh[/gold].\nWhenever you create a Status card, [gold]Transform[/gold] it into a [gold]Refresh[/gold].",
   "INDOMITABLESPIRE2-MOTIVATION_BURST.title": "Motivation Burst",
   "INDOMITABLESPIRE2-MOTIVATION_BURST.description": "Every [blue]20[/blue] excess [gold]Motivation[/gold] you gain,\ngain [blue]{MotivationBurstPower:diff()}[/blue] [gold]Vigor[/gold].",
-
+  "INDOMITABLESPIRE2-EMERGENCY_TAKEOFF.title": "Emergency Takeoff",
+  "INDOMITABLESPIRE2-EMERGENCY_TAKEOFF.description": "Put a random [gold]Carrier Aircraft[/gold] or Attack card from your [gold]Draw Pile[/gold] into your [gold]Hand[/gold] (Aircraft takes priority).\nIt's free to play this turn.",
+  
   "INDOMITABLESPIRE2-SCORCHING_FLAME_RAIN.title": "Scorching Flame Rain",
   "INDOMITABLESPIRE2-SCORCHING_FLAME_RAIN.description": "Can only be played if you have at least [blue]{MotivationRequire:diff()}[/blue] [gold]Motivation[/gold].\nDeal {Damage:diff()} damage to ALL enemies.\nApply [blue]{OnFirePower:diff()}[/blue] [gold]On Fire[/gold] to ALL enemies.",
   
