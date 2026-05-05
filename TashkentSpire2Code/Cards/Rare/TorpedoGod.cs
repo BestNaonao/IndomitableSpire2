@@ -19,9 +19,7 @@ public sealed class TorpedoGod() : TashkentCard(2, CardType.Power, CardRarity.Ra
         await PowerCmd.Apply<TorpedoGodPower>(base.Owner.Creature, 1m, base.Owner.Creature, this);
         for (int i = 0; i < DynamicVars.Repeat.IntValue; i++)
         {
-            int turns = TorpedoPower.ComputeTurns(base.Owner.Creature);
-            (await PowerCmd.Apply<TorpedoPower>(base.Owner.Creature, (decimal)turns, base.Owner.Creature, this))
-                ?.SetDamage(DynamicVars["TashkentSpire2-Torpedo"].BaseValue);
+            await PowerCmd.Apply<TorpedoPower>(base.Owner.Creature, DynamicVars["TashkentSpire2-Torpedo"].BaseValue, base.Owner.Creature, this);
         }
     }
 

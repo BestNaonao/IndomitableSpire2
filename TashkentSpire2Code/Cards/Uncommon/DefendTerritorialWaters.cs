@@ -6,10 +6,10 @@ using TashkentSpire2.TashkentSpire2Code.Powers;
 
 namespace TashkentSpire2.TashkentSpire2Code.Cards.Uncommon;
 
-public sealed class DefendTerritorialWaters() : TashkentCard(1, CardType.Power, CardRarity.Uncommon, TargetType.Self)
+public sealed class DefendTerritorialWaters() : TashkentCard(2, CardType.Power, CardRarity.Uncommon, TargetType.Self)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new PowerVar<DefendTerritorialWatersPower>(3M),
+        new PowerVar<DefendTerritorialWatersPower>(1M),
         new EnergyVar(1)
     ];
 
@@ -21,6 +21,6 @@ public sealed class DefendTerritorialWaters() : TashkentCard(1, CardType.Power, 
 
     protected override void OnUpgrade()
     {
-        base.DynamicVars["DefendTerritorialWatersPower"].UpgradeValueBy(-1M);
+        base.EnergyCost.UpgradeBy(-1);
     }
 }

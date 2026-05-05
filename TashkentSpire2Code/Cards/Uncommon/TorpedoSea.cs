@@ -17,9 +17,7 @@ public sealed class TorpedoSea() : TashkentCard(2, CardType.Skill, CardRarity.Un
     {
         for (int i = 0; i < DynamicVars.Repeat.IntValue; i++)
         {
-            int turns = TorpedoPower.ComputeTurns(base.Owner.Creature);
-            (await PowerCmd.Apply<TorpedoPower>(base.Owner.Creature, (decimal)turns, base.Owner.Creature, this))
-                ?.SetDamage(DynamicVars["TashkentSpire2-Torpedo"].BaseValue);
+            await PowerCmd.Apply<TorpedoPower>(base.Owner.Creature, DynamicVars["TashkentSpire2-Torpedo"].BaseValue, base.Owner.Creature, this);
         }
     }
     

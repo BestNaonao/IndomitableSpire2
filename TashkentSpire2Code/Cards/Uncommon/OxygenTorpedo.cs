@@ -9,16 +9,14 @@ namespace TashkentSpire2.TashkentSpire2Code.Cards.Uncommon;
 public sealed class OxygenTorpedo() : TashkentCard(1, CardType.Skill, CardRarity.Uncommon, TargetType.Self)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new TorpedoDynamicVar(24M),
+        new TorpedoDynamicVar(18M),
         new PowerVar<OxygenTorpedoPower>(12M)
     ];
     
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        int turns = TorpedoPower.ComputeTurns(base.Owner.Creature);
-        (await PowerCmd.Apply<TorpedoPower>(base.Owner.Creature, (decimal)turns, base.Owner.Creature, this))
-            ?.SetDamage(DynamicVars["TashkentSpire2-Torpedo"].BaseValue);
         await PowerCmd.Apply<OxygenTorpedoPower>(base.Owner.Creature, base.DynamicVars["OxygenTorpedoPower"].BaseValue, base.Owner.Creature, this);
+        await PowerCmd.Apply<TorpedoPower>(base.Owner.Creature, DynamicVars["TashkentSpire2-Torpedo"].BaseValue, base.Owner.Creature, this);
     }
     
     protected override void OnUpgrade()

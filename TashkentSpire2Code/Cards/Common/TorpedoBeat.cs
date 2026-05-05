@@ -15,9 +15,7 @@ public sealed class TorpedoBeat() : TashkentCard(1, CardType.Skill, CardRarity.C
     
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        int turns = TorpedoPower.ComputeTurns(base.Owner.Creature);
-        (await PowerCmd.Apply<TorpedoPower>(base.Owner.Creature, (decimal)turns, base.Owner.Creature, this))
-            ?.SetDamage(DynamicVars["TashkentSpire2-Torpedo"].BaseValue);
+        await PowerCmd.Apply<TorpedoPower>(base.Owner.Creature, DynamicVars["TashkentSpire2-Torpedo"].BaseValue, base.Owner.Creature, this);
         await CardPileCmd.Draw(choiceContext, base.DynamicVars.Cards.BaseValue, base.Owner);
     }
     

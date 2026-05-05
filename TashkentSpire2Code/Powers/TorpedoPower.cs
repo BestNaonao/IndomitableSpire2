@@ -5,6 +5,7 @@ using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Helpers;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.Nodes.Rooms;
 using MegaCrit.Sts2.Core.Nodes.Vfx;
@@ -19,19 +20,26 @@ public sealed class TorpedoPower : TashkentPower
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;
     public override bool IsInstanced => true;
-    
-    public override string CustomBigIconPath => 
+
+    public override string CustomBigIconPath =>
         "res://TashkentSpire2/images/powers/big/torpedo_power.png";
-    public override string CustomPackedIconPath => 
+    public override string CustomPackedIconPath =>
         "res://TashkentSpire2/images/powers/packed/torpedo_power.png";
 
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(0m, ValueProp.Unpowered)];
-    
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+        [new DamageVar(0m, ValueProp.Unpowered)];
+
+    private int _turnsLeft;
+    private bool _oxygenApplied;
+
+    public override int DisplayAmount => _turnsLeft <= 0 ? 1 : _turnsLeft;
+
     public static int ComputeTurns(Creature owner)
     {
         var distPower = owner.GetPower<DistancePower>();
         int dist = distPower != null ? (int)distPower.Amount : 0;
         dist -= 10;
+
         if (distPower == null || dist == -1 || dist == 0 || dist == 1)
             return 3;
         if (dist == -2 || dist == -3)
@@ -45,104 +53,136 @@ public sealed class TorpedoPower : TashkentPower
 
         return 3;
     }
-    
-    public void SetDamage(decimal damage)
+
+    public override async Task AfterApplied(Creature? applier, CardModel? cardSource)
     {
-        AssertMutable();
-        int oxygenBonus = (int)(Owner?.GetPower<OxygenTorpedoPower>()?.Amount ?? 0m);
-        base.DynamicVars.Damage.BaseValue = damage + oxygenBonus;
+        if (!_oxygenApplied)
+        {
+            _oxygenApplied = true;
+
+            int oxygenBonus = Owner?.GetPower<OxygenTorpedoPower>() is { } oxy
+                ? (int)oxy.Amount
+                : 0;
+
+            if (oxygenBonus != 0)
+            {
+                await PowerCmd.ModifyAmount(this, oxygenBonus, Owner, cardSource);
+            }
+        }
+
+        if (_turnsLeft <= 0)
+            _turnsLeft = ComputeTurns(Owner!);
     }
 
     public override async Task BeforeTurnEnd(PlayerChoiceContext choiceContext, CombatSide side)
     {
-        if (side != base.Owner.Side)
+        if (side != Owner.Side)
             return;
 
-        if (base.Amount > 1)
+        if (_turnsLeft <= 0)
+            _turnsLeft = ComputeTurns(Owner!);
+
+        if (_turnsLeft > 1)
         {
-            await PowerCmd.Decrement(this);
+            _turnsLeft--;
             return;
         }
 
         Flash();
         await Cmd.CustomScaledWait(0.2f, 0.4f);
 
-        var enemies = base.CombatState.HittableEnemies.ToList();
+        var enemies = CombatState.HittableEnemies.ToList();
         if (enemies.Count == 0)
             return;
 
-        var godPower = base.Owner?.GetPower<TorpedoGodPower>();
+        var godPower = Owner?.GetPower<TorpedoGodPower>();
 
         if (godPower != null)
         {
             foreach (var e in enemies)
             {
-                NCombatRoom.Instance?.CombatVfxContainer.AddChildSafely(NFireSmokePuffVfx.Create(e));
+                NCombatRoom.Instance?.CombatVfxContainer.AddChildSafely(
+                    NFireSmokePuffVfx.Create(e));
+
                 await Cmd.CustomScaledWait(0.2f, 0.4f);
 
-                await CreatureCmd.Damage(choiceContext, e, base.DynamicVars.Damage, base.Owner!);
+                var dmg = new DamageVar(Amount, ValueProp.Unpowered);
+                await CreatureCmd.Damage(choiceContext, e, dmg, Owner!);
 
-                int floodingAmount = (int)(base.Owner?.GetPower<FloodingExpertPower>()?.Amount ?? 0m);
-                if (floodingAmount > 0)
-                {
-                    await PowerCmd.Apply<WeakPower>(e, (decimal)floodingAmount, base.Owner, null);
-                    await PowerCmd.Apply<VulnerablePower>(e, (decimal)floodingAmount, base.Owner, null);
-                    await PowerCmd.Apply<MarkPower>(e, (decimal)floodingAmount, base.Owner, null);
-                }
+                await ApplyFlooding(choiceContext, e);
             }
         }
         else
         {
-            var enemyMarks = enemies
-                .Select(e => new
-                {
-                    Enemy = e,
-                    Mark = (int)(e.GetPower<MarkPower>()?.Amount ?? 0m)
-                })
-                .ToList();
-
-            int maxMark = enemyMarks.Max(x => x.Mark);
-
-            var candidates = enemyMarks
-                .Where(x => x.Mark == maxMark)
-                .Select(x => x.Enemy)
-                .ToList();
-
-            var target = candidates.Count > 0
-                ? base.Owner?.Player?.RunState.Rng.CombatTargets.NextItem(candidates)
-                : null;
-
+            var target = SelectTarget(enemies);
             if (target == null)
                 return;
 
-            NCombatRoom.Instance?.CombatVfxContainer.AddChildSafely(NFireSmokePuffVfx.Create(target));
+            NCombatRoom.Instance?.CombatVfxContainer.AddChildSafely(
+                NFireSmokePuffVfx.Create(target));
 
             await Cmd.CustomScaledWait(0.2f, 0.4f);
 
-            await CreatureCmd.Damage(choiceContext, target, base.DynamicVars.Damage, base.Owner!);
-        
-            int floodingAmount = (int)(base.Owner?.GetPower<FloodingExpertPower>()?.Amount ?? 0m);
-            if (floodingAmount > 0)
-            {
-                await PowerCmd.Apply<WeakPower>(target, (decimal)floodingAmount, base.Owner, null);
-                await PowerCmd.Apply<VulnerablePower>(target, (decimal)floodingAmount, base.Owner, null);
-                await PowerCmd.Apply<MarkPower>(target, (decimal)floodingAmount, base.Owner, null);
-            }
+            var dmg = new DamageVar(Amount, ValueProp.Unpowered);
+            await CreatureCmd.Damage(choiceContext, target, dmg, Owner!);
+
+            await ApplyFlooding(choiceContext, target);
         }
 
-        var reloadCards = base.Owner?.Player?.Piles
+        await TriggerReload(choiceContext);
+
+        await PowerCmd.Remove(this);
+    }
+
+    private Creature? SelectTarget(List<Creature> enemies)
+    {
+        var enemyMarks = enemies
+            .Select(e => new
+            {
+                Enemy = e,
+                Mark = (int)(e.GetPower<MarkPower>()?.Amount ?? 0m)
+            })
+            .ToList();
+
+        int maxMark = enemyMarks.Max(x => x.Mark);
+
+        var candidates = enemyMarks
+            .Where(x => x.Mark == maxMark)
+            .Select(x => x.Enemy)
+            .ToList();
+
+        return candidates.Count > 0
+            ? Owner?.Player?.RunState.Rng.CombatTargets.NextItem(candidates)
+            : null;
+    }
+
+    private async Task ApplyFlooding(PlayerChoiceContext ctx, Creature target)
+    {
+        int floodingAmount = Owner?.GetPower<FloodingExpertPower>() is { } flood
+            ? (int)flood.Amount
+            : 0;
+
+        if (floodingAmount <= 0)
+            return;
+
+        await PowerCmd.Apply<WeakPower>(target, floodingAmount, Owner, null);
+        await PowerCmd.Apply<VulnerablePower>(target, floodingAmount, Owner, null);
+        await PowerCmd.Apply<MarkPower>(target, floodingAmount, Owner, null);
+    }
+
+    private async Task TriggerReload(PlayerChoiceContext ctx)
+    {
+        var reloadCards = Owner?.Player?.Piles
             .SelectMany(p => p.Cards)
             .OfType<TorpedoReload>();
 
-        if (reloadCards != null)
+        if (reloadCards == null)
+            return;
+
+        foreach (var card in reloadCards)
         {
-            foreach (var card in reloadCards)
-            {
-                int load = card.DynamicVars["TashkentSpire2-Load"].IntValue;
-                await Loadcmd.Execute(choiceContext, card, load);
-            }
+            int load = card.DynamicVars["TashkentSpire2-Load"].IntValue;
+            await Loadcmd.Execute(ctx, card, load);
         }
-        
-        await PowerCmd.Remove(this);
     }
 }

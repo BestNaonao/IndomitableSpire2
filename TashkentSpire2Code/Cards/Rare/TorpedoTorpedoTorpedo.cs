@@ -29,9 +29,7 @@ public sealed class TorpedoTorpedoTorpedo() : TashkentCard(2, CardType.Skill, Ca
         int torpedoCount = (int)((CalculatedVar)base.DynamicVars["CalculatedTorpedo"]).Calculate(cardPlay.Target);
         for (int i = 0; i < torpedoCount; i++)
         {
-            int turns = TorpedoPower.ComputeTurns(base.Owner.Creature);
-            (await PowerCmd.Apply<TorpedoPower>(base.Owner.Creature, (decimal)turns, base.Owner.Creature, this))
-                ?.SetDamage(DynamicVars["TashkentSpire2-Torpedo"].BaseValue);
+            await PowerCmd.Apply<TorpedoPower>(base.Owner.Creature, DynamicVars["TashkentSpire2-Torpedo"].BaseValue, base.Owner.Creature, this);
         }
     }
     

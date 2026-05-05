@@ -9,7 +9,6 @@ public sealed class FateGuidedTorpedoPower : TashkentPower
 {
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;
-    public override bool IsInstanced => true;
     
     public override string CustomBigIconPath => 
         "res://TashkentSpire2/images/powers/big/mark_power.png";
@@ -22,8 +21,10 @@ public sealed class FateGuidedTorpedoPower : TashkentPower
     {
         if (side == base.Owner.Side)
         {
-            int turns = TorpedoPower.ComputeTurns(base.Owner);
-            (await PowerCmd.Apply<TorpedoPower>(base.Owner, (decimal)turns, base.Owner, null))?.SetDamage(base.Amount);
+            for (int i = 0; i < base.Amount; i++)
+            {
+                await PowerCmd.Apply<TorpedoPower>(base.Owner, DynamicVars["TashkentSpire2-Torpedo"].BaseValue, base.Owner, null);
+            }
         }
     }
 }

@@ -9,7 +9,7 @@ namespace TashkentSpire2.TashkentSpire2Code.Cards.Uncommon;
 public sealed class FateGuidedTorpedo() : TashkentCard(1, CardType.Power, CardRarity.Uncommon, TargetType.Self)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new PowerVar<FateGuidedTorpedoPower>(9M)
+        new PowerVar<FateGuidedTorpedoPower>(1M)
     ];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
@@ -20,6 +20,6 @@ public sealed class FateGuidedTorpedo() : TashkentCard(1, CardType.Power, CardRa
 
     protected override void OnUpgrade()
     {
-        base.DynamicVars["FateGuidedTorpedoPower"].UpgradeValueBy(3M);
+        AddKeyword(CardKeyword.Innate);
     }
 }

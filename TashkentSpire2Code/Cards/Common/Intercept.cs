@@ -20,9 +20,7 @@ public sealed class Intercept() : TashkentCard(1, CardType.Skill, CardRarity.Com
     {
         await CreatureCmd.GainBlock(Owner.Creature, DynamicVars.Block, cardPlay);
         
-        int turns = TorpedoPower.ComputeTurns(base.Owner.Creature);
-        (await PowerCmd.Apply<TorpedoPower>(base.Owner.Creature, (decimal)turns, base.Owner.Creature, this))
-            ?.SetDamage(DynamicVars["TashkentSpire2-Torpedo"].BaseValue);
+        await PowerCmd.Apply<TorpedoPower>(base.Owner.Creature, DynamicVars["TashkentSpire2-Torpedo"].BaseValue, base.Owner.Creature, this);
     }
     
     protected override void OnUpgrade()

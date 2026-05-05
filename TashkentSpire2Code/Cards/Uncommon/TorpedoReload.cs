@@ -29,9 +29,7 @@ public sealed class TorpedoReload() : AmmunitionCard(2, CardType.Skill, CardRari
         {
             for (int i = 0; i < shellsLoaded; i++)
             {
-                int turns = TorpedoPower.ComputeTurns(base.Owner.Creature);
-                (await PowerCmd.Apply<TorpedoPower>(base.Owner.Creature, (decimal)turns, base.Owner.Creature, this))
-                    ?.SetDamage(DynamicVars["TashkentSpire2-Torpedo"].BaseValue);
+                await PowerCmd.Apply<TorpedoPower>(base.Owner.Creature, DynamicVars["TashkentSpire2-Torpedo"].BaseValue, base.Owner.Creature, this);
             }
             if (shellsLoaded >= DynamicVars["TashkentSpire2-Shot"].BaseValue)
             {

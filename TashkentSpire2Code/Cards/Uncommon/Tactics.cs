@@ -15,9 +15,7 @@ public sealed class Tactics() : TashkentCard(0, CardType.Skill, CardRarity.Uncom
     
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        int turns = TorpedoPower.ComputeTurns(base.Owner.Creature);
-        (await PowerCmd.Apply<TorpedoPower>(base.Owner.Creature, (decimal)turns, base.Owner.Creature, this))
-            ?.SetDamage(DynamicVars["TashkentSpire2-Torpedo"].BaseValue);
+        await PowerCmd.Apply<TorpedoPower>(base.Owner.Creature, DynamicVars["TashkentSpire2-Torpedo"].BaseValue, base.Owner.Creature, this);
         
         var powers = base.Owner.Creature.Powers
             .Where(p => p is TorpedoPower || p is TheBombPower)
