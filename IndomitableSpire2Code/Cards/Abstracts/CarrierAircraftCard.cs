@@ -63,17 +63,10 @@ public abstract class CarrierAircraftCard(
             if (loss > 0)
                 DynamicVars.Durability().BaseValue = Math.Max(0, DynamicVars.Durability().BaseValue - loss);
         }
-    }
-    
-    // 3. 优雅的去向判定：耐久度归零时去到消耗牌堆
-    protected override PileType GetResultPileType()
-    {
-        // 先获取引擎默认的去向（比如判断卡牌本身是否带有消耗关键字）
-        var defaultPileType = base.GetResultPileType();
-        // 如果引擎原本决定的不是空牌堆（像能力牌的去向）或消耗牌堆，但它耐久已经归零了，就强制将其丢进消耗堆
-        if (defaultPileType is not (PileType.None or PileType.Exhaust) && this.OutOfDurability())
-            return PileType.Exhaust;
-        return defaultPileType;
+        
+        // 3. 【回归本质】：如果在战斗结算中耐久归零，立即手动将其送入消耗堆！利用引擎的逃生舱机制，避免了预计算带来的滞后性
+        if (this.OutOfDurability())
+            await CardCmd.Exhaust(choiceContext, this);
     }
     
     // 4. 原生坠毁后摇：处理飞机损毁的特殊反馈。引擎在将卡牌移动到消耗堆后会自动调用这个虚方法
