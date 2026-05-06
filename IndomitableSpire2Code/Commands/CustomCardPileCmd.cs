@@ -31,8 +31,16 @@ public class CustomCardPileCmd
     
     public static async Task<CardPileAddResult?> FormationCmd(CardModel card)
     {
-        if (card.CostsEnergyOrStars(true))
-            return await DrawSameCardAsync(card);
-        return null;
+        var availableCards = CardPile.GetCards(card.Owner, PileType.Draw, PileType.Discard);
+        
+        // 【核心修改】：在过滤条件中加入对基础费用的判断，彻底杜绝 0 费牌的无限循环
+        var validTargets = availableCards.Where(c => 
+            c.Id == card.Id && c != card && 
+            (c.EnergyCost.Canonical > 0 || c.EnergyCost.CostsX)).ToList(); 
+        
+        if (validTargets.Count == 0) return null;
+        
+        var selectedCard = card.Owner.RunState.Rng.CombatCardSelection.NextItem(validTargets)!;
+        return await CardPileCmd.Add(selectedCard, PileType.Hand);
     }
 }
