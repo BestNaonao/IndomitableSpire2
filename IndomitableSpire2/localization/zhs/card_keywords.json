@@ -10,7 +10,7 @@
   "INDOMITABLESPIRE2-LEVEL_BOMBER.title": "水平轰炸机",
   "INDOMITABLESPIRE2-LEVEL_BOMBER.description": "水平轰炸机性质的舰载机，能够触发相关效果。通常具有[gold]群体伤害[/gold]。",
   "INDOMITABLESPIRE2-FORMATION.title": "编队",
-  "INDOMITABLESPIRE2-FORMATION.description": "打出时，将你[gold]抽牌堆[/gold]或[gold]弃牌堆[/gold]中的一张随机同名牌放入你的[gold]手牌[/gold]。",
+  "INDOMITABLESPIRE2-FORMATION.description": "打出时，将你[gold]抽牌堆[/gold]或[gold]弃牌堆[/gold]中的一张费用不为 0 的随机同名牌放入你的[gold]手牌[/gold]。",
   "INDOMITABLESPIRE2-COMMISSION.title": "委托",
   "INDOMITABLESPIRE2-COMMISSION.description": "未完成时无法打出。完成条件后打出，使你和给予这张牌的玩家共同获得奖励。"
 }
