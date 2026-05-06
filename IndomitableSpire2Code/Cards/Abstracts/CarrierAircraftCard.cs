@@ -63,14 +63,30 @@ public abstract class CarrierAircraftCard(
             if (loss > 0)
                 DynamicVars.Durability().BaseValue = Math.Max(0, DynamicVars.Durability().BaseValue - loss);
         }
-        
-        // 3. 如果耐久归零，触发消耗
-        if (DynamicVars.Durability().BaseValue <= 0)
+    }
+    
+    // 3. 优雅的去向判定：耐久度归零时去到消耗牌堆
+    protected override PileType GetResultPileType()
+    {
+        // 先获取引擎默认的去向（比如判断卡牌本身是否带有消耗关键字）
+        var defaultPileType = base.GetResultPileType();
+        // 如果引擎原本决定的不是空牌堆（像能力牌的去向）或消耗牌堆，但它耐久已经归零了，就强制将其丢进消耗堆
+        if (defaultPileType is not (PileType.None or PileType.Exhaust) && this.OutOfDurability())
+            return PileType.Exhaust;
+        return defaultPileType;
+    }
+    
+    // 4. 原生坠毁后摇：处理飞机损毁的特殊反馈。引擎在将卡牌移动到消耗堆后会自动调用这个虚方法
+    public override Task AfterCardExhausted(PlayerChoiceContext choiceContext, CardModel card, bool causedByEthereal)
+    {
+        // 只有当是因为耐久归零（而不是因为虚无或其他效果被消耗）时，才播放坠毁特效
+        if (card == this && card.OutOfDurability() && !causedByEthereal)
         {
-            await CardCmd.Exhaust(choiceContext, this);
-            // 可选：播放飞机坠毁的音效，强化反馈感
+            // 在这里播放飞机坠毁的音效，强化反馈感
             // SfxCmd.Play("event:/sfx/enemy/enemy_attacks/automaton/automaton_death");
         }
+        
+        return Task.CompletedTask;
     }
     
     /// <summary>
