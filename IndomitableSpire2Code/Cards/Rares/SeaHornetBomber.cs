@@ -1,5 +1,4 @@
 ﻿using IndomitableSpire2.IndomitableSpire2Code.Cards.Abstracts;
-using IndomitableSpire2.IndomitableSpire2Code.Commands;
 using IndomitableSpire2.IndomitableSpire2Code.Enums;
 using IndomitableSpire2.IndomitableSpire2Code.Powers;
 using MegaCrit.Sts2.Core.Commands;
@@ -51,8 +50,6 @@ public sealed class SeaHornetBomber() : CarrierAircraftCard(2, CardType.Attack, 
             this
         );
         
-        // 核心机制：呼叫编队，群蜂出动
-        await CustomCardPileCmd.FormationCmd(this);
         return attackCmd.Results;
     }
     
