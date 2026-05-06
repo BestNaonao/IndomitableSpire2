@@ -36,4 +36,7 @@ public static class CardExtensions
         
         return isValid;
     }
+    
+    public static bool OutOfDurability(this CardModel card) => 
+        card.DynamicVars.Durability().BaseValue <= 0;
 }
