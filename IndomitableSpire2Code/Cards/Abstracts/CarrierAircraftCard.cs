@@ -6,7 +6,6 @@ using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
-using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 
@@ -31,11 +30,6 @@ public abstract class CarrierAircraftCard(
     
     protected override HashSet<CardTag> CanonicalTags => 
         [IndomitableTags.CarrierAircraft, ..SubclassTags];
-    
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => 
-    [
-        HoverTipFactory.FromKeyword(IndomitableKeywords.CarrierAircraft)
-    ];
     
     // 注册耐久度动态变量，用于 UI 展现：使用我们自定义的 DurabilityVar 替代普通的 DynamicVar
     protected override IEnumerable<DynamicVar> CanonicalVars => 

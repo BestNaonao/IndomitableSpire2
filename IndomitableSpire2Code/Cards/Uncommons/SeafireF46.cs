@@ -1,11 +1,11 @@
 ﻿using IndomitableSpire2.IndomitableSpire2Code.Cards.Abstracts;
 using IndomitableSpire2.IndomitableSpire2Code.Enums;
+using IndomitableSpire2.IndomitableSpire2Code.Localization.DynamicVars;
 using IndomitableSpire2.IndomitableSpire2Code.Powers;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
-using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.ValueProps;
 
@@ -20,15 +20,12 @@ public sealed class SeafireF46() : CarrierAircraftCard(1, CardType.Attack, CardR
     public override IEnumerable<CardKeyword> CanonicalKeywords => [IndomitableKeywords.StrikeFighter];
     protected override IEnumerable<CardTag> SubclassTags => [IndomitableTags.StrikeFighter];
     
-    // 在悬浮窗额外显示截击的能力提示
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<InterceptedPower>()];
-    
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
         ..base.CanonicalVars,
         new DamageVar(9M, ValueProp.Move),
         new BlockVar(7M, ValueProp.Move),
-        new PowerVar<InterceptedPower>(5M) // 基础截击扣除 3 点力量
+        new CustomPowerVar<InterceptedPower>(5M) // 基础截击扣除 3 点力量
     ];
     
     protected override async Task<IEnumerable<DamageResult>?> OnAircraftPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
@@ -41,7 +38,7 @@ public sealed class SeafireF46() : CarrierAircraftCard(1, CardType.Attack, CardR
             .WithHitFx("vfx/vfx_attack_slash")
             .Execute(choiceContext);
         
-        // 如果目标意图攻击，迎面施加截击削弱其火力
+        // 如果目标意图攻击，迎面施加截击削弱其火力，否则掩护获得格挡
         if (cardPlay.Target is { IsAlive: true, Monster.IntendsToAttack: true })
             await PowerCmd.Apply<InterceptedPower>(
                 target: cardPlay.Target,
@@ -50,7 +47,6 @@ public sealed class SeafireF46() : CarrierAircraftCard(1, CardType.Attack, CardR
                 cardSource: this
             );
         else
-            // 掩护：获得格挡
             await CreatureCmd.GainBlock(Owner.Creature, DynamicVars.Block, cardPlay);
         
         return attackCmd.Results;

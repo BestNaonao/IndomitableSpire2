@@ -7,7 +7,6 @@ using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
-using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.ValueProps;
 
@@ -22,15 +21,13 @@ public sealed class BarracudaMk2() : CarrierAircraftCard(1, CardType.Attack, Car
     public override IEnumerable<CardKeyword> CanonicalKeywords => [IndomitableKeywords.TorpedoBomber];
     protected override IEnumerable<CardTag> SubclassTags => [IndomitableTags.TorpedoBomber];
     
-    // 添加进水和破甲的提示框
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<ArmorBreakPower>()];
-    
+    // 使用 CustomPowerVar 作为能力的动态变量
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
         ..base.CanonicalVars,
         new DamageVar(8M, ValueProp.Move),
         new CustomPowerVar<FloodingPower>(2M),
-        new PowerVar<ArmorBreakPower>(4M) // 基础破甲提升到 4
+        new CustomPowerVar<ArmorBreakPower>(4M) // 基础破甲提升到 4
     ];
     
     protected override async Task<IEnumerable<DamageResult>?> OnAircraftPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
