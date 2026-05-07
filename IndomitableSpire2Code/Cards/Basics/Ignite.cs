@@ -6,7 +6,6 @@ using IndomitableSpire2.IndomitableSpire2Code.Powers;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
-using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.ValueProps;
@@ -15,13 +14,11 @@ namespace IndomitableSpire2.IndomitableSpire2Code.Cards.Basics;
 
 public sealed class Ignite() : IndomitableCard(1, CardType.Attack, CardRarity.Basic, TargetType.AnyEnemy), ITranscendenceCard
 {
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<OnFirePower>()];
-    
     // 注册变量：8点伤害，3层起火
     protected override IEnumerable<DynamicVar> CanonicalVars => 
     [
         new DamageVar(8M, ValueProp.Move),
-        new PowerVar<OnFirePower>(3M),
+        new CustomPowerVar<OnFirePower>(3M),
         new MotivationRequireVar(30M)
     ];
     
@@ -41,7 +38,7 @@ public sealed class Ignite() : IndomitableCard(1, CardType.Attack, CardRarity.Ba
         if (cardPlay.Target is { IsAlive: true })
             await PowerCmd.Apply<OnFirePower>(
                 target: cardPlay.Target, 
-                amount: DynamicVars["OnFirePower"].BaseValue, 
+                amount: DynamicVars.OnFire().BaseValue, 
                 applier: Owner.Creature, 
                 cardSource: this
             );
@@ -51,7 +48,7 @@ public sealed class Ignite() : IndomitableCard(1, CardType.Attack, CardRarity.Ba
     {
         // 升级效果：伤害 +3，起火层数 +1
         DynamicVars.Damage.UpgradeValueBy(3M);
-        DynamicVars["OnFirePower"].UpgradeValueBy(1M);
+        DynamicVars.OnFire().UpgradeValueBy(1M);
     }
     
     // 提供升级为先古卡的接口

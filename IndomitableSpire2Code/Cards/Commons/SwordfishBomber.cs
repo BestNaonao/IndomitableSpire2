@@ -1,5 +1,7 @@
 ﻿using IndomitableSpire2.IndomitableSpire2Code.Cards.Abstracts;
 using IndomitableSpire2.IndomitableSpire2Code.Enums;
+using IndomitableSpire2.IndomitableSpire2Code.Extensions;
+using IndomitableSpire2.IndomitableSpire2Code.Localization.DynamicVars;
 using IndomitableSpire2.IndomitableSpire2Code.Powers;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -23,7 +25,7 @@ public sealed class SwordfishBomber() : CarrierAircraftCard(1, CardType.Attack, 
     [
         ..base.CanonicalVars,
         new DamageVar(7M, ValueProp.Move),
-        new PowerVar<FloodingPower>(2M)
+        new CustomPowerVar<FloodingPower>(2M)
     ];
     
     protected override async Task<IEnumerable<DamageResult>?> OnAircraftPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
@@ -40,7 +42,7 @@ public sealed class SwordfishBomber() : CarrierAircraftCard(1, CardType.Attack, 
         {
             await PowerCmd.Apply<FloodingPower>(
                 target: cardPlay.Target,
-                amount: DynamicVars["FloodingPower"].BaseValue,
+                amount: DynamicVars.Flooding().BaseValue,
                 applier: Owner.Creature,
                 cardSource: this
             );
@@ -51,7 +53,7 @@ public sealed class SwordfishBomber() : CarrierAircraftCard(1, CardType.Attack, 
     protected override void OnUpgrade()
     {
         DynamicVars.Damage.UpgradeValueBy(3M);
-        DynamicVars["FloodingPower"].UpgradeValueBy(1M);
+        DynamicVars.Flooding().UpgradeValueBy(1M);
         UpgradeDurability();
     }
 }

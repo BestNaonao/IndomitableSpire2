@@ -1,5 +1,7 @@
 ﻿using IndomitableSpire2.IndomitableSpire2Code.Cards.Abstracts;
 using IndomitableSpire2.IndomitableSpire2Code.Enums;
+using IndomitableSpire2.IndomitableSpire2Code.Extensions;
+using IndomitableSpire2.IndomitableSpire2Code.Localization.DynamicVars;
 using IndomitableSpire2.IndomitableSpire2Code.Powers;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -28,7 +30,7 @@ public sealed class SeaHornetBomber() : CarrierAircraftCard(2, CardType.Attack, 
         ..base.CanonicalVars,
         new DamageVar(6M, ValueProp.Move),
         new RepeatVar(4),
-        new PowerVar<OnFirePower>(3M)
+        new CustomPowerVar<OnFirePower>(3M)
     ];
     
     protected override async Task<IEnumerable<DamageResult>?> OnAircraftPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
@@ -45,7 +47,7 @@ public sealed class SeaHornetBomber() : CarrierAircraftCard(2, CardType.Attack, 
         // 挂载炸弹洗地，对所有存活的被击中敌人附加起火
         await PowerCmd.Apply<OnFirePower>(
             CombatState.HittableEnemies,
-            DynamicVars["OnFirePower"].BaseValue,
+            DynamicVars.OnFire().BaseValue,
             Owner.Creature,
             this
         );
@@ -56,7 +58,7 @@ public sealed class SeaHornetBomber() : CarrierAircraftCard(2, CardType.Attack, 
     protected override void OnUpgrade()
     {
         DynamicVars.Damage.UpgradeValueBy(2M);
-        DynamicVars["OnFirePower"].UpgradeValueBy(1M);
+        DynamicVars.OnFire().UpgradeValueBy(1M);
         UpgradeDurability();
     }
 }

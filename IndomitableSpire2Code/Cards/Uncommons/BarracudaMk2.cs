@@ -1,5 +1,7 @@
 ﻿using IndomitableSpire2.IndomitableSpire2Code.Cards.Abstracts;
 using IndomitableSpire2.IndomitableSpire2Code.Enums;
+using IndomitableSpire2.IndomitableSpire2Code.Extensions;
+using IndomitableSpire2.IndomitableSpire2Code.Localization.DynamicVars;
 using IndomitableSpire2.IndomitableSpire2Code.Powers;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -21,14 +23,13 @@ public sealed class BarracudaMk2() : CarrierAircraftCard(1, CardType.Attack, Car
     protected override IEnumerable<CardTag> SubclassTags => [IndomitableTags.TorpedoBomber];
     
     // 添加进水和破甲的提示框
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => 
-        [HoverTipFactory.FromPower<FloodingPower>(), HoverTipFactory.FromPower<ArmorBreakPower>()];
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<ArmorBreakPower>()];
     
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
         ..base.CanonicalVars,
         new DamageVar(8M, ValueProp.Move),
-        new PowerVar<FloodingPower>(2M),
+        new CustomPowerVar<FloodingPower>(2M),
         new PowerVar<ArmorBreakPower>(4M) // 基础破甲提升到 4
     ];
     
@@ -45,7 +46,7 @@ public sealed class BarracudaMk2() : CarrierAircraftCard(1, CardType.Attack, Car
         
         await PowerCmd.Apply<FloodingPower>(
             target: cardPlay.Target,
-            amount: DynamicVars["FloodingPower"].BaseValue,
+            amount: DynamicVars.Flooding().BaseValue,
             applier: Owner.Creature,
             cardSource: this
         );
@@ -61,7 +62,7 @@ public sealed class BarracudaMk2() : CarrierAircraftCard(1, CardType.Attack, Car
     protected override void OnUpgrade()
     {
         DynamicVars.Damage.UpgradeValueBy(3M);
-        DynamicVars["FloodingPower"].UpgradeValueBy(1M);
+        DynamicVars.Flooding().UpgradeValueBy(1M);
         DynamicVars["ArmorBreakPower"].UpgradeValueBy(2M);
         UpgradeDurability();
     }

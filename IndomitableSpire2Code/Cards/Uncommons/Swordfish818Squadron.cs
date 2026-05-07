@@ -1,6 +1,7 @@
 ﻿using IndomitableSpire2.IndomitableSpire2Code.Cards.Abstracts;
 using IndomitableSpire2.IndomitableSpire2Code.Enums;
 using IndomitableSpire2.IndomitableSpire2Code.Extensions;
+using IndomitableSpire2.IndomitableSpire2Code.Localization.DynamicVars;
 using IndomitableSpire2.IndomitableSpire2Code.Powers;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -25,7 +26,7 @@ public sealed class Swordfish818Squadron() : CarrierAircraftCard(2, CardType.Att
     [
         ..base.CanonicalVars,
         new DamageVar(11M, ValueProp.Move),
-        new PowerVar<FloodingPower>(3M),
+        new CustomPowerVar<FloodingPower>(3M),
         new PowerVar<SlowPower>(1M) // 用于瘫痪敌方攻势的缓慢变量，层数设为 1
     ];
     
@@ -42,7 +43,7 @@ public sealed class Swordfish818Squadron() : CarrierAircraftCard(2, CardType.Att
         {
             await PowerCmd.Apply<FloodingPower>(
                 target: cardPlay.Target,
-                amount: DynamicVars["FloodingPower"].BaseValue,
+                amount: DynamicVars.Flooding().BaseValue,
                 applier: Owner.Creature,
                 cardSource: this
             );
@@ -64,7 +65,7 @@ public sealed class Swordfish818Squadron() : CarrierAircraftCard(2, CardType.Att
     protected override void OnUpgrade()
     {
         DynamicVars.Damage.UpgradeValueBy(4M);
-        DynamicVars["FloodingPower"].UpgradeValueBy(1M);
+        DynamicVars.Flooding().UpgradeValueBy(1M);
         UpgradeDurability();
         // 缓慢层数保持 1 层不变
     }
