@@ -11,7 +11,7 @@ public class ReconVar : DynamicVar
     // 设定默认标识符，方便在 json 文件中精准匹配
     public const string DefaultName = "Recon";
     
-    // 默认构造函数，直接传入数值即可
+    // 默认构造函数，直接传入数值即可，已经自带提示栏
     public ReconVar(decimal baseValue) : base(DefaultName, baseValue) { this.WithTooltip(); }
     
     // 重载构造函数，保留原版高度的灵活性

@@ -12,6 +12,7 @@ public class ReconCmd
     // 创建自定义的本地化提示框（需要在 json 中配置该文本）
     private static LocString DrawPrompt => new("card_selection", "INDOMITABLESPIRE2-RECON_TO_HAND");
     private static LocString DiscardPrompt => new("card_selection", "INDOMITABLESPIRE2-RECON_TO_DISCARD");
+    
     /// <summary>
     /// 执行侦察机制：查看牌库顶部的牌，选择部分放入手牌，选择部分弃置，其余保留。
     /// 也可以在这里加入侦察前后触发的钩子。
@@ -59,5 +60,7 @@ public class ReconCmd
         // ================= 阶段 3：其余保持不动 =================
         // 凡是没有被放入手牌、也没有被弃置的牌，原版引擎会自动将它们留在抽牌堆的原始位置（顶部），
         // 所以我们不需要编写任何额外代码，机制自然闭环！
+        // 之后我们可以在这里触发我们的自定义钩子。
+        // await CustomHook.AfterRecon(CardModel card, Player player, int amount);
     }
 }

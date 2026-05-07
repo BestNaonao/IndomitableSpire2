@@ -1,6 +1,7 @@
 ﻿using IndomitableSpire2.IndomitableSpire2Code.Cards.Abstracts;
 using IndomitableSpire2.IndomitableSpire2Code.Commands;
 using IndomitableSpire2.IndomitableSpire2Code.Enums;
+using IndomitableSpire2.IndomitableSpire2Code.Extensions;
 using IndomitableSpire2.IndomitableSpire2Code.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -52,14 +53,14 @@ public sealed class SeafireFr47() : CarrierAircraftCard(2, CardType.Attack, Card
             );
         
         // 核心机制：呼叫战区侦察
-        await ReconCmd.Execute(choiceContext, Owner, DynamicVars["Recon"].IntValue);
+        await ReconCmd.Execute(choiceContext, Owner, DynamicVars.Recon().IntValue);
         return attackCmd.Results;
     }
     
     protected override void OnUpgrade()
     {
         DynamicVars.Damage.UpgradeValueBy(2M);
-        DynamicVars["Recon"].UpgradeValueBy(2M); // 升级后侦察深度变强
+        DynamicVars.Recon().UpgradeValueBy(2M); // 升级后侦察深度变强
         UpgradeDurability();
     }
 }

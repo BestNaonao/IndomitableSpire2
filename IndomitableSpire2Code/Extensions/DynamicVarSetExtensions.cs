@@ -13,4 +13,6 @@ public static class DynamicVarSetExtensions
     public static DynamicVar MotivationRequire(this DynamicVarSet  vars) => vars[nameof(MotivationRequire)];
     
     public static DynamicVar MotivationConsume(this DynamicVarSet  vars) => vars[nameof(MotivationConsume)];
+    
+    public static DynamicVar Recon(this DynamicVarSet  vars) => vars[nameof(Recon)];
 }
