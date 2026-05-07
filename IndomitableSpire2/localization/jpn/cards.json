@@ -48,6 +48,10 @@
   "INDOMITABLESPIRE2-MOTIVATION_BURST.description": "溢れた[gold]やる気[/gold]を[blue]20[/blue]得るたび、\n[gold]活力[/gold]を[blue]{MotivationBurstPower:diff()}[/blue]得る。",
   "INDOMITABLESPIRE2-EMERGENCY_TAKEOFF.title": "緊急発艦",
   "INDOMITABLESPIRE2-EMERGENCY_TAKEOFF.description": "[gold]山札[/gold]からランダムな[gold]艦載機[/gold]かアタックを1枚[gold]手札[/gold]に加える（艦載機を優先）。\nこのターン、それはコストを支払わずにプレイできる。",
+  "INDOMITABLESPIRE2-CASUAL_STRIKE.title": "カジュアルストライク",
+  "INDOMITABLESPIRE2-CASUAL_STRIKE.description": "{Damage:diff()}ダメージを与える。\n[gold]やる気[/gold]を[blue]{MotivationGain:diff()}[/blue]得る。",
+  "INDOMITABLESPIRE2-FORMATION_STRIKE.title": "編隊ストライク",
+  "INDOMITABLESPIRE2-FORMATION_STRIKE.description": "{Damage:diff()}ダメージを与える。\n[gold]山札[/gold]にある[gold]編隊[/gold]を持たないランダムな[gold]艦載機[/gold]カード1枚が、[gold]編隊[/gold]を得る。",
   
   "INDOMITABLESPIRE2-SCORCHING_FLAME_RAIN.title": "灼天の焔雨",
   "INDOMITABLESPIRE2-SCORCHING_FLAME_RAIN.description": "[gold]やる気[/gold]が[blue]{MotivationRequire:diff()}[/blue]以上の場合のみプレイできる。\nすべての敵に{Damage:diff()}ダメージを与える。\nすべての敵に[gold]炎上[/gold] [blue]{OnFirePower:diff()}[/blue]を付与する。",
