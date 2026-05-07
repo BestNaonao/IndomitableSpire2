@@ -15,7 +15,7 @@ public sealed class BideOnesTime() : TashkentCard(1, CardType.Skill, CardRarity.
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Retain];
     
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new BlockVar(8M, ValueProp.Move),
+        new BlockVar(7M, ValueProp.Move),
         new LoadDynamicVar(1M)
     ];
 

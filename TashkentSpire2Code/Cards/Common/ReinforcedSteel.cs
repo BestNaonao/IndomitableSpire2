@@ -14,7 +14,7 @@ public sealed class ReinforcedSteel() : TashkentCard(2, CardType.Skill, CardRari
     
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new BlockVar(8M, ValueProp.Move),
-        new PowerVar<PlatingPower>(6M)
+        new PowerVar<PlatingPower>(5M)
     ];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
@@ -27,6 +27,6 @@ public sealed class ReinforcedSteel() : TashkentCard(2, CardType.Skill, CardRari
     protected override void OnUpgrade()
     {
         DynamicVars.Block.UpgradeValueBy(3M);
-        DynamicVars["PlatingPower"].UpgradeValueBy(2M);
+        DynamicVars["PlatingPower"].UpgradeValueBy(1M);
     }
 }

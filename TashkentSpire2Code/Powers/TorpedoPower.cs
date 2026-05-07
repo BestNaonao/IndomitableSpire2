@@ -3,12 +3,9 @@ using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
-using MegaCrit.Sts2.Core.Helpers;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Powers;
-using MegaCrit.Sts2.Core.Nodes.Rooms;
-using MegaCrit.Sts2.Core.Nodes.Vfx;
 using MegaCrit.Sts2.Core.ValueProps;
 using TashkentSpire2.TashkentSpire2Code.Cards.Uncommon;
 using TashkentSpire2.TashkentSpire2Code.Commands;
@@ -17,6 +14,8 @@ namespace TashkentSpire2.TashkentSpire2Code.Powers;
 
 public sealed class TorpedoPower : TashkentPower
 {
+    private const string TurnKey = "Turns";
+
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;
     public override bool IsInstanced => true;
@@ -27,12 +26,14 @@ public sealed class TorpedoPower : TashkentPower
         "res://TashkentSpire2/images/powers/packed/torpedo_power.png";
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new DamageVar(0m, ValueProp.Unpowered)];
+    [
+        new DamageVar(0m, ValueProp.Unpowered),
+        new DynamicVar(TurnKey, 0m)
+    ];
 
-    private int _turnsLeft;
     private bool _oxygenApplied;
 
-    public override int DisplayAmount => _turnsLeft <= 0 ? 1 : _turnsLeft;
+    public override int DisplayAmount => (int)DynamicVars[TurnKey].BaseValue;
 
     public static int ComputeTurns(Creature owner)
     {
@@ -70,8 +71,15 @@ public sealed class TorpedoPower : TashkentPower
             }
         }
 
-        if (_turnsLeft <= 0)
-            _turnsLeft = ComputeTurns(Owner!);
+        var allRounderPower = Owner?.GetPower<AllRounderPower>();
+        if (allRounderPower != null && allRounderPower.Amount > 0)
+        {
+            await CreatureCmd.GainBlock(Owner!, allRounderPower.Amount, ValueProp.Unpowered, null);
+        }
+
+        int turns = ComputeTurns(Owner!);
+        DynamicVars[TurnKey].BaseValue = turns;
+        InvokeDisplayAmountChanged();
     }
 
     public override async Task BeforeTurnEnd(PlayerChoiceContext choiceContext, CombatSide side)
@@ -79,12 +87,20 @@ public sealed class TorpedoPower : TashkentPower
         if (side != Owner.Side)
             return;
 
-        if (_turnsLeft <= 0)
-            _turnsLeft = ComputeTurns(Owner!);
+        int turns = (int)DynamicVars[TurnKey].BaseValue;
 
-        if (_turnsLeft > 1)
+        if (turns <= 0)
         {
-            _turnsLeft--;
+            turns = ComputeTurns(Owner!);
+            DynamicVars[TurnKey].BaseValue = turns;
+            InvokeDisplayAmountChanged();
+        }
+
+        if (turns > 1)
+        {
+            turns--;
+            DynamicVars[TurnKey].BaseValue = turns;
+            InvokeDisplayAmountChanged();
             return;
         }
 
@@ -99,16 +115,11 @@ public sealed class TorpedoPower : TashkentPower
 
         if (godPower != null)
         {
-            foreach (var e in enemies)
+            var dmg = new DamageVar(Amount, ValueProp.Unpowered);
+            await CreatureCmd.Damage(choiceContext, CombatState.HittableEnemies, dmg, Owner!);
+
+            foreach (var e in CombatState.HittableEnemies)
             {
-                NCombatRoom.Instance?.CombatVfxContainer.AddChildSafely(
-                    NFireSmokePuffVfx.Create(e));
-
-                await Cmd.CustomScaledWait(0.2f, 0.4f);
-
-                var dmg = new DamageVar(Amount, ValueProp.Unpowered);
-                await CreatureCmd.Damage(choiceContext, e, dmg, Owner!);
-
                 await ApplyFlooding(choiceContext, e);
             }
         }
@@ -118,17 +129,11 @@ public sealed class TorpedoPower : TashkentPower
             if (target == null)
                 return;
 
-            NCombatRoom.Instance?.CombatVfxContainer.AddChildSafely(
-                NFireSmokePuffVfx.Create(target));
-
-            await Cmd.CustomScaledWait(0.2f, 0.4f);
-
             var dmg = new DamageVar(Amount, ValueProp.Unpowered);
             await CreatureCmd.Damage(choiceContext, target, dmg, Owner!);
 
             await ApplyFlooding(choiceContext, target);
         }
-
         await TriggerReload(choiceContext);
 
         await PowerCmd.Remove(this);

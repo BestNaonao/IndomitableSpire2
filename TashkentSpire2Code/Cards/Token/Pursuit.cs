@@ -14,7 +14,7 @@ namespace TashkentSpire2.TashkentSpire2Code.Cards.Token;
 [Pool(typeof(TokenCardPool))]
 public sealed class Pursuit() : TashkentCard(0, CardType.Attack, CardRarity.Token, TargetType.AnyEnemy)
 {
-    public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust, CardKeyword.Retain];
     
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new DamageVar(7M, ValueProp.Move),

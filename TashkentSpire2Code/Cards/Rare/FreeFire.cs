@@ -17,11 +17,11 @@ public sealed class FreeFire() : AmmunitionCard(0, CardType.Attack, CardRarity.R
     public override IEnumerable<CardKeyword> CanonicalKeywords => [TashkentKeyword.Barrage];
     
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new DamageVar(7M, ValueProp.Move),
+        new DamageVar(5M, ValueProp.Move),
         new AmmunitionDynamicVar(0M),
         new LoadDynamicVar(0M),
         new AmmuMaxDynamicVar(6M),
-        new ShotDynamicVar(3M),
+        new ShotDynamicVar(2M),
         new CardsVar(1)
     ];
 
@@ -65,6 +65,6 @@ public sealed class FreeFire() : AmmunitionCard(0, CardType.Attack, CardRarity.R
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Damage.UpgradeValueBy(2M);
+        DynamicVars.Damage.UpgradeValueBy(1M);
     }
 }

@@ -20,6 +20,8 @@ public sealed class TorpedoReload() : AmmunitionCard(2, CardType.Skill, CardRari
         new ShotDynamicVar(2M)
     ];
     
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
+    
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         ArgumentNullException.ThrowIfNull(CombatState);

@@ -16,6 +16,8 @@ public static class GetShellCountcmd
         int maxAmount, 
         bool canExceed)
     {
+        if (!canExceed && maxAmount == 0) return 0;
+        
         var shellModel = ModelDb.Card<Shell>();
         var choices = new List<CardModel>(); 
     

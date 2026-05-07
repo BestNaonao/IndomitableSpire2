@@ -9,7 +9,7 @@ using MegaCrit.Sts2.Core.HoverTips;
 
 namespace TashkentSpire2.TashkentSpire2Code.Enchantment;
 
-public class OathEnchantment : CustomEnchantmentModel
+public sealed class OathEnchantment : CustomEnchantmentModel
 {
     public override bool ShowAmount => false;   // 是否在卡牌上显示数值
 

@@ -17,8 +17,8 @@ public sealed class PreparatoryAction() : TashkentCard(1, CardType.Skill, CardRa
     ];
     
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [
-        HoverTipFactory.FromCard<ChargePreparation>(),
-        HoverTipFactory.FromCard<RetreatPreparation>()
+        HoverTipFactory.FromCard<ChargePreparation>(base.IsUpgraded),
+        HoverTipFactory.FromCard<RetreatPreparation>(base.IsUpgraded)
     ];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
