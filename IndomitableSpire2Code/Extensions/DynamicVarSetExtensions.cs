@@ -1,4 +1,6 @@
-﻿using MegaCrit.Sts2.Core.Localization.DynamicVars;
+﻿using IndomitableSpire2.IndomitableSpire2Code.Localization.DynamicVars;
+using IndomitableSpire2.IndomitableSpire2Code.Powers;
+using MegaCrit.Sts2.Core.Localization.DynamicVars;
 
 namespace IndomitableSpire2.IndomitableSpire2Code.Extensions;
 
@@ -14,5 +16,9 @@ public static class DynamicVarSetExtensions
     
     public static DynamicVar MotivationConsume(this DynamicVarSet  vars) => vars[nameof(MotivationConsume)];
     
-    public static DynamicVar Recon(this DynamicVarSet  vars) => vars[nameof(Recon)];
+    public static DynamicVar Flooding(this DynamicVarSet  vars) => vars[nameof(FloodingPower)];
+    
+    public static DynamicVar OnFire(this DynamicVarSet  vars) => vars[nameof(OnFirePower)];
+    
+    public static DynamicVar Recon(this DynamicVarSet  vars) => vars[ReconVar.DefaultName];
 }
