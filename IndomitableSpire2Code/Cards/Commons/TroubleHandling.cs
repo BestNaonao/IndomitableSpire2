@@ -13,11 +13,7 @@ namespace IndomitableSpire2.IndomitableSpire2Code.Cards.Commons;
 public sealed class TroubleHandling() : IndomitableCard(0, CardType.Skill, CardRarity.Common, TargetType.Self)
 {
     // 在悬浮窗中提示“干劲”和“慵懒”状态牌
-    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-    [
-        HoverTipFactory.FromPower<MotivationPower>(),
-        HoverTipFactory.FromCard<Indolent>()
-    ];
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromCard<Indolent>()];
     
     // 使用 PowerVar 控制干劲获取量
     protected override IEnumerable<DynamicVar> CanonicalVars => [new MotivationGainVar(30M)];

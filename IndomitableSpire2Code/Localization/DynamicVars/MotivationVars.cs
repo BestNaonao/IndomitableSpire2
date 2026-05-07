@@ -1,11 +1,19 @@
-﻿using IndomitableSpire2.IndomitableSpire2Code.Powers;
+﻿using IndomitableSpire2.IndomitableSpire2Code.Extensions;
+using IndomitableSpire2.IndomitableSpire2Code.Powers;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 
 namespace IndomitableSpire2.IndomitableSpire2Code.Localization.DynamicVars;
 
 // 干劲获取变量 (比如：获得 10 点干劲)
-public sealed class MotivationGainVar(decimal baseValue) 
-    : PowerVar<MotivationPower>("MotivationGain", baseValue);
+public sealed class MotivationGainVar : PowerVar<MotivationPower>
+{
+    public const string DefaultName = "MotivationGain";
+    
+    public MotivationGainVar(decimal baseValue) : base(DefaultName, baseValue)
+    {
+        this.WithPowerTooltip<MotivationGainVar, MotivationPower>();
+    }
+}
 
 // 干劲需求变量 (比如：需要 50 点干劲)
 public sealed class MotivationRequireVar(decimal baseValue)

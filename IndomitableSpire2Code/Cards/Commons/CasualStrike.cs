@@ -4,7 +4,6 @@ using IndomitableSpire2.IndomitableSpire2Code.Powers;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
-using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.ValueProps;
 
@@ -14,9 +13,6 @@ public sealed class CasualStrike() : IndomitableCard(1, CardType.Attack, CardRar
 {
     // 赋予打击标签
     protected override HashSet<CardTag> CanonicalTags => [CardTag.Strike];
-    
-    // 悬浮提示展示干劲
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<MotivationPower>()];
     
     // 注册变量：8点伤害，10点干劲获取 (使用你写好的专属 Var)
     protected override IEnumerable<DynamicVar> CanonicalVars => 
