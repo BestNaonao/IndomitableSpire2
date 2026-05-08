@@ -49,7 +49,7 @@ public sealed class BarracudaMk2() : CarrierAircraftCard(1, CardType.Attack, Car
         );
         await PowerCmd.Apply<ArmorBreakPower>(
             target: cardPlay.Target,
-            amount: DynamicVars["ArmorBreakPower"].BaseValue,
+            amount: DynamicVars.ArmorBreak().BaseValue,
             applier: Owner.Creature,
             cardSource: this
         );
@@ -60,7 +60,7 @@ public sealed class BarracudaMk2() : CarrierAircraftCard(1, CardType.Attack, Car
     {
         DynamicVars.Damage.UpgradeValueBy(3M);
         DynamicVars.Flooding().UpgradeValueBy(1M);
-        DynamicVars["ArmorBreakPower"].UpgradeValueBy(2M);
+        DynamicVars.ArmorBreak().UpgradeValueBy(2M);
         UpgradeDurability();
     }
 }

@@ -1,5 +1,6 @@
 ﻿using IndomitableSpire2.IndomitableSpire2Code.Cards.Abstracts;
 using IndomitableSpire2.IndomitableSpire2Code.Enums;
+using IndomitableSpire2.IndomitableSpire2Code.Extensions;
 using IndomitableSpire2.IndomitableSpire2Code.Localization.DynamicVars;
 using IndomitableSpire2.IndomitableSpire2Code.Powers;
 using MegaCrit.Sts2.Core.Commands;
@@ -42,7 +43,7 @@ public sealed class SeafireF46() : CarrierAircraftCard(1, CardType.Attack, CardR
         if (cardPlay.Target is { IsAlive: true, Monster.IntendsToAttack: true })
             await PowerCmd.Apply<InterceptedPower>(
                 target: cardPlay.Target,
-                amount: DynamicVars["InterceptedPower"].BaseValue,
+                amount: DynamicVars.Intercepted().BaseValue,
                 applier: Owner.Creature,
                 cardSource: this
             );
@@ -56,7 +57,7 @@ public sealed class SeafireF46() : CarrierAircraftCard(1, CardType.Attack, CardR
     {
         DynamicVars.Damage.UpgradeValueBy(3M);
         DynamicVars.Block.UpgradeValueBy(3M);
-        DynamicVars["InterceptedPower"].UpgradeValueBy(2M);
+        DynamicVars.Intercepted().UpgradeValueBy(2M);
         UpgradeDurability();
     }
 }
