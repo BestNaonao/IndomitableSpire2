@@ -12,7 +12,7 @@ public sealed class SolidarityEnchantment : CustomEnchantmentModel
     public override bool HasExtraCardText => true;
 
     protected override string? CustomIconPath =>
-        "res://TashkentSpire2/images/enchantment/oath_enchantment.png";
+        "res://TashkentSpire2/images/enchantment/solidarity_enchantment.png";
 
     private static bool _isTriggering = false;
 

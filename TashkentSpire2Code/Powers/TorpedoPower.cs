@@ -54,6 +54,13 @@ public sealed class TorpedoPower : TashkentPower
 
         return 3;
     }
+    
+    public void ReduceTurnCount(int amount)
+    {
+        var turnVar = DynamicVars[TurnKey];
+        turnVar.BaseValue = Math.Max(1, turnVar.BaseValue - amount);
+        InvokeDisplayAmountChanged();
+    }
 
     public override async Task AfterApplied(Creature? applier, CardModel? cardSource)
     {

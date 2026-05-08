@@ -1,6 +1,7 @@
 ﻿using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using TashkentSpire2.TashkentSpire2Code.Orb;
 
@@ -10,6 +11,10 @@ public sealed class ModuleHealth() : TashkentCard(1, CardType.Power, CardRarity.
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new DynamicVar("Orbs", 1m)
+    ];
+    
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => [
+        HoverTipFactory.FromOrb<ModuleOrb>()
     ];
     
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)

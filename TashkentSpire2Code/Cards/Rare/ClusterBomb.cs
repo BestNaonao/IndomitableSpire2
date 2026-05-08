@@ -63,5 +63,6 @@ public sealed class ClusterBomb() : TashkentCard(1, CardType.Attack, CardRarity.
     protected override void OnUpgrade()
     {
         DynamicVars.Damage.UpgradeValueBy(3M);
+        AddKeyword(CardKeyword.Eternal);
     }
 }

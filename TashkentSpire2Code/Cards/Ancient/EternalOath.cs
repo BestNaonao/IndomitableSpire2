@@ -1,6 +1,7 @@
 ﻿using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using TashkentSpire2.TashkentSpire2Code.Enchantment;
 using TashkentSpire2.TashkentSpire2Code.Powers;
@@ -17,6 +18,10 @@ public sealed class EternalOath() : TashkentCard(2, CardType.Power, CardRarity.A
     
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new PowerVar<EternalOathPower>(1M)
+    ];
+    
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => [
+        ..HoverTipFactory.FromEnchantment<OathEnchantment>()
     ];
     
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)

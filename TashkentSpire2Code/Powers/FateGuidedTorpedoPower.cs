@@ -2,6 +2,7 @@
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.HoverTips;
+using MegaCrit.Sts2.Core.Localization.DynamicVars;
 
 namespace TashkentSpire2.TashkentSpire2Code.Powers;
 
@@ -16,6 +17,10 @@ public sealed class FateGuidedTorpedoPower : TashkentPower
         "res://TashkentSpire2/images/powers/packed/mark_power.png";
     
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<TorpedoPower>()];
+    
+    protected override IEnumerable<DynamicVar> CanonicalVars => [
+        new TorpedoDynamicVar(9M)
+    ];
     
     public override async Task AfterSideTurnStart(CombatSide side, CombatState combatState)
     {

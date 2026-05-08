@@ -2,7 +2,7 @@
   "TASHKENTSPIRE2-MARK.title": "标记",
   "TASHKENTSPIRE2-MARK.description": "受到攻击伤害时增加[gold]标记[/gold]层数的伤害，然后层数减少[blue]1[/blue]。",
   "TASHKENTSPIRE2-TORPEDO.title": "鱼雷",
-  "TASHKENTSPIRE2-TORPEDO.description": "鱼雷在回合结束时对[gold]标记[/gold]数最多的敌人造成伤害。\n时间依[gold]释放时[/gold]自身[gold]距离[/gold]确定: -5~-4需要5回合；-3~-2需要4回合；-1~1需要3回合；2~3需要2回合；4~5需要1回合。",
+  "TASHKENTSPIRE2-TORPEDO.description": "鱼雷在回合结束时对[gold]标记[/gold]数最多的敌人造成伤害。\n时间依[gold]释放时[/gold]自身[gold]距离[/gold]确定: [blue]-5~-4[/blue]需要[blue]5[/blue]回合；[blue]-3~-2[/blue]需要[blue]4[/blue]回合；[blue]-1~1[/blue]需要[blue]3[/blue]回合；[blue]2~3[/blue]需要[blue]2[/blue]回合；[blue]4~5[/blue]需要[blue]1[/blue]回合。",
   "TASHKENTSPIRE2-CHARGE.title": "突进",
   "TASHKENTSPIRE2-CHARGE.description": "距离增加，最多不超过[blue]5[/blue]。",
   "TASHKENTSPIRE2-RETREAT.title": "后撤",
@@ -14,7 +14,5 @@
   "TASHKENTSPIRE2-LOAD.title": "装填",
   "TASHKENTSPIRE2-LOAD.description": "增加此卡的[gold]弹药[/gold]数。",
   "TASHKENTSPIRE2-SHOT.title": "发射",
-  "TASHKENTSPIRE2-SHOT.description": "花费至少多少[gold]弹药[/gold]以执行额外效果。",
-  "TASHKENTSPIRE2_SUMMON_DYNAMIC.title": "召唤{Summon}",
-  "TASHKENTSPIRE2_SUMMON_DYNAMIC.description": "以[blue]{Summon}[/blue]生命值召唤[gold]突进[/gold]与[gold]后撤[/gold]。"
+  "TASHKENTSPIRE2-SHOT.description": "花费至少多少[gold]弹药[/gold]以执行额外效果。"
 }

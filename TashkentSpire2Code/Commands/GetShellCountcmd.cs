@@ -30,6 +30,7 @@ public static class GetShellCountcmd
         int maxToSelect = canExceed ? 6 : Math.Min(6, maxAmount);
     
         var prompt = new LocString("cards", "Tashkent_SelectShellsPrompt");
+        prompt.Add("maxamount", (decimal)maxAmount);
         prompt.Add("max", (decimal)maxToSelect); 
     
         var prefs = new CardSelectorPrefs(

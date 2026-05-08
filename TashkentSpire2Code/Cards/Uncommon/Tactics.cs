@@ -2,7 +2,6 @@
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
-using MegaCrit.Sts2.Core.Models.Powers;
 using TashkentSpire2.TashkentSpire2Code.Powers;
 
 namespace TashkentSpire2.TashkentSpire2Code.Cards.Uncommon;
@@ -17,20 +16,13 @@ public sealed class Tactics() : TashkentCard(0, CardType.Skill, CardRarity.Uncom
     {
         await PowerCmd.Apply<TorpedoPower>(base.Owner.Creature, DynamicVars["TashkentSpire2-Torpedo"].BaseValue, base.Owner.Creature, this);
         
-        var powers = base.Owner.Creature.Powers
-            .Where(p => p is TorpedoPower || p is TheBombPower)
+        var torpedoes = base.Owner.Creature.Powers
+            .OfType<TorpedoPower>()
             .ToList();
 
-        foreach (var power in powers)
+        foreach (var power in torpedoes)
         {
-            int current = (int)power.Amount;
-            int target = Math.Max(1, current - 1);
-            int delta = target - current;
-
-            if (delta != 0)
-            {
-                await PowerCmd.ModifyAmount(power, delta, base.Owner.Creature, this);
-            }
+            power.ReduceTurnCount(1);
         }
     }
     

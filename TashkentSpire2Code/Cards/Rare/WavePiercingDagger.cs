@@ -1,6 +1,7 @@
 ﻿using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models.Powers;
 using TashkentSpire2.TashkentSpire2Code.Powers;
@@ -13,6 +14,11 @@ public sealed class WavePiercingDagger() : TashkentCard(0, CardType.Skill, CardR
         new PowerVar<VigorPower>(50M)
     ];
 
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => [
+        HoverTipFactory.Static(StaticHoverTip.Block),
+        HoverTipFactory.FromPower<VigorPower>()
+    ];
+    
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         decimal de = (decimal)this.Owner.Creature.Block * DynamicVars["VigorPower"].BaseValue / 100M;

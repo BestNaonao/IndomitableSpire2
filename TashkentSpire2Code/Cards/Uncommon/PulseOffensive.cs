@@ -15,7 +15,7 @@ namespace TashkentSpire2.TashkentSpire2Code.Cards.Uncommon;
 public sealed class PulseOffensive() : AmmunitionCard(2, CardType.Attack, CardRarity.Uncommon, TargetType.AllEnemies)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new DamageVar(4M, ValueProp.Move),
+        new DamageVar(6M, ValueProp.Move),
         new AmmunitionDynamicVar(3M),
         new LoadDynamicVar(1M),
         new AmmuMaxDynamicVar(6M),
@@ -72,5 +72,5 @@ public sealed class PulseOffensive() : AmmunitionCard(2, CardType.Attack, CardRa
         }
     }
 
-    protected override void OnUpgrade() => DynamicVars.Damage.UpgradeValueBy(1M);
+    protected override void OnUpgrade() => DynamicVars.Damage.UpgradeValueBy(2M);
 }

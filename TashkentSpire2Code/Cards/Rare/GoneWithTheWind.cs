@@ -1,7 +1,6 @@
 ﻿using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
-using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using TashkentSpire2.TashkentSpire2Code.Commands;
 using TashkentSpire2.TashkentSpire2Code.Powers;
@@ -14,9 +13,6 @@ public sealed class GoneWithTheWind() : TashkentCard(1, CardType.Power, CardRari
         new PowerVar<GoneWithTheWindPower>(4M),
         new SummonVar(1M)
     ];
-
-    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-        [HoverTipFactory.Static(StaticHoverTip.SummonDynamic, base.DynamicVars.Summon)];
     
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {

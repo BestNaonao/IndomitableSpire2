@@ -6,11 +6,11 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Powers;
-using TashkentSpire2.TashkentSpire2Code.Cards.Rare;
+using TashkentSpire2.TashkentSpire2Code.Cards.Uncommon;
 
 namespace TashkentSpire2.TashkentSpire2Code.Powers;
 
-public sealed class CoreBreakdownPower : TashkentPower
+public sealed class ManeuverPower : TashkentPower
 {
     public override PowerType Type => PowerType.Debuff;
     public override PowerStackType StackType => PowerStackType.Counter;
@@ -29,7 +29,7 @@ public sealed class CoreBreakdownPower : TashkentPower
         get
         {
             var tips = new List<IHoverTip>();
-            tips.Add(HoverTipFactory.FromCard(ModelDb.Card<CoreBreakdown>()));
+            tips.Add(HoverTipFactory.FromCard(ModelDb.Card<Maneuver>()));
             tips.Add(HoverTipFactory.FromPower<StrengthPower>());
             return tips;
         }
@@ -67,7 +67,7 @@ public sealed class CoreBreakdownPower : TashkentPower
         if (side == base.Owner.Side)
         {
             Flash();
-
+            
             await PowerCmd.Remove(this);
             await PowerCmd.Apply<StrengthPower>(base.Owner, base.Amount, base.Owner, null);
         }
