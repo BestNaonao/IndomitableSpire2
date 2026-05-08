@@ -52,6 +52,8 @@
   "INDOMITABLESPIRE2-CASUAL_STRIKE.description": "Deal {Damage:diff()} damage.\nGain [blue]{MotivationGain:diff()}[/blue] [gold]Motivation[/gold].",
   "INDOMITABLESPIRE2-FORMATION_STRIKE.title": "Formation Strike",
   "INDOMITABLESPIRE2-FORMATION_STRIKE.description": "Deal {Damage:diff()} damage.\nA random [gold]Carrier Aircraft[/gold] without [gold]Formation[/gold] in your [gold]Draw Pile[/gold] adds [gold]Formation[/gold].",
+  "INDOMITABLESPIRE2-WOOLWORTH_REPLENISHMENT.title": "Woolworth Replenishment",
+  "INDOMITABLESPIRE2-WOOLWORTH_REPLENISHMENT.description": "Gain {Energy:energyIcons()}.\nAdd a random {IfUpgraded:show:[gold]Upgraded[/gold] }[gold]Carrier Aircraft[/gold] into your [gold]Hand[/gold].",
   
   "INDOMITABLESPIRE2-SCORCHING_FLAME_RAIN.title": "Scorching Flame Rain",
   "INDOMITABLESPIRE2-SCORCHING_FLAME_RAIN.description": "Can only be played if you have at least [blue]{MotivationRequire:diff()}[/blue] [gold]Motivation[/gold].\nDeal {Damage:diff()} damage to ALL enemies.\nApply [blue]{OnFirePower:diff()}[/blue] [gold]On Fire[/gold] to ALL enemies.",
