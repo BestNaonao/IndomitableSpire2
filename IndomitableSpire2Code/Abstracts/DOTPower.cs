@@ -18,7 +18,7 @@ public abstract class DOTPower : IndomitablePower
     public override PowerType Type => PowerType.Debuff;
     public override PowerStackType StackType => PowerStackType.Counter;
     // 每回合前后损失生命占最大生命的百分比
-    public virtual decimal Proportion => 0.01m;
+    protected virtual decimal Proportion => 0.01m;
     
     // --- BaseLib 血条预测配置 ---
     // 1. 血条的实际颜色
@@ -37,19 +37,19 @@ public abstract class DOTPower : IndomitablePower
         new("NextLostHpInt", 0m)     // 下次即将损失的整数生命（用于UI显示）
     ];
     
+    private DynamicVar TotalLostHpExact => DynamicVars["TotalLostHpExact"];
+    private DynamicVar TotalLostHpInt => DynamicVars["TotalLostHpInt"];
+    
+    // 获取带小数保留的下一次伤害
+    private decimal ExactNextDamage => Owner.MaxHp * Amount * Proportion;
     // 获取下一次即将造成的真实整数伤害
-    public int GetNextDamage()
-    {
-        if (Owner.MaxHp <= 0) return 0;
-        var exactNext = Owner.MaxHp * Amount * Proportion; // 百分比 * 层数
-        return (int)Math.Floor(DynamicVars["TotalLostHpExact"].BaseValue + exactNext) - (int)DynamicVars["TotalLostHpInt"].BaseValue;
-    }
+    private int GetNextDamage => Math.Max(0, (int)Math.Floor(TotalLostHpExact.BaseValue + ExactNextDamage) - TotalLostHpInt.IntValue);
     
     // 更新UI变量的方法
     protected virtual void Update()
     {
         DynamicVars["NextLostHpPercent"].BaseValue = Amount * 100 * Proportion;
-        DynamicVars["NextLostHpInt"].BaseValue = GetNextDamage();
+        DynamicVars["NextLostHpInt"].BaseValue = GetNextDamage;
         InvokeDisplayAmountChanged();
     }
     
@@ -65,21 +65,20 @@ public abstract class DOTPower : IndomitablePower
     protected virtual async Task TriggerDamage()
     {
         if (Amount <= 0 || Owner.IsDead) return;
-
+        
         // 1. 计算精确伤害并入池
-        var exactNext = Owner.MaxHp * Amount * Proportion;
-        DynamicVars["TotalLostHpExact"].BaseValue += exactNext;
+        TotalLostHpExact.BaseValue += ExactNextDamage;
         
         // 2. 提取需要扣除的整数部分
-        var damageToDeal = (int)Math.Floor(DynamicVars["TotalLostHpExact"].BaseValue) - (int)DynamicVars["TotalLostHpInt"].BaseValue;
+        var damageToDeal = (int)Math.Floor(TotalLostHpExact.BaseValue) - TotalLostHpInt.IntValue;
         if (damageToDeal > 0)
         {
-            DynamicVars["TotalLostHpInt"].BaseValue += damageToDeal;
+            TotalLostHpInt.BaseValue += damageToDeal;
             Flash();
             // 造成无视格挡、不受力量影响的绝对伤害（模仿 Poison）
             await CreatureCmd.Damage(new ThrowingPlayerChoiceContext(), Owner, damageToDeal, ValueProp.Unblockable | ValueProp.Unpowered, null, null);
         }
-
+        
         // 3. 层数衰减与UI更新
         if (Owner.IsAlive)
         {
@@ -88,13 +87,13 @@ public abstract class DOTPower : IndomitablePower
         }
         else await Cmd.CustomScaledWait(0.1f, 0.25f);
     }
-
+    
     // 回合开始时和结束时各触发一次
     public override async Task AfterSideTurnStart(CombatSide side, CombatState combatState)
     {
         if (side == Owner.Side) await TriggerDamage();
     }
-
+    
     public override async Task BeforeTurnEndEarly(PlayerChoiceContext choiceContext, CombatSide side)
     {
         if (side == Owner.Side) await TriggerDamage();
@@ -103,7 +102,7 @@ public abstract class DOTPower : IndomitablePower
     // 【新增】：实现 BaseLib 对血条的接口要求的方法
     public override IEnumerable<HealthBarForecastSegment> GetHealthBarForecastSegments(HealthBarForecastContext context)
     {
-        var damage = GetNextDamage();
+        var damage = GetNextDamage;
         if (damage > 0)
         {
             yield return new HealthBarForecastSegment(

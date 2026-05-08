@@ -12,7 +12,7 @@ public sealed class FloodingPower : DOTPower
 {
     // 使用天蓝色作为进水的层数显示颜色
     public override Color AmountLabelColor => new("33CCFF");
-    public override decimal Proportion => 0.01m;
+    protected override decimal Proportion => 0.01m;
     
     // --- BaseLib 血条预测配置 ---
     // 血条颜色：天蓝色
@@ -20,7 +20,7 @@ public sealed class FloodingPower : DOTPower
     // 致死文本颜色：亮青色 (BaseLib 会自动压暗它来做描边)
     protected override Color ForecastLethalTextColor => new("88FFFF");
     protected override int ForecastOrder => 15;
-
+    
     // 注册变量池，新增 DamageIncreasePercent 用于 UI 动态显示易伤比例
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         base.CanonicalVars.Append(new DynamicVar("DamageIncreasePercent", 0m));
@@ -28,13 +28,13 @@ public sealed class FloodingPower : DOTPower
     protected override string SmartDescriptionLocKey => HasNonAttackIntent 
         ? $"{Id.Entry}.smartDescriptionFull"
         : $"{Id.Entry}.smartDescription";
-
+    
     protected override void Update()
     {
         DynamicVars["DamageIncreasePercent"].BaseValue = Amount * 5m;
         base.Update();
     }
-
+    
     // 判断当前意图列表中是否包含【非攻击】且【非死亡攻击】的意图
     private bool HasNonAttackIntent => Owner.Monster != null && Owner.Monster.NextMove.Intents.Any(intent =>
         intent.IntentType != IntentType.Attack && intent.IntentType != IntentType.DeathBlow);

@@ -7,7 +7,7 @@ public sealed class OnFirePower : DOTPower // 继承自你的基类
 {
     // 使用鲜艳的橙色/红色作为数字颜色
     public override Color AmountLabelColor => new("FFA200");
-    public override decimal Proportion => 0.005m;
+    protected override decimal Proportion => 0.005m;
     
     // --- BaseLib 血条预测配置 ---
     // 血条颜色：橙色
