@@ -58,6 +58,9 @@
   "INDOMITABLESPIRE2-AIR_SUPERIORITY.description": "{Damage:diff()}ダメージを与える。この戦闘中にプレイした[gold]艦載機[/gold]が現在の敵より1枚多いごとに、追加で1回ダメージを与える。{InCombat:(攻撃回数は{CalculatedHits:diff()}回)|}",
   "INDOMITABLESPIRE2-CLEANUP.title": "クリーンアップ",
   "INDOMITABLESPIRE2-CLEANUP.description": "{Damage:diff()}ダメージを与える。\n[gold]手札[/gold]を1枚[gold]廃棄[/gold]する。それがステータスか呪いなら、カードを{Cards:diff()}枚引く。",
+  "INDOMITABLESPIRE2-DECK_TIE_DOWN.title": "甲板係留",
+  "INDOMITABLESPIRE2-DECK_TIE_DOWN.description": "[gold]手札[/gold]を{Cards:diff()}枚まで[gold]保留[/gold]する。",
+  "INDOMITABLESPIRE2-DECK_TIE_DOWN.selectionScreenPrompt": "[gold]保留[/gold]するカードを{Cards}枚選ぶ。",
   
   "INDOMITABLESPIRE2-SCORCHING_FLAME_RAIN.title": "灼天の焔雨",
   "INDOMITABLESPIRE2-SCORCHING_FLAME_RAIN.description": "[gold]やる気[/gold]が[blue]{MotivationRequire:diff()}[/blue]以上の場合のみプレイできる。\nすべての敵に{Damage:diff()}ダメージを与える。\nすべての敵に[gold]炎上[/gold] [blue]{OnFirePower:diff()}[/blue]を付与する。",
