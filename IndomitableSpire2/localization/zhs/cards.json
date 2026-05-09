@@ -59,8 +59,8 @@
   "INDOMITABLESPIRE2-CLEANUP.title": "扫除",
   "INDOMITABLESPIRE2-CLEANUP.description": "造成{Damage:diff()}点伤害。\n[gold]消耗[/gold]一张[gold]手牌[/gold]。如果那是状态牌或诅咒牌，抽{Cards:diff()}张牌。",
   "INDOMITABLESPIRE2-DECK_TIE_DOWN.title": "甲板系留",
-  "INDOMITABLESPIRE2-DECK_TIE_DOWN.description": "[gold]保留[/gold]最多{Cards:diff()}张[gold]手牌[/gold]。",
-  "INDOMITABLESPIRE2-DECK_TIE_DOWN.selectionScreenPrompt": "选择至多{Cards}张牌保留。",
+  "INDOMITABLESPIRE2-DECK_TIE_DOWN.description": "在本回合[gold]保留[/gold]最多{Cards:diff()}张[gold]手牌[/gold]。",
+  "INDOMITABLESPIRE2-DECK_TIE_DOWN.selectionScreenPrompt": "选择最多{Cards}张牌保留。",
   
   "INDOMITABLESPIRE2-SCORCHING_FLAME_RAIN.title": "灼天焰雨",
   "INDOMITABLESPIRE2-SCORCHING_FLAME_RAIN.description": "只有在[gold]干劲[/gold]达到[blue]{MotivationRequire:diff()}[/blue]点及以上时才能打出。\n对所有敌人造成{Damage:diff()}点伤害。\n给予所有敌人[blue]{OnFirePower:diff()}[/blue]层[gold]起火[/gold]。",

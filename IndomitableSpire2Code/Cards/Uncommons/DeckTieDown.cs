@@ -9,6 +9,8 @@ namespace IndomitableSpire2.IndomitableSpire2Code.Cards.Uncommons;
 
 public sealed class DeckTieDown() : IndomitableCard(0, CardType.Skill, CardRarity.Uncommon, TargetType.Self)
 {
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Retain];
+    
     // 提供“保留”关键字的悬浮提示
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromKeyword(CardKeyword.Retain)];
     
