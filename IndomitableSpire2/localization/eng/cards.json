@@ -56,6 +56,8 @@
   "INDOMITABLESPIRE2-WOOLWORTH_REPLENISHMENT.description": "Gain {Energy:energyIcons()}.\nAdd a random {IfUpgraded:show:[gold]Upgraded[/gold] }[gold]Carrier Aircraft[/gold] into your [gold]Hand[/gold].",
   "INDOMITABLESPIRE2-AIR_SUPERIORITY.title": "Air Superiority",
   "INDOMITABLESPIRE2-AIR_SUPERIORITY.description": "Deal {Damage:diff()} damage. Deals 1 additional time for each [gold]Carrier Aircraft[/gold] played this combat beyond current enemy count.{InCombat:(Hits {CalculatedHits:diff()} {CalculatedHits:plural:time|times})|}",
+  "INDOMITABLESPIRE2-CLEANUP.title": "Cleanup",
+  "INDOMITABLESPIRE2-CLEANUP.description": "Deal {Damage:diff()} damage.\n[gold]Exhaust[/gold] a card in your [gold]Hand[/gold]. If it is a Status or Curse, draw {Cards:diff()} {Cards:plural:card|cards}.",
   
   "INDOMITABLESPIRE2-SCORCHING_FLAME_RAIN.title": "Scorching Flame Rain",
   "INDOMITABLESPIRE2-SCORCHING_FLAME_RAIN.description": "Can only be played if you have at least [blue]{MotivationRequire:diff()}[/blue] [gold]Motivation[/gold].\nDeal {Damage:diff()} damage to ALL enemies.\nApply [blue]{OnFirePower:diff()}[/blue] [gold]On Fire[/gold] to ALL enemies.",
