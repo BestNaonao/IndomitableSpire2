@@ -26,7 +26,7 @@ public sealed class SeafireF46() : CarrierAircraftCard(1, CardType.Attack, CardR
         ..base.CanonicalVars,
         new DamageVar(9M, ValueProp.Move),
         new BlockVar(7M, ValueProp.Move),
-        new CustomPowerVar<InterceptedPower>(5M) // 基础截击扣除 3 点力量
+        new CustomPowerVar<InterceptedPower>(5M) // 基础截击扣除 5 点力量
     ];
     
     protected override async Task<IEnumerable<DamageResult>?> OnAircraftPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
