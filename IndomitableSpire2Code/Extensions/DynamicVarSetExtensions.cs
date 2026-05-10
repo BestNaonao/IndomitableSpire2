@@ -6,9 +6,9 @@ namespace IndomitableSpire2.IndomitableSpire2Code.Extensions;
 
 public static class DynamicVarSetExtensions
 {
-    public static DynamicVar Durability(this DynamicVarSet  vars) =>vars[nameof(Durability)];
+    public static DynamicVar Durability(this DynamicVarSet  vars) =>vars[DurabilityVar.DefaultName];
     
-    public static DynamicVar MaxDurability(this DynamicVarSet  vars) => vars[nameof(MaxDurability)];
+    public static DynamicVar MaxDurability(this DynamicVarSet  vars) => vars[MaxDurabilityVar.DefaultName];
     
     public static DynamicVar MotivationGain(this DynamicVarSet  vars) => vars[nameof(MotivationGain)];
     

@@ -1,5 +1,4 @@
-﻿using BaseLib.Extensions;
-using IndomitableSpire2.IndomitableSpire2Code.Enums;
+﻿using IndomitableSpire2.IndomitableSpire2Code.Enums;
 using IndomitableSpire2.IndomitableSpire2Code.Extensions;
 using IndomitableSpire2.IndomitableSpire2Code.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Commands;
@@ -34,8 +33,7 @@ public abstract class CarrierAircraftCard(
     // 注册耐久度动态变量，用于 UI 展现：使用我们自定义的 DurabilityVar 替代普通的 DynamicVar
     protected override IEnumerable<DynamicVar> CanonicalVars => 
     [
-        new DurabilityVar("Durability", MaxDurability).WithTooltip(),
-        new("MaxDurability", MaxDurability)
+        new DurabilityVar(MaxDurability), new MaxDurabilityVar(MaxDurability)
     ];
     
     // 封装原本的 OnPlay，使其成为模板方法（Template Method）
