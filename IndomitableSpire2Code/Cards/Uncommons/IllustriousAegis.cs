@@ -9,19 +9,21 @@ using MegaCrit.Sts2.Core.ValueProps;
 
 namespace IndomitableSpire2.IndomitableSpire2Code.Cards.Uncommons;
 
+// 指定为 AnyPlayer，支持联机模式下套给自己或队友
 public sealed class IllustriousAegis() : IndomitableCard(2, CardType.Skill, CardRarity.Uncommon, TargetType.AnyPlayer)
 {
-    // 指定为 AnyPlayer，完美支持联机模式下套给队友
     public override bool GainsBlock => true;
     
-    // 手动补充提示框，因为 BlockVar 默认只给原版的格挡提示
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<ShieldPower>()];
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
     
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
         new BlockVar(12M, ValueProp.Move),
         new HealVar(4M)
     ];
+    
+    // 手动补充提示框，因为 BlockVar 默认只给原版的格挡提示
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<ShieldPower>()];
     
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
