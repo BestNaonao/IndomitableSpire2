@@ -1,7 +1,9 @@
-﻿using IndomitableSpire2.IndomitableSpire2Code.Powers;
+﻿using IndomitableSpire2.IndomitableSpire2Code.Commands;
+using IndomitableSpire2.IndomitableSpire2Code.Powers;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.ValueProps;
 
@@ -12,23 +14,26 @@ public sealed class IllustriousAegis() : IndomitableCard(2, CardType.Skill, Card
     // 指定为 AnyPlayer，完美支持联机模式下套给队友
     public override bool GainsBlock => true;
     
+    // 手动补充提示框，因为 BlockVar 默认只给原版的格挡提示
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<ShieldPower>()];
+    
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
         new BlockVar(12M, ValueProp.Move),
-        new HealVar(5M)
+        new HealVar(4M)
     ];
     
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         ArgumentNullException.ThrowIfNull(cardPlay.Target, nameof(cardPlay.Target));
         
-        // 1. 先赋予基础真实的格挡
-        var blockAmount = await CreatureCmd.GainBlock(cardPlay.Target, DynamicVars.Block, cardPlay);
+        // 1. 赋予护盾（底层会自动给真实格挡并挂上 ShieldPower）
+        var shieldAmount = await CustomCreatureCmd.GainShield(cardPlay.Target, DynamicVars.Block, cardPlay);
         
-        // 2. 赋予光辉的庇护能力（实例初始化）
+        // 2. 赋予光辉的庇护能力（将其层数设为刚才获得的护盾值）
         await PowerCmd.Apply<IllustriousAegisPower>(
             target: cardPlay.Target,
-            amount: blockAmount, // 将卡牌带来的格挡值作为护盾层数
+            amount: shieldAmount, 
             applier: Owner.Creature,
             cardSource: this
         );

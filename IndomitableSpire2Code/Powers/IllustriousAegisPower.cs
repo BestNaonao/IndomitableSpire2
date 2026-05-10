@@ -1,15 +1,12 @@
-﻿using IndomitableSpire2.IndomitableSpire2Code.Abstracts;
-using MegaCrit.Sts2.Core.Commands;
+﻿using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
-using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
-using MegaCrit.Sts2.Core.ValueProps;
 
 namespace IndomitableSpire2.IndomitableSpire2Code.Powers;
 
-public sealed class IllustriousAegisPower : IndomitablePower, IBlockRetentionProvider
+public sealed class IllustriousAegisPower : IndomitablePower
 {
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;
@@ -35,66 +32,49 @@ public sealed class IllustriousAegisPower : IndomitablePower, IBlockRetentionPro
         return Task.CompletedTask;
     }
     
-    public override async Task AfterDamageReceived(
-        PlayerChoiceContext choiceContext,
-        Creature target,
-        DamageResult result,
-        ValueProp props,
-        Creature? dealer,
-        CardModel? cardSource)
+    // 【核心钩子】：当其他能力（特指 ShieldPower）数值改变时被调用
+    public override async Task AfterPowerAmountChanged(PowerModel power, decimal amount, Creature? applier, CardModel? cardSource)
     {
-        var data = GetInternalData<AegisData>();
-        var damageToAbsorb = result.BlockedDamage;
+        // 1. 【完美解耦】：独立监听自身的碎裂事件：如果改变的是自己，且层数降到了 0 及以下，且是负向改变（扣除）
+        if (power == this && Amount <= 0 && amount < 0 && GetInternalData<AegisData>().HealAmount is var healAmt and > 0)
+        {
+            // 此时能力还在身上，尚未被引擎完全摘除，Flash 特效完美触发！
+            Flash();
+            await CreatureCmd.Heal(Owner, healAmt);
+            return;
+        }
         
-        // 【核心同步机制】：消耗由上一个领袖传递过来的“已处理伤害”欠条
-        // 这样即使本实例意外成为新领袖，它也会把已经被老领袖处理过的伤害抹除。
+        // 2. 监听宿主身上 ShieldPower 的损耗
+        if (power.Owner != Owner || power is not ShieldPower || amount >= 0) return;
+        
+        var data = GetInternalData<AegisData>();
+        
+        // 【领袖同步与消耗欠条】：这部分逻辑保留，用于处理同一个受击事件中的多重实例结算
+        var damageReduced = -(int)amount; // Shield 减少的量就是伤害吸收量
+        
         if (data.HandledDamage > 0)
-            damageToAbsorb -= Math.Min(damageToAbsorb, data.HandledDamage);
+            damageReduced -= Math.Min(damageReduced, data.HandledDamage);
         data.HandledDamage = 0;
         
-        // 如果伤害已经被完全抵消、不是正常攻击、或者打的不是自己，则跳过
-        if (target != Owner || damageToAbsorb <= 0 || !props.IsPoweredAttack()) return;
+        if (damageReduced <= 0) return;
+        var totalDamageProcessedByLeader = damageReduced;
         
-        // 领袖模式：为了防止各个实例重复扣除，仅由当前存活的最老实例统筹
-        var allInstances = target.Powers.OfType<IllustriousAegisPower>().ToList();
+        // 领袖模式统筹分配
+        var allInstances = Owner.Powers.OfType<IllustriousAegisPower>().ToList();
         if (allInstances.Count == 0 || allInstances[0] != this) return;
-        
-        // 记录本次领袖将要统筹处理的总伤害，用于通知后方的实例
-        var totalDamageProcessedByLeader = damageToAbsorb;
-        
-        // 依次遍历所有实例进行结算
         foreach (var aegis in allInstances)
         {
-            // 【关键广播】：给后面的小弟塞欠条！告诉它们这个事件的伤害我已经处理了。
             if (aegis != this)
                 aegis.GetInternalData<AegisData>().HandledDamage += totalDamageProcessedByLeader;
-
-            // 注意这里不能用 break，必须用 continue，以确保所有排在后面的实例都能收到欠条！
-            if (damageToAbsorb <= 0) continue; 
-
-            var absorb = Math.Min(aegis.Amount, damageToAbsorb);
-            damageToAbsorb -= absorb;
-            var newAmount = await PowerCmd.ModifyAmount(aegis, -absorb, dealer, cardSource);
-
-            if (newAmount > 0 || aegis.GetInternalData<AegisData>().HealAmount is not (var healAmt and > 0)) continue;
-            aegis.Flash();
-            await CreatureCmd.Heal(Owner, healAmt);
+            
+            if (damageReduced <= 0) continue;
+            
+            var absorb = Math.Min(aegis.Amount, damageReduced);
+            damageReduced -= absorb;
+            
+            // 扣除当前遍历庇护实例的层数，通过引擎广播该实例的 AfterPowerAmountChanged，触发 Flash 和回血
+            await PowerCmd.ModifyAmount(aegis, -absorb, applier, cardSource);
         }
-    }
-    
-    public override bool ShouldClearBlock(Creature creature) => Owner != creature;
-    
-    // IBlockRetentionProvider 接口实现区域
-    public bool ShouldAggregate => true;
-    
-    public int CalculateRetainedBlock(AbstractModel sourceModel, Creature creature)
-    {
-        return Amount;
-    }
-    
-    public void OnRetentionTriggered(AbstractModel sourceModel, Creature creature)
-    {
-        Flash();
     }
     
     // 内部数据类
