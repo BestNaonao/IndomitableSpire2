@@ -1,5 +1,5 @@
-﻿using BaseLib.Abstracts;
-using BaseLib.Utils;
+﻿using BaseLib.Utils;
+using IndomitableSpire2.IndomitableSpire2Code.Cards.Abstracts;
 using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -11,7 +11,7 @@ using MegaCrit.Sts2.Core.Models.CardPools;
 namespace IndomitableSpire2.IndomitableSpire2Code.Cards.Others;
 
 [Pool(typeof(TokenCardPool))]
-public sealed class Refresh() : CustomCardModel(0, CardType.Skill, CardRarity.Token, TargetType.Self)
+public sealed class Refresh() : IndomitableSpire2Card(0, CardType.Skill, CardRarity.Token, TargetType.Self)
 {
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
     

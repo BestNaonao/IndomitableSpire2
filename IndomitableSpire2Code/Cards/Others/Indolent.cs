@@ -1,5 +1,5 @@
-﻿using BaseLib.Abstracts;
-using BaseLib.Utils;
+﻿using BaseLib.Utils;
+using IndomitableSpire2.IndomitableSpire2Code.Cards.Abstracts;
 using IndomitableSpire2.IndomitableSpire2Code.Extensions;
 using IndomitableSpire2.IndomitableSpire2Code.Localization.DynamicVars;
 using IndomitableSpire2.IndomitableSpire2Code.Powers;
@@ -14,7 +14,7 @@ using MegaCrit.Sts2.Core.Models.CardPools;
 namespace IndomitableSpire2.IndomitableSpire2Code.Cards.Others;
 
 [Pool(typeof(StatusCardPool))]
-public sealed class Indolent() : CustomCardModel(1, CardType.Status, CardRarity.Status, TargetType.Self)
+public sealed class Indolent() : IndomitableSpire2Card(1, CardType.Status, CardRarity.Status, TargetType.Self)
 {
     // 状态牌通常不能升级
     public override int MaxUpgradeLevel => 0;

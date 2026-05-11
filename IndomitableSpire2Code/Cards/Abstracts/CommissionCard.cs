@@ -1,5 +1,4 @@
-﻿using BaseLib.Abstracts;
-using BaseLib.Utils;
+﻿using BaseLib.Utils;
 using Godot;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -18,7 +17,7 @@ namespace IndomitableSpire2.IndomitableSpire2Code.Cards.Abstracts;
 
 [Pool(typeof(QuestCardPool))]
 public abstract class CommissionCard(TargetType target) 
-    : CustomCardModel(0, CardType.Quest, CardRarity.Quest, target)
+    : IndomitableSpire2Card(0, CardType.Quest, CardRarity.Quest, target)
 {
     private Player? _delegator; // 必须声明后备字段
     
