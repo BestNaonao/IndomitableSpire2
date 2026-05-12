@@ -15,7 +15,7 @@ public sealed class NestingDoll() : TashkentCard(1, CardType.Attack, CardRarity.
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
         new CalculationBaseVar(6m),
-        new ExtraDamageVar(2m),
+        new ExtraDamageVar(4m),
         new CalculatedDamageVar(ValueProp.Move).WithMultiplier((CardModel card, Creature? _) =>
             card.Owner.PlayerCombatState?.ExhaustPile.Cards.Count((CardModel c) => c is NestingDoll) ?? 0)
     ];
@@ -40,6 +40,6 @@ public sealed class NestingDoll() : TashkentCard(1, CardType.Attack, CardRarity.
     protected override void OnUpgrade()
     {
         AddKeyword(CardKeyword.Exhaust);
-        base.DynamicVars.ExtraDamage.UpgradeValueBy(1m);
+        base.DynamicVars.ExtraDamage.UpgradeValueBy(2m);
     }
 }

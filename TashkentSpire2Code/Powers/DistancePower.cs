@@ -38,6 +38,8 @@ public sealed class DistancePower : TashkentPower
             new DynamicVar("Decrease", 0M)
         };
     
+    public int TotalIncreasedAmount { get; private set; } = 0;
+    
     private int MapToDist(int amount) => amount - 10;
     
     public async Task OnDirectionFlipped()
@@ -157,6 +159,11 @@ public sealed class DistancePower : TashkentPower
 
             if (deltaDist != 0)
             {
+                if (deltaDist > 0) 
+                {
+                    TotalIncreasedAmount += deltaDist;
+                }
+                
                 base.DynamicVars[VarKey].BaseValue = newDist;
                 RefreshDerivedVars();
                 

@@ -26,8 +26,7 @@ public sealed class SaturationBombing() : AmmunitionCard(2, CardType.Attack, Car
         
         int shellsLoaded = await GetShellCountcmd.Execute(choiceContext, Owner, (int)CurrentAmmu,this.Keywords.Contains(TashkentKeyword.Barrage));
 
-        await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
-            .WithHitCount(shellsLoaded)
+        await DamageCmd.Attack(DynamicVars.Damage.BaseValue * shellsLoaded)
             .FromCard(this)
             .TargetingAllOpponents(CombatState)
             .WithHitFx("vfx/vfx_attack_slash")

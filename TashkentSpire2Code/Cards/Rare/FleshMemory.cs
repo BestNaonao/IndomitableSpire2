@@ -9,6 +9,7 @@ namespace TashkentSpire2.TashkentSpire2Code.Cards.Rare;
 public sealed class FleshMemory() : TashkentCard(0, CardType.Skill, CardRarity.Rare, TargetType.Self)
 {
     public override bool GainsBlock => true;
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
     
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new BlockVar(4M, ValueProp.Move),
