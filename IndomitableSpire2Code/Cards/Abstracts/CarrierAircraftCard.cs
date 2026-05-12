@@ -113,4 +113,22 @@ public abstract class CarrierAircraftCard(
         DynamicVars.MaxDurability().UpgradeValueBy(UpgradeDurabilityAmount);
         DynamicVars.Durability().UpgradeValueBy(UpgradeDurabilityAmount);
     }
+    
+    /// <summary>
+    /// 恢复指定的耐久值
+    /// </summary>
+    public void Repair(int amount)
+    {
+        if (amount <= 0) return;
+        DynamicVars.Durability().BaseValue = Math.Min(DynamicVars.MaxDurability().BaseValue, DynamicVars.Durability().BaseValue + amount);
+    }
+    
+    /// <summary>
+    /// 彻底修复：恢复至最大耐久
+    /// </summary>
+    public void FullyRepair()
+    {
+        if (DynamicVars.Durability().BaseValue < DynamicVars.MaxDurability().BaseValue)
+            DynamicVars.Durability().BaseValue = DynamicVars.MaxDurability().BaseValue;
+    }
 }
