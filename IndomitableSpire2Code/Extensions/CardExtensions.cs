@@ -39,4 +39,7 @@ public static class CardExtensions
     
     public static bool OutOfDurability(this CardModel card) => 
         card.DynamicVars.Durability().BaseValue <= 0;
+    
+    public static bool IsFullDurability(this CardModel card) => 
+        card.DynamicVars.Durability().BaseValue >= card.DynamicVars.MaxDurability().BaseValue;
 }
