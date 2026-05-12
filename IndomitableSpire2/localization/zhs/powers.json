@@ -54,5 +54,8 @@
   "INDOMITABLESPIRE2-ART_OF_RESTING_POWER.title": "休息的艺术",
   "INDOMITABLESPIRE2-MOTIVATION_BURST_POWER.description": "你每过量获得[blue]{OverflowThreshold}[/blue]点[gold]干劲[/gold]，就获得[blue]1[/blue]点[gold]活力[/gold]。",
   "INDOMITABLESPIRE2-MOTIVATION_BURST_POWER.smartDescription": "你每过量获得[blue]{OverflowThreshold}[/blue]点[gold]干劲[/gold]，就获得[blue]{Amount}[/blue]点[gold]活力[/gold]。",
-  "INDOMITABLESPIRE2-MOTIVATION_BURST_POWER.title": "干劲迸发"
+  "INDOMITABLESPIRE2-MOTIVATION_BURST_POWER.title": "干劲迸发",
+  "INDOMITABLESPIRE2-SCHEDULED_MAINTENANCE_POWER.description": "在你的回合开始时，为[gold]抽牌堆[/gold]或[gold]手牌[/gold]中的随机[gold]舰载机[/gold]牌恢复耐久。",
+  "INDOMITABLESPIRE2-SCHEDULED_MAINTENANCE_POWER.smartDescription": "在你的回合开始时，为[gold]抽牌堆[/gold]或[gold]手牌[/gold]中的随机[gold]舰载机[/gold]牌总计恢复[blue]{Amount}[/blue]点耐久。",
+  "INDOMITABLESPIRE2-SCHEDULED_MAINTENANCE_POWER.title": "定期检修"
 }

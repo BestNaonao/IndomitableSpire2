@@ -54,5 +54,8 @@
   "INDOMITABLESPIRE2-ART_OF_RESTING_POWER.title": "Art of Resting",
   "INDOMITABLESPIRE2-MOTIVATION_BURST_POWER.description": "Every [blue]{OverflowThreshold}[/blue] excess [gold]Motivation[/gold] you gain, gain [blue]1[/blue] [gold]Vigor[/gold].",
   "INDOMITABLESPIRE2-MOTIVATION_BURST_POWER.smartDescription": "Every [blue]{OverflowThreshold}[/blue] excess [gold]Motivation[/gold] you gain, gain [blue]{Amount}[/blue] [gold]Vigor[/gold].",
-  "INDOMITABLESPIRE2-MOTIVATION_BURST_POWER.title": "Motivation Burst"
+  "INDOMITABLESPIRE2-MOTIVATION_BURST_POWER.title": "Motivation Burst",
+  "INDOMITABLESPIRE2-SCHEDULED_MAINTENANCE_POWER.description": "At the start of your turn, restore Durability to random [gold]Carrier Aircraft[/gold] in your [gold]Draw Pile[/gold] or [gold]Hand[/gold].",
+  "INDOMITABLESPIRE2-SCHEDULED_MAINTENANCE_POWER.smartDescription": "At the start of your turn, restore a total of [blue]{Amount}[/blue] Durability to random [gold]Carrier Aircraft[/gold] in your [gold]Draw Pile[/gold] or [gold]Hand[/gold].",
+  "INDOMITABLESPIRE2-SCHEDULED_MAINTENANCE_POWER.title": "Scheduled Maintenance"
 }
