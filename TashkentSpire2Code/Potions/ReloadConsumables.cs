@@ -21,7 +21,7 @@ public sealed class ReloadConsumables : TashkentPotion
      
     protected override IEnumerable<DynamicVar> CanonicalVars => 
     [
-        new LoadDynamicVar(3M)
+        new LoadDynamicVar(6M)
     ];
      
     public override string CustomPackedImagePath => "res://TashkentSpire2/images/potions/mark_potion.png";

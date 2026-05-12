@@ -20,19 +20,26 @@ public sealed class Vodka() : TashkentCard(0, CardType.Skill, CardRarity.Token, 
     
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
     
-    public static async Task<IEnumerable<Vodka>> CreateInHand(Player owner, int amount, CombatState combatState)
+    public static async Task<IEnumerable<Vodka>> CreateInHand(Player owner, int amount, CombatState combatState, bool isUpgraded)
     {
-        IEnumerable<Vodka> vodkas = Create(owner, amount, combatState);
+        IEnumerable<Vodka> vodkas = Create(owner, amount, combatState, isUpgraded);
         await CardPileCmd.AddGeneratedCardsToCombat(vodkas, PileType.Hand, addedByPlayer: true);
         return vodkas;
     }
 
-    public static IEnumerable<Vodka> Create(Player owner, int amount, CombatState combatState)
+    public static IEnumerable<Vodka> Create(Player owner, int amount, CombatState combatState, bool isUpgraded)
     {
         List<Vodka> list = new List<Vodka>();
         for (int i = 0; i < amount; i++)
         {
             list.Add(combatState.CreateCard<Vodka>(owner));
+        }
+        if (isUpgraded)
+        {
+            foreach (var item in list)
+            {
+                CardCmd.Upgrade(item);
+            }
         }
         return list;
     }

@@ -9,7 +9,7 @@ namespace TashkentSpire2.TashkentSpire2Code.Commands;
 
 public static class Loadcmd
 {
-    public static async Task Execute(PlayerChoiceContext choiceContext, CardModel? targetCard, int amount)
+    public static async Task Execute(PlayerChoiceContext? choiceContext, CardModel? targetCard, int amount)
     {
         if (amount <= 0 || targetCard == null) return;
         

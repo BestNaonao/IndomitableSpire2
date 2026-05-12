@@ -27,7 +27,7 @@ public sealed class Reward() : TashkentCard(1, CardType.Attack, CardRarity.Commo
             .WithHitFx("vfx/vfx_attack_slash")
             .Execute(choiceContext);
         
-        await Vodka.CreateInHand(base.Owner, base.DynamicVars.Cards.IntValue, base.CombatState);
+        await Vodka.CreateInHand(base.Owner, base.DynamicVars.Cards.IntValue, base.CombatState, false);
     }
     
     protected override void OnUpgrade()

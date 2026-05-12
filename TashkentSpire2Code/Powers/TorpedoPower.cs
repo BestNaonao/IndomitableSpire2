@@ -9,6 +9,7 @@ using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.ValueProps;
 using TashkentSpire2.TashkentSpire2Code.Cards.Uncommon;
 using TashkentSpire2.TashkentSpire2Code.Commands;
+using TashkentSpire2.TashkentSpire2Code.Relics;
 
 namespace TashkentSpire2.TashkentSpire2Code.Powers;
 
@@ -41,18 +42,21 @@ public sealed class TorpedoPower : TashkentPower
         int dist = distPower != null ? (int)distPower.Amount : 0;
         dist -= 10;
 
-        if (distPower == null || dist == -1 || dist == 0 || dist == 1)
-            return 3;
-        if (dist == -2 || dist == -3)
-            return 4;
-        if (dist == -4 || dist == -5)
-            return 5;
-        if (dist == 2 || dist == 3)
-            return 2;
-        if (dist == 4 || dist == 5)
-            return 1;
+        int baseTurns = 3;
 
-        return 3;
+        if (dist == -2 || dist == -3) baseTurns = 4;
+        else if (dist == -4 || dist == -5) baseTurns = 5;
+        else if (dist == 2 || dist == 3) baseTurns = 2;
+        else if (dist == 4 || dist == 5) baseTurns = 1;
+        else if (distPower == null || dist == -1 || dist == 0 || dist == 1) baseTurns = 3;
+
+        int godPowerBonus = (int)(owner.GetPower<TorpedoGodPower>()?.Amount ?? 0m);
+
+        int relicBonus = owner.Player?.Relics.Count(r => r is Thruster) ?? 0;
+
+        int finalTurns = Math.Max(1, baseTurns - godPowerBonus - relicBonus);
+
+        return finalTurns;
     }
     
     public void ReduceTurnCount(int amount)

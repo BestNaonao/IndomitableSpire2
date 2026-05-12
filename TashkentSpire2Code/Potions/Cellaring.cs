@@ -26,6 +26,6 @@ public sealed class Cellaring : TashkentPotion
     protected override async Task OnUse(PlayerChoiceContext choiceContext, Creature? target)
     {
         ArgumentNullException.ThrowIfNull(base.Owner.Creature.CombatState);
-        await Vodka.CreateInHand(base.Owner, base.DynamicVars.Cards.IntValue, base.Owner.Creature.CombatState);
+        await Vodka.CreateInHand(base.Owner, base.DynamicVars.Cards.IntValue, base.Owner.Creature.CombatState, true);
     }
 }

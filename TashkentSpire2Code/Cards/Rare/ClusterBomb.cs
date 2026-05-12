@@ -9,7 +9,7 @@ namespace TashkentSpire2.TashkentSpire2Code.Cards.Rare;
 
 public sealed class ClusterBomb() : TashkentCard(1, CardType.Attack, CardRarity.Rare, TargetType.AnyEnemy)
 {
-    private decimal _extraDamageFromPlays;
+    private decimal _extraDamageFromExhaust;
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new DamageVar(9M, ValueProp.Move)
@@ -17,13 +17,13 @@ public sealed class ClusterBomb() : TashkentCard(1, CardType.Attack, CardRarity.
 
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
     
-    private decimal ExtraDamageFromPlays
+    private decimal ExtraDamageFromExhaust
     {
-        get => _extraDamageFromPlays;
+        get => _extraDamageFromExhaust;
         set
         {
             AssertMutable();
-            _extraDamageFromPlays = value;
+            _extraDamageFromExhaust = value;
         }
     }
 
@@ -31,38 +31,38 @@ public sealed class ClusterBomb() : TashkentCard(1, CardType.Attack, CardRarity.
     {
         ArgumentNullException.ThrowIfNull(cardPlay.Target, nameof(cardPlay.Target));
 
-        decimal currentDamage = DynamicVars.Damage.BaseValue;
-
-        await DamageCmd.Attack(currentDamage)
+        await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
             .FromCard(this)
             .Targeting(cardPlay.Target)
             .WithHitFx("vfx/vfx_attack_slash")
             .Execute(choiceContext);
-
-        decimal newDamage = currentDamage * 2;
-        ExtraDamageFromPlays += (newDamage - currentDamage);
-
-        DynamicVars.Damage.BaseValue = newDamage;
-    }
-
-    protected override void AfterDowngraded()
-    {
-        base.AfterDowngraded();
-        DynamicVars.Damage.BaseValue += ExtraDamageFromPlays;
     }
 
     public override async Task AfterCardExhausted(PlayerChoiceContext choiceContext, CardModel card, bool causedByEthereal)
     {
         if (card == this)
         {
-            CardModel cardclone = CreateClone();
-            await CardPileCmd.AddGeneratedCardToCombat(cardclone, PileType.Discard, addedByPlayer: true);
+            decimal currentBase = DynamicVars.Damage.BaseValue;
+            decimal doubleBonus = currentBase;
+
+            DynamicVars.Damage.BaseValue += doubleBonus;
+            ExtraDamageFromExhaust += doubleBonus;
+
+            CardModel cardClone = CreateClone();
+            await CardPileCmd.AddGeneratedCardToCombat(cardClone, PileType.Discard, addedByPlayer: true);
         }
+    }
+
+    protected override void AfterDowngraded()
+    {
+        base.AfterDowngraded();
+        DynamicVars.Damage.BaseValue -= ExtraDamageFromExhaust;
+        ExtraDamageFromExhaust = 0;
     }
 
     protected override void OnUpgrade()
     {
         DynamicVars.Damage.UpgradeValueBy(3M);
-        AddKeyword(CardKeyword.Eternal);
+        AddKeyword(CardKeyword.Ethereal);
     }
 }

@@ -37,15 +37,7 @@ public sealed class SpareSupplies() : AmmunitionCard(0, CardType.Skill, CardRari
         {
             if (shellsLoaded >= DynamicVars["TashkentSpire2-Shot"].BaseValue)
             {
-                List<Vodka> list = Vodka.Create(base.Owner, base.DynamicVars.Cards.IntValue, base.CombatState).ToList();
-                foreach (Vodka item in list)
-                {
-                    if (this.IsUpgraded)
-                    {
-                        CardCmd.Upgrade(item);
-                    }
-                    await CardPileCmd.AddGeneratedCardToCombat(item, PileType.Hand, addedByPlayer: true);
-                }
+                await Vodka.CreateInHand(base.Owner, base.DynamicVars.Cards.IntValue, base.CombatState, base.IsUpgraded);
             }
             
             for (int i = 0; i < shellsLoaded; i++)

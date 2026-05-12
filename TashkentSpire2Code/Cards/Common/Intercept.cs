@@ -7,13 +7,13 @@ using TashkentSpire2.TashkentSpire2Code.Powers;
 
 namespace TashkentSpire2.TashkentSpire2Code.Cards.Common;
 
-public sealed class Intercept() : TashkentCard(1, CardType.Skill, CardRarity.Common, TargetType.Self)
+public sealed class Intercept() : TashkentCard(2, CardType.Skill, CardRarity.Common, TargetType.Self)
 {
     public override bool GainsBlock => true;
     
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new BlockVar(8M, ValueProp.Move),
-        new TorpedoDynamicVar(18M)
+        new BlockVar(13M, ValueProp.Move),
+        new TorpedoDynamicVar(24M)
     ];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
@@ -25,7 +25,7 @@ public sealed class Intercept() : TashkentCard(1, CardType.Skill, CardRarity.Com
     
     protected override void OnUpgrade()
     {
-        DynamicVars.Block.UpgradeValueBy(2M);
+        DynamicVars.Block.UpgradeValueBy(3M);
         DynamicVars["TashkentSpire2-Torpedo"].UpgradeValueBy(6M);
     }
 }

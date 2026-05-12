@@ -10,21 +10,17 @@ public sealed class TorpedoGod() : TashkentCard(2, CardType.Power, CardRarity.Ra
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new TorpedoDynamicVar(18M),
+        new PowerVar<TorpedoGodPower>(1M),
         new RepeatVar(2)
     ];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
-        await PowerCmd.Apply<TorpedoGodPower>(base.Owner.Creature, 1m, base.Owner.Creature, this);
+        await PowerCmd.Apply<TorpedoGodPower>(base.Owner.Creature, DynamicVars["TorpedoGodPower"].BaseValue, base.Owner.Creature, this);
         for (int i = 0; i < DynamicVars.Repeat.IntValue; i++)
         {
             await PowerCmd.Apply<TorpedoPower>(base.Owner.Creature, DynamicVars["TashkentSpire2-Torpedo"].BaseValue, base.Owner.Creature, this);
         }
-    }
-
-    protected override void OnUpgrade()
-    {
-        DynamicVars.Repeat.UpgradeValueBy(1M);
     }
 }

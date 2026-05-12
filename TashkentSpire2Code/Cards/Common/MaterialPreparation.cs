@@ -25,20 +25,7 @@ public sealed class MaterialPreparation() : TashkentCard(1, CardType.Skill, Card
         
         await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
         await CreatureCmd.GainBlock(base.Owner.Creature, base.DynamicVars.Block, cardPlay);
-        List<Vodka> list = Vodka.Create(base.Owner, base.DynamicVars.Cards.IntValue, base.CombatState).ToList();
-        
-        if (base.IsUpgraded)
-        {
-            foreach (Vodka item in list)
-            {
-                CardCmd.Upgrade(item);
-            }
-        }
-        
-        foreach (Vodka item in list)
-        {
-            await CardPileCmd.AddGeneratedCardToCombat(item, PileType.Hand, addedByPlayer: true);
-        }
+        await Vodka.CreateInHand(base.Owner, base.DynamicVars.Cards.IntValue, base.CombatState, base.IsUpgraded);
     }
     
     protected override void OnUpgrade()
