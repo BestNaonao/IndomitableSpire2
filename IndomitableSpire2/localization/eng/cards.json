@@ -61,6 +61,11 @@
   "INDOMITABLESPIRE2-DECK_TIE_DOWN.title": "Deck Tie-down",
   "INDOMITABLESPIRE2-DECK_TIE_DOWN.description": "[gold]Retain[/gold] up to {Cards:diff()} {Cards:plural:card|cards} this turn.",
   "INDOMITABLESPIRE2-DECK_TIE_DOWN.selectionScreenPrompt": "Choose {Cards:plural:a card|up to {} cards} to Retain.",
+  "INDOMITABLESPIRE2-HANGAR_REPAIR.title": "Hangar Repair",
+  "INDOMITABLESPIRE2-HANGAR_REPAIR.description": "Choose a damaged [gold]Carrier Aircraft[/gold] from your [gold]Draw Pile[/gold] and restore [blue]ALL[/blue] of its Durability.",
+  "INDOMITABLESPIRE2-HANGAR_REPAIR.selectionScreenPrompt": "Select a Carrier Aircraft to repair.",
+  "INDOMITABLESPIRE2-SCHEDULED_MAINTENANCE.title": "Scheduled Maintenance",
+  "INDOMITABLESPIRE2-SCHEDULED_MAINTENANCE.description": "At the start of your turn, restore a total of {ScheduledMaintenancePower:diff()} Durability to random [gold]Carrier Aircraft[/gold] in your [gold]Draw Pile[/gold] or [gold]Hand[/gold].",
   
   "INDOMITABLESPIRE2-SCORCHING_FLAME_RAIN.title": "Scorching Flame Rain",
   "INDOMITABLESPIRE2-SCORCHING_FLAME_RAIN.description": "Can only be played if you have at least [blue]{MotivationRequire:diff()}[/blue] [gold]Motivation[/gold].\nDeal {Damage:diff()} damage to ALL enemies.\nApply [blue]{OnFirePower:diff()}[/blue] [gold]On Fire[/gold] to ALL enemies.",

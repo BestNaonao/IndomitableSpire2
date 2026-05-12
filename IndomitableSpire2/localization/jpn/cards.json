@@ -61,6 +61,11 @@
   "INDOMITABLESPIRE2-DECK_TIE_DOWN.title": "甲板係留",
   "INDOMITABLESPIRE2-DECK_TIE_DOWN.description": "このターン、[gold]手札[/gold]を{Cards:diff()}枚まで[gold]保留[/gold]する。",
   "INDOMITABLESPIRE2-DECK_TIE_DOWN.selectionScreenPrompt": "[gold]保留[/gold]するカードを{Cards}枚まで選ぶ。",
+  "INDOMITABLESPIRE2-HANGAR_REPAIR.title": "格納庫整備",
+  "INDOMITABLESPIRE2-HANGAR_REPAIR.description": "[gold]山札[/gold]から耐久が減っている[gold]艦載機[/gold]を1枚選び、その耐久を[blue]全回復[/blue]させる。",
+  "INDOMITABLESPIRE2-HANGAR_REPAIR.selectionScreenPrompt": "整備する艦載機を1枚選ぶ。",
+  "INDOMITABLESPIRE2-SCHEDULED_MAINTENANCE.title": "定期点検",
+  "INDOMITABLESPIRE2-SCHEDULED_MAINTENANCE.description": "ターン開始時、[gold]山札[/gold]または[gold]手札[/gold]にあるランダムな[gold]艦載機[/gold]の耐久を合计で{ScheduledMaintenancePower:diff()}回復する。",
   
   "INDOMITABLESPIRE2-SCORCHING_FLAME_RAIN.title": "灼天の焔雨",
   "INDOMITABLESPIRE2-SCORCHING_FLAME_RAIN.description": "[gold]やる気[/gold]が[blue]{MotivationRequire:diff()}[/blue]以上の場合のみプレイできる。\nすべての敵に{Damage:diff()}ダメージを与える。\nすべての敵に[gold]炎上[/gold] [blue]{OnFirePower:diff()}[/blue]を付与する。",
