@@ -12,8 +12,9 @@ namespace IndomitableSpire2.IndomitableSpire2Code.Localization.DynamicVars;
 /// </summary>
 public class DurabilityVar : DynamicVar
 {
-    // 记录预览时将要损失的耐久度
+    // 记录预览时将要损失的耐久度和回复的耐久度
     private int _predictedLoss;
+    public int PredictedHeal { get; set; }
     
     public const string DefaultName = "Durability";
     
@@ -61,7 +62,11 @@ public class DurabilityVar : DynamicVar
     /// 正常情况（不在预览状态，或者预测不掉血），只显示当前数字
     /// </summary>
     public override string ToString() => 
-        _predictedLoss > 0 && BaseValue > 0 ? $"({IntValue}-[red]{_predictedLoss}[/red])" : IntValue.ToString();
+        PredictedHeal > 0 
+            ? $"({IntValue}+[green]{PredictedHeal}[/green])" 
+            : _predictedLoss > 0 && BaseValue > 0 
+                ? $"({IntValue}-[red]{_predictedLoss}[/red])" 
+                : IntValue.ToString();
 }
 
 public class MaxDurabilityVar : DynamicVar
