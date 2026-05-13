@@ -22,6 +22,8 @@ public static class DynamicVarSetExtensions
     
     public static DynamicVar OnFire(this DynamicVarSet  vars) => vars[nameof(OnFirePower)];
     
+    public static DynamicVar Hypnotized(this DynamicVarSet  vars) => vars[nameof(HypnotizedPower)];
+    
     public static DynamicVar Intercepted(this DynamicVarSet  vars) => vars[nameof(InterceptedPower)];
     
     public static DynamicVar Recon(this DynamicVarSet  vars) => vars[ReconVar.DefaultName];
