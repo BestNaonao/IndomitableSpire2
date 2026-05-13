@@ -1,0 +1,131 @@
+[gd_scene load_steps=8 format=3 uid="uid://d4fi2l8c52sa5"]
+
+[ext_resource type="Script" uid="uid://bvoy7kphc6pfh" path="res://TashkentSpire2Code/Scripts/NPlayerHandTashkent.cs" id="1_hcre3"]
+[ext_resource type="PackedScene" uid="uid://bdy0w265b8okt" path="res://TashkentSpire2/scenes/ui/tashkent_confirm_button.tscn" id="1_sdu68"]
+[ext_resource type="PackedScene" uid="uid://cdkwaetum6grt" path="res://TashkentSpire2/scenes/ui/tashkent_peek_button.tscn" id="2_fhca5"]
+[ext_resource type="FontFile" uid="uid://df5rj1oegsvgx" path="res://TashkentSpire2/fonts/kreon_bold.ttf" id="2_h50ns"]
+[ext_resource type="Script" uid="uid://dtl4d462n3xg6" path="res://TashkentSpire2Code/Scripts/NSelectedHandCardContainerTashkent.cs" id="2_nk3x8"]
+[ext_resource type="Script" uid="uid://5axhiscqlm43" path="res://TashkentSpire2Code/Scripts/MegaRichTextLabelTashkent.cs" id="4_51b7v"]
+[ext_resource type="Texture2D" uid="uid://cnditq0b2sltc" path="res://TashkentSpire2/images/combatui/upgrade_arrow.png" id="5_ep87x"]
+
+[node name="TashkentSelection" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_hcre3")
+
+[node name="SelectModeBackstop" type="ColorRect" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0.5019608)
+
+[node name="CardHolderContainer" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="SelectedHandCardContainer" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_top = -52.0
+offset_bottom = -52.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_nk3x8")
+
+[node name="SelectModeConfirmButton" parent="." instance=ExtResource("1_sdu68")]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -160.0
+offset_top = -354.0
+offset_right = 40.0
+offset_bottom = -244.0
+grow_horizontal = 0
+grow_vertical = 0
+pivot_offset = Vector2(100, 40)
+
+[node name="SelectionHeader" type="RichTextLabel" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 7.0
+offset_top = -342.0
+offset_right = 7.0
+offset_bottom = -292.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("2_h50ns")
+theme_override_font_sizes/normal_font_size = 32
+theme_override_font_sizes/bold_font_size = 32
+theme_override_font_sizes/bold_italics_font_size = 32
+theme_override_font_sizes/italics_font_size = 32
+theme_override_font_sizes/mono_font_size = 32
+bbcode_enabled = true
+text = "[center]What Shall I do?[/center]"
+scroll_active = false
+script = ExtResource("4_51b7v")
+
+[node name="PeekButton" parent="." instance=ExtResource("2_fhca5")]
+unique_name_in_owner = true
+layout_mode = 1
+offset_left = -860.0
+offset_top = -64.0
+offset_right = -732.0
+offset_bottom = 64.0
+
+[node name="LeftArrow" type="Control" parent="."]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_left = 720.0
+offset_top = 488.0
+offset_right = 720.0
+offset_bottom = 488.0
+
+[node name="TextureRect" type="TextureRect" parent="LeftArrow"]
+layout_mode = 0
+offset_right = 65.0
+offset_bottom = 65.0
+texture = ExtResource("5_ep87x")
+flip_h = true
+
+[node name="RightArrow" type="Control" parent="."]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_left = 1135.0
+offset_top = 488.0
+offset_right = 1135.0
+offset_bottom = 488.0
+
+[node name="TextureRect" type="TextureRect" parent="RightArrow"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("5_ep87x")
