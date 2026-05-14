@@ -1,0 +1,7 @@
+﻿{
+  "INDOMITABLESPIRE2-HIGH_EXPLOSIVE_ENCHANTMENT.title": "High-Explosive",
+  "INDOMITABLESPIRE2-HIGH_EXPLOSIVE_ENCHANTMENT.description": "This card additionally apply [blue]{Amount}[/blue] [gold]On Fire[/gold].",
+  "INDOMITABLESPIRE2-HIGH_EXPLOSIVE_ENCHANTMENT.extraCardText": "Apply [blue]{Amount}[/blue] [gold]On Fire[/gold]{TargetType:choose(AllEnemies): to ALL enemies|}.",
+  "INDOMITABLESPIRE2-ARMOR_PIERCING_ENCHANTMENT.title": "Armor-Piercing",
+  "INDOMITABLESPIRE2-ARMOR_PIERCING_ENCHANTMENT.description": "This card's damage is doubled against enemies with [gold]Block[/gold]."
+}

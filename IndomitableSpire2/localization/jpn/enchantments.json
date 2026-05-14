@@ -1,0 +1,7 @@
+﻿{
+  "INDOMITABLESPIRE2-HIGH_EXPLOSIVE_ENCHANTMENT.title": "榴弾",
+  "INDOMITABLESPIRE2-HIGH_EXPLOSIVE_ENCHANTMENT.description": "このカードは追加で[gold]炎上[/gold][blue]{Amount}[/blue]を付与する。",
+  "INDOMITABLESPIRE2-HIGH_EXPLOSIVE_ENCHANTMENT.extraCardText": "{TargetType:choose(AllEnemies): すべての敵に|}[gold]炎上[/gold][blue]{Amount}[/blue]を付与する。",
+  "INDOMITABLESPIRE2-ARMOR_PIERCING_ENCHANTMENT.title": "徹甲",
+  "INDOMITABLESPIRE2-ARMOR_PIERCING_ENCHANTMENT.description": "[gold]ブロック[/gold]を持つ敵を攻撃する時、ダメージが2倍になる。"
+}

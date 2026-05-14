@@ -1,0 +1,7 @@
+﻿{
+  "INDOMITABLESPIRE2-HIGH_EXPLOSIVE_ENCHANTMENT.title": "高爆",
+  "INDOMITABLESPIRE2-HIGH_EXPLOSIVE_ENCHANTMENT.description": "这张牌额外造成[blue]{Amount}[/blue]层[gold]起火[/gold]。",
+  "INDOMITABLESPIRE2-HIGH_EXPLOSIVE_ENCHANTMENT.extraCardText": "{TargetType:choose(AllEnemies):对所有敌人|}造成[blue]{Amount}[/blue]层[gold]起火[/gold]。",
+  "INDOMITABLESPIRE2-ARMOR_PIERCING_ENCHANTMENT.title": "穿甲",
+  "INDOMITABLESPIRE2-ARMOR_PIERCING_ENCHANTMENT.description": "这张牌攻击带有[gold]格挡[/gold]的敌人时，伤害翻倍。"
+}
