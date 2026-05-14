@@ -32,4 +32,7 @@ public static class StringExtensions
     
     public static string CharacterUiPath(this string path) => 
         Path.Join(MainFile.ModId, "images", "charui", path);
+    
+    public static string EnchantmentImagePath(this string path) => 
+        Path.Join(MainFile.ModId, "images", "enchantments", path);
 }
