@@ -28,8 +28,8 @@ public sealed class SeaHornetBomber() : CarrierAircraftCard(2, CardType.Attack, 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
         ..base.CanonicalVars,
-        new DamageVar(6M, ValueProp.Move),
-        new RepeatVar(4),
+        new DamageVar(8M, ValueProp.Move),
+        new RepeatVar(2),
         new CustomPowerVar<OnFirePower>(3M)
     ];
     
@@ -57,7 +57,7 @@ public sealed class SeaHornetBomber() : CarrierAircraftCard(2, CardType.Attack, 
     
     protected override void OnUpgrade()
     {
-        DynamicVars.Damage.UpgradeValueBy(2M);
+        DynamicVars.Damage.UpgradeValueBy(3M);
         DynamicVars.OnFire().UpgradeValueBy(1M);
         UpgradeDurability();
     }
