@@ -16,13 +16,13 @@ public sealed class PoseidonFormPower : TashkentPower
     private int _usedThisTurn = 0;
     private bool _hasTriggered = false;
 
+    private Type? _typeToIgnore;
+
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;
     
-    public override string CustomBigIconPath => 
-        "res://TashkentSpire2/images/powers/big/poseidon_form_power.png";
-    public override string CustomPackedIconPath => 
-        "res://TashkentSpire2/images/powers/packed/poseidon_form_power.png";
+    public override string CustomBigIconPath => "res://TashkentSpire2/images/powers/big/poseidon_form_power.png";
+    public override string CustomPackedIconPath => "res://TashkentSpire2/images/powers/packed/poseidon_form_power.png";
     
     public override int DisplayAmount => (int)this.Amount - _usedThisTurn;
     
@@ -34,6 +34,7 @@ public sealed class PoseidonFormPower : TashkentPower
         {
             _triggeringCard = cardPlay.Card;
             _hasTriggered = false;
+            _typeToIgnore = null;
         }
         else
         {
@@ -44,13 +45,26 @@ public sealed class PoseidonFormPower : TashkentPower
 
     public override decimal ModifyPowerAmountGiven(PowerModel power, Creature giver, decimal amount, Creature? target, CardModel? cardSource)
     {
-        if (DisplayAmount > 0 && amount > 0 && _triggeringCard != null && 
-            cardSource == _triggeringCard && power.GetTypeForAmount(amount) == PowerType.Buff)
+        if (DisplayAmount > 0 && amount > 0 && _triggeringCard != null && cardSource == _triggeringCard)
         {
-            if (power.StackType == PowerStackType.Single) return amount;
+            if (_typeToIgnore != null && power.GetType() == _typeToIgnore)
+            {
+                _typeToIgnore = null;
+                return amount;
+            }
 
-            _hasTriggered = true; 
-            return amount * 2m;
+            if (power.GetTypeForAmount(amount) == PowerType.Buff)
+            {
+                if (power.StackType == PowerStackType.Single) return amount;
+
+                if (power is ITemporaryPower tempPower)
+                {
+                    _typeToIgnore = tempPower.InternallyAppliedPower?.GetType();
+                }
+
+                _hasTriggered = true; 
+                return amount * 2m;
+            }
         }
         return amount;
     }
@@ -63,12 +77,12 @@ public sealed class PoseidonFormPower : TashkentPower
             {
                 Flash();
                 _usedThisTurn++;
-
                 InvokeDisplayAmountChanged();
             }
 
             _triggeringCard = null;
             _hasTriggered = false;
+            _typeToIgnore = null;
         }
         await base.AfterCardPlayed(context, cardPlay);
     }
@@ -78,6 +92,7 @@ public sealed class PoseidonFormPower : TashkentPower
         _triggeringCard = null;
         _hasTriggered = false;
         _usedThisTurn = 0;
+        _typeToIgnore = null;
         InvokeDisplayAmountChanged();
         return Task.CompletedTask;
     }

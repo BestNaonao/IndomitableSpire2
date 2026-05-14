@@ -12,11 +12,11 @@ public sealed class Fuel : TashkentRelic
     public override RelicRarity Rarity => RelicRarity.Rare;
     
     protected override string BigIconPath => 
-        "res://TashkentSpire2/images/relics/big/EngineBoost.png";
+        "res://TashkentSpire2/images/relics/big/Fuel.png";
     public override string PackedIconPath => 
-        "res://TashkentSpire2/images/relics/packed/EngineBoost.png";
+        "res://TashkentSpire2/images/relics/packed/Fuel.png";
     protected override string PackedIconOutlinePath => 
-        "res://TashkentSpire2/images/relics/outline/EngineBoost.png";
+        "res://TashkentSpire2/images/relics/outline/Fuel.png";
     
     protected override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<VigorPower>(2M)];
 

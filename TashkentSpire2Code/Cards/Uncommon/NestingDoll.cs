@@ -40,6 +40,5 @@ public sealed class NestingDoll() : TashkentCard(1, CardType.Attack, CardRarity.
     protected override void OnUpgrade()
     {
         AddKeyword(CardKeyword.Exhaust);
-        base.DynamicVars.ExtraDamage.UpgradeValueBy(2m);
     }
 }

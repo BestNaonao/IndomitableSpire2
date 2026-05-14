@@ -13,9 +13,9 @@ public sealed class MarkPreTurnPower : TashkentPower
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<MarkPower>()];
     
     public override string CustomBigIconPath => 
-        "res://TashkentSpire2/images/powers/big/mark_power.png";
+        "res://TashkentSpire2/images/powers/big/markpreturn_power.png";
     public override string CustomPackedIconPath => 
-        "res://TashkentSpire2/images/powers/packed/mark_power.png";
+        "res://TashkentSpire2/images/powers/packed/markpreturn_power.png";
     
     public override async Task AfterSideTurnStart(CombatSide side, CombatState combatState)
     {

@@ -22,10 +22,10 @@ public sealed class TargetShipPower : TashkentPower
     public override int DisplayAmount => (int)base.DynamicVars[StoredDamageKey].BaseValue;
 
     public override string CustomBigIconPath =>
-        "res://TashkentSpire2/images/powers/big/mark_power.png";
+        "res://TashkentSpire2/images/powers/big/targetship_power.png";
 
     public override string CustomPackedIconPath =>
-        "res://TashkentSpire2/images/powers/packed/mark_power.png";
+        "res://TashkentSpire2/images/powers/packed/targetship_power.png";
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new DynamicVar(StoredDamageKey, 0m)

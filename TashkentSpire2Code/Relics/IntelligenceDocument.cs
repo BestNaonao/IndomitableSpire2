@@ -14,11 +14,11 @@ public class IntelligenceDocument : TashkentRelic
     public override RelicRarity Rarity => RelicRarity.Uncommon;
     
     protected override string BigIconPath => 
-        "res://TashkentSpire2/images/relics/big/EjectionStart.png";
+        "res://TashkentSpire2/images/relics/big/IntelligenceDocument.png";
     public override string PackedIconPath => 
-        "res://TashkentSpire2/images/relics/packed/EjectionStart.png";
+        "res://TashkentSpire2/images/relics/packed/IntelligenceDocument.png";
     protected override string PackedIconOutlinePath => 
-        "res://TashkentSpire2/images/relics/outline/EjectionStart.png";
+        "res://TashkentSpire2/images/relics/outline/IntelligenceDocument.png";
     
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<MarkPower>()];
 

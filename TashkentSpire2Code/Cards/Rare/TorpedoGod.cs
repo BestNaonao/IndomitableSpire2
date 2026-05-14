@@ -23,4 +23,6 @@ public sealed class TorpedoGod() : TashkentCard(2, CardType.Power, CardRarity.Ra
             await PowerCmd.Apply<TorpedoPower>(base.Owner.Creature, DynamicVars["TashkentSpire2-Torpedo"].BaseValue, base.Owner.Creature, this);
         }
     }
+    
+    protected override void OnUpgrade() => DynamicVars.Repeat.UpgradeValueBy(1M);
 }
