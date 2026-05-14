@@ -7,7 +7,7 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 
 namespace IndomitableSpire2.IndomitableSpire2Code.Cards.Commons;
 
-public sealed class HangarRepair() : IndomitableCard(1, CardType.Skill, CardRarity.Common, TargetType.Self)
+public sealed class HangarRepair() : IndomitableCard(0, CardType.Skill, CardRarity.Common, TargetType.Self)
 {
     // 提供消耗关键字提示
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
