@@ -67,6 +67,13 @@
   "INDOMITABLESPIRE2-SCHEDULED_MAINTENANCE.title": "Scheduled Maintenance",
   "INDOMITABLESPIRE2-SCHEDULED_MAINTENANCE.description": "At the start of your turn, restore a total of {ScheduledMaintenancePower:diff()} Durability to random [gold]Carrier Aircraft[/gold] in your [gold]Draw Pile[/gold] or [gold]Hand[/gold].",
   
+  "INDOMITABLESPIRE2-INCENDIARY_EXPERT.title": "Incendiary Expert",
+  "INDOMITABLESPIRE2-INCENDIARY_EXPERT.description": "Choose [blue]{Cards}[/blue] {Cards:plural:card|cards} in your [gold]Hand[/gold] or [gold]Draw Pile[/gold]. [gold]Enchant[/gold] {Cards:plural:it|them} with [purple]High-Explosive[/purple] [blue]{HighExplosiveAmount:diff()}[/blue].",
+  "INDOMITABLESPIRE2-INCENDIARY_EXPERT.selectionScreenPrompt": "Choose {Cards:plural:a card|{} cards} to Enchant.",
+  "INDOMITABLESPIRE2-ENHANCED_AP_AMMO.title": "Enhanced AP Ammo",
+  "INDOMITABLESPIRE2-ENHANCED_AP_AMMO.description": "Choose [blue]{Cards:diff()}[/blue] {Cards:plural:card|cards} in your [gold]Hand[/gold] or [gold]Draw Pile[/gold]. [gold]Enchant[/gold] {Cards:plural:it|them} with [purple]Armor-Piercing[/purple].",
+  "INDOMITABLESPIRE2-ENHANCED_AP_AMMO.selectionScreenPrompt": "Choose {Cards:plural:a card|{} cards} to Enchant.",
+  
   "INDOMITABLESPIRE2-SCORCHING_FLAME_RAIN.title": "Scorching Flame Rain",
   "INDOMITABLESPIRE2-SCORCHING_FLAME_RAIN.description": "Can only be played if you have at least [blue]{MotivationRequire:diff()}[/blue] [gold]Motivation[/gold].\nDeal {Damage:diff()} damage to ALL enemies.\nApply [blue]{OnFirePower:diff()}[/blue] [gold]On Fire[/gold] to ALL enemies.",
   
