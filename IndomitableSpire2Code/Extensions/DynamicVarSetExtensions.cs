@@ -1,6 +1,7 @@
 ﻿using IndomitableSpire2.IndomitableSpire2Code.Localization.DynamicVars;
 using IndomitableSpire2.IndomitableSpire2Code.Powers;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using MegaCrit.Sts2.Core.Models.Powers;
 
 namespace IndomitableSpire2.IndomitableSpire2Code.Extensions;
 
@@ -25,6 +26,8 @@ public static class DynamicVarSetExtensions
     public static DynamicVar Hypnotized(this DynamicVarSet  vars) => vars[nameof(HypnotizedPower)];
     
     public static DynamicVar Intercepted(this DynamicVarSet  vars) => vars[nameof(InterceptedPower)];
+    
+    public static DynamicVar Slow(this DynamicVarSet  vars) => vars[nameof(SlowPower)];
     
     public static DynamicVar Recon(this DynamicVarSet  vars) => vars[ReconVar.DefaultName];
 }
