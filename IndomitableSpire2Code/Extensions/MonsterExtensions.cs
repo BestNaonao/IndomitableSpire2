@@ -47,10 +47,20 @@ public static class MonsterExtensions
     /// <summary>
     /// 判断怪物当前回合是否意图逃跑。
     /// </summary>
-    public static bool IntendsToEscape(this MonsterModel monster)
+    public static bool IntendsToEscape(this MonsterModel monster) => monster.IntendsTo(IntentType.Escape);
+
+    /// <summary>
+    /// 判断怪物当前回合是否意图睡眠。
+    /// </summary>
+    public static bool IntendsToSleep(this MonsterModel monster) => monster.IntendsTo(IntentType.Sleep);
+    
+    /// <summary>
+    /// 判断怪物当前回合是否包含某类意图。
+    /// </summary>
+    public static bool IntendsTo(this MonsterModel monster, IntentType type)
     {
-        // 确保怪物存活且拥有下一步行动，然后检查其意图列表中是否包含 Escape
+        // 确保怪物存活且拥有下一步行动，然后检查其意图列表中是否包含目标意图类型
         return monster.Creature.IsAlive && 
-               monster.NextMove.Intents.Any(intent => intent.IntentType == IntentType.Escape);
+               monster.NextMove.Intents.Any(intent => intent.IntentType == type);
     }
 }
