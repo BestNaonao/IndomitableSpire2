@@ -27,7 +27,7 @@ public sealed class Swordfish818Squadron() : CarrierAircraftCard(2, CardType.Att
         ..base.CanonicalVars,
         new DamageVar(11M, ValueProp.Move),
         new CustomPowerVar<FloodingPower>(3M),
-        new PowerVar<SlowPower>(1M) // 用于瘫痪敌方攻势的缓慢变量，层数设为 1
+        new CustomPowerVar<SlowPower>(1M) // 用于瘫痪敌方攻势的缓慢变量，层数设为 1
     ];
     
     protected override async Task<IEnumerable<DamageResult>?> OnAircraftPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
@@ -53,7 +53,7 @@ public sealed class Swordfish818Squadron() : CarrierAircraftCard(2, CardType.Att
             {
                 await PowerCmd.Apply<SlowPower>(
                     target: cardPlay.Target,
-                    amount: DynamicVars["SlowPower"].BaseValue,
+                    amount: DynamicVars.Slow().BaseValue,
                     applier: Owner.Creature,
                     cardSource: this
                 );

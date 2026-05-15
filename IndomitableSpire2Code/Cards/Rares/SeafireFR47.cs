@@ -30,7 +30,7 @@ public sealed class SeafireFr47() : CarrierAircraftCard(2, CardType.Attack, Card
         ..base.CanonicalVars,
         new DamageVar(6M, ValueProp.Move),
         new RepeatVar(2), // 致敬共轴反转螺旋桨
-        new PowerVar<VulnerablePower>(2M),
+        new CustomPowerVar<VulnerablePower>(2M),
         new ReconVar(3M) // 搭载侦察变量
     ];
     
@@ -47,7 +47,7 @@ public sealed class SeafireFr47() : CarrierAircraftCard(2, CardType.Attack, Card
         if (cardPlay.Target is { IsAlive: true })
             await PowerCmd.Apply<VulnerablePower>(
                 target: cardPlay.Target,
-                amount: DynamicVars["VulnerablePower"].BaseValue,
+                amount: DynamicVars.Vulnerable.BaseValue,
                 applier: Owner.Creature,
                 cardSource: this
             );
