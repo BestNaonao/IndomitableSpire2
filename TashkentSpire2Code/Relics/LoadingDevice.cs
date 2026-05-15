@@ -12,11 +12,11 @@ public sealed class LoadingDevice : TashkentRelic
     public override RelicRarity Rarity => RelicRarity.Shop;
     
     protected override string BigIconPath => 
-        "res://TashkentSpire2/images/relics/big/EjectionStart.png";
+        "res://TashkentSpire2/images/relics/big/LoadingDevice.png";
     public override string PackedIconPath => 
-        "res://TashkentSpire2/images/relics/packed/EjectionStart.png";
+        "res://TashkentSpire2/images/relics/packed/LoadingDevice.png";
     protected override string PackedIconOutlinePath => 
-        "res://TashkentSpire2/images/relics/outline/EjectionStart.png";
+        "res://TashkentSpire2/images/relics/outline/LoadingDevice.png";
     
     public override bool TryModifyRestSiteOptions(Player player, ICollection<RestSiteOption> options)
     {

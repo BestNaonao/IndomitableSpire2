@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://blbarbrhmeam5"
-path="res://.godot/imported/Layer4.png-8af4280adcc982a6d5b9a1d7a8a4ce19.ctex"
+uid="uid://cqp3cgr3k8grd"
+path="res://.godot/imported/Scope.png-97138b09da3dd5e7579b7c31285ac5b9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://TashkentSpire2/images/combatui/energy_counter/Layer4.png"
-dest_files=["res://.godot/imported/Layer4.png-8af4280adcc982a6d5b9a1d7a8a4ce19.ctex"]
+source_file="res://TashkentSpire2/images/relics/outline/Scope.png"
+dest_files=["res://.godot/imported/Scope.png-97138b09da3dd5e7579b7c31285ac5b9.ctex"]
 
 [params]
 

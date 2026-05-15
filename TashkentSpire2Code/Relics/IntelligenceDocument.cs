@@ -23,7 +23,7 @@ public class IntelligenceDocument : TashkentRelic
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<MarkPower>()];
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new PowerVar<MarkPower>(4m)
+        new MarkDynamicVar(4M)
     ];
 
     public override async Task BeforeSideTurnStart(PlayerChoiceContext choiceContext, CombatSide side, CombatState combatState)

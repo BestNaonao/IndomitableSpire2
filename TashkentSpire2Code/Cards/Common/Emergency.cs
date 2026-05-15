@@ -12,8 +12,8 @@ namespace TashkentSpire2.TashkentSpire2Code.Cards.Common;
 public sealed class Emergency() : TashkentCard(1, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new DamageVar(8M, ValueProp.Move),
-        new MarkDynamicVar(2M)
+        new DamageVar(7M, ValueProp.Move),
+        new MarkDynamicVar(3M)
     ];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)

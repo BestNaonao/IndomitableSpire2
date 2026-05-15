@@ -18,7 +18,7 @@ public sealed class UltimateWeapon() : AmmunitionCard(3, CardType.Attack, CardRa
     
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new AmmunitionDynamicVar(6M),
-        new LoadDynamicVar(6M),
+        new LoadDynamicVar(4M),
         new AmmuMaxDynamicVar(99M),
         new CalculationBaseVar(0M),
         new ExtraDamageVar(2M),

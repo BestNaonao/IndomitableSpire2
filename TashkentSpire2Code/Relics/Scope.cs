@@ -12,16 +12,16 @@ public sealed class Scope : TashkentRelic
     public override RelicRarity Rarity => RelicRarity.Common;
     
     protected override string BigIconPath => 
-        "res://TashkentSpire2/images/relics/big/EjectionStart.png";
+        "res://TashkentSpire2/images/relics/big/Scope.png";
     public override string PackedIconPath => 
-        "res://TashkentSpire2/images/relics/packed/EjectionStart.png";
+        "res://TashkentSpire2/images/relics/packed/Scope.png";
     protected override string PackedIconOutlinePath => 
-        "res://TashkentSpire2/images/relics/outline/EjectionStart.png";
+        "res://TashkentSpire2/images/relics/outline/Scope.png";
     
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<MarkPower>()];
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new PowerVar<MarkPower>(1m)
+        new MarkDynamicVar(1M)
     ];
 
     public override decimal ModifyPowerAmountGiven(PowerModel power, Creature giver, decimal amount, Creature? target, CardModel? cardSource)

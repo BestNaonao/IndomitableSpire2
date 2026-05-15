@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cqgvm8pw3eio8"
-path="res://.godot/imported/Layer1.png-a234ac4f541ecb5a1f3125e145c085ee.ctex"
+uid="uid://dfm16q8iqoowb"
+path="res://.godot/imported/LoadingDevice.png-ff6107f9a45a7e0a446095808582ba56.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://TashkentSpire2/images/combatui/energy_counter/Layer1.png"
-dest_files=["res://.godot/imported/Layer1.png-a234ac4f541ecb5a1f3125e145c085ee.ctex"]
+source_file="res://TashkentSpire2/images/relics/outline/LoadingDevice.png"
+dest_files=["res://.godot/imported/LoadingDevice.png-ff6107f9a45a7e0a446095808582ba56.ctex"]
 
 [params]
 

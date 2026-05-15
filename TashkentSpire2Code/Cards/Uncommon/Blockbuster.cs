@@ -25,6 +25,6 @@ public sealed class Blockbuster() : TashkentCard(1, CardType.Power, CardRarity.U
 
     protected override void OnUpgrade()
     {
-        base.DynamicVars["BlockbusterPower"].UpgradeValueBy(20M);
+        base.DynamicVars["BlockbusterPower"].UpgradeValueBy(10M);
     }
 }

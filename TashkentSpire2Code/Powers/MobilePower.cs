@@ -71,7 +71,7 @@ public sealed class MobilePower : TashkentPower
 		{
 			Flash();
 			await PowerCmd.Apply<DexterityPower>(base.Owner, value * this.Amount, base.Owner, null, silent: true);
-			base.DynamicVars["DexterityApplied"].BaseValue += (decimal)base.DynamicVars.Dexterity.IntValue;
+			base.DynamicVars["DexterityApplied"].BaseValue += (decimal)base.DynamicVars.Dexterity.IntValue * this.Amount;
 			InvokeDisplayAmountChanged();
 		}
 	}
@@ -81,7 +81,7 @@ public sealed class MobilePower : TashkentPower
 		if (side == base.Owner.Side)
 		{
 			await PowerCmd.Remove(this);
-			await PowerCmd.Apply<DexterityPower>(base.Owner, -base.DynamicVars["DexterityApplied"].BaseValue * this.Amount, base.Owner, null, silent: true);
+			await PowerCmd.Apply<DexterityPower>(base.Owner, -base.DynamicVars["DexterityApplied"].BaseValue, base.Owner, null, silent: true);
 		}
 	}
 }

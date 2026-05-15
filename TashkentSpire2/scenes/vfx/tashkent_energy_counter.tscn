@@ -1,11 +1,11 @@
 [gd_scene load_steps=11 format=3 uid="uid://by0n2cgqdp4pd"]
 
 [ext_resource type="Script" uid="uid://vfn0vs2swfs7" path="res://TashkentSpire2Code/Scripts/NEnergyCounterTashkent.cs" id="1_76wkg"]
-[ext_resource type="Texture2D" uid="uid://cqgvm8pw3eio8" path="res://TashkentSpire2/images/combatui/energy_counter/Layer1.png" id="2_4s6m4"]
 [ext_resource type="PackedScene" uid="uid://dphwo60m1eu7s" path="res://TashkentSpire2/scenes/vfx/TashkentEnergyVfxBack.tscn" id="2_o2if5"]
 [ext_resource type="Texture2D" uid="uid://v0fm7sibh1rr" path="res://TashkentSpire2/images/combatui/energy_counter/Layer2.png" id="3_e0jbg"]
+[ext_resource type="Texture2D" uid="uid://biktfxjg80vw4" path="res://TashkentSpire2/images/combatui/energy_counter/Layer_bottom.png" id="3_wij7b"]
 [ext_resource type="Texture2D" uid="uid://b8nddibpo328d" path="res://TashkentSpire2/images/combatui/energy_counter/Layer3.png" id="4_76wkg"]
-[ext_resource type="Texture2D" uid="uid://blbarbrhmeam5" path="res://TashkentSpire2/images/combatui/energy_counter/Layer4.png" id="5_o2if5"]
+[ext_resource type="Texture2D" uid="uid://dw61rp77tbtsl" path="res://TashkentSpire2/images/combatui/energy_counter/Layer_top.png" id="6_wij7b"]
 [ext_resource type="Texture2D" uid="uid://clm800joq8est" path="res://TashkentSpire2/images/combatui/energy_counter/Layer5.png" id="7_o2if5"]
 [ext_resource type="Script" uid="uid://bmor3nrxukenc" path="res://TashkentSpire2Code/Scripts/MegaLabelTashkent.cs" id="8_o2if5"]
 [ext_resource type="PackedScene" uid="uid://dgxqno563xp3u" path="res://TashkentSpire2/scenes/vfx/TashkentEnergyVfxFront.tscn" id="8_wij7b"]
@@ -39,7 +39,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_4s6m4")
+texture = ExtResource("3_wij7b")
 expand_mode = 1
 stretch_mode = 5
 
@@ -86,7 +86,7 @@ offset_bottom = -51.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(1.6, 1.6)
-texture = ExtResource("5_o2if5")
+texture = ExtResource("6_wij7b")
 expand_mode = 1
 
 [node name="Layer5" type="TextureRect" parent="Layers"]

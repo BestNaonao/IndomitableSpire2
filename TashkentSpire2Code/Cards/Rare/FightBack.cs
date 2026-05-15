@@ -12,7 +12,7 @@ public sealed class FightBack() : TashkentCard(0, CardType.Attack, CardRarity.Ra
     protected override bool HasEnergyCostX => true;
     
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new DamageVar(9M, ValueProp.Move),
+        new DamageVar(8M, ValueProp.Move),
         new MarkDynamicVar(2M)
     ];
     

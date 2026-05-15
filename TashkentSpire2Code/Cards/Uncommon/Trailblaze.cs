@@ -13,7 +13,7 @@ namespace TashkentSpire2.TashkentSpire2Code.Cards.Uncommon;
 public sealed class Trailblaze() : TashkentCard(1, CardType.Attack, CardRarity.Uncommon, TargetType.AnyEnemy)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new CalculationBaseVar(6m),
+        new CalculationBaseVar(4m),
         new ExtraDamageVar(2m),
         new ChargeDynamicVar(2m),
         new PowerVar<BackAfterTurnPower>(2m),

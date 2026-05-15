@@ -3,6 +3,7 @@ using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.Localization;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Powers;
@@ -16,6 +17,8 @@ namespace TashkentSpire2.TashkentSpire2Code.Powers;
 public sealed class TorpedoPower : TashkentPower
 {
     private const string TurnKey = "Turns";
+    
+    private const string BombKey = "IsTheBomb";
 
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;
@@ -29,11 +32,31 @@ public sealed class TorpedoPower : TashkentPower
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
         new DamageVar(0m, ValueProp.Unpowered),
-        new DynamicVar(TurnKey, 0m)
+        new DynamicVar(TurnKey, 0m),
+        new DynamicVar(BombKey, 0m)
     ];
 
     private bool _oxygenApplied;
 
+    private bool IsTheBomb => DynamicVars[BombKey].BaseValue == 1m;
+
+    public override LocString Title 
+    {
+        get 
+        {
+            LocString title = base.Title;
+            title.Add("IsTheBomb", IsTheBomb ? 1 : 0); 
+            return title;
+        }
+    }
+    
+    public void SetIsTheBomb(bool value)
+    {
+        DynamicVars[BombKey].BaseValue = value ? 1m : 0m;
+
+        InvokeDisplayAmountChanged(); 
+    }
+    
     public override int DisplayAmount => (int)DynamicVars[TurnKey].BaseValue;
 
     public static int ComputeTurns(Creature owner)
@@ -124,7 +147,7 @@ public sealed class TorpedoPower : TashkentPower
 
         var godPower = Owner?.GetPower<TorpedoGodPower>();
 
-        if (godPower != null)
+        if (IsTheBomb || godPower != null)
         {
             var dmg = new DamageVar(Amount, ValueProp.Unpowered);
             await CreatureCmd.Damage(choiceContext, CombatState.HittableEnemies, dmg, Owner!);

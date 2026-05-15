@@ -13,7 +13,7 @@ public sealed class AllRounder() : AmmunitionCard(1, CardType.Skill, CardRarity.
     public override bool GainsBlock => true;
     
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new BlockVar(7M, ValueProp.Move),
+        new BlockVar(6M, ValueProp.Move),
         new PowerVar<AllRounderPower>(3M)
     ];
     
