@@ -17,6 +17,7 @@ obj/
 .vs/
 *.suo
 *.user
+*.sln.DotSettings.user
 
 # 其他
 /packages/
