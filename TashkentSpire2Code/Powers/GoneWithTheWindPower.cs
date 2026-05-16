@@ -17,8 +17,8 @@ private const string RemainKey = "Tashkent_GoneRemain";
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;
     
-    public override string CustomBigIconPath => "res://TashkentSpire2/images/powers/big/mark_power.png";
-    public override string CustomPackedIconPath => "res://TashkentSpire2/images/powers/packed/mark_power.png";
+    public override string CustomBigIconPath => "res://TashkentSpire2/images/powers/big/GoneWithTheWindPower.png";
+    public override string CustomPackedIconPath => "res://TashkentSpire2/images/powers/packed/GoneWithTheWindPower.png";
     
     public override int DisplayAmount => base.DynamicVars[RemainKey].IntValue;
 

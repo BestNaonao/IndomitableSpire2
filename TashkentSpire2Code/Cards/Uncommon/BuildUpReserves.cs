@@ -22,7 +22,7 @@ public sealed class BuildUpReserves() : AmmunitionCard(1, CardType.Skill, CardRa
         new LoadDynamicVar(1M),
         new AmmuMaxDynamicVar(6M),
         new ShotDynamicVar(3M),
-        new PowerVar<PlatingPower>(6M)
+        new PowerVar<PlatingPower>(3M)
     ];
     
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [

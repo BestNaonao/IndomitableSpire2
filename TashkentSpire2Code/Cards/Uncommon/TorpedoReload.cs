@@ -13,7 +13,7 @@ namespace TashkentSpire2.TashkentSpire2Code.Cards.Uncommon;
 public sealed class TorpedoReload() : AmmunitionCard(2, CardType.Skill, CardRarity.Uncommon, TargetType.Self)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new TorpedoDynamicVar(18M),
+        new TorpedoDynamicVar(9M),
         new AmmunitionDynamicVar(0M),
         new LoadDynamicVar(1M),
         new AmmuMaxDynamicVar(6M),

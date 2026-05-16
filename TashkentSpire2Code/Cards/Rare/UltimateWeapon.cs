@@ -3,8 +3,11 @@ using MegaCrit.Sts2.Core.Commands.Builders;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.Helpers;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Nodes.Rooms;
+using MegaCrit.Sts2.Core.Nodes.Vfx;
 using MegaCrit.Sts2.Core.ValueProps;
 using TashkentSpire2.TashkentSpire2Code.Cards.Status;
 using TashkentSpire2.TashkentSpire2Code.Commands;
@@ -44,13 +47,19 @@ public sealed class UltimateWeapon() : AmmunitionCard(3, CardType.Attack, CardRa
         {
             int overdrawnCount = 0;
 
+            NHyperbeamVfx? nHyperbeamVfx = NHyperbeamVfx.Create(base.Owner.Creature, cardPlay.Target);
+            if (nHyperbeamVfx != null)
+            {
+                NCombatRoom.Instance?.CombatVfxContainer.AddChildSafely(nHyperbeamVfx);
+                await Cmd.Wait(0.5f);
+            }
+            
             for (int i = 0; i < shellsToFire; i++) 
             {
                 bool shouldTriggerFatal = cardPlay.Target.Powers.All((PowerModel p) => p.ShouldOwnerDeathTriggerFatal());
                 AttackCommand attackCommand = await DamageCmd.Attack(base.DynamicVars.CalculatedDamage)
                     .FromCard(this)
                     .Targeting(cardPlay.Target)
-                    .WithHitFx("vfx/vfx_attack_slash")
                     .Execute(choiceContext);
 
                 if (shouldTriggerFatal && attackCommand.Results.Any((DamageResult r) => r.WasTargetKilled))

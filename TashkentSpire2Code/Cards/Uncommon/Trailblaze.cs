@@ -15,8 +15,8 @@ public sealed class Trailblaze() : TashkentCard(1, CardType.Attack, CardRarity.U
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new CalculationBaseVar(4m),
         new ExtraDamageVar(2m),
-        new ChargeDynamicVar(2m),
-        new PowerVar<BackAfterTurnPower>(2m),
+        new ChargeDynamicVar(1m),
+        new PowerVar<BackAfterTurnPower>(1m),
         new CalculatedDamageVar(ValueProp.Move).WithMultiplier((CardModel card, Creature? _) => 
         {
             var distPower = card.Owner.Creature.GetPower<DistancePower>();

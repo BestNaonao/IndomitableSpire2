@@ -7,9 +7,9 @@ public sealed class Thruster : TashkentRelic
     public override RelicRarity Rarity => RelicRarity.Uncommon;
     
     protected override string BigIconPath => 
-        "res://TashkentSpire2/images/relics/big/EngineBoost.png";
+        "res://TashkentSpire2/images/relics/big/Thruster.png";
     public override string PackedIconPath => 
-        "res://TashkentSpire2/images/relics/packed/EngineBoost.png";
+        "res://TashkentSpire2/images/relics/packed/Thruster.png";
     protected override string PackedIconOutlinePath => 
-        "res://TashkentSpire2/images/relics/outline/EngineBoost.png";
+        "res://TashkentSpire2/images/relics/outline/Thruster.png";
 }

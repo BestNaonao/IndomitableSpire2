@@ -7,8 +7,6 @@ using TashkentSpire2.TashkentSpire2Code.Relics;
 using TashkentSpire2.TashkentSpire2Code.Config;
 using MegaCrit.Sts2.Core.Entities.Characters;
 using MegaCrit.Sts2.Core.Models;
-using TashkentSpire2.TashkentSpire2Code.Cards.Ancient;
-using TashkentSpire2.TashkentSpire2Code.Cards.Rare;
 
 namespace TashkentSpire2.TashkentSpire2Code.Character;
 

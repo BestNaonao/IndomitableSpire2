@@ -13,11 +13,11 @@ public sealed class OrderOfSolidarity : TashkentRelic
     public override RelicRarity Rarity => RelicRarity.Rare;
     
     protected override string BigIconPath => 
-        "res://TashkentSpire2/images/relics/big/EjectionStart.png";
+        "res://TashkentSpire2/images/relics/big/OrderOfSolidarity.png";
     public override string PackedIconPath => 
-        "res://TashkentSpire2/images/relics/packed/EjectionStart.png";
+        "res://TashkentSpire2/images/relics/packed/OrderOfSolidarity.png";
     protected override string PackedIconOutlinePath => 
-        "res://TashkentSpire2/images/relics/outline/EjectionStart.png";
+        "res://TashkentSpire2/images/relics/outline/OrderOfSolidarity.png";
     
     protected override IEnumerable<DynamicVar> CanonicalVars =>[
         new CardsVar(2)
