@@ -66,6 +66,8 @@
   "INDOMITABLESPIRE2-HANGAR_REPAIR.selectionScreenPrompt": "选择一张舰载机进行维修。",
   "INDOMITABLESPIRE2-SCHEDULED_MAINTENANCE.title": "定期检修",
   "INDOMITABLESPIRE2-SCHEDULED_MAINTENANCE.description": "在你的回合开始时，为[gold]抽牌堆[/gold]或[gold]手牌[/gold]中的随机[gold]舰载机[/gold]牌总计恢复{ScheduledMaintenancePower:diff()}点耐久。",
+  "INDOMITABLESPIRE2-FIREPOWER_SUPPLY.title": "火力补给",
+  "INDOMITABLESPIRE2-FIREPOWER_SUPPLY.description": "选择1张{IfUpgraded:show:[gold]升级过的[/gold]}[gold]起火专家[/gold]或[gold]增强穿甲弹药[/gold]加入你的[gold]手牌[/gold]。",
   
   "INDOMITABLESPIRE2-INCENDIARY_EXPERT.title": "起火专家",
   "INDOMITABLESPIRE2-INCENDIARY_EXPERT.description": "从[gold]手牌[/gold]或[gold]抽牌堆[/gold]中选择[blue]{Cards}[/blue]张牌，为其[gold]附魔[/gold]：[purple]高爆[/purple][blue]{HighExplosiveAmount:diff()}[/blue]。",
