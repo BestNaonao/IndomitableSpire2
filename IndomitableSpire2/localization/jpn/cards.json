@@ -75,6 +75,9 @@
   "INDOMITABLESPIRE2-ENHANCED_AP_AMMO.title": "強化徹甲弾",
   "INDOMITABLESPIRE2-ENHANCED_AP_AMMO.description": "[gold]手札[/gold]または[gold]山札[/gold]のカードを[blue]{Cards:diff()}[/blue]枚選ぶ。それらに[purple]徹甲[/purple]を[gold]エンチャント[/gold]する。",
   "INDOMITABLESPIRE2-ENHANCED_AP_AMMO.selectionScreenPrompt": "[gold]エンチャント[/gold]するカードを{Cards}枚選ぶ。",
+
+  "INDOMITABLESPIRE2-WELL_RESTED.title": "十分な睡眠",
+  "INDOMITABLESPIRE2-WELL_RESTED.description": "このカードを引くたび、{Energy:energyIcons()}を得る。",
   
   "INDOMITABLESPIRE2-SCORCHING_FLAME_RAIN.title": "灼天の焔雨",
   "INDOMITABLESPIRE2-SCORCHING_FLAME_RAIN.description": "[gold]やる気[/gold]が[blue]{MotivationRequire:diff()}[/blue]以上の場合のみプレイできる。\nすべての敵に{Damage:diff()}ダメージを与える。\nすべての敵に[gold]炎上[/gold] [blue]{OnFirePower:diff()}[/blue]を付与する。",

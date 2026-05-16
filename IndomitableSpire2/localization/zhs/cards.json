@@ -75,6 +75,9 @@
   "INDOMITABLESPIRE2-ENHANCED_AP_AMMO.title": "增强穿甲弹药",
   "INDOMITABLESPIRE2-ENHANCED_AP_AMMO.description": "从[gold]手牌[/gold]或[gold]抽牌堆[/gold]中选择[blue]{Cards:diff()}[/blue]张牌，为其[gold]附魔[/gold]：[purple]穿甲[/purple]。",
   "INDOMITABLESPIRE2-ENHANCED_AP_AMMO.selectionScreenPrompt": "选择{Cards}张牌进行附魔。",
+
+  "INDOMITABLESPIRE2-WELL_RESTED.title": "睡眠充足",
+  "INDOMITABLESPIRE2-WELL_RESTED.description": "每当你抽到这张牌时，获得{Energy:energyIcons()}。",
   
   "INDOMITABLESPIRE2-SCORCHING_FLAME_RAIN.title": "灼天焰雨",
   "INDOMITABLESPIRE2-SCORCHING_FLAME_RAIN.description": "只有在[gold]干劲[/gold]达到[blue]{MotivationRequire:diff()}[/blue]点及以上时才能打出。\n对所有敌人造成{Damage:diff()}点伤害。\n给予所有敌人[blue]{OnFirePower:diff()}[/blue]层[gold]起火[/gold]。",
