@@ -68,6 +68,8 @@
   "INDOMITABLESPIRE2-SCHEDULED_MAINTENANCE.description": "At the start of your turn, restore a total of {ScheduledMaintenancePower:diff()} Durability to random [gold]Carrier Aircraft[/gold] in your [gold]Draw Pile[/gold] or [gold]Hand[/gold].",
   "INDOMITABLESPIRE2-FIREPOWER_SUPPLY.title": "Firepower Supply",
   "INDOMITABLESPIRE2-FIREPOWER_SUPPLY.description": "Choose to add an{IfUpgraded:show: [gold]Upgraded[/gold]} [gold]Incendiary Expert[/gold] or [gold]Enhanced AP Ammo[/gold] into your [gold]Hand[/gold].",
+  "INDOMITABLESPIRE2-ARMOURED_CARRIER.title": "Armoured Carrier",
+  "INDOMITABLESPIRE2-ARMOURED_CARRIER.description": "At the start of your turn, gain [blue]{ShieldPower}[/blue] [gold]Shield[/gold].If you take no unblocked damage in a turn, gain [blue]{AviationPower}[/blue] [gold]Aviation[/gold] at the start of your next turn.",
   
   "INDOMITABLESPIRE2-INCENDIARY_EXPERT.title": "Incendiary Expert",
   "INDOMITABLESPIRE2-INCENDIARY_EXPERT.description": "Choose [blue]{Cards}[/blue] {Cards:plural:card|cards} in your [gold]Hand[/gold] or [gold]Draw Pile[/gold]. [gold]Enchant[/gold] {Cards:plural:it|them} with [purple]High-Explosive[/purple] [blue]{HighExplosiveAmount:diff()}[/blue].",

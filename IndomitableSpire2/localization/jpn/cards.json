@@ -68,6 +68,8 @@
   "INDOMITABLESPIRE2-SCHEDULED_MAINTENANCE.description": "ターン開始時、[gold]山札[/gold]または[gold]手札[/gold]にあるランダムな[gold]艦載機[/gold]の耐久を合计で{ScheduledMaintenancePower:diff()}回復する。",
   "INDOMITABLESPIRE2-FIREPOWER_SUPPLY.title": "火力補給",
   "INDOMITABLESPIRE2-FIREPOWER_SUPPLY.description": "{IfUpgraded:show:[gold]アップグレード[/gold]済みの}[gold]焼夷エキスパート[/gold]または[gold]強化徹甲弾[/gold]を1枚選び、[gold]手札[/gold]に加える。",
+  "INDOMITABLESPIRE2-ARMOURED_CARRIER.title": "装甲空母",
+  "INDOMITABLESPIRE2-ARMOURED_CARRIER.description": "ターン開始時、[gold]シールド[/gold]を[blue]{ShieldPower}[/blue]得る。1ターンの間にブロックされなかったダメージを受けなかった場合、次のターン開始時に[gold]航空[/gold]を[blue]{AviationPower}[/blue]得る。",
   
   "INDOMITABLESPIRE2-INCENDIARY_EXPERT.title": "焼夷エキスパート",
   "INDOMITABLESPIRE2-INCENDIARY_EXPERT.description": "[gold]手札[/gold]または[gold]山札[/gold]のカードを[blue]{Cards}[/blue]枚選ぶ。それらに[purple]榴弾[/purple][blue]{HighExplosiveAmount:diff()}[/blue]を[gold]エンチャント[/gold]する。",
