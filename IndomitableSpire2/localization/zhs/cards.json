@@ -15,7 +15,7 @@
   "INDOMITABLESPIRE2-WORK_ARRANGEMENT.description": "消耗[blue]{MotivationConsume:diff()}[/blue]点[gold]干劲[/gold]。\n抽{Cards:diff()}张牌。\n将一张手牌放到你的[gold]抽牌堆[/gold]的底部。",
   "INDOMITABLESPIRE2-WORK_ARRANGEMENT.selectionScreenPrompt": "选择一张牌放到你的抽牌堆底。",
   "INDOMITABLESPIRE2-ILLUSTRIOUS_AEGIS.title": "光辉的庇护",
-  "INDOMITABLESPIRE2-ILLUSTRIOUS_AEGIS.description": "给予任意玩家{Block:diff()}点[gold]护盾[/gold]。\n该[gold]护盾[/gold]碎裂时，回复[green]{Heal:diff()}[/green]点生命。",
+  "INDOMITABLESPIRE2-ILLUSTRIOUS_AEGIS.description": "给予任意玩家{Shield:diff()}点[gold]护盾[/gold]。\n该[gold]护盾[/gold]碎裂时，回复[green]{Heal:diff()}[/green]点生命。",
   "INDOMITABLESPIRE2-SWORDFISH_BOMBER.title": "剑鱼鱼雷机",
   "INDOMITABLESPIRE2-SWORDFISH_BOMBER.description": "[gold]耐久[/gold]：{Durability}/{MaxDurability:diff()}\n造成{Damage:diff()}点伤害。\n给予[blue]{FloodingPower:diff()}[/blue]层[blue]进水[/blue]。",
   "INDOMITABLESPIRE2-SWORDFISH818_SQUADRON.title": "剑鱼(818中队)",

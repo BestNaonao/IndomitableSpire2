@@ -15,7 +15,7 @@
   "INDOMITABLESPIRE2-WORK_ARRANGEMENT.description": "[gold]やる気[/gold]を[blue]{MotivationConsume:diff()}[/blue]消費する。\nカードを{Cards:diff()}枚引く。\n手札を1枚、[gold]山札[/gold]の一番下に置く。",
   "INDOMITABLESPIRE2-WORK_ARRANGEMENT.selectionScreenPrompt": "山札の一番下に置くカードを1枚選ぶ。",
   "INDOMITABLESPIRE2-ILLUSTRIOUS_AEGIS.title": "イラストリアス・イージス",
-  "INDOMITABLESPIRE2-ILLUSTRIOUS_AEGIS.description": "任意のプレイヤーに[gold]シールド[/gold]を{Block:diff()}与える。\nこの[gold]シールド[/gold]が砕けた時、ＨＰを[green]{Heal:diff()}[/green]回復する。",
+  "INDOMITABLESPIRE2-ILLUSTRIOUS_AEGIS.description": "任意のプレイヤーに[gold]シールド[/gold]を{Shield:diff()}与える。\nこの[gold]シールド[/gold]が砕けた時、ＨＰを[green]{Heal:diff()}[/green]回復する。",
   "INDOMITABLESPIRE2-SWORDFISH_BOMBER.title": "ソードフィッシュ",
   "INDOMITABLESPIRE2-SWORDFISH_BOMBER.description": "[gold]耐久[/gold]：{Durability}/{MaxDurability:diff()}\n{Damage:diff()}ダメージを与える。\n[blue]浸水[/blue]を[blue]{FloodingPower:diff()}[/blue]与える。",
   "INDOMITABLESPIRE2-SWORDFISH818_SQUADRON.title": "ソードフィッシュ(第818飛行隊)",
