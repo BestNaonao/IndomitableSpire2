@@ -57,5 +57,8 @@
   "INDOMITABLESPIRE2-MOTIVATION_BURST_POWER.title": "Motivation Burst",
   "INDOMITABLESPIRE2-SCHEDULED_MAINTENANCE_POWER.description": "At the start of your turn, restore Durability to random [gold]Carrier Aircraft[/gold] in your [gold]Draw Pile[/gold] or [gold]Hand[/gold].",
   "INDOMITABLESPIRE2-SCHEDULED_MAINTENANCE_POWER.smartDescription": "At the start of your turn, restore a total of [blue]{Amount}[/blue] Durability to random [gold]Carrier Aircraft[/gold] in your [gold]Draw Pile[/gold] or [gold]Hand[/gold].",
-  "INDOMITABLESPIRE2-SCHEDULED_MAINTENANCE_POWER.title": "Scheduled Maintenance"
+  "INDOMITABLESPIRE2-SCHEDULED_MAINTENANCE_POWER.title": "Scheduled Maintenance",
+  "INDOMITABLESPIRE2-ARMOURED_CARRIER_POWER.description": "Provides Shield every turn. Gain Aviation if you took no unblocked damage last turn.",
+  "INDOMITABLESPIRE2-ARMOURED_CARRIER_POWER.smartDescription": "At the start of your turn, gain [blue]{Shield}[/blue] [gold]Shield[/gold].If you take no unblocked damage in a turn, gain [blue]{AviationPower}[/blue] [gold]Aviation[/gold] at the start of your next turn.",
+  "INDOMITABLESPIRE2-ARMOURED_CARRIER_POWER.title": "Armoured Carrier"
 }
