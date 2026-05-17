@@ -12,7 +12,12 @@ public static class CustomCreatureCmd
     /// <summary>
     /// 赋予目标护盾（附带同等数值的真实格挡与跨回合保留能力）
     /// </summary>
-    public static async Task<decimal> GainShield(Creature target, decimal amount, ValueProp props, CardPlay cardPlay)
+    public static async Task<decimal> GainShield(
+        Creature target, 
+        decimal amount, 
+        ValueProp props, 
+        CardPlay? cardPlay,
+        Creature? applier = null)
     {
         // 1. 赋予底层受到增减益的真实的格挡值
         var blockAmount = await CreatureCmd.GainBlock(target, amount, props, cardPlay);
@@ -23,16 +28,20 @@ public static class CustomCreatureCmd
             await PowerCmd.Apply<ShieldPower>(
                 target: target, 
                 amount: blockAmount, 
-                applier: cardPlay.Card.Owner.Creature, 
-                cardSource: cardPlay.Card
+                applier: applier ?? cardPlay?.Card.Owner.Creature, 
+                cardSource: cardPlay?.Card
             );
         }
         
         return blockAmount;
     }
     
-    public static async Task<decimal> GainShield(Creature target, BlockVar blockVar, CardPlay cardPlay)
+    public static async Task<decimal> GainShield(
+        Creature target, 
+        BlockVar blockVar, 
+        CardPlay? cardPlay,
+        Creature? applier = null)
     {
-        return await GainShield(target, blockVar.BaseValue, blockVar.Props, cardPlay);
+        return await GainShield(target, blockVar.BaseValue, blockVar.Props, cardPlay, applier);
     }
 }
