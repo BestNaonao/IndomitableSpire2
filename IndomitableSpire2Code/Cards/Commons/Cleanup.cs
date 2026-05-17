@@ -60,5 +60,6 @@ public sealed class Cleanup() : IndomitableCard(1, CardType.Attack, CardRarity.C
     {
         // 升级效果：伤害 +3（变为10点）
         DynamicVars.Damage.UpgradeValueBy(3M);
+        DynamicVars.Cards.UpgradeValueBy(1M);
     }
 }
