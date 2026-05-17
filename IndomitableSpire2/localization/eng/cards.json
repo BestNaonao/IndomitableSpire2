@@ -37,10 +37,6 @@
   "INDOMITABLESPIRE2-TACTICAL_TRAINING.selectionScreenPrompt": "Choose a Carrier Aircraft card for Tactical Training.",
   "INDOMITABLESPIRE2-TROUBLE_HANDLING.title": "Trouble Handling",
   "INDOMITABLESPIRE2-TROUBLE_HANDLING.description": "Gain [blue]{MotivationGain:diff()}[/blue] [gold]Motivation[/gold].\nAdd 2 [gold]Indolent[/gold] into your [gold]Discard Pile[/gold].",
-  "INDOMITABLESPIRE2-INDOLENT.title": "Indolent",
-  "INDOMITABLESPIRE2-INDOLENT.description": "Whenever you draw this card, lose {MotivationConsume} [gold]Motivation[/gold].\nDiscard a card.",
-  "INDOMITABLESPIRE2-REFRESH.title": "Refresh",
-  "INDOMITABLESPIRE2-REFRESH.description": "Gain {Energy:energyIcons()}.\nDraw {Cards:diff()} {Cards:plural:card|cards}. Discard 1 card.",
   "INDOMITABLESPIRE2-ART_OF_RESTING.title": "Art of Resting",
   "INDOMITABLESPIRE2-ART_OF_RESTING.banter": "All forms of relaxation serve a purpose, and are DEFINITELY not slacking off.",
   "INDOMITABLESPIRE2-ART_OF_RESTING.description": "[gold]Transform[/gold] all [gold]Indolent[/gold] cards in your piles into [gold]Refresh[/gold].\nWhenever you create a Status card, [gold]Transform[/gold] it into a [gold]Refresh[/gold].",
@@ -71,13 +67,17 @@
   "INDOMITABLESPIRE2-ARMOURED_CARRIER.title": "Armoured Carrier",
   "INDOMITABLESPIRE2-ARMOURED_CARRIER.description": "At the start of your turn, gain [blue]{ShieldPower}[/blue] [gold]Shield[/gold].If you take no unblocked damage in a turn, gain [blue]{AviationPower}[/blue] [gold]Aviation[/gold] at the start of your next turn.",
   
+  "INDOMITABLESPIRE2-REFRESH.title": "Refresh",
+  "INDOMITABLESPIRE2-REFRESH.description": "Gain {Energy:energyIcons()}.\nDraw {Cards:diff()} {Cards:plural:card|cards}. Discard 1 card.",
   "INDOMITABLESPIRE2-INCENDIARY_EXPERT.title": "Incendiary Expert",
   "INDOMITABLESPIRE2-INCENDIARY_EXPERT.description": "Choose [blue]{Cards}[/blue] {Cards:plural:card|cards} in your [gold]Hand[/gold] or [gold]Draw Pile[/gold]. [gold]Enchant[/gold] {Cards:plural:it|them} with [purple]High-Explosive[/purple] [blue]{HighExplosiveAmount:diff()}[/blue].",
   "INDOMITABLESPIRE2-INCENDIARY_EXPERT.selectionScreenPrompt": "Choose {Cards:plural:a card|{} cards} to Enchant.",
   "INDOMITABLESPIRE2-ENHANCED_AP_AMMO.title": "Enhanced AP Ammo",
   "INDOMITABLESPIRE2-ENHANCED_AP_AMMO.description": "Choose [blue]{Cards:diff()}[/blue] {Cards:plural:card|cards} in your [gold]Hand[/gold] or [gold]Draw Pile[/gold]. [gold]Enchant[/gold] {Cards:plural:it|them} with [purple]Armor-Piercing[/purple].",
   "INDOMITABLESPIRE2-ENHANCED_AP_AMMO.selectionScreenPrompt": "Choose {Cards:plural:a card|{} cards} to Enchant.",
-
+  
+  "INDOMITABLESPIRE2-INDOLENT.title": "Indolent",
+  "INDOMITABLESPIRE2-INDOLENT.description": "Whenever you draw this card, lose {MotivationConsume} [gold]Motivation[/gold].\nDiscard a card.",
   "INDOMITABLESPIRE2-WELL_RESTED.title": "Well-Rested",
   "INDOMITABLESPIRE2-WELL_RESTED.description": "Whenever you draw this card, gain {Energy:energyIcons()}.",
   

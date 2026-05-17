@@ -37,10 +37,6 @@
   "INDOMITABLESPIRE2-TACTICAL_TRAINING.selectionScreenPrompt": "选择一张舰载机牌进行战术研习。",
   "INDOMITABLESPIRE2-TROUBLE_HANDLING.title": "应付麻烦",
   "INDOMITABLESPIRE2-TROUBLE_HANDLING.description": "获得[blue]{MotivationGain:diff()}[/blue]点[gold]干劲[/gold]。\n将2张[gold]慵懒[/gold]加入你的[gold]弃牌堆[/gold]。",
-  "INDOMITABLESPIRE2-INDOLENT.title": "慵懒",
-  "INDOMITABLESPIRE2-INDOLENT.description": "每当你抽到这张牌时，失去{MotivationConsume}点[gold]干劲[/gold]。\n打出时丢弃一张[gold]手牌[/gold]。",
-  "INDOMITABLESPIRE2-REFRESH.title": "养神",
-  "INDOMITABLESPIRE2-REFRESH.description": "获得{Energy:energyIcons()}。\n抽{Cards:diff()}张牌，丢弃1张牌。",
   "INDOMITABLESPIRE2-ART_OF_RESTING.title": "休息的艺术",
   "INDOMITABLESPIRE2-ART_OF_RESTING.banter": "任何休息都是有意义的，绝不是单纯的偷懒，嗯，绝不是。",
   "INDOMITABLESPIRE2-ART_OF_RESTING.description": "将你所有牌堆中的[gold]慵懒[/gold]全部[gold]变化[/gold]为[gold]养神[/gold]。\n每当你生成状态牌时，将其[gold]变化[/gold]为[gold]养神[/gold]。",
@@ -71,13 +67,17 @@
   "INDOMITABLESPIRE2-ARMOURED_CARRIER.title": "装甲航母",
   "INDOMITABLESPIRE2-ARMOURED_CARRIER.description": "在你的回合开始时获得[blue]{ShieldPower}[/blue]点[gold]护盾[/gold]。如果你在一回合内没有受到未被格挡的伤害，在下个回合开始时获得[blue]{AviationPower}[/blue]层[gold]航空[/gold]。",
   
+  "INDOMITABLESPIRE2-REFRESH.title": "养神",
+  "INDOMITABLESPIRE2-REFRESH.description": "获得{Energy:energyIcons()}。\n抽{Cards:diff()}张牌，丢弃1张牌。",
   "INDOMITABLESPIRE2-INCENDIARY_EXPERT.title": "起火专家",
   "INDOMITABLESPIRE2-INCENDIARY_EXPERT.description": "从[gold]手牌[/gold]或[gold]抽牌堆[/gold]中选择[blue]{Cards}[/blue]张牌，为其[gold]附魔[/gold]：[purple]高爆[/purple][blue]{HighExplosiveAmount:diff()}[/blue]。",
   "INDOMITABLESPIRE2-INCENDIARY_EXPERT.selectionScreenPrompt": "选择{Cards}张牌进行附魔。",
   "INDOMITABLESPIRE2-ENHANCED_AP_AMMO.title": "增强穿甲弹药",
   "INDOMITABLESPIRE2-ENHANCED_AP_AMMO.description": "从[gold]手牌[/gold]或[gold]抽牌堆[/gold]中选择[blue]{Cards:diff()}[/blue]张牌，为其[gold]附魔[/gold]：[purple]穿甲[/purple]。",
   "INDOMITABLESPIRE2-ENHANCED_AP_AMMO.selectionScreenPrompt": "选择{Cards}张牌进行附魔。",
-
+  
+  "INDOMITABLESPIRE2-INDOLENT.title": "慵懒",
+  "INDOMITABLESPIRE2-INDOLENT.description": "每当你抽到这张牌时，失去{MotivationConsume}点[gold]干劲[/gold]。\n打出时丢弃一张[gold]手牌[/gold]。",
   "INDOMITABLESPIRE2-WELL_RESTED.title": "睡眠充足",
   "INDOMITABLESPIRE2-WELL_RESTED.description": "每当你抽到这张牌时，获得{Energy:energyIcons()}。",
   
