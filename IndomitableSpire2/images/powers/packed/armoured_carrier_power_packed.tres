@@ -1,0 +1,7 @@
+[gd_resource type="AtlasTexture" load_steps=2 format=3 uid="uid://bdt5u6xp2n08q"]
+
+[ext_resource type="Texture2D" uid="uid://cbxfgaxjvyjma" path="res://IndomitableSpire2/images/powers/packed/armoured_carrier_power_packed.png" id="1_7jgnj"]
+
+[resource]
+atlas = ExtResource("1_7jgnj")
+region = Rect2(0, 0, 64, 64)
