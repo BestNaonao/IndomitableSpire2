@@ -31,6 +31,7 @@ public sealed class ArmouredCarrier() : IndomitableCard(3, CardType.Power, CardR
     protected override void OnUpgrade()
     {
         // 升级效果：费用 -1 (变成 2 费)
+        AddKeyword(CardKeyword.Innate);
         EnergyCost.UpgradeBy(-1);
     }
 }
