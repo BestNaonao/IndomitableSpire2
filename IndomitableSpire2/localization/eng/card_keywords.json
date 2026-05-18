@@ -9,6 +9,8 @@
   "INDOMITABLESPIRE2-DIVE_BOMBER.description": "A Carrier Aircraft classified as a Dive Bomber, triggering related effects. Usually bypasses some of the enemy's defense mechanisms.",
   "INDOMITABLESPIRE2-LEVEL_BOMBER.title": "Level Bomber",
   "INDOMITABLESPIRE2-LEVEL_BOMBER.description": "A Carrier Aircraft classified as a Level Bomber, triggering related effects. Usually features [gold]AoE Damage[/gold].",
+  "INDOMITABLESPIRE2-DURABILITY.title": "Durability",
+  "INDOMITABLESPIRE2-DURABILITY.description": "Loses durability based on the target's attack damage when attacking an enemy intending to attack. [gold]Exhaust[/gold] when durability reaches zero.",
   "INDOMITABLESPIRE2-FORMATION.title": "Formation",
   "INDOMITABLESPIRE2-FORMATION.description": "When played, put a random card with the same name that does not cost 0 Energy from your [gold]Draw Pile[/gold] or [gold]Discard Pile[/gold] into your [gold]Hand[/gold].",
   "INDOMITABLESPIRE2-COMMISSION.title": "Commission",

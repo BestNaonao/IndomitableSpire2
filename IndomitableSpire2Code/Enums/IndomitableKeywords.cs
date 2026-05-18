@@ -25,6 +25,10 @@ public static class IndomitableKeywords
     [CustomEnum("level_bomber"), KeywordProperties(AutoKeywordPosition.Before)]
     public static CardKeyword LevelBomber;
     
+    // 耐久：卡牌的耐久，归零时消耗
+    [CustomEnum("durability"), KeywordProperties(AutoKeywordPosition.Before)]
+    public static CardKeyword Durability;
+    
     // 编队：在卡牌末尾显示，代表小队增援机制
     [CustomEnum("formation"), KeywordProperties(AutoKeywordPosition.After)]
     public static CardKeyword Formation;
