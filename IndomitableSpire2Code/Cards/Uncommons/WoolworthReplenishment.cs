@@ -1,4 +1,5 @@
 ﻿using IndomitableSpire2.IndomitableSpire2Code.Cards.Abstracts;
+using IndomitableSpire2.IndomitableSpire2Code.Enums;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Factories;
@@ -14,7 +15,11 @@ public sealed class WoolworthReplenishment() : IndomitableCard(0, CardType.Skill
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
     
     // 添加能量相关的悬浮提示
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => [EnergyHoverTip];
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => 
+    [
+        EnergyHoverTip, 
+        HoverTipFactory.FromKeyword(IndomitableKeywords.CarrierAircraft)
+    ];
     
     // 注册变量：获得 1 点能量
     protected override IEnumerable<DynamicVar> CanonicalVars => [new EnergyVar(1)];

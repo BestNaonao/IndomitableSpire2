@@ -16,7 +16,8 @@ public sealed class FormationStrike() : IndomitableCard(1, CardType.Attack, Card
     // 悬停提示：展示编队关键字的解释
     protected override IEnumerable<IHoverTip> ExtraHoverTips => 
     [
-        HoverTipFactory.FromKeyword(IndomitableKeywords.Formation)
+        HoverTipFactory.FromKeyword(IndomitableKeywords.Formation),
+        HoverTipFactory.FromKeyword(IndomitableKeywords.CarrierAircraft)
     ];
     
     protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(9M, ValueProp.Move)];

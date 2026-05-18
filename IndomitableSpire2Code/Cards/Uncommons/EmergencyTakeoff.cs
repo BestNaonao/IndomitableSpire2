@@ -1,12 +1,17 @@
 ﻿using IndomitableSpire2.IndomitableSpire2Code.Cards.Abstracts;
+using IndomitableSpire2.IndomitableSpire2Code.Enums;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.HoverTips;
 
 namespace IndomitableSpire2.IndomitableSpire2Code.Cards.Uncommons;
 
 public sealed class EmergencyTakeoff() : IndomitableCard(1, CardType.Skill, CardRarity.Uncommon, TargetType.Self)
 {
+    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+        [HoverTipFactory.FromKeyword(IndomitableKeywords.CarrierAircraft)];
+
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         // 播放技能动画
