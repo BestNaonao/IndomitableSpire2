@@ -6,7 +6,6 @@ using IndomitableSpire2.IndomitableSpire2Code.Powers;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
-using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.ValueProps;
 
@@ -24,9 +23,6 @@ public sealed class IllustriousAegis() : IndomitableCard(2, CardType.Skill, Card
         new ShieldVar(12M, ValueProp.Move),
         new HealVar(4M)
     ];
-    
-    // 手动补充提示框，因为 ShieldVar 默认只给原版的格挡提示
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<ShieldPower>()];
     
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
