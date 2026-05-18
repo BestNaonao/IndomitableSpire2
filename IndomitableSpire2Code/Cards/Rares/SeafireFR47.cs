@@ -7,7 +7,6 @@ using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
-using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.ValueProps;
@@ -22,8 +21,6 @@ public sealed class SeafireFr47() : CarrierAircraftCard(2, CardType.Attack, Card
     
     public override IEnumerable<CardKeyword> CanonicalKeywords => [IndomitableKeywords.StrikeFighter];
     protected override IEnumerable<CardTag> SubclassTags => [IndomitableTags.StrikeFighter];
-    
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<VulnerablePower>()];
     
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
