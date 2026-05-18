@@ -1,6 +1,13 @@
 ﻿{
-  "THE_ARCHITECT.talk.TASHKENTSPIRE2-TASHKENT_CHARACTER.0-0r.char": "I am angry at the architect",
-  "THE_ARCHITECT.talk.TASHKENTSPIRE2-TASHKENT_CHARACTER.0-0r.next": "Continue",
-  "THE_ARCHITECT.talk.TASHKENTSPIRE2-TASHKENT_CHARACTER.0-1r.ancient": "You die",
-  "THE_ARCHITECT.talk.TASHKENTSPIRE2-TASHKENT_CHARACTER.0-attack": "BOTH"
+  "THE_ARCHITECT.talk.TASHKENTSPIRE2-TASHKENT_CHARACTER.0-0r.char": "[sine]同志酱，快扮演建筑师和我打一架吧！Ура！[/sine]",
+  "THE_ARCHITECT.talk.TASHKENTSPIRE2-TASHKENT_CHARACTER.0-0r.next": "继续",
+  "THE_ARCHITECT.talk.TASHKENTSPIRE2-TASHKENT_CHARACTER.0-1r.ancient": "[jitter]时间不早了该睡觉了，今天就到这里吧，晚安哟塔什干酱。[/jitter]",
+  "THE_ARCHITECT.talk.TASHKENTSPIRE2-TASHKENT_CHARACTER.0-attack": "……",
+  "THE_ARCHITECT.talk.TASHKENTSPIRE2-TASHKENT_CHARACTER.1-0r.next": "继续",
+  "THE_ARCHITECT.talk.TASHKENTSPIRE2-TASHKENT_CHARACTER.1-0r.char": "[sine]同志酱，真不扮演建筑师继续玩吗，我已经准备好面对你啦。[/sine]",
+  "THE_ARCHITECT.talk.TASHKENTSPIRE2-TASHKENT_CHARACTER.1-1r.ancient": "[jitter]塔什干很厉害哟，不过今晚先到这里吧。[/jitter]",
+  "THE_ARCHITECT.talk.TASHKENTSPIRE2-TASHKENT_CHARACTER.1-1r.next": "继续",
+  "THE_ARCHITECT.talk.TASHKENTSPIRE2-TASHKENT_CHARACTER.1-2r.char": "[sine]同志酱，今晚，还有很长时间呢……[/sine]",
+  "THE_ARCHITECT.talk.TASHKENTSPIRE2-TASHKENT_CHARACTER.1-2r.next": "继续",
+  "THE_ARCHITECT.talk.TASHKENTSPIRE2-TASHKENT_CHARACTER.1-3r.ancient": "[jitter]游戏就玩到这里吧，不过，塔什干酱我可以再陪你一会儿。[/jitter]"
 }

@@ -205,8 +205,7 @@ public sealed class TorpedoPower : TashkentPower
             return;
 
         await PowerCmd.Apply<WeakPower>(target, floodingAmount, Owner, null);
-        await PowerCmd.Apply<VulnerablePower>(target, floodingAmount, Owner, null);
-        await PowerCmd.Apply<MarkPower>(target, floodingAmount, Owner, null);
+        await PowerCmd.Apply<StrengthPower>(target, -floodingAmount, Owner, null);
     }
 
     private async Task TriggerReload(PlayerChoiceContext ctx)

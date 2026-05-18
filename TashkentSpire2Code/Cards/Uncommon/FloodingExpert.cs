@@ -15,9 +15,8 @@ public sealed class FloodingExpert() : TashkentCard(1, CardType.Power, CardRarit
     ];
     
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [
-        HoverTipFactory.FromPower<VulnerablePower>(),
         HoverTipFactory.FromPower<WeakPower>(),
-        HoverTipFactory.FromPower<MarkPower>()
+        HoverTipFactory.FromPower<StrengthPower>()
     ];
     
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)

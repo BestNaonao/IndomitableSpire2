@@ -11,9 +11,9 @@ public sealed class WavePiercingDaggerPower : TashkentPower
     public override PowerStackType StackType => PowerStackType.Counter;
     
     public override string CustomBigIconPath => 
-        "res://TashkentSpire2/images/powers/big/mark_power.png";
+        "res://TashkentSpire2/images/powers/big/WavePiercingDaggerPower.png";
     public override string CustomPackedIconPath => 
-        "res://TashkentSpire2/images/powers/packed/mark_power.png";
+        "res://TashkentSpire2/images/powers/packed/WavePiercingDaggerPower.png";
     
     public override async Task AfterAttack(AttackCommand command)
     {

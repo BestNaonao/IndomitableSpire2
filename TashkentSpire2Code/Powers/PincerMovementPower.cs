@@ -13,9 +13,9 @@ public sealed class PincerMovementPower : TashkentPower
     public override PowerStackType StackType => PowerStackType.Counter;
     
     public override string CustomBigIconPath => 
-        "res://TashkentSpire2/images/powers/big/mark_power.png";
+        "res://TashkentSpire2/images/powers/big/PincerMovementPower.png";
     public override string CustomPackedIconPath => 
-        "res://TashkentSpire2/images/powers/packed/mark_power.png";
+        "res://TashkentSpire2/images/powers/packed/PincerMovementPower.png";
 
     public override decimal ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource)
     {

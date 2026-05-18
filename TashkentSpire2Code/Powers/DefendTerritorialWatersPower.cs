@@ -40,9 +40,9 @@ public sealed class DefendTerritorialWatersPower : TashkentPower
     protected override object InitInternalData() => new Data();
 
     public override string CustomBigIconPath => 
-        "res://TashkentSpire2/images/powers/big/mark_power.png";
+        "res://TashkentSpire2/images/powers/big/DefendTerritorialWatersPower.png";
     public override string CustomPackedIconPath => 
-        "res://TashkentSpire2/images/powers/packed/mark_power.png";
+        "res://TashkentSpire2/images/powers/packed/DefendTerritorialWatersPower.png";
 
     public async Task OnDistanceChanged(int delta)
     {
