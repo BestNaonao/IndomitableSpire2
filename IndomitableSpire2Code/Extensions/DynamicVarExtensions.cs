@@ -18,4 +18,17 @@ public static class DynamicVarExtensions
         BaseLib.Extensions.DynamicVarExtensions.DynamicVarTips[var] = HoverTipFactory.FromPower<TPower>;
         return var;
     }
+    
+    /// <summary>
+    /// 重载 2：服务于任意普通的 DynamicVar（如 ShieldVar、DamageVar 等）。
+    /// 只需要填入一个泛型。
+    /// 巧妙之处：返回值是基类 DynamicVar，这不仅免去了输入第二个泛型的麻烦，
+    /// 还在隐式类型数组 [...] 初始化时完美通过了编译！
+    /// </summary>
+    public static DynamicVar WithPowerTooltip<TPower>(this DynamicVar var) 
+        where TPower : PowerModel
+    {
+        BaseLib.Extensions.DynamicVarExtensions.DynamicVarTips[var] = HoverTipFactory.FromPower<TPower>;
+        return var;
+    }
 }
