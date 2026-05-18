@@ -1,8 +1,10 @@
 ﻿using IndomitableSpire2.IndomitableSpire2Code.Cards.Abstracts;
+using IndomitableSpire2.IndomitableSpire2Code.Enums;
 using IndomitableSpire2.IndomitableSpire2Code.Powers;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 
 namespace IndomitableSpire2.IndomitableSpire2Code.Cards.Uncommons;
@@ -12,6 +14,9 @@ public sealed class ScheduledMaintenance() : IndomitableCard(1, CardType.Power, 
     // 注册能力变量：基础 4 层
     protected override IEnumerable<DynamicVar> CanonicalVars => 
         [new PowerVar<ScheduledMaintenancePower>(4M)];
+    
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => 
+        [HoverTipFactory.FromKeyword(IndomitableKeywords.CarrierAircraft)];
     
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
