@@ -65,7 +65,7 @@
   "INDOMITABLESPIRE2-FIREPOWER_SUPPLY.title": "Firepower Supply",
   "INDOMITABLESPIRE2-FIREPOWER_SUPPLY.description": "Choose to add an{IfUpgraded:show: [gold]Upgraded[/gold]} [gold]Incendiary Expert[/gold] or [gold]Enhanced AP Ammo[/gold] into your [gold]Hand[/gold].",
   "INDOMITABLESPIRE2-ARMOURED_CARRIER.title": "Armoured Carrier",
-  "INDOMITABLESPIRE2-ARMOURED_CARRIER.description": "At the start of your turn, gain [blue]{ShieldPower}[/blue] [gold]Shield[/gold].If you take no unblocked damage in a turn, gain [blue]{AviationPower}[/blue] [gold]Aviation[/gold] at the start of your next turn.",
+  "INDOMITABLESPIRE2-ARMOURED_CARRIER.description": "At the start of your turn, gain [blue]{ShieldPower}[/blue] [gold]Shield[/gold], and\n[gold]Elegance[/gold]: Gain [blue]{AviationPower}[/blue] [gold]Aviation[/gold].",
   
   "INDOMITABLESPIRE2-REFRESH.title": "Refresh",
   "INDOMITABLESPIRE2-REFRESH.description": "Gain {Energy:energyIcons()}.\nDraw {Cards:diff()} {Cards:plural:card|cards}. Discard 1 card.",

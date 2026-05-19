@@ -65,7 +65,7 @@
   "INDOMITABLESPIRE2-FIREPOWER_SUPPLY.title": "火力補給",
   "INDOMITABLESPIRE2-FIREPOWER_SUPPLY.description": "{IfUpgraded:show:[gold]アップグレード[/gold]済みの}[gold]焼夷エキスパート[/gold]または[gold]強化徹甲弾[/gold]を1枚選び、[gold]手札[/gold]に加える。",
   "INDOMITABLESPIRE2-ARMOURED_CARRIER.title": "装甲空母",
-  "INDOMITABLESPIRE2-ARMOURED_CARRIER.description": "ターン開始時、[gold]シールド[/gold]を[blue]{ShieldPower}[/blue]得る。1ターンの間にブロックされなかったダメージを受けなかった場合、次のターン開始時に[gold]航空[/gold]を[blue]{AviationPower}[/blue]得る。",
+  "INDOMITABLESPIRE2-ARMOURED_CARRIER.description": "ターン開始時、[gold]シールド[/gold]を[blue]{ShieldPower}[/blue]得る、\n[gold]優雅[/gold]：[gold]航空[/gold]を[blue]{AviationPower}[/blue]得る。",
   
   "INDOMITABLESPIRE2-REFRESH.title": "養神",
   "INDOMITABLESPIRE2-REFRESH.description": "{Energy:energyIcons()}を得る。\nカードを{Cards:diff()}枚引く。カードを1枚捨てる。",
