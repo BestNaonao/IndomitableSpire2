@@ -1,8 +1,6 @@
 ﻿using IndomitableSpire2.IndomitableSpire2Code.Commands;
 using IndomitableSpire2.IndomitableSpire2Code.Extensions;
 using IndomitableSpire2.IndomitableSpire2Code.Localization.DynamicVars;
-using MegaCrit.Sts2.Core.Combat;
-using MegaCrit.Sts2.Core.Combat.History.Entries;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Players;
@@ -60,19 +58,8 @@ public sealed class ArmouredCarrierPower : IndomitablePower
         // 1. 获得持续的护盾 (3 * Amount)
         await CustomCreatureCmd.GainShield(Owner, DynamicVars.Shield(), null, Owner);
         
-        // 2. 查询上一回合是否受到了敌人的未格挡伤害
-        // 条件：回合数 == 当前回合 - 1 且 受击者是自己 且 攻击者是敌人 且 总伤害 > 被格挡抵消的伤害
-        var lastRound = CombatState.RoundNumber - 1;
-        var tookUnblockedDamage = CombatManager.Instance.History.Entries
-            .OfType<DamageReceivedEntry>()
-            .Any(e => 
-                e.RoundNumber ==  lastRound && 
-                e.Receiver == Owner && 
-                // e.Dealer is { IsEnemy: true } && 
-                e.Result.UnblockedDamage > 0);
-        
-        // 如果没有破防，获得等同于层数(X)的航空
-        if (!tookUnblockedDamage && lastRound > 0)
+        // 2. 优雅判定逻辑：直接调用扩展方法
+        if (Owner.MeetElegance())
         {
             await PowerCmd.Apply<AviationPower>(
                 target: Owner,
