@@ -14,9 +14,9 @@ public sealed class CounterattackPower : TashkentPower
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<MarkPower>()];
     
     public override string CustomBigIconPath => 
-        "res://TashkentSpire2/images/powers/big/mark_power.png";
+        "res://TashkentSpire2/images/powers/big/CounterattackPower.png";
     public override string CustomPackedIconPath => 
-        "res://TashkentSpire2/images/powers/packed/mark_power.png";
+        "res://TashkentSpire2/images/powers/packed/CounterattackPower.png";
     
     public override async Task BeforePowerAmountChanged(PowerModel power, decimal amount, Creature target, Creature? applier, CardModel? cardSource)
     {

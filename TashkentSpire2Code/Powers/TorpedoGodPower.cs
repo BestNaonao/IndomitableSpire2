@@ -11,7 +11,7 @@ public sealed class TorpedoGodPower: TashkentPower
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<TorpedoPower>()];
     
     public override string CustomBigIconPath => 
-        "res://TashkentSpire2/images/powers/big/mark_power.png";
+        "res://TashkentSpire2/images/powers/big/TorpedoGodPower.png";
     public override string CustomPackedIconPath => 
-        "res://TashkentSpire2/images/powers/packed/mark_power.png";
+        "res://TashkentSpire2/images/powers/packed/TorpedoGodPower.png";
 }

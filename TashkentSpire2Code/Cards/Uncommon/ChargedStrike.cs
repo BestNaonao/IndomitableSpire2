@@ -14,7 +14,7 @@ public sealed class ChargedStrike() : TashkentCard(1, CardType.Attack, CardRarit
 {
     protected override HashSet<CardTag> CanonicalTags => [CardTag.Strike];
     
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(6M, ValueProp.Move)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(5M, ValueProp.Move)];
     
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [
         HoverTipFactory.FromPower<VigorPower>()

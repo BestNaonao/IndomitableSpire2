@@ -52,9 +52,9 @@ public sealed class WillToWin : TashkentRelic
         }
     }
 
-    protected override string BigIconPath => "res://TashkentSpire2/images/relics/big/EngineBoost.png";
-    public override string PackedIconPath => "res://TashkentSpire2/images/relics/packed/EngineBoost.png";
-    protected override string PackedIconOutlinePath => "res://TashkentSpire2/images/relics/outline/EngineBoost.png";
+    protected override string BigIconPath => "res://TashkentSpire2/images/relics/big/WillToWin.png";
+    public override string PackedIconPath => "res://TashkentSpire2/images/relics/packed/WillToWin.png";
+    protected override string PackedIconOutlinePath => "res://TashkentSpire2/images/relics/outline/WillToWin.png";
 
     public override bool ShouldDie(Creature creature)
     {

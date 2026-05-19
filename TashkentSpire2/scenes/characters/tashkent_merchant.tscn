@@ -1,8 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://c8812q7rndsmf"]
+[gd_scene load_steps=3 format=3 uid="uid://c8812q7rndsmf"]
 
 [ext_resource type="Texture2D" uid="uid://b73ixjpx0hd0" path="res://TashkentSpire2/images/Tashkent/Tashkent_character.png" id="1_626iy"]
+[ext_resource type="Script" uid="uid://dk4u2eqkmrsai" path="res://TashkentSpire2Code/Scripts/NMerchantCharacterTashkent.cs" id="1_vtor8"]
 
 [node name="TashkentMerchant" type="Node2D"]
+script = ExtResource("1_vtor8")
 
 [node name="TashkentCharacter" type="Sprite2D" parent="."]
 position = Vector2(1, -202)

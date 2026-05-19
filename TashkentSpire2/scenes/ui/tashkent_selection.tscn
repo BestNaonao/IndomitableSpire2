@@ -47,10 +47,11 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_top = -52.0
-offset_bottom = -52.0
+offset_top = 100.0
+offset_bottom = 100.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(1.6, 1.6)
 script = ExtResource("2_nk3x8")
 
 [node name="SelectModeConfirmButton" parent="." instance=ExtResource("1_sdu68")]
@@ -67,7 +68,6 @@ offset_right = 40.0
 offset_bottom = -244.0
 grow_horizontal = 0
 grow_vertical = 0
-pivot_offset = Vector2(100, 40)
 
 [node name="SelectionHeader" type="RichTextLabel" parent="."]
 unique_name_in_owner = true
@@ -104,10 +104,11 @@ offset_bottom = 64.0
 [node name="LeftArrow" type="Control" parent="."]
 unique_name_in_owner = true
 anchors_preset = 0
-offset_left = 720.0
-offset_top = 488.0
-offset_right = 720.0
-offset_bottom = 488.0
+offset_left = 520.0
+offset_top = 580.0
+offset_right = 520.0
+offset_bottom = 580.0
+scale = Vector2(2, 2)
 
 [node name="TextureRect" type="TextureRect" parent="LeftArrow"]
 layout_mode = 0
@@ -119,10 +120,11 @@ flip_h = true
 [node name="RightArrow" type="Control" parent="."]
 unique_name_in_owner = true
 anchors_preset = 0
-offset_left = 1135.0
-offset_top = 488.0
-offset_right = 1135.0
-offset_bottom = 488.0
+offset_left = 1270.0
+offset_top = 580.0
+offset_right = 1270.0
+offset_bottom = 580.0
+scale = Vector2(2, 2)
 
 [node name="TextureRect" type="TextureRect" parent="RightArrow"]
 layout_mode = 0

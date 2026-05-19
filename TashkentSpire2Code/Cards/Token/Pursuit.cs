@@ -17,13 +17,15 @@ public sealed class Pursuit() : TashkentCard(0, CardType.Attack, CardRarity.Toke
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust, CardKeyword.Retain];
     
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new DamageVar(7M, ValueProp.Move),
-        new MarkDynamicVar(2M)
+        new DamageVar(6M, ValueProp.Move),
+        new MarkDynamicVar(2M),
+        new ChargeDynamicVar(1M)
     ];
     
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         ArgumentNullException.ThrowIfNull(cardPlay.Target, nameof(cardPlay.Target));
+        await PowerCmd.Apply<DistancePower>(base.Owner.Creature, base.DynamicVars["TashkentSpire2-Charge"].BaseValue, base.Owner.Creature, this);
         
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
             .FromCard(this)

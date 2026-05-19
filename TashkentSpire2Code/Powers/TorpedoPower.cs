@@ -1,4 +1,5 @@
-﻿using MegaCrit.Sts2.Core.Combat;
+﻿using BaseLib.Abstracts;
+using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
@@ -14,7 +15,7 @@ using TashkentSpire2.TashkentSpire2Code.Relics;
 
 namespace TashkentSpire2.TashkentSpire2Code.Powers;
 
-public sealed class TorpedoPower : TashkentPower
+public sealed class TorpedoPower : TashkentPower, IHasSecondAmount
 {
     private const string TurnKey = "Turns";
     
@@ -59,6 +60,11 @@ public sealed class TorpedoPower : TashkentPower
     
     public override int DisplayAmount => (int)DynamicVars[TurnKey].BaseValue;
 
+    public string GetSecondAmount()
+    {
+        return this.Amount.ToString();
+    }
+    
     public static int ComputeTurns(Creature owner)
     {
         var distPower = owner.GetPower<DistancePower>();
