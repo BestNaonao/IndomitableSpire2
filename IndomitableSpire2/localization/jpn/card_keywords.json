@@ -14,5 +14,7 @@
   "INDOMITABLESPIRE2-FORMATION.title": "編隊",
   "INDOMITABLESPIRE2-FORMATION.description": "プレイ時、[gold]山札[/gold]または[gold]捨て札[/gold]にある、コストが0でないランダムな同名カードを1枚[gold]手札[/gold]に加える。",
   "INDOMITABLESPIRE2-COMMISSION.title": "委託",
-  "INDOMITABLESPIRE2-COMMISSION.description": "未達成時はプレイできない。条件を満たしてプレイすると、あなたとこのカードを与えたプレイヤーが共に報酬を得て。"
+  "INDOMITABLESPIRE2-COMMISSION.description": "未達成時はプレイできない。条件を満たしてプレイすると、あなたとこのカードを与えたプレイヤーが共に報酬を得て。",
+  "INDOMITABLESPIRE2-ELEGANCE.title": "優雅",
+  "INDOMITABLESPIRE2-ELEGANCE.description": "1ターンの間にブロックされなかったダメージを受けなかった場合、次のターン開始時に効果を発動する。"
 }

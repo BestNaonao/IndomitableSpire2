@@ -36,4 +36,8 @@ public static class IndomitableKeywords
     // 委托：完成任务，和队友获得奖励
     [CustomEnum("commission"), KeywordProperties(AutoKeywordPosition.Before)]
     public static CardKeyword Commission;
+    
+    // 优雅：在一回合内没有受到未格挡伤害，下回合开始时触发
+    [CustomEnum("elegance"), KeywordProperties(AutoKeywordPosition.Before)]
+    public static CardKeyword Elegance;
 }
