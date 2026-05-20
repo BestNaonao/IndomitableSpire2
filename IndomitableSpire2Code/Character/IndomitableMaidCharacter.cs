@@ -28,15 +28,16 @@ public sealed class IndomitableMaidCharacter : Indomitable
     // 人物手模图片(石头剪刀布和指向)
     public override string CustomArmPaperTexturePath => 
         "res://IndomitableSpire2/images/charui/hands/multiplayer_hand_indomitable_maid_paper.png";
-    
     public override string CustomArmPointingTexturePath => 
         $"res://IndomitableSpire2/images/charui/hands/multiplayer_hand_indomitable_maid_point{new Random().Next(1, 4)}.png";
-    
     public override string CustomArmRockTexturePath => 
         "res://IndomitableSpire2/images/charui/hands/multiplayer_hand_indomitable_maid_rock.png";
-    
     public override string CustomArmScissorsTexturePath => 
         "res://IndomitableSpire2/images/charui/hands/multiplayer_hand_indomitable_maid_scissors.png";
+    
+    // 人物选择时播放的台词
+    public override string CharacterSelectSfx => 
+        "res://IndomitableSpire2/sfx/characters/indomitable/maid_pifumiaoshu.wav";
     
     public override bool HideFromVanillaCharacterSelect => true;
     

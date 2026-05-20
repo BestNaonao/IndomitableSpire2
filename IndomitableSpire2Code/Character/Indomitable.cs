@@ -103,4 +103,15 @@ public abstract class Indomitable : CustomCharacterModel
         span[4] = "vfx/vfx_fire_smoke_puff";
         return list;
     }
+    
+    // public override string CharacterTransitionSfx { get; }
+    //
+    // public override string CustomAttackSfx { get; }
+    
+    // 技能台词
+    public override string CustomCastSfx => 
+        "res://IndomitableSpire2/sfx/characters/indomitable/jinengtaici.wav";
+    // 失败台词
+    public override string CustomDeathSfx => 
+        "res://IndomitableSpire2/sfx/characters/indomitable/shibaitaici_ex.wav";
 }
