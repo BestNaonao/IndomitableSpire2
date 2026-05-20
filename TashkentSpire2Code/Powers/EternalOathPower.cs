@@ -1,13 +1,7 @@
-﻿using MegaCrit.Sts2.Core.CardSelection;
-using MegaCrit.Sts2.Core.Commands;
-using MegaCrit.Sts2.Core.Entities.Players;
+﻿using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Powers;
-using MegaCrit.Sts2.Core.Helpers;
-using MegaCrit.Sts2.Core.Models;
-using MegaCrit.Sts2.Core.Nodes;
-using MegaCrit.Sts2.Core.Nodes.Vfx;
 using MegaCrit.Sts2.Core.Rooms;
-using TashkentSpire2.TashkentSpire2Code.Enchantment;
+using TashkentSpire2.TashkentSpire2Code.Rewards;
 
 namespace TashkentSpire2.TashkentSpire2Code.Powers;
 
@@ -32,26 +26,7 @@ public sealed class EternalOathPower : TashkentPower
 
         for (int i = 0; i < base.Amount; i++)
         {
-            var selectedCards = await CardSelectCmd.FromDeckForEnchantment(
-                prefs: new CardSelectorPrefs(
-                    CardSelectorPrefs.EnchantSelectionPrompt,
-                    1
-                ),
-                player: player,
-                enchantment: ModelDb.Enchantment<OathEnchantment>(),
-                amount: 1
-            );
-
-            foreach (CardModel card in selectedCards)
-            {
-                CardCmd.Enchant<OathEnchantment>(card, 1m);
-
-                var vfx = NCardEnchantVfx.Create(card);
-                if (vfx != null)
-                {
-                    NRun.Instance?.GlobalUi.CardPreviewContainer.AddChildSafely(vfx);
-                }
-            }
+            room.AddExtraReward(base.Owner.Player, new TashkentOathReward(base.Owner.Player));
         }
     }
 }

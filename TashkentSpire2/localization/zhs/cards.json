@@ -155,7 +155,7 @@
   "TASHKENTSPIRE2-MAINTENANCE_TOOLS.title": "维修工具",
   "TASHKENTSPIRE2-MAINTENANCE_TOOLS.description": "获得[green]{RegenPower}[/green]层[gold]再生[/gold]。",
   "TASHKENTSPIRE2-MODULE_HEALTH.title": "模块血量",
-  "TASHKENTSPIRE2-MODULE_HEALTH.description": "获得{Orbs:diff()}个特殊的[gold]模块[/gold]充能球。",
+  "TASHKENTSPIRE2-MODULE_HEALTH.description": "[gold]生成[/gold]{Orbs:diff()}个特殊的[gold]模块[/gold]充能球。",
   "TASHKENTSPIRE2-POSEIDON_FORM.title": "海王形态",
   "TASHKENTSPIRE2-POSEIDON_FORM.description": "每回合开始时，你前{PoseidonFormPower:diff()}次打出能给予[gold]正面效果[/gold]的牌时，将其效果翻倍。",
   "TASHKENTSPIRE2-SLAY_THE_WHALES.title": "斩鲸",
