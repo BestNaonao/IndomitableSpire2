@@ -35,12 +35,6 @@ public sealed class ArmouredCarrierPower : IndomitablePower
         DynamicVars.Aviation().BaseValue = Amount * AviationPerStack;
     }
     
-    public override Task AfterApplied(Creature? applier, CardModel? cardSource)
-    {
-        SyncDynamicVars();
-        return Task.CompletedTask;
-    }
-    
     public override Task AfterPowerAmountChanged(PowerModel power, decimal amount, Creature? applier, CardModel? cardSource)
     {
         if (power == this)

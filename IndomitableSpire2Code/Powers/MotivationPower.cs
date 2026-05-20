@@ -27,7 +27,6 @@ public sealed class MotivationPower : IndomitablePower
     {
         // 引擎默认按卡牌给的数值设置了 Amount。我们需要默默 +1 垫底。
         SetAmount(Amount + 1, silent: true);
-        DynamicVars["MotivationAmount"].BaseValue = DisplayAmount;
         return Task.CompletedTask;
     }
     
@@ -45,7 +44,6 @@ public sealed class MotivationPower : IndomitablePower
         // 锁定机制：如果已经满级，且外界试图扣除干劲，则偏移量强行归 0
         if (IsCompleted && amount < 0)
             modifiedAmount = 0M;
-        
         // 下限保护：不能让底层 Amount 跌破 1（否则图标消失），计算刚好跌到 1 的差值
         else if (Amount + amount < 1)
             modifiedAmount = 1 - Amount;
@@ -71,7 +69,7 @@ public sealed class MotivationPower : IndomitablePower
                 await burstPower.ProcessOverflow(overflow, applier, cardSource);
         }
         
-        // 6. 更新动态变量，仅供本地化文本渲染
+        // 6. 更新动态变量，仅供本地化文本渲染，兼顾施加和追加
         DynamicVars["MotivationAmount"].BaseValue = DisplayAmount;
     }
     
