@@ -7,7 +7,8 @@ namespace IndomitableSpire2.IndomitableSpire2Code.Powers;
 
 public sealed class ZigzagManeuverPower : IndomitableTemporaryPower<DexterityPower>
 {
-    protected override bool IsPositive => true;
+    // 默认为 false，无需任何反转
+    protected override bool InvertInternalPowerAmount => false;
     
     // 绑定来源卡牌
     public override AbstractModel OriginModel => ModelDb.Card<ZigzagManeuver>();

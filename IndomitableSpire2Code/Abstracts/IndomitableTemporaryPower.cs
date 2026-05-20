@@ -4,6 +4,7 @@ using IndomitableSpire2.IndomitableSpire2Code.Extensions;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
+using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Models;
 
@@ -15,19 +16,19 @@ public abstract class IndomitableTemporaryPower<T> : CustomTemporaryPowerModel w
     public override string CustomBigIconPath => $"{Id.Entry.RemovePrefix().ToLowerInvariant()}.png".BigPowerImagePath();
     public override string CustomPackedIconPath => $"packed/{Id.Entry.RemovePrefix().ToLowerInvariant()}_packed.tres".PowerImagePath();
     
-    // 判断是正面Buff还是负面Buff
-    protected virtual bool IsPositive => true;
-    public override PowerType Type => IsPositive ? PowerType.Buff : PowerType.Debuff;
+    // 【核心改动 1】：利用扩展方法，根据 InvertInternalPowerAmount 动态反转内部能力的极性
+    public override PowerType Type => InternallyAppliedPower.Type.InvertIf(InvertInternalPowerAmount);
     
     // 底层实际操作的能力类型：T 泛型能力
     public override PowerModel InternallyAppliedPower => ModelDb.Power<T>();
     
-    // 保留原版力量的悬浮提示
+    // 内部能力的悬浮提示框
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<T>()];
     
-    // 核心逻辑：定义如何施加这个能力
-    protected override Func<Creature, decimal, Creature?, CardModel?, bool, Task> ApplyPowerFunc => 
-        (target, amount, applier, source, silent) => 
-            // BaseLib 会在回合结束时自动传入 (-(-amount)) 来返还内部能力，极其优雅！
-            PowerCmd.Apply<T>(target, IsPositive ? amount : -amount, applier, source, silent);
+    // 【核心改动 2】定义如何施加这个能力：签名加入了 PlayerChoiceContext。
+    // 因为 BaseLib 已经通过 InvertInternalPowerAmount 在底层帮我们把 amount 的正负号处理好了，
+    // 这里我们直接原样传递 amount，代码变得极其干净！
+    protected override Func<PlayerChoiceContext, Creature, decimal, Creature?, CardModel?, bool, Task> ApplyPowerFunc => 
+        (_, target, amount, applier, source, silent) => 
+            PowerCmd.Apply<T>(target, amount, applier, source, silent);
 }
