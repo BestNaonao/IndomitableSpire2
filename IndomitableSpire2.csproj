@@ -120,6 +120,7 @@
         <Folder Include="IndomitableSpire2\images\powers\big\"/>
         <Folder Include="IndomitableSpire2\images\relics\big\"/>
         <Folder Include="IndomitableSpire2\scenes\vfx\energy\" />
+        <Folder Include="IndomitableSpire2\sfx\characters\indomitable\" />
     </ItemGroup>
 
     <ItemGroup>
