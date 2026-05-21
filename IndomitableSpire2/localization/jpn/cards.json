@@ -66,6 +66,8 @@
   "INDOMITABLESPIRE2-FIREPOWER_SUPPLY.description": "{IfUpgraded:show:[gold]アップグレード[/gold]済みの}[gold]焼夷エキスパート[/gold]または[gold]強化徹甲弾[/gold]を1枚選び、[gold]手札[/gold]に加える。",
   "INDOMITABLESPIRE2-ARMOURED_CARRIER.title": "装甲空母",
   "INDOMITABLESPIRE2-ARMOURED_CARRIER.description": "ターン開始時、[gold]シールド[/gold]を[blue]{ShieldPower}[/blue]得る、\n[gold]優雅[/gold]：[gold]航空[/gold]を[blue]{AviationPower}[/blue]得る。",
+  "INDOMITABLESPIRE2-PAJAMA_REVOLUTION.title": "パジャマ革命",
+  "INDOMITABLESPIRE2-PAJAMA_REVOLUTION.description": "[blue]{HypnotizedPower:diff()}[/blue]の[gold]催眠[/gold]を与える。\nすべてのプレイヤーは{Block:diff()}[gold]ブロック[/gold]を得て、次のターンに{Energy:energyIcons()}を得る、このターンを終了する。",
   
   "INDOMITABLESPIRE2-REFRESH.title": "養神",
   "INDOMITABLESPIRE2-REFRESH.description": "{Energy:energyIcons()}を得る。\nカードを{Cards:diff()}枚引く。カードを1枚捨てる。",

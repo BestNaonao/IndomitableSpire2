@@ -66,6 +66,8 @@
   "INDOMITABLESPIRE2-FIREPOWER_SUPPLY.description": "选择1张{IfUpgraded:show:[gold]升级过的[/gold]}[gold]起火专家[/gold]或[gold]增强穿甲弹药[/gold]加入你的[gold]手牌[/gold]。",
   "INDOMITABLESPIRE2-ARMOURED_CARRIER.title": "装甲航母",
   "INDOMITABLESPIRE2-ARMOURED_CARRIER.description": "在你的回合开始时获得[blue]{ShieldPower}[/blue]点[gold]护盾[/gold]，并且\n[gold]优雅[/gold]：获得[blue]{AviationPower}[/blue]层[gold]航空[/gold]。",
+  "INDOMITABLESPIRE2-PAJAMA_REVOLUTION.title": "睡衣革命",
+  "INDOMITABLESPIRE2-PAJAMA_REVOLUTION.description": "给予[blue]{HypnotizedPower:diff()}[/blue]层[gold]催眠[/gold]。\n所有玩家获得{Block:diff()}点[gold]格挡[/gold]，下回合获得{Energy:energyIcons()}，结束当前回合。",
   
   "INDOMITABLESPIRE2-REFRESH.title": "养神",
   "INDOMITABLESPIRE2-REFRESH.description": "获得{Energy:energyIcons()}。\n抽{Cards:diff()}张牌，丢弃1张牌。",
