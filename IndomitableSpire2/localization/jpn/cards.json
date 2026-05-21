@@ -69,8 +69,8 @@
   "INDOMITABLESPIRE2-PAJAMA_REVOLUTION.title": "パジャマ革命",
   "INDOMITABLESPIRE2-PAJAMA_REVOLUTION.description": "[blue]{HypnotizedPower:diff()}[/blue]の[gold]催眠[/gold]を与える。\nすべてのプレイヤーは{Block:diff()}[gold]ブロック[/gold]を得て、次のターンに{Energy:energyIcons()}を得る、このターンを終了する。",
   "INDOMITABLESPIRE2-NIGHT_RAID.title": "夜襲",
-  "INDOMITABLESPIRE2-NIGHT_RAID.description": "[blue]{MotivationRequire:diff()}[/blue]の[gold]やる気[/gold]を[gold]必要[/gold]とする。\n[gold]手札[/gold]にあるアタックを1枚選び、それをプレイする。そのカードは[gold]睡眠[/gold]を意図している敵に対して{DamageMultiplier:diff()}倍のダメージを与える。",
-  "INDOMITABLESPIRE2-NIGHT_RAID.selectionScreenPrompt": "アタックを選ぶ",
+  "INDOMITABLESPIRE2-NIGHT_RAID.description": "[blue]{MotivationRequire:diff()}[/blue]の[gold]やる気[/gold]を[gold]必要[/gold]とする。\n[gold]手札[/gold]にあるアタックを1枚選び、それをプレイする。そのカードは[gold]睡眠[/gold]中の敵に対して{DamageMultiplier:diff()}倍のダメージを与える。",
+  "INDOMITABLESPIRE2-NIGHT_RAID.selectionScreenPrompt": "アタックを選ぶ。",
   
   "INDOMITABLESPIRE2-REFRESH.title": "養神",
   "INDOMITABLESPIRE2-REFRESH.description": "{Energy:energyIcons()}を得る。\nカードを{Cards:diff()}枚引く。カードを1枚捨てる。",

@@ -69,7 +69,7 @@
   "INDOMITABLESPIRE2-PAJAMA_REVOLUTION.title": "Pajama Revolution",
   "INDOMITABLESPIRE2-PAJAMA_REVOLUTION.description": "Apply [blue]{HypnotizedPower:diff()}[/blue] [gold]Hypnotized[/gold].\nALL players gain {Block:diff()} [gold]Block[/gold] and gain {Energy:energyIcons()} next turn, End current turn.",
   "INDOMITABLESPIRE2-NIGHT_RAID.title": "Night Raid",
-  "INDOMITABLESPIRE2-NIGHT_RAID.description": "[gold]Requires[/gold] [blue]{MotivationRequire:diff()}[/blue] [gold]Motivation[/gold].\nChoose an Attack in your [gold]Hand[/gold] and play it. It deals {DamageMultiplier:diff()}x damage to enemies intending to [gold]Sleep[/gold].",
+  "INDOMITABLESPIRE2-NIGHT_RAID.description": "[gold]Requires[/gold] [blue]{MotivationRequire:diff()}[/blue] [gold]Motivation[/gold].\nChoose an Attack in your [gold]Hand[/gold] and play it. It deals {DamageMultiplier:diff()}x damage to [gold]Sleeping[/gold] enemies.",
   "INDOMITABLESPIRE2-NIGHT_RAID.selectionScreenPrompt": "Choose an Attack.",
   
   "INDOMITABLESPIRE2-REFRESH.title": "Refresh",
