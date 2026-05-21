@@ -30,7 +30,7 @@ public sealed class Scope : TashkentRelic
         {
             return amount;
         }
-        if (giver != base.Owner.Creature)
+        if (giver != base.Owner.Creature || target == base.Owner.Creature)
         {
             return amount;
         }

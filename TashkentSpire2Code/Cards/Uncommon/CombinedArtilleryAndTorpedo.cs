@@ -27,6 +27,7 @@ public sealed class CombinedArtilleryAndTorpedo() : TashkentCard(1, CardType.Att
         
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
             .FromCard(this)
+            .WithHitCount(base.DynamicVars.Repeat.IntValue)
             .Targeting(cardPlay.Target)
             .WithHitFx("vfx/vfx_attack_slash")
             .Execute(choiceContext);

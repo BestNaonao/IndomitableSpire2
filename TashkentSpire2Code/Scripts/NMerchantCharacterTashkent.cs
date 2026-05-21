@@ -4,4 +4,12 @@ namespace TashkentSpire2.TashkentSpire2Code.Scripts;
 
 public partial class NMerchantCharacterTashkent : NMerchantCharacter
 {
+    public override void _Ready()
+    {
+        CallDeferred(nameof(DisableAnimationSetup));
+    }
+
+    private void DisableAnimationSetup()
+    {
+    }
 }

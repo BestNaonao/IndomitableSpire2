@@ -31,6 +31,10 @@ public sealed class ModuleOrb : CustomOrbModel
     // 球的场景的路径。如果你使用这个，你必须要有一个名称为SpineSkeleton并且是SpineSprite类型的节点
     // public override string? CustomSpritePath => "res://test/scenes/test_orb.tscn";
 
+    public override string CustomPassiveSfx => "res://TashkentSpire2/sfx/tashkent_PassiveSfx.mp3";
+    public override string CustomEvokeSfx => "res://TashkentSpire2/sfx/tashkent_EvokeSfx.mp3";
+    public override string CustomChannelSfx => "res://TashkentSpire2/sfx/tashkent_ChannelSfx.mp3";
+    
     // 可以继承这个并自行搭建场景，只需父节点是Node2D即可。这样就没有上述限制。代码上优先使用这个
     public override Node2D? CreateCustomSprite()
     {

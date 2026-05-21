@@ -70,6 +70,6 @@ public sealed class TorpedoReload() : AmmunitionCard(2, CardType.Skill, CardRari
     
     protected override void OnUpgrade()
     {
-        DynamicVars["TashkentSpire2-Shot"].UpgradeValueBy(-1M);
+        DynamicVars["TashkentSpire2-Torpedo"].UpgradeValueBy(3M);
     }
 }

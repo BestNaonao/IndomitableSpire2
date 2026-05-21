@@ -116,7 +116,7 @@
   "TASHKENTSPIRE2-TIDEBREAKER_HUNT.title": "踏浪猎杀",
   "TASHKENTSPIRE2-TIDEBREAKER_HUNT.description": "对所有敌人造成{Damage:diff()}点伤害。\n被[gold]消耗[/gold]时，将一张费用减少{Energy:energyIcons()}的[gold]复制牌[/gold]加入手牌。",
   "TASHKENTSPIRE2-TORPEDO_RELOAD.title": "鱼雷再装填",
-  "TASHKENTSPIRE2-TORPEDO_RELOAD.description": "[gold]鱼雷[/gold]{TashkentSpire2-Torpedo:diff()}。\n[gold]发射[/gold]{TashkentSpire2-Shot:diff()}: 你的[gold]鱼雷[/gold]能力生效提前[blue]2[/blue]回合。\n[gold]弹药[/gold]{TashkentSpire2-Ammu:diff()}/{TashkentSpire2-Ammu-Max:diff()}。\n抽到此牌或者[gold]鱼雷[/gold]命中时，[gold]装填[/gold]{TashkentSpire2-Load:diff()}[gold]弹药[/gold]。",
+  "TASHKENTSPIRE2-TORPEDO_RELOAD.description": "[gold]鱼雷[/gold]{TashkentSpire2-Torpedo:diff()}。\n[gold]发射[/gold]{TashkentSpire2-Shot:diff()}: 你的[gold]鱼雷[/gold]能力生效提前[blue]1[/blue]回合。\n[gold]弹药[/gold]{TashkentSpire2-Ammu:diff()}/{TashkentSpire2-Ammu-Max:diff()}。\n抽到此牌或者[gold]鱼雷[/gold]命中时，[gold]装填[/gold]{TashkentSpire2-Load:diff()}[gold]弹药[/gold]。",
   "TASHKENTSPIRE2-TORPEDO_SEA.title": "鱼雷海",
   "TASHKENTSPIRE2-TORPEDO_SEA.description": "[gold]鱼雷[/gold]{TashkentSpire2-Torpedo:diff()}。\n[gold]鱼雷[/gold]{TashkentSpire2-Torpedo:diff()}。\n[gold]鱼雷[/gold]{TashkentSpire2-Torpedo:diff()}。{IfUpgraded:show:\n[gold]鱼雷[/gold]{TashkentSpire2-Torpedo:diff()}。|}",
   "TASHKENTSPIRE2-TRAILBLAZE.title": "开拓",
