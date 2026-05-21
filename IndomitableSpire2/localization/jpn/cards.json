@@ -6,11 +6,11 @@
   "INDOMITABLESPIRE2-TAKE_A_BREAK.title": "小休止",
   "INDOMITABLESPIRE2-TAKE_A_BREAK.description": "ＨＰを[green]{Heal:diff()}[/green]回復する。\n[gold]やる気[/gold]を[blue]{MotivationGain:diff()}[/blue]得る。\nターンを終了する。",
   "INDOMITABLESPIRE2-IGNITE.title": "点火",
-  "INDOMITABLESPIRE2-IGNITE.description": "[gold]やる気[/gold]が[blue]{MotivationRequire:diff()}[/blue]以上の場合のみプレイできる。\n{Damage:diff()}ダメージを与える。\n[gold]炎上[/gold] [blue]{OnFirePower:diff()}[/blue]を付与する",
+  "INDOMITABLESPIRE2-IGNITE.description": "[blue]{MotivationRequire:diff()}[/blue]の[gold]やる気[/gold]を[gold]必要[/gold]とする。\n{Damage:diff()}ダメージを与える。\n[gold]炎上[/gold] [blue]{OnFirePower:diff()}[/blue]を付与する",
   "INDOMITABLESPIRE2-DUAL_PURPOSE_GUN.title": "4.5インチ両用砲",
   "INDOMITABLESPIRE2-DUAL_PURPOSE_GUN.description": "{Damage:diff()}ダメージを与える。\nターン終了時、このカードが[gold]手札[/gold]にあり、このターンにプレイされていなければ、[gold]ブロック[/gold]を{Block:diff()}得る。{InCombat:\n{WillAutoBlock:cond:>0?[green]（ブロックを得る）[/green]|[red]（このターンにプレイ済み）[/red]}|}",
   "INDOMITABLESPIRE2-ZIGZAG_MANEUVER.title": "ジグザグ機動",
-  "INDOMITABLESPIRE2-ZIGZAG_MANEUVER.description": "[gold]やる気[/gold]が[blue]{MotivationRequire:diff()}[/blue]以上の場合のみプレイできる。\nブロックを{Block:diff()}得る。\nターン終了時まで[gold]敏捷[/gold]{DexterityPower:diff()}を得る。",
+  "INDOMITABLESPIRE2-ZIGZAG_MANEUVER.description": "[blue]{MotivationRequire:diff()}[/blue]の[gold]やる気[/gold]を[gold]必要[/gold]とする。\nブロックを{Block:diff()}得る。\nターン終了時まで[gold]敏捷[/gold]{DexterityPower:diff()}を得る。",
   "INDOMITABLESPIRE2-WORK_ARRANGEMENT.title": "業務手配",
   "INDOMITABLESPIRE2-WORK_ARRANGEMENT.description": "[gold]やる気[/gold]を[blue]{MotivationConsume:diff()}[/blue]消費する。\nカードを{Cards:diff()}枚引く。\n手札を1枚、[gold]山札[/gold]の一番下に置く。",
   "INDOMITABLESPIRE2-WORK_ARRANGEMENT.selectionScreenPrompt": "山札の一番下に置くカードを1枚選ぶ。",
@@ -69,7 +69,7 @@
   "INDOMITABLESPIRE2-PAJAMA_REVOLUTION.title": "パジャマ革命",
   "INDOMITABLESPIRE2-PAJAMA_REVOLUTION.description": "[blue]{HypnotizedPower:diff()}[/blue]の[gold]催眠[/gold]を与える。\nすべてのプレイヤーは{Block:diff()}[gold]ブロック[/gold]を得て、次のターンに{Energy:energyIcons()}を得る、このターンを終了する。",
   "INDOMITABLESPIRE2-NIGHT_RAID.title": "夜襲",
-  "INDOMITABLESPIRE2-NIGHT_RAID.description": "[gold]やる気[/gold]が[blue]{MotivationRequire:diff()}[/blue]以上の場合のみプレイできる。\n[gold]手札[/gold]にあるアタックを1枚選び、それをプレイする。そのカードは[gold]睡眠[/gold]を意図している敵に対して{DamageMultiplier:diff()}倍のダメージを与える。",
+  "INDOMITABLESPIRE2-NIGHT_RAID.description": "[blue]{MotivationRequire:diff()}[/blue]の[gold]やる気[/gold]を[gold]必要[/gold]とする。\n[gold]手札[/gold]にあるアタックを1枚選び、それをプレイする。そのカードは[gold]睡眠[/gold]を意図している敵に対して{DamageMultiplier:diff()}倍のダメージを与える。",
   "INDOMITABLESPIRE2-NIGHT_RAID.selectionScreenPrompt": "アタックを選ぶ",
   
   "INDOMITABLESPIRE2-REFRESH.title": "養神",
@@ -87,7 +87,7 @@
   "INDOMITABLESPIRE2-WELL_RESTED.description": "このカードを引くたび、{Energy:energyIcons()}を得る。",
   
   "INDOMITABLESPIRE2-SCORCHING_FLAME_RAIN.title": "灼天の焔雨",
-  "INDOMITABLESPIRE2-SCORCHING_FLAME_RAIN.description": "[gold]やる気[/gold]が[blue]{MotivationRequire:diff()}[/blue]以上の場合のみプレイできる。\nすべての敵に{Damage:diff()}ダメージを与える。\nすべての敵に[gold]炎上[/gold] [blue]{OnFirePower:diff()}[/blue]を付与する。",
+  "INDOMITABLESPIRE2-SCORCHING_FLAME_RAIN.description": "[blue]{MotivationRequire:diff()}[/blue]の[gold]やる気[/gold]を[gold]必要[/gold]とする。\nすべての敵に{Damage:diff()}ダメージを与える。\nすべての敵に[gold]炎上[/gold] [blue]{OnFirePower:diff()}[/blue]を付与する。",
   
   "INDOMITABLESPIRE2-DISPATCH_COMMISSION.title": "委託発令",
   "INDOMITABLESPIRE2-DISPATCH_COMMISSION.description": "他のプレイヤー1人は、ランダムな{IfUpgraded:show:[gold]アップグレード[/gold]済みの}[gold]委託[/gold]カードを1枚[gold]手札[/gold]に加える。",
