@@ -50,7 +50,7 @@ public static class CustomCreatureCmd
     /// <summary>
     /// 判断目标生物上一回合是否符合“优雅”的条件（即：在上一回合存在，且没有受到任何未被格挡的伤害）
     /// </summary>
-    public static bool MeetElegance(this Creature creature)
+    public static bool MeetsElegance(this Creature creature)
     {
         var combatState = creature.CombatState;
         if (combatState == null) return false;

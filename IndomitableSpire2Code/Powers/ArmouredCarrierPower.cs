@@ -53,7 +53,7 @@ public sealed class ArmouredCarrierPower : IndomitablePower
         await CustomCreatureCmd.GainShield(Owner, DynamicVars.Shield(), null, Owner);
         
         // 2. 优雅判定逻辑：直接调用扩展方法
-        if (Owner.MeetElegance())
+        if (Owner.MeetsElegance())
         {
             await PowerCmd.Apply<AviationPower>(
                 target: Owner,
