@@ -1,4 +1,5 @@
 ﻿using IndomitableSpire2.IndomitableSpire2Code.Cards.Abstracts;
+using IndomitableSpire2.IndomitableSpire2Code.Enums;
 using IndomitableSpire2.IndomitableSpire2Code.Extensions;
 using IndomitableSpire2.IndomitableSpire2Code.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.CardSelection;
@@ -6,6 +7,7 @@ using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.ValueProps;
@@ -23,6 +25,10 @@ public sealed class NightRaid() : IndomitableCard(1, CardType.Skill, CardRarity.
         new MotivationRequireVar(30M),
         new DamageMultiplierVar(2M)
     ];
+    
+    // 添加“需求”提示框
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => 
+        [HoverTipFactory.FromKeyword(IndomitableKeywords.Require)];
     
     // 核心限制：干劲不足时不可打出
     protected override bool IsPlayable => this.MeetsMotivationRequirement();

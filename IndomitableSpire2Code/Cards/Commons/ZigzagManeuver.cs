@@ -1,4 +1,5 @@
 ﻿using IndomitableSpire2.IndomitableSpire2Code.Cards.Abstracts;
+using IndomitableSpire2.IndomitableSpire2Code.Enums;
 using IndomitableSpire2.IndomitableSpire2Code.Extensions;
 using IndomitableSpire2.IndomitableSpire2Code.Localization.DynamicVars;
 using IndomitableSpire2.IndomitableSpire2Code.Powers;
@@ -14,16 +15,17 @@ namespace IndomitableSpire2.IndomitableSpire2Code.Cards.Commons;
 
 public sealed class ZigzagManeuver() : IndomitableCard(1, CardType.Skill, CardRarity.Common, TargetType.Self)
 {
-    // 悬停提示：显示敏捷的关键词说明
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<DexterityPower>()];
-    
     // 注册变量：5点格挡，2点敏捷
     protected override IEnumerable<DynamicVar> CanonicalVars => 
     [
+        new MotivationRequireVar(20M),
         new BlockVar(5M, ValueProp.Move),
-        new PowerVar<DexterityPower>(2M),
-        new MotivationRequireVar(20M)
+        new CustomPowerVar<DexterityPower>(2M)
     ];
+    
+    // 添加“需求”提示框
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => 
+        [HoverTipFactory.FromKeyword(IndomitableKeywords.Require)];
     
     // 核心限制：必须有至少 10 点干劲才能打出
     protected override bool IsPlayable => this.MeetsMotivationRequirement();
