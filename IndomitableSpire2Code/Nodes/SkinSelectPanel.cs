@@ -2,6 +2,7 @@
 using IndomitableSpire2.IndomitableSpire2Code.Character;
 using MegaCrit.Sts2.addons.mega_text;
 using MegaCrit.Sts2.Core.Bindings.MegaSpine;
+using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Localization;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Nodes.Screens.CharacterSelect;
@@ -56,23 +57,23 @@ public partial class SkinSelectPanel : Control
     private void OnLeftPressed()
     {
         _currentIndex = (_currentIndex + Skins.Count - 1) % Skins.Count;
-        UpdateUI();
+        OnSelection();
     }
     
     private void OnRightPressed()
     {
         _currentIndex = (_currentIndex + 1) % Skins.Count;
-        UpdateUI();
+        OnSelection();
     }
     
-    private void UpdateUI()
+    private void OnSelection()
     {
         var skin = Skins[_currentIndex];
         RenderSkinVisuals(skin);
         _selectScreen.Lobby.SetLocalCharacter(skin);
         
         // 播放当前皮肤的专属选人音效
-        // SfxCmd.Play(skin.CharacterSelectSfx);
+        SfxCmd.Play(skin.CharacterSelectSfx);
     }
     
     // 专注处理 UI 视觉的替换
