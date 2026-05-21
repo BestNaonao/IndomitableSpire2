@@ -31,6 +31,9 @@ public static class DynamicVarSetExtensions
     
     public static DynamicVar Slow(this DynamicVarSet  vars) => vars[nameof(SlowPower)];
     
+    public static DamageMultiplierVar DamageMultiplier(this DynamicVarSet vars) => 
+        (DamageMultiplierVar) vars[DamageMultiplierVar.DefaultName];
+    
     public static ReconVar Recon(this DynamicVarSet  vars) => (ReconVar) vars[ReconVar.DefaultName];
     
     public static ShieldVar Shield(this DynamicVarSet  vars) => (ShieldVar) vars[ShieldVar.DefaultName];
