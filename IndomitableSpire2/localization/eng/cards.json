@@ -68,6 +68,9 @@
   "INDOMITABLESPIRE2-ARMOURED_CARRIER.description": "At the start of your turn, gain [blue]{ShieldPower}[/blue] [gold]Shield[/gold], and\n[gold]Elegance[/gold]: Gain [blue]{AviationPower}[/blue] [gold]Aviation[/gold].",
   "INDOMITABLESPIRE2-PAJAMA_REVOLUTION.title": "Pajama Revolution",
   "INDOMITABLESPIRE2-PAJAMA_REVOLUTION.description": "Apply [blue]{HypnotizedPower:diff()}[/blue] [gold]Hypnotized[/gold].\nALL players gain {Block:diff()} [gold]Block[/gold] and gain {Energy:energyIcons()} next turn, End current turn.",
+  "INDOMITABLESPIRE2-NIGHT_RAID.title": "Night Raid",
+  "INDOMITABLESPIRE2-NIGHT_RAID.description": "Can only be played if you have at least [blue]{MotivationRequire:diff()}[/blue] [gold]Motivation[/gold].\nChoose an Attack in your [gold]Hand[/gold] and play it. It deals {DamageMultiplier:diff()}x damage to enemies intending to [gold]Sleep[/gold].",
+  "INDOMITABLESPIRE2-NIGHT_RAID.selectionScreenPrompt": "Choose an Attack.",
   
   "INDOMITABLESPIRE2-REFRESH.title": "Refresh",
   "INDOMITABLESPIRE2-REFRESH.description": "Gain {Energy:energyIcons()}.\nDraw {Cards:diff()} {Cards:plural:card|cards}. Discard 1 card.",
