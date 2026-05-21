@@ -29,6 +29,10 @@ public static class IndomitableKeywords
     [CustomEnum("durability"), KeywordProperties(AutoKeywordPosition.Before)]
     public static CardKeyword Durability;
     
+    // 需求：打出卡牌的前置条件
+    [CustomEnum("require"), KeywordProperties(AutoKeywordPosition.Before)]
+    public static CardKeyword Require;
+    
     // 编队：在卡牌末尾显示，代表小队增援机制
     [CustomEnum("formation"), KeywordProperties(AutoKeywordPosition.After)]
     public static CardKeyword Formation;

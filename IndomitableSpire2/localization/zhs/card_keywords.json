@@ -11,6 +11,8 @@
   "INDOMITABLESPIRE2-LEVEL_BOMBER.description": "水平轰炸机性质的舰载机，能够触发相关效果。通常具有[gold]群体伤害[/gold]。",
   "INDOMITABLESPIRE2-DURABILITY.title": "耐久",
   "INDOMITABLESPIRE2-DURABILITY.description": "该卡牌攻击具有攻击意图的敌人会根据反击强度损失耐久，耐久归零时[gold]消耗[/gold]。",
+  "INDOMITABLESPIRE2-REQUIRE.title": "需求",
+  "INDOMITABLESPIRE2-REQUIRE.description": "只有当对应的数值达到要求时，这张牌才能被打出。",
   "INDOMITABLESPIRE2-FORMATION.title": "编队",
   "INDOMITABLESPIRE2-FORMATION.description": "打出时，将你[gold]抽牌堆[/gold]或[gold]弃牌堆[/gold]中的一张费用不为 0 的随机同名牌放入你的[gold]手牌[/gold]。",
   "INDOMITABLESPIRE2-COMMISSION.title": "委托",
