@@ -27,14 +27,13 @@ public abstract class Indomitable : CustomCharacterModel
     
     // 角色名称的颜色，STS2 使用 Godot 的 Color 结构体
     public override Color NameColor => TopicColor; // 替换为不挠的主题色，比如白色或淡蓝
-
+    
     public override int StartingHp => 69; // 初始血量
     public override int StartingGold => 99; // BaseLib 默认是 99，你可以重写修改
-
+    
     // 小地图、对话、能量球相关的颜色设置
     public override Color EnergyLabelOutlineColor => new Color("1E283CFF");
     public override Color DialogueColor => new("AAAAAA");
-    public override Color MapDrawingColor => new("AAAAAA");
     public override Color RemoteTargetingLineColor => new("AAAAAA");
     public override Color RemoteTargetingLineOutline => Colors.Black;
     
@@ -42,7 +41,7 @@ public abstract class Indomitable : CustomCharacterModel
     public override CardPoolModel CardPool => ModelDb.CardPool<IndomitableCardPool>();
     public override PotionPoolModel PotionPool => ModelDb.PotionPool<IndomitablePotionPool>();
     public override RelicPoolModel RelicPool => ModelDb.RelicPool<IndomitableRelicPool>();
-
+    
     // 设置初始卡组
     public override IEnumerable<CardModel> StartingDeck =>
     [
@@ -57,11 +56,8 @@ public abstract class Indomitable : CustomCharacterModel
         ModelDb.Card<TakeABreak>(),
         ModelDb.Card<Ignite>()
     ];
-
-    public override IReadOnlyList<RelicModel> StartingRelics =>
-    [
-        ModelDb.Relic<ShikikanDakimakura>()
-    ];
+    
+    public override IReadOnlyList<RelicModel> StartingRelics => [ModelDb.Relic<ShikikanDakimakura>()];
     
     // ... 同样的方式替换选人界面的立绘、头像等 ...
     public override string CustomCharacterSelectBg =>               // 选择界面背景
@@ -78,7 +74,7 @@ public abstract class Indomitable : CustomCharacterModel
         "res://IndomitableSpire2/scenes/combat/energy_counters/indomitable_energy_counter.tscn";
     public override string CustomTrailPath =>                       // 卡牌轨迹特效
         "res://IndomitableSpire2/scenes/vfx/card_trail_indomitable.tscn";
-
+    
     // 原版逻辑构建动作映射，传入 Spine 文件中实际命名的动作字符串
     public override CreatureAnimator SetupCustomAnimationStates(MegaSprite controller) => SetupAnimationState(
         controller: controller, 

@@ -1,7 +1,11 @@
-﻿namespace IndomitableSpire2.IndomitableSpire2Code.Character;
+﻿using Godot;
+
+namespace IndomitableSpire2.IndomitableSpire2Code.Character;
 
 public sealed class IndomitableMaidCharacter : Indomitable
 {
+    public override Color MapDrawingColor => Colors.Black;
+    
     // 逻辑控制开关：当前选择的皮肤。
     // 设置为 static 方便以后在 UI 界面（如 CharacterSelectScreen）的按钮点击事件中直接修改：
     public override IndomitableSkin CurrentSkin => IndomitableSkin.Maid;
