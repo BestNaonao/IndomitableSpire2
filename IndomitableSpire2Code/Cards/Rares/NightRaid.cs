@@ -2,6 +2,8 @@
 using IndomitableSpire2.IndomitableSpire2Code.Enums;
 using IndomitableSpire2.IndomitableSpire2Code.Extensions;
 using IndomitableSpire2.IndomitableSpire2Code.Localization.DynamicVars;
+using IndomitableSpire2.IndomitableSpire2Code.Localization.HoverTips;
+using IndomitableSpire2.IndomitableSpire2Code.Powers;
 using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -10,6 +12,7 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.MonsterMoves.Intents;
 using MegaCrit.Sts2.Core.ValueProps;
 
 namespace IndomitableSpire2.IndomitableSpire2Code.Cards.Rares;
@@ -19,16 +22,18 @@ public sealed class NightRaid() : IndomitableCard(1, CardType.Skill, CardRarity.
     // 用于记录被选中的攻击牌，在全局伤害钩子中进行特判识别
     private CardModel? _selectedCard;
     
-    // 注册变量：需要 30 点干劲
     protected override IEnumerable<DynamicVar> CanonicalVars => 
     [
-        new MotivationRequireVar(30M),
-        new DamageMultiplierVar(2M)
+        new MotivationRequireVar(30M),  // 需要 30 点干劲
+        new DamageMultiplierVar(2M)     // 伤害乘 2 倍
     ];
     
-    // 添加“需求”提示框
     protected override IEnumerable<IHoverTip> ExtraHoverTips => 
-        [HoverTipFactory.FromKeyword(IndomitableKeywords.Require)];
+    [
+        HoverTipFactory.FromKeyword(IndomitableKeywords.Require),   // “需求”提示框
+        HoverTipFactory.FromPower<MotivationPower>(),   // “干劲”提示框
+        CustomHoverTipFactory.FromIntent<SleepIntent>() // “沉睡”提示框
+    ];
     
     // 核心限制：干劲不足时不可打出
     protected override bool IsPlayable => this.MeetsMotivationRequirement();
@@ -43,19 +48,14 @@ public sealed class NightRaid() : IndomitableCard(1, CardType.Skill, CardRarity.
         
         // 从手牌中选择一张攻击牌，并记录这张牌，以便在随后的伤害计算中为其提供特判加成
         _selectedCard = (await CardSelectCmd.FromHand(
-            choiceContext, 
-            Owner, 
-            prefs, 
-            c => c.Type == CardType.Attack, 
-            this
+            choiceContext, Owner, prefs, c => c.Type == CardType.Attack, this
         )).FirstOrDefault();
         
         if (_selectedCard != null)
         {
             try
             {
-                // 【核心引导机制】：将夜袭技能牌指定的目标 (cardPlay.Target) 传递给自动打出的攻击牌！
-                // 如果是单体攻击，它将精准命中 cardPlay.Target；如果是群攻/随机攻击，底层会自动忽略。
+                // 将夜袭技能牌指定的目标传递给自动打出的攻击牌！底层会自动处理单体/群体/随机攻击。
                 await CardCmd.AutoPlay(choiceContext, _selectedCard, cardPlay.Target);
             }
             finally
@@ -68,11 +68,7 @@ public sealed class NightRaid() : IndomitableCard(1, CardType.Skill, CardRarity.
     
     // 【核心特判机制】：利用卡牌在战斗堆中会监听全局钩子的特性，拦截并修改伤害
     public override decimal ModifyDamageMultiplicative(
-        Creature? target,
-        decimal amount,
-        ValueProp props,
-        Creature? dealer,
-        CardModel? cardSource)
+        Creature? target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource)
     {
         // 1. 确保造成伤害的卡正是我们刚才记录的那张选定的牌，且这是一次卡牌攻击伤害
         // 2. 确保目标存在、是怪物、并且通过我们的扩展方法判定其拥有“睡眠”意图
