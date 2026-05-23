@@ -1,9 +1,9 @@
-﻿using Godot;
+﻿using System.Reflection;
+using Godot;
 using MegaCrit.Sts2.Core.Assets;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization;
 using MegaCrit.Sts2.Core.MonsterMoves.Intents;
-using System.Reflection;
 
 namespace IndomitableSpire2.IndomitableSpire2Code.Localization.HoverTips;
 
@@ -31,15 +31,11 @@ public static class CustomHoverTipFactory
         static IntentCache()
         {
             var intent = new TIntent();
-            // 1. 唯一需要反射的地方：获取 protected 的 IntentPrefix。
-            // 由于放在静态构造函数中，整个游戏生命周期对每种 Intent 只会执行一次反射。
-            var prefixProp = typeof(TIntent).GetProperty(
-                "IntentPrefix", BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public
-            );
-            
+            // 1. 唯一需要反射的地方：获取 protected 的 IntentPrefix。由于放在静态构造函数中，对每种 Intent 只会执行一次反射。
             // 兜底策略：如果获取失败，就将 IntentType 枚举转为大写字符串（例如 SleepIntent -> SLEEP）
-            var prefix = prefixProp?.GetValue(intent) as string ?? 
-                         intent.IntentType.ToString().ToUpperInvariant();
+            var prefix = typeof(TIntent)
+                .GetProperty("IntentPrefix", BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public)
+                ?.GetValue(intent) as string ?? intent.IntentType.ToString().ToUpperInvariant();
             
             // 2. 组装纯净的静态 LocString（不传入 targets 和 owner）
             var title = new LocString("intents", $"{prefix}.title");
