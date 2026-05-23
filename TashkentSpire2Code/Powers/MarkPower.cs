@@ -34,7 +34,7 @@ public sealed class MarkPower : TashkentPower
     
     public override async Task AfterDamageReceived(PlayerChoiceContext choiceContext, Creature target, DamageResult result, ValueProp props, Creature? dealer, CardModel? cardSource)
     {
-        if (target == base.Owner && result.TotalDamage != 0)
+        if (target == base.Owner && result.TotalDamage != 0 && props.HasFlag(ValueProp.Move))
         {
             Flash();
             await PowerCmd.Decrement(this);

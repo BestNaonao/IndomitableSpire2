@@ -16,7 +16,7 @@ public sealed class BideOnesTime() : TashkentCard(1, CardType.Skill, CardRarity.
     
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new BlockVar(7M, ValueProp.Move),
-        new LoadDynamicVar(1M)
+        new LoadDynamicVar(2M)
     ];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)

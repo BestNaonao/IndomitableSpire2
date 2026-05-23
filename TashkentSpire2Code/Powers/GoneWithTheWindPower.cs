@@ -10,7 +10,7 @@ namespace TashkentSpire2.TashkentSpire2Code.Powers;
 
 public sealed class GoneWithTheWindPower: TashkentPower
 {
-private const string RemainKey = "Tashkent_GoneRemain";
+    private const string RemainKey = "Tashkent_GoneRemain";
     private int _reduce = 0;
     private readonly SemaphoreSlim _lock = new(1, 1);
 

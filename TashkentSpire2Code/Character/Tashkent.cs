@@ -57,6 +57,8 @@ public sealed class TashkentCharacter : CustomCharacterModel
 		"res://TashkentSpire2/sfx/tashkent_castsfx.mp3";
 	public override string CustomDeathSfx => 
 		"res://TashkentSpire2/sfx/tashkent_deathsfx.mp3";
+	public override string CharacterSelectSfx => 
+		"res://TashkentSpire2/sfx/tashkent_character_select.mp3";
 	
 	public override string CustomIconTexturePath =>                 //选择时
 		"res://TashkentSpire2/images/Tashkent/character_icon_tashkent.png";  

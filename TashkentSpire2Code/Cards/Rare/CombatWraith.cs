@@ -10,7 +10,7 @@ using MegaCrit.Sts2.Core.ValueProps;
 
 namespace TashkentSpire2.TashkentSpire2Code.Cards.Rare;
 
-public sealed class CombatWraith() : AmmunitionCard(2, CardType.Attack, CardRarity.Rare, TargetType.AnyEnemy)
+public sealed class CombatWraith() : TashkentCard(2, CardType.Attack, CardRarity.Rare, TargetType.AnyEnemy)
 {
     private const int _intangibleThreshold = 9;
 

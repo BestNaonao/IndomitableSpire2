@@ -6,14 +6,11 @@ using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.ValueProps;
 using TashkentSpire2.TashkentSpire2Code.Powers;
 
-namespace TashkentSpire2.TashkentSpire2Code.Cards.Common;
+namespace TashkentSpire2.TashkentSpire2Code.Cards.Uncommon;
 
-public sealed class AllRounder() : AmmunitionCard(1, CardType.Skill, CardRarity.Common, TargetType.Self)
+public sealed class AllRounder() : TashkentCard(1, CardType.Power, CardRarity.Uncommon, TargetType.Self)
 {
-    public override bool GainsBlock => true;
-    
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new BlockVar(6M, ValueProp.Move),
         new PowerVar<AllRounderPower>(3M)
     ];
     
@@ -21,14 +18,12 @@ public sealed class AllRounder() : AmmunitionCard(1, CardType.Skill, CardRarity.
     
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        await CreatureCmd.GainBlock(Owner.Creature, DynamicVars.Block, cardPlay);
         await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
         await PowerCmd.Apply<AllRounderPower>(base.Owner.Creature, base.DynamicVars["AllRounderPower"].BaseValue, base.Owner.Creature, this);
     }
     
     protected override void OnUpgrade()
     {
-        DynamicVars.Block.UpgradeValueBy(2M);
         base.DynamicVars["AllRounderPower"].UpgradeValueBy(1M);
     }
 }

@@ -4,17 +4,15 @@ using Godot;
 using MegaCrit.Sts2.Core.Assets;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Models;
-using TashkentSpire2.TashkentSpire2Code.Character;
 
 namespace TashkentSpire2.TashkentSpire2Code.Character;
 
-public sealed class TashkentCardPool : CustomCardPoolModel, ICustomEnergyIconPool
+public sealed class TashkentCardPool : CustomCardPoolModel
 {
     // 卡池的唯一标识符
     public override string Title => TashkentCharacter.CharacterId;
     // 使用 BaseLib 的标准格式生成 EnergyColorName
     public override string EnergyColorName => CustomEnergyIconPatches.GetEnergyColorName(Id);
-    // public override string EnergyColorName => IndomitableCharacter.CharacterId;
 
     // // 基础卡牌背景框材质，如果没有自定义材质，可以使用游戏原版的
     public override float H => 1f;

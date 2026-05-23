@@ -12,7 +12,7 @@
   "TASHKENTSPIRE2-BACK_AFTER_TURN_POWER.smartDescription": "你的回合结束时，[gold]后撤[/gold][blue]{Amount}[/blue]。",
   "TASHKENTSPIRE2-BACK_AFTER_TURN_POWER.title": "结束时后撤",
   "TASHKENTSPIRE2-TORPEDO_POWER.description": "[gold]距离[/gold]不影响鱼雷伤害，但会影响鱼雷命中的时间。",
-  "TASHKENTSPIRE2-TORPEDO_POWER.smartDescription": "在{Turns:choose(1):本回合|第[blue]{}[/blue]回合}结束时，{IsTheBomb:cond:==1?对所有敌人|对[gold]标记[/gold]最高的敌人}造成[blue]{Amount}[/blue]伤害。",
+  "TASHKENTSPIRE2-TORPEDO_POWER.smartDescription": "在{Turns:choose(1):本回合|第[blue]{}[/blue]回合}结束时，{AOEFlag:cond:==1?对[gold]所有敌人[/gold]|对[gold]标记[/gold]最高的敌人}造成[blue]{Amount}[/blue]伤害。",
   "TASHKENTSPIRE2-TORPEDO_POWER.title": "{IsTheBomb:cond:==1?鱼雷？炸弹？|鱼雷}",
   "TASHKENTSPIRE2-MARK_POWER.description": "受到攻击伤害时增加标记层数的伤害，然后层数减少[blue]1[/blue]。",
   "TASHKENTSPIRE2-MARK_POWER.smartDescription": "受到攻击伤害时增加[blue]{Amount}[/blue]点伤害，然后层数减少[blue]1[/blue]。",
@@ -96,13 +96,16 @@
   "TASHKENTSPIRE2-BARREL_MODIFICATION_POWER.description": "当你[gold]装填[/gold]时，获得[gold]活力[gold]。",
   "TASHKENTSPIRE2-BARREL_MODIFICATION_POWER.smartDescription": "当你[gold]装填[/gold]时，获得{Amount}点[gold]活力[gold]。",
   "TASHKENTSPIRE2-BARREL_MODIFICATION_POWER.title": "炮膛改装",
-  "TASHKENTSPIRE2-ALL_ROUNDER_POWER.description": "本回合释放[gold]鱼雷[/gold]后，获得[gold]格挡[/gold]。",
-  "TASHKENTSPIRE2-ALL_ROUNDER_POWER.smartDescription": "本回合释放[gold]鱼雷[/gold]后，获得{Amount}点[gold]格挡[/gold]。",
+  "TASHKENTSPIRE2-ALL_ROUNDER_POWER.description": "释放[gold]鱼雷[/gold]后增加计数，左键能力获得[gold]格挡[/gold]。",
+  "TASHKENTSPIRE2-ALL_ROUNDER_POWER.smartDescription": "释放[gold]鱼雷[/gold]后增加计数，左键能力获得{Amount}点[gold]格挡[/gold]。",
   "TASHKENTSPIRE2-ALL_ROUNDER_POWER.title": "多面手",
   "TASHKENTSPIRE2-TARGET_SHIP_POWER.description": "回合开始时会对所有怪物造成本回合受到的全部伤害。",
   "TASHKENTSPIRE2-TARGET_SHIP_POWER.smartDescription": "对其造成伤害会增加计数，回合开始时会对所有怪物造成{StoredDamage:diff()}点伤害{Amount}次。",
   "TASHKENTSPIRE2-TARGET_SHIP_POWER.title": "靶舰",
   "TASHKENTSPIRE2-AZURE_CRUISER_POWER.description": "你在本回合每[gold]消耗[/gold]一张牌便生成一枚[gold]鱼雷[/gold]。",
   "TASHKENTSPIRE2-AZURE_CRUISER_POWER.smartDescription": "你在本回合每[gold]消耗[/gold]一张牌便生成{Amount}枚[gold]鱼雷[/gold][blue]{TashkentSpire2-Torpedo:diff()}[/blue]。",
-  "TASHKENTSPIRE2-AZURE_CRUISER_POWER.title": "天青巡洋"
+  "TASHKENTSPIRE2-AZURE_CRUISER_POWER.title": "天青巡洋",
+  "TASHKENTSPIRE2-DODGE_POWER.description": "下个回合开始前，免受少于等于一定数值的伤害。\n和格挡一样受其他能力加成。",
+  "TASHKENTSPIRE2-DODGE_POWER.smartDescription": "下个回合开始前，免受少于等于{Amount}的伤害。",
+  "TASHKENTSPIRE2-DODGE_POWER.title": "闪避"
 }

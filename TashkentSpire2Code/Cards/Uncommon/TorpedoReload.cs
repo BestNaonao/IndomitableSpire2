@@ -5,12 +5,13 @@ using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using TashkentSpire2.TashkentSpire2Code.Cards.Status;
 using TashkentSpire2.TashkentSpire2Code.Commands;
+using TashkentSpire2.TashkentSpire2Code.Extensions;
 using TashkentSpire2.TashkentSpire2Code.Keywords;
 using TashkentSpire2.TashkentSpire2Code.Powers;
 
 namespace TashkentSpire2.TashkentSpire2Code.Cards.Uncommon;
 
-public sealed class TorpedoReload() : AmmunitionCard(2, CardType.Skill, CardRarity.Uncommon, TargetType.Self)
+public sealed class TorpedoReload() : AmmunitionCard(2, CardType.Skill, CardRarity.Uncommon, TargetType.Self), IAfterTorpedoDamage
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new TorpedoDynamicVar(9M),
@@ -66,6 +67,12 @@ public sealed class TorpedoReload() : AmmunitionCard(2, CardType.Skill, CardRari
         
         int load = DynamicVars["TashkentSpire2-Load"].IntValue;
         await Loadcmd.Execute(choiceContext, this, load);
+    }
+    
+    public async Task AfterTorpedoDamage(TorpedoDamageContext context)
+    {
+        int load = DynamicVars["TashkentSpire2-Load"].IntValue;
+        await Loadcmd.Execute(context.ChoiceContext, this, load);
     }
     
     protected override void OnUpgrade()

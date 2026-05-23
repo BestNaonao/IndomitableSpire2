@@ -3,10 +3,11 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using TashkentSpire2.TashkentSpire2Code.Patches;
 
 namespace TashkentSpire2.TashkentSpire2Code.Actions;
 
-public abstract class ActionModel : PowerModel, ICustomPower
+public abstract class ActionModel : PowerModel, ICustomPower, IClickableModel
 {
     public virtual TargetType TargetType => TargetType.None; 
     
@@ -24,4 +25,9 @@ public abstract class ActionModel : PowerModel, ICustomPower
     }
     
     protected abstract Task OnClick(Creature actor, PlayerChoiceContext? context);
+    
+    public async Task OnClick(PlayerChoiceContext choiceContext, ClickContext clickContext)
+    {
+        await TryAct(choiceContext, null);
+    }
 }

@@ -11,7 +11,7 @@ namespace TashkentSpire2.TashkentSpire2Code.Orb;
 
 public sealed class ModuleOrb : CustomOrbModel
 {
-    private const decimal BaseValue = 10m;
+    private const decimal BaseValue = 8m;
     
     public decimal ModifiedPositiveValue => ModifyOrbValue(BaseValue);
     // 被动效果数值，ModifyOrbValue表示是否吃集中等

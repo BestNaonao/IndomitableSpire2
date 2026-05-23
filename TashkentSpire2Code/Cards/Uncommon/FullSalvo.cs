@@ -9,7 +9,10 @@ namespace TashkentSpire2.TashkentSpire2Code.Cards.Uncommon;
 
 public sealed class FullSalvo() : TashkentCard(2, CardType.Attack, CardRarity.Uncommon, TargetType.AnyEnemy)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(10M, ValueProp.Move)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [
+        new DamageVar(14M, ValueProp.Move),
+        new PowerVar<FullSalvoPower>(2M)
+    ];
     
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
@@ -17,11 +20,11 @@ public sealed class FullSalvo() : TashkentCard(2, CardType.Attack, CardRarity.Un
         await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue).FromCard(this).Targeting(cardPlay.Target)
             .WithHitFx("vfx/vfx_attack_slash")
             .Execute(choiceContext);
-        await PowerCmd.Apply<FullSalvoPower>(base.Owner.Creature, 2m, base.Owner.Creature, this);
+        await PowerCmd.Apply<FullSalvoPower>(base.Owner.Creature, base.DynamicVars["FullSalvoPower"].BaseValue, base.Owner.Creature, this);
     }
 
     protected override void OnUpgrade()
     {
-        base.DynamicVars.Damage.UpgradeValueBy(5M);
+        base.DynamicVars.Damage.UpgradeValueBy(6M);
     }
 }

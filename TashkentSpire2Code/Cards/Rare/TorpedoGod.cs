@@ -18,6 +18,12 @@ public sealed class TorpedoGod() : TashkentCard(2, CardType.Power, CardRarity.Ra
     {
         await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
         await PowerCmd.Apply<TorpedoGodPower>(base.Owner.Creature, DynamicVars["TorpedoGodPower"].BaseValue, base.Owner.Creature, this);
+        
+        foreach (var p in base.Owner.Creature.Powers.OfType<TorpedoPower>())
+        {
+            p.SyncAOEFlag();
+        }
+        
         for (int i = 0; i < DynamicVars.Repeat.IntValue; i++)
         {
             await PowerCmd.Apply<TorpedoPower>(base.Owner.Creature, DynamicVars["TashkentSpire2-Torpedo"].BaseValue, base.Owner.Creature, this);

@@ -7,10 +7,8 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
-using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.ValueProps;
-using TashkentSpire2.TashkentSpire2Code.Cards.Uncommon;
-using TashkentSpire2.TashkentSpire2Code.Commands;
+using TashkentSpire2.TashkentSpire2Code.Extensions;
 using TashkentSpire2.TashkentSpire2Code.Relics;
 
 namespace TashkentSpire2.TashkentSpire2Code.Powers;
@@ -18,7 +16,6 @@ namespace TashkentSpire2.TashkentSpire2Code.Powers;
 public sealed class TorpedoPower : TashkentPower, IHasSecondAmount
 {
     private const string TurnKey = "Turns";
-    
     private const string BombKey = "IsTheBomb";
 
     public override PowerType Type => PowerType.Buff;
@@ -27,6 +24,7 @@ public sealed class TorpedoPower : TashkentPower, IHasSecondAmount
 
     public override string CustomBigIconPath =>
         "res://TashkentSpire2/images/powers/big/torpedo_power.png";
+
     public override string CustomPackedIconPath =>
         "res://TashkentSpire2/images/powers/packed/torpedo_power.png";
 
@@ -34,37 +32,36 @@ public sealed class TorpedoPower : TashkentPower, IHasSecondAmount
     [
         new DamageVar(0m, ValueProp.Unpowered),
         new DynamicVar(TurnKey, 0m),
-        new DynamicVar(BombKey, 0m)
+        new DynamicVar(BombKey, 0m),
+        new DynamicVar("AOEFlag", 0m)
     ];
 
     private bool _oxygenApplied;
-
     private bool IsTheBomb => DynamicVars[BombKey].BaseValue == 1m;
 
-    public override LocString Title 
+    public override LocString Title
     {
-        get 
+        get
         {
             LocString title = base.Title;
-            title.Add("IsTheBomb", IsTheBomb ? 1 : 0); 
+            title.Add("IsTheBomb", IsTheBomb ? 1 : 0);
             return title;
         }
     }
-    
-    public void SetIsTheBomb(bool value)
-    {
-        DynamicVars[BombKey].BaseValue = value ? 1m : 0m;
 
-        InvokeDisplayAmountChanged(); 
-    }
-    
     public override int DisplayAmount => (int)DynamicVars[TurnKey].BaseValue;
 
     public string GetSecondAmount()
     {
-        return this.Amount.ToString();
+        return Amount.ToString();
     }
-    
+
+    public void SetIsTheBomb(bool value)
+    {
+        DynamicVars[BombKey].BaseValue = value ? 1m : 0m;
+        SyncAOEFlag();
+    }
+
     public static int ComputeTurns(Creature owner)
     {
         var distPower = owner.GetPower<DistancePower>();
@@ -73,21 +70,24 @@ public sealed class TorpedoPower : TashkentPower, IHasSecondAmount
 
         int baseTurns = 3;
 
-        if (dist == -2 || dist == -3) baseTurns = 4;
-        else if (dist == -4 || dist == -5) baseTurns = 5;
-        else if (dist == 2 || dist == 3) baseTurns = 2;
-        else if (dist == 4 || dist == 5) baseTurns = 1;
-        else if (distPower == null || dist == -1 || dist == 0 || dist == 1) baseTurns = 3;
+        if (dist == -2 || dist == -3)
+            baseTurns = 4;
+        else if (dist == -4 || dist == -5)
+            baseTurns = 5;
+        else if (dist == 2 || dist == 3)
+            baseTurns = 2;
+        else if (dist == 4 || dist == 5)
+            baseTurns = 1;
+        else if (distPower == null || dist == -1 || dist == 0 || dist == 1)
+            baseTurns = 3;
 
         int godPowerBonus = (int)(owner.GetPower<TorpedoGodPower>()?.Amount ?? 0m);
 
         int relicBonus = owner.Player?.Relics.Count(r => r is Thruster) ?? 0;
 
-        int finalTurns = Math.Max(1, baseTurns - godPowerBonus - relicBonus);
-
-        return finalTurns;
+        return Math.Max(1, baseTurns - godPowerBonus - relicBonus);
     }
-    
+
     public void ReduceTurnCount(int amount)
     {
         var turnVar = DynamicVars[TurnKey];
@@ -101,9 +101,7 @@ public sealed class TorpedoPower : TashkentPower, IHasSecondAmount
         {
             _oxygenApplied = true;
 
-            int oxygenBonus = Owner?.GetPower<OxygenTorpedoPower>() is { } oxy
-                ? (int)oxy.Amount
-                : 0;
+            int oxygenBonus = Owner?.GetPower<OxygenTorpedoPower>() is { } oxy? (int)oxy.Amount : 0;
 
             if (oxygenBonus != 0)
             {
@@ -111,14 +109,23 @@ public sealed class TorpedoPower : TashkentPower, IHasSecondAmount
             }
         }
 
+        DynamicVars["AOEFlag"].BaseValue = IsTheBomb || Owner?.GetPower<TorpedoGodPower>() != null ? 1m : 0m;
+        
         var allRounderPower = Owner?.GetPower<AllRounderPower>();
-        if (allRounderPower != null && allRounderPower.Amount > 0)
+
+        if (allRounderPower != null)
         {
-            await CreatureCmd.GainBlock(Owner!, allRounderPower.Amount, ValueProp.Unpowered, null);
+            allRounderPower.AddCharge(1);
         }
 
         int turns = ComputeTurns(Owner!);
         DynamicVars[TurnKey].BaseValue = turns;
+        InvokeDisplayAmountChanged();
+    }
+    
+    public void SyncAOEFlag()
+    {
+        DynamicVars["AOEFlag"].BaseValue = IsTheBomb || Owner?.GetPower<TorpedoGodPower>() != null ? 1m : 0m;
         InvokeDisplayAmountChanged();
     }
 
@@ -153,15 +160,17 @@ public sealed class TorpedoPower : TashkentPower, IHasSecondAmount
 
         var godPower = Owner?.GetPower<TorpedoGodPower>();
 
-        if (IsTheBomb || godPower != null)
-        {
-            var dmg = new DamageVar(Amount, ValueProp.Unpowered);
-            await CreatureCmd.Damage(choiceContext, CombatState.HittableEnemies, dmg, Owner!);
+        IReadOnlyList<Creature> targets;
 
-            foreach (var e in CombatState.HittableEnemies)
-            {
-                await ApplyFlooding(choiceContext, e);
-            }
+        bool isAOE = IsTheBomb || godPower != null;
+
+        var dmg = new DamageVar(Amount, ValueProp.Unpowered);
+
+        if (isAOE)
+        {
+            targets = enemies;
+
+            await CreatureCmd.Damage(choiceContext, targets, dmg, Owner!);
         }
         else
         {
@@ -169,20 +178,29 @@ public sealed class TorpedoPower : TashkentPower, IHasSecondAmount
             if (target == null)
                 return;
 
-            var dmg = new DamageVar(Amount, ValueProp.Unpowered);
-            await CreatureCmd.Damage(choiceContext, target, dmg, Owner!);
+            targets = [target];
 
-            await ApplyFlooding(choiceContext, target);
+            await CreatureCmd.Damage(choiceContext, target, dmg, Owner!);
         }
-        await TriggerReload(choiceContext);
+
+        var context = new TorpedoDamageContext
+        {
+            ChoiceContext = choiceContext,
+            Source = Owner!,
+            Targets = targets,
+            Damage = Amount,
+            IsBomb = IsTheBomb,
+            IsAOE = isAOE
+        };
+
+        await TriggerAfterTorpedoDamage(context);
 
         await PowerCmd.Remove(this);
     }
 
     private Creature? SelectTarget(List<Creature> enemies)
     {
-        var enemyMarks = enemies
-            .Select(e => new
+        var enemyMarks = enemies.Select(e => new
             {
                 Enemy = e,
                 Mark = (int)(e.GetPower<MarkPower>()?.Amount ?? 0m)
@@ -201,32 +219,32 @@ public sealed class TorpedoPower : TashkentPower, IHasSecondAmount
             : null;
     }
 
-    private async Task ApplyFlooding(PlayerChoiceContext ctx, Creature target)
+    private async Task TriggerAfterTorpedoDamage(TorpedoDamageContext context)
     {
-        int floodingAmount = Owner?.GetPower<FloodingExpertPower>() is { } flood
-            ? (int)flood.Amount
-            : 0;
-
-        if (floodingAmount <= 0)
-            return;
-
-        await PowerCmd.Apply<WeakPower>(target, floodingAmount, Owner, null);
-        await PowerCmd.Apply<StrengthPower>(target, -floodingAmount, Owner, null);
+        foreach (var hook in GetHooks<IAfterTorpedoDamage>())
+        {
+            await hook.AfterTorpedoDamage(context);
+        }
     }
 
-    private async Task TriggerReload(PlayerChoiceContext ctx)
+    private IEnumerable<T> GetHooks<T>()
     {
-        var reloadCards = Owner?.Player?.Piles
-            .SelectMany(p => p.Cards)
-            .OfType<TorpedoReload>();
-
-        if (reloadCards == null)
-            return;
-
-        foreach (var card in reloadCards)
+        foreach (var card in Owner!.Player!.Piles.SelectMany(p => p.Cards))
         {
-            int load = card.DynamicVars["TashkentSpire2-Load"].IntValue;
-            await Loadcmd.Execute(ctx, card, load);
+            if (card is T t)
+                yield return t;
+        }
+        
+        foreach (var power in Owner.Powers)
+        {
+            if (power is T t)
+                yield return t;
+        }
+
+        foreach (var relic in Owner.Player.Relics)
+        {
+            if (relic is T t)
+                yield return t;
         }
     }
 }
