@@ -71,7 +71,11 @@
   "INDOMITABLESPIRE2-NIGHT_RAID.title": "Night Raid",
   "INDOMITABLESPIRE2-NIGHT_RAID.description": "[gold]Requires[/gold] [blue]{MotivationRequire:diff()}[/blue] [gold]Motivation[/gold].\nChoose an Attack in your [gold]Hand[/gold] and play it. It deals {DamageMultiplier:diff()}x damage to [gold]Sleeping[/gold] enemies.",
   "INDOMITABLESPIRE2-NIGHT_RAID.selectionScreenPrompt": "Choose an Attack.",
+  "INDOMITABLESPIRE2-TEA_PARTY_IN_THE_WOODS.title": "Tea Party in the Woods",
+  "INDOMITABLESPIRE2-TEA_PARTY_IN_THE_WOODS.description": "[gold]Requires[/gold] [blue]{MotivationRequire:diff()}[/blue] [gold]Motivation[/gold].\nCost [blue]{MotivationConsume:diff()}[/blue] [gold]Motivation[/gold].\nAdd {Cards:diff()} [gold]{Cards:plural:Dessert|Desserts}[/gold] into ALL players' [gold]Draw Piles[/gold].",
   
+  "INDOMITABLESPIRE2-DESSERT.title": "Dessert",
+  "INDOMITABLESPIRE2-DESSERT.description": "Heal [green]{Heal:diff()}[/green] HP.\nGain {Energy:energyIcons()}.",
   "INDOMITABLESPIRE2-REFRESH.title": "Refresh",
   "INDOMITABLESPIRE2-REFRESH.description": "Gain {Energy:energyIcons()}.\nDraw {Cards:diff()} {Cards:plural:card|cards}. Discard 1 card.",
   "INDOMITABLESPIRE2-INCENDIARY_EXPERT.title": "Incendiary Expert",

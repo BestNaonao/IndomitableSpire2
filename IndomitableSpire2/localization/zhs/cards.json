@@ -71,7 +71,11 @@
   "INDOMITABLESPIRE2-NIGHT_RAID.title": "夜袭",
   "INDOMITABLESPIRE2-NIGHT_RAID.description": "[gold]需求[/gold][blue]{MotivationRequire:diff()}[/blue]点[gold]干劲[/gold]。\n选择你[gold]手牌[/gold]中的一张攻击牌并将其打出。这张牌对[gold]沉睡[/gold]的敌人造成{DamageMultiplier:diff()}倍伤害。",
   "INDOMITABLESPIRE2-NIGHT_RAID.selectionScreenPrompt": "选择一张攻击牌。",
+  "INDOMITABLESPIRE2-TEA_PARTY_IN_THE_WOODS.title": "林间茶会",
+  "INDOMITABLESPIRE2-TEA_PARTY_IN_THE_WOODS.description": "[gold]需求[/gold][blue]{MotivationRequire:diff()}[/blue]点[gold]干劲[/gold]。\n消耗[blue]{MotivationConsume:diff()}[/blue]点[gold]干劲[/gold]。\n在所有玩家的[gold]抽牌堆[/gold]中加入{Cards:diff()}张[gold]甜点[/gold]。",
   
+  "INDOMITABLESPIRE2-DESSERT.title": "甜点",
+  "INDOMITABLESPIRE2-DESSERT.description": "回复[green]{Heal:diff()}[/green]点生命。\n获得{Energy:energyIcons()}。",
   "INDOMITABLESPIRE2-REFRESH.title": "养神",
   "INDOMITABLESPIRE2-REFRESH.description": "获得{Energy:energyIcons()}。\n抽{Cards:diff()}张牌，丢弃1张牌。",
   "INDOMITABLESPIRE2-INCENDIARY_EXPERT.title": "起火专家",
