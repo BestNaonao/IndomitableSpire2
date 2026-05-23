@@ -1,4 +1,5 @@
-﻿using MegaCrit.Sts2.Core.Commands;
+﻿using BaseLib.Abstracts;
+using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
@@ -6,7 +7,7 @@ using MegaCrit.Sts2.Core.Models;
 
 namespace IndomitableSpire2.IndomitableSpire2Code.Powers;
 
-public sealed class IllustriousAegisPower : IndomitablePower
+public sealed class IllustriousAegisPower : IndomitablePower, IHasSecondAmount
 {
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;
@@ -17,6 +18,8 @@ public sealed class IllustriousAegisPower : IndomitablePower
     // 注册内部变量以绑定本地化文本，便于展示回血量
     protected override IEnumerable<DynamicVar> CanonicalVars => [new HealVar(0M)];
     
+    public string GetSecondAmount() => DynamicVars.Heal.ToString();
+    
     // 【关键2】：使用内部数据类存储每个实例的独特回血量
     protected override object InitInternalData() => new AegisData();
     
@@ -25,10 +28,10 @@ public sealed class IllustriousAegisPower : IndomitablePower
         // 初始化时，从打出它的卡牌上获取治疗量并存入内部数据
         if (cardSource != null && cardSource.DynamicVars.TryGetValue(HealVar.defaultName, out var healVar))
         {
-            var healValue = (int)healVar.BaseValue;
-            GetInternalData<AegisData>().HealAmount = healValue;
-            DynamicVars.Heal.BaseValue = healValue; // 同步至 UI 变量
+            GetInternalData<AegisData>().HealAmount = healVar.IntValue;
+            DynamicVars.Heal.BaseValue = healVar.BaseValue; // 同步至 UI 变量
         }
+        InvokeDisplayAmountChanged();
         return Task.CompletedTask;
     }
     
