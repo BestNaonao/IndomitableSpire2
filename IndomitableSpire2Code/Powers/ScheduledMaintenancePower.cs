@@ -1,7 +1,10 @@
 ﻿using IndomitableSpire2.IndomitableSpire2Code.Commands;
+using IndomitableSpire2.IndomitableSpire2Code.Extensions;
+using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.Models;
 
 namespace IndomitableSpire2.IndomitableSpire2Code.Powers;
 
@@ -14,8 +17,16 @@ public sealed class ScheduledMaintenancePower : IndomitablePower
     {
         if (player != Owner.Player || Amount <= 0) return;
         
-        Flash();
-        // 调用我们编写的递归指令，传入当前的层数作为恢复池
-        await RepairCmd.RandomRepair(player, Amount);
+        // 1. 【由发起者组装数据池】：扫描手牌和抽牌堆
+        var damagedAircraft = new List<CardModel>();
+        damagedAircraft.AddRange(PileType.Hand.GetPile(player).Cards.Where(c => c.IsCarrierAircraft() && !c.IsFullDurability()));
+        damagedAircraft.AddRange(PileType.Draw.GetPile(player).Cards.Where(c => c.IsCarrierAircraft() && !c.IsFullDurability()));
+        
+        // 如果有需要维修的，就闪烁，并将装配好的数据池喂给底层 Command
+        if (damagedAircraft.Count > 0)
+        {
+            Flash();
+            await RepairCmd.RandomRepair(player, damagedAircraft, Amount);
+        }
     }
 }
