@@ -1,6 +1,6 @@
 ﻿using Godot;
-using IndomitableSpire2.IndomitableSpire2Code.Cards.Abstracts;
 using IndomitableSpire2.IndomitableSpire2Code.Enums;
+using IndomitableSpire2.IndomitableSpire2Code.Extensions;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
@@ -34,29 +34,24 @@ public class AviationPower : IndomitablePower
         decimal amount, 
         ValueProp props, 
         Creature? dealer, 
-        CardModel? cardSource)
-    {
+        CardModel? cardSource) => 
         // 确保攻击者是自己，伤害属于正常受力量加成的攻击，且来源卡牌包含指定的机种标签
-        if (dealer == Owner && props.IsPoweredAttack() && 
-            cardSource is CarrierAircraftCard && cardSource.Tags.Contains(RequiredTag))
-            // 返回 1 + 层数 * 每层比例，即 1 + 层数%
-            return 1m + Amount * MultiplierPerStack;
-        return 1m;
-    }
+        dealer == Owner && props.IsPoweredAttack() && 
+        cardSource.IsCarrierAircraft() && cardSource!.Tags.Contains(RequiredTag)
+            ? 1m + Amount * MultiplierPerStack  // 返回 1 + 层数 * 每层比例，即 1 + 层数%
+            : 1m;
     
     public override decimal ModifyBlockMultiplicative(
         Creature target, 
         decimal block, 
         ValueProp props, 
         CardModel? cardSource, 
-        CardPlay? cardPlay)
-    {
+        CardPlay? cardPlay) =>
         // 确保获得格挡的是自己，且来源卡牌包含指定的机种标签
-        if (target == Owner && props.IsPoweredCardOrMonsterMoveBlock() &&
-            cardSource is CarrierAircraftCard && cardSource.Tags.Contains(RequiredTag))
-            return 1m + Amount * MultiplierPerStack;
-        return 1m;
-    }
+        target == Owner && props.IsPoweredCardOrMonsterMoveBlock() && 
+        cardSource.IsCarrierAircraft() && cardSource!.Tags.Contains(RequiredTag)
+            ? 1m + Amount * MultiplierPerStack
+            : 1m;
 }
 
 // 空战精英
