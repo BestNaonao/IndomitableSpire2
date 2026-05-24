@@ -14,7 +14,7 @@ public static class CombatStateExtensions
         this CombatState combatState, 
         Player player, 
         int amount, 
-        bool isUpgraded)
+        bool isUpgraded = false)
         where TCard : CardModel
     {
         var list = new List<TCard>();
