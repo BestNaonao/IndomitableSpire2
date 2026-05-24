@@ -1,5 +1,6 @@
 ﻿using IndomitableSpire2.IndomitableSpire2Code.Cards.Abstracts;
 using IndomitableSpire2.IndomitableSpire2Code.Enums;
+using IndomitableSpire2.IndomitableSpire2Code.Extensions;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -33,23 +34,22 @@ public sealed class FormationStrike() : IndomitableCard(1, CardType.Attack, Card
             .WithHitFx("vfx/vfx_attack_slash")
             .Execute(choiceContext);
         
-        // 2. 获取抽牌堆
+        // 2. 使用 GetByPriority 按优先级从抽牌堆中获取目标
         var drawPile = PileType.Draw.GetPile(Owner).Cards;
-        
-        // 3. 筛选出没有“编队”关键字的舰载机牌
-        var validCards = drawPile.Where(c => 
-            c is CarrierAircraftCard && !c.Keywords.Contains(IndomitableKeywords.Formation)
+        var validCards = drawPile.GetByPriority(
+            c => c is CarrierAircraftCard && !c.Keywords.Contains(IndomitableKeywords.Formation),
+            c => c.IsCarrierAircraft() && !c.Keywords.Contains(IndomitableKeywords.Formation)
         ).ToList();
         
-        // 4. 随机选中一张
+        // 3. 随机选中一张
         if (validCards.Count > 0)
         {
             var selectedCard = Owner.RunState.Rng.CombatCardSelection.NextItem(validCards);
             if (selectedCard != null)
             {
-                // 5. 调用引擎指令赋予关键字，这会自动在对应卡牌上生效，并处理后续的 UI 渲染
+                // 4. 调用引擎指令赋予关键字，这会自动在对应卡牌上生效，并处理后续的 UI 渲染
                 CardCmd.ApplyKeyword(selectedCard, IndomitableKeywords.Formation);
-                // 6. 将这张牌在屏幕中央预览闪烁一下（极佳的视觉反馈）
+                // 5. 将这张牌在屏幕中央预览闪烁一下（极佳的视觉反馈）
                 CardCmd.Preview(selectedCard);
             }
         }
