@@ -1,11 +1,11 @@
 ﻿using IndomitableSpire2.IndomitableSpire2Code.Cards.Abstracts;
 using IndomitableSpire2.IndomitableSpire2Code.Enums;
+using IndomitableSpire2.IndomitableSpire2Code.Extensions;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Combat.History.Entries;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
-using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.ValueProps;
 
@@ -13,11 +13,13 @@ namespace IndomitableSpire2.IndomitableSpire2Code.Cards.Uncommons;
 
 public sealed class AirSuperiority() : IndomitableCard(1, CardType.Attack, CardRarity.Uncommon, TargetType.AnyEnemy)
 {
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromKeyword(IndomitableKeywords.CarrierAircraft)];
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [IndomitableKeywords.CarrierAircraft];
+    
+    protected override HashSet<CardTag> CanonicalTags => [IndomitableTags.CarrierAircraft];
     
     protected override IEnumerable<DynamicVar> CanonicalVars => 
     [
-        new DamageVar(8M, ValueProp.Move),
+        new DamageVar(6M, ValueProp.Move),
         new CalculationBaseVar(1M),
         new CalculationExtraVar(1M),
         new CalculatedVar("CalculatedHits").WithMultiplier((card, _) => 
@@ -27,7 +29,7 @@ public sealed class AirSuperiority() : IndomitableCard(1, CardType.Attack, CardR
             // 1. 获取本场战斗中该玩家打出的舰载机牌数量
             var aircraftPlayedCount = CombatManager.Instance.History.Entries
                 .OfType<CardPlayFinishedEntry>()
-                .Count(e => e.CardPlay.Card.Owner == card.Owner && e.CardPlay.Card is CarrierAircraftCard);
+                .Count(e => e.CardPlay.Card.Owner == card.Owner && e.CardPlay.Card.IsCarrierAircraft());
             
             // 2. 获取当前存活且可被选中的敌人数量
             var enemyCount = card.CombatState.HittableEnemies.Count;
