@@ -32,9 +32,7 @@ public abstract class CarrierAircraftCard(
     
     // 注册耐久度动态变量，用于 UI 展现：使用我们自定义的 DurabilityVar 替代普通的 DynamicVar
     protected override IEnumerable<DynamicVar> CanonicalVars => 
-    [
-        new DurabilityVar(MaxDurability), new MaxDurabilityVar(MaxDurability)
-    ];
+        [new DurabilityVar(MaxDurability), new MaxDurabilityVar(MaxDurability)];
     
     // 封装原本的 OnPlay，使其成为模板方法（Template Method）
     protected sealed override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
@@ -112,23 +110,5 @@ public abstract class CarrierAircraftCard(
         if (UpgradeDurabilityAmount <= 0) return;
         DynamicVars.MaxDurability().UpgradeValueBy(UpgradeDurabilityAmount);
         DynamicVars.Durability().UpgradeValueBy(UpgradeDurabilityAmount);
-    }
-    
-    /// <summary>
-    /// 恢复指定的耐久值
-    /// </summary>
-    public void Repair(int amount)
-    {
-        if (amount <= 0) return;
-        DynamicVars.Durability().BaseValue = Math.Min(DynamicVars.MaxDurability().BaseValue, DynamicVars.Durability().BaseValue + amount);
-    }
-    
-    /// <summary>
-    /// 彻底修复：恢复至最大耐久
-    /// </summary>
-    public void FullyRepair()
-    {
-        if (DynamicVars.Durability().BaseValue < DynamicVars.MaxDurability().BaseValue)
-            DynamicVars.Durability().BaseValue = DynamicVars.MaxDurability().BaseValue;
     }
 }
