@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cpdncg18qg2ak"
-path="res://.godot/imported/charge.png-9f25fc3b8dacfb499f2d05825da1c153.ctex"
+uid="uid://ch6qh72645ra4"
+path="res://.godot/imported/charged.png-df467c7674da6644e12385b1773216d1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://TashkentSpire2/images/card_portraits/big/charge.png"
-dest_files=["res://.godot/imported/charge.png-9f25fc3b8dacfb499f2d05825da1c153.ctex"]
+source_file="res://TashkentSpire2/images/card_portraits/big/charged.png"
+dest_files=["res://.godot/imported/charged.png-df467c7674da6644e12385b1773216d1.ctex"]
 
 [params]
 

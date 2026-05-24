@@ -14,6 +14,7 @@ public sealed class ModuleHealth() : TashkentCard(1, CardType.Power, CardRarity.
     ];
     
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [
+        HoverTipFactory.Static(StaticHoverTip.Channeling),
         HoverTipFactory.FromOrb<ModuleOrb>()
     ];
     

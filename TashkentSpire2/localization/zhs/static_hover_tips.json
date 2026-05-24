@@ -8,7 +8,7 @@
   "TASHKENTSPIRE2-RETREAT.title": "后撤",
   "TASHKENTSPIRE2-RETREAT.description": "距离减少，最少不低于[blue]-5[/blue]。",
   "TASHKENTSPIRE2-AMMU.title": "弹药",
-  "TASHKENTSPIRE2-AMMU.description": "可用弹药数/最大弹药数。\n弹药可跨战斗保存。",
+  "TASHKENTSPIRE2-AMMU.description": "可用弹药数/最大弹药数。\n战斗中花费弹药执行“[red]重复[/red]”所示的效果。\n弹药可跨战斗保存。",
   "TASHKENTSPIRE2-AMMU-MAX.title": "弹药最大值",
   "TASHKENTSPIRE2-AMMU-MAX.description": "可装载的弹药最大值。",
   "TASHKENTSPIRE2-LOAD.title": "装填",

@@ -16,7 +16,7 @@ public sealed class BideOnesTime() : TashkentCard(1, CardType.Skill, CardRarity.
     
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new BlockVar(7M, ValueProp.Move),
-        new LoadDynamicVar(2M)
+        new LoadDynamicVar(1M)
     ];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
@@ -38,5 +38,9 @@ public sealed class BideOnesTime() : TashkentCard(1, CardType.Skill, CardRarity.
         }
     }
     
-    protected override void OnUpgrade() => DynamicVars.Block.UpgradeValueBy(3M);
+    protected override void OnUpgrade()
+    {
+        DynamicVars.Block.UpgradeValueBy(2M);
+        DynamicVars["TashkentSpire2-Load"].UpgradeValueBy(1M);
+    }
 }
