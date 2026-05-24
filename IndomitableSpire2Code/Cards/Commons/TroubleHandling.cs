@@ -17,7 +17,11 @@ public sealed class TroubleHandling() : IndomitableCard(0, CardType.Skill, CardR
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromCard<Indolent>()];
     
     // 使用 PowerVar 控制干劲获取量
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new MotivationGainVar(30M)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => 
+    [
+        new MotivationGainVar(30M),
+        new CardsVar(2)
+    ];
     
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
@@ -30,18 +34,18 @@ public sealed class TroubleHandling() : IndomitableCard(0, CardType.Skill, CardR
         );
         
         // 2. 将两张“慵懒”印入弃牌堆
-        for (var i = 0; i < 2; ++i)
+        if (CombatState != null)
         {
             CardCmd.PreviewCardPileAdd(
-                await CardPileCmd.AddGeneratedCardToCombat(
-                    card: CombatState!.CreateCard<Indolent>(Owner), 
+                await CardPileCmd.AddGeneratedCardsToCombat(
+                    cards: CombatState.CreateCards<Indolent>(Owner, DynamicVars.Cards.IntValue),
                     newPileType: PileType.Discard, 
                     addedByPlayer: true
                 )
             );
         }
     }
-
+    
     protected override void OnUpgrade()
     {
         // 升级后增加 10 点干劲
