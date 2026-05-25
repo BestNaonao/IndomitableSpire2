@@ -60,5 +60,8 @@
   "INDOMITABLESPIRE2-SCHEDULED_MAINTENANCE_POWER.title": "定期点検",
   "INDOMITABLESPIRE2-ARMOURED_CARRIER_POWER.description": "毎ターンシールドを獲得する。1ターンの間にブロックされなかったダメージを受けなかった場合、次のターン開始時に[gold]航空[/gold]を得る。",
   "INDOMITABLESPIRE2-ARMOURED_CARRIER_POWER.smartDescription": "ターン開始時、[gold]シールド[/gold]を[blue]{Shield}[/blue]得る。1ターンの間にブロックされなかったダメージを受けなかった場合、次のターン開始時に[gold]航空[/gold]を[blue]{AviationPower}[/blue]得る。",
-  "INDOMITABLESPIRE2-ARMOURED_CARRIER_POWER.title": "装甲空母"
+  "INDOMITABLESPIRE2-ARMOURED_CARRIER_POWER.title": "装甲空母",
+  "INDOMITABLESPIRE2-EVASIVE_MANEUVERS_POWER.description": "このターン、次にプレイする[gold]艦載機[/gold]カードが受ける[gold]耐久[/gold]減少が0になる。",
+  "INDOMITABLESPIRE2-EVASIVE_MANEUVERS_POWER.smartDescription": "このターン、次にプレイする[blue]{Amount}[/blue]枚の[gold]艦載機[/gold]カードが受ける[gold]耐久[/gold]減少が[blue]0[/blue]になる。",
+  "INDOMITABLESPIRE2-EVASIVE_MANEUVERS_POWER.title": "回避機動"
 }

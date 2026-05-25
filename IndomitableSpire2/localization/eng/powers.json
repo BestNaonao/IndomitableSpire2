@@ -60,5 +60,8 @@
   "INDOMITABLESPIRE2-SCHEDULED_MAINTENANCE_POWER.title": "Scheduled Maintenance",
   "INDOMITABLESPIRE2-ARMOURED_CARRIER_POWER.description": "Provides Shield every turn. Gain Aviation if you took no unblocked damage last turn.",
   "INDOMITABLESPIRE2-ARMOURED_CARRIER_POWER.smartDescription": "At the start of your turn, gain [blue]{Shield}[/blue] [gold]Shield[/gold].If you take no unblocked damage in a turn, gain [blue]{AviationPower}[/blue] [gold]Aviation[/gold] at the start of your next turn.",
-  "INDOMITABLESPIRE2-ARMOURED_CARRIER_POWER.title": "Armoured Carrier"
+  "INDOMITABLESPIRE2-ARMOURED_CARRIER_POWER.title": "Armoured Carrier",
+  "INDOMITABLESPIRE2-EVASIVE_MANEUVERS_POWER.description": "Your next [gold]Carrier Aircraft[/gold] card takes 0 [gold]Durability[/gold] loss this turn.",
+  "INDOMITABLESPIRE2-EVASIVE_MANEUVERS_POWER.smartDescription": "Your next {Amount:plural:[gold]Carrier Aircraft[/gold] card takes|[blue]{Amount}[/blue] [gold]Carrier Aircraft[/gold] cards take} [blue]0[/blue] [gold]Durability[/gold] loss this turn.",
+  "INDOMITABLESPIRE2-EVASIVE_MANEUVERS_POWER.title": "Evasive Maneuvers"
 }

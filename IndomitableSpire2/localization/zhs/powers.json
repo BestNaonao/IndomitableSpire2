@@ -60,5 +60,8 @@
   "INDOMITABLESPIRE2-SCHEDULED_MAINTENANCE_POWER.title": "定期检修",
   "INDOMITABLESPIRE2-ARMOURED_CARRIER_POWER.description": "每回合获得护盾。在一回合内没有受到未被格挡的伤害，就在下一回合开始时获得航空。",
   "INDOMITABLESPIRE2-ARMOURED_CARRIER_POWER.smartDescription": "在你的回合开始时获得[blue]{Shield}[/blue]点[gold]护盾[/gold]。如果你在一回合内没有受到未被格挡的伤害，则在下一回合开始时获得[blue]{AviationPower}[/blue]层[gold]航空[/gold]。",
-  "INDOMITABLESPIRE2-ARMOURED_CARRIER_POWER.title": "装甲航母"
+  "INDOMITABLESPIRE2-ARMOURED_CARRIER_POWER.title": "装甲航母",
+  "INDOMITABLESPIRE2-EVASIVE_MANEUVERS_POWER.description": "你打出的下一张[gold]舰载机[/gold]牌受到的[gold]耐久[/gold]损失为0。",
+  "INDOMITABLESPIRE2-EVASIVE_MANEUVERS_POWER.smartDescription": "本回合，你打出的下[blue]{Amount}[/blue]张[gold]舰载机[/gold]牌受到的[gold]耐久[/gold]损失为[blue]0[/blue]。",
+  "INDOMITABLESPIRE2-EVASIVE_MANEUVERS_POWER.title": "机动规避"
 }

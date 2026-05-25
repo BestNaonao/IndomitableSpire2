@@ -73,6 +73,8 @@
   "INDOMITABLESPIRE2-NIGHT_RAID.selectionScreenPrompt": "Choose an Attack.",
   "INDOMITABLESPIRE2-TEA_PARTY_IN_THE_WOODS.title": "Tea Party in the Woods",
   "INDOMITABLESPIRE2-TEA_PARTY_IN_THE_WOODS.description": "[gold]Requires[/gold] [blue]{MotivationRequire:diff()}[/blue] [gold]Motivation[/gold].\nCost [blue]{MotivationConsume:diff()}[/blue] [gold]Motivation[/gold].\nAdd {Cards:diff()} [gold]{Cards:plural:Dessert|Desserts}[/gold] into ALL players' [gold]Draw Piles[/gold].",
+  "INDOMITABLESPIRE2-EVASIVE_MANEUVERS.title": "Evasive Maneuvers",
+  "INDOMITABLESPIRE2-EVASIVE_MANEUVERS.description": "This turn, your next {EvasiveManeuversPower:diff()} [gold]Carrier Aircraft[/gold] cards take 0 [gold]Durability[/gold] loss.\n[gold]Exhausts[/gold] after {Durability} plays.",
   
   "INDOMITABLESPIRE2-DESSERT.title": "Dessert",
   "INDOMITABLESPIRE2-DESSERT.description": "Heal [green]{Heal:diff()}[/green] HP.\nGain {Energy:energyIcons()}.",
