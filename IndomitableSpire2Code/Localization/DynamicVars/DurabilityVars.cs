@@ -1,5 +1,6 @@
 ﻿using BaseLib.Extensions;
 using IndomitableSpire2.IndomitableSpire2Code.Cards.Abstracts;
+using IndomitableSpire2.IndomitableSpire2Code.Hooks;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
@@ -48,7 +49,8 @@ public class DurabilityVar : DynamicVar
         
         // 3. 调用舰载机的纯计算函数，获取预测损失
         if (potentialTargets.Count != 0)
-            _predictedLoss = aircraftCard.CalculateDurabilityLoss(potentialTargets);
+            _predictedLoss = CustomHook.ModifyDurabilityLossInCombat(
+                aircraftCard.CombatState, aircraftCard, aircraftCard.CalculateDurabilityLoss(potentialTargets), out _);
         
         // 我们利用 PreviewValue 来告诉基类的 ToHighlightedString 是否发生了“变化”（虽然我们自己会接管文本格式）
         if (_predictedLoss > 0)

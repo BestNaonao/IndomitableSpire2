@@ -1,5 +1,6 @@
 ﻿using IndomitableSpire2.IndomitableSpire2Code.Enums;
 using IndomitableSpire2.IndomitableSpire2Code.Extensions;
+using IndomitableSpire2.IndomitableSpire2Code.Hooks;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
@@ -37,10 +38,13 @@ public abstract class CarrierAircraftCard(
                 .Select(r => r.Receiver)
                 .Where(c => c is { IsAlive: true, IsEnemy: true });
             
-            // 【核心改动】：先计算，再应用
-            var loss = CalculateDurabilityLoss(hitEnemies);
+            // 【核心修改】：先获取修改后的损失与起效模型列表
+            var loss = CustomHook.ModifyDurabilityLossInCombat(
+                CombatState, this, CalculateDurabilityLoss(hitEnemies), out var modifyingModels);
             if (loss > 0)
                 DynamicVars.Durability().BaseValue = Math.Max(0, DynamicVars.Durability().BaseValue - loss);
+            // 【时序修复】：在实际结算完毕的瞬间，调用 After 钩子，让能力安稳地扣除层数！
+            await CustomHook.AfterModifyingDurabilityLossInCombat(CombatState, this, modifyingModels);
         }
         
         // 3. 【回归本质】：如果在战斗结算中耐久归零，立即手动将其送入消耗堆！利用引擎的逃生舱机制，避免了预计算带来的滞后性
