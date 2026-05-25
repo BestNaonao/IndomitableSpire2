@@ -19,15 +19,12 @@ public sealed class SeaHornetBomber() : CarrierAircraftCard(2, CardType.Attack, 
     protected override int UpgradeDurabilityAmount { get; set; } = 5;
     
     // 关键字：水平轰炸机 (最前) + 编队 (最后)
-    public override IEnumerable<CardKeyword> CanonicalKeywords => [
-        IndomitableKeywords.LevelBomber, 
-        IndomitableKeywords.Formation
-    ];
+    public override IEnumerable<CardKeyword> CanonicalKeywords => 
+        [IndomitableKeywords.LevelBomber, IndomitableKeywords.Formation];
     protected override IEnumerable<CardTag> SubclassTags => [IndomitableTags.LevelBomber];
     
-    protected override IEnumerable<DynamicVar> CanonicalVars =>
+    protected override IEnumerable<DynamicVar> AdditionalVars =>
     [
-        ..base.CanonicalVars,
         new DamageVar(8M, ValueProp.Move),
         new RepeatVar(2),
         new CustomPowerVar<OnFirePower>(3M)

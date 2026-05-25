@@ -24,11 +24,7 @@ public sealed class Barracuda831Squadron() : CarrierAircraftCard(2, CardType.Att
     // 仅需破甲提示框
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<ArmorBreakPower>()];
     
-    protected override IEnumerable<DynamicVar> CanonicalVars =>
-    [
-        ..base.CanonicalVars,
-        new DamageVar(12M, ValueProp.Move)
-    ];
+    protected override IEnumerable<DynamicVar> AdditionalVars => [new DamageVar(12M, ValueProp.Move)];
     
     protected override async Task<IEnumerable<DamageResult>?> OnAircraftPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
@@ -59,18 +55,15 @@ public sealed class Barracuda831Squadron() : CarrierAircraftCard(2, CardType.Att
         return attackCmd.Results;
     }
     
+    // 如果对方有格挡，直接将伤害的乘数翻倍
     public override decimal ModifyDamageMultiplicative(
         Creature? target,
         decimal amount,
         ValueProp props,
         Creature? dealer,
-        CardModel? cardSource)
-    {
-        if (target is not { Block: > 0 } || dealer != Owner.Creature || cardSource != this || !props.IsPoweredAttack())
-            return 1M;
-        // 如果对方有格挡，直接将伤害的乘数翻倍
-        return 2M;
-    }
+        CardModel? cardSource) =>
+        target is not { Block: > 0 } || dealer != Owner.Creature || cardSource != this || !props.IsPoweredAttack()
+            ? 1M : 2M;
     
     protected override void OnUpgrade()
     {

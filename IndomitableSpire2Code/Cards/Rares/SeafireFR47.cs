@@ -22,9 +22,8 @@ public sealed class SeafireFr47() : CarrierAircraftCard(2, CardType.Attack, Card
     public override IEnumerable<CardKeyword> CanonicalKeywords => [IndomitableKeywords.StrikeFighter];
     protected override IEnumerable<CardTag> SubclassTags => [IndomitableTags.StrikeFighter];
     
-    protected override IEnumerable<DynamicVar> CanonicalVars =>
+    protected override IEnumerable<DynamicVar> AdditionalVars =>
     [
-        ..base.CanonicalVars,
         new DamageVar(6M, ValueProp.Move),
         new RepeatVar(2), // 致敬共轴反转螺旋桨
         new CustomPowerVar<VulnerablePower>(2M),

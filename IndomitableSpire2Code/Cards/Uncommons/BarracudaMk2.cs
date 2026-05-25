@@ -22,9 +22,8 @@ public sealed class BarracudaMk2() : CarrierAircraftCard(1, CardType.Attack, Car
     protected override IEnumerable<CardTag> SubclassTags => [IndomitableTags.TorpedoBomber];
     
     // 使用 CustomPowerVar 作为能力的动态变量
-    protected override IEnumerable<DynamicVar> CanonicalVars =>
+    protected override IEnumerable<DynamicVar> AdditionalVars =>
     [
-        ..base.CanonicalVars,
         new DamageVar(8M, ValueProp.Move),
         new CustomPowerVar<FloodingPower>(2M),
         new CustomPowerVar<ArmorBreakPower>(4M) // 基础破甲提升到 4

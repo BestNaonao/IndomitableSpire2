@@ -19,15 +19,12 @@ public sealed class SeaHornetFighter() : CarrierAircraftCard(2, CardType.Attack,
     protected override int UpgradeDurabilityAmount { get; set; } = 3;
     
     // 关键字：战斗攻击机 (加在最前) + 编队 (加在最后)
-    public override IEnumerable<CardKeyword> CanonicalKeywords => [
-        IndomitableKeywords.StrikeFighter, 
-        IndomitableKeywords.Formation
-    ];
+    public override IEnumerable<CardKeyword> CanonicalKeywords => 
+        [IndomitableKeywords.StrikeFighter, IndomitableKeywords.Formation];
     protected override IEnumerable<CardTag> SubclassTags => [IndomitableTags.StrikeFighter];
     
-    protected override IEnumerable<DynamicVar> CanonicalVars =>
+    protected override IEnumerable<DynamicVar> AdditionalVars =>
     [
-        ..base.CanonicalVars,
         new DamageVar(2M, ValueProp.Move),
         new RepeatVar(8),
         new CustomPowerVar<OnFirePower>(4M)

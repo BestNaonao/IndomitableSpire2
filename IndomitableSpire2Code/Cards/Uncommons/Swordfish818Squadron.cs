@@ -22,9 +22,8 @@ public sealed class Swordfish818Squadron() : CarrierAircraftCard(2, CardType.Att
     public override IEnumerable<CardKeyword> CanonicalKeywords => [IndomitableKeywords.TorpedoBomber];
     protected override IEnumerable<CardTag> SubclassTags => [IndomitableTags.TorpedoBomber];
     
-    protected override IEnumerable<DynamicVar> CanonicalVars =>
+    protected override IEnumerable<DynamicVar> AdditionalVars =>
     [
-        ..base.CanonicalVars,
         new DamageVar(11M, ValueProp.Move),
         new CustomPowerVar<FloodingPower>(3M),
         new CustomPowerVar<SlowPower>(1M) // 用于瘫痪敌方攻势的缓慢变量，层数设为 1
@@ -67,6 +66,5 @@ public sealed class Swordfish818Squadron() : CarrierAircraftCard(2, CardType.Att
         DynamicVars.Damage.UpgradeValueBy(4M);
         DynamicVars.Flooding().UpgradeValueBy(1M);
         UpgradeDurability();
-        // 缓慢层数保持 1 层不变
     }
 }

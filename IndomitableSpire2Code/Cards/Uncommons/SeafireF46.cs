@@ -21,9 +21,8 @@ public sealed class SeafireF46() : CarrierAircraftCard(1, CardType.Attack, CardR
     public override IEnumerable<CardKeyword> CanonicalKeywords => [IndomitableKeywords.StrikeFighter];
     protected override IEnumerable<CardTag> SubclassTags => [IndomitableTags.StrikeFighter];
     
-    protected override IEnumerable<DynamicVar> CanonicalVars =>
+    protected override IEnumerable<DynamicVar> AdditionalVars =>
     [
-        ..base.CanonicalVars,
         new DamageVar(9M, ValueProp.Move),
         new BlockVar(7M, ValueProp.Move),
         new CustomPowerVar<InterceptedPower>(5M) // 基础截击扣除 5 点力量
