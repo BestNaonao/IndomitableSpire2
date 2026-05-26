@@ -1,5 +1,9 @@
 {
   "INDOMITABLESPIRE2-SHIKIKAN_DAKIMAKURA.title": "Commander Dakimakura",
   "INDOMITABLESPIRE2-SHIKIKAN_DAKIMAKURA.flavor": "As long as I hug it, even the most troublesome sortie missions can be completely forgotten in my dreams... Zzz...",
-  "INDOMITABLESPIRE2-SHIKIKAN_DAKIMAKURA.description": "At the end of your turn, heal [green]{Heal}[/green] HP, gain [blue]{MotivationGain}[/blue] [gold]Motivation[/gold]."
+  "INDOMITABLESPIRE2-SHIKIKAN_DAKIMAKURA.description": "At the end of your turn, heal [green]{Heal}[/green] HP, gain [blue]{MotivationGain}[/blue] [gold]Motivation[/gold].",
+
+  "INDOMITABLESPIRE2-ROYAL_BOUNTY.title": "Royal Bounty",
+  "INDOMITABLESPIRE2-ROYAL_BOUNTY.description": "At the end of combat, randomly distribute [gold]Gold[/gold] to ALL players equal to [blue]{BountyRate}%[/blue] of the total Max HP of all enemies.",
+  "INDOMITABLESPIRE2-ROYAL_BOUNTY.flavor": "\"Sink the Bismarck!\" - Admiral John Tovey"
 }
