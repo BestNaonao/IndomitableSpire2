@@ -1,4 +1,6 @@
-﻿namespace IndomitableSpire2.IndomitableSpire2Code.Extensions;
+﻿using MegaCrit.Sts2.Core.Random;
+
+namespace IndomitableSpire2.IndomitableSpire2Code.Extensions;
 
 public static class EnumerableExtensions
 {
@@ -25,5 +27,26 @@ public static class EnumerableExtensions
         
         // 所有优先级条件都未命中
         return [];
+    }
+    
+    /// <summary>
+    /// 费舍尔-耶茨洗牌算法 (Fisher-Yates)
+    /// 一旦某个谓词筛选出至少一个元素，即刻返回该结果集合。
+    /// 如果所有谓词都未能筛选出元素，则返回空集合。
+    /// </summary>
+    public static List<T> FisherYatesShuffle<T>(
+        this List<T> source, 
+        Rng random)
+    {
+        var lastIndex = source.Count - 1;
+        while (lastIndex > 0)
+        {
+            // 使用 NextUInt() 取模来获取合法的随机索引
+            var randIndex = (int)(random.NextUnsignedInt() % (uint)(lastIndex + 1));
+            // C# 元组交换语法糖，更加简洁
+            (source[lastIndex], source[randIndex]) = (source[randIndex], source[lastIndex]);
+            lastIndex--;
+        }
+        return source;
     }
 }
