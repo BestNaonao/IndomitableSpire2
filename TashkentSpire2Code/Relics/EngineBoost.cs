@@ -9,7 +9,7 @@ namespace TashkentSpire2.TashkentSpire2Code.Relics;
 
 public sealed class EngineBoost : TashkentRelic
 {
-    public override RelicRarity Rarity => RelicRarity.Ancient;
+    public override RelicRarity Rarity => RelicRarity.Starter;
     
     protected override string BigIconPath => 
         "res://TashkentSpire2/images/relics/big/EngineBoost.png";
