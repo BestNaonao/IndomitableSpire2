@@ -1,0 +1,7 @@
+[gd_resource type="AtlasTexture" load_steps=2 format=3 uid="uid://c151l7nbrdscv"]
+
+[ext_resource type="Texture2D" uid="uid://cnen6t0e2ws83" path="res://IndomitableSpire2/images/relics/outline/royal_bounty.png" id="1_uig2g"]
+
+[resource]
+atlas = ExtResource("1_uig2g")
+region = Rect2(0, 0, 90, 90)
