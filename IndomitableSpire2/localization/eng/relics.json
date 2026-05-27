@@ -4,6 +4,6 @@
   "INDOMITABLESPIRE2-SHIKIKAN_DAKIMAKURA.description": "At the end of your turn, heal [green]{Heal}[/green] HP, gain [blue]{MotivationGain}[/blue] [gold]Motivation[/gold].",
 
   "INDOMITABLESPIRE2-ROYAL_BOUNTY.title": "Royal Bounty",
-  "INDOMITABLESPIRE2-ROYAL_BOUNTY.description": "At the end of combat, randomly distribute [gold]Gold[/gold] to ALL players equal to [blue]{BountyRate}%[/blue] of the total Max HP of all enemies.",
+  "INDOMITABLESPIRE2-ROYAL_BOUNTY.description": "At the end of combat, randomly distribute [gold]Gold[/gold] to ALL players equal to [blue]{BountyRate}%[/blue] of the total Max HP of all killed enemies.",
   "INDOMITABLESPIRE2-ROYAL_BOUNTY.flavor": "\"Sink the Bismarck!\" - Admiral John Tovey"
 }
