@@ -1,10 +1,7 @@
 ﻿using BaseLib.Abstracts;
 using BaseLib.Extensions;
 using BaseLib.Utils;
-using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Entities.Cards;
-using MegaCrit.Sts2.Core.Entities.Players;
-using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using TashkentSpire2.TashkentSpire2Code.Character;
 using TashkentSpire2.TashkentSpire2Code.Extensions;
 
@@ -21,14 +18,4 @@ public abstract class TashkentCard(
 ) : CustomCardModel(baseCost, type, rarity, target, showInCardLibrary, autoAdd)
 {
     public sealed override string CustomPortraitPath => $"{Id.Entry.RemovePrefix().ToLowerInvariant()}.png".BigCardImagePath();
-    
-    public override async Task BeforeHandDraw(Player player, PlayerChoiceContext ctx, CombatState state)
-    {
-        await base.BeforeHandDraw(player, ctx, state);
-
-        if (Enchantment != null)
-        {
-            await Enchantment.BeforeHandDraw(player, ctx, state);
-        }
-    }
 }

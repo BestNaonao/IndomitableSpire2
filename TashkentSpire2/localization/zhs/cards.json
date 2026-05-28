@@ -98,7 +98,7 @@
   "TASHKENTSPIRE2-OXYGEN_TORPEDO.title": "酸素鱼雷",
   "TASHKENTSPIRE2-OXYGEN_TORPEDO.description": "本场战斗你生成的[gold]鱼雷[/gold]基础伤害增加{OxygenTorpedoPower:diff()}点。\n[gold]鱼雷[/gold]{TashkentSpire2-Torpedo:diff()}。",
   "TASHKENTSPIRE2-PINCER_MOVEMENT.title": "钳形攻势",
-  "TASHKENTSPIRE2-PINCER_MOVEMENT.description": "造成{Damage:diff()}点伤害。\n到下{PincerMovementPower:diff()}个回合开始前你造成的[gold]非攻击伤害[/gold]翻倍。",
+  "TASHKENTSPIRE2-PINCER_MOVEMENT.description": "造成{Damage:diff()}点伤害。\n到下{PincerMovementPower:diff()}个回合开始前你造成的[gold]非卡牌伤害[/gold]翻倍。",
   "TASHKENTSPIRE2-PULSE_OFFENSIVE.title": "脉冲攻势",
   "TASHKENTSPIRE2-PULSE_OFFENSIVE.description": "[gold]发射[/gold]{TashkentSpire2-Shot:diff()}:给予所有敌人{WeakPower:diff()}层[gold]虚弱[/gold]和{VulnerablePower:diff()}层[gold]易伤[/gold]。\n[red]重复[/red]:对所有敌人造成{Damage:diff()}点伤害。\n[gold]弹药[/gold]{TashkentSpire2-Ammu:diff()}/{TashkentSpire2-Ammu-Max:diff()}。\n当你打出[gold]消耗牌[/gold]时，[gold]装填[/gold]{TashkentSpire2-Load:diff()}[gold]弹药[/gold]。",
   "TASHKENTSPIRE2-RESCUE.title": "救援",

@@ -110,12 +110,13 @@ public sealed class TorpedoPower : TashkentPower, IHasSecondAmount
         }
 
         DynamicVars["AOEFlag"].BaseValue = IsTheBomb || Owner?.GetPower<TorpedoGodPower>() != null ? 1m : 0m;
-        
-        var allRounderPower = Owner?.GetPower<AllRounderPower>();
 
-        if (allRounderPower != null)
+        if (Owner != null && Owner.Player != null)
         {
-            allRounderPower.AddCharge(1);
+            foreach (var allRounderPower in base.Owner.Player.Creature.Powers.OfType<AllRounderPower>())
+            {
+                allRounderPower.AddCharge(1);
+            }
         }
 
         int turns = ComputeTurns(Owner!);
