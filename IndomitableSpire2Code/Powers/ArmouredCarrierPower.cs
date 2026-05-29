@@ -1,4 +1,5 @@
-﻿using IndomitableSpire2.IndomitableSpire2Code.Commands;
+﻿using BaseLib.Abstracts;
+using IndomitableSpire2.IndomitableSpire2Code.Commands;
 using IndomitableSpire2.IndomitableSpire2Code.Extensions;
 using IndomitableSpire2.IndomitableSpire2Code.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Commands;
@@ -12,7 +13,7 @@ using MegaCrit.Sts2.Core.ValueProps;
 
 namespace IndomitableSpire2.IndomitableSpire2Code.Powers;
 
-public sealed class ArmouredCarrierPower : IndomitablePower
+public sealed class ArmouredCarrierPower : IndomitablePower, IHasSecondAmount
 {
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;
@@ -21,6 +22,10 @@ public sealed class ArmouredCarrierPower : IndomitablePower
     private const int AviationPerStack = 10;
     // 每层提供的护盾值
     private const int ShieldPerStack = 3;
+    
+    // 双数量展示
+    public override int DisplayAmount => Amount * AviationPerStack;
+    public string GetSecondAmount() => (Amount * ShieldPerStack).ToString();
     
     protected override IEnumerable<DynamicVar> CanonicalVars => 
     [
