@@ -102,7 +102,7 @@
   "INDOMITABLESPIRE2-OIL_COMMISSION.title": "Oilfield Dev.",
   "INDOMITABLESPIRE2-OIL_COMMISSION.description": "Playable after gaining {MaxProgress:energyIcons()}{InCombat: ({Progress}/{MaxProgress})|}.\nYou and {InCombat:[gold]{DelegatorName}[/gold]|the Delegator} each gain {Energy:energyIcons()}.",
   "INDOMITABLESPIRE2-EXERCISE_COMMISSION.title": "Fleet Exercise",
-  "INDOMITABLESPIRE2-EXERCISE_COMMISSION.description": "Playable after dealing {MaxProgress} damage to enemies{InCombat: ({Progress}/{MaxProgress})|}.\nYou and {InCombat:[gold]{DelegatorName}[/gold]|the Delegator} each gain {PowerAmount:diff()} [gold]Strength[/gold] and [gold]Dexterity[/gold].",
+  "INDOMITABLESPIRE2-EXERCISE_COMMISSION.description": "Playable after dealing {MaxProgress} damage to enemies{InCombat: ({Progress}/{MaxProgress})|}.\nYou and {InCombat:[gold]{DelegatorName}[/gold]|the Delegator} each gain {StrengthPower:diff()} [gold]Strength[/gold] and [gold]Dexterity[/gold].",
   "INDOMITABLESPIRE2-TRANSPORT_COMMISSION.title": "Cargo Transport",
   "INDOMITABLESPIRE2-TRANSPORT_COMMISSION.description": "Playable after drawing {MaxProgress} cards{InCombat: ({Progress}/{MaxProgress})|}.\nYou and {InCombat:[gold]{DelegatorName}[/gold]|the Delegator} each draw {Cards:diff()} {Cards:plural:card|cards}.",
   "INDOMITABLESPIRE2-ESCORT_COMMISSION.title": "Merchant Escort",

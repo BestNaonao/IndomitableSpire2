@@ -76,7 +76,7 @@
   "INDOMITABLESPIRE2-EVASIVE_MANEUVERS.title": "机动规避",
   "INDOMITABLESPIRE2-EVASIVE_MANEUVERS.description": "在这个回合，你打出的下{EvasiveManeuversPower:diff()}张[gold]舰载机[/gold]牌受到的[gold]耐久[/gold]损失降为0。\n该牌打出{Durability}次后[gold]消耗[/gold]",
   "INDOMITABLESPIRE2-PILOT_TRANSFER.title": "调任",
-  "INDOMITABLESPIRE2-PILOT_TRANSFER.description": "选择你[gold]手牌[/gold]中的1张已升级的牌，将其[gold]降级[/gold]。该牌每失去1个升级等级，选择1张其他手牌[gold]升级[/gold]。",
+  "INDOMITABLESPIRE2-PILOT_TRANSFER.description": "选择你[gold]手牌[/gold]中的1张已升级的牌，将其[gold]降级[/gold]。每失去1个等级，选择1张其他手牌[gold]升级[/gold]。",
   
   "INDOMITABLESPIRE2-DESSERT.title": "甜点",
   "INDOMITABLESPIRE2-DESSERT.description": "回复[green]{Heal:diff()}[/green]点生命。\n获得{Energy:energyIcons()}。",
@@ -102,7 +102,7 @@
   "INDOMITABLESPIRE2-OIL_COMMISSION.title": "油田开发",
   "INDOMITABLESPIRE2-OIL_COMMISSION.description": "累计获得{MaxProgress:energyIcons()}后可打出{InCombat:({Progress}/{MaxProgress})|}。\n你和{InCombat:{DelegatorName}|委托方}各获得{Energy:energyIcons()}。",
   "INDOMITABLESPIRE2-EXERCISE_COMMISSION.title": "舰队演习",
-  "INDOMITABLESPIRE2-EXERCISE_COMMISSION.description": "累计对敌人造成{MaxProgress}点伤害后可打出{InCombat:({Progress}/{MaxProgress})|}。\n给予你和{InCombat:{DelegatorName}|委托方}各{PowerAmount:diff()}点[gold]力量[/gold]与[gold]敏捷[/gold]。",
+  "INDOMITABLESPIRE2-EXERCISE_COMMISSION.description": "累计对敌人造成{MaxProgress}点伤害后可打出{InCombat:({Progress}/{MaxProgress})|}。\n给予你和{InCombat:{DelegatorName}|委托方}各{StrengthPower:diff()}点[gold]力量[/gold]与[gold]敏捷[/gold]。",
   "INDOMITABLESPIRE2-TRANSPORT_COMMISSION.title": "货物运输",
   "INDOMITABLESPIRE2-TRANSPORT_COMMISSION.description": "累计抽取{MaxProgress}张牌后可打出{InCombat:({Progress}/{MaxProgress})|}。\n你和{InCombat:{DelegatorName}|委托方}各抽{Cards:diff()}张牌。",
   "INDOMITABLESPIRE2-ESCORT_COMMISSION.title": "商船护卫",
