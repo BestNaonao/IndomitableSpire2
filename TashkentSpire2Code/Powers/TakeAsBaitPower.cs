@@ -4,15 +4,15 @@ using MegaCrit.Sts2.Core.HoverTips;
 
 namespace TashkentSpire2.TashkentSpire2Code.Powers;
 
-public sealed class SpearheadPower : TashkentPower
+public sealed class TakeAsBaitPower : TashkentPower
 {
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;
     
     public override string CustomBigIconPath => 
-        "res://TashkentSpire2/images/powers/big/SpearheadPower.png";
+        "res://TashkentSpire2/images/powers/big/TakeAsBaitPower.png";
     public override string CustomPackedIconPath => 
-        "res://TashkentSpire2/images/powers/packed/SpearheadPower.png";
+        "res://TashkentSpire2/images/powers/packed/TakeAsBaitPower.png";
     
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.ForEnergy(this)];
 

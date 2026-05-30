@@ -6,7 +6,6 @@ using MegaCrit.Sts2.Core.Entities.Multiplayer;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
-using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.ValueProps;
 
 namespace TashkentSpire2.TashkentSpire2Code.Powers;
@@ -31,11 +30,11 @@ public sealed class TargetShipPower : TashkentPower
         new DynamicVar(StoredDamageKey, 0m)
     ];
     
-    public override Task AfterDamageReceived(PlayerChoiceContext choiceContext, Creature target, DamageResult result, ValueProp props, Creature? dealer, CardModel? cardSource)
+    public override Task AfterCurrentHpChanged(Creature target, decimal hpChange)
     {
-        if (target == base.Owner && base.Owner.IsAlive && result.TotalDamage > 0)
+        if (target == base.Owner && hpChange < 0)
         {
-            base.DynamicVars[StoredDamageKey].BaseValue += result.TotalDamage;
+            base.DynamicVars[StoredDamageKey].BaseValue += Math.Abs(hpChange);
             InvokeDisplayAmountChanged();
             
             Flash();
@@ -70,5 +69,33 @@ public sealed class TargetShipPower : TashkentPower
 
         base.DynamicVars[StoredDamageKey].BaseValue = 0m;
         InvokeDisplayAmountChanged();
+    }
+    
+    public override async Task BeforeDeath(Creature target)
+    {
+        if (base.Owner == target)
+        {
+            int damageToDeal = (int)base.DynamicVars[StoredDamageKey].BaseValue * this.Amount;
+
+            if (damageToDeal <= 0)
+                return;
+
+            var combatState = base.CombatState;
+            if (combatState == null)
+                return;
+
+            var aliveMonsterTeammates = combatState.Enemies
+                .Where(c => c != null && c != base.Owner && c.CurrentHp > 0)
+                .ToList();
+
+            if (aliveMonsterTeammates.Count == 0)
+                return;
+
+            var dmg = new DamageVar(damageToDeal, ValueProp.Unpowered);
+
+            var ctx = new HookPlayerChoiceContext(this, LocalContext.NetId!.Value, combatState, GameActionType.Combat);
+
+            await CreatureCmd.Damage(ctx, aliveMonsterTeammates, dmg, null, null);
+        }
     }
 }

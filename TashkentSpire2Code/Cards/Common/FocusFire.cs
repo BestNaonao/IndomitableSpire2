@@ -15,7 +15,7 @@ public sealed class FocusFire() : AmmunitionCard(1, CardType.Attack, CardRarity.
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new AmmunitionDynamicVar(6M),
-        new LoadDynamicVar(3M),
+        new LoadDynamicVar(6M),
         new AmmuMaxDynamicVar(6M),
         new ShotDynamicVar(6M),
         new CalculationBaseVar(1M),
@@ -72,6 +72,6 @@ public sealed class FocusFire() : AmmunitionCard(1, CardType.Attack, CardRarity.
     
     protected override void OnUpgrade()
     {
-        DynamicVars["TashkentSpire2-Load"].UpgradeValueBy(3M);
+        DynamicVars.CalculationBase.UpgradeValueBy(3M);
     }
 }

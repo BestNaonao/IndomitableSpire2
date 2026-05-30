@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c7ferowgdf5b4"
-path="res://.godot/imported/SpearheadPower.png-14131e4cadbcf4fae1944ab22881da7f.ctex"
+uid="uid://b7p5nhaau03ed"
+path="res://.godot/imported/TakeAsBaitPower.png-b8e8840157729ed7fc9e4ea83b2f3c64.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://TashkentSpire2/images/powers/packed/SpearheadPower.png"
-dest_files=["res://.godot/imported/SpearheadPower.png-14131e4cadbcf4fae1944ab22881da7f.ctex"]
+source_file="res://TashkentSpire2/images/powers/packed/TakeAsBaitPower.png"
+dest_files=["res://.godot/imported/TakeAsBaitPower.png-b8e8840157729ed7fc9e4ea83b2f3c64.ctex"]
 
 [params]
 
