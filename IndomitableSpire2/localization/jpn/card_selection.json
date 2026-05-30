@@ -1,4 +1,6 @@
 ﻿{
   "INDOMITABLESPIRE2-RECON_TO_HAND": "手札に加えるカードを最大[blue]{Amount}[/blue]枚選択。",
-  "INDOMITABLESPIRE2-RECON_TO_DISCARD": "[gold]捨てる[/gold]カードを最大[blue]{Amount}[/blue]枚選択。"
+  "INDOMITABLESPIRE2-RECON_TO_DISCARD": "[gold]捨てる[/gold]カードを最大[blue]{Amount}[/blue]枚選択。",
+  "INDOMITABLESPIRE2-TRANSFER_DOWNGRADE": "ダウングレードするカードを1枚選ぶ。",
+  "INDOMITABLESPIRE2-TRANSFER_UPGRADE": "アップグレードするカードを最大[blue]{Amount}[/blue]枚選ぶ。"
 }

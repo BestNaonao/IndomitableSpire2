@@ -1,4 +1,6 @@
 ﻿{
   "INDOMITABLESPIRE2-RECON_TO_HAND": "Choose up to {Amount:plural:a card|[blue]{}[/blue] cards} to put into your [gold]Hand[/gold].",
-  "INDOMITABLESPIRE2-RECON_TO_DISCARD": "Choose up to {Amount:plural:a card|[blue]{}[/blue] cards} to [gold]Discard[/gold]."
+  "INDOMITABLESPIRE2-RECON_TO_DISCARD": "Choose up to {Amount:plural:a card|[blue]{}[/blue] cards} to [gold]Discard[/gold].",
+  "INDOMITABLESPIRE2-TRANSFER_DOWNGRADE": "Choose 1 card to Downgrade.",
+  "INDOMITABLESPIRE2-TRANSFER_UPGRADE": "Choose up to [blue]{Amount}[/blue] cards to Upgrade."
 }
