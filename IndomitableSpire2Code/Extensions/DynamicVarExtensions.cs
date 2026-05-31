@@ -15,7 +15,7 @@ public static class DynamicVarExtensions
         where TPower : PowerModel
     {
         // 利用 BaseLib 的底层字段，直接绑定原生的能力 Tip 生成逻辑
-        BaseLib.Extensions.DynamicVarExtensions.DynamicVarTips[var] = HoverTipFactory.FromPower<TPower>;
+        BaseLib.Extensions.DynamicVarExtensions.DynamicVarTips[var] = _ => HoverTipFactory.FromPower<TPower>();
         return var;
     }
     
@@ -28,7 +28,7 @@ public static class DynamicVarExtensions
     public static DynamicVar WithPowerTooltip<TPower>(this DynamicVar var) 
         where TPower : PowerModel
     {
-        BaseLib.Extensions.DynamicVarExtensions.DynamicVarTips[var] = HoverTipFactory.FromPower<TPower>;
+        BaseLib.Extensions.DynamicVarExtensions.DynamicVarTips[var] = _ => HoverTipFactory.FromPower<TPower>();
         return var;
     }
 }
