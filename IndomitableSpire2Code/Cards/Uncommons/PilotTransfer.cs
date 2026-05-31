@@ -7,7 +7,7 @@ using MegaCrit.Sts2.Core.Localization;
 
 namespace IndomitableSpire2.IndomitableSpire2Code.Cards.Uncommons;
 
-public sealed class PilotTransfer() : IndomitableCard(1, CardType.Skill, CardRarity.Uncommon, TargetType.Self)
+public sealed class PilotTransfer() : IndomitableCard(0, CardType.Skill, CardRarity.Uncommon, TargetType.Self)
 {
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Ethereal];
     
@@ -38,10 +38,7 @@ public sealed class PilotTransfer() : IndomitableCard(1, CardType.Skill, CardRar
         
         // 执行彻底降级，并在屏幕上闪烁展示，给予负向但清晰的视觉反馈
         CardCmd.Downgrade(cardToDowngrade);
-        CardCmd.Preview(cardToDowngrade);
-        
-        // 稍微停顿一下，让玩家看清降级发生了
-        await Cmd.CustomScaledWait(0.3f, 0.5f);
+        await Cmd.CustomScaledWait(0.2f, 0.4f);
         
         // ================= 阶段 2：选择升级 =================
         if (transferLevels > 0)
@@ -49,23 +46,31 @@ public sealed class PilotTransfer() : IndomitableCard(1, CardType.Skill, CardRar
             // 提示文本中可以使用动态变量 {Amount} 来显示能升几级
             var upPrefs = new CardSelectorPrefs(UpgradePrompt, 1, transferLevels);
             
-            // 过滤：只能选除了刚才被降级的那张牌之外的牌（防止刚降级又给升回去，破坏风味）
-            var cardsToUpgrade = await CardSelectCmd.FromHand(
-                choiceContext, Owner, upPrefs, c => c != cardToDowngrade && c != this && c.IsUpgradable, this
-                );
+            // 手动过滤出符合条件的卡牌列表
+            var validCardsForUpgrade = PileType.Hand.GetPile(Owner).Cards
+                .Where(c => c != cardToDowngrade && c != this && c.IsUpgradable)
+                .ToList();
             
-            foreach (var card in cardsToUpgrade)
+            if (validCardsForUpgrade.Count > 0)
             {
-                CardCmd.Upgrade(card);
-                CardCmd.Preview(card); // 闪烁展示升级效果
-                await Cmd.CustomScaledWait(0.15f, 0.3f);
+                // 【核心修复 2】：使用 FromSimpleGrid 呼出网格界面，彻底与手牌的物理布局解耦
+                var cardsToUpgrade = await CardSelectCmd.FromSimpleGrid(
+                    choiceContext, validCardsForUpgrade, Owner, upPrefs
+                );
+                
+                foreach (var card in cardsToUpgrade)
+                {
+                    CardCmd.Upgrade(card);
+                    CardCmd.Preview(card); // 闪烁展示升级效果
+                    await Cmd.CustomScaledWait(0.15f, 0.3f);
+                }
             }
         }
     }
     
     protected override void OnUpgrade()
     {
-        // 升级效果：费用 -1（变为 0 费，润滑流转节奏）
-        EnergyCost.UpgradeBy(-1);
+        // 升级效果：移除虚无属性
+        RemoveKeyword(CardKeyword.Ethereal);
     }
 }
