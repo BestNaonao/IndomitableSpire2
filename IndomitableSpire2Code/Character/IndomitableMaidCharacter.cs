@@ -45,5 +45,7 @@ public sealed class IndomitableMaidCharacter : Indomitable
     
     public override bool HideFromVanillaCharacterSelect => true;
     
+    public override bool HideInCompendium => true;
+    
     public override bool AllowInVanillaRandomCharacterSelect => true;
 }
