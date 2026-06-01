@@ -1,11 +1,9 @@
 ﻿using IndomitableSpire2.IndomitableSpire2Code.Cards.Abstracts;
-using IndomitableSpire2.IndomitableSpire2Code.Enums;
 using IndomitableSpire2.IndomitableSpire2Code.Localization.DynamicVars;
 using IndomitableSpire2.IndomitableSpire2Code.Powers;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
-using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 
 namespace IndomitableSpire2.IndomitableSpire2Code.Cards.Rares;
@@ -14,16 +12,10 @@ public sealed class ArmouredCarrier() : IndomitableCard(3, CardType.Power, CardR
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => 
     [
-        new PowerVar<ShieldPower>(6M),
-        new PowerVar<AviationPower>(20M),
+        new CustomPowerVar<ShieldPower>(6M),
+        new EleganceVar(1M),
+        new CustomPowerVar<AviationPower>(20M),
         new PowerVar<ArmouredCarrierPower>(2M)
-    ];
-    
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => 
-    [
-        HoverTipFactory.FromPower<ShieldPower>(),
-        HoverTipFactory.FromKeyword(IndomitableKeywords.Elegance),
-        HoverTipFactory.FromPower<AviationPower>()
     ];
     
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
