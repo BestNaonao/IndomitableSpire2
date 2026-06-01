@@ -9,8 +9,10 @@ namespace TashkentSpire2.TashkentSpire2Code.Cards.Uncommon;
 
 public sealed class PincerMovement() : TashkentCard(1, CardType.Attack, CardRarity.Uncommon, TargetType.AnyEnemy)
 {
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Retain];
+    
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new DamageVar(9M, ValueProp.Move),
+        new DamageVar(7M, ValueProp.Move),
         new DynamicVar("PincerMovementPower", 2M)
     ];
     

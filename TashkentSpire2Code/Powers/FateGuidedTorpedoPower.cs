@@ -20,8 +20,16 @@ public sealed class FateGuidedTorpedoPower : TashkentPower, IHasSecondAmount
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<TorpedoPower>()];
     
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new TorpedoDynamicVar(9M)
+        new TorpedoDynamicVar(0M)
     ];
+    
+    public FateGuidedTorpedoPower SetTorpedoPower(decimal amount)
+    {
+        AssertMutable();
+        base.DynamicVars["TashkentSpire2-Torpedo"].BaseValue = amount;
+        InvokeDisplayAmountChanged();
+        return this;
+    }
     
     public string GetSecondAmount()
     {

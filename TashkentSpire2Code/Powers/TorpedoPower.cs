@@ -70,15 +70,11 @@ public sealed class TorpedoPower : TashkentPower, IHasSecondAmount
 
         int baseTurns = 3;
 
-        if (dist == -2 || dist == -3)
-            baseTurns = 4;
-        else if (dist == -4 || dist == -5)
-            baseTurns = 5;
-        else if (dist == 2 || dist == 3)
+        if (dist == 2 || dist == 3)
             baseTurns = 2;
         else if (dist == 4 || dist == 5)
             baseTurns = 1;
-        else if (distPower == null || dist == -1 || dist == 0 || dist == 1)
+        else if (distPower == null || dist <= 1)
             baseTurns = 3;
 
         int godPowerBonus = (int)(owner.GetPower<TorpedoGodPower>()?.Amount ?? 0m);
@@ -161,17 +157,24 @@ public sealed class TorpedoPower : TashkentPower, IHasSecondAmount
 
         var godPower = Owner?.GetPower<TorpedoGodPower>();
 
-        IReadOnlyList<Creature> targets;
+        List<Creature> targets = new List<Creature>();
 
         bool isAOE = IsTheBomb || godPower != null;
 
-        var dmg = new DamageVar(Amount, ValueProp.Unpowered);
-
         if (isAOE)
         {
-            targets = enemies;
+            foreach (var enemy in enemies)
+            {
+                if (enemy == null) continue;
 
-            await CreatureCmd.Damage(choiceContext, targets, dmg, Owner!);
+                int markAmount = enemy.GetPower<MarkPower>()?.Amount ?? 0;
+                int bonusDamage = markAmount * 2;
+
+                var dmg = new DamageVar(Amount + bonusDamage, ValueProp.Unpowered);
+            
+                await CreatureCmd.Damage(choiceContext, enemy, dmg, Owner!);
+                targets.Add(enemy);
+            }
         }
         else
         {
@@ -179,9 +182,13 @@ public sealed class TorpedoPower : TashkentPower, IHasSecondAmount
             if (target == null)
                 return;
 
-            targets = [target];
+            int markAmount = target.GetPower<MarkPower>()?.Amount ?? 0;
+            int bonusDamage = markAmount * 2;
+
+            var dmg = new DamageVar(Amount + bonusDamage, ValueProp.Unpowered);
 
             await CreatureCmd.Damage(choiceContext, target, dmg, Owner!);
+            targets.Add(target);
         }
 
         var context = new TorpedoDamageContext

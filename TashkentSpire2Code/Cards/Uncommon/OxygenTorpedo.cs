@@ -9,7 +9,7 @@ namespace TashkentSpire2.TashkentSpire2Code.Cards.Uncommon;
 public sealed class OxygenTorpedo() : TashkentCard(1, CardType.Skill, CardRarity.Uncommon, TargetType.Self)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new TorpedoDynamicVar(18M),
+        new TorpedoDynamicVar(12M),
         new PowerVar<OxygenTorpedoPower>(12M)
     ];
     

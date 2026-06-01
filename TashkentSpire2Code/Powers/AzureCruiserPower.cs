@@ -2,6 +2,7 @@
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 
@@ -16,6 +17,8 @@ public sealed class AzureCruiserPower : TashkentPower
         "res://TashkentSpire2/images/powers/big/AzureCruiserPower.png";
     public override string CustomPackedIconPath => 
         "res://TashkentSpire2/images/powers/packed/AzureCruiserPower.png";
+    
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<TorpedoPower>()];
     
     public override bool IsInstanced => true;
     
@@ -42,6 +45,14 @@ public sealed class AzureCruiserPower : TashkentPower
             {
                 await PowerCmd.Apply<TorpedoPower>(base.Owner.Player.Creature, base.DynamicVars["TashkentSpire2-Torpedo"].IntValue, base.Owner.Player.Creature, null);
             }
+        }
+        var torpedoes = base.Owner.Powers
+            .OfType<TorpedoPower>()
+            .ToList();
+
+        foreach (var power in torpedoes)
+        {
+            power.ReduceTurnCount(this.Amount);
         }
     }
     

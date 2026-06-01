@@ -10,7 +10,8 @@ namespace TashkentSpire2.TashkentSpire2Code.Cards.Uncommon;
 public sealed class FateGuidedTorpedo() : TashkentCard(1, CardType.Power, CardRarity.Uncommon, TargetType.Self)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new PowerVar<FateGuidedTorpedoPower>(1M)
+        new PowerVar<FateGuidedTorpedoPower>(1M),
+        new TorpedoDynamicVar(12M)
     ];
 
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [
@@ -20,7 +21,11 @@ public sealed class FateGuidedTorpedo() : TashkentCard(1, CardType.Power, CardRa
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
-        await PowerCmd.Apply<FateGuidedTorpedoPower>(base.Owner.Creature, base.DynamicVars["FateGuidedTorpedoPower"].BaseValue, base.Owner.Creature, this);
+        var powerInstance = await PowerCmd.Apply<FateGuidedTorpedoPower>(base.Owner.Creature, base.DynamicVars["FateGuidedTorpedoPower"].BaseValue, base.Owner.Creature, this);
+        if (powerInstance != null)
+        {
+            powerInstance.SetTorpedoPower(base.DynamicVars["TashkentSpire2-Torpedo"].BaseValue);
+        }
     }
 
     protected override void OnUpgrade()
