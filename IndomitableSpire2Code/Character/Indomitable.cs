@@ -100,10 +100,11 @@ public abstract class Indomitable : CustomCharacterModel
         return list;
     }
     
-    // public override string CharacterTransitionSfx { get; }
-    //
+    // 转场台词
+    public override string CharacterTransitionSfx =>
+        "res://IndomitableSpire2/sfx/characters/indomitable/denglujiemian.wav";
+    // 攻击音效
     // public override string CustomAttackSfx { get; }
-    
     // 技能台词
     public override string CustomCastSfx => 
         "res://IndomitableSpire2/sfx/characters/indomitable/jinengtaici.wav";
