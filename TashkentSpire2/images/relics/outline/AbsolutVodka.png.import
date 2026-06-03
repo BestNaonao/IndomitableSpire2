@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://di8x0jxpl66rh"
-path="res://.godot/imported/Tashkent_energy_icon_original.png-c81ac334eeb6d789d102adc387f7ac69.ctex"
+uid="uid://b0jllhj1u73wy"
+path="res://.godot/imported/AbsolutVodka.png-c1992292938c8c888c1844b4945dc7ec.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://TashkentSpire2/images/packed/sprite_fonts/Tashkent_energy_icon_original.png"
-dest_files=["res://.godot/imported/Tashkent_energy_icon_original.png-c81ac334eeb6d789d102adc387f7ac69.ctex"]
+source_file="res://TashkentSpire2/images/relics/outline/AbsolutVodka.png"
+dest_files=["res://.godot/imported/AbsolutVodka.png-c1992292938c8c888c1844b4945dc7ec.ctex"]
 
 [params]
 

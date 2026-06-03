@@ -10,7 +10,7 @@
   "TASHKENTSPIRE2-LOADING_DEVICE.description": "现在你可以在[gold]休息处[/gold]对一张[gold]弹药[/gold]牌[gold]装填[/gold][blue]6[/blue]。\n首先选择装填选项则不消耗休息处次数。",
   "TASHKENTSPIRE2-ORDER_OF_SOLIDARITY.title": "团结勋章",
   "TASHKENTSPIRE2-ORDER_OF_SOLIDARITY.flavor": "荣耀不属于个人，而属于共同进退的战友。",
-  "TASHKENTSPIRE2-ORDER_OF_SOLIDARITY.description": "从你的[gold]牌组[/gold]中选择[blue]{Cards}[/blue]张牌。为这些牌[gold]附魔[/gold]：[purple]团结[/purple]。",
+  "TASHKENTSPIRE2-ORDER_OF_SOLIDARITY.description": "拾起时，从你的[gold]牌组[/gold]中选择[blue]{Cards}[/blue]张牌。为这些牌[gold]附魔[/gold]：[purple]团结[/purple]。",
   "TASHKENTSPIRE2-SCOPE.title": "瞄准镜",
   "TASHKENTSPIRE2-SCOPE.flavor": "锁定，微调，然后……等待那个决定性的瞬间。",
   "TASHKENTSPIRE2-SCOPE.description": "每当你给予敌人[gold]标记[/gold]时，所给予的[gold]标记[/gold]层数增加[blue]{TashkentSpire2-Mark:diff()}[/blue]层。",
@@ -25,5 +25,17 @@
   "TASHKENTSPIRE2-WILL_TO_WIN.description": "每场战斗首次受到[red]致命伤害[/red]或者受到[red]致命伤害[/red]时减少自己[blue]20[/blue]点[gold]活力[/gold]，防止死亡并回复至[blue]1[/blue]点生命值。\n当你生命值仅为[blue]1[/blue]点时，获得卡牌造成伤害[blue]20[/blue]%的[gold]活力[/gold]。",
   "TASHKENTSPIRE2-FUEL.title": "燃料",
   "TASHKENTSPIRE2-FUEL.flavor": "充分燃烧每一份资源，化作冲破防线的力量。",
-  "TASHKENTSPIRE2-FUEL.description": "每当你[gold]消耗[/gold]一张牌，获得[blue]{VigorPower}[/blue]点[gold]活力[/gold]。"
+  "TASHKENTSPIRE2-FUEL.description": "每当你[gold]消耗[/gold]一张牌，获得[blue]{VigorPower}[/blue]点[gold]活力[/gold]。",
+  "TASHKENTSPIRE2-ABSOLUT_VODKA.title": "绝对伏特加",
+  "TASHKENTSPIRE2-ABSOLUT_VODKA.flavor": "绝对伏特加，绝对好品质。",
+  "TASHKENTSPIRE2-ABSOLUT_VODKA.description": "拾起时，从你的[gold]牌组[/gold]中选择[blue]{Cards}[/blue]张牌。为这些牌[gold]附魔[/gold]：[purple]发酵[/purple]。",
+  "TASHKENTSPIRE2-TEST1.title": "测试1",
+  "TASHKENTSPIRE2-TEST1.flavor": "测试1",
+  "TASHKENTSPIRE2-TEST1.description": "在每回合开始时[red]失去[/red]{Energy:energyIcons()}，多余的能量可以留到下一回合。\n每打出一张牌，获得{energyPrefix:energyIcons(1)}，但每次[gold]打乱洗牌[/gold]后，所有牌耗能增加[blue]1[/blue]{energyPrefix:energyIcons(1)}。",
+  "TASHKENTSPIRE2-TEST2.title": "测试2",
+  "TASHKENTSPIRE2-TEST2.flavor": "测试2",
+  "TASHKENTSPIRE2-TEST2.description": "在每回合开始时，你[gold]手牌[/gold]中随机一张耗能最高的牌耗能减少{Energy:energyIcons()}。",
+  "TASHKENTSPIRE2-TEST3.title": "测试3",
+  "TASHKENTSPIRE2-TEST3.flavor": "测试3",
+  "TASHKENTSPIRE2-TEST3.description": "战斗开始时，获得{MaxHp:diff()}点[gold]最大生命值[/gold]。\n在每回合开始时，失去[blue]1[/blue]点[gold]最大生命值[/gold]并获得{Energy:energyIcons()}。"
 }

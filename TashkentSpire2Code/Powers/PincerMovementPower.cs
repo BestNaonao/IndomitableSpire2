@@ -22,7 +22,7 @@ public sealed class PincerMovementPower : TashkentPower
         if (dealer != this.Owner || this.Owner?.CombatState == null || props.HasFlag(ValueProp.Move))
             return 1M;
         
-        return 2M;
+        return 1.5M;
     }
 
     public override async Task AfterSideTurnStart(CombatSide side, CombatState combatState)

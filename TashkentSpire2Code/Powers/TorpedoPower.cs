@@ -168,9 +168,8 @@ public sealed class TorpedoPower : TashkentPower, IHasSecondAmount
                 if (enemy == null) continue;
 
                 int markAmount = enemy.GetPower<MarkPower>()?.Amount ?? 0;
-                int bonusDamage = markAmount * 2;
 
-                var dmg = new DamageVar(Amount + bonusDamage, ValueProp.Unpowered);
+                var dmg = new DamageVar(Amount + markAmount, ValueProp.Unpowered);
             
                 await CreatureCmd.Damage(choiceContext, enemy, dmg, Owner!);
                 targets.Add(enemy);
@@ -183,9 +182,8 @@ public sealed class TorpedoPower : TashkentPower, IHasSecondAmount
                 return;
 
             int markAmount = target.GetPower<MarkPower>()?.Amount ?? 0;
-            int bonusDamage = markAmount * 2;
 
-            var dmg = new DamageVar(Amount + bonusDamage, ValueProp.Unpowered);
+            var dmg = new DamageVar(Amount + markAmount, ValueProp.Unpowered);
 
             await CreatureCmd.Damage(choiceContext, target, dmg, Owner!);
             targets.Add(target);

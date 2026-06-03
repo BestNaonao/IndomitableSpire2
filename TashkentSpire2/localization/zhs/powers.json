@@ -36,7 +36,7 @@
   "TASHKENTSPIRE2-MOBILE_POWER.smartDescription": "每当你在本回合打出卡牌时，在本回合获得[blue]{Amount}[/blue]点[gold]敏捷[/gold]。",
   "TASHKENTSPIRE2-MOBILE_POWER.title": "跳洗",
   "TASHKENTSPIRE2-PINCER_MOVEMENT_POWER.description": "到回合开始前你造成的非卡牌伤害翻倍。",
-  "TASHKENTSPIRE2-PINCER_MOVEMENT_POWER.smartDescription": "到下[blue]{Amount}[/blue]个回合开始前你造成的非卡牌伤害翻倍。",
+  "TASHKENTSPIRE2-PINCER_MOVEMENT_POWER.smartDescription": "到下[blue]{Amount}[/blue]个回合开始前你造成的[gold]非卡牌伤害[/gold]增加[blue]50[/blue]%。",
   "TASHKENTSPIRE2-PINCER_MOVEMENT_POWER.title": "钳形攻势",
   "TASHKENTSPIRE2-FATE_GUIDED_TORPEDO_POWER.description": "你的回合开始时，释放[gold]鱼雷[/gold]。",
   "TASHKENTSPIRE2-FATE_GUIDED_TORPEDO_POWER.smartDescription": "你的回合开始时，释放[blue]{Amount}[/blue]次[gold]鱼雷[/gold]{TashkentSpire2-Torpedo:diff()}。",

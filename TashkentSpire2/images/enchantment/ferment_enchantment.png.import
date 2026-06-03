@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://di8x0jxpl66rh"
-path="res://.godot/imported/Tashkent_energy_icon_original.png-c81ac334eeb6d789d102adc387f7ac69.ctex"
+uid="uid://b1f7tkto3goap"
+path="res://.godot/imported/ferment_enchantment.png-e3149d07cc9edb7990e3db422a3c8d92.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://TashkentSpire2/images/packed/sprite_fonts/Tashkent_energy_icon_original.png"
-dest_files=["res://.godot/imported/Tashkent_energy_icon_original.png-c81ac334eeb6d789d102adc387f7ac69.ctex"]
+source_file="res://TashkentSpire2/images/enchantment/ferment_enchantment.png"
+dest_files=["res://.godot/imported/ferment_enchantment.png-e3149d07cc9edb7990e3db422a3c8d92.ctex"]
 
 [params]
 
