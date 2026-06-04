@@ -10,45 +10,60 @@ namespace IndomitableSpire2.IndomitableSpire2Code.Localization.HoverTips;
 public static class CustomHoverTipFactory
 {
     /// <summary>
-    /// 获取任意 Intent 的静态 HoverTip。
-    /// 第一次调用时自动生成，后续调用零开销直接从泛型缓存获取。
+    /// 获取任意 Intent 的 HoverTip。
+    /// 每次调用生成新实例以保证 Godot 资源的安全性，但反射和文本拼接过程通过泛型缓存实现了零开销。
     /// </summary>
     public static IHoverTip FromIntent<TIntent>() where TIntent : AbstractIntent, new()
     {
-        return IntentCache<TIntent>.Tip;
+        // 1. 极速获取缓存的纯文本元数据（零反射开销）
+        var meta = IntentMetadataCache<TIntent>.Instance;
+        
+        // 2. 将加载纹理的动作交给原版的 PreloadManager 或 ResourceLoader，
+        // 它们内部拥有安全的、与 Godot 生命周期绑定的资源缓存池。
+        Texture2D? texture = null;
+        if (!string.IsNullOrEmpty(meta.AssetPath))
+        {
+            texture = PreloadManager.Cache.GetTexture2D(meta.AssetPath);
+        }
+        
+        // 3. 每次都 new 一个新的 HoverTip，彻底告别 ObjectDisposedException
+        return new HoverTip(meta.Title, meta.Description, texture);
     }
     
     /// <summary>
-    /// 泛型静态类缓存：利用 C# JIT 特性，每种 TIntent 都会拥有独立的静态字段。
-    /// 完美替代 Dictionary，避免了任何多线程并发问题和哈希查找开销。
+    /// 纯 C# 元数据结构，不持有任何 Godot 非托管资源
     /// </summary>
-    private static class IntentCache<TIntent> where TIntent : AbstractIntent, new()
+    private class IntentMetadata
+    {
+        public required LocString Title;
+        public required LocString Description;
+        public string? AssetPath;
+    }
+    
+    /// <summary>
+    /// 泛型静态类缓存：利用 C# JIT 特性为每种 Intent 缓存反射结果和本地化字符串。
+    /// </summary>
+    private static class IntentMetadataCache<TIntent> where TIntent : AbstractIntent, new()
     {
         // ReSharper disable once StaticFieldInGenericType
-        // 设计意图：每种 Intent 类型独立缓存其 HoverTip，利用泛型静态构造函数的"每类型执行一次"特性
-        public static readonly IHoverTip Tip;
+        public static readonly IntentMetadata Instance;
         
-        static IntentCache()
+        static IntentMetadataCache()
         {
             var intent = new TIntent();
-            // 1. 唯一需要反射的地方：获取 protected 的 IntentPrefix。由于放在静态构造函数中，对每种 Intent 只会执行一次反射。
-            // 兜底策略：如果获取失败，就将 IntentType 枚举转为大写字符串（例如 SleepIntent -> SLEEP）
+            
+            // 唯一需要反射的地方
             var prefix = typeof(TIntent)
                 .GetProperty("IntentPrefix", BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public)
                 ?.GetValue(intent) as string ?? intent.IntentType.ToString().ToUpperInvariant();
             
-            // 2. 组装纯净的静态 LocString（不传入 targets 和 owner）
-            var title = new LocString("intents", $"{prefix}.title");
-            var description = new LocString("intents", $"{prefix}.description");
-            
-            // 3. 完美绕过 SpritePath 反射：利用公共的 AssetPaths！
-            // 原版的 AssetPaths 已经帮我们把 SpritePath 包装进了 ImageHelper.GetImagePath 中。
-            Texture2D? texture = null;
-            var assetPath = intent.AssetPaths.FirstOrDefault();
-            if (!string.IsNullOrEmpty(assetPath))
-                texture = PreloadManager.Cache.GetTexture2D(assetPath);
-            
-            Tip = new HoverTip(title, description, texture);
+            // 组装纯净的文本元数据
+            Instance = new IntentMetadata
+            {
+                Title = new LocString("intents", $"{prefix}.title"),
+                Description = new LocString("intents", $"{prefix}.description"),
+                AssetPath = intent.AssetPaths.FirstOrDefault()
+            };
         }
     }
 }
