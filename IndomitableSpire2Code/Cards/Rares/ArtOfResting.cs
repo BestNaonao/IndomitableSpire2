@@ -30,7 +30,7 @@ public sealed class ArtOfResting() : IndomitableCard(2, CardType.Power, CardRari
         TalkCmd.Play(RestingDialogue, Owner.Creature, VfxColor.Gold, VfxDuration.VeryLong);
         
         // 2. 极其优雅地全堆查找：遍历该玩家所有牌堆（抽牌、弃牌、手牌、消耗），找到所有“慵懒”，将之前积攒的“慵懒”统统转化为“养神”
-        var indolentCards = Owner.Piles
+        var indolentCards = Owner.PlayerCombatState.AllPiles
             .SelectMany(p => p.Cards)
             .Where(c => c is Indolent)
             .ToList();
