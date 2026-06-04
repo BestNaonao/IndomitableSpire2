@@ -3,7 +3,6 @@ using IndomitableSpire2.IndomitableSpire2Code.Cards.Others;
 using IndomitableSpire2.IndomitableSpire2Code.Enums;
 using IndomitableSpire2.IndomitableSpire2Code.Extensions;
 using IndomitableSpire2.IndomitableSpire2Code.Localization.DynamicVars;
-using IndomitableSpire2.IndomitableSpire2Code.Powers;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Context;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -41,12 +40,7 @@ public sealed class TeaPartyInTheWoods() : IndomitableCard(0, CardType.Skill, Ca
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         // 1. 消耗干劲
-        await PowerCmd.Apply<MotivationPower>(
-            target: Owner.Creature,
-            amount: -DynamicVars.MotivationConsume().BaseValue,
-            applier: Owner.Creature,
-            cardSource: this
-        );
+        await this.SpendMotivationCost();
         
         // 2. 为所有玩家发放甜点
         if (CombatState != null)

@@ -1,7 +1,6 @@
 ﻿using IndomitableSpire2.IndomitableSpire2Code.Cards.Abstracts;
 using IndomitableSpire2.IndomitableSpire2Code.Extensions;
 using IndomitableSpire2.IndomitableSpire2Code.Localization.DynamicVars;
-using IndomitableSpire2.IndomitableSpire2Code.Powers;
 using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -14,10 +13,7 @@ public sealed class WorkArrangement() : IndomitableCard(0, CardType.Skill, CardR
 {
     // 注册变量：抽 2 张牌
     protected override IEnumerable<DynamicVar> CanonicalVars => 
-    [
-        new CardsVar(2),
-        new MotivationConsumeVar(10M)   // 使用专属变量类
-    ];
+        [new CardsVar(2), new MotivationConsumeVar(10M)];
     
     // 核心限制：必须有足够的干劲才能打出
     protected override bool IsPlayable => this.CanAffordMotivationCost();
@@ -25,12 +21,7 @@ public sealed class WorkArrangement() : IndomitableCard(0, CardType.Skill, CardR
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         // 1. 消耗干劲：通过施加负数的能力层数来实现扣除
-        await PowerCmd.Apply<MotivationPower>(
-            target: Owner.Creature, 
-            amount: -DynamicVars.MotivationConsume().BaseValue, 
-            applier: Owner.Creature, 
-            cardSource: this
-        );
+        await this.SpendMotivationCost();
         
         // 2. 抽牌
         await CardPileCmd.Draw(choiceContext, DynamicVars.Cards.BaseValue, Owner);
