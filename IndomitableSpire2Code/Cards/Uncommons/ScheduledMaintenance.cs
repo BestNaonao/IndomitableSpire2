@@ -20,6 +20,9 @@ public sealed class ScheduledMaintenance() : IndomitableCard(1, CardType.Power, 
     
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
+        // 1. 播放能力卡专属的施法动画
+        await CreatureCmd.TriggerAnim(Owner.Creature, "Cast", Owner.Character.CastAnimDelay);
+        
         // 施加定期检修能力
         await PowerCmd.Apply<ScheduledMaintenancePower>(
             target: Owner.Creature,

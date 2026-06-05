@@ -20,6 +20,9 @@ public sealed class ArmouredCarrier() : IndomitableCard(3, CardType.Power, CardR
     
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
+        // 1. 播放能力卡专属的施法动画
+        await CreatureCmd.TriggerAnim(Owner.Creature, "Cast", Owner.Character.CastAnimDelay);
+        
         // 施加装甲航母能力，1 层代表 3 点护盾和 10 点航空的基础收益
         await PowerCmd.Apply<ArmouredCarrierPower>(
             target: Owner.Creature,
