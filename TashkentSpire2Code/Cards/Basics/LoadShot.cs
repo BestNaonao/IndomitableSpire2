@@ -16,7 +16,7 @@ namespace TashkentSpire2.TashkentSpire2Code.Cards.Basics;
 public sealed class LoadShot() : AmmunitionCard(1, CardType.Attack, CardRarity.Basic, TargetType.AnyEnemy), ITranscendenceCard
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new DamageVar(6M, ValueProp.Move),
+        new DamageVar(7M, ValueProp.Move),
         new AmmunitionDynamicVar(0M),
         new LoadDynamicVar(1M),
         new AmmuMaxDynamicVar(6M),
@@ -32,11 +32,6 @@ public sealed class LoadShot() : AmmunitionCard(1, CardType.Attack, CardRarity.B
         int shellsLoaded = await GetShellCountcmd.Execute(choiceContext, Owner, (int)CurrentAmmu,this.Keywords.Contains(TashkentKeyword.Barrage));
         if (shellsLoaded > 0)
         {
-            if (shellsLoaded >= DynamicVars["TashkentSpire2-Shot"].BaseValue)
-            {
-                await PowerCmd.Apply<MarkPower>(cardPlay.Target, DynamicVars["TashkentSpire2-Mark"].BaseValue,Owner.Creature,this);
-            }
-            
             for (int i = 0; i < shellsLoaded; i++)
             {
                 await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
@@ -45,6 +40,12 @@ public sealed class LoadShot() : AmmunitionCard(1, CardType.Attack, CardRarity.B
                     .WithHitFx("vfx/vfx_attack_slash")
                     .Execute(choiceContext);
             }
+            
+            if (shellsLoaded >= DynamicVars["TashkentSpire2-Shot"].BaseValue)
+            {
+                await PowerCmd.Apply<MarkPower>(cardPlay.Target, DynamicVars["TashkentSpire2-Mark"].BaseValue,Owner.Creature,this);
+            }
+            
             int num = Math.Max(shellsLoaded - CurrentAmmu, 0);
             if (num > 0 && this.Keywords.Contains(TashkentKeyword.Barrage))
             {

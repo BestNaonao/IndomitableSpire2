@@ -27,14 +27,17 @@ public sealed class BreakThroughOnAllFronts() : TashkentCard(2, CardType.Power, 
         if (Owner.PlayerCombatState is null) return;
         
         TalkCmd.Play(BreakThroughOnAllFronts_Dialogue, Owner.Creature, VfxColor.Gold, VfxDuration.VeryLong);
-        var ammuCards = Owner.Piles
+        var ammuCards = Owner.PlayerCombatState?.AllPiles
             .SelectMany(p => p.Cards)
             .Where(c => c is AmmunitionCard)
             .ToList();
-        
-        foreach (var original in ammuCards)
+
+        if (ammuCards != null)
         {
-            original.AddKeyword(TashkentKeyword.Barrage);
+            foreach (var original in ammuCards)
+            {
+                original.AddKeyword(TashkentKeyword.Barrage);
+            }
         }
         
         await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);

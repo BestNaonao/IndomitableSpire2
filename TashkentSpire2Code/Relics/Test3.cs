@@ -1,6 +1,7 @@
-﻿using MegaCrit.Sts2.Core.Commands;
-using MegaCrit.Sts2.Core.Entities.Cards;
-using MegaCrit.Sts2.Core.Entities.Players;
+﻿using MegaCrit.Sts2.Core.Combat;
+using MegaCrit.Sts2.Core.Commands;
+using MegaCrit.Sts2.Core.Context;
+using MegaCrit.Sts2.Core.Entities.Multiplayer;
 using MegaCrit.Sts2.Core.Entities.Relics;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
@@ -10,7 +11,7 @@ namespace TashkentSpire2.TashkentSpire2Code.Relics;
 
 public sealed class Test3 : TashkentRelic
 {
-    public override RelicRarity Rarity => RelicRarity.Rare;
+    public override RelicRarity Rarity => RelicRarity.Event;
     
     protected override string BigIconPath => 
         "res://TashkentSpire2/images/relics/big/Thruster.png";
@@ -28,12 +29,22 @@ public sealed class Test3 : TashkentRelic
         HoverTipFactory.ForEnergy(this)
     ];
     
-    public override decimal ModifyMaxEnergy(Player player, decimal amount)
+    public override async Task BeforeSideTurnStart(PlayerChoiceContext choiceContext, CombatSide side, CombatState combatState)
     {
-        if (player != base.Owner)
+        if (side == base.Owner.Creature.Side && combatState.RoundNumber <= 1)
         {
-            return amount;
+            await CreatureCmd.GainMaxHp(base.Owner.Creature, base.DynamicVars.MaxHp.BaseValue);
         }
-        return amount + (decimal)base.DynamicVars.Energy.IntValue;
+    }
+    
+    public override async Task AfterSideTurnStart(CombatSide side, CombatState combatState)
+    {
+        if (side == base.Owner.Creature.Side)
+        {
+            Flash();
+            var ctx = new HookPlayerChoiceContext(this, LocalContext.NetId!.Value, combatState, GameActionType.Combat);
+            await PlayerCmd.GainEnergy(base.DynamicVars.Energy.BaseValue, base.Owner);
+            await CreatureCmd.LoseMaxHp(ctx, base.Owner.Creature, 1m, isFromCard: false);
+        }
     }
 }

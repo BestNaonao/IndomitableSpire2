@@ -113,6 +113,11 @@ public sealed class TorpedoPower : TashkentPower, IHasSecondAmount
             {
                 allRounderPower.AddCharge(1);
             }
+            
+            foreach (var device in Owner.Player.Relics.OfType<TorpedoRecoilDevice>())
+            {
+                await device.TryTriggerBlock(); 
+            }
         }
 
         int turns = ComputeTurns(Owner!);

@@ -10,7 +10,7 @@ namespace TashkentSpire2.TashkentSpire2Code.Relics;
 
 public sealed class Test1 : TashkentRelic
 {
-    public override RelicRarity Rarity => RelicRarity.Rare;
+    public override RelicRarity Rarity => RelicRarity.Event;
     
     protected override string BigIconPath => 
         "res://TashkentSpire2/images/relics/big/Thruster.png";
@@ -50,18 +50,20 @@ public sealed class Test1 : TashkentRelic
         if (shuffler == base.Owner)
         {
             Flash();
-            var Cards = Owner.Piles
+            var Cards = Owner.PlayerCombatState?.AllPiles
                 .SelectMany(p => p.Cards)
                 .ToList();
-            
-            foreach (var item in Cards)
+
+            if (Cards != null)
             {
-                if (!item.EnergyCost.CostsX && item.EnergyCost.GetWithModifiers(CostModifiers.None) >= 0)
+                foreach (var item in Cards)
                 {
-                    item.EnergyCost.AddThisCombat(1);
+                    if (!item.EnergyCost.CostsX && item.EnergyCost.GetWithModifiers(CostModifiers.None) >= 0)
+                    {
+                        item.EnergyCost.AddThisCombat(1);
+                    }
                 }
             }
-            
         }
     }
     
