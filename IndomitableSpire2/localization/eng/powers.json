@@ -63,5 +63,8 @@
   "INDOMITABLESPIRE2-ARMOURED_CARRIER_POWER.title": "Armoured Carrier",
   "INDOMITABLESPIRE2-EVASIVE_MANEUVERS_POWER.description": "Your next [gold]Carrier Aircraft[/gold] card takes 0 [gold]Durability[/gold] loss this turn.",
   "INDOMITABLESPIRE2-EVASIVE_MANEUVERS_POWER.smartDescription": "Your next {Amount:plural:[gold]Carrier Aircraft[/gold] card takes|[blue]{Amount}[/blue] [gold]Carrier Aircraft[/gold] cards take} [blue]0[/blue] [gold]Durability[/gold] loss this turn.",
-  "INDOMITABLESPIRE2-EVASIVE_MANEUVERS_POWER.title": "Evasive Maneuvers"
+  "INDOMITABLESPIRE2-EVASIVE_MANEUVERS_POWER.title": "Evasive Maneuvers",
+  "INDOMITABLESPIRE2-MASTER_OF_LIFE_POWER.description": "Whenever you heal HP, gain [gold]Vigor[/gold].",
+  "INDOMITABLESPIRE2-MASTER_OF_LIFE_POWER.smartDescription": "Whenever you heal HP, gain [blue]{Amount}[/blue] [gold]Vigor[/gold].",
+  "INDOMITABLESPIRE2-MASTER_OF_LIFE_POWER.title": "Master of Life"
 }

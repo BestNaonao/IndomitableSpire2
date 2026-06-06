@@ -77,6 +77,8 @@
   "INDOMITABLESPIRE2-EVASIVE_MANEUVERS.description": "在这个回合，你打出的下{EvasiveManeuversPower:diff()}张[gold]舰载机[/gold]牌受到的[gold]耐久[/gold]损失降为0。\n该牌打出{Durability}次后[gold]消耗[/gold]",
   "INDOMITABLESPIRE2-PILOT_TRANSFER.title": "调任",
   "INDOMITABLESPIRE2-PILOT_TRANSFER.description": "选择你[gold]手牌[/gold]中的1张已升级的牌，将其[gold]降级[/gold]。每失去1个等级，选择1张其他手牌[gold]升级[/gold]。",
+  "INDOMITABLESPIRE2-MASTER_OF_LIFE.title": "生活大师",
+  "INDOMITABLESPIRE2-MASTER_OF_LIFE.description": "[gold]需求[/gold][blue]{MotivationRequire:diff()}[/blue]点[gold]干劲[/gold]。\n每当你在战斗中回复生命时，获得{MasterOfLifePower:diff()}点[gold]活力[/gold]。",
   
   "INDOMITABLESPIRE2-DESSERT.title": "甜点",
   "INDOMITABLESPIRE2-DESSERT.description": "回复[green]{Heal:diff()}[/green]点生命。\n获得{Energy:energyIcons()}。",

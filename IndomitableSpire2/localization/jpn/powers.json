@@ -63,5 +63,8 @@
   "INDOMITABLESPIRE2-ARMOURED_CARRIER_POWER.title": "装甲空母",
   "INDOMITABLESPIRE2-EVASIVE_MANEUVERS_POWER.description": "このターン、次にプレイする[gold]艦載機[/gold]カードが受ける[gold]耐久[/gold]減少が0になる。",
   "INDOMITABLESPIRE2-EVASIVE_MANEUVERS_POWER.smartDescription": "このターン、次にプレイする[blue]{Amount}[/blue]枚の[gold]艦載機[/gold]カードが受ける[gold]耐久[/gold]減少が[blue]0[/blue]になる。",
-  "INDOMITABLESPIRE2-EVASIVE_MANEUVERS_POWER.title": "回避機動"
+  "INDOMITABLESPIRE2-EVASIVE_MANEUVERS_POWER.title": "回避機動",
+  "INDOMITABLESPIRE2-MASTER_OF_LIFE_POWER.description": "HPを回復するたび、[gold]活力[/gold]を得る。",
+  "INDOMITABLESPIRE2-MASTER_OF_LIFE_POWER.smartDescription": "HPを回復するたび、[gold]活力[/gold]を[blue]{Amount}[/blue]得る。",
+  "INDOMITABLESPIRE2-MASTER_OF_LIFE_POWER.title": "ライフマスター"
 }

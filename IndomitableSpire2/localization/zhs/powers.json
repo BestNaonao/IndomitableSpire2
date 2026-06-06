@@ -63,5 +63,8 @@
   "INDOMITABLESPIRE2-ARMOURED_CARRIER_POWER.title": "装甲航母",
   "INDOMITABLESPIRE2-EVASIVE_MANEUVERS_POWER.description": "你打出的下一张[gold]舰载机[/gold]牌受到的[gold]耐久[/gold]损失为0。",
   "INDOMITABLESPIRE2-EVASIVE_MANEUVERS_POWER.smartDescription": "本回合，你打出的下[blue]{Amount}[/blue]张[gold]舰载机[/gold]牌受到的[gold]耐久[/gold]损失为[blue]0[/blue]。",
-  "INDOMITABLESPIRE2-EVASIVE_MANEUVERS_POWER.title": "机动规避"
+  "INDOMITABLESPIRE2-EVASIVE_MANEUVERS_POWER.title": "机动规避",
+  "INDOMITABLESPIRE2-MASTER_OF_LIFE_POWER.description": "每当你回复生命时，获得[gold]活力[/gold]。",
+  "INDOMITABLESPIRE2-MASTER_OF_LIFE_POWER.smartDescription": "每当你回复生命时，获得[blue]{Amount}[/blue]点[gold]活力[/gold]。",
+  "INDOMITABLESPIRE2-MASTER_OF_LIFE_POWER.title": "生活大师"
 }
