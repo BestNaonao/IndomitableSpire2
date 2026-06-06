@@ -1,4 +1,7 @@
 ﻿using IndomitableSpire2.IndomitableSpire2Code.Cards.Abstracts;
+using IndomitableSpire2.IndomitableSpire2Code.Enums;
+using IndomitableSpire2.IndomitableSpire2Code.Extensions;
+using IndomitableSpire2.IndomitableSpire2Code.Localization.DynamicVars;
 using IndomitableSpire2.IndomitableSpire2Code.Powers;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -11,11 +14,19 @@ namespace IndomitableSpire2.IndomitableSpire2Code.Cards.Uncommons;
 
 public sealed class MasterOfLife() : IndomitableCard(1, CardType.Power, CardRarity.Uncommon, TargetType.Self)
 {
-    // 注册能力层数变量：基础施加 3 层生活大师能力（即每次回血得 3 活力）
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<MasterOfLifePower>(3M)];
+    // 注册干劲需求变量与能力层数变量
+    protected override IEnumerable<DynamicVar> CanonicalVars => 
+    [
+        new MotivationRequireVar(25M),
+        new CustomPowerVar<VigorPower>(1M),
+        new PowerVar<MasterOfLifePower>(3M)
+    ];
     
-    // 提供活力的悬浮提示框
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<VigorPower>()];
+    // 提供需求的悬浮提示框
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromKeyword(IndomitableKeywords.Require)];
+    
+    // 核心限制：干劲不足时不可打出
+    protected override bool IsPlayable => this.MeetsMotivationRequirement();
     
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
