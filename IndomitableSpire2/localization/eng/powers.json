@@ -66,5 +66,8 @@
   "INDOMITABLESPIRE2-EVASIVE_MANEUVERS_POWER.title": "Evasive Maneuvers",
   "INDOMITABLESPIRE2-MASTER_OF_LIFE_POWER.description": "Whenever you heal HP, gain [gold]Vigor[/gold].",
   "INDOMITABLESPIRE2-MASTER_OF_LIFE_POWER.smartDescription": "Whenever you heal HP, gain [blue]{Amount}[/blue] [gold]Vigor[/gold].",
-  "INDOMITABLESPIRE2-MASTER_OF_LIFE_POWER.title": "Master of Life"
+  "INDOMITABLESPIRE2-MASTER_OF_LIFE_POWER.title": "Master of Life",
+  "INDOMITABLESPIRE2-KENOSIS_FORM_POWER.description": "At the start of your turn, heal HP. Whenever you heal HP, gain [gold]Motivation[/gold] and add [gold]Refresh+[/gold] into your [gold]Draw Pile[/gold].",
+  "INDOMITABLESPIRE2-KENOSIS_FORM_POWER.smartDescription": "At the start of your turn, heal [blue]{Heal}[/blue] HP. Whenever you heal HP, gain [blue]{MotivationGain}[/blue] [gold]Motivation[/gold] and add [blue]{Cards}[/blue] [gold]{Cards:plural:Refresh+|Refresh+}[/gold] into your [gold]Draw Pile[/gold].",
+  "INDOMITABLESPIRE2-KENOSIS_FORM_POWER.title": "Kenosis Form"
 }

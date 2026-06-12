@@ -79,6 +79,8 @@
   "INDOMITABLESPIRE2-PILOT_TRANSFER.description": "[gold]手札[/gold]にあるアップグレード済みのカードを1枚選び、[gold]ダウングレード[/gold]する。そのカードが失ったアップグレード段階1につき、他の手札1枚を選んで[gold]アップグレード[/gold]する。",
   "INDOMITABLESPIRE2-MASTER_OF_LIFE.title": "ライフマスター",
   "INDOMITABLESPIRE2-MASTER_OF_LIFE.description": "[blue]{MotivationRequire:diff()}[/blue]の[gold]やる気[/gold]を[gold]必要[/gold]とする。\n戦闘中にHPを回復するたび、[gold]活力[/gold]を{MasterOfLifePower:diff()}得る。",
+  "INDOMITABLESPIRE2-KENOSIS_FORM.title": "ケノーシス化",
+  "INDOMITABLESPIRE2-KENOSIS_FORM.description": "ターン開始時、HPを{KenosisFormPower:diff()}回復する。HPを回復するたび、[gold]やる気[/gold]を[blue]10[/blue]点得て、[gold]リフレッシュ+[/gold]を[blue]1[/blue]枚[gold]山札[/gold]に加える。",
   
   "INDOMITABLESPIRE2-DESSERT.title": "デザート",
   "INDOMITABLESPIRE2-DESSERT.description": "HPを[green]{Heal:diff()}[/green]回復する。\n{Energy:energyIcons()}を得る。",

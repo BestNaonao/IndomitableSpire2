@@ -66,5 +66,8 @@
   "INDOMITABLESPIRE2-EVASIVE_MANEUVERS_POWER.title": "回避機動",
   "INDOMITABLESPIRE2-MASTER_OF_LIFE_POWER.description": "HPを回復するたび、[gold]活力[/gold]を得る。",
   "INDOMITABLESPIRE2-MASTER_OF_LIFE_POWER.smartDescription": "HPを回復するたび、[gold]活力[/gold]を[blue]{Amount}[/blue]得る。",
-  "INDOMITABLESPIRE2-MASTER_OF_LIFE_POWER.title": "ライフマスター"
+  "INDOMITABLESPIRE2-MASTER_OF_LIFE_POWER.title": "ライフマスター",
+  "INDOMITABLESPIRE2-KENOSIS_FORM_POWER.description": "ターン開始時、HPを回復する。HPを回復するたび、[gold]やる気[/gold]を得て、[gold]リフレッシュ+[/gold]を[gold]山札[/gold]に加える。",
+  "INDOMITABLESPIRE2-KENOSIS_FORM_POWER.smartDescription": "ターン開始時、HPを[blue]{Heal}[/blue]回復する。HPを回復するたび、[gold]やる気[/gold]を[blue]{MotivationGain}[/blue]点得て、[gold]リフレッシュ+[/gold]を[blue]{Cards}[/blue]枚[gold]山札[/gold]に加える。",
+  "INDOMITABLESPIRE2-KENOSIS_FORM_POWER.title": "ケノーシス化"
 }
