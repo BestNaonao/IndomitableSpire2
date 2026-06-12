@@ -125,6 +125,7 @@
 
     <ItemGroup>
       <Content Include="IndomitableSpire2Code\python_scripts\energy_icon_generator.py" />
+      <Content Include="IndomitableSpire2Code\python_scripts\fix_power_tres.py" />
       <Content Include="IndomitableSpire2Code\python_scripts\json_filter.py.py" />
       <Content Include="IndomitableSpire2Code\python_scripts\json_sort.py" />
     </ItemGroup>
