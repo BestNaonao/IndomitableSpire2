@@ -26,7 +26,7 @@ public sealed class PincerMovement() : TashkentCard(1, CardType.Attack, CardRari
             .WithHitFx("vfx/vfx_attack_slash")
             .Execute(choiceContext);
         
-        await PowerCmd.Apply<PincerMovementPower>(base.Owner.Creature, base.DynamicVars["PincerMovementPower"].BaseValue, base.Owner.Creature, this);
+        await PowerCmd.Apply<PincerMovementPower>(choiceContext, base.Owner.Creature, base.DynamicVars["PincerMovementPower"].BaseValue, base.Owner.Creature, this);
     }
     
     protected override void OnUpgrade()

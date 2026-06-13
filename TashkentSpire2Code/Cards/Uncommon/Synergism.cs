@@ -20,7 +20,7 @@ public sealed class Synergism() : TashkentCard(1, CardType.Power, CardRarity.Unc
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
-        await PowerCmd.Apply<SynergismPower>(base.Owner.Creature, base.DynamicVars["SynergismPower"].BaseValue, base.Owner.Creature, this);
+        await PowerCmd.Apply<SynergismPower>(choiceContext, base.Owner.Creature, base.DynamicVars["SynergismPower"].BaseValue, base.Owner.Creature, this);
     }
 
     protected override void OnUpgrade()

@@ -1,4 +1,6 @@
 ﻿using MegaCrit.Sts2.Core.Entities.Relics;
+using MegaCrit.Sts2.Core.HoverTips;
+using TashkentSpire2.TashkentSpire2Code.Powers;
 
 namespace TashkentSpire2.TashkentSpire2Code.Relics;
 
@@ -12,4 +14,8 @@ public sealed class Thruster : TashkentRelic
         "res://TashkentSpire2/images/relics/packed/Thruster.png";
     protected override string PackedIconOutlinePath => 
         "res://TashkentSpire2/images/relics/outline/Thruster.png";
+    
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => [
+        HoverTipFactory.FromPower<TorpedoPower>()
+    ];
 }

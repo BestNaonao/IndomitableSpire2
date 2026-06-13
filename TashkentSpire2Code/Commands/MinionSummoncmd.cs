@@ -13,7 +13,7 @@ public static class MinionSummoncmd
 {
     public static async Task Summon(PlayerChoiceContext choiceContext, Player owner, decimal amount, AbstractModel? source)
     {
-        CombatState? combatState = owner.Creature.CombatState;
+        ICombatState? combatState = owner.Creature.CombatState;
         if (combatState == null)
         {
             return;

@@ -16,7 +16,7 @@ public sealed class TargetShipPower : TashkentPower
 
     public override PowerType Type => PowerType.Debuff;
     public override PowerStackType StackType => PowerStackType.Counter;
-    public override bool IsInstanced => true;
+    public override PowerInstanceType InstanceType => PowerInstanceType.Instanced;
     
     public override int DisplayAmount => (int)base.DynamicVars[StoredDamageKey].BaseValue;
 
@@ -42,9 +42,9 @@ public sealed class TargetShipPower : TashkentPower
         return Task.CompletedTask;
     }
 
-    public override async Task AfterSideTurnStart(CombatSide side, CombatState combatState)
+    public override async Task AfterSideTurnStart(CombatSide side, IReadOnlyList<Creature> participants, ICombatState combatState)
     {
-        if (side != base.Owner.Side)
+        if (!participants.Contains(base.Owner))
         {
             return;
         }

@@ -36,7 +36,7 @@ public sealed class GoneWithTheWindPower: TashkentPower
         await Task.CompletedTask;
     }
 
-    public override Task AfterPowerAmountChanged(PowerModel power, decimal amount, Creature? applier, CardModel? cardSource)
+    public override Task AfterPowerAmountChanged(PlayerChoiceContext choiceContext, PowerModel power, decimal amount, Creature? applier, CardModel? cardSource)
     {
         if (power == this)
         {
@@ -46,7 +46,7 @@ public sealed class GoneWithTheWindPower: TashkentPower
         return Task.CompletedTask;
     }
     
-    public override Task BeforeHandDraw(Player player, PlayerChoiceContext choiceContext, CombatState combatState)
+    public override Task BeforeHandDraw(Player player, PlayerChoiceContext choiceContext, ICombatState combatState)
     {
         if (player != this.Owner.Player) return Task.CompletedTask;
         
@@ -55,9 +55,9 @@ public sealed class GoneWithTheWindPower: TashkentPower
         return Task.CompletedTask;
     }
     
-    public override Task BeforeTurnEnd(PlayerChoiceContext choiceContext, CombatSide side)
+    public override Task BeforeSideTurnEndEarly(PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)
     {
-        if (side != base.Owner.Side)
+        if (!participants.Contains(base.Owner))
             return Task.CompletedTask;
         
         _reduce = (int)this.Amount;

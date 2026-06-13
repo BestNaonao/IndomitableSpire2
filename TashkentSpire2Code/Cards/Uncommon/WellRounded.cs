@@ -34,8 +34,8 @@ public sealed class WellRounded() : TashkentCard(3, CardType.Attack, CardRarity.
             .WithHitFx("vfx/vfx_attack_slash")
             .Execute(choiceContext);
         await CreatureCmd.GainBlock(Owner.Creature, DynamicVars.Block, cardPlay);
-        await PowerCmd.Apply<MarkPower>(cardPlay.Target, DynamicVars["TashkentSpire2-Mark"].BaseValue, base.Owner.Creature, this);
-        await PowerCmd.Apply<VigorPower>(base.Owner.Creature, base.DynamicVars["VigorPower"].IntValue, base.Owner.Creature, this);
+        await PowerCmd.Apply<MarkPower>(choiceContext, cardPlay.Target, DynamicVars["TashkentSpire2-Mark"].BaseValue, base.Owner.Creature, this);
+        await PowerCmd.Apply<VigorPower>(choiceContext, base.Owner.Creature, base.DynamicVars["VigorPower"].IntValue, base.Owner.Creature, this);
     }
     
     protected override void OnUpgrade()

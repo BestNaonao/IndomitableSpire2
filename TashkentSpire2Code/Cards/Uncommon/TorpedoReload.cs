@@ -15,10 +15,10 @@ public sealed class TorpedoReload() : AmmunitionCard(2, CardType.Skill, CardRari
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new TorpedoDynamicVar(9M),
-        new AmmunitionDynamicVar(0M),
+        new AmmunitionDynamicVar(3M),
         new LoadDynamicVar(1M),
         new AmmuMaxDynamicVar(6M),
-        new ShotDynamicVar(2M)
+        new ShotDynamicVar(6M)
     ];
     
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
@@ -32,7 +32,7 @@ public sealed class TorpedoReload() : AmmunitionCard(2, CardType.Skill, CardRari
         {
             for (int i = 0; i < shellsLoaded; i++)
             {
-                await PowerCmd.Apply<TorpedoPower>(base.Owner.Creature, DynamicVars["TashkentSpire2-Torpedo"].BaseValue, base.Owner.Creature, this);
+                await PowerCmd.Apply<TorpedoPower>(choiceContext, base.Owner.Creature, DynamicVars["TashkentSpire2-Torpedo"].BaseValue, base.Owner.Creature, this);
             }
             if (shellsLoaded >= DynamicVars["TashkentSpire2-Shot"].BaseValue)
             {
@@ -54,7 +54,7 @@ public sealed class TorpedoReload() : AmmunitionCard(2, CardType.Skill, CardRari
                 {
                     list.Add(base.CombatState.CreateCard<ShellCasing>(base.Owner));
                 }
-                await CardPileCmd.AddGeneratedCardsToCombat(list, PileType.Hand, addedByPlayer: true);
+                await CardPileCmd.AddGeneratedCardsToCombat(list, PileType.Hand, base.Owner);
             }
             
             UpdateAmmuGlobal(Math.Max(CurrentAmmu - shellsLoaded, 0));
@@ -69,7 +69,7 @@ public sealed class TorpedoReload() : AmmunitionCard(2, CardType.Skill, CardRari
         await Loadcmd.Execute(choiceContext, this, load);
     }
     
-    public async Task AfterTorpedoDamage(TorpedoDamageContext context)
+    public async Task AfterTorpedoDamage(PlayerChoiceContext choiceContext, TorpedoDamageContext context)
     {
         int load = DynamicVars["TashkentSpire2-Load"].IntValue;
         await Loadcmd.Execute(context.ChoiceContext, this, load);

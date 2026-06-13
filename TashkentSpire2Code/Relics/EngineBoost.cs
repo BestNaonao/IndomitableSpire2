@@ -18,13 +18,13 @@ public sealed class EngineBoost : TashkentRelic
     protected override string PackedIconOutlinePath => 
         "res://TashkentSpire2/images/relics/outline/EngineBoost.png";
     
-    public override async Task BeforeHandDraw(Player player, PlayerChoiceContext choiceContext, CombatState combatState)
+    public override async Task BeforeHandDraw(Player player, PlayerChoiceContext choiceContext, ICombatState combatState)
     {
         if (player == base.Owner && combatState.CurrentSide == base.Owner.Creature.Side)
         {
             Flash();
-            await PowerCmd.Apply<DistancePower>(base.Owner.Creature, 3m, base.Owner.Creature, null);
-            await PowerCmd.Apply<BackAfterTurnPower>(base.Owner.Creature, 3m, base.Owner.Creature, null);
+            await PowerCmd.Apply<DistancePower>(choiceContext, base.Owner.Creature, 3m, base.Owner.Creature, null);
+            await PowerCmd.Apply<BackAfterTurnPower>(choiceContext, base.Owner.Creature, 3m, base.Owner.Creature, null);
         }
     }
 }

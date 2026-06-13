@@ -30,7 +30,7 @@ public sealed class ChargedStrike() : TashkentCard(1, CardType.Attack, CardRarit
             .WithHitFx("vfx/vfx_attack_slash")
             .Execute(choiceContext);
         
-        await PowerCmd.Apply<VigorPower>(base.Owner.Creature, attackCommand.Results.Sum((DamageResult r) => r.TotalDamage + r.OverkillDamage), base.Owner.Creature, this);
+        await PowerCmd.Apply<VigorPower>(choiceContext, base.Owner.Creature, attackCommand.Results.SelectMany((List<DamageResult> r) => r).Sum((DamageResult r) => r.TotalDamage + r.OverkillDamage), base.Owner.Creature, this);
     }
     
     protected override void OnUpgrade()

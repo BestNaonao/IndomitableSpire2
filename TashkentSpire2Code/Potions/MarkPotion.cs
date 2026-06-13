@@ -35,6 +35,7 @@ public sealed class MarkPotion : TashkentPotion
          ArgumentNullException.ThrowIfNull(target);
          
          await PowerCmd.Apply<MarkPower>(
+             choiceContext, 
              target: target, 
              amount: DynamicVars["MarkPower"].BaseValue, 
              applier: Owner.Creature, 

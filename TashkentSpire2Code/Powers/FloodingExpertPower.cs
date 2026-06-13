@@ -1,5 +1,6 @@
 ﻿using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Powers;
+using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Models.Powers;
 using TashkentSpire2.TashkentSpire2Code.Extensions;
@@ -18,7 +19,7 @@ public sealed class FloodingExpertPower : TashkentPower, IAfterTorpedoDamage
     public override string CustomPackedIconPath => 
         "res://TashkentSpire2/images/powers/packed/flooding_expert_power.png";
     
-    public async Task AfterTorpedoDamage(TorpedoDamageContext context)
+    public async Task AfterTorpedoDamage(PlayerChoiceContext choiceContext, TorpedoDamageContext context)
     {
         int floodingAmount = (int)Amount;
 
@@ -27,8 +28,8 @@ public sealed class FloodingExpertPower : TashkentPower, IAfterTorpedoDamage
 
         foreach (var target in context.Targets)
         {
-            await PowerCmd.Apply<WeakPower>(target, floodingAmount, context.Source, null);
-            await PowerCmd.Apply<StrengthPower>(target, -floodingAmount, context.Source, null);
+            await PowerCmd.Apply<WeakPower>(choiceContext, target, floodingAmount, context.Source, null);
+            await PowerCmd.Apply<StrengthPower>(choiceContext, target, -floodingAmount, context.Source, null);
         }
     }
 }

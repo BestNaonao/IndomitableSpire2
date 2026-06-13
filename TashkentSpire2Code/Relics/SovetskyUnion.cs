@@ -8,16 +8,16 @@ using MegaCrit.Sts2.Core.Localization.DynamicVars;
 
 namespace TashkentSpire2.TashkentSpire2Code.Relics;
 
-public sealed class Test1 : TashkentRelic
+public sealed class SovetskyUnion : TashkentRelic
 {
-    public override RelicRarity Rarity => RelicRarity.Event;
+    public override RelicRarity Rarity => RelicRarity.Ancient;
     
     protected override string BigIconPath => 
-        "res://TashkentSpire2/images/relics/big/Thruster.png";
+        "res://TashkentSpire2/images/relics/big/SovetskyUnion.png";
     public override string PackedIconPath => 
-        "res://TashkentSpire2/images/relics/packed/Thruster.png";
+        "res://TashkentSpire2/images/relics/packed/SovetskyUnion.png";
     protected override string PackedIconOutlinePath => 
-        "res://TashkentSpire2/images/relics/outline/Thruster.png";
+        "res://TashkentSpire2/images/relics/outline/SovetskyUnion.png";
     
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new EnergyVar(1)

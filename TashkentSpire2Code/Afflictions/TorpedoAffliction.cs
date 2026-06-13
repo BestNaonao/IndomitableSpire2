@@ -15,6 +15,6 @@ public sealed class TorpedoAffliction : AfflictionModel
         if (cardPlay.Card != base.Card) return;
         var owner = base.Card.Owner.Creature;
 
-        await PowerCmd.Apply<TorpedoPower>(owner, 18M, owner, null);
+        await PowerCmd.Apply<TorpedoPower>(choiceContext, owner, 18M, owner, null);
     }
 }

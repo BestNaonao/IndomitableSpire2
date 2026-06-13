@@ -11,7 +11,7 @@ public sealed class EndeavourEnchantment : CustomEnchantmentModel
     public override bool HasExtraCardText => true;
 
     protected override string? CustomIconPath =>
-        "res://TashkentSpire2/images/enchantment/ferment_enchantment.png";
+        "res://TashkentSpire2/images/enchantment/endeavou_enchantment.png";
 
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [
         HoverTipFactory.FromKeyword(CardKeyword.Exhaust)

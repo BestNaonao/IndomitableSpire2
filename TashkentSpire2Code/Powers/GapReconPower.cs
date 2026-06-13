@@ -1,5 +1,6 @@
 ﻿using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
+using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
@@ -18,13 +19,13 @@ public sealed class GapReconPower : TashkentPower
     public override string CustomPackedIconPath => 
         "res://TashkentSpire2/images/powers/packed/gaprecon_power.png";
     
-    public override async Task BeforeTurnEnd(PlayerChoiceContext choiceContext, CombatSide side)
+    public override async Task BeforeSideTurnEndEarly(PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)
     {
-        if (side != base.Owner.Side)
+        if (!participants.Contains(base.Owner))
         {
             return;
         }
         Flash();
-        await PowerCmd.Apply<MarkPower>(base.CombatState.HittableEnemies, base.Amount, base.Owner, null);
+        await PowerCmd.Apply<MarkPower>(choiceContext, base.CombatState.HittableEnemies, base.Amount, base.Owner, null);
     }
 }

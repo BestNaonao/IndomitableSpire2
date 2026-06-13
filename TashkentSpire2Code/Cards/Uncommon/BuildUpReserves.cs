@@ -42,7 +42,7 @@ public sealed class BuildUpReserves() : AmmunitionCard(1, CardType.Skill, CardRa
             }
             if (shellsLoaded >= DynamicVars["TashkentSpire2-Shot"].BaseValue)
             {
-                await PowerCmd.Apply<PlatingPower>(base.Owner.Creature, base.DynamicVars["PlatingPower"].BaseValue, base.Owner.Creature, this);
+                await PowerCmd.Apply<PlatingPower>(choiceContext, base.Owner.Creature, base.DynamicVars["PlatingPower"].BaseValue, base.Owner.Creature, this);
             }
 
             int num = Math.Max(shellsLoaded - CurrentAmmu, 0);
@@ -53,7 +53,7 @@ public sealed class BuildUpReserves() : AmmunitionCard(1, CardType.Skill, CardRa
                 {
                     list.Add(base.CombatState.CreateCard<ShellCasing>(base.Owner));
                 }
-                await CardPileCmd.AddGeneratedCardsToCombat(list, PileType.Hand, addedByPlayer: true);
+                await CardPileCmd.AddGeneratedCardsToCombat(list, PileType.Hand, base.Owner);
             }
             
             UpdateAmmuGlobal(Math.Max(CurrentAmmu - shellsLoaded, 0));

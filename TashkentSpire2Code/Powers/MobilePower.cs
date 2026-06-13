@@ -1,6 +1,7 @@
 ﻿using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
@@ -40,7 +41,7 @@ public sealed class MobilePower : TashkentPower
 
 	public override int DisplayAmount => base.DynamicVars["DexterityApplied"].IntValue;
 
-	public override bool IsInstanced => true;
+	public override PowerInstanceType InstanceType => PowerInstanceType.Instanced;
 
 	protected override IEnumerable<DynamicVar> CanonicalVars =>
 	[
@@ -65,23 +66,23 @@ public sealed class MobilePower : TashkentPower
 		return Task.CompletedTask;
 	}
 
-	public override async Task AfterCardPlayed(PlayerChoiceContext context, CardPlay cardPlay)
+	public override async Task AfterCardPlayed(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
 		if (cardPlay.Card.Owner == base.Owner.Player && GetInternalData<Data>().amountsForPlayedCards.Remove(cardPlay.Card, out var value))
 		{
 			Flash();
-			await PowerCmd.Apply<DexterityPower>(base.Owner, value * this.Amount, base.Owner, null, silent: true);
+			await PowerCmd.Apply<DexterityPower>(choiceContext, base.Owner, value * this.Amount, base.Owner, null, silent: true);
 			base.DynamicVars["DexterityApplied"].BaseValue += (decimal)base.DynamicVars.Dexterity.IntValue * this.Amount;
 			InvokeDisplayAmountChanged();
 		}
 	}
 
-	public override async Task AfterTurnEnd(PlayerChoiceContext choiceContext, CombatSide side)
+	public override async Task AfterSideTurnEnd(PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)
 	{
 		if (side == base.Owner.Side)
 		{
 			await PowerCmd.Remove(this);
-			await PowerCmd.Apply<DexterityPower>(base.Owner, -base.DynamicVars["DexterityApplied"].BaseValue, base.Owner, null, silent: true);
+			await PowerCmd.Apply<DexterityPower>(choiceContext, base.Owner, -base.DynamicVars["DexterityApplied"].BaseValue, base.Owner, null, silent: true);
 		}
 	}
 }

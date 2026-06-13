@@ -54,7 +54,7 @@ public sealed class CombatWraith() : TashkentCard(2, CardType.Attack, CardRarity
         }
         if (exhaustedCount >= 9)
         {
-            await PowerCmd.Apply<IntangiblePower>(base.Owner.Creature, 1m, base.Owner.Creature, this);
+            await PowerCmd.Apply<IntangiblePower>(choiceContext, base.Owner.Creature, 1m, base.Owner.Creature, this);
         }
     }
 

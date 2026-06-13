@@ -1,6 +1,7 @@
 ﻿using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Players;
+using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using TashkentSpire2.TashkentSpire2Code.Actions;
 using TashkentSpire2.TashkentSpire2Code.Powers;
 
@@ -26,7 +27,7 @@ public sealed class MinionLeft : MinionModel
         var power = owner?.Creature.GetPower<GoneWithTheWindPower>();
         if (power != null)
         {
-            await PowerCmd.Apply<MinionLeftAction>(self, 1m, self, null, false);
+            await PowerCmd.Apply<MinionLeftAction>(new ThrowingPlayerChoiceContext(), self, 1m, self, null, false);
         }
     }
 }

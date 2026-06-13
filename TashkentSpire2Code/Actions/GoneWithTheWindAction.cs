@@ -27,11 +27,11 @@ public abstract class GoneWithTheWindAction : ActionModel
         
         if (await power.TryConsumeCharge())
         {
-            await ExecuteEffect(actor);
+            await ExecuteEffect(context, actor);
         }
     }
 
     protected abstract bool CanExecute(Creature player);
     
-    protected abstract Task ExecuteEffect(Creature self);
+    protected abstract Task ExecuteEffect(PlayerChoiceContext? context, Creature self);
 }

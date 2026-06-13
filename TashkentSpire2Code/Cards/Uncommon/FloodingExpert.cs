@@ -15,6 +15,7 @@ public sealed class FloodingExpert() : TashkentCard(1, CardType.Power, CardRarit
     ];
     
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [
+        HoverTipFactory.FromPower<TorpedoPower>(),
         HoverTipFactory.FromPower<WeakPower>(),
         HoverTipFactory.FromPower<StrengthPower>()
     ];
@@ -22,7 +23,7 @@ public sealed class FloodingExpert() : TashkentCard(1, CardType.Power, CardRarit
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
-        await PowerCmd.Apply<FloodingExpertPower>(base.Owner.Creature, base.DynamicVars["FloodingExpertPower"].BaseValue, base.Owner.Creature, this);
+        await PowerCmd.Apply<FloodingExpertPower>(choiceContext, base.Owner.Creature, base.DynamicVars["FloodingExpertPower"].BaseValue, base.Owner.Creature, this);
     }
     
     protected override void OnUpgrade()

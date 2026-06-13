@@ -1,10 +1,11 @@
 {
   "TASHKENTSPIRE2-OATH_ENCHANTMENT.title": "誓约",
   "TASHKENTSPIRE2-OATH_ENCHANTMENT.extraCardText": "在你的下个回合开始时，将此卡返回你的[gold]手牌[/gold]。",
+  "COMBAT_REWARD_CARD_ENCHANT_OATH": "选择你的牌组中的一张牌[gold]附魔[/gold]：[pink]誓约[/pink]。",
   "TASHKENTSPIRE2-OATH_ENCHANTMENT.description": "这张牌获得[gold]永恒[/gold]、[gold]保留[/gold]。\n在你的下个回合开始时，将此卡返回你的[gold]手牌[/gold]。",
   "TASHKENTSPIRE2-SOLIDARITY_ENCHANTMENT.title": "团结",
-  "TASHKENTSPIRE2-SOLIDARITY_ENCHANTMENT.extraCardText": "当你打出有[gold]团结[/gold]的牌时，自动打出此牌。",
-  "TASHKENTSPIRE2-SOLIDARITY_ENCHANTMENT.description": "当你打出有[gold]团结[/gold]的牌时，自动打出此牌。",
+  "TASHKENTSPIRE2-SOLIDARITY_ENCHANTMENT.extraCardText": "当你打出[gold]附魔[/gold]有[gold]团结[/gold]的牌时，自动打出此牌。",
+  "TASHKENTSPIRE2-SOLIDARITY_ENCHANTMENT.description": "当你打出[gold]附魔[/gold]有[gold]团结[/gold]的牌时，自动打出此牌。",
   "TASHKENTSPIRE2-FERMENT_ENCHANTMENT.title": "发酵",
   "TASHKENTSPIRE2-FERMENT_ENCHANTMENT.extraCardText": "战斗开始时，此牌自动变化为“[gold]伏特加[/gold]”。",
   "TASHKENTSPIRE2-FERMENT_ENCHANTMENT.description": "战斗开始时，此牌自动变化为“[gold]伏特加[/gold]”。",

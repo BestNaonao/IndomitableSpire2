@@ -4,6 +4,7 @@ using Godot.Bridge;
 using HarmonyLib;
 using MegaCrit.Sts2.Core.Modding;
 using TashkentSpire2.TashkentSpire2Code.Config;
+using TashkentSpire2.TashkentSpire2Code.Rewards;
 
 namespace TashkentSpire2.TashkentSpire2Code;
 
@@ -22,6 +23,8 @@ public partial class MainFile : Node
 		ScriptManagerBridge.LookupScriptsInAssembly(typeof(MainFile).Assembly);
 		
 		ModConfigRegistry.Register(ModId, new TashkentConfig());
+		
+		new TashkentOathReward(null!).Initialize();
 		
 		harmony.PatchAll();
 		

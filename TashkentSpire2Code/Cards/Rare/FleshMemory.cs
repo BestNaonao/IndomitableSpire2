@@ -12,7 +12,7 @@ public sealed class FleshMemory() : TashkentCard(0, CardType.Skill, CardRarity.R
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
     
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new BlockVar(4M, ValueProp.Move),
+        new BlockVar(5M, ValueProp.Move),
         new CardsVar(1)
     ];
 
@@ -32,6 +32,6 @@ public sealed class FleshMemory() : TashkentCard(0, CardType.Skill, CardRarity.R
     
     protected override void OnUpgrade()
     {
-        DynamicVars.Block.UpgradeValueBy(2M);
+        DynamicVars.Block.UpgradeValueBy(3M);
     }
 }

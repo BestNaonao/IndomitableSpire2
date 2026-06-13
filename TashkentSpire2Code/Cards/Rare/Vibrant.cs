@@ -19,7 +19,8 @@ public class Vibrant() : TashkentCard(1, CardType.Skill, CardRarity.Rare, Target
     ];
 
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [
-        HoverTipFactory.FromPower<VigorPower>()
+        HoverTipFactory.FromPower<VigorPower>(),
+        HoverTipFactory.FromKeyword(CardKeyword.Exhaust)
     ];
     
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
@@ -51,7 +52,7 @@ public class Vibrant() : TashkentCard(1, CardType.Skill, CardRarity.Rare, Target
             await CardCmd.Exhaust(choiceContext, card);
         }
         
-        await PowerCmd.Apply<VigorPower>(base.Owner.Creature, damage, base.Owner.Creature, this);
+        await PowerCmd.Apply<VigorPower>(choiceContext, base.Owner.Creature, damage, base.Owner.Creature, this);
     }
     
     protected override void OnUpgrade()

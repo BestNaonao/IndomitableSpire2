@@ -34,7 +34,7 @@ public sealed class HeroicShooting() : AmmunitionCard(0, CardType.Attack, CardRa
         {
             if (shellsLoaded >= DynamicVars["TashkentSpire2-Shot"].BaseValue)
             {
-                await PowerCmd.Apply<MarkPower>(CombatState.HittableEnemies, base.DynamicVars["TashkentSpire2-Mark"].BaseValue, base.Owner.Creature, null);
+                await PowerCmd.Apply<MarkPower>(choiceContext, CombatState.HittableEnemies, base.DynamicVars["TashkentSpire2-Mark"].BaseValue, base.Owner.Creature, null);
             }
             
             for (int i = 0; i < shellsLoaded; i++)
@@ -53,7 +53,7 @@ public sealed class HeroicShooting() : AmmunitionCard(0, CardType.Attack, CardRa
                 {
                     list.Add(base.CombatState.CreateCard<ShellCasing>(base.Owner));
                 }
-                await CardPileCmd.AddGeneratedCardsToCombat(list, PileType.Hand, addedByPlayer: true);
+                await CardPileCmd.AddGeneratedCardsToCombat(list, PileType.Hand, base.Owner);
             }
             
             UpdateAmmuGlobal(Math.Max(CurrentAmmu - shellsLoaded, 0));

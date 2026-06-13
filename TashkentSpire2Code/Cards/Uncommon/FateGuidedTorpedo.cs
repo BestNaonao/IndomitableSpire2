@@ -13,15 +13,11 @@ public sealed class FateGuidedTorpedo() : TashkentCard(1, CardType.Power, CardRa
         new PowerVar<FateGuidedTorpedoPower>(1M),
         new TorpedoDynamicVar(12M)
     ];
-
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => [
-        HoverTipFactory.FromPower<TorpedoPower>()
-    ];
     
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
-        var powerInstance = await PowerCmd.Apply<FateGuidedTorpedoPower>(base.Owner.Creature, base.DynamicVars["FateGuidedTorpedoPower"].BaseValue, base.Owner.Creature, this);
+        var powerInstance = await PowerCmd.Apply<FateGuidedTorpedoPower>(choiceContext, base.Owner.Creature, base.DynamicVars["FateGuidedTorpedoPower"].BaseValue, base.Owner.Creature, this);
         if (powerInstance != null)
         {
             powerInstance.SetTorpedoPower(base.DynamicVars["TashkentSpire2-Torpedo"].BaseValue);

@@ -25,9 +25,9 @@ public sealed class PincerMovementPower : TashkentPower
         return 1.5M;
     }
 
-    public override async Task AfterSideTurnStart(CombatSide side, CombatState combatState)
+    public override async Task AfterSideTurnStart(CombatSide side, IReadOnlyList<Creature> participants, ICombatState combatState)
     {
-        if (side == base.Owner.Side)
+        if (participants.Contains(base.Owner))
         {
             await PowerCmd.Decrement(this);
         }

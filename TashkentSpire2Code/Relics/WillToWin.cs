@@ -3,6 +3,8 @@ using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Commands.Builders;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Relics;
+using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.Rooms;
 using MegaCrit.Sts2.Core.ValueProps;
@@ -56,6 +58,10 @@ public sealed class WillToWin : TashkentRelic
     public override string PackedIconPath => "res://TashkentSpire2/images/relics/packed/WillToWin.png";
     protected override string PackedIconOutlinePath => "res://TashkentSpire2/images/relics/outline/WillToWin.png";
 
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => [
+        HoverTipFactory.FromPower<VigorPower>()
+    ];
+    
     public override bool ShouldDie(Creature creature)
     {
         if (creature != base.Owner.Creature)
@@ -89,7 +95,7 @@ public sealed class WillToWin : TashkentRelic
         var vigor = creature.GetPower<VigorPower>();
         if (vigor != null && vigor.Amount >= 20m)
         {
-            await PowerCmd.Apply<VigorPower>(base.Owner.Creature, -20M, base.Owner.Creature, null);
+            await PowerCmd.Apply<VigorPower>(new ThrowingPlayerChoiceContext(), base.Owner.Creature, -20M, base.Owner.Creature, null);
             await TriggerHealEffect();
         }
     }
@@ -130,18 +136,18 @@ public sealed class WillToWin : TashkentRelic
         return Task.CompletedTask;
     }
     
-    public override async Task AfterAttack(AttackCommand command)
+    public override async Task AfterAttack(PlayerChoiceContext choiceContext, AttackCommand command)
     {
         if (command.Attacker != base.Owner.Creature || command.TargetSide == base.Owner.Creature.Side || !command.DamageProps.IsPoweredAttack() || base.Owner.Creature.CurrentHp != 1M)
         {
             return;
         }
         
-        decimal totalDamage = command.Results.Sum(r => r.TotalDamage + r.OverkillDamage) * 20M / 100M;
+        decimal totalDamage = command.Results.SelectMany((List<DamageResult> r) => r).Sum((DamageResult r) => r.TotalDamage + r.OverkillDamage) * 20M / 100M;
 
         if (totalDamage > 0)
         {
-            await PowerCmd.Apply<VigorPower>(base.Owner.Creature, totalDamage, base.Owner.Creature, null);
+            await PowerCmd.Apply<VigorPower>(choiceContext, base.Owner.Creature, totalDamage, base.Owner.Creature, null);
         }
     }
 }

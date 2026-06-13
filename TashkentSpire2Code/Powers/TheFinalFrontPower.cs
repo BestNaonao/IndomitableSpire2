@@ -24,7 +24,7 @@ public sealed class TheFinalFrontPower : TashkentPower
     {
         if (dealer == base.Owner && props.IsPoweredAttack() && result.TotalDamage > 0)
         {
-            await PowerCmd.Apply<MarkPower>(target, base.Amount, base.Owner, null);
+            await PowerCmd.Apply<MarkPower>(choiceContext, target, base.Amount, base.Owner, null);
         }
     }
 }

@@ -18,7 +18,7 @@ public sealed class SpareSupplies() : AmmunitionCard(0, CardType.Skill, CardRari
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
     
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new AmmunitionDynamicVar(0M),
+        new AmmunitionDynamicVar(2M),
         new LoadDynamicVar(1M),
         new AmmuMaxDynamicVar(6M),
         new ShotDynamicVar(2M),
@@ -52,14 +52,14 @@ public sealed class SpareSupplies() : AmmunitionCard(0, CardType.Skill, CardRari
                 {
                     list.Add(base.CombatState.CreateCard<ShellCasing>(base.Owner));
                 }
-                await CardPileCmd.AddGeneratedCardsToCombat(list, PileType.Hand, addedByPlayer: true);
+                await CardPileCmd.AddGeneratedCardsToCombat(list, PileType.Hand, base.Owner);
             }
             
             UpdateAmmuGlobal(Math.Max(CurrentAmmu - shellsLoaded, 0));
         }
     }
     
-    public override async Task BeforeHandDraw(Player player, PlayerChoiceContext choiceContext, CombatState combatState)
+    public override async Task BeforeHandDraw(Player player, PlayerChoiceContext choiceContext, ICombatState combatState)
     {
         if (player == base.Owner && combatState.RoundNumber == 1)
         {

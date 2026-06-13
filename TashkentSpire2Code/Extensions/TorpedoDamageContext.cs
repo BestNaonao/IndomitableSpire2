@@ -5,7 +5,7 @@ namespace TashkentSpire2.TashkentSpire2Code.Extensions;
 
 public interface IAfterTorpedoDamage
 {
-    Task AfterTorpedoDamage(TorpedoDamageContext context);
+    Task AfterTorpedoDamage(PlayerChoiceContext choiceContext, TorpedoDamageContext context);
 }
 
 public sealed class TorpedoDamageContext

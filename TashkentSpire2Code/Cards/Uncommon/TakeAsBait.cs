@@ -22,8 +22,8 @@ public sealed class TakeAsBait() : TashkentCard(1, CardType.Power, CardRarity.Un
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
-        await PowerCmd.Apply<TakeAsBaitPower>(base.Owner.Creature, base.DynamicVars["TakeAsBaitPower"].BaseValue, base.Owner.Creature, this);
-        await PowerCmd.Apply<MarkPreTurnPower>(base.Owner.Creature, base.DynamicVars["MarkPreTurnPower"].BaseValue, base.Owner.Creature, this);
+        await PowerCmd.Apply<TakeAsBaitPower>(choiceContext, base.Owner.Creature, base.DynamicVars["TakeAsBaitPower"].BaseValue, base.Owner.Creature, this);
+        await PowerCmd.Apply<MarkPreTurnPower>(choiceContext, base.Owner.Creature, base.DynamicVars["MarkPreTurnPower"].BaseValue, base.Owner.Creature, this);
     }
 
     protected override void OnUpgrade()

@@ -11,7 +11,8 @@ public sealed class PrecisionStrike() : TashkentCard(0, CardType.Attack, CardRar
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new DamageVar(4M, ValueProp.Move),
-        new MarkDynamicVar(2M)
+        new MarkDynamicVar(1M),
+        new RepeatVar(2)
     ];
     
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
@@ -23,13 +24,16 @@ public sealed class PrecisionStrike() : TashkentCard(0, CardType.Attack, CardRar
             .Targeting(cardPlay.Target)
             .WithHitFx("vfx/vfx_attack_slash")
             .Execute(choiceContext);
-        
-        await PowerCmd.Apply<MarkPower>(cardPlay.Target, base.DynamicVars["TashkentSpire2-Mark"].BaseValue, base.Owner.Creature, this);
+
+        for (int i = 0; i < DynamicVars.Repeat.BaseValue; i++)
+        {
+            await PowerCmd.Apply<MarkPower>(choiceContext, cardPlay.Target, base.DynamicVars["TashkentSpire2-Mark"].BaseValue, base.Owner.Creature, this);
+        }
     }
     
     protected override void OnUpgrade()
     {
         DynamicVars.Damage.UpgradeValueBy(2M);
-        DynamicVars["TashkentSpire2-Mark"].UpgradeValueBy(1M);
+        DynamicVars.Repeat.UpgradeValueBy(1M);
     }
 }

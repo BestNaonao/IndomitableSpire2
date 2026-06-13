@@ -12,14 +12,17 @@ namespace TashkentSpire2.TashkentSpire2Code.Cards.Common;
 
 public sealed class ArtilleryStrike() : AmmunitionCard(1, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
 {
+    public override bool GainsBlock => true;
+    
     protected override HashSet<CardTag> CanonicalTags => [CardTag.Strike];
     
     public override IEnumerable<CardKeyword> CanonicalKeywords => [TashkentKeyword.Barrage];
     
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new DamageVar(3M, ValueProp.Move),
+        new DamageVar(2M, ValueProp.Move),
+        new BlockVar(2M, ValueProp.Move),
         new AmmunitionDynamicVar(6M),
-        new LoadDynamicVar(3M),
+        new LoadDynamicVar(4M),
         new AmmuMaxDynamicVar(6M),
         new ShotDynamicVar(3M)
     ];
@@ -39,6 +42,7 @@ public sealed class ArtilleryStrike() : AmmunitionCard(1, CardType.Attack, CardR
                     .Targeting(cardPlay.Target)
                     .WithHitFx("vfx/vfx_attack_slash")
                     .Execute(choiceContext);
+                await CreatureCmd.GainBlock(Owner.Creature, DynamicVars.Block, cardPlay);
             }
             int num = Math.Max(shellsLoaded - CurrentAmmu, 0);
             if (num > 0 && this.Keywords.Contains(TashkentKeyword.Barrage))
@@ -48,7 +52,7 @@ public sealed class ArtilleryStrike() : AmmunitionCard(1, CardType.Attack, CardR
                 {
                     list.Add(base.CombatState.CreateCard<ShellCasing>(base.Owner));
                 }
-                await CardPileCmd.AddGeneratedCardsToCombat(list, PileType.Hand, addedByPlayer: true);
+                await CardPileCmd.AddGeneratedCardsToCombat(list, PileType.Hand, base.Owner);
             }
             
             UpdateAmmuGlobal(Math.Max(CurrentAmmu - shellsLoaded, 0));
@@ -61,5 +65,8 @@ public sealed class ArtilleryStrike() : AmmunitionCard(1, CardType.Attack, CardR
         }
     }
     
-    protected override void OnUpgrade() => DynamicVars.Damage.UpgradeValueBy(1M);
+    protected override void OnUpgrade(){
+        DynamicVars.Damage.UpgradeValueBy(1M);
+        DynamicVars.Block.UpgradeValueBy(1M);
+    }
 }

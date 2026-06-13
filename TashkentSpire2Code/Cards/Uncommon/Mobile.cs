@@ -21,7 +21,7 @@ public sealed class Mobile() : TashkentCard(0, CardType.Skill, CardRarity.Uncomm
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
-        await PowerCmd.Apply<MobilePower>(base.Owner.Creature, base.DynamicVars["MobilePower"].BaseValue, base.Owner.Creature, this);
+        await PowerCmd.Apply<MobilePower>(choiceContext, base.Owner.Creature, base.DynamicVars["MobilePower"].BaseValue, base.Owner.Creature, this);
     }
     
     protected override void OnUpgrade()

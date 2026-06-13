@@ -25,7 +25,7 @@ public sealed class Pursuit() : TashkentCard(0, CardType.Attack, CardRarity.Toke
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         ArgumentNullException.ThrowIfNull(cardPlay.Target, nameof(cardPlay.Target));
-        await PowerCmd.Apply<DistancePower>(base.Owner.Creature, base.DynamicVars["TashkentSpire2-Charge"].BaseValue, base.Owner.Creature, this);
+        await PowerCmd.Apply<DistancePower>(choiceContext, base.Owner.Creature, base.DynamicVars["TashkentSpire2-Charge"].BaseValue, base.Owner.Creature, this);
         
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
             .FromCard(this)
@@ -33,17 +33,17 @@ public sealed class Pursuit() : TashkentCard(0, CardType.Attack, CardRarity.Toke
             .WithHitFx("vfx/vfx_attack_slash")
             .Execute(choiceContext);
         
-        await PowerCmd.Apply<MarkPower>(cardPlay.Target, base.DynamicVars["TashkentSpire2-Mark"].BaseValue, base.Owner.Creature, this);
+        await PowerCmd.Apply<MarkPower>(choiceContext, cardPlay.Target, base.DynamicVars["TashkentSpire2-Mark"].BaseValue, base.Owner.Creature, this);
     }
     
-    public static async Task<IEnumerable<Pursuit>> CreateInHand(Player owner, int amount, CombatState combatState)
+    public static async Task<IEnumerable<Pursuit>> CreateInHand(Player owner, int amount, ICombatState combatState)
     {
         IEnumerable<Pursuit> Pursuits = Create(owner, amount, combatState);
-        await CardPileCmd.AddGeneratedCardsToCombat(Pursuits, PileType.Hand, addedByPlayer: true);
+        await CardPileCmd.AddGeneratedCardsToCombat(Pursuits, PileType.Hand, owner);
         return Pursuits;
     }
     
-    public static IEnumerable<Pursuit> Create(Player owner, int amount, CombatState combatState)
+    public static IEnumerable<Pursuit> Create(Player owner, int amount, ICombatState combatState)
     {
         List<Pursuit> list = new List<Pursuit>();
         for (int i = 0; i < amount; i++)

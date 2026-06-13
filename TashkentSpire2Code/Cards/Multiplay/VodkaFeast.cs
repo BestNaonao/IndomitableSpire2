@@ -31,7 +31,7 @@ public sealed class VodkaFeast() : TashkentCard(3, CardType.Skill, CardRarity.Ra
                 int num = MaxHandSizePatch.GetMaxHandSize(creature.Player, MaxHandSizePatch.DefaultMaxHandSize) - CardPile.GetCards(creature.Player, PileType.Hand).Count();
                 List<Vodka> cards = Vodka.Create(creature.Player, num, base.CombatState, false).ToList();
 
-                IReadOnlyList<CardPileAddResult> results = await CardPileCmd.AddGeneratedCardsToCombat(cards, PileType.Hand, addedByPlayer: true);
+                IReadOnlyList<CardPileAddResult> results = await CardPileCmd.AddGeneratedCardsToCombat(cards, PileType.Hand, base.Owner);
                 if (LocalContext.IsMe(creature))
                 {
                     CardCmd.PreviewCardPileAdd(results);

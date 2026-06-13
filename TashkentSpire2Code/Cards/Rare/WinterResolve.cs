@@ -20,7 +20,7 @@ public sealed class WinterResolve() : TashkentCard(1, CardType.Power, CardRarity
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
-        await PowerCmd.Apply<WinterResolvePower>(base.Owner.Creature, base.DynamicVars["WinterResolvePower"].BaseValue, base.Owner.Creature, this);
+        await PowerCmd.Apply<WinterResolvePower>(choiceContext, base.Owner.Creature, base.DynamicVars["WinterResolvePower"].BaseValue, base.Owner.Creature, this);
     }
 
     protected override void OnUpgrade()

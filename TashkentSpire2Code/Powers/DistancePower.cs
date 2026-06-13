@@ -3,6 +3,7 @@ using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
+using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Powers;
@@ -54,7 +55,7 @@ public sealed class DistancePower : TashkentPower
         
         if (delta != 0)
         {
-            await PowerCmd.ModifyAmount(this, delta, base.Owner, null);
+            await PowerCmd.ModifyAmount(new ThrowingPlayerChoiceContext(), this, delta, base.Owner, null);
         }
 
         _isFlipping = false;
@@ -86,7 +87,7 @@ public sealed class DistancePower : TashkentPower
     {
         if (base.Amount < 5m)
         {
-            await PowerCmd.ModifyAmount(this, 10m, base.Owner, cardSource);
+            await PowerCmd.ModifyAmount(new ThrowingPlayerChoiceContext(), this, 10m, base.Owner, cardSource);
             return;
         }
         
@@ -107,13 +108,13 @@ public sealed class DistancePower : TashkentPower
         return base.CombatState.Enemies.Any(e => e.HasPower<SandpitPower>());
     }
     
-    public override async Task AfterSideTurnStart(CombatSide side, CombatState combatState)
+    public override async Task AfterSideTurnStart(CombatSide side, IReadOnlyList<Creature> participants, ICombatState combatState)
     {
-        if (side == CombatSide.Enemy && HasActiveSandpit())
+        if (!participants.Contains(base.Owner) && HasActiveSandpit())
         {
             _isSyncing = true;  // 加锁
 
-            await PowerCmd.ModifyAmount(this, 1m, base.Owner, null);
+            await PowerCmd.ModifyAmount(new ThrowingPlayerChoiceContext(), this, 1m, base.Owner, null);
             
             _isSyncing = false;
         }
@@ -149,7 +150,7 @@ public sealed class DistancePower : TashkentPower
         return multiplier;
     }
     
-    public override async Task AfterPowerAmountChanged(PowerModel power, decimal oldAmount, Creature? __, CardModel? cardSource)
+    public override async Task AfterPowerAmountChanged(PlayerChoiceContext choiceContext, PowerModel power, decimal oldAmount, Creature? __, CardModel? cardSource)
     {
         if (power == this)
         {
@@ -210,7 +211,7 @@ public sealed class DistancePower : TashkentPower
 
             if (sandpitPower != null)
             {
-                await PowerCmd.ModifyAmount(sandpitPower, -(decimal)delta, enemy, null);
+                await PowerCmd.ModifyAmount(new ThrowingPlayerChoiceContext(), sandpitPower, -(decimal)delta, enemy, null);
             }
         }
     }
@@ -255,7 +256,7 @@ public sealed class DistancePower : TashkentPower
         _isSyncing = true;
         try 
         {
-            await PowerCmd.ModifyAmount(this, delta, base.Owner, cardSource);
+            await PowerCmd.ModifyAmount(new ThrowingPlayerChoiceContext(), this, delta, base.Owner, cardSource);
         }
         finally 
         {

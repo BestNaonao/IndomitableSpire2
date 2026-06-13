@@ -34,8 +34,8 @@ public sealed class PreparatoryAction() : TashkentCard(1, CardType.Skill, CardRa
 
         for (int i = 0; i < DynamicVars.Cards.IntValue; i++)
         {
-            await CardPileCmd.AddGeneratedCardToCombat(card1, PileType.Hand, addedByPlayer: true);
-            await CardPileCmd.AddGeneratedCardToCombat(card2, PileType.Hand, addedByPlayer: true);
+            await CardPileCmd.AddGeneratedCardToCombat(card1, PileType.Hand, base.Owner);
+            await CardPileCmd.AddGeneratedCardToCombat(card2, PileType.Hand, base.Owner);
         }
     }
 }

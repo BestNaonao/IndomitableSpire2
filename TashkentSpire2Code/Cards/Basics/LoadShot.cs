@@ -43,7 +43,7 @@ public sealed class LoadShot() : AmmunitionCard(1, CardType.Attack, CardRarity.B
             
             if (shellsLoaded >= DynamicVars["TashkentSpire2-Shot"].BaseValue)
             {
-                await PowerCmd.Apply<MarkPower>(cardPlay.Target, DynamicVars["TashkentSpire2-Mark"].BaseValue,Owner.Creature,this);
+                await PowerCmd.Apply<MarkPower>(choiceContext, cardPlay.Target, DynamicVars["TashkentSpire2-Mark"].BaseValue,Owner.Creature,this);
             }
             
             int num = Math.Max(shellsLoaded - CurrentAmmu, 0);
@@ -54,7 +54,7 @@ public sealed class LoadShot() : AmmunitionCard(1, CardType.Attack, CardRarity.B
                 {
                     list.Add(base.CombatState.CreateCard<ShellCasing>(base.Owner));
                 }
-                await CardPileCmd.AddGeneratedCardsToCombat(list, PileType.Hand, addedByPlayer: true);
+                await CardPileCmd.AddGeneratedCardsToCombat(list, PileType.Hand, base.Owner);
             }
             
             UpdateAmmuGlobal(Math.Max(CurrentAmmu - shellsLoaded, 0));

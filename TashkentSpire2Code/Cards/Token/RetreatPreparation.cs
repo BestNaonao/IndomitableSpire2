@@ -22,7 +22,7 @@ public sealed class RetreatPreparation() : TashkentCard(0, CardType.Skill, CardR
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        await PowerCmd.Apply<DistancePower>(base.Owner.Creature, -base.DynamicVars["TashkentSpire2-Retreat"].BaseValue, base.Owner.Creature, this);
+        await PowerCmd.Apply<DistancePower>(choiceContext, base.Owner.Creature, -base.DynamicVars["TashkentSpire2-Retreat"].BaseValue, base.Owner.Creature, this);
     }
     
     protected override void OnUpgrade()

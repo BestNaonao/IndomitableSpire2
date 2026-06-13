@@ -65,7 +65,7 @@ public sealed class UltimateWeapon() : AmmunitionCard(3, CardType.Attack, CardRa
                     .Targeting(cardPlay.Target)
                     .Execute(choiceContext);
 
-                if (shouldTriggerFatal && attackCommand.Results.Any((DamageResult r) => r.WasTargetKilled))
+                if (shouldTriggerFatal && attackCommand.Results.SelectMany((List<DamageResult> r) => r).Any((DamageResult r) => r.WasTargetKilled))
                 {
                     int loadValue = DynamicVars["TashkentSpire2-Load"].IntValue;
                     await Loadcmd.Execute(choiceContext, this, loadValue);
@@ -88,7 +88,7 @@ public sealed class UltimateWeapon() : AmmunitionCard(3, CardType.Attack, CardRa
                 {
                     shellCasings.Add(base.CombatState.CreateCard<ShellCasing>(base.Owner));
                 }
-                await CardPileCmd.AddGeneratedCardsToCombat(shellCasings, PileType.Hand, addedByPlayer: true);
+                await CardPileCmd.AddGeneratedCardsToCombat(shellCasings, PileType.Hand, base.Owner);
             }
         }
     }

@@ -42,8 +42,8 @@ public sealed class Trailblaze() : TashkentCard(1, CardType.Attack, CardRarity.U
             .WithHitFx("vfx/vfx_attack_slash")
             .Execute(choiceContext);
         
-        await PowerCmd.Apply<DistancePower>(base.Owner.Creature, base.DynamicVars["TashkentSpire2-Charge"].BaseValue, base.Owner.Creature, this);
-        await PowerCmd.Apply<BackAfterTurnPower>(base.Owner.Creature, base.DynamicVars["BackAfterTurnPower"].BaseValue, base.Owner.Creature, null);
+        await PowerCmd.Apply<DistancePower>(choiceContext, base.Owner.Creature, base.DynamicVars["TashkentSpire2-Charge"].BaseValue, base.Owner.Creature, this);
+        await PowerCmd.Apply<BackAfterTurnPower>(choiceContext, base.Owner.Creature, base.DynamicVars["BackAfterTurnPower"].BaseValue, base.Owner.Creature, null);
     }
     
     protected override void OnUpgrade() => DynamicVars.ExtraDamage.UpgradeValueBy(1M);

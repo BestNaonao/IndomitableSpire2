@@ -2,6 +2,7 @@
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Potions;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using TashkentSpire2.TashkentSpire2Code.Cards.Token;
 
@@ -19,9 +20,13 @@ public sealed class Cellaring : TashkentPotion
     [
         new CardsVar(3)
     ];
+    
+    public override IEnumerable<IHoverTip> ExtraHoverTips => [
+        HoverTipFactory.FromCard<Vodka>()
+    ];
      
-    public override string CustomPackedImagePath => "res://TashkentSpire2/images/potions/mark_potion.png";
-    public override string CustomPackedOutlinePath => "res://TashkentSpire2/images/potions/mark_potion_outline.png";
+    public override string CustomPackedImagePath => "res://TashkentSpire2/images/potions/cellaring.png";
+    public override string CustomPackedOutlinePath => "res://TashkentSpire2/images/potions/cellaring_outline.png";
      
     protected override async Task OnUse(PlayerChoiceContext choiceContext, Creature? target)
     {

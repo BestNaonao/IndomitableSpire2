@@ -41,7 +41,7 @@ public sealed class Emergency() : TashkentCard(1, CardType.Attack, CardRarity.Co
         if (enemies != null && enemies.Any())
         {
             Creature target = base.Owner.RunState.Rng.CombatTargets.NextItem(enemies)!;
-            await PowerCmd.Apply<MarkPower>(target, DynamicVars["TashkentSpire2-Mark"].BaseValue,base.Owner.Creature,this);
+            await PowerCmd.Apply<MarkPower>(choiceContext, target, DynamicVars["TashkentSpire2-Mark"].BaseValue,base.Owner.Creature,this);
         }
     }
     

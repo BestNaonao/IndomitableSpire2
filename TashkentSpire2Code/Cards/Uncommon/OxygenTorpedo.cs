@@ -15,8 +15,8 @@ public sealed class OxygenTorpedo() : TashkentCard(1, CardType.Skill, CardRarity
     
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        await PowerCmd.Apply<OxygenTorpedoPower>(base.Owner.Creature, base.DynamicVars["OxygenTorpedoPower"].BaseValue, base.Owner.Creature, this);
-        await PowerCmd.Apply<TorpedoPower>(base.Owner.Creature, DynamicVars["TashkentSpire2-Torpedo"].BaseValue, base.Owner.Creature, this);
+        await PowerCmd.Apply<OxygenTorpedoPower>(choiceContext, base.Owner.Creature, base.DynamicVars["OxygenTorpedoPower"].BaseValue, base.Owner.Creature, this);
+        await PowerCmd.Apply<TorpedoPower>(choiceContext, base.Owner.Creature, DynamicVars["TashkentSpire2-Torpedo"].BaseValue, base.Owner.Creature, this);
     }
     
     protected override void OnUpgrade()

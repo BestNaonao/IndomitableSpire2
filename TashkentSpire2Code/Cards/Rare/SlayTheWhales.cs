@@ -1,5 +1,6 @@
 ﻿using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.ValueProps;
@@ -22,12 +23,7 @@ public sealed class SlayTheWhales() : TashkentCard(2, CardType.Attack, CardRarit
         
         if (base.IsUpgraded)
         {
-            await PowerCmd.Apply<DistancePower>(
-                base.Owner.Creature, 
-                -DynamicVars["TashkentSpire2-Retreat"].BaseValue, 
-                base.Owner.Creature, 
-                this
-            );
+            await PowerCmd.Apply<DistancePower>(choiceContext, base.Owner.Creature, -DynamicVars["TashkentSpire2-Retreat"].BaseValue, base.Owner.Creature, this);
         }
 
         while (true)
@@ -44,20 +40,10 @@ public sealed class SlayTheWhales() : TashkentCard(2, CardType.Attack, CardRarit
                 break;
             }
             
-            await PowerCmd.Apply<DistancePower>(
-                base.Owner.Creature, 
-                DynamicVars["TashkentSpire2-Charge"].BaseValue, 
-                base.Owner.Creature, 
-                this
-            );
-            await PowerCmd.Apply<BackAfterTurnPower>(
-                base.Owner.Creature,
-                DynamicVars["TashkentSpire2-Retreat"].BaseValue,
-                base.Owner.Creature,
-                this
-            );
+            await PowerCmd.Apply<DistancePower>(choiceContext, base.Owner.Creature, DynamicVars["TashkentSpire2-Charge"].BaseValue, base.Owner.Creature, this);
+            await PowerCmd.Apply<BackAfterTurnPower>(choiceContext, base.Owner.Creature, DynamicVars["TashkentSpire2-Retreat"].BaseValue, base.Owner.Creature, this);
 
-            bool allInfinite = Owner.Creature.CombatState?.HittableEnemies.All(c => c.ShowsInfiniteHp) ?? true;
+            bool allInfinite = Owner.Creature.CombatState?.HittableEnemies.All((Creature c) => c.HpDisplay.IsInfinite()) ?? true;
             if (cardPlay.Target.IsDead || allInfinite)
             {
                 break;

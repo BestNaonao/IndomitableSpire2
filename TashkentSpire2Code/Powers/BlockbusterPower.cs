@@ -2,7 +2,9 @@
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Commands.Builders;
 using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
+using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.ValueProps;
 
 namespace TashkentSpire2.TashkentSpire2Code.Powers;
@@ -17,7 +19,7 @@ public sealed class BlockbusterPower : TashkentPower
     public override string CustomPackedIconPath => 
         "res://TashkentSpire2/images/powers/packed/BlockbusterPower.png";
     
-    public override async Task AfterAttack(AttackCommand command)
+    public override async Task AfterAttack(PlayerChoiceContext choiceContext, AttackCommand command)
     {
         if (command.Attacker != base.Owner || command.TargetSide == base.Owner.Side || !command.DamageProps.IsPoweredAttack())
         {
@@ -34,7 +36,7 @@ public sealed class BlockbusterPower : TashkentPower
             return;
         }
         
-        decimal totalDamage = command.Results.Sum(r => r.TotalDamage + r.OverkillDamage) * this.Amount / 100M;
+        decimal totalDamage = command.Results.SelectMany((List<DamageResult> r) => r).Sum((DamageResult r) => r.TotalDamage + r.OverkillDamage) * this.Amount / 100M;
 
         if (totalDamage > 0)
         {

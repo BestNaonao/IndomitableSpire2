@@ -33,13 +33,14 @@ public sealed class TashkentOathReward : CustomReward
     public override bool IsPopulated => true;
 
     public override LocString Description =>
-        new("gameplay_ui", "COMBAT_REWARD_CARD_ENCHANT_OATH");
+        new("enchantments", "COMBAT_REWARD_CARD_ENCHANT_OATH");
 
     protected override string IconPath =>
         "res://TashkentSpire2/images/packed/rewards/eternaloath_power.png";
 
-    public override Task Populate() =>
-        Task.CompletedTask;
+    public override void Populate()
+    {
+    }
 
     protected override async Task<bool> OnSelect()
     {

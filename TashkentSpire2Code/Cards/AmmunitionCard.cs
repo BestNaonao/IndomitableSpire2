@@ -7,6 +7,7 @@ namespace TashkentSpire2.TashkentSpire2Code.Cards;
 public interface IAmmunitionCard
 {
     int CurrentAmmu { get; set; }
+    int MaxAmmu { get; }
     void UpdateAmmuGlobal(int newValue);
 }
 
@@ -36,6 +37,10 @@ public abstract class AmmunitionCard(
         }
     }
     
+    public int MaxAmmu => DynamicVars.ContainsKey("TashkentSpire2-Ammu-Max") 
+        ? DynamicVars["TashkentSpire2-Ammu-Max"].IntValue 
+        : 99;
+    
     public override void AfterCreated()
     {
         base.AfterCreated();
@@ -48,11 +53,7 @@ public abstract class AmmunitionCard(
 
     public void UpdateAmmuGlobal(int newValue)
     {
-        int max = DynamicVars.ContainsKey("TashkentSpire2-Ammu-Max") 
-            ? DynamicVars["TashkentSpire2-Ammu-Max"].IntValue 
-            : 99;
-            
-        int clampedValue = Math.Clamp(newValue, 0, max);
+        int clampedValue = Math.Clamp(newValue, 0, this.MaxAmmu);
         this.CurrentAmmu = clampedValue;
 
         if (base.DeckVersion is IAmmunitionCard masterCard)

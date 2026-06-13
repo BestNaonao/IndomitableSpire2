@@ -1,5 +1,6 @@
 ﻿using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Relics;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
@@ -7,16 +8,16 @@ using MegaCrit.Sts2.Core.Models;
 
 namespace TashkentSpire2.TashkentSpire2Code.Relics;
 
-public sealed class Test2 : TashkentRelic
+public sealed class PreferredPlan : TashkentRelic
 {
-    public override RelicRarity Rarity => RelicRarity.Event;
+    public override RelicRarity Rarity => RelicRarity.Ancient;
     
     protected override string BigIconPath => 
-        "res://TashkentSpire2/images/relics/big/Thruster.png";
+        "res://TashkentSpire2/images/relics/big/PreferredPlan.png";
     public override string PackedIconPath => 
-        "res://TashkentSpire2/images/relics/packed/Thruster.png";
+        "res://TashkentSpire2/images/relics/packed/PreferredPlan.png";
     protected override string PackedIconOutlinePath => 
-        "res://TashkentSpire2/images/relics/outline/Thruster.png";
+        "res://TashkentSpire2/images/relics/outline/PreferredPlan.png";
     
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new EnergyVar(2)
@@ -26,7 +27,7 @@ public sealed class Test2 : TashkentRelic
         HoverTipFactory.ForEnergy(this)
     ];
 
-    public override Task AfterSideTurnStart(CombatSide side, CombatState combatState)
+    public override Task AfterSideTurnStart(CombatSide side, IReadOnlyList<Creature> participants, ICombatState combatState)
     {
         if (side == base.Owner.Creature.Side)
         {

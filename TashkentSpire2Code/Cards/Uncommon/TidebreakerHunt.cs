@@ -36,7 +36,7 @@ public sealed class TidebreakerHunt() : TashkentCard(4, CardType.Attack, CardRar
             {
                 cardclone.EnergyCost.AddThisCombat(-1);
             }
-            await CardPileCmd.AddGeneratedCardToCombat(cardclone, PileType.Hand, addedByPlayer: true);
+            await CardPileCmd.AddGeneratedCardToCombat(cardclone, PileType.Hand, base.Owner);
         }
     }
     

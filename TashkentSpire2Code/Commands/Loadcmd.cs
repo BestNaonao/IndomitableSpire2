@@ -24,9 +24,9 @@ public static class Loadcmd
         }
         
         int vigorAmount = (int)(targetCard.Owner?.Creature.GetPower<BarrelModificationPower>()?.Amount ?? 0m);
-        if (vigorAmount > 0 && targetCard.Owner?.Creature != null)
+        if (vigorAmount > 0 && targetCard.Owner?.Creature != null && choiceContext != null)
         {
-            await PowerCmd.Apply<VigorPower>(targetCard.Owner.Creature, (decimal)vigorAmount, targetCard.Owner.Creature, null);
+            await PowerCmd.Apply<VigorPower>(choiceContext, targetCard.Owner.Creature, (decimal)vigorAmount, targetCard.Owner.Creature, null);
         }
         
         await Task.CompletedTask;

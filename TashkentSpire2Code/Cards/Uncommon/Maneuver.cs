@@ -23,7 +23,7 @@ public sealed class Maneuver() : TashkentCard(0, CardType.Skill, CardRarity.Unco
     {
         await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
         decimal baseValue = base.DynamicVars.Strength.BaseValue;
-        await PowerCmd.Apply<ManeuverPower>(base.Owner.Creature, baseValue, base.Owner.Creature, this);
+        await PowerCmd.Apply<ManeuverPower>(choiceContext, base.Owner.Creature, baseValue, base.Owner.Creature, this);
         
         await CardPileCmd.Draw(choiceContext, base.DynamicVars.Cards.IntValue, base.Owner);
     }

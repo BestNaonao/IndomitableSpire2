@@ -11,30 +11,30 @@ using TashkentSpire2.TashkentSpire2Code.Enchantment;
 
 namespace TashkentSpire2.TashkentSpire2Code.Relics;
 
-public sealed class Test5 : TashkentRelic
+public sealed class CommissarHat : TashkentRelic
 {
-    public override RelicRarity Rarity => RelicRarity.Event;
+    public override RelicRarity Rarity => RelicRarity.Ancient;
     
     protected override string BigIconPath => 
-        "res://TashkentSpire2/images/relics/big/AbsolutVodka.png";
+        "res://TashkentSpire2/images/relics/big/CommissarHat.png";
     public override string PackedIconPath => 
-        "res://TashkentSpire2/images/relics/packed/AbsolutVodka.png";
+        "res://TashkentSpire2/images/relics/packed/CommissarHat.png";
     protected override string PackedIconOutlinePath => 
-        "res://TashkentSpire2/images/relics/outline/AbsolutVodka.png";
+        "res://TashkentSpire2/images/relics/outline/CommissarHat.png";
     
     protected override IEnumerable<DynamicVar> CanonicalVars =>[
-        new CardsVar(2)
+        new CardsVar(1)
     ];
     
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [
-        ..HoverTipFactory.FromEnchantment<EndeavourEnchantment>()
+        ..HoverTipFactory.FromEnchantment<CommissarEnchantment>()
     ];
 
     public override async Task AfterObtained()
     {
-        foreach (CardModel item in await CardSelectCmd.FromDeckForEnchantment(prefs: new CardSelectorPrefs(CardSelectorPrefs.EnchantSelectionPrompt, base.DynamicVars.Cards.IntValue), player: base.Owner, enchantment: ModelDb.Enchantment<EndeavourEnchantment>(), amount: 1))
+        foreach (CardModel item in await CardSelectCmd.FromDeckForEnchantment(prefs: new CardSelectorPrefs(CardSelectorPrefs.EnchantSelectionPrompt, base.DynamicVars.Cards.IntValue), player: base.Owner, enchantment: ModelDb.Enchantment<CommissarEnchantment>(), amount: 1))
         {
-            CardCmd.Enchant<EndeavourEnchantment>(item, 1m);
+            CardCmd.Enchant<CommissarEnchantment>(item, 1m);
             NCardEnchantVfx? nCardEnchantVfx = NCardEnchantVfx.Create(item);
             if (nCardEnchantVfx != null)
             {

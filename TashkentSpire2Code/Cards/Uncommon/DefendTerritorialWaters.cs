@@ -16,7 +16,7 @@ public sealed class DefendTerritorialWaters() : TashkentCard(2, CardType.Power, 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
-        await PowerCmd.Apply<DefendTerritorialWatersPower>(base.Owner.Creature, base.DynamicVars["DefendTerritorialWatersPower"].BaseValue, base.Owner.Creature, this);
+        await PowerCmd.Apply<DefendTerritorialWatersPower>(choiceContext, base.Owner.Creature, base.DynamicVars["DefendTerritorialWatersPower"].BaseValue, base.Owner.Creature, this);
     }
 
     protected override void OnUpgrade()

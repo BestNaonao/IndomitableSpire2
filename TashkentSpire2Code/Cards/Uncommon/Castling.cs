@@ -6,10 +6,11 @@ using MegaCrit.Sts2.Core.Models;
 
 namespace TashkentSpire2.TashkentSpire2Code.Cards.Uncommon;
 
-public sealed class Castling() : TashkentCard(0, CardType.Skill, CardRarity.Uncommon, TargetType.Self)
+public sealed class Castling() : TashkentCard(1, CardType.Skill, CardRarity.Uncommon, TargetType.Self)
 {
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [
-        HoverTipFactory.FromKeyword(CardKeyword.Retain)
+        HoverTipFactory.FromKeyword(CardKeyword.Retain),
+        HoverTipFactory.FromKeyword(CardKeyword.Exhaust)
     ];
     
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
@@ -32,6 +33,6 @@ public sealed class Castling() : TashkentCard(0, CardType.Skill, CardRarity.Unco
     
     protected override void OnUpgrade()
     {
-        AddKeyword(CardKeyword.Retain);
+        base.EnergyCost.UpgradeBy(-1);
     }
 }

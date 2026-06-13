@@ -27,7 +27,7 @@ public sealed class EternalOath() : TashkentCard(2, CardType.Power, CardRarity.A
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
-        await PowerCmd.Apply<EternalOathPower>(base.Owner.Creature, base.DynamicVars["EternalOathPower"].BaseValue, base.Owner.Creature, this);
+        await PowerCmd.Apply<EternalOathPower>(choiceContext, base.Owner.Creature, base.DynamicVars["EternalOathPower"].BaseValue, base.Owner.Creature, this);
     }
     
     protected override void OnUpgrade()

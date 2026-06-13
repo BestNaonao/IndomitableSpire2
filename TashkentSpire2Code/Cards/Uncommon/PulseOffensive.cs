@@ -15,8 +15,8 @@ namespace TashkentSpire2.TashkentSpire2Code.Cards.Uncommon;
 public sealed class PulseOffensive() : AmmunitionCard(2, CardType.Attack, CardRarity.Uncommon, TargetType.AllEnemies)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new DamageVar(6M, ValueProp.Move),
-        new AmmunitionDynamicVar(3M),
+        new DamageVar(7M, ValueProp.Move),
+        new AmmunitionDynamicVar(2M),
         new LoadDynamicVar(1M),
         new AmmuMaxDynamicVar(6M),
         new PowerVar<WeakPower>(2M),
@@ -35,8 +35,8 @@ public sealed class PulseOffensive() : AmmunitionCard(2, CardType.Attack, CardRa
             {
                 foreach (Creature enemy in base.CombatState.HittableEnemies)
                 {
-                    await PowerCmd.Apply<WeakPower>(enemy, base.DynamicVars.Weak.BaseValue, base.Owner.Creature, this);
-                    await PowerCmd.Apply<VulnerablePower>(enemy, base.DynamicVars.Vulnerable.BaseValue, base.Owner.Creature, this);
+                    await PowerCmd.Apply<WeakPower>(choiceContext, enemy, base.DynamicVars.Weak.BaseValue, base.Owner.Creature, this);
+                    await PowerCmd.Apply<VulnerablePower>(choiceContext, enemy, base.DynamicVars.Vulnerable.BaseValue, base.Owner.Creature, this);
                 }
             }
             
@@ -56,7 +56,7 @@ public sealed class PulseOffensive() : AmmunitionCard(2, CardType.Attack, CardRa
                 {
                     list.Add(base.CombatState.CreateCard<ShellCasing>(base.Owner));
                 }
-                await CardPileCmd.AddGeneratedCardsToCombat(list, PileType.Hand, addedByPlayer: true);
+                await CardPileCmd.AddGeneratedCardsToCombat(list, PileType.Hand, base.Owner);
             }
             
             UpdateAmmuGlobal(Math.Max(CurrentAmmu - shellsLoaded, 0));

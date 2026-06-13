@@ -1,7 +1,9 @@
 ﻿using BaseLib.Abstracts;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
+using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
+using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 
@@ -36,13 +38,18 @@ public sealed class FateGuidedTorpedoPower : TashkentPower, IHasSecondAmount
         return DynamicVars["TashkentSpire2-Torpedo"].BaseValue.ToString();
     }
     
-    public override async Task AfterSideTurnStart(CombatSide side, CombatState combatState)
+    public override async Task AfterSideTurnStart(CombatSide side, IReadOnlyList<Creature> participants, ICombatState combatState)
     {
+        if (!participants.Contains(base.Owner))
+        {
+            return;
+        }
+        Flash();
         if (side == base.Owner.Side)
         {
             for (int i = 0; i < base.Amount; i++)
             {
-                await PowerCmd.Apply<TorpedoPower>(base.Owner, DynamicVars["TashkentSpire2-Torpedo"].BaseValue, base.Owner, null);
+                await PowerCmd.Apply<TorpedoPower>(new ThrowingPlayerChoiceContext(), base.Owner, DynamicVars["TashkentSpire2-Torpedo"].BaseValue, base.Owner, null);
             }
         }
     }

@@ -2,6 +2,7 @@
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
@@ -17,7 +18,7 @@ public sealed class CommissarEnchantment : CustomEnchantmentModel
     public override bool HasExtraCardText => true;
 
     protected override string? CustomIconPath =>
-        "res://TashkentSpire2/images/enchantment/ferment_enchantment.png";
+        "res://TashkentSpire2/images/enchantment/commissar_enchantment.png";
     
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [
         HoverTipFactory.FromKeyword(CardKeyword.Innate),
@@ -43,7 +44,7 @@ public sealed class CommissarEnchantment : CustomEnchantmentModel
         return true;
     }
     
-    public override async Task BeforeTurnEnd(PlayerChoiceContext choiceContext, CombatSide side)
+    public override async Task BeforeSideTurnEndEarly(PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)
     {
         if (side == base.Card.Owner.Creature.Side)
         {
@@ -51,7 +52,7 @@ public sealed class CommissarEnchantment : CustomEnchantmentModel
             if (handPile.Cards != null && handPile.Cards.Contains(base.Card))
             {
                 await Cmd.Wait(0.25f);
-                await PowerCmd.Apply<EnergyNextTurnPower>(base.Card.Owner.Creature, base.DynamicVars.Energy.BaseValue, base.Card.Owner.Creature, base.Card);
+                await PowerCmd.Apply<EnergyNextTurnPower>(choiceContext, base.Card.Owner.Creature, base.DynamicVars.Energy.BaseValue, base.Card.Owner.Creature, base.Card);
             }
         }
     }

@@ -13,13 +13,13 @@ public static class MonologuePowerPatch
 {
     [HarmonyPatch(nameof(MonologuePower.AfterCardPlayed))]
     [HarmonyPrefix]
-    static bool AfterCardPlayedPrefix(MonologuePower __instance, PlayerChoiceContext context, CardPlay cardPlay, ref Task __result)
+    static bool AfterCardPlayedPrefix(MonologuePower __instance, PlayerChoiceContext choiceContext, CardPlay cardPlay, ref Task __result)
     {
-        __result = ReplacementLogic(__instance, cardPlay);
+        __result = ReplacementLogic(__instance, choiceContext, cardPlay);
         return false;
     }
 
-    private static async Task ReplacementLogic(MonologuePower instance, CardPlay cardPlay)
+    private static async Task ReplacementLogic(MonologuePower instance, PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         var internalData = Traverse.Create(instance).Field("_internalData").GetValue();
         if (internalData == null) return;
@@ -32,7 +32,7 @@ public static class MonologuePowerPatch
             Traverse.Create(instance).Method("Flash").GetValue();
 
             int finalValue = value * instance.Amount; 
-            await PowerCmd.Apply<StrengthPower>(instance.Owner, (decimal)finalValue, instance.Owner, null, silent: true);
+            await PowerCmd.Apply<StrengthPower>(choiceContext, instance.Owner, (decimal)finalValue, instance.Owner, null, silent: true);
 
             instance.DynamicVars["StrengthApplied"].BaseValue += (decimal)finalValue;
 
@@ -40,26 +40,26 @@ public static class MonologuePowerPatch
         }
     }
 
-    [HarmonyPatch(nameof(MonologuePower.AfterTurnEnd))]
+    [HarmonyPatch(nameof(MonologuePower.AfterSideTurnEnd))]
     [HarmonyPrefix]
-    static bool AfterTurnEndPrefix(MonologuePower __instance, PlayerChoiceContext choiceContext, CombatSide side, ref Task __result)
+    static bool AfterSideTurnEndPrefix(MonologuePower __instance, PlayerChoiceContext choiceContext, CombatSide side, ref Task __result)
     {
         if (side == __instance.Owner.Side)
         {
-            __result = ClearStrengthAsync(__instance);
+            __result = ClearStrengthAsync(__instance, choiceContext);
             return false;
         }
         return true;
     }
 
-    private static async Task ClearStrengthAsync(MonologuePower instance)
+    private static async Task ClearStrengthAsync(MonologuePower instance, PlayerChoiceContext choiceContext)
     {
         decimal totalToClear = instance.DynamicVars["StrengthApplied"].BaseValue;
         
         await PowerCmd.Remove(instance);
         if (totalToClear != 0)
         {
-            await PowerCmd.Apply<StrengthPower>(instance.Owner, -totalToClear, instance.Owner, null, silent: true);
+            await PowerCmd.Apply<StrengthPower>(choiceContext, instance.Owner, -totalToClear, instance.Owner, null, silent: true);
         }
     }
 }

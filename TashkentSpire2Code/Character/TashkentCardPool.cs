@@ -4,10 +4,11 @@ using Godot;
 using MegaCrit.Sts2.Core.Assets;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Models;
+using TashkentSpire2.TashkentSpire2Code.Patches;
 
 namespace TashkentSpire2.TashkentSpire2Code.Character;
 
-public sealed class TashkentCardPool : CustomCardPoolModel
+public sealed class TashkentCardPool : CustomCardPoolModel, IPhilosophersCardPool
 {
     // 卡池的唯一标识符
     public override string Title => TashkentCharacter.CharacterId;

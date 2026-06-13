@@ -3,8 +3,10 @@ using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Relics;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.ValueProps;
+using TashkentSpire2.TashkentSpire2Code.Powers;
 
 namespace TashkentSpire2.TashkentSpire2Code.Relics;
 
@@ -19,12 +21,17 @@ public sealed class TorpedoRecoilDevice : TashkentRelic
     protected override string PackedIconOutlinePath => 
         "res://TashkentSpire2/images/relics/outline/TorpedoRecoilDevice.png";
     
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => [
+        HoverTipFactory.FromPower<TorpedoPower>(),
+        HoverTipFactory.Static(StaticHoverTip.Block)
+    ];
+    
     protected override IEnumerable<DynamicVar> CanonicalVars => [new BlockVar(7M, ValueProp.Unpowered)];
     
     private int _triggered = 0;
     private readonly SemaphoreSlim _lock = new(1, 1);
 
-    public override Task BeforeHandDraw(Player player, PlayerChoiceContext choiceContext, CombatState combatState)
+    public override Task BeforeHandDraw(Player player, PlayerChoiceContext choiceContext, ICombatState combatState)
     {
         if (player == this.Owner?.Creature.Player)
         {

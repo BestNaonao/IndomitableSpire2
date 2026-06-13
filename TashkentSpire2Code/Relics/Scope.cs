@@ -24,22 +24,23 @@ public sealed class Scope : TashkentRelic
         new MarkDynamicVar(1M)
     ];
 
-    public override decimal ModifyPowerAmountGiven(PowerModel power, Creature giver, decimal amount, Creature? target, CardModel? cardSource)
+    public override decimal ModifyPowerAmountGivenAdditive(PowerModel power, Creature giver, decimal amount, Creature? target, CardModel? cardSource)
     {
         if (!(power is MarkPower))
         {
-            return amount;
+            return 0m;
         }
         if (giver != base.Owner.Creature || target == base.Owner.Creature)
         {
-            return amount;
+            return 0m;
         }
-        return amount + base.DynamicVars["TashkentSpire2-Mark"].BaseValue;
+        return base.DynamicVars["TashkentSpire2-Mark"].BaseValue;
     }
 
     public override Task AfterModifyingPowerAmountGiven(PowerModel power)
     {
-        Flash();
+        if(power is MarkPower)
+            Flash();
         return Task.CompletedTask;
     }
 }

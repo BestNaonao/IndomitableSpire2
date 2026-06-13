@@ -1,5 +1,6 @@
 ﻿using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Creatures;
+using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using TashkentSpire2.TashkentSpire2Code.Powers;
 
 namespace TashkentSpire2.TashkentSpire2Code.Actions;
@@ -21,12 +22,12 @@ public sealed class MinionLeftAction : GoneWithTheWindAction
         return true;
     }
     
-    protected override async Task ExecuteEffect(Creature self)
+    protected override async Task ExecuteEffect(PlayerChoiceContext? context, Creature self)
     {
         var player = self.PetOwner?.Creature;
-        if (player != null)
+        if (player != null && context != null)
         {
-            await PowerCmd.Apply<DistancePower>(player, -1m, self, null, false);
+            await PowerCmd.Apply<DistancePower>(context, player, -1m, self, null, false);
         }
     }
 }

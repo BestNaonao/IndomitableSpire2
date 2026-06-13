@@ -20,7 +20,7 @@ public sealed class EasyPrey() : TashkentCard(1, CardType.Attack, CardRarity.Com
         ArgumentNullException.ThrowIfNull(cardPlay.Target, nameof(cardPlay.Target));
         ArgumentNullException.ThrowIfNull(CombatState);
         
-        await PowerCmd.Apply<MarkPower>(cardPlay.Target, base.DynamicVars["TashkentSpire2-Mark"].BaseValue, base.Owner.Creature, this);
+        await PowerCmd.Apply<MarkPower>(choiceContext, cardPlay.Target, base.DynamicVars["TashkentSpire2-Mark"].BaseValue, base.Owner.Creature, this);
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
             .WithHitCount(DynamicVars.Repeat.IntValue)
             .FromCard(this)
@@ -31,6 +31,6 @@ public sealed class EasyPrey() : TashkentCard(1, CardType.Attack, CardRarity.Com
     
     protected override void OnUpgrade()
     {
-        DynamicVars.Damage.UpgradeValueBy(1M);
+        DynamicVars.Damage.UpgradeValueBy(2M);
     }
 }

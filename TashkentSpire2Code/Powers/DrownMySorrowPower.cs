@@ -43,7 +43,7 @@ public sealed class DrownMySorrowPower : TashkentPower
         await Task.CompletedTask;
     }
 
-    public override Task AfterPowerAmountChanged(PowerModel power, decimal amount, Creature? applier,
+    public override Task AfterPowerAmountChanged(PlayerChoiceContext choiceContext, PowerModel power, decimal amount, Creature? applier,
         CardModel? cardSource)
     {
         if (power == this)
@@ -55,7 +55,7 @@ public sealed class DrownMySorrowPower : TashkentPower
         return Task.CompletedTask;
     }
     
-    public override Task BeforeHandDraw(Player player, PlayerChoiceContext choiceContext, CombatState combatState)
+    public override Task BeforeHandDraw(Player player, PlayerChoiceContext choiceContext, ICombatState combatState)
     {
         if (player != this.Owner.Player) return Task.CompletedTask;
 

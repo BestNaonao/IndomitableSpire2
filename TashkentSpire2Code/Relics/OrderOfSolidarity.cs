@@ -13,7 +13,7 @@ namespace TashkentSpire2.TashkentSpire2Code.Relics;
 
 public sealed class OrderOfSolidarity : TashkentRelic
 {
-    public override RelicRarity Rarity => RelicRarity.Rare;
+    public override RelicRarity Rarity => RelicRarity.Ancient;
     
     protected override string BigIconPath => 
         "res://TashkentSpire2/images/relics/big/OrderOfSolidarity.png";

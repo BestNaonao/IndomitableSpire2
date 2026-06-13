@@ -17,7 +17,7 @@ public sealed class PoseidonForm() : TashkentCard(3, CardType.Power, CardRarity.
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
-        await PowerCmd.Apply<PoseidonFormPower>(base.Owner.Creature, base.DynamicVars["PoseidonFormPower"].BaseValue, base.Owner.Creature, this);
+        await PowerCmd.Apply<PoseidonFormPower>(choiceContext, base.Owner.Creature, base.DynamicVars["PoseidonFormPower"].BaseValue, base.Owner.Creature, this);
     }
 
     protected override void OnUpgrade()

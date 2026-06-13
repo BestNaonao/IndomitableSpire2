@@ -22,10 +22,10 @@ public sealed class WavePiercingDagger() : TashkentCard(0, CardType.Skill, CardR
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         decimal de = (decimal)this.Owner.Creature.Block * DynamicVars["VigorPower"].BaseValue / 100M;
-        await PowerCmd.Apply<VigorPower>(base.Owner.Creature, de, base.Owner.Creature, this);
-        await PowerCmd.Apply<WavePiercingDaggerPower>(base.Owner.Creature, 1M, base.Owner.Creature, this);
+        await PowerCmd.Apply<VigorPower>(choiceContext, base.Owner.Creature, de, base.Owner.Creature, this);
+        await PowerCmd.Apply<WavePiercingDaggerPower>(choiceContext, base.Owner.Creature, 1M, base.Owner.Creature, this);
         this.Owner.Creature.LoseBlockInternal(this.Owner.Creature.Block);
-        await PowerCmd.Apply<NoBlockPower>(base.Owner.Creature, 1M, base.Owner.Creature, this);
+        await PowerCmd.Apply<NoBlockPower>(choiceContext, base.Owner.Creature, 1M, base.Owner.Creature, this);
     }
     
     protected override void OnUpgrade()

@@ -24,8 +24,8 @@ public sealed class ReloadConsumables : TashkentPotion
         new LoadDynamicVar(6M)
     ];
      
-    public override string CustomPackedImagePath => "res://TashkentSpire2/images/potions/mark_potion.png";
-    public override string CustomPackedOutlinePath => "res://TashkentSpire2/images/potions/mark_potion_outline.png";
+    public override string CustomPackedImagePath => "res://TashkentSpire2/images/potions/reload_consumables.png";
+    public override string CustomPackedOutlinePath => "res://TashkentSpire2/images/potions/reload_consumables_outline.png";
      
     protected override async Task OnUse(PlayerChoiceContext choiceContext, Creature? target)
     {

@@ -26,16 +26,16 @@ public class IntelligenceDocument : TashkentRelic
         new MarkDynamicVar(4M)
     ];
 
-    public override async Task BeforeSideTurnStart(PlayerChoiceContext choiceContext, CombatSide side, CombatState combatState)
+    public override async Task BeforeSideTurnStart(PlayerChoiceContext choiceContext, CombatSide side, IReadOnlyList<Creature> participants, ICombatState combatState)
     {
         if (side != base.Owner.Creature.Side || combatState.RoundNumber > 1)
         {
             return;
         }
         Flash();
-        foreach (Creature hittableEnemy2 in base.Owner.Creature.CombatState!.HittableEnemies)
+        foreach (Creature hittableEnemy in base.Owner.Creature.CombatState!.HittableEnemies)
         {
-            await PowerCmd.Apply<MarkPower>(hittableEnemy2, base.DynamicVars["TashkentSpire2-Mark"].BaseValue, base.Owner.Creature, null);
+            await PowerCmd.Apply<MarkPower>(choiceContext, hittableEnemy, base.DynamicVars["TashkentSpire2-Mark"].BaseValue, base.Owner.Creature, null);
         }
     }
 }

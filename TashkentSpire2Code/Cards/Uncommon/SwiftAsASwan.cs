@@ -16,9 +16,9 @@ public sealed class SwiftAsASwan() : TashkentCard(1, CardType.Skill, CardRarity.
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        await PowerCmd.Apply<DistancePower>(base.Owner.Creature, -base.DynamicVars["TashkentSpire2-Retreat"].BaseValue, base.Owner.Creature, this);
+        await PowerCmd.Apply<DistancePower>(choiceContext, base.Owner.Creature, -base.DynamicVars["TashkentSpire2-Retreat"].BaseValue, base.Owner.Creature, this);
         await CardPileCmd.Draw(choiceContext, base.DynamicVars.Cards.BaseValue, base.Owner);
-        await PowerCmd.Apply<AttackToDrawPower>(base.Owner.Creature, base.DynamicVars["AttackToDrawPower"].BaseValue, base.Owner.Creature, this);
+        await PowerCmd.Apply<AttackToDrawPower>(choiceContext, base.Owner.Creature, base.DynamicVars["AttackToDrawPower"].BaseValue, base.Owner.Creature, this);
     }
     
     protected override void OnUpgrade()

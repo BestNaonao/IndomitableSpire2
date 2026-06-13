@@ -17,7 +17,7 @@ public sealed class GoneWithTheWind() : TashkentCard(1, CardType.Power, CardRari
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
-        await PowerCmd.Apply<GoneWithTheWindPower>(base.Owner.Creature, base.DynamicVars["GoneWithTheWindPower"].BaseValue, base.Owner.Creature, this);
+        await PowerCmd.Apply<GoneWithTheWindPower>(choiceContext, Owner.Creature, base.DynamicVars["GoneWithTheWindPower"].BaseValue, base.Owner.Creature, this);
         await MinionSummoncmd.Summon(choiceContext, base.Owner, base.DynamicVars.Summon.BaseValue, this);
     }
 

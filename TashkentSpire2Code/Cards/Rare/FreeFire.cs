@@ -21,7 +21,7 @@ public sealed class FreeFire() : AmmunitionCard(0, CardType.Attack, CardRarity.R
         new AmmunitionDynamicVar(0M),
         new LoadDynamicVar(0M),
         new AmmuMaxDynamicVar(6M),
-        new ShotDynamicVar(2M),
+        new ShotDynamicVar(1M),
         new CardsVar(1)
     ];
 
@@ -56,7 +56,7 @@ public sealed class FreeFire() : AmmunitionCard(0, CardType.Attack, CardRarity.R
                 {
                     list.Add(base.CombatState.CreateCard<ShellCasing>(base.Owner));
                 }
-                await CardPileCmd.AddGeneratedCardsToCombat(list, PileType.Hand, addedByPlayer: true);
+                await CardPileCmd.AddGeneratedCardsToCombat(list, PileType.Hand, base.Owner);
             }
             
             UpdateAmmuGlobal(Math.Max(CurrentAmmu - shellsLoaded, 0));

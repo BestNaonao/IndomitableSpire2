@@ -44,11 +44,11 @@ public abstract class TashkentTemporaryPower<T> : TashkentPower, ITemporaryPower
         }
         else
         {
-            await PowerCmd.Apply<T>(target, (decimal)Sign * amount, applier, cardSource, silent: true);
+            await PowerCmd.Apply<T>(new ThrowingPlayerChoiceContext(), target, (decimal)Sign * amount, applier, cardSource, silent: true);
         }
     }
 
-    public override async Task AfterPowerAmountChanged(PowerModel power, decimal amount, Creature? applier, CardModel? cardSource)
+    public override async Task AfterPowerAmountChanged(PlayerChoiceContext choiceContext, PowerModel power, decimal amount, Creature? applier, CardModel? cardSource)
     {
         if (power == this && amount != (decimal)base.Amount)
         {
@@ -58,18 +58,18 @@ public abstract class TashkentTemporaryPower<T> : TashkentPower, ITemporaryPower
             }
             else
             {
-                await PowerCmd.Apply<T>(base.Owner, (decimal)Sign * amount, applier, cardSource, silent: true);
+                await PowerCmd.Apply<T>(choiceContext, base.Owner, (decimal)Sign * amount, applier, cardSource, silent: true);
             }
         }
     }
 
-    public override async Task AfterTurnEnd(PlayerChoiceContext choiceContext, CombatSide side)
+    public override async Task AfterSideTurnEnd(PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)
     {
         if (side == base.Owner.Side)
         {
             Flash();
             await PowerCmd.Remove(this);
-            await PowerCmd.Apply<T>(base.Owner, (decimal)-Sign * base.Amount, base.Owner, null);
+            await PowerCmd.Apply<T>(choiceContext, base.Owner, (decimal)-Sign * base.Amount, base.Owner, null);
         }
     }
 }

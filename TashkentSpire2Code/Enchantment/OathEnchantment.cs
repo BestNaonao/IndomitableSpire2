@@ -36,9 +36,9 @@ public sealed class OathEnchantment : CustomEnchantmentModel
         Card.AddKeyword(CardKeyword.Retain);
     }
 
-    public override async Task BeforeHandDraw(Player player, PlayerChoiceContext choiceContext, CombatState combatState)
+    public override async Task BeforeHandDraw(Player player, PlayerChoiceContext choiceContext, ICombatState combatState)
     {
-        if (player == Card.Owner && CombatManager.Instance.History.CardPlaysFinished.Any((CardPlayFinishedEntry e) => e.RoundNumber == combatState.RoundNumber - 1 && e.CardPlay.Card == Card))
+        if (player == Card.Owner && CombatManager.Instance.History.CardPlaysFinished.Any((CardPlayFinishedEntry e) => e.HappenedLastPlayerTurn(base.Card.Owner) && e.CardPlay.Card == Card))
         {
             CardPile? pile = Card.Pile;
             if (pile == null || pile.Type != PileType.Hand)

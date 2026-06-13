@@ -14,7 +14,7 @@ public sealed class Tactics() : TashkentCard(0, CardType.Skill, CardRarity.Uncom
     
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        await PowerCmd.Apply<TorpedoPower>(base.Owner.Creature, DynamicVars["TashkentSpire2-Torpedo"].BaseValue, base.Owner.Creature, this);
+        await PowerCmd.Apply<TorpedoPower>(choiceContext, base.Owner.Creature, DynamicVars["TashkentSpire2-Torpedo"].BaseValue, base.Owner.Creature, this);
         
         var torpedoes = base.Owner.Creature.Powers
             .OfType<TorpedoPower>()

@@ -19,11 +19,12 @@ public sealed class LoadRestSiteOption : CustomRestSiteOption
     public override string OptionId => "TASHKENTSPIRE2-LOAD";
 
     public override string CustomIconPath => "res://TashkentSpire2/images/rest_site/load.png";
-    
+
     public LoadRestSiteOption(Player owner) : base(owner)
     {
-        this.IsEnabled = owner.Deck.Cards.Any(c => c is IAmmunitionCard);
     }
+
+    public override bool IsEnabled => base.Owner.Deck.Cards.Any(c => c is IAmmunitionCard);
     
     public override LocString Description
     {

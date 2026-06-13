@@ -29,7 +29,7 @@ public sealed class CoreBreakdown() : TashkentCard(3, CardType.Attack, CardRarit
             .WithHitFx("vfx/vfx_attack_blunt", null, "heavy_attack.mp3")
             .Execute(choiceContext);
         
-        await PowerCmd.Apply<CoreBreakdownPower>(cardPlay.Target, attackCommand.Results.Sum((DamageResult r) => r.TotalDamage + r.OverkillDamage), base.Owner.Creature, this);
+        await PowerCmd.Apply<CoreBreakdownPower>(choiceContext, cardPlay.Target, attackCommand.Results.SelectMany((List<DamageResult> r) => r).Sum((DamageResult r) => r.TotalDamage + r.OverkillDamage), base.Owner.Creature, this);
     }
     
     protected override void OnUpgrade()

@@ -20,7 +20,7 @@ public sealed class TorpedoPower : TashkentPower, IHasSecondAmount
 
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;
-    public override bool IsInstanced => true;
+    public override PowerInstanceType InstanceType => PowerInstanceType.Instanced;
 
     public override string CustomBigIconPath =>
         "res://TashkentSpire2/images/powers/big/torpedo_power.png";
@@ -101,7 +101,7 @@ public sealed class TorpedoPower : TashkentPower, IHasSecondAmount
 
             if (oxygenBonus != 0)
             {
-                await PowerCmd.ModifyAmount(this, oxygenBonus, Owner, cardSource);
+                await PowerCmd.ModifyAmount(new ThrowingPlayerChoiceContext(), this, oxygenBonus, Owner, cardSource);
             }
         }
 
@@ -131,9 +131,9 @@ public sealed class TorpedoPower : TashkentPower, IHasSecondAmount
         InvokeDisplayAmountChanged();
     }
 
-    public override async Task BeforeTurnEnd(PlayerChoiceContext choiceContext, CombatSide side)
+    public override async Task BeforeSideTurnEnd(PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)
     {
-        if (side != Owner.Side)
+        if (!participants.Contains(base.Owner))
             return;
 
         int turns = (int)DynamicVars[TurnKey].BaseValue;
@@ -204,7 +204,7 @@ public sealed class TorpedoPower : TashkentPower, IHasSecondAmount
             IsAOE = isAOE
         };
 
-        await TriggerAfterTorpedoDamage(context);
+        await TriggerAfterTorpedoDamage(choiceContext, context);
 
         await PowerCmd.Remove(this);
     }
@@ -230,11 +230,11 @@ public sealed class TorpedoPower : TashkentPower, IHasSecondAmount
             : null;
     }
 
-    private async Task TriggerAfterTorpedoDamage(TorpedoDamageContext context)
+    private async Task TriggerAfterTorpedoDamage(PlayerChoiceContext choiceContext, TorpedoDamageContext context)
     {
         foreach (var hook in GetHooks<IAfterTorpedoDamage>())
         {
-            await hook.AfterTorpedoDamage(context);
+            await hook.AfterTorpedoDamage(choiceContext, context);
         }
     }
 

@@ -15,7 +15,7 @@ public sealed class DrawFire() : TashkentCard(0, CardType.Skill, CardRarity.Unco
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        await PowerCmd.Apply<MarkPower>(base.Owner.Creature, DynamicVars["TashkentSpire2-Mark"].BaseValue, base.Owner.Creature, this);
+        await PowerCmd.Apply<MarkPower>(choiceContext, base.Owner.Creature, DynamicVars["TashkentSpire2-Mark"].BaseValue, base.Owner.Creature, this);
         await PlayerCmd.GainEnergy(base.DynamicVars.Energy.BaseValue, base.Owner);
     }
     

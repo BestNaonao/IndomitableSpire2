@@ -1,17 +1,23 @@
 ﻿using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.Factories;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.ValueProps;
-using TashkentSpire2.TashkentSpire2Code.Powers;
+using TashkentSpire2.TashkentSpire2Code.Enchantment;
 
 namespace TashkentSpire2.TashkentSpire2Code.Cards.Uncommon;
 
 public sealed class FullSalvo() : TashkentCard(2, CardType.Attack, CardRarity.Uncommon, TargetType.AnyEnemy)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new DamageVar(14M, ValueProp.Move),
-        new PowerVar<FullSalvoPower>(2M)
+        new DamageVar(10M, ValueProp.Move)
+    ];
+
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => [
+        ..HoverTipFactory.FromEnchantment<EndeavourEnchantment>()
     ];
     
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
@@ -20,11 +26,25 @@ public sealed class FullSalvo() : TashkentCard(2, CardType.Attack, CardRarity.Un
         await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue).FromCard(this).Targeting(cardPlay.Target)
             .WithHitFx("vfx/vfx_attack_slash")
             .Execute(choiceContext);
-        await PowerCmd.Apply<FullSalvoPower>(base.Owner.Creature, base.DynamicVars["FullSalvoPower"].BaseValue, base.Owner.Creature, this);
+        
+        var ammuCards = ModelDb.AllCards.OfType<AmmunitionCard>();
+
+        var card = CardFactory.GetDistinctForCombat(
+            Owner, ammuCards, 1, Owner.RunState.Rng.CombatCardGeneration
+        ).FirstOrDefault();
+        if (card == null) return;
+
+        if (IsUpgraded) CardCmd.Upgrade(card);
+        if (ModelDb.Enchantment<EndeavourEnchantment>().CanEnchant(card))
+        {
+            CardCmd.Enchant<EndeavourEnchantment>(card, 1m);
+        }
+
+        await CardPileCmd.AddGeneratedCardToCombat(card, PileType.Hand, base.Owner);
     }
 
     protected override void OnUpgrade()
     {
-        base.DynamicVars.Damage.UpgradeValueBy(6M);
+        base.DynamicVars.Damage.UpgradeValueBy(4M);
     }
 }

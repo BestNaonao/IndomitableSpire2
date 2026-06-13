@@ -1,6 +1,7 @@
 ﻿using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
+using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Models;
 
@@ -23,7 +24,7 @@ public sealed class CounterattackPower : TashkentPower
         if (applier == base.Owner && target != base.Owner && !(amount <= 0m) && power is MarkPower)
         {
             Flash();
-            await PowerCmd.Apply<MarkPower>(base.Owner, this.Amount, base.Owner, null);
+            await PowerCmd.Apply<MarkPower>(new ThrowingPlayerChoiceContext(), base.Owner, this.Amount, base.Owner, null);
         }
     }
 }

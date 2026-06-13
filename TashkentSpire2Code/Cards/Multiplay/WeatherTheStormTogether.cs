@@ -13,7 +13,7 @@ public sealed class WeatherTheStormTogether() : TashkentCard(1, CardType.Skill, 
 
     public override bool GainsBlock => true;
     
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new BlockVar(0M, ValueProp.Move)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new BlockVar(2M, ValueProp.Move)];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
@@ -38,5 +38,5 @@ public sealed class WeatherTheStormTogether() : TashkentCard(1, CardType.Skill, 
 
     }
     
-    protected override void OnUpgrade() => DynamicVars.Block.UpgradeValueBy(8M);
+    protected override void OnUpgrade() => DynamicVars.Block.UpgradeValueBy(6M);
 }

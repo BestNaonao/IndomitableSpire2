@@ -39,7 +39,7 @@ public sealed class SaturationBombing() : AmmunitionCard(2, CardType.Attack, Car
             {
                 list.Add(base.CombatState.CreateCard<ShellCasing>(base.Owner));
             }
-            await CardPileCmd.AddGeneratedCardsToCombat(list, PileType.Hand, addedByPlayer: true);
+            await CardPileCmd.AddGeneratedCardsToCombat(list, PileType.Hand, base.Owner);
         }
         
         UpdateAmmuGlobal(Math.Max(CurrentAmmu - shellsLoaded, 0));

@@ -43,14 +43,14 @@ public sealed class PoseidonFormPower : TashkentPower
         return Task.CompletedTask;
     }
 
-    public override decimal ModifyPowerAmountGiven(PowerModel power, Creature giver, decimal amount, Creature? target, CardModel? cardSource)
+    public override decimal ModifyPowerAmountGivenAdditive(PowerModel power, Creature giver, decimal amount, Creature? target, CardModel? cardSource)
     {
         if (DisplayAmount > 0 && amount > 0 && _triggeringCard != null && cardSource == _triggeringCard)
         {
             if (_typeToIgnore != null && power.GetType() == _typeToIgnore)
             {
                 _typeToIgnore = null;
-                return amount;
+                return 0m;
             }
 
             if (power.GetTypeForAmount(amount) == PowerType.Buff)
@@ -63,10 +63,10 @@ public sealed class PoseidonFormPower : TashkentPower
                 }
 
                 _hasTriggered = true; 
-                return amount * 2m;
+                return amount;
             }
         }
-        return amount;
+        return 0m;
     }
 
     public override async Task AfterCardPlayed(PlayerChoiceContext context, CardPlay cardPlay)
@@ -87,7 +87,7 @@ public sealed class PoseidonFormPower : TashkentPower
         await base.AfterCardPlayed(context, cardPlay);
     }
 
-    public override Task BeforeHandDraw(Player player, PlayerChoiceContext choiceContext, CombatState combatState)
+    public override Task BeforeHandDraw(Player player, PlayerChoiceContext choiceContext, ICombatState combatState)
     {
         _triggeringCard = null;
         _hasTriggered = false;
