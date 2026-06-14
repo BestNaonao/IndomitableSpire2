@@ -13,7 +13,7 @@ using MegaCrit.Sts2.Core.ValueProps;
 
 namespace TashkentSpire2.TashkentSpire2Code.Powers;
 
-public sealed class DistancePower : TashkentPower
+public sealed class DistancePower : TashkentPower, IPersistentPower
 {
     private const string VarKey = "Tashkent_Distance";
     private bool _isSyncing = false;
@@ -22,9 +22,6 @@ public sealed class DistancePower : TashkentPower
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;
     public override bool AllowNegative => true;
-    
-    private int CurrentDist => (int)base.DynamicVars[VarKey].BaseValue;
-    public override int DisplayAmount => CurrentDist;
     
     public override string CustomBigIconPath => 
         "res://TashkentSpire2/images/powers/big/distance_power.png";
@@ -41,8 +38,6 @@ public sealed class DistancePower : TashkentPower
     
     public int TotalIncreasedAmount { get; private set; } = 0;
     
-    private int MapToDist(int amount) => amount - 10;
-    
     public async Task OnDirectionFlipped()
     {
         if (_isSyncing) return;
@@ -50,7 +45,7 @@ public sealed class DistancePower : TashkentPower
         _isSyncing = true;
         _isFlipping = true;
 
-        decimal targetAmount = 20m - base.Amount;
+        decimal targetAmount = -base.Amount;
         decimal delta = targetAmount - base.Amount;
         
         if (delta != 0)
@@ -67,7 +62,7 @@ public sealed class DistancePower : TashkentPower
         if (canonicalPower.Id == this.Id && target == this.Owner)
         {
             int potential = (int)base.Amount + (int)amount;
-            int clamped = Mathf.Clamp(potential, 5, 15);
+            int clamped = Mathf.Clamp(potential, -5, 5);
             modifiedAmount = (decimal)(clamped - (int)base.Amount);
             return true;
         }
@@ -77,7 +72,7 @@ public sealed class DistancePower : TashkentPower
     
     private void RefreshDerivedVars()
     {
-        int dist = CurrentDist;
+        int dist = (int)base.Amount;
 
         base.DynamicVars["Increase"].BaseValue = dist * 20;
         base.DynamicVars["Decrease"].BaseValue = dist * 10;
@@ -85,19 +80,19 @@ public sealed class DistancePower : TashkentPower
     
     public override async Task AfterApplied(Creature? applier, CardModel? cardSource)
     {
-        if (base.Amount < 5m)
+        int initialDist = (int)base.Amount;
+        if (initialDist > 0)
         {
-            await PowerCmd.ModifyAmount(new ThrowingPlayerChoiceContext(), this, 10m, base.Owner, cardSource);
-            return;
+            TotalIncreasedAmount += initialDist;
         }
-        
-        int targetDist = MapToDist(base.Amount);
-        base.DynamicVars[VarKey].BaseValue = targetDist;
+
+        base.DynamicVars[VarKey].BaseValue = base.Amount;
         RefreshDerivedVars();
 
-        if (targetDist != 0)
+        if (initialDist != 0)
         {
-            await UpdateCreaturePositions(targetDist);
+            await UpdateCreaturePositions(initialDist);
+            await NotifyDistanceChanged(initialDist);
         }
         InvokeDisplayAmountChanged();
     }
@@ -125,7 +120,7 @@ public sealed class DistancePower : TashkentPower
         if (dealer == this.Owner && (!props.HasFlag(ValueProp.Move) || cardSource == null))
             return 1m;
 
-        int dist = CurrentDist; 
+        int dist = (int)base.Amount; 
         if (dist == 0) return 1m;
 
         int enemySide = 1;
@@ -154,7 +149,7 @@ public sealed class DistancePower : TashkentPower
     {
         if (power == this)
         {
-            int newDist = MapToDist(base.Amount);
+            int newDist = (int)base.Amount;
             int lastLogicalDist = (int)base.DynamicVars[VarKey].BaseValue;
             int deltaDist = newDist - lastLogicalDist;
 

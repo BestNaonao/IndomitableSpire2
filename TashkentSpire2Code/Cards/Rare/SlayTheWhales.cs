@@ -28,17 +28,17 @@ public sealed class SlayTheWhales() : TashkentCard(2, CardType.Attack, CardRarit
 
         while (true)
         {
+            var distPower = base.Owner.Creature.GetPower<DistancePower>();
+            if (distPower != null && distPower.Amount >= 5m)
+            {
+                break;
+            }
+            
             await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
                 .FromCard(this)
                 .Targeting(cardPlay.Target)
                 .WithHitFx("vfx/vfx_attack_slash")
                 .Execute(choiceContext);
-            
-            var distPower = base.Owner.Creature.GetPower<DistancePower>();
-            if (distPower != null && distPower.Amount >= 15m)
-            {
-                break;
-            }
             
             await PowerCmd.Apply<DistancePower>(choiceContext, base.Owner.Creature, DynamicVars["TashkentSpire2-Charge"].BaseValue, base.Owner.Creature, this);
             await PowerCmd.Apply<BackAfterTurnPower>(choiceContext, base.Owner.Creature, DynamicVars["TashkentSpire2-Retreat"].BaseValue, base.Owner.Creature, this);

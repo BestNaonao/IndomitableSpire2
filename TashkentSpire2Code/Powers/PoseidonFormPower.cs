@@ -45,7 +45,7 @@ public sealed class PoseidonFormPower : TashkentPower
 
     public override decimal ModifyPowerAmountGivenAdditive(PowerModel power, Creature giver, decimal amount, Creature? target, CardModel? cardSource)
     {
-        if (DisplayAmount > 0 && amount > 0 && _triggeringCard != null && cardSource == _triggeringCard)
+        if (DisplayAmount > 0 && (amount > 0 || power is DistancePower) && _triggeringCard != null && cardSource == _triggeringCard && cardSource.Owner == this.Owner.Player)
         {
             if (_typeToIgnore != null && power.GetType() == _typeToIgnore)
             {

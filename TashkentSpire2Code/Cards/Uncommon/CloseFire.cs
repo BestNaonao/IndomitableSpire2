@@ -25,11 +25,11 @@ public sealed class CloseFire() : TashkentCard(1, CardType.Attack, CardRarity.Un
 
         int repeat = DynamicVars.Repeat.IntValue;
         int distanceAmount = (int)(Owner.Creature.GetPower<DistancePower>()?.Amount ?? 0m);
-        if (distanceAmount >= 13)
+        if (distanceAmount >= 3)
         {
             repeat *= 2;
         }
-        if (distanceAmount >= 15)
+        if (distanceAmount >= 5)
         {
             repeat *= 2;
         }

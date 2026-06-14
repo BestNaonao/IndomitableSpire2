@@ -1,6 +1,8 @@
 ﻿using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Powers;
+using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Rooms;
+using TashkentSpire2.TashkentSpire2Code.Enchantment;
 using TashkentSpire2.TashkentSpire2Code.Rewards;
 
 namespace TashkentSpire2.TashkentSpire2Code.Powers;
@@ -15,6 +17,8 @@ public sealed class EternalOathPower : TashkentPower
         "res://TashkentSpire2/images/powers/big/eternaloath_power.png";
     public override string CustomPackedIconPath => 
         "res://TashkentSpire2/images/powers/packed/eternaloath_power.png";
+    
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => [..HoverTipFactory.FromEnchantment<OathEnchantment>()];
     
     public override async Task AfterCombatEnd(CombatRoom room)
     {

@@ -22,7 +22,7 @@ public sealed class ArtilleryStrike() : AmmunitionCard(1, CardType.Attack, CardR
         new DamageVar(2M, ValueProp.Move),
         new BlockVar(2M, ValueProp.Move),
         new AmmunitionDynamicVar(6M),
-        new LoadDynamicVar(4M),
+        new LoadDynamicVar(3M),
         new AmmuMaxDynamicVar(6M),
         new ShotDynamicVar(3M)
     ];

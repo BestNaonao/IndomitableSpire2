@@ -37,15 +37,33 @@ public sealed class TorpedoPower : TashkentPower, IHasSecondAmount
     ];
 
     private bool _oxygenApplied;
-    private bool IsTheBomb => DynamicVars[BombKey].BaseValue == 1m;
+    private bool IsTheBomb => Owner != null && DynamicVars.ContainsKey(BombKey) && DynamicVars[BombKey].BaseValue == 1m;
 
     public override LocString Title
     {
         get
         {
-            LocString title = base.Title;
-            title.Add("IsTheBomb", IsTheBomb ? 1 : 0);
-            return title;
+            var stackTrace = new System.Diagnostics.StackTrace();
+            string traceStr = stackTrace.ToString();
+        
+            if (traceStr.Contains("HoverTipFactory") || traceStr.Contains("DevConsole") || traceStr.Contains("CardLibrary"))
+            {
+                return base.Title;
+            }
+
+            try
+            {
+                if (IsTheBomb)
+                {
+                    return new LocString(locTable, Id.Entry + ".title_bomb");
+                }
+            }
+            catch (System.Exception)
+            {
+                return base.Title;
+            }
+
+            return base.Title;
         }
     }
 
@@ -66,7 +84,6 @@ public sealed class TorpedoPower : TashkentPower, IHasSecondAmount
     {
         var distPower = owner.GetPower<DistancePower>();
         int dist = distPower != null ? (int)distPower.Amount : 0;
-        dist -= 10;
 
         int baseTurns = 3;
 
