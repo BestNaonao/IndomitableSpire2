@@ -69,5 +69,8 @@
   "INDOMITABLESPIRE2-MASTER_OF_LIFE_POWER.title": "Master of Life",
   "INDOMITABLESPIRE2-KENOSIS_FORM_POWER.description": "At the start of your turn, heal HP. Whenever you heal HP, gain [gold]Motivation[/gold] and add [gold]Refresh+[/gold] into your [gold]Draw Pile[/gold].",
   "INDOMITABLESPIRE2-KENOSIS_FORM_POWER.smartDescription": "At the start of your turn, heal [blue]{Heal}[/blue] HP. Whenever you heal HP, gain [blue]{MotivationGain}[/blue] [gold]Motivation[/gold] and add [blue]{Cards}[/blue] [gold]{Cards:plural:Refresh+|Refresh+}[/gold] into your [gold]Draw Pile[/gold].",
-  "INDOMITABLESPIRE2-KENOSIS_FORM_POWER.title": "Kenosis Form"
+  "INDOMITABLESPIRE2-KENOSIS_FORM_POWER.title": "Kenosis Form",
+  "INDOMITABLESPIRE2-INDUSTRIAL_REVOLUTION_POWER.description": "Every [blue]4[/blue] non-[gold]Status[/gold], non-[gold]Curse[/gold] cards you create, the next card you play gains [gold]Replay[/gold] 1.",
+  "INDOMITABLESPIRE2-INDUSTRIAL_REVOLUTION_POWER.smartDescription": "Every [blue]4[/blue] non-[gold]Status[/gold], non-[gold]Curse[/gold] cards you create, the next [blue]{Amount}[/blue] {Amount:plural:card you play gains|cards you play gain} [gold]Replay[/gold] 1.",
+  "INDOMITABLESPIRE2-INDUSTRIAL_REVOLUTION_POWER.title": "Industrial Revolution"
 }

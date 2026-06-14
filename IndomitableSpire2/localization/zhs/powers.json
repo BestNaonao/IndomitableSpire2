@@ -69,5 +69,8 @@
   "INDOMITABLESPIRE2-MASTER_OF_LIFE_POWER.title": "生活大师",
   "INDOMITABLESPIRE2-KENOSIS_FORM_POWER.description": "在你的回合开始时，回复生命。每当你回复生命时，获得[gold]干劲[/gold]并将[gold]养神+[/gold]放入你的[gold]抽牌堆[/gold]中。",
   "INDOMITABLESPIRE2-KENOSIS_FORM_POWER.smartDescription": "在你的回合开始时，回复[blue]{Heal}[/blue]点生命。每当你回复生命时，获得[blue]{MotivationGain}[/blue]点[gold]干劲[/gold]并将[blue]{Cards}[/blue]张[gold]养神+[/gold]放入你的[gold]抽牌堆[/gold]中。",
-  "INDOMITABLESPIRE2-KENOSIS_FORM_POWER.title": "虚己形态"
+  "INDOMITABLESPIRE2-KENOSIS_FORM_POWER.title": "虚己形态",
+  "INDOMITABLESPIRE2-INDUSTRIAL_REVOLUTION_POWER.description": "你每生成[blue]4[/blue]张非[gold]状态[/gold]、非[gold]诅咒[/gold]的牌，你打出的下一张牌在打出前获得1层[gold]重放[/gold]。",
+  "INDOMITABLESPIRE2-INDUSTRIAL_REVOLUTION_POWER.smartDescription": "你每生成[blue]4[/blue]张非[gold]状态[/gold]、非[gold]诅咒[/gold]的牌，你打出的下[blue]{Amount}[/blue]张牌在打出前获得1层[gold]重放[/gold]。",
+  "INDOMITABLESPIRE2-INDUSTRIAL_REVOLUTION_POWER.title": "工业革命"
 }

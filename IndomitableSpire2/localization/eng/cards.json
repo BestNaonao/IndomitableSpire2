@@ -81,6 +81,8 @@
   "INDOMITABLESPIRE2-MASTER_OF_LIFE.description": "[gold]Requires[/gold] [blue]{MotivationRequire:diff()}[/blue] [gold]Motivation[/gold].\nWhenever you heal HP during combat, gain {MasterOfLifePower:diff()} [gold]Vigor[/gold].",
   "INDOMITABLESPIRE2-KENOSIS_FORM.title": "Kenosis Form",
   "INDOMITABLESPIRE2-KENOSIS_FORM.description": "At the start of your turn, heal {KenosisFormPower:diff()} HP. Whenever you heal HP, gain [blue]10[/blue] [gold]Motivation[/gold] and add [blue]1[/blue] [gold]Refresh+[/gold] into your [gold]Draw Pile[/gold].",
+  "INDOMITABLESPIRE2-INDUSTRIAL_REVOLUTION.title": "Industrial Revolution",
+  "INDOMITABLESPIRE2-INDUSTRIAL_REVOLUTION.description": "Every [blue]4[/blue] non-[gold]Status[/gold], non-[gold]Curse[/gold] cards you create, the next {IndustrialRevolutionPower:diff()} {IndustrialRevolutionPower:plural:card you play gains|cards you play gain} [gold]Replay[/gold] 1.",
   
   "INDOMITABLESPIRE2-DESSERT.title": "Dessert",
   "INDOMITABLESPIRE2-DESSERT.description": "Heal [green]{Heal:diff()}[/green] HP.\nGain {Energy:energyIcons()}.",
