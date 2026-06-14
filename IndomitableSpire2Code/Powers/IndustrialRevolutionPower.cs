@@ -1,9 +1,11 @@
 ﻿using BaseLib.Abstracts;
+using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Nodes.Cards;
 
 namespace IndomitableSpire2.IndomitableSpire2Code.Powers;
 
@@ -61,10 +63,9 @@ public sealed class IndustrialRevolutionPower : IndomitablePower, IHasSecondAmou
         // 如果是玩家自己的卡，且还有待触发的重放充能
         if (card.Owner != Owner.Player || data.PendingReplays <= 0) return playCount;
         data.PendingReplays--;  // 消耗一层充能
-        // ModifyCardPlayCount 只是让本次打出变成了2次。
-        // 设计本意是“获得重放”，那么必须在这里给底层数据加上 BaseReplayCount。
-        card.BaseReplayCount += 1;
+        card.BaseReplayCount += 1;  // ModifyCardPlayCount 只是让本次打出变成了2次。必须在这里给底层数据加上 BaseReplayCount。
         InvokeDisplayAmountChanged();   // 刷新 UI 的数字
+        NCard.FindOnTable(card)?.UpdateVisuals(PileType.Play, CardPreviewMode.Normal);  // 重新读取文本
         return playCount + 1;           // 告诉引擎：这张牌的最终打出次数 +1
     }
     
