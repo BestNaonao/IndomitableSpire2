@@ -1,0 +1,7 @@
+[gd_resource type="AtlasTexture" load_steps=2 format=3 uid="uid://du1eat8fiioa3"]
+
+[ext_resource type="Texture2D" uid="uid://cqapfds41y0q1" path="res://IndomitableSpire2/images/powers/packed/industrial_revolution_power_packed.png" id="1_ggiob"]
+
+[resource]
+atlas = ExtResource("1_ggiob")
+region = Rect2(0, 0, 64, 64)
