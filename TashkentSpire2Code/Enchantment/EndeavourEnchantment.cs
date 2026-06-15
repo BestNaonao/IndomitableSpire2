@@ -14,12 +14,14 @@ public sealed class EndeavourEnchantment : CustomEnchantmentModel
         "res://TashkentSpire2/images/enchantment/endeavou_enchantment.png";
 
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [
+        HoverTipFactory.FromKeyword(CardKeyword.Ethereal),
         HoverTipFactory.FromKeyword(CardKeyword.Exhaust)
     ];
     
     protected override void OnEnchant()
     {
         Card.AddKeyword(CardKeyword.Exhaust);
+        Card.AddKeyword(CardKeyword.Ethereal);
         base.Card.SetToFreeThisCombat();
     }
     

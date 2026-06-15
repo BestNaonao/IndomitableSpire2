@@ -32,6 +32,6 @@ public sealed class FleshMemory() : TashkentCard(0, CardType.Skill, CardRarity.R
     
     protected override void OnUpgrade()
     {
-        DynamicVars.Block.UpgradeValueBy(3M);
+        DynamicVars.Block.UpgradeValueBy(2M);
     }
 }

@@ -14,5 +14,5 @@
   "TASHKENTSPIRE2-COMMISSAR_ENCHANTMENT.description": "这张牌获得[gold]固有[/gold]、[gold]保留[/gold]。\n在你回合结束时，若此牌在[gold]手牌[/gold]中则下个回合开始时获得{Energy:energyIcons()}。",
   "TASHKENTSPIRE2-ENDEAVOUR_ENCHANTMENT.title": "竭尽",
   "TASHKENTSPIRE2-ENDEAVOUR_ENCHANTMENT.extraCardText": "可以免费打出。",
-  "TASHKENTSPIRE2-ENDEAVOUR_ENCHANTMENT.description": "这张牌获得[gold]消耗[/gold]，且可以免费打出。"
+  "TASHKENTSPIRE2-ENDEAVOUR_ENCHANTMENT.description": "这张牌获得[gold]消耗[/gold]、[gold]虚无[/gold]，且可以免费打出。"
 }

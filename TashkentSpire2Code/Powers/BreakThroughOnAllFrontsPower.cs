@@ -29,7 +29,7 @@ public class BreakThroughOnAllFrontsPower : TashkentPower
     
     public override async Task AfterPlayerTurnStart(PlayerChoiceContext choiceContext, Player player)
     {
-        if(this.Owner.Player == null)
+        if(this.Owner.Player == null || player != this.Owner.Player)
             return;
         
         var prompt = new LocString("powers", "TASHKENTSPIRE2-BREAK_THROUGH_ON_ALL_FRONTS_POWER.selectionScreenPrompt");

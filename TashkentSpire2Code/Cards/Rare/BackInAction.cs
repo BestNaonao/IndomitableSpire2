@@ -31,7 +31,7 @@ public sealed class BackInAction() : TashkentCard(2, CardType.Skill, CardRarity.
             choiceContext,
             candidates,
             base.Owner,
-            new CardSelectorPrefs(base.SelectionScreenPrompt, 2) 
+            new CardSelectorPrefs(base.SelectionScreenPrompt, 2){RequireManualConfirmation = true} 
         );
         
         foreach (var card in selectedList)

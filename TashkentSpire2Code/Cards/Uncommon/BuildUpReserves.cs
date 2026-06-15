@@ -18,7 +18,7 @@ public sealed class BuildUpReserves() : AmmunitionCard(1, CardType.Skill, CardRa
     
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new BlockVar(7M, ValueProp.Move),
-        new AmmunitionDynamicVar(3M),
+        new AmmunitionDynamicVar(2M),
         new LoadDynamicVar(1M),
         new AmmuMaxDynamicVar(6M),
         new ShotDynamicVar(3M),
