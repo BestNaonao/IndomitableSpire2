@@ -97,8 +97,8 @@
   "TASHKENTSPIRE2-BARREL_MODIFICATION_POWER.description": "当你[gold]装填[/gold]时，获得[gold]活力[gold]。",
   "TASHKENTSPIRE2-BARREL_MODIFICATION_POWER.smartDescription": "当你[gold]装填[/gold]时，获得{Amount}点[gold]活力[gold]。",
   "TASHKENTSPIRE2-BARREL_MODIFICATION_POWER.title": "炮膛改装",
-  "TASHKENTSPIRE2-ALL_ROUNDER_POWER.description": "释放[gold]鱼雷[/gold]后增加计数，左键能力获得[gold]格挡[/gold]。",
-  "TASHKENTSPIRE2-ALL_ROUNDER_POWER.smartDescription": "释放[gold]鱼雷[/gold]后增加计数，左键能力获得{Amount}点[gold]格挡[/gold]。",
+  "TASHKENTSPIRE2-ALL_ROUNDER_POWER.description": "当你释放[gold]鱼雷[/gold]后，你获得1层[gold]烟雾[/gold]。",
+  "TASHKENTSPIRE2-ALL_ROUNDER_POWER.smartDescription": "当你释放[gold]鱼雷[/gold]后，你获得{Amount}层[gold]烟雾[/gold]。",
   "TASHKENTSPIRE2-ALL_ROUNDER_POWER.title": "多面手",
   "TASHKENTSPIRE2-TARGET_SHIP_POWER.description": "拥有者回合开始或死亡时会对所有怪物造成期间失去生命数值的伤害。",
   "TASHKENTSPIRE2-TARGET_SHIP_POWER.smartDescription": "对拥有者造成伤害会增加计数，拥有者回合开始或者死亡时会对所有怪物造成{Amount:choose(1):|{Amount}倍的}{StoredDamage:diff()}点伤害，然后重置该数值。",
@@ -108,5 +108,8 @@
   "TASHKENTSPIRE2-AZURE_CRUISER_POWER.title": "天青巡洋",
   "TASHKENTSPIRE2-DODGE_POWER.description": "下个回合开始前，免受少于等于一定数值的伤害。\n和格挡一样受其他能力加成。",
   "TASHKENTSPIRE2-DODGE_POWER.smartDescription": "下个回合开始前，免受少于等于{Amount}的伤害。",
-  "TASHKENTSPIRE2-DODGE_POWER.title": "闪避"
+  "TASHKENTSPIRE2-DODGE_POWER.title": "闪避",
+  "TASHKENTSPIRE2-SMOKE_POWER.description": "受到的攻击伤害减少[gold]20%[/gold]。\n当你受到攻击伤害后，减少一层能力。",
+  "TASHKENTSPIRE2-SMOKE_POWER.smartDescription": "受到的攻击伤害减少[gold]20%[/gold]。\n当你受到攻击伤害后，减少一层能力。",
+  "TASHKENTSPIRE2-SMOKE_POWER.title": "烟雾"
 }

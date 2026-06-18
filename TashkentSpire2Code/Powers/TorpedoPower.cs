@@ -4,6 +4,7 @@ using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
@@ -36,6 +37,10 @@ public sealed class TorpedoPower : TashkentPower, IHasSecondAmount
         new DynamicVar("AOEFlag", 0m)
     ];
 
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => [
+        HoverTipFactory.FromPower<MarkPower>()
+    ];
+    
     private bool _oxygenApplied;
     private bool IsTheBomb => Owner != null && DynamicVars.ContainsKey(BombKey) && DynamicVars[BombKey].BaseValue == 1m;
 
@@ -43,10 +48,7 @@ public sealed class TorpedoPower : TashkentPower, IHasSecondAmount
     {
         get
         {
-            var stackTrace = new System.Diagnostics.StackTrace();
-            string traceStr = stackTrace.ToString();
-        
-            if (traceStr.Contains("HoverTipFactory") || traceStr.Contains("DevConsole") || traceStr.Contains("CardLibrary"))
+            if (Owner == null || IsCanonical)
             {
                 return base.Title;
             }
@@ -126,9 +128,10 @@ public sealed class TorpedoPower : TashkentPower, IHasSecondAmount
 
         if (Owner != null && Owner.Player != null)
         {
-            foreach (var allRounderPower in base.Owner.Player.Creature.Powers.OfType<AllRounderPower>())
+            int smokeCount = Owner.GetPower<AllRounderPower>() is { } allRounder ? (int)allRounder.Amount : 0;
+            if (smokeCount > 0)
             {
-                allRounderPower.AddCharge(1);
+                await PowerCmd.Apply<SmokePower>(new ThrowingPlayerChoiceContext(), Owner, smokeCount, Owner, null); 
             }
             
             foreach (var device in Owner.Player.Relics.OfType<TorpedoRecoilDevice>())

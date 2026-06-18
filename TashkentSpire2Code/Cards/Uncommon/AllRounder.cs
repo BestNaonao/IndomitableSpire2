@@ -10,12 +10,12 @@ namespace TashkentSpire2.TashkentSpire2Code.Cards.Uncommon;
 public sealed class AllRounder() : TashkentCard(1, CardType.Power, CardRarity.Uncommon, TargetType.Self)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new PowerVar<AllRounderPower>(4M)
+        new PowerVar<AllRounderPower>(1M)
     ];
     
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [
         HoverTipFactory.FromPower<TorpedoPower>(),
-        HoverTipFactory.Static(StaticHoverTip.Block)
+        HoverTipFactory.FromPower<SmokePower>()
     ];
     
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
@@ -26,6 +26,6 @@ public sealed class AllRounder() : TashkentCard(1, CardType.Power, CardRarity.Un
     
     protected override void OnUpgrade()
     {
-        base.DynamicVars["AllRounderPower"].UpgradeValueBy(1M);
+        AddKeyword(CardKeyword.Innate);
     }
 }

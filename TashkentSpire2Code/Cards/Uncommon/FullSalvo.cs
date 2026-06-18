@@ -42,9 +42,4 @@ public sealed class FullSalvo() : TashkentCard(2, CardType.Attack, CardRarity.Un
 
         await CardPileCmd.AddGeneratedCardToCombat(card, PileType.Hand, base.Owner);
     }
-
-    protected override void OnUpgrade()
-    {
-        base.DynamicVars.Damage.UpgradeValueBy(4M);
-    }
 }

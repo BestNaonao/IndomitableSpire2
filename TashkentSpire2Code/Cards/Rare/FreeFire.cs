@@ -65,6 +65,6 @@ public sealed class FreeFire() : AmmunitionCard(0, CardType.Attack, CardRarity.R
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Damage.UpgradeValueBy(1M);
+        DynamicVars.Damage.UpgradeValueBy(2M);
     }
 }
