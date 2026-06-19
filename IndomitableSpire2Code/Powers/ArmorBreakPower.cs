@@ -39,9 +39,9 @@ public sealed class ArmorBreakPower : IndomitablePower
     }
     
     // 机制补充：在拥有者的回合结束时，层数减少 1
-    public override async Task AfterTurnEnd(PlayerChoiceContext choiceContext, CombatSide side)
+    public override async Task AfterSideTurnEnd(
+        PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)
     {
-        if (side == CombatSide.Enemy)
-            await PowerCmd.TickDownDuration(this);
+        if (side == CombatSide.Enemy) await PowerCmd.TickDownDuration(this);
     }
 }

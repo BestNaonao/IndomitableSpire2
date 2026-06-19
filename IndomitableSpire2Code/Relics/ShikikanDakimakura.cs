@@ -3,6 +3,7 @@ using IndomitableSpire2.IndomitableSpire2Code.Localization.DynamicVars;
 using IndomitableSpire2.IndomitableSpire2Code.Powers;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
+using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Relics;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
@@ -22,7 +23,8 @@ public sealed class ShikikanDakimakura : IndomitableRelic
     ];
     
     // 在回合结束时恢复 1 点生命值。
-    public override async Task AfterTurnEnd(PlayerChoiceContext choiceContext, CombatSide side)
+    public override async Task AfterSideTurnEnd(
+        PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)
     {
         // 如果角色已经死亡，直接跳过（参考了燃烧之血的防崩溃处理）
         if (side != Owner.Creature.Side || Owner.Creature.IsDead)
@@ -30,6 +32,7 @@ public sealed class ShikikanDakimakura : IndomitableRelic
         
         Flash();
         await CreatureCmd.Heal(Owner.Creature, DynamicVars.Heal.BaseValue);
-        await PowerCmd.Apply<MotivationPower>(Owner.Creature, DynamicVars.MotivationGain().BaseValue, Owner.Creature, null);
+        await PowerCmd.Apply<MotivationPower>(
+            choiceContext, Owner.Creature, DynamicVars.MotivationGain().BaseValue, Owner.Creature, null);
     }
 }
