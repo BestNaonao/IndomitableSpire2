@@ -1,5 +1,0 @@
-{
-  "OPTION_TASHKENTSPIRE2-LOAD.description": "你[gold]牌组[/gold]中的{Count}张[gold]弹药[/gold]牌[gold]装填[/gold][blue]6[/blue]。",
-  "OPTION_TASHKENTSPIRE2-LOAD.descriptionDisabled": "[red]你没有可以[gold]装填[/gold]的[gold]弹药[/gold]牌。[/red]",
-  "OPTION_TASHKENTSPIRE2-LOAD.name": "装填"
-}

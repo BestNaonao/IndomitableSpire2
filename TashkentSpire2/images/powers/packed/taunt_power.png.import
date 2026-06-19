@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://if2gai3fmxqa"
-path="res://.godot/imported/mobile.png-77b22518c510ed44f9fe496e5c8e996e.ctex"
+uid="uid://c17i1dsb838mm"
+path="res://.godot/imported/taunt_power.png-200c0397eea9e2b9956161ff38558664.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://TashkentSpire2/images/card_portraits/big/mobile.png"
-dest_files=["res://.godot/imported/mobile.png-77b22518c510ed44f9fe496e5c8e996e.ctex"]
+source_file="res://TashkentSpire2/images/powers/packed/taunt_power.png"
+dest_files=["res://.godot/imported/taunt_power.png-200c0397eea9e2b9956161ff38558664.ctex"]
 
 [params]
 

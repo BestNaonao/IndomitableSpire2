@@ -1,4 +1,4 @@
 {
-  "TASHKENTSPIRE2-BARRAGE.title" : "弹幕",
-  "TASHKENTSPIRE2-BARRAGE.description" : "能无视卡牌现有[gold]弹药[/gold]数量而能打出至多6枚[gold]弹药[/gold]。\n每超过现有[gold]弹药[/gold]数量而发射一枚，则往手牌放入一张[gold]空弹壳[/gold]。"
+  "TASHKENTSPIRE2-BARRAGE.title": "Barrage",
+  "TASHKENTSPIRE2-BARRAGE.description": "This card can fire up to 6 [gold]Ammo[/gold] regardless of its current [gold]Ammo[/gold] count.\nFor each shot fired beyond its current [gold]Ammo[/gold], add a [gold]Spent Shell Casing[/gold] to your hand."
 }

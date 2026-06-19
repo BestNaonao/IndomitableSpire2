@@ -11,7 +11,7 @@ using MegaCrit.Sts2.Core.Models.Powers;
 
 namespace TashkentSpire2.TashkentSpire2Code.Powers;
 
-public sealed class MobilePower : TashkentPower
+public sealed class TauntPower : TashkentPower
 {
     private class Data
 	{
@@ -35,9 +35,9 @@ public sealed class MobilePower : TashkentPower
 	}
 	
 	public override string CustomBigIconPath => 
-		"res://TashkentSpire2/images/powers/big/mobile_power.png";
+		"res://TashkentSpire2/images/powers/big/taunt_power.png";
 	public override string CustomPackedIconPath => 
-		"res://TashkentSpire2/images/powers/packed/mobile_power.png";
+		"res://TashkentSpire2/images/powers/packed/taunt_power.png";
 
 	public override int DisplayAmount => base.DynamicVars["DexterityApplied"].IntValue;
 

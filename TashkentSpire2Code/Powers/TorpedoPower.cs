@@ -48,7 +48,10 @@ public sealed class TorpedoPower : TashkentPower, IHasSecondAmount
     {
         get
         {
-            if (Owner == null || IsCanonical)
+            var stackTrace = new System.Diagnostics.StackTrace();
+            string traceStr = stackTrace.ToString();
+        
+            if (traceStr.Contains("HoverTipFactory") || traceStr.Contains("DevConsole") || traceStr.Contains("CardLibrary"))
             {
                 return base.Title;
             }

@@ -1,9 +1,9 @@
 {
-  "TASHKENTSPIRE2-MARK_POTION.description": "给予[blue]{MarkPower}[/blue]层[gold]标记[/gold]。",
-  "TASHKENTSPIRE2-MARK_POTION.title": "标记药水",
-  "TASHKENTSPIRE2-RELOAD_CONSUMABLES.description": "为手上的一张弹药牌[gold]装填[/gold]{TashkentSpire2-Load:diff()}[gold]弹药[/gold]。",
-  "TASHKENTSPIRE2-RELOAD_CONSUMABLES.selectionScreenPrompt": "选择一张[gold]弹药[/gold]牌[gold]装填[/gold][blue]6[/blue]。",
-  "TASHKENTSPIRE2-RELOAD_CONSUMABLES.title": "再装填消耗品",
-  "TASHKENTSPIRE2-CELLARING.description": "将[blue]{Cards}[/blue]张[gold]伏特加+[/gold]加入你的[gold]手牌[/gold]。",
-  "TASHKENTSPIRE2-CELLARING.title": "窖藏"
+  "TASHKENTSPIRE2-MARK_POTION.description": "Apply [blue]{MarkPower}[/blue] [gold]Mark[/gold].",
+  "TASHKENTSPIRE2-MARK_POTION.title": "Mark Potion",
+  "TASHKENTSPIRE2-RELOAD_CONSUMABLES.description": "[gold]Load[/gold] {TashkentSpire2-Load:diff()} [gold]Ammo[/gold] onto an [gold]Ammo[/gold] card in your hand.",
+  "TASHKENTSPIRE2-RELOAD_CONSUMABLES.selectionScreenPrompt": "Choose an [gold]Ammo[/gold] card to [gold]Load[/gold] [blue]6[/blue].",
+  "TASHKENTSPIRE2-RELOAD_CONSUMABLES.title": "Reload Consumable",
+  "TASHKENTSPIRE2-CELLARING.description": "Add [blue]{Cards}[/blue] [gold]Vodka+[/gold] to your [gold]Hand[/gold].",
+  "TASHKENTSPIRE2-CELLARING.title": "Cellaring"
 }
