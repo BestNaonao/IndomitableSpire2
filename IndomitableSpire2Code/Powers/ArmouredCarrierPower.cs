@@ -1,19 +1,18 @@
 ﻿using BaseLib.Abstracts;
+using IndomitableSpire2.IndomitableSpire2Code.Abstracts;
 using IndomitableSpire2.IndomitableSpire2Code.Commands;
 using IndomitableSpire2.IndomitableSpire2Code.Extensions;
 using IndomitableSpire2.IndomitableSpire2Code.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Commands;
-using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
-using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.ValueProps;
 
 namespace IndomitableSpire2.IndomitableSpire2Code.Powers;
 
-public sealed class ArmouredCarrierPower : IndomitablePower, IHasSecondAmount
+public sealed class ArmouredCarrierPower : DynamicVarSyncPower, IHasSecondAmount
 {
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;
@@ -34,17 +33,10 @@ public sealed class ArmouredCarrierPower : IndomitablePower, IHasSecondAmount
     ];
     
     // 同步变量值，用于更新卡牌/能力的文本描述
-    private void SyncDynamicVars()
+    protected override void SyncDynamicVars()
     {
         DynamicVars.Shield().BaseValue = Amount * ShieldPerStack;
         DynamicVars.Aviation().BaseValue = Amount * AviationPerStack;
-    }
-    
-    public override Task AfterPowerAmountChanged(PowerModel power, decimal amount, Creature? applier, CardModel? cardSource)
-    {
-        if (power == this)
-            SyncDynamicVars();
-        return Task.CompletedTask;
     }
     
     // 核心回合开始逻辑
@@ -61,6 +53,7 @@ public sealed class ArmouredCarrierPower : IndomitablePower, IHasSecondAmount
         if (Owner.MeetsElegance())
         {
             await PowerCmd.Apply<AviationPower>(
+                choiceContext: choiceContext,
                 target: Owner,
                 amount: DynamicVars.Aviation().BaseValue,
                 applier: Owner,

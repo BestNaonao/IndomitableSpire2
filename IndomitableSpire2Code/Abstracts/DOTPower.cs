@@ -1,19 +1,17 @@
 ﻿using BaseLib.Hooks;
 using Godot;
-using IndomitableSpire2.IndomitableSpire2Code.Powers;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
-using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.ValueProps;
 
 namespace IndomitableSpire2.IndomitableSpire2Code.Abstracts;
 
 // ReSharper disable once InconsistentNaming for Special Abbreviation
-public abstract class DOTPower : IndomitablePower
+public abstract class DOTPower : DynamicVarSyncPower
 {
     public override PowerType Type => PowerType.Debuff;
     public override PowerStackType StackType => PowerStackType.Counter;
@@ -45,20 +43,12 @@ public abstract class DOTPower : IndomitablePower
     // 获取下一次即将造成的真实整数伤害
     private int GetNextDamage => Math.Max(0, (int)Math.Floor(TotalLostHpExact.BaseValue + ExactNextDamage) - TotalLostHpInt.IntValue);
     
-    // 更新UI变量的方法
-    protected virtual void Update()
+    // 【修改】：重写基类的抽象方法，替代原先的 Update()
+    protected override void SyncDynamicVars()
     {
         DynamicVars["NextLostHpPercent"].BaseValue = Amount * 100 * Proportion;
         DynamicVars["NextLostHpInt"].BaseValue = GetNextDamage;
         InvokeDisplayAmountChanged();
-    }
-    
-    // 【修改】：统一接管初次应用、层数增加、层数减少的 UI 更新，代替原先的钩子方法
-    public override Task AfterPowerAmountChanged(PowerModel power, decimal amount, Creature? applier, CardModel? cardSource)
-    {
-        // 确保触发的是当前能力自身的层数变化
-        if (power == this) Update();
-        return Task.CompletedTask;
     }
     
     // 核心伤害逻辑提取
@@ -83,20 +73,22 @@ public abstract class DOTPower : IndomitablePower
         if (Owner.IsAlive)
         {
             await PowerCmd.Decrement(this);
-            Update();
+            SyncDynamicVars();
         }
         else await Cmd.CustomScaledWait(0.1f, 0.25f);
     }
     
     // 回合开始时和结束时各触发一次
-    public override async Task AfterSideTurnStart(CombatSide side, CombatState combatState)
+    public override async Task AfterSideTurnStart(
+        CombatSide side, IReadOnlyList<Creature> participants, ICombatState combatState)
     {
-        if (side == Owner.Side) await TriggerDamage();
+        if (participants.Contains(Owner) && side == Owner.Side) await TriggerDamage();
     }
     
-    public override async Task BeforeTurnEndEarly(PlayerChoiceContext choiceContext, CombatSide side)
+    public override async Task BeforeSideTurnEndEarly(
+        PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)
     {
-        if (side == Owner.Side) await TriggerDamage();
+        if (participants.Contains(Owner) && side == Owner.Side) await TriggerDamage();
     }
     
     // 【新增】：实现 BaseLib 对血条的接口要求的方法

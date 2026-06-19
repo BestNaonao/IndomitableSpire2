@@ -1,4 +1,5 @@
-﻿using IndomitableSpire2.IndomitableSpire2Code.Cards.Others;
+﻿using IndomitableSpire2.IndomitableSpire2Code.Abstracts;
+using IndomitableSpire2.IndomitableSpire2Code.Cards.Others;
 using IndomitableSpire2.IndomitableSpire2Code.Extensions;
 using IndomitableSpire2.IndomitableSpire2Code.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Commands;
@@ -8,11 +9,10 @@ using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
-using MegaCrit.Sts2.Core.Models;
 
 namespace IndomitableSpire2.IndomitableSpire2Code.Powers;
 
-public sealed class KenosisFormPower : IndomitablePower
+public sealed class KenosisFormPower : DynamicVarSyncPower
 {
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;
@@ -24,24 +24,14 @@ public sealed class KenosisFormPower : IndomitablePower
     
     // 注册动态变量，依靠生命周期同步
     protected override IEnumerable<DynamicVar> CanonicalVars => 
-    [
-        new HealVar(0M),
-        new MotivationGainVar(0M),
-        new CardsVar(0)
-    ];
+        [new HealVar(0M), new MotivationGainVar(0M), new CardsVar(0)];
     
     // 同步变量值，让 SmartDescription 能够动态展示叠加后的效果
-    private void SyncDynamicVars()
+    protected override void SyncDynamicVars()
     {
         DynamicVars.Heal.BaseValue = Amount * HealPerStack;
         DynamicVars.MotivationGain().BaseValue = Amount * MotivationPerStack;
         DynamicVars.Cards.BaseValue = Amount * CardsPerStack;
-    }
-    
-    public override Task AfterPowerAmountChanged(PowerModel power, decimal amount, Creature? applier, CardModel? cardSource)
-    {
-        if (power == this) SyncDynamicVars();
-        return Task.CompletedTask;
     }
     
     // 机制一：回合开始时回血
@@ -61,6 +51,7 @@ public sealed class KenosisFormPower : IndomitablePower
             
             // 获得干劲
             await PowerCmd.Apply<MotivationPower>(
+                choiceContext: new ThrowingPlayerChoiceContext(),
                 target: Owner,
                 amount: DynamicVars.MotivationGain().BaseValue,
                 applier: Owner,
@@ -77,7 +68,7 @@ public sealed class KenosisFormPower : IndomitablePower
                 
                 // 放入抽牌堆的随机位置
                 CardCmd.PreviewCardPileAdd(await CardPileCmd.AddGeneratedCardsToCombat(
-                    refreshCards, PileType.Draw, true, CardPilePosition.Random));
+                    refreshCards, PileType.Draw, Owner.Player, CardPilePosition.Random));
             }
         }
     }
