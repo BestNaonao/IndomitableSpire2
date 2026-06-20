@@ -52,7 +52,7 @@ public sealed class DualPurposeGun() : IndomitableCard(1, CardType.Attack, CardR
     // ========== 触发机制：回合结束的判定与自动打出 ==========
     public override bool HasTurnEndInHandEffect => !HasBeenPlayedThisTurn;
     
-    public override async Task OnTurnEndInHand(PlayerChoiceContext choiceContext)
+    protected override async Task OnTurnEndInHand(PlayerChoiceContext choiceContext)
     {
         // 既然能进到这里，说明 HasTurnEndInHandEffect 必定为 true，即本回合未被打出。
         // 触发自动打出：高射防空（留在手中自动提供格挡）
