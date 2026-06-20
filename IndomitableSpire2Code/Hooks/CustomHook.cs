@@ -28,7 +28,7 @@ public static class CustomHook
     /// 阶段 1：尝试修改耐久损失，并收集成功实施修改的模型
     /// </summary>
     public static int ModifyDurabilityLossInCombat(
-        CombatState? combatState, 
+        ICombatState? combatState, 
         CardModel card, 
         int originalLoss, 
         out List<AbstractModel> modifyingModels)
@@ -54,7 +54,7 @@ public static class CustomHook
     /// 阶段 2：在战斗中实际造成了耐久修改后，通知生效名单内的模型（触发扣层数等逻辑）
     /// </summary>
     public static async Task AfterModifyingDurabilityLossInCombat(
-        CombatState? combatState, 
+        ICombatState? combatState, 
         CardModel card, 
         IEnumerable<AbstractModel> modifyingModels)
     {

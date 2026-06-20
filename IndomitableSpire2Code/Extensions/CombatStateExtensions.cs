@@ -11,7 +11,7 @@ public static class CombatStateExtensions
     /// 批量创建指定类型的卡牌实例（仅创建，不加入任何牌堆）
     /// </summary>
     public static IEnumerable<TCard> CreateCards<TCard>(
-        this CombatState combatState, 
+        this ICombatState combatState, 
         Player player, 
         int amount, 
         bool isUpgraded = false)
