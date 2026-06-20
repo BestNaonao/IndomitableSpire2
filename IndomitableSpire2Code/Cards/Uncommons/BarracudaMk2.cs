@@ -41,12 +41,14 @@ public sealed class BarracudaMk2() : CarrierAircraftCard(1, CardType.Attack, Car
         if (cardPlay.Target is not { IsAlive: true }) return attackCmd.Results;
         
         await PowerCmd.Apply<FloodingPower>(
+            choiceContext: choiceContext, 
             target: cardPlay.Target,
             amount: DynamicVars.Flooding().BaseValue,
             applier: Owner.Creature,
             cardSource: this
         );
         await PowerCmd.Apply<ArmorBreakPower>(
+            choiceContext: choiceContext, 
             target: cardPlay.Target,
             amount: DynamicVars.ArmorBreak().BaseValue,
             applier: Owner.Creature,

@@ -3,6 +3,7 @@ using IndomitableSpire2.IndomitableSpire2Code.Localization.DynamicVars;
 using IndomitableSpire2.IndomitableSpire2Code.Models;
 using IndomitableSpire2.IndomitableSpire2Code.Powers;
 using MegaCrit.Sts2.Core.Commands;
+using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
 
 namespace IndomitableSpire2.IndomitableSpire2Code.Extensions;
@@ -53,7 +54,7 @@ public static class CardMotivationExtensions
     /// <summary>
     /// 一键扣除干劲费用的标准扩展方法。自动计算打折/免费后的最终数值！
     /// </summary>
-    public static async Task SpendMotivationCost(this CardModel card)
+    public static async Task SpendMotivationCost(this CardModel card, PlayerChoiceContext choiceContext)
     {
         if (!card.DynamicVars.ContainsKey(MotivationConsumeVar.DefaultName)) return;
         
@@ -62,6 +63,7 @@ public static class CardMotivationExtensions
         if (actualCost > 0)
         {
             await PowerCmd.Apply<MotivationPower>(
+                choiceContext: choiceContext, 
                 target: card.Owner.Creature,
                 amount: -actualCost, // 扣减干劲
                 applier: card.Owner.Creature,

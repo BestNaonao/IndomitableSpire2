@@ -38,7 +38,8 @@ public sealed class ArtOfResting() : IndomitableCard(2, CardType.Power, CardRari
             await CardCmd.Transform(original, CombatState!.CreateCard<Refresh>(Owner));
         
         // 3. 赋予休息的艺术能力，处理未来生成的状态牌
-        await PowerCmd.Apply<ArtOfRestingPower>(Owner.Creature, 1M, Owner.Creature, this);
+        await PowerCmd.Apply<ArtOfRestingPower>(
+            choiceContext: choiceContext, Owner.Creature, 1M, Owner.Creature, this);
     }
     
     protected override void OnUpgrade()

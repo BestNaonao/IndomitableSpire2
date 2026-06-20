@@ -25,6 +25,7 @@ public sealed class ScheduledMaintenance() : IndomitableCard(1, CardType.Power, 
         
         // 施加定期检修能力
         await PowerCmd.Apply<ScheduledMaintenancePower>(
+            choiceContext: choiceContext, 
             target: Owner.Creature,
             amount: DynamicVars["ScheduledMaintenancePower"].BaseValue,
             applier: Owner.Creature,

@@ -28,6 +28,7 @@ public sealed class MotivationBurst() : IndomitableCard(1, CardType.Power, CardR
         
         // 2. 将能力施加给自身
         await PowerCmd.Apply<MotivationBurstPower>(
+            choiceContext: choiceContext, 
             target: Owner.Creature, 
             amount: DynamicVars["MotivationBurstPower"].BaseValue, 
             applier: Owner.Creature, 

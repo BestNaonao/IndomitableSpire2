@@ -4,6 +4,7 @@ using MegaCrit.Sts2.Core.Combat.History.Entries;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
+using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.ValueProps;
 
@@ -15,10 +16,11 @@ public static class CustomCreatureCmd
     /// 赋予目标护盾（附带同等数值的真实格挡与跨回合保留能力）
     /// </summary>
     public static async Task<decimal> GainShield(
+        PlayerChoiceContext choiceContext, 
         Creature target, 
         decimal amount, 
         ValueProp props, 
-        CardPlay? cardPlay,
+        CardPlay? cardPlay, 
         Creature? applier = null)
     {
         // 1. 赋予底层受到增减益的真实的格挡值
@@ -28,6 +30,7 @@ public static class CustomCreatureCmd
         if (blockAmount > 0)
         {
             await PowerCmd.Apply<ShieldPower>(
+                choiceContext: choiceContext, 
                 target: target, 
                 amount: blockAmount, 
                 applier: applier ?? cardPlay?.Card.Owner.Creature, 
@@ -39,12 +42,13 @@ public static class CustomCreatureCmd
     }
     
     public static async Task<decimal> GainShield(
+        PlayerChoiceContext choiceContext, 
         Creature target, 
         BlockVar blockVar, 
         CardPlay? cardPlay,
         Creature? applier = null)
     {
-        return await GainShield(target, blockVar.BaseValue, blockVar.Props, cardPlay, applier);
+        return await GainShield(choiceContext, target, blockVar.BaseValue, blockVar.Props, cardPlay, applier);
     }
     
     /// <summary>

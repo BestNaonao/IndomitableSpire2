@@ -33,8 +33,10 @@ public sealed class ExerciseCommission() : CommissionCard(TargetType.Self)
     
     protected override async Task GrantReward(PlayerChoiceContext choiceContext, Player player)
     {
-        await PowerCmd.Apply<StrengthPower>(player.Creature, DynamicVars.Strength.BaseValue, Owner.Creature, this);
-        await PowerCmd.Apply<DexterityPower>(player.Creature, DynamicVars.Dexterity.BaseValue, Owner.Creature, this);
+        await PowerCmd.Apply<StrengthPower>(
+            choiceContext: choiceContext, player.Creature, DynamicVars.Strength.BaseValue, Owner.Creature, this);
+        await PowerCmd.Apply<DexterityPower>(
+            choiceContext: choiceContext, player.Creature, DynamicVars.Dexterity.BaseValue, Owner.Creature, this);
     }
     
     protected override void OnUpgrade()

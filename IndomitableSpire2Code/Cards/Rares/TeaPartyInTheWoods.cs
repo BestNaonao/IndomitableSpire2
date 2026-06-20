@@ -40,7 +40,7 @@ public sealed class TeaPartyInTheWoods() : IndomitableCard(0, CardType.Skill, Ca
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         // 1. 消耗干劲
-        await this.SpendMotivationCost();
+        await this.SpendMotivationCost(choiceContext);
         
         // 2. 为所有玩家发放甜点
         if (CombatState != null)

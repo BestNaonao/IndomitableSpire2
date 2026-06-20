@@ -30,6 +30,7 @@ public sealed class EvasiveManeuvers() : DurableCard(1, CardType.Skill, CardRari
         
         // 1. 施加机动规避能力
         await PowerCmd.Apply<EvasiveManeuversPower>(
+            choiceContext: choiceContext, 
             target: Owner.Creature,
             amount: DynamicVars["EvasiveManeuversPower"].BaseValue,
             applier: Owner.Creature,

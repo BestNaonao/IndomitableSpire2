@@ -44,6 +44,7 @@ public sealed class HypnoticPotion : IndomitablePotion
         // 给选中的敌人 (target) 施加催眠能力
         // 来源是玩家自身 (Owner.Creature)
         await PowerCmd.Apply<HypnotizedPower>(
+            choiceContext: choiceContext, 
             target: target, 
             amount: DynamicVars.Hypnotized().BaseValue, 
             applier: Owner.Creature, 

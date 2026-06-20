@@ -40,6 +40,7 @@ public sealed class ZigzagManeuver() : IndomitableCard(1, CardType.Skill, CardRa
         
         // 3. 获得本回合敏捷 (核心：这里施加的是 之字机动能力 临时敏捷)
         await PowerCmd.Apply<ZigzagManeuverPower>(
+            choiceContext: choiceContext, 
             target: Owner.Creature, 
             amount: DynamicVars.Dexterity.BaseValue, 
             applier: Owner.Creature, 

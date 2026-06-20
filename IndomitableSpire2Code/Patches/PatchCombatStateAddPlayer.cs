@@ -5,6 +5,7 @@ using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Players;
+using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Helpers;
 
 namespace IndomitableSpire2.IndomitableSpire2Code.Patches;
@@ -27,9 +28,11 @@ public static class PatchCombatStateAddPlayer
     private static async Task InitMotivation(Creature targetCreature)
     {
         // 先 +1，触发 AfterApplied 自动补齐底数，此时 Amount=2, 显示=1
-        await PowerCmd.Apply<MotivationPower>(targetCreature, 1, targetCreature, null, silent: true);
+        await PowerCmd.Apply<MotivationPower>(
+            new ThrowingPlayerChoiceContext(), targetCreature, 1, targetCreature, null, silent: true);
         
         // 再 -1，触发正常的递减，此时 Amount=1, 显示=0。完美达到拥有能力图标且数字为 0 的状态！
-        await PowerCmd.Apply<MotivationPower>(targetCreature, -1, targetCreature, null, silent: true);
+        await PowerCmd.Apply<MotivationPower>(
+            new ThrowingPlayerChoiceContext(), targetCreature, -1, targetCreature, null, silent: true);
     }
 }

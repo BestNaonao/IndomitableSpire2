@@ -29,10 +29,12 @@ public sealed class IllustriousAegis() : IndomitableCard(2, CardType.Skill, Card
         ArgumentNullException.ThrowIfNull(cardPlay.Target, nameof(cardPlay.Target));
         
         // 1. 赋予护盾（底层会自动给真实格挡并挂上 ShieldPower）
-        var shieldAmount = await CustomCreatureCmd.GainShield(cardPlay.Target, DynamicVars.Shield(), cardPlay);
+        var shieldAmount = await CustomCreatureCmd.GainShield(
+            choiceContext, cardPlay.Target, DynamicVars.Shield(), cardPlay);
         
         // 2. 赋予光辉的庇护能力（将其层数设为刚才获得的护盾值）
         await PowerCmd.Apply<IllustriousAegisPower>(
+            choiceContext: choiceContext, 
             target: cardPlay.Target,
             amount: shieldAmount, 
             applier: Owner.Creature,

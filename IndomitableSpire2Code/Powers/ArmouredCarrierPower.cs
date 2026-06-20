@@ -47,7 +47,7 @@ public sealed class ArmouredCarrierPower : DynamicVarSyncPower, IHasSecondAmount
         Flash();
         
         // 1. 获得持续的护盾 (3 * Amount)
-        await CustomCreatureCmd.GainShield(Owner, DynamicVars.Shield(), null, Owner);
+        await CustomCreatureCmd.GainShield(choiceContext, Owner, DynamicVars.Shield(), null, Owner);
         
         // 2. 优雅判定逻辑：直接调用扩展方法
         if (Owner.MeetsElegance())

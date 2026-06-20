@@ -39,16 +39,16 @@ public sealed class TacticalTraining() : IndomitableCard(0, CardType.Skill, Card
             var amount = DynamicVars["SpecialPowerAmount"].BaseValue;
             // 根据选中的舰载机标签，精准投放对应的航空能力
             if (selectedCard.Tags.Contains(IndomitableTags.StrikeFighter))
-                await PowerCmd.Apply<AirCombatElitePower>(Owner.Creature, amount, Owner.Creature, this);
+                await PowerCmd.Apply<AirCombatElitePower>(choiceContext: choiceContext, Owner.Creature, amount, Owner.Creature, this);
             else if (selectedCard.Tags.Contains(IndomitableTags.TorpedoBomber))
-                await PowerCmd.Apply<TorpedoMasteryPower>(Owner.Creature, amount, Owner.Creature, this);
+                await PowerCmd.Apply<TorpedoMasteryPower>(choiceContext: choiceContext, Owner.Creature, amount, Owner.Creature, this);
             else if (selectedCard.Tags.Contains(IndomitableTags.DiveBomber))
-                await PowerCmd.Apply<LethalDivePower>(Owner.Creature, amount, Owner.Creature, this);
+                await PowerCmd.Apply<LethalDivePower>(choiceContext: choiceContext, Owner.Creature, amount, Owner.Creature, this);
             else if (selectedCard.Tags.Contains(IndomitableTags.LevelBomber))
-                await PowerCmd.Apply<ScorchedBombingPower>(Owner.Creature, amount, Owner.Creature, this);
+                await PowerCmd.Apply<ScorchedBombingPower>(choiceContext: choiceContext, Owner.Creature, amount, Owner.Creature, this);
             // 无特殊分类的舰载机（如水上侦察机、反潜机），提供通用航空 Buff 作为下限保障
             else
-                await PowerCmd.Apply<AviationPower>(Owner.Creature, amount, Owner.Creature, this);
+                await PowerCmd.Apply<AviationPower>(choiceContext: choiceContext, Owner.Creature, amount, Owner.Creature, this);
         }
     }
     

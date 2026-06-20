@@ -25,6 +25,7 @@ public sealed class ArmouredCarrier() : IndomitableCard(3, CardType.Power, CardR
         
         // 施加装甲航母能力，1 层代表 3 点护盾和 10 点航空的基础收益
         await PowerCmd.Apply<ArmouredCarrierPower>(
+            choiceContext: choiceContext, 
             target: Owner.Creature,
             amount: DynamicVars["ArmouredCarrierPower"].BaseValue,
             applier: Owner.Creature,

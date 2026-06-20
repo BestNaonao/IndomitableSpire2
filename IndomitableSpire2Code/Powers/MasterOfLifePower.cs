@@ -1,6 +1,7 @@
 ﻿using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
+using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models.Powers;
 
 namespace IndomitableSpire2.IndomitableSpire2Code.Powers;
@@ -21,6 +22,7 @@ public sealed class MasterOfLifePower : IndomitablePower
             
             // 每次回血触发时，获得等于该能力层数的活力 (Vigor)
             await PowerCmd.Apply<VigorPower>(
+                choiceContext: new ThrowingPlayerChoiceContext(), 
                 target: Owner, 
                 amount: Amount, 
                 applier: Owner, 

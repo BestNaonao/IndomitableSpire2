@@ -31,6 +31,7 @@ public sealed class Indolent() : IndomitableSpire2Card(1, CardType.Status, CardR
         if (card != this) return;
         await Cmd.Wait(0.25f);
         await PowerCmd.Apply<MotivationPower>(
+            choiceContext: choiceContext, 
             target: Owner.Creature,
             amount: -DynamicVars.MotivationConsume().BaseValue,
             applier: Owner.Creature,

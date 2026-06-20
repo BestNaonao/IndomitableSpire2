@@ -31,6 +31,7 @@ public sealed class KenosisForm() : IndomitableCard(3, CardType.Power, CardRarit
         
         // 施加“虚己形态”能力
         await PowerCmd.Apply<KenosisFormPower>(
+            choiceContext: choiceContext, 
             target: Owner.Creature,
             amount: DynamicVars["KenosisFormPower"].BaseValue,
             applier: Owner.Creature,

@@ -46,6 +46,7 @@ public sealed class Barracuda831Squadron() : CarrierAircraftCard(2, CardType.Att
         var armorBreakStacks = (int)Math.Max(0M, hasBlock ? totalDealt / 2M : totalDealt);
         if (armorBreakStacks > 0)
             await PowerCmd.Apply<ArmorBreakPower>(
+                choiceContext: choiceContext, 
                 target: cardPlay.Target,
                 amount: armorBreakStacks,
                 applier: Owner.Creature,

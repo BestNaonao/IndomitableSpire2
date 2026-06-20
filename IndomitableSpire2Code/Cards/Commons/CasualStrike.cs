@@ -35,6 +35,7 @@ public sealed class CasualStrike() : IndomitableCard(1, CardType.Attack, CardRar
         
         // 2. 获得干劲
         await PowerCmd.Apply<MotivationPower>(
+            choiceContext: choiceContext, 
             target: Owner.Creature, 
             amount: DynamicVars.MotivationGain().BaseValue, 
             applier: Owner.Creature, 

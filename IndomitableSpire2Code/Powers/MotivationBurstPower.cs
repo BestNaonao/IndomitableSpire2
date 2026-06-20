@@ -35,7 +35,7 @@ public sealed class MotivationBurstPower : IndomitablePower, IHasSecondAmount
         {
             Flash(); // 闪烁本能力图标
             // 每次触发给予等同于当前能力层数的活力
-            await PowerCmd.Apply<VigorPower>(Owner, Amount * triggers, applier, cardSource);
+            await PowerCmd.Apply<VigorPower>(choiceContext, Owner, Amount * triggers, applier, cardSource);
             data.TriggerCount += triggers;
         }
         // 更新 UI 上的剩余次数显示

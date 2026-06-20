@@ -41,6 +41,7 @@ public sealed class ScorchingFlameRain() : IndomitableCard(1, CardType.Attack, C
         
         // 2. 群体起火
         await PowerCmd.Apply<OnFirePower>(
+            choiceContext: choiceContext, 
             targets: CombatState.HittableEnemies, 
             amount: DynamicVars.OnFire().BaseValue, 
             applier: Owner.Creature, 

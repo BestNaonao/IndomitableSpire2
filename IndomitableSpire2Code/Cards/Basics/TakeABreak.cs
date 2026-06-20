@@ -27,6 +27,7 @@ public sealed class TakeABreak() : IndomitableCard(0, CardType.Skill, CardRarity
 
         // 3. 获得干劲
         await PowerCmd.Apply<MotivationPower>(
+            choiceContext: choiceContext, 
             target: Owner.Creature, 
             amount: DynamicVars.MotivationGain().BaseValue, 
             applier: Owner.Creature, 

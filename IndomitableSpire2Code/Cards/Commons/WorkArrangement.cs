@@ -21,7 +21,7 @@ public sealed class WorkArrangement() : IndomitableCard(0, CardType.Skill, CardR
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         // 1. 消耗干劲：通过施加负数的能力层数来实现扣除
-        await this.SpendMotivationCost();
+        await this.SpendMotivationCost(choiceContext);
         
         // 2. 抽牌
         await CardPileCmd.Draw(choiceContext, DynamicVars.Cards.BaseValue, Owner);

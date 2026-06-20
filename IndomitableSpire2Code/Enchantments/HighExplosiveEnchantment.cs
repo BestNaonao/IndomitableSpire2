@@ -37,6 +37,7 @@ public sealed class HighExplosiveEnchantment : IndomitableEnchantment
         
         // 对卡牌的目标施加对应层数的起火
         await PowerCmd.Apply<OnFirePower>(
+            choiceContext: choiceContext, 
             target: cardPlay.Target,
             amount: Amount, // 附魔的自带属性，表示层数
             applier: Card.Owner.Creature,

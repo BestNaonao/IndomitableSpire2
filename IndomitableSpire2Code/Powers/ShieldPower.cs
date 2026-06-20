@@ -28,7 +28,7 @@ public sealed class ShieldPower : IndomitablePower, IBlockRetentionProvider
         
         // 扣除护盾层数，最多扣到 0
         var absorb = Math.Min(Amount, damageAbsorbed);
-        await PowerCmd.ModifyAmount(this, -absorb, dealer, cardSource);
+        await PowerCmd.ModifyAmount(choiceContext, this, -absorb, dealer, cardSource);
     }
     
     public override bool ShouldClearBlock(Creature creature) => Owner != creature;

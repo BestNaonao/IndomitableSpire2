@@ -30,5 +30,5 @@ public abstract class IndomitableTemporaryPower<T> : CustomTemporaryPowerModel w
     // 这里我们直接原样传递 amount，代码变得极其干净！
     protected override Func<PlayerChoiceContext, Creature, decimal, Creature?, CardModel?, bool, Task> ApplyPowerFunc => 
         (_, target, amount, applier, source, silent) => 
-            PowerCmd.Apply<T>(target, amount, applier, source, silent);
+            PowerCmd.Apply<T>(new ThrowingPlayerChoiceContext(), target, amount, applier, source, silent);
 }

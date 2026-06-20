@@ -41,6 +41,7 @@ public sealed class PajamaRevolution() : IndomitableCard(3, CardType.Skill, Card
         if (cardPlay.Target is { IsAlive: true })
         {
             await PowerCmd.Apply<HypnotizedPower>(
+                choiceContext: choiceContext, 
                 target: cardPlay.Target,
                 amount: DynamicVars.Hypnotized().BaseValue,
                 applier: Owner.Creature,
@@ -56,6 +57,7 @@ public sealed class PajamaRevolution() : IndomitableCard(3, CardType.Skill, Card
                 // 所有玩家获得格挡，并在下回合获得能量
                 await CreatureCmd.GainBlock(playerCreature, DynamicVars.Block, cardPlay);
                 await PowerCmd.Apply<EnergyNextTurnPower>(
+                    choiceContext: choiceContext, 
                     target: playerCreature,
                     amount: DynamicVars.Energy.BaseValue,
                     applier: Owner.Creature,

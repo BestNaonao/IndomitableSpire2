@@ -35,6 +35,7 @@ public sealed class MasterOfLife() : IndomitableCard(1, CardType.Power, CardRari
         
         // 施加“生活大师”能力
         await PowerCmd.Apply<MasterOfLifePower>(
+            choiceContext: choiceContext, 
             target: Owner.Creature,
             amount: DynamicVars["MasterOfLifePower"].BaseValue,
             applier: Owner.Creature,

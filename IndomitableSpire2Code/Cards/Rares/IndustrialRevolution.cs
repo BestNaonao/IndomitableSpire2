@@ -21,6 +21,7 @@ public sealed class IndustrialRevolution() : IndomitableCard(1, CardType.Power, 
         await CreatureCmd.TriggerAnim(Owner.Creature, "Cast", Owner.Character.CastAnimDelay);
         
         await PowerCmd.Apply<IndustrialRevolutionPower>(
+            choiceContext: choiceContext, 
             target: Owner.Creature,
             amount: DynamicVars["IndustrialRevolutionPower"].BaseValue,
             applier: Owner.Creature,
