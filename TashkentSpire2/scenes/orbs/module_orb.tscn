@@ -5,5 +5,5 @@
 [node name="ModuleOrb" type="Node2D"]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.2, 0.2)
+scale = Vector2(0.18, 0.18)
 texture = ExtResource("1_3dvb1")

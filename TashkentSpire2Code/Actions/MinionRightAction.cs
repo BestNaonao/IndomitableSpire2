@@ -15,7 +15,7 @@ public sealed class MinionRightAction : GoneWithTheWindAction
     protected override bool CanExecute(Creature player)
     {
         var distPower = player.GetPower<DistancePower>();
-        if (distPower != null && distPower.Amount >= 15m)
+        if (distPower != null && distPower.Amount >= 5m)
         {
             return false;
         }
