@@ -49,7 +49,7 @@ public sealed class RoyalBounty : IndomitableRelic
     // 核心提取：更新生物最高生命值记录的安全方法
     private void UpsertEnemyMaxHpTracker(Creature creature)
     {
-        if (!creature.IsEnemy || creature.ShowsInfiniteHp) return;
+        if (!creature.IsEnemy || creature.HpDisplay != HpDisplay.Normal) return;
         
         if (!_enemyMaxHpTracker.TryGetValue(creature, out var record))
         {
