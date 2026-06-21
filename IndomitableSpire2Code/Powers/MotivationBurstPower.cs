@@ -1,21 +1,23 @@
 ﻿using BaseLib.Abstracts;
+using IndomitableSpire2.IndomitableSpire2Code.Abstracts;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
+using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Powers;
 
 namespace IndomitableSpire2.IndomitableSpire2Code.Powers;
 
-public sealed class MotivationBurstPower : IndomitablePower, IHasSecondAmount
+public sealed class MotivationBurstPower : IndomitablePower, IHasSecondAmount, IOnResourceOverflowSubscriber
 {
     private const int OverflowThreshold = 20;
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;
     
     // 允许有多个实例与内部独立数据
-    public override bool IsInstanced => true;
+    public override PowerInstanceType InstanceType => PowerInstanceType.Instanced;
     protected override object InitInternalData() => new BurstData();
     protected override IEnumerable<DynamicVar> CanonicalVars => [new("OverflowThreshold", OverflowThreshold)];
     
@@ -23,13 +25,20 @@ public sealed class MotivationBurstPower : IndomitablePower, IHasSecondAmount
     public override int DisplayAmount => OverflowThreshold - GetInternalData<BurstData>().OverflowAccumulated % OverflowThreshold;
     public string GetSecondAmount() => Amount.ToString();
     
-    // 【核心接口】：专供 MotivationPower 调用的溢出处理方法
-    public async Task ProcessOverflow(decimal overflowAmount, Creature? applier, CardModel? cardSource)
+    // 【核心修改】：实现接口，替代原本的 ProcessOverflow
+    public async Task AfterResourceOverflowed(
+        PlayerChoiceContext choiceContext, 
+        Creature target, 
+        AbstractModel sourceModel, 
+        decimal overflowAmount, 
+        Creature? applier, 
+        CardModel? cardSource)
     {
+        // 【精准拦截】：只响应拥有者自身的溢出，且溢出源必须是干劲系统（MotivationPower）
+        if (target != Owner || sourceModel is not MotivationPower) return;
+        // 计算可以触发几次转化（每 20 点 1 次）
         var data = GetInternalData<BurstData>();
         data.OverflowAccumulated += (int)overflowAmount;
-        
-        // 计算可以触发几次转化（每 20 点 1 次）
         var triggers = data.OverflowAccumulated / OverflowThreshold - data.TriggerCount;
         if (triggers > 0)
         {
@@ -38,7 +47,6 @@ public sealed class MotivationBurstPower : IndomitablePower, IHasSecondAmount
             await PowerCmd.Apply<VigorPower>(choiceContext, Owner, Amount * triggers, applier, cardSource);
             data.TriggerCount += triggers;
         }
-        // 更新 UI 上的剩余次数显示
         InvokeDisplayAmountChanged();
     }
     

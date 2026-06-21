@@ -1,5 +1,7 @@
-﻿using MegaCrit.Sts2.Core.Entities.Creatures;
+﻿using IndomitableSpire2.IndomitableSpire2Code.Hooks;
+using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
+using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 
@@ -52,7 +54,8 @@ public sealed class MotivationPower : IndomitablePower
     }
     
     // 5. 处理上限截断与溢出联动（这是在引擎生效后触发的）
-    public override async Task AfterPowerAmountChanged(PowerModel power, decimal amount, Creature? applier, CardModel? cardSource)
+    public override async Task AfterPowerAmountChanged(
+        PlayerChoiceContext choiceContext, PowerModel power, decimal amount, Creature? applier, CardModel? cardSource)
     {
         if (power != this) return;
         
@@ -64,9 +67,9 @@ public sealed class MotivationPower : IndomitablePower
             // 默默将数值切回上限，不触发二次特效
             SetAmount(MaxAmount + 1, silent: true);
             
-            // 触发联动：干劲迸发
-            foreach (var burstPower in Owner.Powers.OfType<MotivationBurstPower>().ToList())
-                await burstPower.ProcessOverflow(overflow, applier, cardSource);
+            // 【核心修改】：彻底解耦！不再去寻找 MotivationBurstPower，而是向全场广播“我溢出了！”
+            await CustomHook.AfterResourceOverflowed(
+                choiceContext, Owner, this, overflow, applier, cardSource);
         }
         
         // 6. 更新动态变量，仅供本地化文本渲染，兼顾施加和追加
