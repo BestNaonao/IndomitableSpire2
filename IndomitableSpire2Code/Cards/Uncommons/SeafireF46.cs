@@ -28,7 +28,7 @@ public sealed class SeafireF46() : CarrierAircraftCard(1, CardType.Attack, CardR
         new CustomPowerVar<InterceptedPower>(5M) // 基础截击扣除 5 点力量
     ];
     
-    protected override async Task<IEnumerable<DamageResult>?> OnAircraftPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+    protected override async Task<IEnumerable<IEnumerable<DamageResult>>?> OnAircraftPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         ArgumentNullException.ThrowIfNull(cardPlay.Target, nameof(cardPlay.Target));
         
@@ -41,6 +41,7 @@ public sealed class SeafireF46() : CarrierAircraftCard(1, CardType.Attack, CardR
         // 如果目标意图攻击，迎面施加截击削弱其火力，否则掩护获得格挡
         if (cardPlay.Target is { IsAlive: true, Monster.IntendsToAttack: true })
             await PowerCmd.Apply<InterceptedPower>(
+                choiceContext: choiceContext, 
                 target: cardPlay.Target,
                 amount: DynamicVars.Intercepted().BaseValue,
                 applier: Owner.Creature,

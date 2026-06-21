@@ -27,7 +27,7 @@ public sealed class SwordfishBomber() : CarrierAircraftCard(1, CardType.Attack, 
         new CustomPowerVar<FloodingPower>(2M)
     ];
     
-    protected override async Task<IEnumerable<DamageResult>?> OnAircraftPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+    protected override async Task<IEnumerable<IEnumerable<DamageResult>>?> OnAircraftPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         ArgumentNullException.ThrowIfNull(cardPlay.Target, nameof(cardPlay.Target));
         
@@ -40,6 +40,7 @@ public sealed class SwordfishBomber() : CarrierAircraftCard(1, CardType.Attack, 
         if (cardPlay.Target is { IsAlive: true })
         {
             await PowerCmd.Apply<FloodingPower>(
+                choiceContext: choiceContext, 
                 target: cardPlay.Target,
                 amount: DynamicVars.Flooding().BaseValue,
                 applier: Owner.Creature,

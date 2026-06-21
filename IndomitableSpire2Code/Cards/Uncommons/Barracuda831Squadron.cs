@@ -26,7 +26,7 @@ public sealed class Barracuda831Squadron() : CarrierAircraftCard(2, CardType.Att
     
     protected override IEnumerable<DynamicVar> AdditionalVars => [new DamageVar(12M, ValueProp.Move)];
     
-    protected override async Task<IEnumerable<DamageResult>?> OnAircraftPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+    protected override async Task<IEnumerable<IEnumerable<DamageResult>>?> OnAircraftPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         ArgumentNullException.ThrowIfNull(cardPlay.Target, nameof(cardPlay.Target));
         
@@ -42,7 +42,10 @@ public sealed class Barracuda831Squadron() : CarrierAircraftCard(2, CardType.Att
         if (cardPlay.Target is not { IsAlive: true }) return attackCmd.Results;
         
         // 提取最终造成的面板伤害总和，根据是否翻倍来逆推单倍伤害
-        var totalDealt = attackCmd.Results.Sum(r => r.TotalDamage + r.OverkillDamage);
+        var totalDealt = attackCmd.Results
+            .SelectMany(hitList => hitList)     // 1. 展平新版 API 的嵌套列表（将多段伤害合并为一个流）
+            .Where(r => r.Receiver == cardPlay.Target) // 2. 过滤确保只统计打在这个主目标身上的伤害（防遗物溅射干扰）
+            .Sum(r => (decimal)(r.TotalDamage + r.OverkillDamage)); // 3. 提取伤害总和
         var armorBreakStacks = (int)Math.Max(0M, hasBlock ? totalDealt / 2M : totalDealt);
         if (armorBreakStacks > 0)
             await PowerCmd.Apply<ArmorBreakPower>(

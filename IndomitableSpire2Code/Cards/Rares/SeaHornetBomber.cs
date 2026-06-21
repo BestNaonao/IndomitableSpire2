@@ -30,7 +30,7 @@ public sealed class SeaHornetBomber() : CarrierAircraftCard(2, CardType.Attack, 
         new CustomPowerVar<OnFirePower>(3M)
     ];
     
-    protected override async Task<IEnumerable<DamageResult>?> OnAircraftPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+    protected override async Task<IEnumerable<IEnumerable<DamageResult>>?> OnAircraftPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         if (CombatState == null) return null;
         
@@ -43,6 +43,7 @@ public sealed class SeaHornetBomber() : CarrierAircraftCard(2, CardType.Attack, 
         
         // 挂载炸弹洗地，对所有存活的被击中敌人附加起火
         await PowerCmd.Apply<OnFirePower>(
+            choiceContext: choiceContext, 
             CombatState.HittableEnemies,
             DynamicVars.OnFire().BaseValue,
             Owner.Creature,

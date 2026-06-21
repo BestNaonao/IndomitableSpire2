@@ -30,7 +30,7 @@ public sealed class SeaHornetFighter() : CarrierAircraftCard(2, CardType.Attack,
         new CustomPowerVar<OnFirePower>(4M)
     ];
     
-    protected override async Task<IEnumerable<DamageResult>?> OnAircraftPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+    protected override async Task<IEnumerable<IEnumerable<DamageResult>>?> OnAircraftPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         ArgumentNullException.ThrowIfNull(cardPlay.Target, nameof(cardPlay.Target));
         
@@ -43,6 +43,7 @@ public sealed class SeaHornetFighter() : CarrierAircraftCard(2, CardType.Attack,
         
         if (cardPlay.Target is { IsAlive: true })
             await PowerCmd.Apply<OnFirePower>(
+                choiceContext: choiceContext, 
                 target: cardPlay.Target,
                 amount: DynamicVars.OnFire().BaseValue,
                 applier: Owner.Creature,
