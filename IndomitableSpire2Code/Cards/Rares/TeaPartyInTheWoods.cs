@@ -49,7 +49,7 @@ public sealed class TeaPartyInTheWoods() : IndomitableCard(0, CardType.Skill, Ca
             {
                 var desserts = CombatState.CreateCards<Dessert>(player, DynamicVars.Cards.IntValue);
                 var combat = await CardPileCmd.AddGeneratedCardsToCombat(
-                    desserts, PileType.Draw, true, CardPilePosition.Random);
+                    desserts, PileType.Draw, Owner, CardPilePosition.Random);
                 if (LocalContext.IsMe(player))
                     CardCmd.PreviewCardPileAdd(combat);
             }

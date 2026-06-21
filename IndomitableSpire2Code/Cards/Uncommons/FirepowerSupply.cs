@@ -37,7 +37,7 @@ public sealed class FirepowerSupply() : IndomitableCard(0, CardType.Skill, CardR
         if (selectedCard == null) return;
         
         // 4. 将选中的牌加入手牌
-        await CardPileCmd.AddGeneratedCardToCombat(selectedCard, PileType.Hand, true);
+        await CardPileCmd.AddGeneratedCardToCombat(selectedCard, PileType.Hand, Owner);
     }
     
     // 升级逻辑已经在 OnPlay 的 IsUpgraded 判断，以及本地化文本中的 IfUpgraded 标签处理

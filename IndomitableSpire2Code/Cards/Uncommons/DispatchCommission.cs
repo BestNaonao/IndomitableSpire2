@@ -46,7 +46,7 @@ public sealed class DispatchCommission() : IndomitableCard(1, CardType.Skill, Ca
             CardCmd.Upgrade(generatedCard);
         
         // 5. 安全发送到队友手牌中
-        await CardPileCmd.AddGeneratedCardToCombat(generatedCard, PileType.Hand, true);
+        await CardPileCmd.AddGeneratedCardToCombat(generatedCard, PileType.Hand, Owner);
     }
     
     protected override void OnUpgrade()

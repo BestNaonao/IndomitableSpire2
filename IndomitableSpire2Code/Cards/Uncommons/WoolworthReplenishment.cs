@@ -44,7 +44,7 @@ public sealed class WoolworthReplenishment() : IndomitableCard(0, CardType.Skill
         if (IsUpgraded) CardCmd.Upgrade(card);
         
         // 5. 将生成的卡牌加入手牌
-        await CardPileCmd.AddGeneratedCardToCombat(card, PileType.Hand, true);
+        await CardPileCmd.AddGeneratedCardToCombat(card, PileType.Hand, Owner);
     }
     
     // 升级效果已经通过 OnPlay 中的 IsUpgraded 和本地化文本的 IfUpgraded 标签实现了，这里不需要修改基础数值或费用，保持为空即可。

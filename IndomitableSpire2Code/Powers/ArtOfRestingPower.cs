@@ -1,6 +1,7 @@
 ﻿using IndomitableSpire2.IndomitableSpire2Code.Cards.Others;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.Models;
 
@@ -14,10 +15,10 @@ public sealed class ArtOfRestingPower : IndomitablePower
     public override PowerStackType StackType => PowerStackType.Single;
     
     // 核心钩子：在生成卡牌后拦截
-    public override async Task AfterCardGeneratedForCombat(CardModel card, bool addedByPlayer)
+    public override async Task AfterCardGeneratedForCombat(CardModel card, Player? creator)
     {
-        // 如果不是玩家生成的、不是状态牌、或者不是属于该角色的，直接放行
-        if (!addedByPlayer || card.Type != CardType.Status || card.Owner.Creature != Owner || Owner.Player == null)
+        // 如果不是能力拥有者的玩家生成的、不是玩家的牌、不是状态牌，直接放行
+        if (card.Type != CardType.Status || creator == null || creator != Owner.Player || card.Owner != creator)
             return;
         
         // 闪烁并等待一下

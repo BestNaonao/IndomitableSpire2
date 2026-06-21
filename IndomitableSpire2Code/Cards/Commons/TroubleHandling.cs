@@ -41,7 +41,7 @@ public sealed class TroubleHandling() : IndomitableCard(0, CardType.Skill, CardR
                 await CardPileCmd.AddGeneratedCardsToCombat(
                     cards: CombatState.CreateCards<Indolent>(Owner, DynamicVars.Cards.IntValue),
                     newPileType: PileType.Discard, 
-                    addedByPlayer: true
+                    creator: Owner
                 )
             );
         }

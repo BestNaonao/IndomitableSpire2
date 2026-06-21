@@ -1,6 +1,7 @@
 ﻿using BaseLib.Abstracts;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
+using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
@@ -16,7 +17,7 @@ public sealed class IndustrialRevolutionPower : IndomitablePower, IHasSecondAmou
     public override PowerStackType StackType => PowerStackType.Counter;
     
     // 允许有多个实例与内部独立数据
-    public override bool IsInstanced => true;
+    public override PowerInstanceType InstanceType => PowerInstanceType.Instanced;
     protected override object InitInternalData() => new RevolutionData();
     protected override IEnumerable<DynamicVar> CanonicalVars => [new("Threshold", Threshold)];
     
@@ -28,10 +29,10 @@ public sealed class IndustrialRevolutionPower : IndomitablePower, IHasSecondAmou
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.Static(StaticHoverTip.ReplayStatic)];
     
     // 拦截卡牌生成事件（效仿原版武器库 ArsenalPower）
-    public override Task AfterCardGeneratedForCombat(CardModel card, bool addedByPlayer)
+    public override Task AfterCardGeneratedForCombat(CardModel card, Player? creator)
     {
         // 确保是玩家生成的卡
-        if (card.Owner != Owner.Player || !addedByPlayer) 
+        if (creator == null || creator.Creature != Owner) 
             return Task.CompletedTask;
         
         // 过滤不参与计数的卡池
