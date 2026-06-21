@@ -1,6 +1,8 @@
 ﻿using IndomitableSpire2.IndomitableSpire2Code.Abstracts;
 using MegaCrit.Sts2.Core.Combat;
+using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Players;
+using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
 
 namespace IndomitableSpire2.IndomitableSpire2Code.Hooks;
@@ -65,6 +67,32 @@ public static class CustomHook
             {
                 await modifier.AfterModifyingDurabilityLoss(card);
                 // 【核心细节】：必须通知底层引擎当前监听器的异步方法已执行完毕
+                model.InvokeExecutionFinished();
+            }
+        }
+    }
+    
+    // 【新增】：触发全局溢出事件的方法
+    public static async Task AfterResourceOverflowed(
+        PlayerChoiceContext choiceContext,
+        Creature target,
+        AbstractModel sourceModel,
+        decimal overflowAmount,
+        Creature? applier,
+        CardModel? cardSource)
+    {
+        if (target.CombatState == null || overflowAmount <= 0) return;
+        
+        // 遍历当前战斗中所有的合法监听器（包括手牌、遗物、能力等）
+        foreach (var model in target.CombatState.IterateHookListeners())
+        {
+            if (model is IOnResourceOverflowSubscriber subscriber)
+            {
+                // 等待监听器处理溢出逻辑
+                await subscriber.AfterResourceOverflowed(
+                    choiceContext, target, sourceModel, overflowAmount, applier, cardSource);
+                
+                // 【核心细节】：通知引擎状态机
                 model.InvokeExecutionFinished();
             }
         }
