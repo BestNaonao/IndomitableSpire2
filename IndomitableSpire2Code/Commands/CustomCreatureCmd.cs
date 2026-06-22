@@ -57,18 +57,17 @@ public static class CustomCreatureCmd
     public static bool MeetsElegance(this Creature creature)
     {
         var combatState = creature.CombatState;
-        if (combatState == null) return false;
+        if (combatState == null || creature.Player == null) return false;
         
         // 计算回合数，第一回合没有上一回合，按规则无法触发优雅
-        var lastRound = combatState.RoundNumber - 1;
-        if (lastRound <= 0) return false;
+        if (creature.Player.PlayerCombatState?.TurnNumber <= 1) return false;
         
         var tookUnblockedDamage = CombatManager.Instance.History.Entries
             .OfType<DamageReceivedEntry>()
             .Any(e => 
-                e.RoundNumber == lastRound && 
                 e.Receiver == creature && 
-                e.Result.UnblockedDamage > 0);
+                e.Result.UnblockedDamage > 0 && 
+                e.HappenedLastPlayerTurn(creature.Player));
         return !tookUnblockedDamage;
     }
 }
