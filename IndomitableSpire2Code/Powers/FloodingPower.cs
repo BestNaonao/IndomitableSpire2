@@ -29,10 +29,10 @@ public sealed class FloodingPower : DOTPower
         ? $"{Id.Entry}.smartDescriptionFull"
         : $"{Id.Entry}.smartDescription";
     
-    protected override void Update()
+    protected override void SyncDynamicVars()
     {
         DynamicVars["DamageIncreasePercent"].BaseValue = Amount * 5m;
-        base.Update();
+        base.SyncDynamicVars();
     }
     
     // 判断当前意图列表中是否包含【非攻击】且【非死亡攻击】的意图

@@ -2,6 +2,7 @@
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
+using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 
@@ -13,7 +14,7 @@ public sealed class IllustriousAegisPower : IndomitablePower, IHasSecondAmount
     public override PowerStackType StackType => PowerStackType.Counter;
     
     // 【关键1】：允许该能力在同一个生物身上存在多个独立的实例
-    public override bool IsInstanced => true;
+    public override PowerInstanceType InstanceType => PowerInstanceType.Instanced;
     
     // 注册内部变量以绑定本地化文本，便于展示回血量
     protected override IEnumerable<DynamicVar> CanonicalVars => [new HealVar(0M)];
@@ -36,7 +37,8 @@ public sealed class IllustriousAegisPower : IndomitablePower, IHasSecondAmount
     }
     
     // 【核心钩子】：当其他能力（特指 ShieldPower）数值改变时被调用
-    public override async Task AfterPowerAmountChanged(PowerModel power, decimal amount, Creature? applier, CardModel? cardSource)
+    public override async Task AfterPowerAmountChanged(
+        PlayerChoiceContext choiceContext, PowerModel power, decimal amount, Creature? applier, CardModel? cardSource)
     {
         // 1. 【完美解耦】：独立监听自身的碎裂事件：如果改变的是自己，且层数降到了 0 及以下，且是负向改变（扣除）
         if (power == this && Amount <= 0 && amount < 0 && GetInternalData<AegisData>().HealAmount is var healAmt and > 0)
@@ -76,7 +78,7 @@ public sealed class IllustriousAegisPower : IndomitablePower, IHasSecondAmount
             damageReduced -= absorb;
             
             // 扣除当前遍历庇护实例的层数，通过引擎广播该实例的 AfterPowerAmountChanged，触发 Flash 和回血
-            await PowerCmd.ModifyAmount(aegis, -absorb, applier, cardSource);
+            await PowerCmd.ModifyAmount(choiceContext, aegis, -absorb, applier, cardSource);
         }
     }
     
