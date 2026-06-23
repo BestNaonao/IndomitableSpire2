@@ -1,9 +1,12 @@
-﻿using IndomitableSpire2.IndomitableSpire2Code.Cards.Abstracts;
+﻿using HarmonyLib;
+using IndomitableSpire2.IndomitableSpire2Code.Cards.Abstracts;
 using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization;
+using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Models.Cards;
 
 namespace IndomitableSpire2.IndomitableSpire2Code.Cards.Uncommons;
 
@@ -15,9 +18,13 @@ public sealed class PilotTransfer() : IndomitableCard(0, CardType.Skill, CardRar
     private static LocString DowngradePrompt => new("card_selection", "INDOMITABLESPIRE2-TRANSFER_DOWNGRADE");
     private static LocString UpgradePrompt => new("card_selection", "INDOMITABLESPIRE2-TRANSFER_UPGRADE");
     
+    // 【核心修复 1】：封装判定逻辑，兼容普通升级牌与假升级的凋萎
+    // 不能是自己，并且是正常的已升级卡牌或被永世沙漏强化过的凋萎（只要伤害大于基础的 3，就说明被强化过）
+    private bool CanBeDowngraded(CardModel c) => 
+        c != this && (c.CurrentUpgradeLevel > 0 || c is Wither { DynamicVars.Damage.BaseValue: > 3M });
+    
     // 核心限制：手牌中必须至少有一张已升级的牌（且不能是自己）才能打出
-    protected override bool IsPlayable => 
-        PileType.Hand.GetPile(Owner).Cards.Any(c => c.CurrentUpgradeLevel > 0 && c != this);
+    protected override bool IsPlayable => PileType.Hand.GetPile(Owner).Cards.Any(CanBeDowngraded);
     
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
@@ -28,16 +35,29 @@ public sealed class PilotTransfer() : IndomitableCard(0, CardType.Skill, CardRar
         
         // 利用 FromHand 的第四个参数 (Predicate) 来过滤只能选已升级的牌
         var cardToDowngrade = (await CardSelectCmd.FromHand(
-            choiceContext, Owner, downPrefs, c => c.CurrentUpgradeLevel > 0 && c != this, this
-        )).FirstOrDefault();
+            choiceContext, Owner, downPrefs, CanBeDowngraded, this)).FirstOrDefault();
         
         if (cardToDowngrade == null) return;
         
-        // 记录它身上的所有“王牌经验”
-        var transferLevels = cardToDowngrade.CurrentUpgradeLevel;
-        
-        // 执行彻底降级，并在屏幕上闪烁展示，给予负向但清晰的视觉反馈
-        CardCmd.Downgrade(cardToDowngrade);
+        int transferLevels;
+        List<CardModel> cardsToPreview = [cardToDowngrade];
+        // 【核心修复 2】：特判剥夺“凋萎”的假升级层数
+        // ==========================================
+        if (cardToDowngrade is Wither witherTarget)
+        {
+            // 逆推层数：(当前伤害 - 基础伤害3) / 每层加的3
+            transferLevels = (int)((witherTarget.DynamicVars.Damage.BaseValue - 3M) / 3M);
+            // 通过 Harmony 反射，强行将 Boss 赋予的私有假等级归零，并将基础伤害打回原形！
+            var fakeUpgradeField = AccessTools.Field(typeof(Wither), "_fakeUpgradeLevel");
+            if (fakeUpgradeField != null) fakeUpgradeField.SetValue(witherTarget, 0);
+            witherTarget.DynamicVars.Damage.BaseValue = 3M;
+        }
+        else
+        {
+            // 正常牌走正常降级流程
+            transferLevels = cardToDowngrade.CurrentUpgradeLevel;
+            CardCmd.Downgrade(cardToDowngrade);
+        }
         await Cmd.CustomScaledWait(0.2f, 0.4f);
         
         // ================= 阶段 2：选择升级 =================
@@ -61,11 +81,13 @@ public sealed class PilotTransfer() : IndomitableCard(0, CardType.Skill, CardRar
                 foreach (var card in cardsToUpgrade)
                 {
                     CardCmd.Upgrade(card);
-                    CardCmd.Preview(card); // 闪烁展示升级效果
+                    cardsToPreview.Add(card);
                     await Cmd.CustomScaledWait(0.15f, 0.3f);
                 }
             }
         }
+        // 展示降级和升级的卡牌
+        CardCmd.Preview(cardsToPreview);
     }
     
     protected override void OnUpgrade()
