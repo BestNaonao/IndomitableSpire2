@@ -76,7 +76,7 @@
   "INDOMITABLESPIRE2-EVASIVE_MANEUVERS.title": "回避機動",
   "INDOMITABLESPIRE2-EVASIVE_MANEUVERS.description": "このターン、次にプレイする{EvasiveManeuversPower:diff()}枚の[gold]艦載機[/gold]カードが受ける[gold]耐久[/gold]減少を0にする。\nこのカードを{Durability}回プレイすると[gold]廃棄[/gold]される。",
   "INDOMITABLESPIRE2-PILOT_TRANSFER.title": "配置転換",
-  "INDOMITABLESPIRE2-PILOT_TRANSFER.description": "[gold]手札[/gold]にあるアップグレード済みのカードを1枚選び、[gold]ダウングレード[/gold]する。そのカードが失ったアップグレード段階1につき、他の手札1枚を選んで[gold]アップグレード[/gold]する。",
+  "INDOMITABLESPIRE2-PILOT_TRANSFER.description": "[gold]手札[/gold]にあるアップグレード済みのカードを最大2枚選び、[gold]ダウングレード[/gold]する。失ったアップグレード段階1につき、[gold]手札[/gold]か[gold]山札[/gold]のカード1枚を選んで[gold]アップグレード[/gold]する。",
   "INDOMITABLESPIRE2-MASTER_OF_LIFE.title": "ライフマスター",
   "INDOMITABLESPIRE2-MASTER_OF_LIFE.description": "[blue]{MotivationRequire:diff()}[/blue]の[gold]やる気[/gold]を[gold]必要[/gold]とする。\n戦闘中にHPを回復するたび、[gold]活力[/gold]を{MasterOfLifePower:diff()}得る。",
   "INDOMITABLESPIRE2-KENOSIS_FORM.title": "ケノーシス化",

@@ -76,7 +76,7 @@
   "INDOMITABLESPIRE2-EVASIVE_MANEUVERS.title": "Evasive Maneuvers",
   "INDOMITABLESPIRE2-EVASIVE_MANEUVERS.description": "This turn, your next {EvasiveManeuversPower:diff()} [gold]Carrier Aircraft[/gold] cards take 0 [gold]Durability[/gold] loss.\n[gold]Exhausts[/gold] after {Durability} plays.",
   "INDOMITABLESPIRE2-PILOT_TRANSFER.title": "Transfer",
-  "INDOMITABLESPIRE2-PILOT_TRANSFER.description": "Choose an Upgraded card in your [gold]Hand[/gold] to [gold]Downgrade[/gold]. For each upgrade level it loses, [gold]Upgrade[/gold] another card in your hand.",
+  "INDOMITABLESPIRE2-PILOT_TRANSFER.description": "Choose up to 2 Upgraded cards in your [gold]Hand[/gold] to [gold]Downgrade[/gold]. For each upgrade level lost, [gold]Upgrade[/gold] a card in your [gold]Hand[/gold] or [gold]Draw Pile[/gold].",
   "INDOMITABLESPIRE2-MASTER_OF_LIFE.title": "Master of Life",
   "INDOMITABLESPIRE2-MASTER_OF_LIFE.description": "[gold]Requires[/gold] [blue]{MotivationRequire:diff()}[/blue] [gold]Motivation[/gold].\nWhenever you heal HP during combat, gain {MasterOfLifePower:diff()} [gold]Vigor[/gold].",
   "INDOMITABLESPIRE2-KENOSIS_FORM.title": "Kenosis Form",
