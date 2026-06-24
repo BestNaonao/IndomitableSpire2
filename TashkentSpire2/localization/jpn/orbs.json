@@ -1,0 +1,5 @@
+{
+  "TASHKENTSPIRE2-MODULE_ORB.title": "モジュール",
+  "TASHKENTSPIRE2-MODULE_ORB.description": "[blue]オーブ[/blue]：保持している間、1回の攻撃で受けるダメージに上限が設けられる。",
+  "TASHKENTSPIRE2-MODULE_ORB.smartDescription": "[gold]パッシブ：[/gold]保持している間、1回の攻撃で受けるダメージは最大[blue]{Passive}[/blue]。\n[gold]起動：[/gold][blue]{Evoke}[/blue]HP回復する。"
+}

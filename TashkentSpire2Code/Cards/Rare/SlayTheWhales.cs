@@ -44,7 +44,7 @@ public sealed class SlayTheWhales() : TashkentCard(2, CardType.Attack, CardRarit
             await PowerCmd.Apply<BackAfterTurnPower>(choiceContext, base.Owner.Creature, DynamicVars["TashkentSpire2-Retreat"].BaseValue, base.Owner.Creature, this);
 
             bool allInfinite = Owner.Creature.CombatState?.HittableEnemies.All((Creature c) => c.HpDisplay.IsInfinite()) ?? true;
-            if (cardPlay.Target.IsDead || allInfinite)
+            if (cardPlay.Target.IsDead || allInfinite || this.Owner.Creature.IsDead)
             {
                 break;
             }

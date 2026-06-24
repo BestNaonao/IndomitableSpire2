@@ -1,0 +1,18 @@
+{
+  "TASHKENTSPIRE2-MARK.title": "標的",
+  "TASHKENTSPIRE2-MARK.description": "攻撃ダメージを受けた時、[gold]標的[/gold]の層数分だけ追加ダメージを受け、その後[blue]1[/blue]層減少する。",
+  "TASHKENTSPIRE2-TORPEDO.title": "魚雷",
+  "TASHKENTSPIRE2-TORPEDO.description": "ターン終了時、[gold]標的[/gold]が最も多い敵にダメージを与える。\n到達時間は[gold]発射時[/gold]の自身の[gold]距離[/gold]によって決まる。\nダメージは対象の[gold]標的[/gold]の影響を受ける。",
+  "TASHKENTSPIRE2-CHARGE.title": "突撃",
+  "TASHKENTSPIRE2-CHARGE.description": "[gold]距離[/gold]を増加させる。最大[blue]5[/blue]まで。",
+  "TASHKENTSPIRE2-RETREAT.title": "後退",
+  "TASHKENTSPIRE2-RETREAT.description": "[gold]距離[/gold]を減少させる。最小[blue]-5[/blue]まで。",
+  "TASHKENTSPIRE2-AMMU.title": "弾薬",
+  "TASHKENTSPIRE2-AMMU.description": "現在の弾薬数/最大弾薬数。\n戦闘中、弾薬を消費して「[red]反復[/red]」効果を発動する。\n弾薬は戦闘をまたいで保持される。",
+  "TASHKENTSPIRE2-AMMU-MAX.title": "最大弾薬数",
+  "TASHKENTSPIRE2-AMMU-MAX.description": "装填可能な弾薬の上限。",
+  "TASHKENTSPIRE2-LOAD.title": "装填",
+  "TASHKENTSPIRE2-LOAD.description": "このカードの[gold]弾薬[/gold]を増加させる。",
+  "TASHKENTSPIRE2-SHOT.title": "発射",
+  "TASHKENTSPIRE2-SHOT.description": "追加効果を発動するために必要な最小[gold]弾薬[/gold]数。"
+}

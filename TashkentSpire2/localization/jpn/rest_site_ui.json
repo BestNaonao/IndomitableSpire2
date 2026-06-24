@@ -1,0 +1,5 @@
+{
+  "OPTION_TASHKENTSPIRE2-LOAD.name": "装填",
+  "OPTION_TASHKENTSPIRE2-LOAD.description": "あなたの[gold]デッキ[/gold]内の[gold]弾薬[/gold]カード{Count}枚を[gold]装填[/gold][blue]6[/blue]する。",
+  "OPTION_TASHKENTSPIRE2-LOAD.descriptionDisabled": "[red][gold]装填[/gold]可能な[gold]弾薬[/gold]カードがありません。[/red]"
+}

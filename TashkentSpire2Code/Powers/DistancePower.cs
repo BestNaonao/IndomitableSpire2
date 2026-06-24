@@ -2,6 +2,7 @@
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Creatures;
+using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
@@ -10,6 +11,8 @@ using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.Nodes.Combat;
 using MegaCrit.Sts2.Core.Nodes.Rooms;
 using MegaCrit.Sts2.Core.ValueProps;
+using TashkentSpire2.TashkentSpire2Code.Commands;
+using TashkentSpire2.TashkentSpire2Code.Minion;
 
 namespace TashkentSpire2.TashkentSpire2Code.Powers;
 
@@ -53,6 +56,8 @@ public sealed class DistancePower : TashkentPower, IPersistentPower
             await PowerCmd.ModifyAmount(new ThrowingPlayerChoiceContext(), this, delta, base.Owner, null);
         }
 
+        await UpdateMinionPositions();
+        
         _isFlipping = false;
         _isSyncing = false;
     }
@@ -256,6 +261,44 @@ public sealed class DistancePower : TashkentPower, IPersistentPower
         finally 
         {
             _isSyncing = false;
+        }
+    }
+    
+    private async Task UpdateMinionPositions()
+    {
+        if (base.Owner.Pets == null || !base.Owner.Pets.Any()) return;
+
+        Creature? minionLeft = base.Owner.Pets.FirstOrDefault(p => p.Monster is MinionLeft);
+        Creature? minionRight = base.Owner.Pets.FirstOrDefault(p => p.Monster is MinionRight);
+
+        if (minionLeft != null && minionRight != null && 
+            minionLeft.Monster is MinionModel leftModel && 
+            minionRight.Monster is MinionModel rightModel)
+        {
+            var surrounded = base.Owner.GetPower<SurroundedPower>();
+            bool isFacingLeft = surrounded != null && surrounded.Facing == SurroundedPower.Direction.Left;
+
+            MinionPosition targetLeftPos = isFacingLeft ? MinionPosition.Front : MinionPosition.Back;
+            MinionPosition targetRightPos = isFacingLeft ? MinionPosition.Back : MinionPosition.Front;
+
+            leftModel.Position = targetLeftPos;
+            rightModel.Position = targetRightPos;
+
+            Player? player = base.Owner.Player; 
+            if (player?.PlayerCombatState?.Pets is List<Creature> rawPetsList)
+            {
+                int indexLeft = rawPetsList.IndexOf(minionLeft);
+                int indexRight = rawPetsList.IndexOf(minionRight);
+ 
+                if (indexLeft >= 0 && indexRight >= 0)
+                {
+                    rawPetsList[indexLeft] = minionRight;
+                    rawPetsList[indexRight] = minionLeft;
+                }
+
+                PetOrderSnapshotManager.TakeSnapshot(player);
+                _ = MinionAnimCmd.Rearrange(duration: 0.5f);
+            }
         }
     }
 }

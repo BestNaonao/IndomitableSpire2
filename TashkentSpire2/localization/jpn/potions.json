@@ -1,0 +1,9 @@
+{
+  "TASHKENTSPIRE2-MARK_POTION.title": "標的ポーション",
+  "TASHKENTSPIRE2-MARK_POTION.description": "[blue]{MarkPower}[/blue]層の[gold]標的[/gold]を付与する。",
+  "TASHKENTSPIRE2-RELOAD_CONSUMABLES.title": "再装填キット",
+  "TASHKENTSPIRE2-RELOAD_CONSUMABLES.description": "手札の[gold]弾薬[/gold]カード1枚を[gold]装填[/gold]{TashkentSpire2-Load:diff()}[gold]弾薬[/gold]する。",
+  "TASHKENTSPIRE2-RELOAD_CONSUMABLES.selectionScreenPrompt": "[gold]弾薬[/gold]カードを1枚選び、[gold]装填[/gold][blue]6[/blue]する。",
+  "TASHKENTSPIRE2-CELLARING.title": "熟成貯蔵",
+  "TASHKENTSPIRE2-CELLARING.description": "[gold]ウォッカ+[/gold]を[blue]{Cards}[/blue]枚[gold]手札[/gold]に加える。"
+}

@@ -1,0 +1,18 @@
+{
+  "TASHKENTSPIRE2-OATH_ENCHANTMENT.title": "誓約",
+  "TASHKENTSPIRE2-OATH_ENCHANTMENT.extraCardText": "次の自分のターン開始時、このカードを[gold]手札[/gold]に戻す。",
+  "COMBAT_REWARD_CARD_ENCHANT_OATH": "デッキからカードを1枚選び、[pink]誓約[/pink]を[gold]付与[/gold]する。",
+  "TASHKENTSPIRE2-OATH_ENCHANTMENT.description": "このカードは[gold]永続[/gold]と[gold]保持[/gold]を得る。\n次の自分のターン開始時、このカードを[gold]手札[/gold]に戻す。",
+  "TASHKENTSPIRE2-SOLIDARITY_ENCHANTMENT.title": "団結",
+  "TASHKENTSPIRE2-SOLIDARITY_ENCHANTMENT.extraCardText": "[gold]団結[/gold]が付与されたカードを使用した時、このカードも自動的に使用される。",
+  "TASHKENTSPIRE2-SOLIDARITY_ENCHANTMENT.description": "[gold]団結[/gold]が付与されたカードを使用した時、このカードも自動的に使用される。",
+  "TASHKENTSPIRE2-FERMENT_ENCHANTMENT.title": "発酵",
+  "TASHKENTSPIRE2-FERMENT_ENCHANTMENT.extraCardText": "戦闘開始時、このカードは自動的に「[gold]ウォッカ[/gold]」へ変化する。",
+  "TASHKENTSPIRE2-FERMENT_ENCHANTMENT.description": "戦闘開始時、このカードは自動的に「[gold]ウォッカ[/gold]」へ変化する。",
+  "TASHKENTSPIRE2-COMMISSAR_ENCHANTMENT.title": "政治委員",
+  "TASHKENTSPIRE2-COMMISSAR_ENCHANTMENT.extraCardText": "ターン終了時、このカードが[gold]手札[/gold]にある場合、次のターン開始時に{Energy:energyIcons()}を得る。",
+  "TASHKENTSPIRE2-COMMISSAR_ENCHANTMENT.description": "このカードは[gold]初期手札[/gold]と[gold]保持[/gold]を得る。\nターン終了時、このカードが[gold]手札[/gold]にある場合、次のターン開始時に{Energy:energyIcons()}を得る。",
+  "TASHKENTSPIRE2-ENDEAVOUR_ENCHANTMENT.title": "尽力",
+  "TASHKENTSPIRE2-ENDEAVOUR_ENCHANTMENT.extraCardText": "コストなしで使用できる。",
+  "TASHKENTSPIRE2-ENDEAVOUR_ENCHANTMENT.description": "このカードは[gold]消費[/gold]と[gold]虚無[/gold]を得る。さらにコストなしで使用できる。"
+}

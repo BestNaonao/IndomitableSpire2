@@ -1,0 +1,5 @@
+{
+  "TASHKENTSPIRE2-MODULE_ORB.description": "[blue]충전 구체[/blue]: 보유 중에는 한 번에 받을 수 있는 피해량에 상한이 생깁니다.",
+  "TASHKENTSPIRE2-MODULE_ORB.smartDescription": "[gold]지속 효과:[/gold] 보유 중에는 한 번에 최대 [blue]{Passive}[/blue]의 피해만 받습니다.\n[gold]격발:[/gold] 생명력을 [blue]{Evoke}[/blue] 회복합니다.",
+  "TASHKENTSPIRE2-MODULE_ORB.title": "모듈"
+}

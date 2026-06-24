@@ -1,0 +1,18 @@
+{
+  "TASHKENTSPIRE2-OATH_ENCHANTMENT.title": "맹세",
+  "TASHKENTSPIRE2-OATH_ENCHANTMENT.extraCardText": "다음 턴 시작 시 이 카드를 [gold]손패[/gold]로 되돌립니다.",
+  "COMBAT_REWARD_CARD_ENCHANT_OATH": "당신의 덱에서 카드 1장을 선택하여 [pink]맹세[/pink]를 [gold]부여[/gold]합니다.",
+  "TASHKENTSPIRE2-OATH_ENCHANTMENT.description": "이 카드는 [gold]영속[/gold]과 [gold]보존[/gold]을 획득합니다.\n다음 턴 시작 시 이 카드를 [gold]손패[/gold]로 되돌립니다.",
+  "TASHKENTSPIRE2-SOLIDARITY_ENCHANTMENT.title": "단결",
+  "TASHKENTSPIRE2-SOLIDARITY_ENCHANTMENT.extraCardText": "[gold]단결[/gold]이 [gold]부여[/gold]된 카드를 사용할 때 이 카드를 자동으로 사용합니다.",
+  "TASHKENTSPIRE2-SOLIDARITY_ENCHANTMENT.description": "[gold]단결[/gold]이 [gold]부여[/gold]된 카드를 사용할 때 이 카드를 자동으로 사용합니다.",
+  "TASHKENTSPIRE2-FERMENT_ENCHANTMENT.title": "발효",
+  "TASHKENTSPIRE2-FERMENT_ENCHANTMENT.extraCardText": "전투 시작 시 이 카드는 자동으로 [gold]보드카[/gold]로 변합니다.",
+  "TASHKENTSPIRE2-FERMENT_ENCHANTMENT.description": "전투 시작 시 이 카드는 자동으로 [gold]보드카[/gold]로 변합니다.",
+  "TASHKENTSPIRE2-COMMISSAR_ENCHANTMENT.title": "정치장교",
+  "TASHKENTSPIRE2-COMMISSAR_ENCHANTMENT.extraCardText": "턴 종료 시 이 카드가 [gold]손패[/gold]에 있다면 다음 턴 시작 시 {Energy:energyIcons()}를 획득합니다.",
+  "TASHKENTSPIRE2-COMMISSAR_ENCHANTMENT.description": "이 카드는 [gold]고유[/gold]와 [gold]보존[/gold]을 획득합니다.\n턴 종료 시 이 카드가 [gold]손패[/gold]에 있다면 다음 턴 시작 시 {Energy:energyIcons()}를 획득합니다.",
+  "TASHKENTSPIRE2-ENDEAVOUR_ENCHANTMENT.title": "소진",
+  "TASHKENTSPIRE2-ENDEAVOUR_ENCHANTMENT.extraCardText": "비용 없이 사용할 수 있습니다.",
+  "TASHKENTSPIRE2-ENDEAVOUR_ENCHANTMENT.description": "이 카드는 [gold]소멸[/gold]과 [gold]공허[/gold]를 획득하며, 비용 없이 사용할 수 있습니다."
+}

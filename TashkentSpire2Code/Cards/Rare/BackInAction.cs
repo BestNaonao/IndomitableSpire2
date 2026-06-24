@@ -27,6 +27,29 @@ public sealed class BackInAction() : TashkentCard(2, CardType.Skill, CardRarity.
             return;
         }
         
+        if (candidates.Count == 1)
+        {
+            if (CombatManager.Instance.IsOverOrEnding)
+            {
+                return;
+            }
+
+            var card = candidates[0];
+
+            Creature? target = null;
+            if (card.TargetType == TargetType.AnyEnemy)
+            {
+                var enemies = CombatState.HittableEnemies;
+                if (enemies.Any())
+                {
+                    target = Owner.RunState.Rng.CombatTargets.NextItem(enemies);
+                }
+            }
+
+            await CardCmd.AutoPlay(choiceContext, card, target);
+            return;
+        }
+        
         var selectedList = await CardSelectCmd.FromSimpleGrid(
             choiceContext,
             candidates,

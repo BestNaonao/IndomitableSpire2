@@ -1,0 +1,5 @@
+{
+  "OPTION_TASHKENTSPIRE2-LOAD.description": "당신의 [gold]덱[/gold]에 있는 [gold]탄약[/gold] 카드 {Count}장을 [blue]6[/blue] [gold]장전[/gold]합니다.",
+  "OPTION_TASHKENTSPIRE2-LOAD.descriptionDisabled": "[red][gold]장전[/gold]할 수 있는 [gold]탄약[/gold] 카드가 없습니다.[/red]",
+  "OPTION_TASHKENTSPIRE2-LOAD.name": "장전"
+}
