@@ -72,5 +72,8 @@
   "INDOMITABLESPIRE2-KENOSIS_FORM_POWER.title": "虚己形态",
   "INDOMITABLESPIRE2-INDUSTRIAL_REVOLUTION_POWER.description": "你每生成[blue]4[/blue]张非[gold]状态[/gold]、非[gold]诅咒[/gold]的牌，你打出的下一张牌在打出前获得1层[gold]重放[/gold]。",
   "INDOMITABLESPIRE2-INDUSTRIAL_REVOLUTION_POWER.smartDescription": "你每生成[blue]4[/blue]张非[gold]状态[/gold]、非[gold]诅咒[/gold]的牌，你打出的下[blue]{Amount}[/blue]张牌在打出前获得1层[gold]重放[/gold]。",
-  "INDOMITABLESPIRE2-INDUSTRIAL_REVOLUTION_POWER.title": "工业革命"
+  "INDOMITABLESPIRE2-INDUSTRIAL_REVOLUTION_POWER.title": "工业革命",
+  "INDOMITABLESPIRE2-SECOND_HANGAR_POWER.description": "你的手牌上限增加。",
+  "INDOMITABLESPIRE2-SECOND_HANGAR_POWER.smartDescription": "你的手牌上限增加[blue]{Amount}[/blue]张。",
+  "INDOMITABLESPIRE2-SECOND_HANGAR_POWER.title": "第二机库"
 }

@@ -72,5 +72,8 @@
   "INDOMITABLESPIRE2-KENOSIS_FORM_POWER.title": "Kenosis Form",
   "INDOMITABLESPIRE2-INDUSTRIAL_REVOLUTION_POWER.description": "Every [blue]4[/blue] non-[gold]Status[/gold], non-[gold]Curse[/gold] cards you create, the next card you play gains [gold]Replay[/gold] 1.",
   "INDOMITABLESPIRE2-INDUSTRIAL_REVOLUTION_POWER.smartDescription": "Every [blue]4[/blue] non-[gold]Status[/gold], non-[gold]Curse[/gold] cards you create, the next [blue]{Amount}[/blue] {Amount:plural:card you play gains|cards you play gain} [gold]Replay[/gold] 1.",
-  "INDOMITABLESPIRE2-INDUSTRIAL_REVOLUTION_POWER.title": "Industrial Revolution"
+  "INDOMITABLESPIRE2-INDUSTRIAL_REVOLUTION_POWER.title": "Industrial Revolution",
+  "INDOMITABLESPIRE2-SECOND_HANGAR_POWER.description": "Increase your maximum hand size.",
+  "INDOMITABLESPIRE2-SECOND_HANGAR_POWER.smartDescription": "Increase your maximum hand size by [blue]{Amount}[/blue].",
+  "INDOMITABLESPIRE2-SECOND_HANGAR_POWER.title": "Second Hangar"
 }
