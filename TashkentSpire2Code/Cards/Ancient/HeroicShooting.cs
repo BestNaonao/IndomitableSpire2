@@ -32,19 +32,17 @@ public sealed class HeroicShooting() : AmmunitionCard(0, CardType.Attack, CardRa
         int shellsLoaded = await GetShellCountcmd.Execute(choiceContext, Owner, (int)CurrentAmmu,this.Keywords.Contains(TashkentKeyword.Barrage));
         if (shellsLoaded > 0)
         {
-            if (shellsLoaded >= DynamicVars["TashkentSpire2-Shot"].BaseValue)
-            {
-                await PowerCmd.Apply<MarkPower>(choiceContext, CombatState.HittableEnemies, base.DynamicVars["TashkentSpire2-Mark"].BaseValue, base.Owner.Creature, null);
-            }
-            
-            for (int i = 0; i < shellsLoaded; i++)
-            {
-                await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
-                    .FromCard(this)
-                    .TargetingAllOpponents(CombatState)
-                    .WithHitFx("vfx/vfx_attack_slash")
-                    .Execute(choiceContext);
-            }
+            await TryTriggerShotEffectAsync(shellsLoaded, async () => {
+                await PowerCmd.Apply<MarkPower>(choiceContext, CombatState.HittableEnemies, base.DynamicVars["TashkentSpire2-Mark"].BaseValue, base.Owner.Creature, this);
+            });
+
+            await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
+                .FromCard(this)
+                .WithHitCount(shellsLoaded)
+                .TargetingAllOpponents(CombatState)
+                .WithHitFx("vfx/vfx_attack_slash")
+                .Execute(choiceContext);
+
             int num = Math.Max(shellsLoaded - CurrentAmmu, 0);
             if (num > 0 && this.Keywords.Contains(TashkentKeyword.Barrage))
             {
@@ -57,6 +55,7 @@ public sealed class HeroicShooting() : AmmunitionCard(0, CardType.Attack, CardRa
             }
             
             UpdateAmmuGlobal(Math.Max(CurrentAmmu - shellsLoaded, 0));
+            await LoadAfterShotAsync(choiceContext, shellsLoaded);
         }
     }
     
@@ -70,7 +69,6 @@ public sealed class HeroicShooting() : AmmunitionCard(0, CardType.Attack, CardRa
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Damage.UpgradeValueBy(2M);
-        DynamicVars["TashkentSpire2-Mark"].UpgradeValueBy(1M);
+        DynamicVars["TashkentSpire2-Mark"].UpgradeValueBy(3M);
     }
 }

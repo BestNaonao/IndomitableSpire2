@@ -2,13 +2,13 @@
 
 namespace TashkentSpire2.TashkentSpire2Code.Powers;
 
-public sealed class BarrelModificationPower : TashkentPower
+public sealed class BarrelModificationLoadPower : TashkentPower
 {
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;
     
     public override string CustomBigIconPath => 
-        "res://TashkentSpire2/images/powers/big/barrelmodification_power.png";
+        "res://TashkentSpire2/images/powers/big/BarrelModificationLoadPower.png";
     public override string CustomPackedIconPath => 
-        "res://TashkentSpire2/images/powers/packed/barrelmodification_power.png";
+        "res://TashkentSpire2/images/powers/packed/BarrelModificationLoadPower.png";
 }

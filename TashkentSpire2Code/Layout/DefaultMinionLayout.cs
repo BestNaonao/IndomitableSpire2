@@ -88,11 +88,11 @@ public class DefaultMinionLayout : IMinionLayout
             case MinionPosition.Front:
                 if (lookup.Contains(MinionPosition.FrontUpper) && lookup[MinionPosition.Front].Count() >= 2)
                     return new Vector2(200f, 50f);
-                return new Vector2(200f, 0f);
+                return new Vector2(210f, 0f);
             case MinionPosition.Back:
                 if (lookup.Contains(MinionPosition.BackUpper) && lookup[MinionPosition.Back].Count() >= 2)
                     return new Vector2(-200f, 50f);
-                return new Vector2(-200f, 0f);
+                return new Vector2(-230f, 0f);
             case MinionPosition.FrontUpper:
                 if (lookup[MinionPosition.Upper].Count() <= 2)
                     return new Vector2(100f + 50f * lookup[MinionPosition.Upper].Count(), -350f);

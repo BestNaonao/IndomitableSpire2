@@ -22,7 +22,7 @@ public sealed class SmokePower : TashkentPower
     {
         if (target == base.Owner && props.HasFlag(ValueProp.Move))
         {
-            return 0.8m;
+            return 0.7m;
         }
         
         return 1m;

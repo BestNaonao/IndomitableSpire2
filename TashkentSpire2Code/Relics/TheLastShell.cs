@@ -23,7 +23,7 @@ public sealed class TheLastShell : TashkentRelic
         "res://TashkentSpire2/images/relics/outline/TheLastShell.png";
     
     protected override IEnumerable<DynamicVar> CanonicalVars =>[
-        new CardsVar(2)
+        new CardsVar(3)
     ];
     
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [

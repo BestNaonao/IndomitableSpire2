@@ -40,12 +40,11 @@ public sealed class FocusFire() : AmmunitionCard(1, CardType.Attack, CardRarity.
         int shellsLoaded = await GetShellCountcmd.Execute(choiceContext, Owner, (int)CurrentAmmu,this.Keywords.Contains(TashkentKeyword.Barrage));
         if (shellsLoaded > 0)
         {
-            if (shellsLoaded >= DynamicVars["TashkentSpire2-Shot"].BaseValue)
-            {
+            await TryTriggerShotEffectAsync(shellsLoaded, async () => {
                 await DamageCmd.Attack(base.DynamicVars.CalculatedDamage).FromCard(this).Targeting(cardPlay.Target)
                     .WithHitFx("vfx/vfx_attack_slash")
                     .Execute(choiceContext);
-            }
+            });
             
             int num = Math.Max(shellsLoaded - CurrentAmmu, 0);
             if (num > 0 && this.Keywords.Contains(TashkentKeyword.Barrage))
@@ -59,6 +58,7 @@ public sealed class FocusFire() : AmmunitionCard(1, CardType.Attack, CardRarity.
             }
             
             UpdateAmmuGlobal(Math.Max(CurrentAmmu - shellsLoaded, 0));
+            await LoadAfterShotAsync(choiceContext, shellsLoaded);
         }
     }
     

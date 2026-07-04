@@ -11,7 +11,7 @@ namespace TashkentSpire2.TashkentSpire2Code.Cards.Uncommon;
 public sealed class DrownMySorrow() : TashkentCard(1, CardType.Power, CardRarity.Uncommon, TargetType.Self)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new PowerVar<DrownMySorrowPower>(2M)
+        new PowerVar<DrownMySorrowPower>(3M)
     ];
 
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
@@ -25,6 +25,6 @@ public sealed class DrownMySorrow() : TashkentCard(1, CardType.Power, CardRarity
     
     protected override void OnUpgrade()
     {
-        base.DynamicVars["DrownMySorrowPower"].UpgradeValueBy(1M);
+        base.EnergyCost.UpgradeBy(-1);
     }
 }

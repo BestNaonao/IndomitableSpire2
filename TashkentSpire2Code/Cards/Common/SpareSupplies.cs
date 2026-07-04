@@ -35,10 +35,9 @@ public sealed class SpareSupplies() : AmmunitionCard(0, CardType.Skill, CardRari
         int shellsLoaded = await GetShellCountcmd.Execute(choiceContext, Owner, (int)CurrentAmmu,this.Keywords.Contains(TashkentKeyword.Barrage));
         if (shellsLoaded > 0)
         {
-            if (shellsLoaded >= DynamicVars["TashkentSpire2-Shot"].BaseValue)
-            {
+            await TryTriggerShotEffectAsync(shellsLoaded, async () => {
                 await Vodka.CreateInHand(base.Owner, base.DynamicVars.Cards.IntValue, base.CombatState, base.IsUpgraded);
-            }
+            });
             
             for (int i = 0; i < shellsLoaded; i++)
             {
@@ -56,6 +55,7 @@ public sealed class SpareSupplies() : AmmunitionCard(0, CardType.Skill, CardRari
             }
             
             UpdateAmmuGlobal(Math.Max(CurrentAmmu - shellsLoaded, 0));
+            await LoadAfterShotAsync(choiceContext, shellsLoaded);
         }
     }
     

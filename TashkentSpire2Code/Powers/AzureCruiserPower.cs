@@ -39,7 +39,7 @@ public sealed class AzureCruiserPower : TashkentPower
     
     public override async Task AfterCardExhausted(PlayerChoiceContext choiceContext, CardModel card, bool causedByEthereal)
     {
-        if (base.Owner.Player != null && card.Owner.Creature == base.Owner)
+        if (base.Owner.Player != null)
         {
             Flash();
             for (int i = 0; i < this.Amount; i++)

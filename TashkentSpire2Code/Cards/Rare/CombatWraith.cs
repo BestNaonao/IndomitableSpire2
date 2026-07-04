@@ -23,7 +23,7 @@ public sealed class CombatWraith() : TashkentCard(2, CardType.Attack, CardRarity
             {
                 return false;
             }
-            return playerCombatState.Hand.Cards.Count > 9;
+            return playerCombatState.Hand.Cards.Count > 9 || playerCombatState.Hand.Cards.Count <= 1;
         }
     }
 
@@ -52,7 +52,7 @@ public sealed class CombatWraith() : TashkentCard(2, CardType.Attack, CardRarity
             await CardCmd.Exhaust(choiceContext, item);
             exhaustedCount++;
         }
-        if (exhaustedCount >= 9)
+        if (exhaustedCount >= 9 || exhaustedCount == 0)
         {
             await PowerCmd.Apply<IntangiblePower>(choiceContext, base.Owner.Creature, 1m, base.Owner.Creature, this);
         }

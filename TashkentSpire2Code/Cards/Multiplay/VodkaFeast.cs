@@ -9,7 +9,7 @@ using TashkentSpire2.TashkentSpire2Code.Cards.Token;
 
 namespace TashkentSpire2.TashkentSpire2Code.Cards.Multiplay;
 
-public sealed class VodkaFeast() : TashkentCard(3, CardType.Skill, CardRarity.Rare, TargetType.AllAllies)
+public sealed class VodkaFeast() : TashkentCard(2, CardType.Skill, CardRarity.Rare, TargetType.AllAllies)
 {
     public override CardMultiplayerConstraint MultiplayerConstraint => CardMultiplayerConstraint.MultiplayerOnly;
     
@@ -39,6 +39,9 @@ public sealed class VodkaFeast() : TashkentCard(3, CardType.Skill, CardRarity.Ra
             }
         }
     }
-    
-    protected override void OnUpgrade() => base.EnergyCost.UpgradeBy(-1);
+
+    protected override void OnUpgrade()
+    {
+        RemoveKeyword(CardKeyword.Exhaust);
+    }
 }

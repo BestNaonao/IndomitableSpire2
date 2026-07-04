@@ -34,8 +34,8 @@ public sealed class TorpedoReload() : AmmunitionCard(2, CardType.Skill, CardRari
             {
                 await PowerCmd.Apply<TorpedoPower>(choiceContext, base.Owner.Creature, DynamicVars["TashkentSpire2-Torpedo"].BaseValue, base.Owner.Creature, this);
             }
-            if (shellsLoaded >= DynamicVars["TashkentSpire2-Shot"].BaseValue)
-            {
+            
+            await TryTriggerShotEffectAsync(shellsLoaded, () => {
                 var torpedoes = base.Owner.Creature.Powers
                     .OfType<TorpedoPower>()
                     .ToList();
@@ -44,7 +44,9 @@ public sealed class TorpedoReload() : AmmunitionCard(2, CardType.Skill, CardRari
                 {
                     power.ReduceTurnCount(1);
                 }
-            }
+    
+                return Task.CompletedTask;
+            });
             
             int num = Math.Max(shellsLoaded - CurrentAmmu, 0);
             if (num > 0 && this.Keywords.Contains(TashkentKeyword.Barrage))
@@ -58,6 +60,7 @@ public sealed class TorpedoReload() : AmmunitionCard(2, CardType.Skill, CardRari
             }
             
             UpdateAmmuGlobal(Math.Max(CurrentAmmu - shellsLoaded, 0));
+            await LoadAfterShotAsync(choiceContext, shellsLoaded);
         }
     }
     
@@ -71,6 +74,13 @@ public sealed class TorpedoReload() : AmmunitionCard(2, CardType.Skill, CardRari
     
     public async Task AfterTorpedoDamage(PlayerChoiceContext choiceContext, TorpedoDamageContext context)
     {
+        var allPiles = Owner?.PlayerCombatState?.AllPiles;
+
+        if (allPiles == null || !allPiles.SelectMany(p => p.Cards).Contains(this))
+        {
+            return;
+        }
+
         int load = DynamicVars["TashkentSpire2-Load"].IntValue;
         await Loadcmd.Execute(context.ChoiceContext, this, load);
     }

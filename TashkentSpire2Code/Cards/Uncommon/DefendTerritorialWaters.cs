@@ -10,7 +10,8 @@ public sealed class DefendTerritorialWaters() : TashkentCard(2, CardType.Power, 
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new PowerVar<DefendTerritorialWatersPower>(1M),
-        new EnergyVar(1)
+        new EnergyVar(1),
+        new ChargeDynamicVar(0M)
     ];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)

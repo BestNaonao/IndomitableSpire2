@@ -1,5 +1,8 @@
 ﻿using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Saves.Runs;
+using TashkentSpire2.TashkentSpire2Code.Commands;
+using TashkentSpire2.TashkentSpire2Code.Powers;
 using TashkentSpire2.TashkentSpire2Code.Tags;
 
 namespace TashkentSpire2.TashkentSpire2Code.Cards;
@@ -59,6 +62,27 @@ public abstract class AmmunitionCard(
         if (base.DeckVersion is IAmmunitionCard masterCard)
         {
             masterCard.CurrentAmmu = clampedValue;
+        }
+    }
+    
+    protected async Task TryTriggerShotEffectAsync(int shellsLoaded, Func<Task> effectAction)
+    {
+        if (DynamicVars.TryGetValue("TashkentSpire2-Shot", out var shotVar) && shellsLoaded >= shotVar.BaseValue)
+        {
+            await effectAction();
+        }
+    }
+    
+    protected async Task LoadAfterShotAsync(PlayerChoiceContext choiceContext, int shellsLoaded)
+    {
+        if (DynamicVars.TryGetValue("TashkentSpire2-Shot", out var shotVar) && shellsLoaded >= shotVar.BaseValue)
+        {
+            int loadAmount = (int)(Owner?.Creature.GetPower<BarrelModificationLoadPower>()?.Amount ?? 0m);
+
+            if (loadAmount > 0 && Owner?.Creature != null)
+            {
+                await Loadcmd.Execute(choiceContext, this, loadAmount);
+            }
         }
     }
 }

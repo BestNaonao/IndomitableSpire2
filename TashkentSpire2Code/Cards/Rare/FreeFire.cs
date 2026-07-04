@@ -35,19 +35,17 @@ public sealed class FreeFire() : AmmunitionCard(0, CardType.Attack, CardRarity.R
         int shellsLoaded = await GetShellCountcmd.Execute(choiceContext, Owner, (int)CurrentAmmu,this.Keywords.Contains(TashkentKeyword.Barrage));
         if (shellsLoaded > 0)
         {
-            if (shellsLoaded >= DynamicVars["TashkentSpire2-Shot"].BaseValue)
-            {
+            await TryTriggerShotEffectAsync(shellsLoaded, async () => {
                 await Pursuit.CreateInHand(base.Owner, base.DynamicVars.Cards.IntValue, base.CombatState);
-            }
+            });
             
-            for (int i = 0; i < shellsLoaded; i++)
-            {
-                await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
-                    .FromCard(this)
-                    .Targeting(cardPlay.Target)
-                    .WithHitFx("vfx/vfx_attack_slash")
-                    .Execute(choiceContext);
-            }
+            await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
+                .FromCard(this)
+                .WithHitCount(shellsLoaded)
+                .Targeting(cardPlay.Target)
+                .WithHitFx("vfx/vfx_attack_slash")
+                .Execute(choiceContext);
+            
             int num = Math.Max(shellsLoaded - CurrentAmmu, 0);
             if (num > 0 && this.Keywords.Contains(TashkentKeyword.Barrage))
             {
@@ -60,11 +58,12 @@ public sealed class FreeFire() : AmmunitionCard(0, CardType.Attack, CardRarity.R
             }
             
             UpdateAmmuGlobal(Math.Max(CurrentAmmu - shellsLoaded, 0));
+            await LoadAfterShotAsync(choiceContext, shellsLoaded);
         }
     }
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Damage.UpgradeValueBy(2M);
+        DynamicVars.Damage.UpgradeValueBy(3M);
     }
 }

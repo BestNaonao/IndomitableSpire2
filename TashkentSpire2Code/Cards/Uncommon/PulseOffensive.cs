@@ -31,14 +31,13 @@ public sealed class PulseOffensive() : AmmunitionCard(2, CardType.Attack, CardRa
         int shellsLoaded = await GetShellCountcmd.Execute(choiceContext, Owner, (int)CurrentAmmu,this.Keywords.Contains(TashkentKeyword.Barrage));
         if (shellsLoaded > 0)
         {
-            if (shellsLoaded >= DynamicVars["TashkentSpire2-Shot"].BaseValue)
-            {
+            await TryTriggerShotEffectAsync(shellsLoaded, async () => {
                 foreach (Creature enemy in base.CombatState.HittableEnemies)
                 {
                     await PowerCmd.Apply<WeakPower>(choiceContext, enemy, base.DynamicVars.Weak.BaseValue, base.Owner.Creature, this);
                     await PowerCmd.Apply<VulnerablePower>(choiceContext, enemy, base.DynamicVars.Vulnerable.BaseValue, base.Owner.Creature, this);
                 }
-            }
+            });
             
             for (int i = 0; i < shellsLoaded; i++)
             {
@@ -60,6 +59,7 @@ public sealed class PulseOffensive() : AmmunitionCard(2, CardType.Attack, CardRa
             }
             
             UpdateAmmuGlobal(Math.Max(CurrentAmmu - shellsLoaded, 0));
+            await LoadAfterShotAsync(choiceContext, shellsLoaded);
         }
     }
 

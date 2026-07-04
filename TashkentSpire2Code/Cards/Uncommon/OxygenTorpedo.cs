@@ -10,7 +10,7 @@ public sealed class OxygenTorpedo() : TashkentCard(1, CardType.Skill, CardRarity
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new TorpedoDynamicVar(12M),
-        new PowerVar<OxygenTorpedoPower>(12M)
+        new PowerVar<OxygenTorpedoPower>(9M)
     ];
     
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
@@ -21,6 +21,6 @@ public sealed class OxygenTorpedo() : TashkentCard(1, CardType.Skill, CardRarity
     
     protected override void OnUpgrade()
     {
-        DynamicVars["TashkentSpire2-Torpedo"].UpgradeValueBy(6M);
+        DynamicVars["OxygenTorpedoPower"].UpgradeValueBy(3M);
     }
 }

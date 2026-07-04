@@ -40,10 +40,10 @@ public sealed class BuildUpReserves() : AmmunitionCard(1, CardType.Skill, CardRa
             {
                 await CreatureCmd.GainBlock(Owner.Creature, DynamicVars.Block, cardPlay);
             }
-            if (shellsLoaded >= DynamicVars["TashkentSpire2-Shot"].BaseValue)
-            {
+            
+            await TryTriggerShotEffectAsync(shellsLoaded, async () => {
                 await PowerCmd.Apply<PlatingPower>(choiceContext, base.Owner.Creature, base.DynamicVars["PlatingPower"].BaseValue, base.Owner.Creature, this);
-            }
+            });
 
             int num = Math.Max(shellsLoaded - CurrentAmmu, 0);
             if (num > 0 && this.Keywords.Contains(TashkentKeyword.Barrage))
@@ -57,6 +57,7 @@ public sealed class BuildUpReserves() : AmmunitionCard(1, CardType.Skill, CardRa
             }
             
             UpdateAmmuGlobal(Math.Max(CurrentAmmu - shellsLoaded, 0));
+            await LoadAfterShotAsync(choiceContext, shellsLoaded);
         }
     }
     

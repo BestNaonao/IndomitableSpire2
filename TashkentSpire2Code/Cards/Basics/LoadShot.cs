@@ -41,10 +41,9 @@ public sealed class LoadShot() : AmmunitionCard(1, CardType.Attack, CardRarity.B
                     .Execute(choiceContext);
             }
             
-            if (shellsLoaded >= DynamicVars["TashkentSpire2-Shot"].BaseValue)
-            {
-                await PowerCmd.Apply<MarkPower>(choiceContext, cardPlay.Target, DynamicVars["TashkentSpire2-Mark"].BaseValue,Owner.Creature,this);
-            }
+            await TryTriggerShotEffectAsync(shellsLoaded, async () => {
+                await PowerCmd.Apply<MarkPower>(choiceContext, cardPlay.Target, DynamicVars["TashkentSpire2-Mark"].BaseValue, Owner.Creature, this);
+            });
             
             int num = Math.Max(shellsLoaded - CurrentAmmu, 0);
             if (num > 0 && this.Keywords.Contains(TashkentKeyword.Barrage))
@@ -58,6 +57,7 @@ public sealed class LoadShot() : AmmunitionCard(1, CardType.Attack, CardRarity.B
             }
             
             UpdateAmmuGlobal(Math.Max(CurrentAmmu - shellsLoaded, 0));
+            await LoadAfterShotAsync(choiceContext, shellsLoaded);
         }
     }
     

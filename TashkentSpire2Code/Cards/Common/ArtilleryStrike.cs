@@ -44,6 +44,7 @@ public sealed class ArtilleryStrike() : AmmunitionCard(1, CardType.Attack, CardR
                     .Execute(choiceContext);
                 await CreatureCmd.GainBlock(Owner.Creature, DynamicVars.Block, cardPlay);
             }
+            
             int num = Math.Max(shellsLoaded - CurrentAmmu, 0);
             if (num > 0 && this.Keywords.Contains(TashkentKeyword.Barrage))
             {
@@ -57,11 +58,11 @@ public sealed class ArtilleryStrike() : AmmunitionCard(1, CardType.Attack, CardR
             
             UpdateAmmuGlobal(Math.Max(CurrentAmmu - shellsLoaded, 0));
             
-            if (shellsLoaded >= DynamicVars["TashkentSpire2-Shot"].BaseValue)
-            {
+            await TryTriggerShotEffectAsync(shellsLoaded, async () => {
                 int load = DynamicVars["TashkentSpire2-Load"].IntValue;
                 await Loadcmd.Execute(choiceContext, this, load);
-            }
+            });
+            await LoadAfterShotAsync(choiceContext, shellsLoaded);
         }
     }
     

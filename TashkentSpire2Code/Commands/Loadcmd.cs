@@ -1,7 +1,7 @@
 ﻿using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
-using MegaCrit.Sts2.Core.Models.Powers;
+using MegaCrit.Sts2.Core.ValueProps;
 using TashkentSpire2.TashkentSpire2Code.Cards;
 using TashkentSpire2.TashkentSpire2Code.Powers;
 
@@ -23,10 +23,10 @@ public static class Loadcmd
             ammuCard.UpdateAmmuGlobal(newValue);
         }
         
-        int vigorAmount = (int)(targetCard.Owner?.Creature.GetPower<BarrelModificationPower>()?.Amount ?? 0m);
-        if (vigorAmount > 0 && targetCard.Owner?.Creature != null && choiceContext != null)
+        int blockAmount = (int)(targetCard.Owner?.Creature.GetPower<BarrelModificationPower>()?.Amount ?? 0m);
+        if (blockAmount > 0 && targetCard.Owner?.Creature != null)
         {
-            await PowerCmd.Apply<VigorPower>(choiceContext, targetCard.Owner.Creature, (decimal)vigorAmount, targetCard.Owner.Creature, null);
+            await CreatureCmd.GainBlock(targetCard.Owner.Creature, blockAmount, ValueProp.Unpowered, null);
         }
         
         await Task.CompletedTask;

@@ -49,7 +49,7 @@ public sealed class ClusterBomb() : TashkentCard(1, CardType.Attack, CardRarity.
             ExtraDamageFromExhaust += doubleBonus;
 
             CardModel cardClone = CreateClone();
-            await CardPileCmd.AddGeneratedCardToCombat(cardClone, PileType.Discard, base.Owner);
+            CardCmd.PreviewCardPileAdd(await CardPileCmd.AddGeneratedCardToCombat(cardClone, PileType.Discard, base.Owner), 0.2f);
         }
     }
 
