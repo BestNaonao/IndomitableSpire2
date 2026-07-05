@@ -97,4 +97,20 @@ public static class CustomHook
             }
         }
     }
+    
+    // 【新增】：护盾破碎全局广播
+    public static async Task AfterShieldBroken(Creature target)
+    {
+        if (target.CombatState == null) return;
+        
+        // 遍历当前战斗中所有的合法监听器（如内层装甲能力）
+        foreach (var model in target.CombatState.IterateHookListeners())
+        {
+            if (model is IAfterShieldBrokenSubscriber subscriber)
+            {
+                await subscriber.AfterShieldBroken(target);
+                model.InvokeExecutionFinished();
+            }
+        }
+    }
 }
