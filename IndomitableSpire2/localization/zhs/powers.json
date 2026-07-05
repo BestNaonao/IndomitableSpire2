@@ -75,5 +75,8 @@
   "INDOMITABLESPIRE2-INDUSTRIAL_REVOLUTION_POWER.title": "工业革命",
   "INDOMITABLESPIRE2-SECOND_HANGAR_POWER.description": "你的手牌上限增加。",
   "INDOMITABLESPIRE2-SECOND_HANGAR_POWER.smartDescription": "你的手牌上限增加[blue]{Amount}[/blue]张。",
-  "INDOMITABLESPIRE2-SECOND_HANGAR_POWER.title": "第二机库"
+  "INDOMITABLESPIRE2-SECOND_HANGAR_POWER.title": "第二机库",
+  "INDOMITABLESPIRE2-INNER_ARMOR_POWER.description": "在你下一次[gold]护盾[/gold]破碎时，获得[gold]护盾[/gold]。",
+  "INDOMITABLESPIRE2-INNER_ARMOR_POWER.smartDescription": "在你下一次[gold]护盾[/gold]破碎时，获得[blue]{Amount}[/blue]点[gold]护盾[/gold]。",
+  "INDOMITABLESPIRE2-INNER_ARMOR_POWER.title": "内层装甲"
 }

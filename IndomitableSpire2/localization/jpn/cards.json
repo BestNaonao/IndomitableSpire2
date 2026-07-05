@@ -85,6 +85,8 @@
   "INDOMITABLESPIRE2-INDUSTRIAL_REVOLUTION.description": "[gold]状態異常[/gold]と[gold]呪い[/gold]以外のカードを[blue]4[/blue]枚作成するたび、次にプレイする{IndustrialRevolutionPower:diff()}枚のカードが[gold]リプレイ[/gold]1を得る。",
   "INDOMITABLESPIRE2-SECOND_HANGAR.title": "第二格納庫",
   "INDOMITABLESPIRE2-SECOND_HANGAR.description": "手札の上限が{SecondHangarPower:diff()}枚増加する。",
+  "INDOMITABLESPIRE2-INNER_ARMOR.title": "内装甲",
+  "INDOMITABLESPIRE2-INNER_ARMOR.description": "次にあなたの[gold]シールド[/gold]が破壊された時、現在の[gold]シールド[/gold]値に等しい[gold]シールド[/gold]を得る。",
   
   "INDOMITABLESPIRE2-DESSERT.title": "デザート",
   "INDOMITABLESPIRE2-DESSERT.description": "HPを[green]{Heal:diff()}[/green]回復する。\n{Energy:energyIcons()}を得る。",

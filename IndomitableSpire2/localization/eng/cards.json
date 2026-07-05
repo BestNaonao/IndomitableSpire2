@@ -85,6 +85,8 @@
   "INDOMITABLESPIRE2-INDUSTRIAL_REVOLUTION.description": "Every [blue]4[/blue] non-[gold]Status[/gold], non-[gold]Curse[/gold] cards you create, the next {IndustrialRevolutionPower:diff()} {IndustrialRevolutionPower:plural:card you play gains|cards you play gain} [gold]Replay[/gold] 1.",
   "INDOMITABLESPIRE2-SECOND_HANGAR.title": "Second Hangar",
   "INDOMITABLESPIRE2-SECOND_HANGAR.description": "Increase your maximum hand size by {SecondHangarPower:diff()}.",
+  "INDOMITABLESPIRE2-INNER_ARMOR.title": "Inner Armor",
+  "INDOMITABLESPIRE2-INNER_ARMOR.description": "The next time your [gold]Shield[/gold] breaks, gain [gold]Shield[/gold] equal to your current [gold]Shield[/gold].",
   
   "INDOMITABLESPIRE2-DESSERT.title": "Dessert",
   "INDOMITABLESPIRE2-DESSERT.description": "Heal [green]{Heal:diff()}[/green] HP.\nGain {Energy:energyIcons()}.",

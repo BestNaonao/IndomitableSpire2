@@ -75,5 +75,8 @@
   "INDOMITABLESPIRE2-INDUSTRIAL_REVOLUTION_POWER.title": "Industrial Revolution",
   "INDOMITABLESPIRE2-SECOND_HANGAR_POWER.description": "Increase your maximum hand size.",
   "INDOMITABLESPIRE2-SECOND_HANGAR_POWER.smartDescription": "Increase your maximum hand size by [blue]{Amount}[/blue].",
-  "INDOMITABLESPIRE2-SECOND_HANGAR_POWER.title": "Second Hangar"
+  "INDOMITABLESPIRE2-SECOND_HANGAR_POWER.title": "Second Hangar",
+  "INDOMITABLESPIRE2-INNER_ARMOR_POWER.description": "The next time your [gold]Shield[/gold] breaks, gain [gold]Shield[/gold].",
+  "INDOMITABLESPIRE2-INNER_ARMOR_POWER.smartDescription": "The next time your [gold]Shield[/gold] breaks, gain [blue]{Amount}[/blue] [gold]Shield[/gold].",
+  "INDOMITABLESPIRE2-INNER_ARMOR_POWER.title": "Inner Armor"
 }

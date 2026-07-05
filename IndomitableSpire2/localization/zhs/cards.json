@@ -85,6 +85,8 @@
   "INDOMITABLESPIRE2-INDUSTRIAL_REVOLUTION.description": "你每生成[blue]4[/blue]张非[gold]状态[/gold]、非[gold]诅咒[/gold]的牌，你打出的下{IndustrialRevolutionPower:diff()}张牌在打出前获得1层[gold]重放[/gold]。",
   "INDOMITABLESPIRE2-SECOND_HANGAR.title": "第二机库",
   "INDOMITABLESPIRE2-SECOND_HANGAR.description": "你的手牌上限增加{SecondHangarPower:diff()}张。",
+  "INDOMITABLESPIRE2-INNER_ARMOR.title": "内层装甲",
+  "INDOMITABLESPIRE2-INNER_ARMOR.description": "在你下一次[gold]护盾[/gold]破碎时，获得等量于你当前[gold]护盾[/gold]层数的[gold]护盾[/gold]。",
   
   "INDOMITABLESPIRE2-DESSERT.title": "甜点",
   "INDOMITABLESPIRE2-DESSERT.description": "回复[green]{Heal:diff()}[/green]点生命。\n获得{Energy:energyIcons()}。",
