@@ -1,4 +1,5 @@
 ﻿using IndomitableSpire2.IndomitableSpire2Code.Abstracts;
+using IndomitableSpire2.IndomitableSpire2Code.Hooks;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
@@ -39,4 +40,11 @@ public sealed class ShieldPower : IndomitablePower, IBlockRetentionProvider
     public int CalculateRetainedBlock(AbstractModel sourceModel, Creature creature) => Amount;
     
     public void OnRetentionTriggered(AbstractModel sourceModel, Creature creature) => Flash();
+    
+    // 当护盾层数跌至 0，被引擎彻底移除时触发
+    public override async Task AfterRemoved(Creature owner)
+    {
+        await CustomHook.AfterShieldBroken(owner);  // 向全场广播护盾破碎事件
+        await base.AfterRemoved(owner); // 调用基类方法保证底层逻辑完整
+    }
 }
