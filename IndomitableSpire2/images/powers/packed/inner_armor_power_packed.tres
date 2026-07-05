@@ -1,0 +1,7 @@
+[gd_resource type="AtlasTexture" load_steps=2 format=3 uid="uid://bqieelr4768cv"]
+
+[ext_resource type="Texture2D" uid="uid://dfi6g3d5q7hrg" path="res://IndomitableSpire2/images/powers/packed/inner_armor_power_packed.png" id="1_630be"]
+
+[resource]
+atlas = ExtResource("1_630be")
+region = Rect2(0, 0, 64, 64)
