@@ -113,13 +113,13 @@ public static class NCardVisualsPatch
             {
                 durabilityIcon.Visible = true;
                 
-                // 获取当前值和最大值
-                var current = (int)model.DynamicVars.Durability().BaseValue;
+                // 同时获取基础值（Base）、预测值（Preview）和最大值（Max）
+                var previewCurrent = (int)model.DynamicVars.Durability().PreviewValue;
                 var max = (int)model.DynamicVars.MaxDurability().BaseValue;
-                durabilityLabel.Text = $"{current}/{max}";
+                durabilityLabel.Text = $"{previewCurrent}/{max}";
                 
                 // 核心功能：绿-黄-红 丝滑渐变算法
-                var pct = max > 0 ? Mathf.Clamp((float)current / max, 0f, 1f) : 0f;
+                var pct = max > 0 ? Mathf.Clamp((float)previewCurrent / max, 0f, 1f) : 0f;
                 var targetColor =
                     // 大于 50%：在黄色和绿色之间插值，将 0.5~1.0 映射为 0.0~1.0
                     pct > 0.5f ? Colors.DarkOrange.Lerp(Colors.DarkGreen, (pct - 0.5f) * 2f) :
