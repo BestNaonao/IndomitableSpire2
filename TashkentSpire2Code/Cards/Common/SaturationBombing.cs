@@ -13,7 +13,8 @@ namespace TashkentSpire2.TashkentSpire2Code.Cards.Common;
 public sealed class SaturationBombing() : AmmunitionCard(2, CardType.Attack, CardRarity.Common, TargetType.AllEnemies)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new DamageVar(6M, ValueProp.Move),
+        new ExtraDamageVar(6m),
+        new DamageVar(0M, ValueProp.Move),
         new AmmunitionDynamicVar(3M),
         new AmmuMaxDynamicVar(6M)
     ];
@@ -26,7 +27,7 @@ public sealed class SaturationBombing() : AmmunitionCard(2, CardType.Attack, Car
         
         int shellsLoaded = await GetShellCountcmd.Execute(choiceContext, Owner, (int)CurrentAmmu,this.Keywords.Contains(TashkentKeyword.Barrage));
 
-        await DamageCmd.Attack(DynamicVars.Damage.BaseValue * shellsLoaded)
+        await DamageCmd.Attack(DynamicVars.ExtraDamage.BaseValue * shellsLoaded)
             .FromCard(this)
             .TargetingAllOpponents(CombatState)
             .WithHitFx("vfx/vfx_attack_slash")
@@ -45,5 +46,5 @@ public sealed class SaturationBombing() : AmmunitionCard(2, CardType.Attack, Car
         UpdateAmmuGlobal(Math.Max(CurrentAmmu - shellsLoaded, 0));
     }
     
-    protected override void OnUpgrade() => DynamicVars.Damage.UpgradeValueBy(3M);
+    protected override void OnUpgrade() => DynamicVars.ExtraDamage.UpgradeValueBy(3M);
 }

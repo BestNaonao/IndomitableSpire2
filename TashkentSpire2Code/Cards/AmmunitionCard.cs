@@ -28,7 +28,16 @@ public abstract class AmmunitionCard(
     [SavedProperty]
     public int CurrentAmmu
     {
-        get => _currentAmmu;
+        get
+        {
+            if (_currentAmmu == -1 &&
+                DynamicVars.TryGetValue("TashkentSpire2-Ammu", out var ammuVar))
+            {
+                _currentAmmu = (int)ammuVar.BaseValue;
+            }
+
+            return _currentAmmu;
+        }
         set
         {
             AssertMutable();
@@ -83,6 +92,19 @@ public abstract class AmmunitionCard(
             {
                 await Loadcmd.Execute(choiceContext, this, loadAmount);
             }
+        }
+    }
+    
+    protected override bool ShouldGlowGoldInternal
+    {
+        get
+        {
+            if (DynamicVars.TryGetValue("TashkentSpire2-Shot", out var shotVar))
+            {
+                return CurrentAmmu >= shotVar.IntValue;
+            }
+
+            return false;
         }
     }
 }

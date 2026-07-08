@@ -2,17 +2,17 @@
   "TASHKENTSPIRE2-MARK.title": "标记",
   "TASHKENTSPIRE2-MARK.description": "受到攻击伤害时增加[gold]标记[/gold]层数的伤害，然后层数减少[blue]1[/blue]。",
   "TASHKENTSPIRE2-TORPEDO.title": "鱼雷",
-  "TASHKENTSPIRE2-TORPEDO.description": "鱼雷在回合结束时对[gold]标记[/gold]数最多的敌人造成伤害。\n时间依[gold]释放时[/gold]自身[gold]距离[/gold]确定。\n伤害受目标身上的[gold]标记[/gold]加成。",
+  "TASHKENTSPIRE2-TORPEDO.description": "鱼雷在回合结束时对[gold]标记[/gold]数最多的敌人造成伤害。\n命中时间依[gold]释放时[/gold]自身[gold]距离[/gold]确定，基础在第3回合结束时命中敌人，[gold]距离[/gold]为[blue]2[/blue]或者[blue]3[/blue]时在下一回合结束时命中敌人，[gold]距离[/gold]为[blue]4[/blue]或者[blue]5[/blue]时在本回合结束时命中敌人。\n伤害受目标身上的[gold]标记[/gold]加成。",
   "TASHKENTSPIRE2-CHARGE.title": "突进",
   "TASHKENTSPIRE2-CHARGE.description": "距离增加，最多不超过[blue]5[/blue]。",
   "TASHKENTSPIRE2-RETREAT.title": "后撤",
   "TASHKENTSPIRE2-RETREAT.description": "距离减少，最少不低于[blue]-5[/blue]。",
   "TASHKENTSPIRE2-AMMU.title": "弹药",
-  "TASHKENTSPIRE2-AMMU.description": "可用弹药数/最大弹药数。\n战斗中花费弹药执行“[red]重复[/red]”所示的效果。\n弹药可跨战斗保存。",
+  "TASHKENTSPIRE2-AMMU.description": "可用弹药数/最大弹药数。\n战斗中每花费一份弹药，执行一次“[red]发射[/red]”后的效果。\n弹药可跨战斗保存。",
   "TASHKENTSPIRE2-AMMU-MAX.title": "弹药最大值",
   "TASHKENTSPIRE2-AMMU-MAX.description": "可装载的弹药最大值。",
   "TASHKENTSPIRE2-LOAD.title": "装填",
   "TASHKENTSPIRE2-LOAD.description": "增加此卡的[gold]弹药[/gold]数。",
-  "TASHKENTSPIRE2-SHOT.title": "发射",
-  "TASHKENTSPIRE2-SHOT.description": "花费至少多少[gold]弹药[/gold]以执行额外效果。"
+  "TASHKENTSPIRE2-SHOT.title": "集火X",
+  "TASHKENTSPIRE2-SHOT.description": "打出时，如果决定使用的[gold]弹药[/gold]数 >= X，触发后续额外效果。"
 }

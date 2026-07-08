@@ -1,5 +1,4 @@
-﻿using BaseLib.Extensions;
-using MegaCrit.Sts2.Core.Localization.DynamicVars;
+﻿using MegaCrit.Sts2.Core.Localization.DynamicVars;
 
 namespace TashkentSpire2.TashkentSpire2Code;
 
@@ -11,6 +10,6 @@ public class LoadDynamicVar : DynamicVar
 
     public LoadDynamicVar(decimal baseValue) : base(Key, baseValue)
     {
-        this.WithTooltip(LocKey);
+        //this.WithTooltip(LocKey);
     }
 }

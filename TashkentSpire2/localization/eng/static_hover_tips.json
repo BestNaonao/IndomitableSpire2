@@ -2,17 +2,17 @@
   "TASHKENTSPIRE2-MARK.title": "Mark",
   "TASHKENTSPIRE2-MARK.description": "When taking Attack damage, increase that damage by the number of [gold]Mark[/gold] stacks, then lose [blue]1[/blue] stack.",
   "TASHKENTSPIRE2-TORPEDO.title": "Torpedo",
-  "TASHKENTSPIRE2-TORPEDO.description": "At the end of the turn, a Torpedo deals damage to the enemy with the most [gold]Mark[/gold].\nIts timing is determined by your [gold]Distance[/gold] when it is [gold]launched[/gold].\nIts damage is increased by the target's [gold]Mark[/gold].",
+  "TASHKENTSPIRE2-TORPEDO.description": "At the end of the turn, a Torpedo deals damage to the enemy with the most [gold]Mark[/gold].\nThe hit timing is determined by your [gold]Distance[/gold] when it is [gold]launched[/gold]. By default, it hits the enemy at the end of the 3rd turn. If your [gold]Distance[/gold] is [blue]2[/blue] or [blue]3[/blue], it hits the enemy at the end of the next turn. If your [gold]Distance[/gold] is [blue]4[/blue] or [blue]5[/blue], it hits the enemy at the end of this turn.\nDamage is increased by the target's [gold]Mark[/gold].",
   "TASHKENTSPIRE2-CHARGE.title": "Charge",
   "TASHKENTSPIRE2-CHARGE.description": "Increase your Distance, up to a maximum of [blue]5[/blue].",
   "TASHKENTSPIRE2-RETREAT.title": "Retreat",
   "TASHKENTSPIRE2-RETREAT.description": "Decrease your Distance, down to a minimum of [blue]-5[/blue].",
   "TASHKENTSPIRE2-AMMU.title": "Ammo",
-  "TASHKENTSPIRE2-AMMU.description": "Current Ammo / Maximum Ammo.\nSpend Ammo during combat to perform effects marked with [red]Repeat[/red].\nAmmo is retained between combats.",
+  "TASHKENTSPIRE2-AMMU.description": "Current Ammo / Maximum Ammo.\nDuring combat, each Ammo spent triggers the effect after [gold]Fire[/gold].\nAmmo is retained between combats.",
   "TASHKENTSPIRE2-AMMU-MAX.title": "Maximum Ammo",
   "TASHKENTSPIRE2-AMMU-MAX.description": "The maximum amount of Ammo this card can hold.",
   "TASHKENTSPIRE2-LOAD.title": "Load",
   "TASHKENTSPIRE2-LOAD.description": "Increase this card's [gold]Ammo[/gold].",
-  "TASHKENTSPIRE2-SHOT.title": "Fire",
-  "TASHKENTSPIRE2-SHOT.description": "Spend at least this much [gold]Ammo[/gold] to trigger the additional effect."
+  "TASHKENTSPIRE2-SHOT.title": "Focus Fire X",
+  "TASHKENTSPIRE2-SHOT.description": "When played, if the chosen amount of [gold]Ammo[/gold] is greater than or equal to X, trigger the additional effect."
 }

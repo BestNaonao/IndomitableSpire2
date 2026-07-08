@@ -64,14 +64,6 @@ public sealed class TorpedoReload() : AmmunitionCard(2, CardType.Skill, CardRari
         }
     }
     
-    public override async Task AfterCardDrawn(PlayerChoiceContext choiceContext, CardModel card, bool fromHandDraw)
-    {
-        if (card != this) return;
-        
-        int load = DynamicVars["TashkentSpire2-Load"].IntValue;
-        await Loadcmd.Execute(choiceContext, this, load);
-    }
-    
     public async Task AfterTorpedoDamage(PlayerChoiceContext choiceContext, TorpedoDamageContext context)
     {
         var allPiles = Owner?.PlayerCombatState?.AllPiles;
