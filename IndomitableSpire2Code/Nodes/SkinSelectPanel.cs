@@ -39,6 +39,13 @@ public partial class SkinSelectPanel : Control
         _rightArrow.Pressed += OnRightPressed;
     }
     
+    public void SetInteractable(bool interactable)
+    {
+        // 直接控制左和右箭头的可见性（或者设置 Disabled 属性也可以）
+        if (IsInstanceValid(_leftArrow)) _leftArrow.Visible = interactable;
+        if (IsInstanceValid(_rightArrow)) _rightArrow.Visible = interactable;
+    }
+    
     // 每次选中该角色时被调用（包括重进界面）
     public void ShowAndSync(NCharacterSelectScreen screen)
     {
