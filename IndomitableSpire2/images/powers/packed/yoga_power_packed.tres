@@ -1,0 +1,7 @@
+[gd_resource type="AtlasTexture" load_steps=2 format=3 uid="uid://cycdptkaoabnf"]
+
+[ext_resource type="Texture2D" uid="uid://dheng5djn72gk" path="res://IndomitableSpire2/images/powers/packed/yoga_power_packed.png" id="1_mwnas"]
+
+[resource]
+atlas = ExtResource("1_mwnas")
+region = Rect2(0, 0, 64, 64)
