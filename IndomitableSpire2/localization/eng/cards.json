@@ -87,6 +87,8 @@
   "INDOMITABLESPIRE2-SECOND_HANGAR.description": "Increase your maximum hand size by {SecondHangarPower:diff()}.",
   "INDOMITABLESPIRE2-INNER_ARMOR.title": "Inner Armor",
   "INDOMITABLESPIRE2-INNER_ARMOR.description": "The next time your [gold]Shield[/gold] breaks, gain [gold]Shield[/gold] equal to your current [gold]Shield[/gold].",
+  "INDOMITABLESPIRE2-YOGA.title": "Yoga",
+  "INDOMITABLESPIRE2-YOGA.description": "Whenever you gain or consume [gold]Motivation[/gold] this turn, gain {YogaPower:diff()} [gold]Shield[/gold].",
   
   "INDOMITABLESPIRE2-DESSERT.title": "Dessert",
   "INDOMITABLESPIRE2-DESSERT.description": "Heal [green]{Heal:diff()}[/green] HP.\nGain {Energy:energyIcons()}.",

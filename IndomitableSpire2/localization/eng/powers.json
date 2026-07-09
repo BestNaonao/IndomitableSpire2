@@ -78,5 +78,8 @@
   "INDOMITABLESPIRE2-SECOND_HANGAR_POWER.title": "Second Hangar",
   "INDOMITABLESPIRE2-INNER_ARMOR_POWER.description": "The next time your [gold]Shield[/gold] breaks, gain [gold]Shield[/gold].",
   "INDOMITABLESPIRE2-INNER_ARMOR_POWER.smartDescription": "The next time your [gold]Shield[/gold] breaks, gain [blue]{Amount}[/blue] [gold]Shield[/gold].",
-  "INDOMITABLESPIRE2-INNER_ARMOR_POWER.title": "Inner Armor"
+  "INDOMITABLESPIRE2-INNER_ARMOR_POWER.title": "Inner Armor",
+  "INDOMITABLESPIRE2-YOGA_POWER.description": "Whenever you gain or consume [gold]Motivation[/gold] this turn, gain [gold]Shield[/gold].",
+  "INDOMITABLESPIRE2-YOGA_POWER.smartDescription": "Whenever you gain or consume [gold]Motivation[/gold] this turn, gain [blue]{Amount}[/blue] [gold]Shield[/gold].",
+  "INDOMITABLESPIRE2-YOGA_POWER.title": "Yoga"
 }

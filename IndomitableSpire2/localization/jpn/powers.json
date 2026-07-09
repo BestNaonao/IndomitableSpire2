@@ -78,5 +78,8 @@
   "INDOMITABLESPIRE2-SECOND_HANGAR_POWER.title": "第二格納庫",
   "INDOMITABLESPIRE2-INNER_ARMOR_POWER.description": "次に[gold]シールド[/gold]が破壊された時、[gold]シールド[/gold]を得る。",
   "INDOMITABLESPIRE2-INNER_ARMOR_POWER.smartDescription": "次に[gold]シールド[/gold]が破壊された時、[gold]シールド[/gold]を[blue]{Amount}[/blue]得る。",
-  "INDOMITABLESPIRE2-INNER_ARMOR_POWER.title": "内装甲"
+  "INDOMITABLESPIRE2-INNER_ARMOR_POWER.title": "内装甲",
+  "INDOMITABLESPIRE2-YOGA_POWER.description": "このターン、[gold]やる気[/gold]を得るか消費するたび、[gold]シールド[/gold]を得る。",
+  "INDOMITABLESPIRE2-YOGA_POWER.smartDescription": "このターン、[gold]やる気[/gold]を得るか消費するたび、[gold]シールド[/gold]を[blue]{Amount}[/blue]得る。",
+  "INDOMITABLESPIRE2-YOGA_POWER.title": "ヨガ"
 }

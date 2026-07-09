@@ -78,5 +78,8 @@
   "INDOMITABLESPIRE2-SECOND_HANGAR_POWER.title": "第二机库",
   "INDOMITABLESPIRE2-INNER_ARMOR_POWER.description": "在你下一次[gold]护盾[/gold]破碎时，获得[gold]护盾[/gold]。",
   "INDOMITABLESPIRE2-INNER_ARMOR_POWER.smartDescription": "在你下一次[gold]护盾[/gold]破碎时，获得[blue]{Amount}[/blue]点[gold]护盾[/gold]。",
-  "INDOMITABLESPIRE2-INNER_ARMOR_POWER.title": "内层装甲"
+  "INDOMITABLESPIRE2-INNER_ARMOR_POWER.title": "内层装甲",
+  "INDOMITABLESPIRE2-YOGA_POWER.description": "本回合，每当你获得或消耗[gold]干劲[/gold]时，获得[gold]护盾[/gold]。",
+  "INDOMITABLESPIRE2-YOGA_POWER.smartDescription": "本回合，每当你获得或消耗[gold]干劲[/gold]时，获得[blue]{Amount}[/blue]点[gold]护盾[/gold]。",
+  "INDOMITABLESPIRE2-YOGA_POWER.title": "瑜伽"
 }
