@@ -46,7 +46,7 @@ public sealed class AirSuperiority() : IndomitableCard(1, CardType.Attack, CardR
         // 执行多段伤害指令， 动态计算本次打出的实际段数
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
             .WithHitCount((int)((CalculatedVar)DynamicVars["CalculatedHits"]).Calculate(cardPlay.Target))
-            .FromCard(this)
+            .FromCard(this, cardPlay)
             .Targeting(cardPlay.Target)
             .WithHitFx("vfx/vfx_attack_slash")
             .Execute(choiceContext);

@@ -42,7 +42,7 @@ public sealed class DualPurposeGun() : IndomitableCard(1, CardType.Attack, CardR
             // 【手动打出】：平射对舰
             ArgumentNullException.ThrowIfNull(cardPlay.Target, nameof(cardPlay.Target));
             await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
-                .FromCard(this)
+                .FromCard(this, cardPlay)
                 .Targeting(cardPlay.Target)
                 .WithHitFx("vfx/vfx_attack_slash")
                 .Execute(choiceContext);

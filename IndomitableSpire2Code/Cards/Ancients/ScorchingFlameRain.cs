@@ -34,7 +34,7 @@ public sealed class ScorchingFlameRain() : IndomitableCard(1, CardType.Attack, C
         if (CombatState == null) return;
         // 1. 群体伤害
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
-            .FromCard(this)
+            .FromCard(this, cardPlay)
             .TargetingAllOpponents(CombatState)
             .WithHitFx("vfx/vfx_fire_burst") 
             .Execute(choiceContext);

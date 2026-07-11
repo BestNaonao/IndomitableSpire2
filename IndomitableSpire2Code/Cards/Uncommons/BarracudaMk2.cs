@@ -34,7 +34,7 @@ public sealed class BarracudaMk2() : CarrierAircraftCard(1, CardType.Attack, Car
         ArgumentNullException.ThrowIfNull(cardPlay.Target, nameof(cardPlay.Target));
         
         var attackCmd = await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
-            .FromCard(this)
+            .FromCard(this, cardPlay)
             .Targeting(cardPlay.Target)
             .Execute(choiceContext);
         

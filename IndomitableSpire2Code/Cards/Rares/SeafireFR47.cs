@@ -36,7 +36,7 @@ public sealed class SeafireFr47() : CarrierAircraftCard(2, CardType.Attack, Card
         
         var attackCmd = await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
             .WithHitCount(DynamicVars.Repeat.IntValue)
-            .FromCard(this)
+            .FromCard(this, cardPlay)
             .Targeting(cardPlay.Target)
             .Execute(choiceContext);
         

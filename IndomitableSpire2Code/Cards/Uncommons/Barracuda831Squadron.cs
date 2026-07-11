@@ -34,7 +34,7 @@ public sealed class Barracuda831Squadron() : CarrierAircraftCard(2, CardType.Att
         
         // 利用 ModifyDamageMultiplicative 钩子函数修改伤害，就不用在打出逻辑里写双倍伤害了。
         var attackCmd = await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
-            .FromCard(this)
+            .FromCard(this, cardPlay)
             .Targeting(cardPlay.Target)
             .WithHitFx(hasBlock ? "vfx/vfx_heavy_blunt" : "vfx/vfx_attack_slash")
             .Execute(choiceContext);

@@ -27,7 +27,7 @@ public sealed class Cleanup() : IndomitableCard(1, CardType.Attack, CardRarity.C
         
         // 1. 先造成伤害
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
-            .FromCard(this)
+            .FromCard(this, cardPlay)
             .Targeting(cardPlay.Target)
             .WithHitFx("vfx/vfx_attack_slash") // 挥扫的视觉特效
             .Execute(choiceContext);

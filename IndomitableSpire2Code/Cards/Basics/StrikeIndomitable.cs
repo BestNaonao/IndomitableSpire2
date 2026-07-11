@@ -22,7 +22,7 @@ public sealed class StrikeIndomitable() : IndomitableCard(1, CardType.Attack, Ca
 
         // 调用伤害指令，应用当前的伤害变量，并附带斩击特效
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
-            .FromCard(this)
+            .FromCard(this, cardPlay)
             .Targeting(cardPlay.Target)
             .WithHitFx("vfx/vfx_attack_slash")
             .Execute(choiceContext);

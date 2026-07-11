@@ -36,7 +36,7 @@ public sealed class Ignite() : IndomitableCard(1, CardType.Attack, CardRarity.Ba
     {
         ArgumentNullException.ThrowIfNull(cardPlay.Target, nameof(cardPlay.Target));
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
-            .FromCard(this)
+            .FromCard(this, cardPlay)
             .Targeting(cardPlay.Target)
             .WithHitFx("vfx/vfx_fire_burst")
             .Execute(choiceContext);

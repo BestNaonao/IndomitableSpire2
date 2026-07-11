@@ -36,7 +36,7 @@ public sealed class SeaHornetBomber() : CarrierAircraftCard(2, CardType.Attack, 
         
         var attackCmd = await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
             .WithHitCount(DynamicVars.Repeat.IntValue)
-            .FromCard(this)
+            .FromCard(this, cardPlay)
             .TargetingAllOpponents(CombatState)
             .WithHitFx("vfx/vfx_fire_burst")
             .Execute(choiceContext);
