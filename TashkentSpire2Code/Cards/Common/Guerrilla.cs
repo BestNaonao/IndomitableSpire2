@@ -29,7 +29,7 @@ public sealed class Guerrilla() : TashkentCard(0, CardType.Attack, CardRarity.Co
                 await CardPileCmd.Draw(choiceContext, base.DynamicVars.Cards.IntValue, base.Owner);
             }
             await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
-                .FromCard(this)
+                .FromCard(this, cardPlay)
                 .Targeting(cardPlay.Target)
                 .WithHitFx("vfx/vfx_attack_slash")
                 .Execute(choiceContext);

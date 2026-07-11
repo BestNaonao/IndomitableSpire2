@@ -37,7 +37,7 @@ public sealed class HeroicShooting() : AmmunitionCard(0, CardType.Attack, CardRa
             });
 
             await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
-                .FromCard(this)
+                .FromCard(this, cardPlay)
                 .WithHitCount(shellsLoaded)
                 .TargetingAllOpponents(CombatState)
                 .WithHitFx("vfx/vfx_attack_slash")

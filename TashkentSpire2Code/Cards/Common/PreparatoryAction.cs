@@ -10,8 +10,6 @@ namespace TashkentSpire2.TashkentSpire2Code.Cards.Common;
 
 public sealed class PreparatoryAction() : TashkentCard(1, CardType.Skill, CardRarity.Common, TargetType.Self)
 {
-    public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
-    
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new CardsVar(1)
     ];

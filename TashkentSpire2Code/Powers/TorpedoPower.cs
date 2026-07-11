@@ -131,12 +131,6 @@ public sealed class TorpedoPower : TashkentPower, IHasSecondAmount
 
         if (Owner != null && Owner.Player != null)
         {
-            int smokeCount = Owner.GetPower<AllRounderPower>() is { } allRounder ? (int)allRounder.Amount : 0;
-            if (smokeCount > 0)
-            {
-                await PowerCmd.Apply<SmokePower>(new ThrowingPlayerChoiceContext(), Owner, smokeCount, Owner, null); 
-            }
-            
             foreach (var device in Owner.Player.Relics.OfType<TorpedoRecoilDevice>())
             {
                 await device.TryTriggerBlock(); 

@@ -1,6 +1,7 @@
 ﻿using Godot;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
+using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Powers;
@@ -110,6 +111,8 @@ public sealed class DistancePower : TashkentPower, IPersistentPower
     
     public override async Task AfterSideTurnStart(CombatSide side, IReadOnlyList<Creature> participants, ICombatState combatState)
     {
+        if (base.Owner.Player == null) return;
+        
         if (!participants.Contains(base.Owner) && HasActiveSandpit())
         {
             _isSyncing = true;  // 加锁
@@ -120,9 +123,9 @@ public sealed class DistancePower : TashkentPower, IPersistentPower
         }
     }
     
-    public override decimal ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource)
+    public override decimal ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource, CardPlay? cardPlay)
     {
-        if (dealer == this.Owner && (!props.HasFlag(ValueProp.Move) || cardSource == null))
+        if (dealer == this.Owner && !props.IsPoweredAttack())
             return 1m;
 
         int dist = (int)base.Amount; 
@@ -171,7 +174,7 @@ public sealed class DistancePower : TashkentPower, IPersistentPower
                 if (!_isSyncing)
                 {
                     _isSyncing = true;
-                    await SyncSandpitPower(deltaDist);
+                    await SyncSandpitPower(-deltaDist);
                     _isSyncing = false;
                 }
 
@@ -200,18 +203,29 @@ public sealed class DistancePower : TashkentPower, IPersistentPower
     
     private async Task SyncSandpitPower(int delta)
     {
-        var sandpitEnemies = base.CombatState?.Enemies.Where(c => c.HasPower<SandpitPower>());
-    
-        if (sandpitEnemies == null) return;
-
-        foreach (var enemy in sandpitEnemies)
+        if (base.Owner.Player != null)
         {
-            var sandpitPower = enemy.Powers.OfType<SandpitPower>()
-                .FirstOrDefault(s => s.Target == base.Owner);
+            var sandpitEnemies = base.CombatState?.Enemies.Where(c => c.HasPower<SandpitPower>());
+            if (sandpitEnemies == null) return;
 
+            foreach (var enemy in sandpitEnemies)
+            {
+                var sandpitPower = enemy.Powers.OfType<SandpitPower>()
+                    .FirstOrDefault(s => s.Target == base.Owner);
+
+                if (sandpitPower != null)
+                {
+                    await PowerCmd.ModifyAmount(new ThrowingPlayerChoiceContext(), sandpitPower, (decimal)delta, enemy, null);
+                }
+            }
+        }
+
+        else
+        {
+            var sandpitPower = base.Owner.Powers.OfType<SandpitPower>().FirstOrDefault();
             if (sandpitPower != null)
             {
-                await PowerCmd.ModifyAmount(new ThrowingPlayerChoiceContext(), sandpitPower, -(decimal)delta, enemy, null);
+                await PowerCmd.ModifyAmount(new ThrowingPlayerChoiceContext(), sandpitPower, (decimal)delta, base.Owner, null);
             }
         }
     }
@@ -232,11 +246,22 @@ public sealed class DistancePower : TashkentPower, IPersistentPower
     private async Task UpdateCreaturePositions(int delta)
     {
         if (delta == 0) return;
-        var surrounded = base.Owner.GetPower<SurroundedPower>();
-        bool isFacingLeft = surrounded != null && surrounded.Facing == SurroundedPower.Direction.Left;
+        
+        bool isFacingLeft;
 
+        if (base.Owner.Player != null)
+        {
+            var surrounded = base.Owner.GetPower<SurroundedPower>();
+            isFacingLeft = surrounded != null && surrounded.Facing == SurroundedPower.Direction.Left;
+        }
+        else
+        {
+            bool hasBackAttackLeft = base.Owner.HasPower<BackAttackLeftPower>();
+            isFacingLeft = !hasBackAttackLeft;
+        }
+        
         float moveDir = isFacingLeft ? -1f : 1f;
-        float moveDistance = delta * 50f * moveDir;
+        float moveDistance = delta * 40f * moveDir;
 
         Tween? tween = null;
         foreach (Creature creature in GetOwnerAndPets())

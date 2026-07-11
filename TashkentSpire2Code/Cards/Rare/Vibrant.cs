@@ -48,7 +48,7 @@ public class Vibrant() : TashkentCard(1, CardType.Skill, CardRarity.Rare, Target
             {
                 Log.Warn(base.Id.Entry + " exhausted attack card " + card.Id.Entry + " that did not have an appropriate damage var!");
             }
-            damage = Hook.ModifyDamage(base.Owner.RunState, base.Owner.Creature.CombatState, null, base.Owner.Creature, damage, ValueProp.Move, card, ModifyDamageHookType.All, CardPreviewMode.None, out IEnumerable<AbstractModel> _);
+            damage = Hook.ModifyDamage(base.Owner.RunState, base.Owner.Creature.CombatState, null, base.Owner.Creature, damage, ValueProp.Move, card, null, ModifyDamageHookType.All, CardPreviewMode.None, out IEnumerable<AbstractModel> _);
             await CardCmd.Exhaust(choiceContext, card);
         }
         

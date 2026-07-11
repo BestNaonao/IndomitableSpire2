@@ -25,7 +25,7 @@ public sealed class FightBack() : TashkentCard(0, CardType.Attack, CardRarity.Ra
         for (int i = 0; i < xValue; i++)
         {
             await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
-                .FromCard(this)
+                .FromCard(this, cardPlay)
                 .Targeting(cardPlay.Target)
                 .WithHitFx("vfx/vfx_attack_slash")
                 .Execute(choiceContext);

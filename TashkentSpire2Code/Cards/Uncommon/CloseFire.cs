@@ -36,7 +36,7 @@ public sealed class CloseFire() : TashkentCard(1, CardType.Attack, CardRarity.Un
 
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
             .WithHitCount(repeat)
-            .FromCard(this)
+            .FromCard(this, cardPlay)
             .Targeting(cardPlay.Target)
             .WithHitFx("vfx/vfx_attack_slash")
             .Execute(choiceContext);

@@ -1,7 +1,6 @@
 ﻿using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
-using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using TashkentSpire2.TashkentSpire2Code.Powers;
 
@@ -10,12 +9,8 @@ namespace TashkentSpire2.TashkentSpire2Code.Cards.Uncommon;
 public sealed class AllRounder() : TashkentCard(1, CardType.Power, CardRarity.Uncommon, TargetType.Self)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new PowerVar<AllRounderPower>(1M)
-    ];
-    
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => [
-        HoverTipFactory.FromPower<TorpedoPower>(),
-        HoverTipFactory.FromPower<SmokePower>()
+        new PowerVar<AllRounderPower>(1M),
+        new MarkDynamicVar(0M)
     ];
     
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
@@ -26,6 +21,6 @@ public sealed class AllRounder() : TashkentCard(1, CardType.Power, CardRarity.Un
     
     protected override void OnUpgrade()
     {
-        AddKeyword(CardKeyword.Innate);
+        DynamicVars["AllRounderPower"].UpgradeValueBy(1M);
     }
 }

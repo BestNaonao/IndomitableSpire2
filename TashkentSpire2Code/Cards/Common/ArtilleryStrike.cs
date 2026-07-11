@@ -38,7 +38,7 @@ public sealed class ArtilleryStrike() : AmmunitionCard(1, CardType.Attack, CardR
             for (int i = 0; i < shellsLoaded; i++)
             {
                 await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
-                    .FromCard(this)
+                    .FromCard(this, cardPlay)
                     .Targeting(cardPlay.Target)
                     .WithHitFx("vfx/vfx_attack_slash")
                     .Execute(choiceContext);

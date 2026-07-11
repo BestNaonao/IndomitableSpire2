@@ -21,7 +21,7 @@ public sealed class TidebreakerHunt() : TashkentCard(4, CardType.Attack, CardRar
         ArgumentNullException.ThrowIfNull(CombatState);
         
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
-            .FromCard(this)
+            .FromCard(this, cardPlay)
             .TargetingAllOpponents(CombatState)
             .WithHitFx("vfx/vfx_attack_slash")
             .Execute(choiceContext);

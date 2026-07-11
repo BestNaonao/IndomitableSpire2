@@ -28,7 +28,7 @@ public sealed class Pursuit() : TashkentCard(0, CardType.Attack, CardRarity.Toke
         await PowerCmd.Apply<DistancePower>(choiceContext, base.Owner.Creature, base.DynamicVars["TashkentSpire2-Charge"].BaseValue, base.Owner.Creature, this);
         
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
-            .FromCard(this)
+            .FromCard(this, cardPlay)
             .Targeting(cardPlay.Target)
             .WithHitFx("vfx/vfx_attack_slash")
             .Execute(choiceContext);

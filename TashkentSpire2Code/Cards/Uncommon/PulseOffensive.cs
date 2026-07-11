@@ -42,7 +42,7 @@ public sealed class PulseOffensive() : AmmunitionCard(2, CardType.Attack, CardRa
             for (int i = 0; i < shellsLoaded; i++)
             {
                 await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
-                    .FromCard(this)
+                    .FromCard(this, cardPlay)
                     .TargetingAllOpponents(CombatState)
                     .WithHitFx("vfx/vfx_attack_slash")
                     .Execute(choiceContext);

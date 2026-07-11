@@ -22,7 +22,7 @@ public sealed class Reward() : TashkentCard(1, CardType.Attack, CardRarity.Commo
         ArgumentNullException.ThrowIfNull(cardPlay.Target, nameof(cardPlay.Target));
         ArgumentNullException.ThrowIfNull(CombatState);
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
-            .FromCard(this)
+            .FromCard(this, cardPlay)
             .Targeting(cardPlay.Target)
             .WithHitFx("vfx/vfx_attack_slash")
             .Execute(choiceContext);

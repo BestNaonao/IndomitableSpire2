@@ -61,7 +61,7 @@ public sealed class UltimateWeapon() : AmmunitionCard(3, CardType.Attack, CardRa
             {
                 bool shouldTriggerFatal = cardPlay.Target.Powers.All((PowerModel p) => p.ShouldOwnerDeathTriggerFatal());
                 AttackCommand attackCommand = await DamageCmd.Attack(base.DynamicVars.CalculatedDamage)
-                    .FromCard(this)
+                    .FromCard(this, cardPlay)
                     .Targeting(cardPlay.Target)
                     .Execute(choiceContext);
 

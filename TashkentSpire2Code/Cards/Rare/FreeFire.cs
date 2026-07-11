@@ -40,7 +40,7 @@ public sealed class FreeFire() : AmmunitionCard(0, CardType.Attack, CardRarity.R
             });
             
             await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
-                .FromCard(this)
+                .FromCard(this, cardPlay)
                 .WithHitCount(shellsLoaded)
                 .Targeting(cardPlay.Target)
                 .WithHitFx("vfx/vfx_attack_slash")

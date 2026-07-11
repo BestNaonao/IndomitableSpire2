@@ -41,7 +41,7 @@ public sealed class FocusFire() : AmmunitionCard(1, CardType.Attack, CardRarity.
         if (shellsLoaded > 0)
         {
             await TryTriggerShotEffectAsync(shellsLoaded, async () => {
-                await DamageCmd.Attack(base.DynamicVars.CalculatedDamage).FromCard(this).Targeting(cardPlay.Target)
+                await DamageCmd.Attack(base.DynamicVars.CalculatedDamage).FromCard(this, cardPlay).Targeting(cardPlay.Target)
                     .WithHitFx("vfx/vfx_attack_slash")
                     .Execute(choiceContext);
             });
