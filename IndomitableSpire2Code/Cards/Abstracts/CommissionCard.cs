@@ -84,7 +84,8 @@ public abstract class CommissionCard(TargetType target)
     }
     
     // 强制返回 PileType.None 作为保险
-    protected override PileType GetResultPileTypeForCardPlay() => IsCompleted ? PileType.None : base.GetResultPileTypeForCardPlay();
+    protected override (PileType, CardPilePosition) GetResultPileTypeAndPositionForCardPlay() => 
+        IsCompleted ? (PileType.None, CardPilePosition.Bottom) : base.GetResultPileTypeAndPositionForCardPlay();
     
     /// <summary>
     /// 子类必须实现的奖励发放逻辑
