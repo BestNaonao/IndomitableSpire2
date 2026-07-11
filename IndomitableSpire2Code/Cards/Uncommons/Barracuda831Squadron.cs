@@ -61,12 +61,8 @@ public sealed class Barracuda831Squadron() : CarrierAircraftCard(2, CardType.Att
     
     // 如果对方有格挡，直接将伤害的乘数翻倍
     public override decimal ModifyDamageMultiplicative(
-        Creature? target,
-        decimal amount,
-        ValueProp props,
-        Creature? dealer,
-        CardModel? cardSource) =>
-        target is not { Block: > 0 } || dealer != Owner.Creature || cardSource != this || !props.IsPoweredAttack()
+        Creature? target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource, CardPlay? cardPlay) 
+        => target is not { Block: > 0 } || dealer != Owner.Creature || cardSource != this || !props.IsPoweredAttack() 
             ? 1M : 2M;
     
     protected override void OnUpgrade()

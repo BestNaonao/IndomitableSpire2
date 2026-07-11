@@ -17,15 +17,13 @@ public sealed class ArmorPiercingEnchantment : IndomitableEnchantment
         decimal amount,
         ValueProp props,
         Creature? dealer,
-        CardModel? cardSource)
-    {
+        CardModel? cardSource,
+        CardPlay? cardPlay) =>
         // 严格的伤害翻倍触发条件判定：
         // 1. 卡牌来源必须是这张附魔卡
         // 2. 伤害来源必须是打出这张卡的主人
         // 3. 必须是一次基于卡牌数值的攻击（非环境/反伤）
         // 4. 最重要的一点：目标存在，且目标的护甲（Block）大于 0！
-        if (cardSource != Card || dealer != Card.Owner.Creature || !props.IsPoweredAttack() || target is not { Block: > 0 })
-            return 1M;
-        return 2M;
-    }
+        cardSource != Card || dealer != Card.Owner.Creature || !props.IsPoweredAttack() || target is not { Block: > 0 }
+            ? 1M : 2M;
 }

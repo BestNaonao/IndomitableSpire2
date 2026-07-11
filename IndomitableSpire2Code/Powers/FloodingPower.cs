@@ -1,5 +1,6 @@
 ﻿using Godot;
 using IndomitableSpire2.IndomitableSpire2Code.Abstracts;
+using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
@@ -41,7 +42,7 @@ public sealed class FloodingPower : DOTPower
     
     // ========== 核心机制：基于意图的动态易伤乘区 ==========
     public override decimal ModifyDamageMultiplicative(
-        Creature? target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource)
+        Creature? target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource, CardPlay? cardPlay)
     {
         // 确保受到攻击的是拥有者怪物本身，且是享受力量加成的正常攻击
         var isPoweredAttack = props.HasFlag(ValueProp.Move) && !props.HasFlag(ValueProp.Unpowered);

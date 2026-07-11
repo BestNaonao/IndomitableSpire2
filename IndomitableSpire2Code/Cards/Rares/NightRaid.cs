@@ -68,7 +68,7 @@ public sealed class NightRaid() : IndomitableCard(1, CardType.Skill, CardRarity.
     
     // 【核心特判机制】：利用卡牌在战斗堆中会监听全局钩子的特性，拦截并修改伤害
     public override decimal ModifyDamageMultiplicative(
-        Creature? target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource)
+        Creature? target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource, CardPlay? cardPlay)
     {
         // 1. 确保造成伤害的卡正是我们刚才记录的那张选定的牌，且这是一次卡牌攻击伤害
         // 2. 确保目标存在、是怪物、并且通过我们的扩展方法判定其拥有“睡眠”意图

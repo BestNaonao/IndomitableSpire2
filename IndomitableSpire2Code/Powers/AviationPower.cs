@@ -30,23 +30,15 @@ public class AviationPower : IndomitablePower
     
     // 拦截伤害与格挡的乘区计算
     public override decimal ModifyDamageMultiplicative(
-        Creature? target, 
-        decimal amount, 
-        ValueProp props, 
-        Creature? dealer, 
-        CardModel? cardSource) => 
+        Creature? target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource, CardPlay? cardPlay) 
         // 确保攻击者是自己，伤害属于正常受力量加成的攻击，且来源卡牌包含指定的机种标签
-        dealer == Owner && props.IsPoweredAttack() && 
-        cardSource.IsCarrierAircraft() && cardSource!.Tags.Contains(RequiredTag)
+        => dealer == Owner && props.IsPoweredAttack() && 
+           cardSource.IsCarrierAircraft() && cardSource!.Tags.Contains(RequiredTag)
             ? 1m + Amount * MultiplierPerStack  // 返回 1 + 层数 * 每层比例，即 1 + 层数%
             : 1m;
     
     public override decimal ModifyBlockMultiplicative(
-        Creature target, 
-        decimal block, 
-        ValueProp props, 
-        CardModel? cardSource, 
-        CardPlay? cardPlay) =>
+        Creature target, decimal block, ValueProp props, CardModel? cardSource, CardPlay? cardPlay) =>
         // 确保获得格挡的是自己，且来源卡牌包含指定的机种标签
         target == Owner && props.IsPoweredCardOrMonsterMoveBlock() && 
         cardSource.IsCarrierAircraft() && cardSource!.Tags.Contains(RequiredTag)
