@@ -30,7 +30,13 @@ public static class NRestSiteCharacterSleepAnimPatch
         foreach (var child in __instance.GetChildren().OfType<Node2D>())
         {
             if (child.GetClass() != "SpineSprite") continue;
-            var track = new MegaSprite((Variant)child).GetAnimationState().SetAnimation("sleep");
+            // 1. 获取 AnimationState
+            var animState = new MegaSprite((Variant)child).GetAnimationState();
+            // 2. 播放 sleep 动画 (现在是 void 返回值，不要用变量接收)
+            animState.SetAnimation("sleep");
+            // 3. 通过 GetCurrent(0) 获取当前的 Track，并放入 using 块中确保正确释放底层的 Godot Variant
+            using var track = animState.GetCurrent(0);
+            // 4. 设置随机起始时间
             track?.SetTrackTime(track.GetAnimationEnd() * Rng.Chaotic.NextFloat());
         }
         
