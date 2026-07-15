@@ -21,6 +21,18 @@ public sealed class SeaGladiator() : CarrierAircraftCard(1, CardType.Attack, Car
     // 用于记录上一次触发起飞的回合数，防止多段攻击或多名敌人造成的无限回手
     private int _lastTriggerRound = -1;
     
+    // 添加专门记录局内成长格挡值的内部变量
+    private decimal _extraBlock;
+    private decimal ExtraBlock
+    {
+        get => _extraBlock;
+        set
+        {
+            AssertMutable();
+            _extraBlock = value;
+        }
+    }
+    
     public override bool GainsBlock => true;
     
     // 优雅地继承父类的耐久变量，并追加伤害与格挡变量
@@ -63,6 +75,7 @@ public sealed class SeaGladiator() : CarrierAircraftCard(1, CardType.Attack, Car
         // 记录本回合已触发，局内格挡值 +1，并且返回手牌
         _lastTriggerRound = CombatState.RoundNumber;
         DynamicVars.Block.BaseValue += 1M;
+        ExtraBlock += 1M;
         await CardPileCmd.Add(this, PileType.Hand);
     }
     
@@ -72,5 +85,12 @@ public sealed class SeaGladiator() : CarrierAircraftCard(1, CardType.Attack, Car
         DynamicVars.Damage.UpgradeValueBy(2M);
         DynamicVars.Block.UpgradeValueBy(2M);
         UpgradeDurability();
+    }
+    
+    // 重写降级钩子，确保局内成长不会丢失
+    protected override void AfterDowngraded()
+    {
+        base.AfterDowngraded();
+        DynamicVars.Block.BaseValue += ExtraBlock;
     }
 }
