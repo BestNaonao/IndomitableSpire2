@@ -82,7 +82,7 @@
   "INDOMITABLESPIRE2-YOGA_POWER.description": "Whenever you gain or consume [gold]Motivation[/gold] this turn, gain [gold]Shield[/gold].",
   "INDOMITABLESPIRE2-YOGA_POWER.smartDescription": "Whenever you gain or consume [gold]Motivation[/gold] this turn, gain [blue]{Amount}[/blue] [gold]Shield[/gold].",
   "INDOMITABLESPIRE2-YOGA_POWER.title": "Yoga",
-  "INDOMITABLESPIRE2-AIR_RAID_GUIDANCE_POWER.title": "Air Raid Guidance",
   "INDOMITABLESPIRE2-AIR_RAID_GUIDANCE_POWER.description": "Your next [gold]Carrier Aircraft[/gold] Attack deals additional damage.",
-  "INDOMITABLESPIRE2-AIR_RAID_GUIDANCE_POWER.smartDescription": "{OnPlayer:Your|[gold]{OwnerName}'s[/gold]} next [gold]Carrier Aircraft[/gold] Attack deals [blue]{Amount}[/blue] additional damage."
+  "INDOMITABLESPIRE2-AIR_RAID_GUIDANCE_POWER.smartDescription": "{OnPlayer:Your|[gold]{OwnerName}'s[/gold]} next [gold]Carrier Aircraft[/gold] Attack deals [blue]{Amount}[/blue] additional damage.",
+  "INDOMITABLESPIRE2-AIR_RAID_GUIDANCE_POWER.title": "Air Raid Guidance"
 }

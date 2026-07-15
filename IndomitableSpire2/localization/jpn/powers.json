@@ -82,7 +82,7 @@
   "INDOMITABLESPIRE2-YOGA_POWER.description": "このターン、[gold]やる気[/gold]を得るか消費するたび、[gold]シールド[/gold]を得る。",
   "INDOMITABLESPIRE2-YOGA_POWER.smartDescription": "このターン、[gold]やる気[/gold]を得るか消費するたび、[gold]シールド[/gold]を[blue]{Amount}[/blue]得る。",
   "INDOMITABLESPIRE2-YOGA_POWER.title": "ヨガ",
-  "INDOMITABLESPIRE2-AIR_RAID_GUIDANCE_POWER.title": "空襲先導",
   "INDOMITABLESPIRE2-AIR_RAID_GUIDANCE_POWER.description": "次にプレイする[gold]艦載機[/gold]のアタックは追加ダメージを与える。",
-  "INDOMITABLESPIRE2-AIR_RAID_GUIDANCE_POWER.smartDescription": "{OnPlayer:自身が|[gold]{OwnerName}[/gold]が}次にプレイする[gold]艦載機[/gold]のアタックは追加で[blue]{Amount}[/blue]ダメージを与える。"
+  "INDOMITABLESPIRE2-AIR_RAID_GUIDANCE_POWER.smartDescription": "{OnPlayer:自身が|[gold]{OwnerName}[/gold]が}次にプレイする[gold]艦載機[/gold]のアタックは追加で[blue]{Amount}[/blue]ダメージを与える。",
+  "INDOMITABLESPIRE2-AIR_RAID_GUIDANCE_POWER.title": "空襲先導"
 }
