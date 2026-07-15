@@ -91,6 +91,10 @@
   "INDOMITABLESPIRE2-YOGA.description": "このターン、[gold]やる気[/gold]を得るか消費するたび、[gold]シールド[/gold]を{YogaPower:diff()}得る。",
   "INDOMITABLESPIRE2-SEA_GLADIATOR.title": "シーグラディエーター",
   "INDOMITABLESPIRE2-SEA_GLADIATOR.description": "{Damage:diff()}ダメージを与える。{Block:diff()}[gold]ブロック[/gold]を得る。\n攻撃を受けた時、このカードが[gold]捨て札[/gold]か[gold]山札[/gold]にあるなら、このカードの[gold]ブロック[/gold]を[blue]1[/blue]増やし、[gold]手札[/gold]に戻す。",
+  "INDOMITABLESPIRE2-SEA_HURRICANE.title": "シーハリケーン",
+  "INDOMITABLESPIRE2-SEA_HURRICANE.description": "{Damage:diff()}ダメージを与える。\n攻撃を受けるたび、戦闘終了までダメージが2増加する。",
+  "INDOMITABLESPIRE2-SEA_HURRICANE_TAC_R.title": "シーハリケーン Tac R",
+  "INDOMITABLESPIRE2-SEA_HURRICANE_TAC_R.description": "{Damage:diff()}ダメージを与える。\n[gold]偵察[/gold][blue]{Recon:diff()}[/blue]。\n[gold]空襲先導[/gold]を[blue]{AirRaidGuidancePower:diff()}[/blue]得る。",
   
   "INDOMITABLESPIRE2-DESSERT.title": "デザート",
   "INDOMITABLESPIRE2-DESSERT.description": "HPを[green]{Heal:diff()}[/green]回復する。\n{Energy:energyIcons()}を得る。",

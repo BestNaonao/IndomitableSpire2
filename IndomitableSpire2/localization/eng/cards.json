@@ -91,6 +91,10 @@
   "INDOMITABLESPIRE2-YOGA.description": "Whenever you gain or consume [gold]Motivation[/gold] this turn, gain {YogaPower:diff()} [gold]Shield[/gold].",
   "INDOMITABLESPIRE2-SEA_GLADIATOR.title": "Sea Gladiator",
   "INDOMITABLESPIRE2-SEA_GLADIATOR.description": "Deal {Damage:diff()} damage. Gain {Block:diff()} [gold]Block[/gold].\nWhen you are attacked, if this is in your [gold]Discard[/gold] or [gold]Draw Pile[/gold], increase its [gold]Block[/gold] by [blue]1[/blue] and return to your [gold]Hand[/gold].",
+  "INDOMITABLESPIRE2-SEA_HURRICANE.title": "Sea Hurricane",
+  "INDOMITABLESPIRE2-SEA_HURRICANE.description": "Deal {Damage:diff()} damage.\nWhenever you are attacked, increase its damage by 2 this combat.",
+  "INDOMITABLESPIRE2-SEA_HURRICANE_TAC_R.title": "Sea Hurricane Tac R",
+  "INDOMITABLESPIRE2-SEA_HURRICANE_TAC_R.description": "Deal {Damage:diff()} damage.\n[gold]Recon[/gold] [blue]{Recon:diff()}[/blue].\nGain [blue]{AirRaidGuidancePower:diff()}[/blue] [gold]Air Raid Guidance[/gold].",
   
   "INDOMITABLESPIRE2-DESSERT.title": "Dessert",
   "INDOMITABLESPIRE2-DESSERT.description": "Heal [green]{Heal:diff()}[/green] HP.\nGain {Energy:energyIcons()}.",
