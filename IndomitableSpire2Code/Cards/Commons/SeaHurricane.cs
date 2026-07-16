@@ -53,8 +53,9 @@ public sealed class SeaHurricane() : CarrierAircraftCard(2, CardType.Attack, Car
         Creature? dealer,
         CardModel? cardSource)
     {
-        // 确保是真正的攻击
-        if (target != Owner.Creature || dealer == null || !props.IsPoweredAttack() || CombatState == null)
+        // 确保是真正的攻击，并且检验 CombatState 和所在牌堆以避免误加
+        if (target != Owner.Creature || dealer == null || !props.IsPoweredAttack() || 
+            CombatState == null || Pile?.Type is PileType.Deck or PileType.None)
             return Task.CompletedTask;
         
         DynamicVars.Damage.BaseValue += 2M;
