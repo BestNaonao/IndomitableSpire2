@@ -88,7 +88,7 @@
   "INDOMITABLESPIRE2-INNER_ARMOR.title": "Inner Armor",
   "INDOMITABLESPIRE2-INNER_ARMOR.description": "The next time your [gold]Shield[/gold] breaks, gain [gold]Shield[/gold] equal to your current [gold]Shield[/gold].",
   "INDOMITABLESPIRE2-YOGA.title": "Yoga",
-  "INDOMITABLESPIRE2-YOGA.description": "Whenever you gain or consume [gold]Motivation[/gold] this turn, gain {YogaPower:diff()} [gold]Shield[/gold].",
+  "INDOMITABLESPIRE2-YOGA.description": "Whenever you gain or consume [gold]Motivation[/gold] this turn, gain {YogaPower:diff()} [gold]Shield[/gold].\nGain [blue]{MotivationGain:diff()}[/blue] [gold]Motivation[/gold].",
   "INDOMITABLESPIRE2-SEA_GLADIATOR.title": "Sea Gladiator",
   "INDOMITABLESPIRE2-SEA_GLADIATOR.description": "Deal {Damage:diff()} damage. Gain {Block:diff()} [gold]Block[/gold].\nWhen you are attacked, if this is in your [gold]Discard[/gold] or [gold]Draw Pile[/gold], increase its [gold]Block[/gold] by [blue]1[/blue] and return to your [gold]Hand[/gold].",
   "INDOMITABLESPIRE2-SEA_HURRICANE.title": "Sea Hurricane",
