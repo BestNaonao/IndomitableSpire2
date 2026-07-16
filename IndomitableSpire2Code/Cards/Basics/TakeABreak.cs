@@ -16,15 +16,15 @@ public sealed class TakeABreak() : IndomitableCard(0, CardType.Skill, CardRarity
         new HealVar(3M),
         new MotivationGainVar(15M)
     ];
-
+    
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         // 1. 播放一个施法动画（可选，增加视觉反馈）
         await CreatureCmd.TriggerAnim(Owner.Creature, "Cast", Owner.Character.CastAnimDelay);
-
+        
         // 2. 回复生命值
         await CreatureCmd.Heal(Owner.Creature, DynamicVars.Heal.BaseValue);
-
+        
         // 3. 获得干劲
         await PowerCmd.Apply<MotivationPower>(
             choiceContext: choiceContext, 
@@ -33,14 +33,14 @@ public sealed class TakeABreak() : IndomitableCard(0, CardType.Skill, CardRarity
             applier: Owner.Creature, 
             cardSource: this
         );
-
+        
         // 4. 强制结束回合 (参考了 VoidForm 的写法)，第二个参数 false 代表这是不可撤销的操作
         PlayerCmd.EndTurn(Owner, false);
     }
-
+    
     protected override void OnUpgrade()
     {
         DynamicVars.Heal.UpgradeValueBy(1M);
-        DynamicVars.MotivationGain().UpgradeValueBy(3M);
+        DynamicVars.MotivationGain().UpgradeValueBy(5M);
     }
 }
