@@ -4,6 +4,7 @@ using IndomitableSpire2.IndomitableSpire2Code.Registries;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Creatures;
+using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Hooks;
 using MegaCrit.Sts2.Core.Models;
 
@@ -123,7 +124,7 @@ public static class BlockRetentionPatches
             var toLose = creature.Block - context.FinalRetainedAmount;
             
             // 1. 如果最终保留值小于当前格挡，扣除多余部分（如：15点格挡只保留10点，扣除5点）
-            if (toLose > 0) await CreatureCmd.LoseBlock(creature, toLose);
+            if (toLose > 0) await CreatureCmd.LoseBlock(new ThrowingPlayerChoiceContext(), creature, toLose, null);
             
             // 2. 触发对应模型的表现效果 (如闪烁)
             foreach (var model in context.TriggeredModels)

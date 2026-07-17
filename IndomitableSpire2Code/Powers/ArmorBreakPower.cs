@@ -34,7 +34,7 @@ public sealed class ArmorBreakPower : IndomitablePower
         if (target.Block > 0)
         {
             Flash();
-            await CreatureCmd.LoseBlock(target, Math.Min(target.Block, Amount));
+            await CreatureCmd.LoseBlock(choiceContext, target, Math.Min(target.Block, Amount), dealer);
         }
     }
     

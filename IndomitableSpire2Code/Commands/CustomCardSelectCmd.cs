@@ -53,7 +53,7 @@ public static class CustomCardSelectCmd
         {
             // --- 多人联机同步核心开始 ---
             var choiceId = RunManager.Instance.PlayerChoiceSynchronizer.ReserveChoiceId(player);
-            await context.SignalPlayerChoiceBegun(PlayerChoiceOptions.None);
+            await context.SignalPlayerChoiceBegun(player, PlayerChoiceOptions.None);
             
             if (LocalContext.IsMe(player) && RunManager.Instance.NetService.Type != NetGameType.Replay)
             {
