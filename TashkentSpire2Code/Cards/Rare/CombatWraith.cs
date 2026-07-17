@@ -10,10 +10,8 @@ using MegaCrit.Sts2.Core.ValueProps;
 
 namespace TashkentSpire2.TashkentSpire2Code.Cards.Rare;
 
-public sealed class CombatWraith() : TashkentCard(2, CardType.Attack, CardRarity.Rare, TargetType.AnyEnemy)
+public sealed class CombatWraith() : TashkentCard(1, CardType.Attack, CardRarity.Rare, TargetType.AnyEnemy)
 {
-    private const int _intangibleThreshold = 9;
-
     protected override bool ShouldGlowGoldInternal
     {
         get
@@ -23,11 +21,11 @@ public sealed class CombatWraith() : TashkentCard(2, CardType.Attack, CardRarity
             {
                 return false;
             }
-            return playerCombatState.Hand.Cards.Count > 9 || playerCombatState.Hand.Cards.Count <= 1;
+            return playerCombatState.Hand.Cards.Count <= 1;
         }
     }
 
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(14M, ValueProp.Move)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(12M, ValueProp.Move)];
     
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [
         HoverTipFactory.FromKeyword(CardKeyword.Exhaust),
@@ -52,7 +50,7 @@ public sealed class CombatWraith() : TashkentCard(2, CardType.Attack, CardRarity
             await CardCmd.Exhaust(choiceContext, item);
             exhaustedCount++;
         }
-        if (exhaustedCount >= 9 || exhaustedCount == 0)
+        if (exhaustedCount == 0)
         {
             await PowerCmd.Apply<IntangiblePower>(choiceContext, base.Owner.Creature, 1m, base.Owner.Creature, this);
         }
@@ -60,6 +58,6 @@ public sealed class CombatWraith() : TashkentCard(2, CardType.Attack, CardRarity
 
     protected override void OnUpgrade()
     {
-        base.EnergyCost.UpgradeBy(-1);
+        DynamicVars.Damage.UpgradeValueBy(5M);
     }
 }

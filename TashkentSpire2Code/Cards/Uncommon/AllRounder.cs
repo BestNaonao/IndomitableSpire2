@@ -21,6 +21,6 @@ public sealed class AllRounder() : TashkentCard(1, CardType.Power, CardRarity.Un
     
     protected override void OnUpgrade()
     {
-        DynamicVars["AllRounderPower"].UpgradeValueBy(1M);
+        AddKeyword(CardKeyword.Innate);
     }
 }

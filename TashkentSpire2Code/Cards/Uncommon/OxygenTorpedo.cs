@@ -8,9 +8,11 @@ namespace TashkentSpire2.TashkentSpire2Code.Cards.Uncommon;
 
 public sealed class OxygenTorpedo() : TashkentCard(1, CardType.Skill, CardRarity.Uncommon, TargetType.Self)
 {
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
+    
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new TorpedoDynamicVar(12M),
-        new PowerVar<OxygenTorpedoPower>(9M)
+        new PowerVar<OxygenTorpedoPower>(12M)
     ];
     
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
@@ -21,6 +23,6 @@ public sealed class OxygenTorpedo() : TashkentCard(1, CardType.Skill, CardRarity
     
     protected override void OnUpgrade()
     {
-        DynamicVars["OxygenTorpedoPower"].UpgradeValueBy(3M);
+        DynamicVars["TashkentSpire2-Torpedo"].UpgradeValueBy(6M);
     }
 }

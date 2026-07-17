@@ -101,7 +101,7 @@
   "TASHKENTSPIRE2-ALL_ROUNDER_POWER.smartDescription": "每当你给予[gold]标记[/gold]时，抽{Amount}张牌。",
   "TASHKENTSPIRE2-ALL_ROUNDER_POWER.title": "多面手",
   "TASHKENTSPIRE2-TARGET_SHIP_POWER.description": "拥有者回合开始或死亡时会对所有怪物造成期间失去生命数值的伤害。",
-  "TASHKENTSPIRE2-TARGET_SHIP_POWER.smartDescription": "对拥有者造成伤害会增加计数，拥有者回合开始或者死亡时会对所有怪物造成{Amount:choose(1):|{Amount}倍的}{StoredDamage:diff()}点伤害，然后重置该数值。",
+  "TASHKENTSPIRE2-TARGET_SHIP_POWER.smartDescription": "对拥有者造成[gold]未格挡伤害[/gold]会增加计数，拥有者回合开始或者死亡时会对所有怪物造成{Amount:choose(1):|{Amount}倍的}{StoredDamage:diff()}点伤害，然后重置该数值。",
   "TASHKENTSPIRE2-TARGET_SHIP_POWER.title": "靶舰",
   "TASHKENTSPIRE2-AZURE_CRUISER_POWER.description": "本回合任何人[gold]消耗[/gold]一张牌，你便生成一枚[gold]鱼雷[/gold]，且使所有[gold]鱼雷[/gold]生效提前[blue]1[/blue]回合。",
   "TASHKENTSPIRE2-AZURE_CRUISER_POWER.smartDescription": "本回合任何人[gold]消耗[/gold]一张牌，你便生成{Amount}枚[gold]鱼雷[/gold][blue]{TashkentSpire2-Torpedo:diff()}[/blue]，且使所有[gold]鱼雷[/gold]生效提前[blue]{Amount}[/blue]回合。",

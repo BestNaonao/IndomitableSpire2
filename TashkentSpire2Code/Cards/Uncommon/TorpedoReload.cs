@@ -34,19 +34,22 @@ public sealed class TorpedoReload() : AmmunitionCard(2, CardType.Skill, CardRari
             {
                 await PowerCmd.Apply<TorpedoPower>(choiceContext, base.Owner.Creature, DynamicVars["TashkentSpire2-Torpedo"].BaseValue, base.Owner.Creature, this);
             }
-            
-            await TryTriggerShotEffectAsync(shellsLoaded, () => {
-                var torpedoes = base.Owner.Creature.Powers
-                    .OfType<TorpedoPower>()
-                    .ToList();
 
-                foreach (var power in torpedoes)
-                {
-                    power.ReduceTurnCount(1);
-                }
+            if (base.IsUpgraded)
+            {
+                await TryTriggerShotEffectAsync(shellsLoaded, () => {
+                    var torpedoes = base.Owner.Creature.Powers
+                        .OfType<TorpedoPower>()
+                        .ToList();
+
+                    foreach (var power in torpedoes)
+                    {
+                        power.ReduceTurnCount(1);
+                    }
     
-                return Task.CompletedTask;
-            });
+                    return Task.CompletedTask;
+                });
+            }
             
             int num = Math.Max(shellsLoaded - CurrentAmmu, 0);
             if (num > 0 && this.Keywords.Contains(TashkentKeyword.Barrage))
@@ -75,10 +78,5 @@ public sealed class TorpedoReload() : AmmunitionCard(2, CardType.Skill, CardRari
 
         int load = DynamicVars["TashkentSpire2-Load"].IntValue;
         await Loadcmd.Execute(context.ChoiceContext, this, load);
-    }
-    
-    protected override void OnUpgrade()
-    {
-        DynamicVars["TashkentSpire2-Torpedo"].UpgradeValueBy(3M);
     }
 }

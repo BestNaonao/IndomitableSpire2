@@ -102,7 +102,7 @@
   "TASHKENTSPIRE2-ALL_ROUNDER_POWER.smartDescription": "[gold]標的[/gold]を付与するたび、カードを{Amount}枚引く。",
   "TASHKENTSPIRE2-TARGET_SHIP_POWER.title": "標的艦",
   "TASHKENTSPIRE2-TARGET_SHIP_POWER.description": "所持者のターン開始時または死亡時、この間に失ったHPに等しいダメージをすべての敵に与える。",
-  "TASHKENTSPIRE2-TARGET_SHIP_POWER.smartDescription": "所持者にダメージを与えるたびに記録値が増加する。所持者のターン開始時または死亡時、すべての敵に{Amount:choose(1):|{Amount}倍の}{StoredDamage:diff()}ダメージを与え、その後この値をリセットする。",
+  "TASHKENTSPIRE2-TARGET_SHIP_POWER.smartDescription": "所有者に[gold]ブロックされなかったダメージ[/gold]を与えるとカウントが増加する。所有者のターン開始時または死亡時、すべてのモンスターに{Amount:choose(1):|{Amount}倍の}{StoredDamage:diff()}ダメージを与え、その値をリセットする。",
   "TASHKENTSPIRE2-AZURE_CRUISER_POWER.title": "蒼海巡航",
   "TASHKENTSPIRE2-AZURE_CRUISER_POWER.description": "このターン中、誰かがカードを1枚[gold]消費[/gold]するたびに、[gold]魚雷[/gold]を1発生成し、さらにすべての[gold]魚雷[/gold]の発動を[blue]1[/blue]ターン早める。",
   "TASHKENTSPIRE2-AZURE_CRUISER_POWER.smartDescription": "このターン中、誰かがカードを1枚[gold]消費[/gold]するたびに、[blue]{TashkentSpire2-Torpedo:diff()}[/blue]の[gold]魚雷[/gold]を{Amount}発生成し、さらにすべての[gold]魚雷[/gold]の発動を[blue]{Amount}[/blue]ターン早める。",

@@ -8,7 +8,7 @@ using TashkentSpire2.TashkentSpire2Code.Powers;
 
 namespace TashkentSpire2.TashkentSpire2Code.Cards.Uncommon;
 
-public sealed class FloodingExpert() : TashkentCard(1, CardType.Power, CardRarity.Uncommon, TargetType.Self)
+public sealed class FloodingExpert() : TashkentCard(2, CardType.Power, CardRarity.Uncommon, TargetType.Self)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new PowerVar<FloodingExpertPower>(1M)

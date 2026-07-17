@@ -9,7 +9,7 @@ namespace TashkentSpire2.TashkentSpire2Code.Cards.Rare;
 public sealed class Counterattack() : TashkentCard(1, CardType.Power, CardRarity.Rare, TargetType.Self)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new PowerVar<CounterattackPower>(2M),
+        new PowerVar<CounterattackPower>(1M),
         new MarkDynamicVar(0M)
     ];
 

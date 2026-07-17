@@ -7,11 +7,9 @@ using TashkentSpire2.TashkentSpire2Code.Powers;
 
 namespace TashkentSpire2.TashkentSpire2Code.Cards.Multiplay;
 
-public sealed class SpecialServices() : TashkentCard(1, CardType.Skill, CardRarity.Uncommon, TargetType.AllAllies)
+public sealed class SpecialServices() : TashkentCard(2, CardType.Skill, CardRarity.Uncommon, TargetType.AllAllies)
 {
     public override CardMultiplayerConstraint MultiplayerConstraint => CardMultiplayerConstraint.MultiplayerOnly;
-    
-    public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
     
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new PowerVar<SpecialServicesPower>(1m)
@@ -31,6 +29,6 @@ public sealed class SpecialServices() : TashkentCard(1, CardType.Skill, CardRari
     
     protected override void OnUpgrade()
     {
-        RemoveKeyword(CardKeyword.Exhaust);
+        base.EnergyCost.UpgradeBy(-1);
     }
 }

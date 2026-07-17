@@ -90,12 +90,10 @@ public sealed class TargetShipPower : TashkentPower
 
             if (aliveMonsterTeammates.Count == 0)
                 return;
-
+            
             var dmg = new DamageVar(damageToDeal, ValueProp.Unpowered);
 
-            var ctx = new HookPlayerChoiceContext(this, LocalContext.NetId!.Value, combatState, GameActionType.Combat);
-
-            await CreatureCmd.Damage(ctx, aliveMonsterTeammates, dmg, base.Owner);
+            await CreatureCmd.Damage(new ThrowingPlayerChoiceContext(), aliveMonsterTeammates, dmg, null, null, null);
         }
     }
 }

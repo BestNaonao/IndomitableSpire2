@@ -11,7 +11,7 @@ namespace TashkentSpire2.TashkentSpire2Code.Cards.Rare;
 public sealed class Repel() : TashkentCard(2, CardType.Attack, CardRarity.Rare, TargetType.AllEnemies)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new DamageVar(15M, ValueProp.Move),
+        new DamageVar(12M, ValueProp.Move),
         new RetreatDynamicVar(2M)
     ];
 

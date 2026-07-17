@@ -101,7 +101,7 @@
   "TASHKENTSPIRE2-ALL_ROUNDER_POWER.smartDescription": "Whenever you apply [gold]Mark[/gold], draw {Amount} card(s).",
   "TASHKENTSPIRE2-ALL_ROUNDER_POWER.title": "All-Rounder",
   "TASHKENTSPIRE2-TARGET_SHIP_POWER.description": "When the owner starts its turn or dies, deal damage to all enemies equal to the life lost during that period.",
-  "TASHKENTSPIRE2-TARGET_SHIP_POWER.smartDescription": "Damage dealt to the owner increases the stored value. When the owner starts its turn or dies, deal {Amount:choose(1):|{Amount}x }{StoredDamage:diff()} damage to all enemies, then reset the stored value.",
+  "TASHKENTSPIRE2-TARGET_SHIP_POWER.smartDescription": "Dealing [gold]Unblocked Damage[/gold] to the owner increases the counter. At the start of the owner's turn or when the owner dies, deal {Amount:choose(1):|{Amount} times }{StoredDamage:diff()} damage to all monsters, then reset the counter.",
   "TASHKENTSPIRE2-TARGET_SHIP_POWER.title": "Target Ship",
   "TASHKENTSPIRE2-AZURE_CRUISER_POWER.description": "This turn, whenever anyone [gold]Exhausts[/gold] a card, create a [gold]Torpedo[/gold] and make all [gold]Torpedoes[/gold] activate [blue]1[/blue] turn earlier.",
   "TASHKENTSPIRE2-AZURE_CRUISER_POWER.smartDescription": "This turn, whenever anyone [gold]Exhausts[/gold] a card, create {Amount} [gold]Torpedo[/gold] [blue]{TashkentSpire2-Torpedo:diff()}[/blue] and make all [gold]Torpedoes[/gold] activate [blue]{Amount}[/blue] turn(s) earlier.",

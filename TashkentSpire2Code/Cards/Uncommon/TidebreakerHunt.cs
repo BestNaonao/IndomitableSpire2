@@ -10,7 +10,7 @@ namespace TashkentSpire2.TashkentSpire2Code.Cards.Uncommon;
 public sealed class TidebreakerHunt() : TashkentCard(4, CardType.Attack, CardRarity.Uncommon, TargetType.AllEnemies)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new DamageVar(20M, ValueProp.Move),
+        new DamageVar(18M, ValueProp.Move),
         new EnergyVar(1)
     ];
     

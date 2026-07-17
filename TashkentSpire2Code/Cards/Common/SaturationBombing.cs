@@ -13,7 +13,7 @@ namespace TashkentSpire2.TashkentSpire2Code.Cards.Common;
 public sealed class SaturationBombing() : AmmunitionCard(2, CardType.Attack, CardRarity.Common, TargetType.AllEnemies)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new ExtraDamageVar(6m),
+        new ExtraDamageVar(5m),
         new DamageVar(0M, ValueProp.Move),
         new AmmunitionDynamicVar(3M),
         new AmmuMaxDynamicVar(6M)

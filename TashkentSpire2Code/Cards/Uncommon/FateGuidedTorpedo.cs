@@ -11,7 +11,7 @@ public sealed class FateGuidedTorpedo() : TashkentCard(1, CardType.Power, CardRa
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new PowerVar<FateGuidedTorpedoPower>(1M),
-        new TorpedoDynamicVar(12M)
+        new TorpedoDynamicVar(9M)
     ];
     
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)

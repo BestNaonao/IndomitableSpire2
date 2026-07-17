@@ -11,7 +11,7 @@ public sealed class AzureCruiser() : TashkentCard(1, CardType.Skill, CardRarity.
     public override CardMultiplayerConstraint MultiplayerConstraint => CardMultiplayerConstraint.MultiplayerOnly;
     
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new TorpedoDynamicVar(18M)
+        new TorpedoDynamicVar(12M)
     ];
     
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)

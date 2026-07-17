@@ -12,7 +12,7 @@ public sealed class Intercept() : TashkentCard(2, CardType.Skill, CardRarity.Com
     public override bool GainsBlock => true;
     
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new BlockVar(13M, ValueProp.Move),
+        new BlockVar(11M, ValueProp.Move),
         new TorpedoDynamicVar(18M)
     ];
 
