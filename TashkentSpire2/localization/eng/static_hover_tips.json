@@ -2,7 +2,7 @@
   "TASHKENTSPIRE2-MARK.title": "Mark",
   "TASHKENTSPIRE2-MARK.description": "When taking Attack damage, increase that damage by the number of [gold]Mark[/gold] stacks, then lose [blue]1[/blue] stack.",
   "TASHKENTSPIRE2-TORPEDO.title": "Torpedo",
-  "TASHKENTSPIRE2-TORPEDO.description": "At the end of the turn, deals damage to the enemy with the most [gold]Mark[/gold], with damage increased by the target's [gold]Mark[/gold].\nThe hit timing is determined by your [gold]Distance[/gold] when it is [gold]launched[/gold]:\nBy default, it hits the enemy at the end of the 3rd turn;\nIf your [gold]Distance[/gold] is [blue]2[/blue] or [blue]3[/blue], it hits the enemy at the end of the next turn;\nIf your [gold]Distance[/gold] is [blue]4[/blue] or [blue]5[/blue], it hits the enemy at the end of this turn.",
+  "TASHKENTSPIRE2-TORPEDO.description": "At the end of the turn, deals damage to the enemy with the most [gold]Mark[/gold], with damage increased by the target's [gold]Mark[/gold].\nHit timing is determined by your [gold]Distance[/gold] when [gold]launched[/gold]:\n[gold]Distance[/gold] [blue]4~5[/blue]: End of this turn;\n[gold]Distance[/gold] [blue]2~3[/blue]: End of the next turn;\nOtherwise: End of the turn after next.",
   "TASHKENTSPIRE2-CHARGE.title": "Charge",
   "TASHKENTSPIRE2-CHARGE.description": "Increase your Distance, up to a maximum of [blue]5[/blue].\nFor each [blue]1[/blue] Charge, increase damage dealt by [gold]20%[/gold] and damage taken by [gold]10%[/gold].",
   "TASHKENTSPIRE2-RETREAT.title": "Retreat",

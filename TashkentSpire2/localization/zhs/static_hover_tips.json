@@ -2,7 +2,7 @@
   "TASHKENTSPIRE2-MARK.title": "标记",
   "TASHKENTSPIRE2-MARK.description": "受到攻击伤害时增加[gold]标记[/gold]层数的伤害，然后层数减少[blue]1[/blue]。",
   "TASHKENTSPIRE2-TORPEDO.title": "鱼雷",
-  "TASHKENTSPIRE2-TORPEDO.description": "在回合结束时对[gold]标记[/gold]数最多的敌人造成伤害，伤害受目标身上的[gold]标记[/gold]加成。\n命中时间依[gold]释放时[/gold]自身[gold]距离[/gold]确定：\n基础在第3回合结束时命中敌人；\n[gold]距离[/gold]为[blue]2[/blue]或者[blue]3[/blue]时在下一回合结束时命中敌人；\n[gold]距离[/gold]为[blue]4[/blue]或者[blue]5[/blue]时在本回合结束时命中敌人。",
+  "TASHKENTSPIRE2-TORPEDO.description": "在回合结束时对[gold]标记[/gold]数最多的敌人造成伤害，伤害受目标身上的[gold]标记[/gold]加成。\n命中时间由[gold]释放时[/gold]的[gold]距离[/gold]决定：\n[gold]距离[/gold][blue]4~5[/blue]：本回合结束时命中；\n[gold]距离[/gold][blue]2~3[/blue]：下1回合结束时命中；\n其他：下2回合结束时命中。",
   "TASHKENTSPIRE2-CHARGE.title": "突进",
   "TASHKENTSPIRE2-CHARGE.description": "距离增加，最多不超过[blue]5[/blue]。\n每突进[blue]1[/blue]增加[gold]20%[/gold]造成的伤害，增加[gold]10%[/gold]受到的伤害。",
   "TASHKENTSPIRE2-RETREAT.title": "后撤",
