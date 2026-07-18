@@ -95,6 +95,8 @@
   "INDOMITABLESPIRE2-SEA_HURRICANE.description": "{Damage:diff()}ダメージを与える。\n攻撃を受けるたび、戦闘終了までダメージが2増加する。",
   "INDOMITABLESPIRE2-SEA_HURRICANE_TAC_R.title": "シーハリケーン Tac R",
   "INDOMITABLESPIRE2-SEA_HURRICANE_TAC_R.description": "{Damage:diff()}ダメージを与える。\n[gold]偵察[/gold][blue]{Recon:diff()}[/blue]。\n[gold]空襲先導[/gold]を[blue]{AirRaidGuidancePower:diff()}[/blue]得る。",
+  "INDOMITABLESPIRE2-SKUA.title": "スクア",
+  "INDOMITABLESPIRE2-SKUA.description": "{Damage:diff()}ダメージを与える。{WeakPower:cond:>0?[gold]弱体[/gold]を{WeakPower:diff()}与える。|}\n[gold]保留[/gold]されるたび、このカードのダメージが{Increase:diff()}増加し、さらに[gold]弱体[/gold]を[blue]1[/blue]与える。",
   
   "INDOMITABLESPIRE2-DESSERT.title": "デザート",
   "INDOMITABLESPIRE2-DESSERT.description": "HPを[green]{Heal:diff()}[/green]回復する。\n{Energy:energyIcons()}を得る。",
