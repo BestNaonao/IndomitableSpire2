@@ -88,7 +88,7 @@
   "INDOMITABLESPIRE2-INNER_ARMOR.title": "内装甲",
   "INDOMITABLESPIRE2-INNER_ARMOR.description": "次にあなたの[gold]シールド[/gold]が破壊された時、現在の[gold]シールド[/gold]値に等しい[gold]シールド[/gold]を得る。",
   "INDOMITABLESPIRE2-YOGA.title": "ヨガ",
-  "INDOMITABLESPIRE2-YOGA.description": "このターン、[gold]やる気[/gold]を得るか消費するたび、[gold]シールド[/gold]を{YogaPower:diff()}得る。\n[gold]やる気[/gold]を[blue]{MotivationGain:diff()}[/blue]得る。",
+  "INDOMITABLESPIRE2-YOGA.description": "このターン、[gold]やる気[/gold]を得る、必要とする、または消費するたび、[gold]シールド[/gold]を{YogaPower:diff()}得る。\n[gold]やる気[/gold]を[blue]{MotivationGain:diff()}[/blue]得る。",
   "INDOMITABLESPIRE2-SEA_GLADIATOR.title": "シーグラディエーター",
   "INDOMITABLESPIRE2-SEA_GLADIATOR.description": "{Damage:diff()}ダメージを与える。{Block:diff()}[gold]ブロック[/gold]を得る。\n攻撃を受けた時、このカードが[gold]捨て札[/gold]か[gold]山札[/gold]にあるなら、このカードの[gold]ブロック[/gold]を[blue]1[/blue]増やし、[gold]手札[/gold]に戻す。",
   "INDOMITABLESPIRE2-SEA_HURRICANE.title": "シーハリケーン",

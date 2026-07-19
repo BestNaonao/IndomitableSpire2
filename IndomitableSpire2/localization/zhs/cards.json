@@ -88,7 +88,7 @@
   "INDOMITABLESPIRE2-INNER_ARMOR.title": "内层装甲",
   "INDOMITABLESPIRE2-INNER_ARMOR.description": "在你下一次[gold]护盾[/gold]破碎时，获得等量于你当前[gold]护盾[/gold]层数的[gold]护盾[/gold]。",
   "INDOMITABLESPIRE2-YOGA.title": "瑜伽",
-  "INDOMITABLESPIRE2-YOGA.description": "本回合内，每当你获得或消耗[gold]干劲[/gold]时，获得{YogaPower:diff()}点[gold]护盾[/gold]。\n获得[blue]{MotivationGain:diff()}[/blue]点[gold]干劲[/gold]。",
+  "INDOMITABLESPIRE2-YOGA.description": "本回合内，每当你获得、需求或消耗[gold]干劲[/gold]时，获得{YogaPower:diff()}点[gold]护盾[/gold]。\n获得[blue]{MotivationGain:diff()}[/blue]点[gold]干劲[/gold]。",
   "INDOMITABLESPIRE2-SEA_GLADIATOR.title": "海斗士",
   "INDOMITABLESPIRE2-SEA_GLADIATOR.description": "造成{Damage:diff()}点伤害。获得{Block:diff()}点[gold]格挡[/gold]。\n每当你受到攻击时，如果这张牌在[gold]弃牌堆[/gold]或[gold]抽牌堆[/gold]中，其[gold]格挡[/gold]增加[blue]1[/blue]点并返回[gold]手牌[/gold]。",
   "INDOMITABLESPIRE2-SEA_HURRICANE.title": "海飓风",
