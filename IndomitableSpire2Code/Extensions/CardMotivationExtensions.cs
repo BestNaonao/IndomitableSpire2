@@ -50,13 +50,24 @@ public static class CardMotivationExtensions
     }
     
     // ====== 战斗逻辑扩展 ======
+    /// <summary>
+    /// 判断该卡牌当前是否实际需求干劲（实际需求值 > 0）
+    /// </summary>
+    public static bool RequiresMotivation(this CardModel card) => 
+        card.DynamicVars.ContainsKey(MotivationRequireVar.DefaultName);
+    
+    /// <summary>
+    /// 判断该卡牌当前是否实际消耗干劲（实际消耗值 > 0）
+    /// </summary>
+    public static bool ConsumesMotivation(this CardModel card) => 
+        card.DynamicVars.ContainsKey(MotivationConsumeVar.DefaultName);
     
     /// <summary>
     /// 一键扣除干劲费用的标准扩展方法。自动计算打折/免费后的最终数值！
     /// </summary>
     public static async Task SpendMotivationCost(this CardModel card, PlayerChoiceContext choiceContext)
     {
-        if (!card.DynamicVars.ContainsKey(MotivationConsumeVar.DefaultName)) return;
+        if (!card.ConsumesMotivation()) return;
         
         // 读取修改后的真实花费
         var actualCost = card.GetActualMotivationCost(card.DynamicVars.MotivationConsume().IntValue);
@@ -80,12 +91,12 @@ public static class CardMotivationExtensions
     
     // 高阶判断：是否满足“需求”变量的数值
     public static bool MeetsMotivationRequirement(this CardModel card) => 
-        !card.DynamicVars.ContainsKey(MotivationRequireVar.DefaultName) || 
+        !card.RequiresMotivation() || 
         card.HasEnoughMotivation(card.GetActualMotivationCost(card.DynamicVars.MotivationRequire().IntValue));
     
     // 高阶判断：是否足够支付“消耗”变量的数值
     public static bool CanAffordMotivationCost(this CardModel card) => 
-        !card.DynamicVars.ContainsKey(MotivationConsumeVar.DefaultName) ||
+        !card.ConsumesMotivation() || 
         card.HasEnoughMotivation(card.GetActualMotivationCost(card.DynamicVars.MotivationConsume().IntValue));
     
     // 终极组合验证：只要卡牌注册了这两种变量，就自动双重验证！

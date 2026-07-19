@@ -50,7 +50,7 @@ public static class CardModelCostPatches
         if (__result) return;
         
         // 2. 如果原版判定为 false，检查这张卡是否有“干劲消耗”变量
-        if (__instance.DynamicVars.ContainsKey(MotivationConsumeVar.DefaultName))
+        if (__instance.ConsumesMotivation())
         {
             // 获取基础干劲消耗与实际的干劲消耗
             var baseMotivationCost = __instance.DynamicVars.MotivationConsume().IntValue;
@@ -61,7 +61,7 @@ public static class CardModelCostPatches
         }
         
         // 3. 进一步检查这张卡是否有“干劲需求”变量
-        if (__instance.DynamicVars.ContainsKey(MotivationRequireVar.DefaultName))
+        if (__instance.RequiresMotivation())
         {
             var baseMotivationCost = __instance.DynamicVars.MotivationRequire().IntValue;
             if (CheckMotivationCost(__instance, includeGlobalModifiers, baseMotivationCost))
