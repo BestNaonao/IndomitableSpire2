@@ -38,7 +38,7 @@ public sealed class SeaHurricaneTacR() : CarrierAircraftCard(1, CardType.Attack,
             .Execute(choiceContext);
         
         // 侦察
-        await ReconCmd.Execute(choiceContext, Owner, DynamicVars.Recon().IntValue);
+        await ReconCommand.Recon(Owner, DynamicVars.Recon().IntValue).Execute(choiceContext);
         
         // 赋予“目标引导”能力
         await PowerCmd.Apply<AirRaidGuidancePower>(

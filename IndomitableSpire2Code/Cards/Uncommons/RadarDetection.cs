@@ -26,7 +26,7 @@ public sealed class RadarDetection() : IndomitableCard(2, CardType.Skill, CardRa
         // 播放施法动画
         await CreatureCmd.TriggerAnim(Owner.Creature, "Cast", Owner.Character.CastAnimDelay);
         // 核心机制：执行侦察命令
-        await ReconCmd.Execute(choiceContext, Owner, DynamicVars.Recon().IntValue);
+        await ReconCommand.Recon(Owner, DynamicVars.Recon().IntValue).Execute(choiceContext);
     }
     
     protected override void OnUpgrade()

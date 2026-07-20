@@ -50,7 +50,7 @@ public sealed class SeafireFr47() : CarrierAircraftCard(2, CardType.Attack, Card
             );
         
         // 核心机制：呼叫战区侦察
-        await ReconCmd.Execute(choiceContext, Owner, DynamicVars.Recon().IntValue);
+        await ReconCommand.Recon(Owner, DynamicVars.Recon().IntValue).Execute(choiceContext);
         return attackCmd.Results;
     }
     
