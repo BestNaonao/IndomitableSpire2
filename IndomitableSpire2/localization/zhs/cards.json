@@ -97,6 +97,8 @@
   "INDOMITABLESPIRE2-SEA_HURRICANE_TAC_R.description": "造成{Damage:diff()}点伤害。\n[gold]侦察[/gold][blue]{Recon:diff()}[/blue]。\n获得[blue]{AirRaidGuidancePower:diff()}[/blue]层[gold]空袭引导[/gold]。",
   "INDOMITABLESPIRE2-SKUA.title": "贼鸥",
   "INDOMITABLESPIRE2-SKUA.description": "造成{Damage:diff()}点伤害。{WeakPower:cond:>0?给予{WeakPower:diff()}层[gold]虚弱[/gold]。|}\n这张牌每[gold]保留[/gold]1个回合，其伤害增加{Increase:diff()}点并且额外给予[blue]1[/blue]层[gold]虚弱[/gold]。",
+  "INDOMITABLESPIRE2-RADAR_DETECTION.title": "雷达探测",
+  "INDOMITABLESPIRE2-RADAR_DETECTION.description": "[gold]侦察[/gold][blue]{Recon:diff()}[/blue]。",
   
   "INDOMITABLESPIRE2-DESSERT.title": "甜点",
   "INDOMITABLESPIRE2-DESSERT.description": "回复[green]{Heal:diff()}[/green]点生命。\n获得{Energy:energyIcons()}。",

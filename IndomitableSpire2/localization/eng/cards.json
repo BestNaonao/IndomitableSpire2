@@ -97,6 +97,8 @@
   "INDOMITABLESPIRE2-SEA_HURRICANE_TAC_R.description": "Deal {Damage:diff()} damage.\n[gold]Recon[/gold] [blue]{Recon:diff()}[/blue].\nGain [blue]{AirRaidGuidancePower:diff()}[/blue] [gold]Air Raid Guidance[/gold].",
   "INDOMITABLESPIRE2-SKUA.title": "Skua",
   "INDOMITABLESPIRE2-SKUA.description": "Deal {Damage:diff()} damage.{WeakPower:cond:>0? Apply {WeakPower:diff()} [gold]Weak[/gold].|}\nEvery turn this card is [gold]Retained[/gold], its damage increases by {Increase:diff()} and it applies [blue]1[/blue] additional [gold]Weak[/gold].",
+  "INDOMITABLESPIRE2-RADAR_DETECTION.title": "Radar Detection",
+  "INDOMITABLESPIRE2-RADAR_DETECTION.description": "[gold]Recon[/gold] [blue]{Recon:diff()}[/blue].",
   
   "INDOMITABLESPIRE2-DESSERT.title": "Dessert",
   "INDOMITABLESPIRE2-DESSERT.description": "Heal [green]{Heal:diff()}[/green] HP.\nGain {Energy:energyIcons()}.",
