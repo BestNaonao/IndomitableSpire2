@@ -14,7 +14,9 @@ public sealed class IndustrialRevolution() : IndomitableCard(1, CardType.Power, 
     protected override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<IndustrialRevolutionPower>(1M)];
     
     // 悬浮提示框：展示原版游戏内置的“重放”静态提示
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.Static(StaticHoverTip.ReplayStatic)];
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => 
+        (IsUpgraded ? [HoverTipFactory.FromKeyword(CardKeyword.Retain)] : Array.Empty<IHoverTip>())
+        .Append(HoverTipFactory.Static(StaticHoverTip.ReplayStatic));
     
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
