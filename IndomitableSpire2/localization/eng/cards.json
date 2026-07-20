@@ -99,6 +99,8 @@
   "INDOMITABLESPIRE2-SKUA.description": "Deal {Damage:diff()} damage.{WeakPower:cond:>0? Apply {WeakPower:diff()} [gold]Weak[/gold].|}\nEvery turn this card is [gold]Retained[/gold], its damage increases by {Increase:diff()} and it applies [blue]1[/blue] additional [gold]Weak[/gold].",
   "INDOMITABLESPIRE2-RADAR_DETECTION.title": "Radar Detection",
   "INDOMITABLESPIRE2-RADAR_DETECTION.description": "[gold]Recon[/gold] [blue]{Recon:diff()}[/blue].",
+  "INDOMITABLESPIRE2-AIRSPACE_RECON.title": "Airspace Recon",
+  "INDOMITABLESPIRE2-AIRSPACE_RECON.description": "[gold]Recon[/gold] [blue]{IfUpgraded:show:3X+3|3X}[/blue].\nThe [blue]{IfUpgraded:show:first X (at least 1)|first}[/blue] card put into your [gold]Hand[/gold] this way is free to play this turn.",
   
   "INDOMITABLESPIRE2-DESSERT.title": "Dessert",
   "INDOMITABLESPIRE2-DESSERT.description": "Heal [green]{Heal:diff()}[/green] HP.\nGain {Energy:energyIcons()}.",

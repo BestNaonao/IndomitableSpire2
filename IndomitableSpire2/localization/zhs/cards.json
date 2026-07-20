@@ -99,6 +99,8 @@
   "INDOMITABLESPIRE2-SKUA.description": "造成{Damage:diff()}点伤害。{WeakPower:cond:>0?给予{WeakPower:diff()}层[gold]虚弱[/gold]。|}\n这张牌每[gold]保留[/gold]1个回合，其伤害增加{Increase:diff()}点并且额外给予[blue]1[/blue]层[gold]虚弱[/gold]。",
   "INDOMITABLESPIRE2-RADAR_DETECTION.title": "雷达探测",
   "INDOMITABLESPIRE2-RADAR_DETECTION.description": "[gold]侦察[/gold][blue]{Recon:diff()}[/blue]。",
+  "INDOMITABLESPIRE2-AIRSPACE_RECON.title": "空域侦察",
+  "INDOMITABLESPIRE2-AIRSPACE_RECON.description": "[gold]侦察[/gold][blue]{IfUpgraded:show:3X+3|3X}[/blue]。\n通过此次[gold]侦察[/gold]放入[gold]手牌[/gold]的[blue]{IfUpgraded:show:前X张（至少1张）|第1张}[/blue]牌在本回合内免费打出。",
   
   "INDOMITABLESPIRE2-DESSERT.title": "甜点",
   "INDOMITABLESPIRE2-DESSERT.description": "回复[green]{Heal:diff()}[/green]点生命。\n获得{Energy:energyIcons()}。",

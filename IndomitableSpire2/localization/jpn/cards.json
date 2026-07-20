@@ -99,6 +99,8 @@
   "INDOMITABLESPIRE2-SKUA.description": "{Damage:diff()}ダメージを与える。{WeakPower:cond:>0?[gold]弱体[/gold]を{WeakPower:diff()}与える。|}\n[gold]保留[/gold]されるたび、このカードのダメージが{Increase:diff()}増加し、さらに[gold]弱体[/gold]を[blue]1[/blue]与える。",
   "INDOMITABLESPIRE2-RADAR_DETECTION.title": "レーダー探知",
   "INDOMITABLESPIRE2-RADAR_DETECTION.description": "[gold]偵察[/gold][blue]{Recon:diff()}[/blue]。",
+  "INDOMITABLESPIRE2-AIRSPACE_RECON.title": "空域偵察",
+  "INDOMITABLESPIRE2-AIRSPACE_RECON.description": "[gold]偵察[/gold][blue]{IfUpgraded:show:3X+3|3X}[/blue]を行う。\nこの[gold]偵察[/gold]で[gold]手札[/gold]に加えた[blue]{IfUpgraded:show:最初のX枚（最低1枚）|最初の1枚}[/blue]は、このターンコストを支払わずにプレイできる。",
   
   "INDOMITABLESPIRE2-DESSERT.title": "デザート",
   "INDOMITABLESPIRE2-DESSERT.description": "HPを[green]{Heal:diff()}[/green]回復する。\n{Energy:energyIcons()}を得る。",
