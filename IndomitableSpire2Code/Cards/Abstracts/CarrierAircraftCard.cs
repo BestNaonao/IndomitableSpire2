@@ -74,7 +74,7 @@ public abstract class CarrierAircraftCard(
         // 直接计算并返回耐久损失
         return (from enemy in targets.Select(c => c.Monster).OfType<MonsterModel>()
                 where enemy.Creature.IsAlive
-                let singleDamage = enemy.GetIntentSingleDamage()
+                let singleDamage = enemy.GetIntentSingleDamageTo(Owner)
                 let hitCount = enemy.GetIntentHitCount()
                 where singleDamage > 0 && hitCount > 0
                 let lossPerHit = singleDamage switch
