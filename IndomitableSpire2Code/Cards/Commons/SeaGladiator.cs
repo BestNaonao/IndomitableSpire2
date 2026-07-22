@@ -39,7 +39,7 @@ public sealed class SeaGladiator() : CarrierAircraftCard(1, CardType.Attack, Car
     protected override IEnumerable<DynamicVar> AdditionalVars =>
         [new DamageVar(4M, ValueProp.Move), new BlockVar(4M, ValueProp.Move)];
     
-    protected override async Task<IEnumerable<IEnumerable<DamageResult>>?> OnAircraftPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+    protected override async Task<IEnumerable<IEnumerable<DamageResult>>> OnAircraftPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         ArgumentNullException.ThrowIfNull(cardPlay.Target, nameof(cardPlay.Target));
         

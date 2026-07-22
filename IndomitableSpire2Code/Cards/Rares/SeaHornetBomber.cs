@@ -30,9 +30,9 @@ public sealed class SeaHornetBomber() : CarrierAircraftCard(2, CardType.Attack, 
         new CustomPowerVar<OnFirePower>(3M)
     ];
     
-    protected override async Task<IEnumerable<IEnumerable<DamageResult>>?> OnAircraftPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+    protected override async Task<IEnumerable<IEnumerable<DamageResult>>> OnAircraftPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        if (CombatState == null) return null;
+        if (CombatState == null) return [];
         
         var attackCmd = await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
             .WithHitCount(DynamicVars.Repeat.IntValue)

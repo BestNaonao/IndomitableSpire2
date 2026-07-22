@@ -30,7 +30,7 @@ public sealed class SeaHornetFighter() : CarrierAircraftCard(2, CardType.Attack,
         new CustomPowerVar<OnFirePower>(4M)
     ];
     
-    protected override async Task<IEnumerable<IEnumerable<DamageResult>>?> OnAircraftPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+    protected override async Task<IEnumerable<IEnumerable<DamageResult>>> OnAircraftPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         ArgumentNullException.ThrowIfNull(cardPlay.Target, nameof(cardPlay.Target));
         

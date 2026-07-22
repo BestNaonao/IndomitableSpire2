@@ -26,7 +26,7 @@ public sealed class Barracuda831Squadron() : CarrierAircraftCard(2, CardType.Att
     
     protected override IEnumerable<DynamicVar> AdditionalVars => [new DamageVar(12M, ValueProp.Move)];
     
-    protected override async Task<IEnumerable<IEnumerable<DamageResult>>?> OnAircraftPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+    protected override async Task<IEnumerable<IEnumerable<DamageResult>>> OnAircraftPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         ArgumentNullException.ThrowIfNull(cardPlay.Target, nameof(cardPlay.Target));
         

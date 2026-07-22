@@ -29,7 +29,7 @@ public sealed class BarracudaMk2() : CarrierAircraftCard(1, CardType.Attack, Car
         new CustomPowerVar<ArmorBreakPower>(4M) // 基础破甲提升到 4
     ];
     
-    protected override async Task<IEnumerable<IEnumerable<DamageResult>>?> OnAircraftPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+    protected override async Task<IEnumerable<IEnumerable<DamageResult>>> OnAircraftPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         ArgumentNullException.ThrowIfNull(cardPlay.Target, nameof(cardPlay.Target));
         

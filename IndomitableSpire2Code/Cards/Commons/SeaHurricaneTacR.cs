@@ -28,7 +28,7 @@ public sealed class SeaHurricaneTacR() : CarrierAircraftCard(1, CardType.Attack,
         new CustomPowerVar<AirRaidGuidancePower>(5M)
     ];
     
-    protected override async Task<IEnumerable<IEnumerable<DamageResult>>?> OnAircraftPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+    protected override async Task<IEnumerable<IEnumerable<DamageResult>>> OnAircraftPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         ArgumentNullException.ThrowIfNull(cardPlay.Target, nameof(cardPlay.Target));
         

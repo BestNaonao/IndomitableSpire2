@@ -1,6 +1,5 @@
 ﻿using IndomitableSpire2.IndomitableSpire2Code.Cards.Abstracts;
 using IndomitableSpire2.IndomitableSpire2Code.Enums;
-using IndomitableSpire2.IndomitableSpire2Code.Extensions;
 using IndomitableSpire2.IndomitableSpire2Code.Powers;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -36,14 +35,10 @@ public sealed class EvasiveManeuvers() : DurableCard(1, CardType.Skill, CardRari
             applier: Owner.Creature,
             cardSource: this
         );
-        
-        // 2. 扣除自身1点耐久（代表消耗了1次使用次数）
-        DynamicVars.Durability().BaseValue -= 1;
-        
-        // 3. 如果耐久耗尽，手动将其送入消耗堆
-        if (this.OutOfDurability())
-            await CardCmd.Exhaust(choiceContext, this);
     }
+    
+    protected override Task<int> CalculateDurabilityLossAfterPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay) 
+        => Task.FromResult(1);
     
     protected override void OnUpgrade()
     {

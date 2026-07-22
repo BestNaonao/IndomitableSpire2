@@ -29,7 +29,7 @@ public sealed class Swordfish818Squadron() : CarrierAircraftCard(2, CardType.Att
         new CustomPowerVar<SlowPower>(1M) // 用于瘫痪敌方攻势的缓慢变量，层数设为 1
     ];
     
-    protected override async Task<IEnumerable<IEnumerable<DamageResult>>?> OnAircraftPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+    protected override async Task<IEnumerable<IEnumerable<DamageResult>>> OnAircraftPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         ArgumentNullException.ThrowIfNull(cardPlay.Target, nameof(cardPlay.Target));
         
