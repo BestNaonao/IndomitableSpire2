@@ -101,6 +101,8 @@
   "INDOMITABLESPIRE2-RADAR_DETECTION.description": "[gold]侦察[/gold][blue]{Recon:diff()}[/blue]。",
   "INDOMITABLESPIRE2-AIRSPACE_RECON.title": "空域侦察",
   "INDOMITABLESPIRE2-AIRSPACE_RECON.description": "[gold]侦察[/gold][blue]{IfUpgraded:show:3X+3|3X}[/blue]。\n通过此次[gold]侦察[/gold]放入[gold]手牌[/gold]的[blue]{IfUpgraded:show:前X张（至少1张）|第1张}[/blue]牌在本回合内免费打出。",
+  "INDOMITABLESPIRE2-RETIRE.title": "退役",
+  "INDOMITABLESPIRE2-RETIRE.description": "从你的[gold]抽牌堆[/gold]中选择一张牌将其[gold]消耗[/gold]。\n如果那是[gold]舰载机[/gold]牌，[gold]升级[/gold]你[gold]手牌[/gold]中的{IfUpgraded:show:所有牌|一张牌}；否则，获得[blue]{MotivationGain:diff()}[/blue]点[gold]干劲[/gold]。",
   
   "INDOMITABLESPIRE2-DESSERT.title": "甜点",
   "INDOMITABLESPIRE2-DESSERT.description": "回复[green]{Heal:diff()}[/green]点生命。\n获得{Energy:energyIcons()}。",
