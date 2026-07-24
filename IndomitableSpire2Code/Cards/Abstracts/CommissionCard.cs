@@ -1,10 +1,12 @@
 ﻿using BaseLib.Utils;
 using Godot;
+using IndomitableSpire2.IndomitableSpire2Code.Enums;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Helpers;
+using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models.CardPools;
 using MegaCrit.Sts2.Core.Nodes.Cards;
@@ -46,6 +48,11 @@ public abstract class CommissionCard(TargetType target)
         new("MaxProgress", InitialMaxProgressAmount),
         new StringVar("DelegatorName")
     ];
+    
+    public sealed override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Retain];
+    
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => 
+        [HoverTipFactory.FromKeyword(IndomitableKeywords.Commission)];
     
     private int CurrentProgress => DynamicVars["Progress"].IntValue;
     private int MaxProgressAmount => DynamicVars["MaxProgress"].IntValue;
