@@ -47,6 +47,7 @@ public sealed class AirSuperiority() : IndomitableCard(1, CardType.Attack, CardR
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
             .WithHitCount((int)((CalculatedVar)DynamicVars["CalculatedHits"]).Calculate(cardPlay.Target))
             .FromCard(this, cardPlay)
+            .OnlyPlayAnimOnce()
             .Targeting(cardPlay.Target)
             .WithHitFx("vfx/vfx_attack_slash")
             .Execute(choiceContext);

@@ -37,6 +37,7 @@ public sealed class SeaHornetFighter() : CarrierAircraftCard(2, CardType.Attack,
         var attackCmd = await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
             .WithHitCount(DynamicVars.Repeat.IntValue)
             .FromCard(this, cardPlay)
+            .OnlyPlayAnimOnce()
             .Targeting(cardPlay.Target)
             .WithHitFx("vfx/vfx_fire_burst") // 推荐搭配激烈的机炮或火箭弹特效
             .Execute(choiceContext);
