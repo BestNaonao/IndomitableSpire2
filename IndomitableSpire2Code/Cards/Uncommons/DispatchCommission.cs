@@ -15,7 +15,9 @@ public sealed class DispatchCommission() : IndomitableCard(1, CardType.Skill, Ca
     // 仅限多人模式可用
     public override CardMultiplayerConstraint MultiplayerConstraint => CardMultiplayerConstraint.MultiplayerOnly;
     
-    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Innate];
+    
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => 
         [HoverTipFactory.FromKeyword(IndomitableKeywords.Commission)];
     
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
