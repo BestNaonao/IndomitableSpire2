@@ -126,11 +126,11 @@
   "INDOMITABLESPIRE2-DISPATCH_COMMISSION.title": "派发委托",
   "INDOMITABLESPIRE2-DISPATCH_COMMISSION.description": "将一张随机的{IfUpgraded:show:[gold]升级过的[/gold]}[gold]委托[/gold]牌添加至一位其他玩家的[gold]手牌[/gold]中。",
   "INDOMITABLESPIRE2-OIL_COMMISSION.title": "油田开发",
-  "INDOMITABLESPIRE2-OIL_COMMISSION.description": "累计获得{MaxProgress:energyIcons()}后可打出{InCombat:({Progress}/{MaxProgress})|}。\n你和{InCombat:{DelegatorName}|委托方}各获得{Energy:energyIcons()}。",
+  "INDOMITABLESPIRE2-OIL_COMMISSION.description": "[gold]委托[/gold]：获得{MaxProgress:energyIcons()}{InCombat:({Progress}/{MaxProgress})|}。\n你和{InCombat:{DelegatorName}|委托方}各获得{Energy:energyIcons()}。",
   "INDOMITABLESPIRE2-EXERCISE_COMMISSION.title": "舰队演习",
-  "INDOMITABLESPIRE2-EXERCISE_COMMISSION.description": "累计对敌人造成{MaxProgress}点伤害后可打出{InCombat:({Progress}/{MaxProgress})|}。\n给予你和{InCombat:{DelegatorName}|委托方}各{StrengthPower:diff()}点[gold]力量[/gold]与[gold]敏捷[/gold]。",
+  "INDOMITABLESPIRE2-EXERCISE_COMMISSION.description": "[gold]委托[/gold]：对敌人造成{MaxProgress}点伤害{InCombat:({Progress}/{MaxProgress})|}。\n给予你和{InCombat:{DelegatorName}|委托方}各{StrengthPower:diff()}点[gold]力量[/gold]与[gold]敏捷[/gold]。",
   "INDOMITABLESPIRE2-TRANSPORT_COMMISSION.title": "货物运输",
-  "INDOMITABLESPIRE2-TRANSPORT_COMMISSION.description": "累计抽取{MaxProgress}张牌后可打出{InCombat:({Progress}/{MaxProgress})|}。\n你和{InCombat:{DelegatorName}|委托方}各抽{Cards:diff()}张牌。",
+  "INDOMITABLESPIRE2-TRANSPORT_COMMISSION.description": "[gold]委托[/gold]：抽取{MaxProgress}张牌{InCombat:({Progress}/{MaxProgress})|}。\n你和{InCombat:{DelegatorName}|委托方}各抽{Cards:diff()}张牌。",
   "INDOMITABLESPIRE2-ESCORT_COMMISSION.title": "商船护卫",
-  "INDOMITABLESPIRE2-ESCORT_COMMISSION.description": "累计获得{MaxProgress}点[gold]格挡[/gold]后可打出{InCombat:({Progress}/{MaxProgress})|}。\n战斗结束后你和{InCombat:{DelegatorName}|委托方}各获得{Gold:diff()}[gold]金币[/gold]。"
+  "INDOMITABLESPIRE2-ESCORT_COMMISSION.description": "[gold]委托[/gold]：获得{MaxProgress}点[gold]格挡[/gold]{InCombat:({Progress}/{MaxProgress})|}。\n战斗结束后你和{InCombat:{DelegatorName}|委托方}各获得{Gold:diff()}[gold]金币[/gold]。"
 }

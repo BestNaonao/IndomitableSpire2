@@ -126,11 +126,11 @@
   "INDOMITABLESPIRE2-DISPATCH_COMMISSION.title": "委託発令",
   "INDOMITABLESPIRE2-DISPATCH_COMMISSION.description": "他のプレイヤー1人は、ランダムな{IfUpgraded:show:[gold]アップグレード[/gold]済みの}[gold]委託[/gold]カードを1枚[gold]手札[/gold]に加える。",
   "INDOMITABLESPIRE2-OIL_COMMISSION.title": "油田開発",
-  "INDOMITABLESPIRE2-OIL_COMMISSION.description": "{MaxProgress:energyIcons()}を累計で得ることでプレイ可能{InCombat:（{Progress}/{MaxProgress}）|}。\nあなたと{InCombat:[gold]{DelegatorName}[/gold]|委託元}はそれぞれ{Energy:energyIcons()}を得る。",
+  "INDOMITABLESPIRE2-OIL_COMMISSION.description": "[gold]委託[/gold]：{MaxProgress:energyIcons()}を累計で得ること{InCombat:（{Progress}/{MaxProgress}）|}。\nあなたと{InCombat:[gold]{DelegatorName}[/gold]|委託元}はそれぞれ{Energy:energyIcons()}を得る。",
   "INDOMITABLESPIRE2-EXERCISE_COMMISSION.title": "艦隊演習",
-  "INDOMITABLESPIRE2-EXERCISE_COMMISSION.description": "敵に累計{MaxProgress}ダメージを与えることでプレイ可能{InCombat:（{Progress}/{MaxProgress}）|}。\nあなたと{InCombat:[gold]{DelegatorName}[/gold]|委託元}はそれぞれ[gold]筋力[/gold]と[gold]敏捷[/gold]を{StrengthPower:diff()}得る。",
+  "INDOMITABLESPIRE2-EXERCISE_COMMISSION.description": "[gold]委託[/gold]：敵に累計{MaxProgress}ダメージを与えること{InCombat:（{Progress}/{MaxProgress}）|}。\nあなたと{InCombat:[gold]{DelegatorName}[/gold]|委託元}はそれぞれ[gold]筋力[/gold]と[gold]敏捷[/gold]を{StrengthPower:diff()}得る。",
   "INDOMITABLESPIRE2-TRANSPORT_COMMISSION.title": "貨物輸送",
-  "INDOMITABLESPIRE2-TRANSPORT_COMMISSION.description": "カードを累計{MaxProgress}枚引くことでプレイ可能{InCombat:（{Progress}/{MaxProgress}）|}。\nあなたと{InCombat:[gold]{DelegatorName}[/gold]|委託元}はそれぞれカードを{Cards:diff()}枚引く。",
+  "INDOMITABLESPIRE2-TRANSPORT_COMMISSION.description": "[gold]委託[/gold]：カードを累計{MaxProgress}枚引くこと{InCombat:（{Progress}/{MaxProgress}）|}。\nあなたと{InCombat:[gold]{DelegatorName}[/gold]|委託元}はそれぞれカードを{Cards:diff()}枚引く。",
   "INDOMITABLESPIRE2-ESCORT_COMMISSION.title": "商船護衛",
-  "INDOMITABLESPIRE2-ESCORT_COMMISSION.description": "[gold]ブロック[/gold]を累計{MaxProgress}得ることでプレイ可能{InCombat:（{Progress}/{MaxProgress}）|}。\n戦闘終了後、あなたと{InCombat:[gold]{DelegatorName}[/gold]|委託元}はそれぞれ{Gold:diff()}[gold]ゴールド[/gold]を得る。"
+  "INDOMITABLESPIRE2-ESCORT_COMMISSION.description": "[gold]委託[/gold]：[gold]ブロック[/gold]を累計{MaxProgress}得ること{InCombat:（{Progress}/{MaxProgress}）|}。\n戦闘終了後、あなたと{InCombat:[gold]{DelegatorName}[/gold]|委託元}はそれぞれ{Gold:diff()}[gold]ゴールド[/gold]を得る。"
 }
