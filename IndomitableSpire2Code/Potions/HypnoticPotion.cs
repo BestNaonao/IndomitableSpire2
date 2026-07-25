@@ -29,7 +29,7 @@ public sealed class HypnoticPotion : IndomitablePotion
     
     // 定义药水数值：1 层催眠能力。STS2 中使用 PowerVar<T> 来绑定能力数值。现已自动显示“催眠”这个能力的说明框
     protected override IEnumerable<DynamicVar> CanonicalVars => 
-        [new CustomPowerVar<HypnotizedPower>(1M)];
+        [new CustomPowerVar<HypnotizedPower>(3M)];
     
     // 添加悬浮提示 (HoverTip)：当玩家把鼠标放在药水上时，自动显示“催眠”这个能力的说明框
     public override IEnumerable<IHoverTip> ExtraHoverTips => 
