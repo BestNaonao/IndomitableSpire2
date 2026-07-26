@@ -105,6 +105,9 @@
   "INDOMITABLESPIRE2-RETIRE.description": "[gold]山札[/gold]のカードを1枚[gold]廃棄[/gold]する。\nそれが[gold]艦載機[/gold]なら、[gold]手札[/gold]のカードを{IfUpgraded:show:すべて|1枚}[gold]アップグレード[/gold]する。そうでない場合、[gold]やる気[/gold]を[blue]{MotivationGain:diff()}[/blue]得る。",
   "INDOMITABLESPIRE2-RALLY.title": "立て直し",
   "INDOMITABLESPIRE2-RALLY.description": "[gold]やる気[/gold]を[blue]{MotivationConsume:diff()}[/blue]消費する。\n[gold]捨て札[/gold]を[gold]山札[/gold]にシャッフルする。これによりカードを[blue]{Threshold:diff()}[/blue]枚シャッフルするごとに、[gold]養神[/gold]を1枚[gold]山札[/gold]の一番上に置く。",
+  "INDOMITABLESPIRE2-LOGISTICS_EXCHANGE.title": "後方支援交換",
+  "INDOMITABLESPIRE2-LOGISTICS_EXCHANGE.description": "[gold]手札[/gold]からカードを2枚選ぶ。戦闘終了まで、それらの現在のコストを入れ替える。",
+  "INDOMITABLESPIRE2-LOGISTICS_EXCHANGE.selectionScreenPrompt": "コストを入れ替えるカードを2枚選ぶ。",
   
   "INDOMITABLESPIRE2-DESSERT.title": "デザート",
   "INDOMITABLESPIRE2-DESSERT.description": "HPを[green]{Heal:diff()}[/green]回復する。\n{Energy:energyIcons()}を得る。",

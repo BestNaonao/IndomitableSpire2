@@ -105,6 +105,9 @@
   "INDOMITABLESPIRE2-RETIRE.description": "[gold]Exhaust[/gold] 1 card from your [gold]Draw Pile[/gold].\nIf it is a [gold]Carrier Aircraft[/gold], [gold]Upgrade[/gold] {IfUpgraded:show:ALL cards|a card} in your [gold]Hand[/gold]; otherwise, gain [blue]{MotivationGain:diff()}[/blue] [gold]Motivation[/gold].",
   "INDOMITABLESPIRE2-RALLY.title": "Rally",
   "INDOMITABLESPIRE2-RALLY.description": "Cost [blue]{MotivationConsume:diff()}[/blue] [gold]Motivation[/gold].\nShuffle your [gold]Discard Pile[/gold] into your [gold]Draw Pile[/gold]. For every [blue]{Threshold:diff()}[/blue] cards shuffled this way, put a [gold]Refresh[/gold] on top of your [gold]Draw Pile[/gold].",
+  "INDOMITABLESPIRE2-LOGISTICS_EXCHANGE.title": "Logistics Exchange",
+  "INDOMITABLESPIRE2-LOGISTICS_EXCHANGE.description": "Choose 2 cards in your [gold]Hand[/gold]. Swap their current energy costs and use as basic costs this combat.",
+  "INDOMITABLESPIRE2-LOGISTICS_EXCHANGE.selectionScreenPrompt": "Choose 2 cards to swap their energy costs.",
   
   "INDOMITABLESPIRE2-DESSERT.title": "Dessert",
   "INDOMITABLESPIRE2-DESSERT.description": "Heal [green]{Heal:diff()}[/green] HP.\nGain {Energy:energyIcons()}.",
