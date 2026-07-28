@@ -108,6 +108,9 @@
   "INDOMITABLESPIRE2-LOGISTICS_EXCHANGE.title": "Logistics Exchange",
   "INDOMITABLESPIRE2-LOGISTICS_EXCHANGE.description": "Choose 2 cards in your [gold]Hand[/gold]. Swap their current energy costs and use as basic costs this combat.",
   "INDOMITABLESPIRE2-LOGISTICS_EXCHANGE.selectionScreenPrompt": "Choose 2 cards to swap their energy costs.",
+  "INDOMITABLESPIRE2-LEND_LEASE_ACT.title": "Lend-Lease Act",
+  "INDOMITABLESPIRE2-LEND_LEASE_ACT.description": "You and another player each choose a card in [gold]Hand[/gold] to swap. The swapped cards will return to their original owners after played.",
+  "INDOMITABLESPIRE2-LEND_LEASE_ACT.selectionScreenPrompt": "Choose a card to lend to your ally.",
   
   "INDOMITABLESPIRE2-DESSERT.title": "Dessert",
   "INDOMITABLESPIRE2-DESSERT.description": "Heal [green]{Heal:diff()}[/green] HP.\nGain {Energy:energyIcons()}.",
