@@ -15,7 +15,7 @@ public sealed class SaturationBombing() : AmmunitionCard(2, CardType.Attack, Car
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new ExtraDamageVar(5m),
         new DamageVar(0M, ValueProp.Move),
-        new AmmunitionDynamicVar(3M),
+        new AmmunitionDynamicVar(2M),
         new AmmuMaxDynamicVar(6M)
     ];
     

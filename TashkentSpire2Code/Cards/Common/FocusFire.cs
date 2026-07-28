@@ -59,15 +59,10 @@ public sealed class FocusFire() : AmmunitionCard(1, CardType.Attack, CardRarity.
             
             UpdateAmmuGlobal(Math.Max(CurrentAmmu - shellsLoaded, 0));
             await LoadAfterShotAsync(choiceContext, shellsLoaded);
+            
+            int load = DynamicVars["TashkentSpire2-Load"].IntValue;
+            await Loadcmd.Execute(choiceContext, this, load);
         }
-    }
-    
-    public override async Task AfterCardDrawn(PlayerChoiceContext choiceContext, CardModel card, bool fromHandDraw)
-    {
-        if (card != this) return;
-        
-        int load = DynamicVars["TashkentSpire2-Load"].IntValue;
-        await Loadcmd.Execute(choiceContext, this, load);
     }
     
     protected override void OnUpgrade()

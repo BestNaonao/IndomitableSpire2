@@ -24,7 +24,7 @@ public sealed class TorpedoSea() : TashkentCard(2, CardType.Skill, CardRarity.Un
     }
     
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new TorpedoDynamicVar(15M),
+        new TorpedoDynamicVar(12M),
         new RepeatVar(3)
     ];
     

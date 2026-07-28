@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c0k5a78doi7r1"
-path="res://.godot/imported/pursuit.png-8977294217638eb9153a12863e0fd88d.ctex"
+uid="uid://bwt7tpbmergfy"
+path="res://.godot/imported/taunt_end_turn_power.png-0c3b33db71d9f51b0c7857c04bbf547b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://TashkentSpire2/images/card_portraits/big/pursuit.png"
-dest_files=["res://.godot/imported/pursuit.png-8977294217638eb9153a12863e0fd88d.ctex"]
+source_file="res://TashkentSpire2/images/powers/packed/taunt_end_turn_power.png"
+dest_files=["res://.godot/imported/taunt_end_turn_power.png-0c3b33db71d9f51b0c7857c04bbf547b.ctex"]
 
 [params]
 

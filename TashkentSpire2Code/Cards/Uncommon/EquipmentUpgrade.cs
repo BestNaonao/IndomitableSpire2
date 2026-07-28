@@ -6,6 +6,7 @@ using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.ValueProps;
+using TashkentSpire2.TashkentSpire2Code.Commands;
 using TashkentSpire2.TashkentSpire2Code.Keywords;
 
 namespace TashkentSpire2.TashkentSpire2Code.Cards.Uncommon;
@@ -15,7 +16,8 @@ public sealed class EquipmentUpgrade() : TashkentCard(1, CardType.Skill, CardRar
     public override bool GainsBlock => true;
     
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new BlockVar(9M, ValueProp.Move)
+        new BlockVar(8M, ValueProp.Move),
+        new LoadDynamicVar(1M)
     ];
 
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [
@@ -38,6 +40,7 @@ public sealed class EquipmentUpgrade() : TashkentCard(1, CardType.Skill, CardRar
         if (card != null)
         {
             card.AddKeyword(TashkentKeyword.Barrage);
+            await Loadcmd.Execute(choiceContext, card, DynamicVars["TashkentSpire2-Load"].IntValue);
         }
     }
     

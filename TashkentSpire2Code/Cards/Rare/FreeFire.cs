@@ -1,50 +1,63 @@
 ﻿using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.Factories;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
-using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
-using MegaCrit.Sts2.Core.ValueProps;
 using TashkentSpire2.TashkentSpire2Code.Cards.Status;
-using TashkentSpire2.TashkentSpire2Code.Cards.Token;
 using TashkentSpire2.TashkentSpire2Code.Commands;
 using TashkentSpire2.TashkentSpire2Code.Keywords;
 
 namespace TashkentSpire2.TashkentSpire2Code.Cards.Rare;
 
-public sealed class FreeFire() : AmmunitionCard(0, CardType.Attack, CardRarity.Rare, TargetType.AnyEnemy)
+public sealed class FreeFire() : AmmunitionCard(3, CardType.Skill, CardRarity.Rare, TargetType.Self)
 {
     public override IEnumerable<CardKeyword> CanonicalKeywords => [TashkentKeyword.Barrage];
     
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new DamageVar(5M, ValueProp.Move),
         new AmmunitionDynamicVar(0M),
         new LoadDynamicVar(0M),
-        new AmmuMaxDynamicVar(6M),
-        new ShotDynamicVar(1M),
-        new CardsVar(1)
+        new AmmuMaxDynamicVar(6M)
     ];
-
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromCard<Pursuit>()];
     
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        ArgumentNullException.ThrowIfNull(cardPlay.Target, nameof(cardPlay.Target));
         ArgumentNullException.ThrowIfNull(CombatState);
-        
-        int shellsLoaded = await GetShellCountcmd.Execute(choiceContext, Owner, (int)CurrentAmmu,this.Keywords.Contains(TashkentKeyword.Barrage));
+    
+        int shellsLoaded = await GetShellCountcmd.Execute(choiceContext, Owner, (int)CurrentAmmu, this.Keywords.Contains(TashkentKeyword.Barrage));
         if (shellsLoaded > 0)
         {
-            await TryTriggerShotEffectAsync(shellsLoaded, async () => {
-                await Pursuit.CreateInHand(base.Owner, base.DynamicVars.Cards.IntValue, base.CombatState);
-            });
-            
-            await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
-                .FromCard(this, cardPlay)
-                .WithHitCount(shellsLoaded)
-                .Targeting(cardPlay.Target)
-                .WithHitFx("vfx/vfx_attack_slash")
-                .Execute(choiceContext);
+            var ammuCards = ModelDb.AllCards.OfType<AmmunitionCard>();
+        
+            List<CardModel> cardsToPlay = CardFactory.GetDistinctForCombat(
+                base.Owner, ammuCards, shellsLoaded, base.Owner.RunState.Rng.CombatCardGeneration
+            ).ToList();
+
+            foreach (var card in cardsToPlay)
+            {
+                if (this.IsUpgraded) 
+                {
+                    CardCmd.Upgrade(card);
+                }
+            }
+
+            if (cardsToPlay.Count > 0)
+            {
+                await CardPileCmd.AddGeneratedCardsToCombat(cardsToPlay, PileType.Play, base.Owner);
+            }
+
+            foreach (CardModel item in cardsToPlay)
+            {
+                if (!base.Owner.Creature.IsDead)
+                {
+                    item.ExhaustOnNextPlay = true; 
+                    await CardCmd.AutoPlay(choiceContext, item, null);
+                }
+                else
+                {
+                    break;
+                }
+            }
             
             int num = Math.Max(shellsLoaded - CurrentAmmu, 0);
             if (num > 0 && this.Keywords.Contains(TashkentKeyword.Barrage))
@@ -60,10 +73,5 @@ public sealed class FreeFire() : AmmunitionCard(0, CardType.Attack, CardRarity.R
             UpdateAmmuGlobal(Math.Max(CurrentAmmu - shellsLoaded, 0));
             await LoadAfterShotAsync(choiceContext, shellsLoaded);
         }
-    }
-
-    protected override void OnUpgrade()
-    {
-        DynamicVars.Damage.UpgradeValueBy(2M);
     }
 }

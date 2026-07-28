@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://6hes5l7xtu30"
-path="res://.godot/imported/mark_potion_outline.png-5e8c8b05011db07134d22d533d192334.ctex"
+uid="uid://csm418sk7rkls"
+path="res://.godot/imported/taunt_end_turn_power.png-5c15946c86775dcfcbe4f520b1c444c6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://TashkentSpire2/images/potions/mark_potion_outline.png"
-dest_files=["res://.godot/imported/mark_potion_outline.png-5e8c8b05011db07134d22d533d192334.ctex"]
+source_file="res://TashkentSpire2/images/powers/big/taunt_end_turn_power.png"
+dest_files=["res://.godot/imported/taunt_end_turn_power.png-5c15946c86775dcfcbe4f520b1c444c6.ctex"]
 
 [params]
 

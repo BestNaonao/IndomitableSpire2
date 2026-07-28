@@ -11,13 +11,13 @@ using TashkentSpire2.TashkentSpire2Code.Powers;
 
 namespace TashkentSpire2.TashkentSpire2Code.Cards.Ancient;
 
-public sealed class HeroicShooting() : AmmunitionCard(0, CardType.Attack, CardRarity.Ancient, TargetType.AllEnemies)
+public sealed class HeroicShooting() : AmmunitionCard(1, CardType.Attack, CardRarity.Ancient, TargetType.AllEnemies)
 {
     public override IEnumerable<CardKeyword> CanonicalKeywords => [TashkentKeyword.Barrage];
     
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new DamageVar(5M, ValueProp.Move),
+        new DamageVar(4M, ValueProp.Move),
         new AmmunitionDynamicVar(6M),
         new LoadDynamicVar(3M),
         new AmmuMaxDynamicVar(6M),
