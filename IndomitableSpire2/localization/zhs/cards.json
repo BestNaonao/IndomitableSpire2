@@ -109,7 +109,7 @@
   "INDOMITABLESPIRE2-LOGISTICS_EXCHANGE.description": "选择2张[gold]手牌[/gold]，将它们的当前耗能互换，并作为这场战斗中的基础能耗。",
   "INDOMITABLESPIRE2-LOGISTICS_EXCHANGE.selectionScreenPrompt": "选择2张牌互换其耗能。",
   "INDOMITABLESPIRE2-LEND_LEASE_ACT.title": "租借法案",
-  "INDOMITABLESPIRE2-LEND_LEASE_ACT.description": "你和另一名玩家各自选择一张[gold]手牌[/gold]互换。互换的牌在被打出后会返还给原拥有者。",
+  "INDOMITABLESPIRE2-LEND_LEASE_ACT.description": "你和另一名玩家各选择一张[gold]手牌[/gold]在本回合内免费打出。选中的牌被打出后将交给对方，再次被打出后返还给原拥有者。",
   "INDOMITABLESPIRE2-LEND_LEASE_ACT.selectionScreenPrompt": "选择一张要租借给盟友的牌。",
   
   "INDOMITABLESPIRE2-DESSERT.title": "甜点",

@@ -109,7 +109,7 @@
   "INDOMITABLESPIRE2-LOGISTICS_EXCHANGE.description": "[gold]手札[/gold]からカードを2枚選ぶ。戦闘終了まで、それらの現在のコストを入れ替える。",
   "INDOMITABLESPIRE2-LOGISTICS_EXCHANGE.selectionScreenPrompt": "コストを入れ替えるカードを2枚選ぶ。",
   "INDOMITABLESPIRE2-LEND_LEASE_ACT.title": "レンドリース法",
-  "INDOMITABLESPIRE2-LEND_LEASE_ACT.description": "自身と他のプレイヤーはそれぞれ[gold]手札[/gold]を1枚選び、交換する。交換したカードはプレイされた後、元の持ち主に返還される。",
+  "INDOMITABLESPIRE2-LEND_LEASE_ACT.description": "自身と他のプレイヤーはそれぞれ[gold]手札[/gold]を1枚選び、このターンコストを0にする。選ばれたカードはプレイ時に相手に渡り、再プレイ時に戻る。",
   "INDOMITABLESPIRE2-LEND_LEASE_ACT.selectionScreenPrompt": "味方に貸与するカードを1枚選ぶ。",
   
   "INDOMITABLESPIRE2-DESSERT.title": "デザート",
