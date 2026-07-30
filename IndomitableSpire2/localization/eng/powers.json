@@ -85,7 +85,8 @@
   "INDOMITABLESPIRE2-AIR_RAID_GUIDANCE_POWER.description": "Your next [gold]Carrier Aircraft[/gold] Attack deals additional damage.",
   "INDOMITABLESPIRE2-AIR_RAID_GUIDANCE_POWER.smartDescription": "{OnPlayer:Your|[gold]{OwnerName}'s[/gold]} next [gold]Carrier Aircraft[/gold] Attack deals [blue]{Amount}[/blue] additional damage.",
   "INDOMITABLESPIRE2-AIR_RAID_GUIDANCE_POWER.title": "Air Raid Guidance",
-  "INDOMITABLESPIRE2-LEND_LEASE_ACT_POWER.description": "When you play the leased card, it returns to its original owner.",
-  "INDOMITABLESPIRE2-LEND_LEASE_ACT_POWER.smartDescription": "When you play the leased [gold]{CardName}[/gold], it returns to [gold]{OriginalOwnerName}[/gold].",
+  "INDOMITABLESPIRE2-LEND_LEASE_ACT_POWER.description": "When you play the specific card, it returns to its signatory.",
+  "INDOMITABLESPIRE2-LEND_LEASE_ACT_POWER.smartDescriptionLend": "When you play [gold]{CardName}[/gold], it goes to [gold]{TargetName}[/gold]'s Hand.",
+  "INDOMITABLESPIRE2-LEND_LEASE_ACT_POWER.smartDescriptionReturn": "When you play the borrowed [gold]{CardName}[/gold], it returns to [gold]{TargetName}[/gold].",
   "INDOMITABLESPIRE2-LEND_LEASE_ACT_POWER.title": "Lend-Lease Act"
 }

@@ -85,7 +85,8 @@
   "INDOMITABLESPIRE2-AIR_RAID_GUIDANCE_POWER.description": "次にプレイする[gold]艦載機[/gold]のアタックは追加ダメージを与える。",
   "INDOMITABLESPIRE2-AIR_RAID_GUIDANCE_POWER.smartDescription": "{OnPlayer:自身が|[gold]{OwnerName}[/gold]が}次にプレイする[gold]艦載機[/gold]のアタックは追加で[blue]{Amount}[/blue]ダメージを与える。",
   "INDOMITABLESPIRE2-AIR_RAID_GUIDANCE_POWER.title": "空襲先導",
-  "INDOMITABLESPIRE2-LEND_LEASE_ACT_POWER.description": "借りたカードをプレイした時、元の持ち主に返還される。",
-  "INDOMITABLESPIRE2-LEND_LEASE_ACT_POWER.smartDescription": "借りた[gold]{CardName}[/gold]をプレイした時、それは[gold]{OriginalOwnerName}[/gold]に返還される。",
+  "INDOMITABLESPIRE2-LEND_LEASE_ACT_POWER.description": "特定のカードをプレイした時、契約者に返還される。",
+  "INDOMITABLESPIRE2-LEND_LEASE_ACT_POWER.smartDescriptionLend": "[gold]{CardName}[/gold]をプレイした時、それを[gold]{TargetName}[/gold]の手札に渡す。",
+  "INDOMITABLESPIRE2-LEND_LEASE_ACT_POWER.smartDescriptionReturn": "借りた[gold]{CardName}[/gold]をプレイした時、それは[gold]{TargetName}[/gold]に返還される。",
   "INDOMITABLESPIRE2-LEND_LEASE_ACT_POWER.title": "レンドリース法"
 }
