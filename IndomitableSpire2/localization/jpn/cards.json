@@ -111,6 +111,8 @@
   "INDOMITABLESPIRE2-LEND_LEASE_ACT.title": "レンドリース法",
   "INDOMITABLESPIRE2-LEND_LEASE_ACT.description": "自身と他のプレイヤーはそれぞれ[gold]手札[/gold]を1枚選び、このターンコストを0にする。選ばれたカードはプレイ時に相手に渡り、再プレイ時に戻る。",
   "INDOMITABLESPIRE2-LEND_LEASE_ACT.selectionScreenPrompt": "味方に貸与するカードを1枚選ぶ。",
+  "INDOMITABLESPIRE2-ENGAGE_ON_SIGHT.title": "見敵必戦",
+  "INDOMITABLESPIRE2-ENGAGE_ON_SIGHT.description": "{IfUpgraded:show:|自分のターン中に}アタックを引くたび、すべての敵に[gold]手札[/gold]の枚数に等しいダメージを与える。",
   
   "INDOMITABLESPIRE2-DESSERT.title": "デザート",
   "INDOMITABLESPIRE2-DESSERT.description": "HPを[green]{Heal:diff()}[/green]回復する。\n{Energy:energyIcons()}を得る。",

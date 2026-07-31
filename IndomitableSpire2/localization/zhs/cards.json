@@ -111,6 +111,8 @@
   "INDOMITABLESPIRE2-LEND_LEASE_ACT.title": "租借法案",
   "INDOMITABLESPIRE2-LEND_LEASE_ACT.description": "你和另一名玩家各选择一张[gold]手牌[/gold]在本回合内免费打出。选中的牌被打出后将交给对方，再次被打出后返还给原拥有者。",
   "INDOMITABLESPIRE2-LEND_LEASE_ACT.selectionScreenPrompt": "选择一张要租借给盟友的牌。",
+  "INDOMITABLESPIRE2-ENGAGE_ON_SIGHT.title": "见敌必战",
+  "INDOMITABLESPIRE2-ENGAGE_ON_SIGHT.description": "每当你{IfUpgraded:show:|在回合进行中}抽到一张攻击牌时，对所有敌人造成相当于[gold]手牌[/gold]数量的伤害。",
   
   "INDOMITABLESPIRE2-DESSERT.title": "甜点",
   "INDOMITABLESPIRE2-DESSERT.description": "回复[green]{Heal:diff()}[/green]点生命。\n获得{Energy:energyIcons()}。",
