@@ -89,8 +89,8 @@
   "INDOMITABLESPIRE2-LEND_LEASE_ACT_POWER.smartDescriptionLend": "When you play [gold]{CardName}[/gold], it goes to [gold]{TargetName}[/gold]'s Hand.",
   "INDOMITABLESPIRE2-LEND_LEASE_ACT_POWER.smartDescriptionReturn": "When you play the borrowed [gold]{CardName}[/gold], it returns to [gold]{TargetName}[/gold].",
   "INDOMITABLESPIRE2-LEND_LEASE_ACT_POWER.title": "Lend-Lease Act",
-  "INDOMITABLESPIRE2-ENGAGE_ON_SIGHT_POWER.description": "Deal damage when drawing Attack cards.",
-  "INDOMITABLESPIRE2-ENGAGE_ON_SIGHT_POWER.smartDescription": "Whenever you draw an Attack card during your turn, deal damage to ALL enemies equal to the number of cards in your [gold]Hand[/gold] [blue]{Amount}[/blue] times.",
-  "INDOMITABLESPIRE2-ENGAGE_ON_SIGHT_POWER.smartDescriptionUpgraded": "Whenever you draw an Attack card, deal damage to ALL enemies equal to the number of cards in your [gold]Hand[/gold].\nTriggers [blue]{Amount}[/blue] times during your turn, and [blue]{SecondAmount}[/blue] times outside your turn.",
+  "INDOMITABLESPIRE2-ENGAGE_ON_SIGHT_POWER.description": "Deal damage to ALL enemies when drawing Attack cards.",
+  "INDOMITABLESPIRE2-ENGAGE_ON_SIGHT_POWER.smartDescription": "Whenever you draw an Attack during your turn, deal damage to ALL enemies equal to the number of cards in your [gold]Hand[/gold] [blue]{Amount}[/blue] {Amount:plural:time|times}.",
+  "INDOMITABLESPIRE2-ENGAGE_ON_SIGHT_POWER.smartDescriptionUpgraded": "Whenever you draw an Attack, deal damage to ALL enemies equal to the number of cards in your [gold]Hand[/gold] [blue]{Amount}[/blue] {Amount:plural:time|times} during your turn, and [blue]{UnrestrictedAmount}[/blue] {UnrestrictedAmount:plural:time|times} outside your turn.",
   "INDOMITABLESPIRE2-ENGAGE_ON_SIGHT_POWER.title": "Engage on Sight"
 }

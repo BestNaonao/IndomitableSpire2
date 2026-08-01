@@ -112,7 +112,7 @@
   "INDOMITABLESPIRE2-LEND_LEASE_ACT.description": "You and another player each choose a card in [gold]Hand[/gold] to become free this turn. The chosen cards are given to each other when played, and return back when played again.",
   "INDOMITABLESPIRE2-LEND_LEASE_ACT.selectionScreenPrompt": "Choose a card to lend to your ally.",
   "INDOMITABLESPIRE2-ENGAGE_ON_SIGHT.title": "Engage on Sight",
-  "INDOMITABLESPIRE2-ENGAGE_ON_SIGHT.description": "Whenever you draw an Attack card{IfUpgraded:show:| during your turn}, deal damage to ALL enemies equal to the number of cards in your [gold]Hand[/gold].",
+  "INDOMITABLESPIRE2-ENGAGE_ON_SIGHT.description": "Whenever you draw an Attack {IfUpgraded:show:| during your turn}, deal damage to ALL enemies equal to the number of cards in your [gold]Hand[/gold].",
   
   "INDOMITABLESPIRE2-DESSERT.title": "Dessert",
   "INDOMITABLESPIRE2-DESSERT.description": "Heal [green]{Heal:diff()}[/green] HP.\nGain {Energy:energyIcons()}.",
