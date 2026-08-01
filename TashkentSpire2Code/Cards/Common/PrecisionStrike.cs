@@ -33,7 +33,7 @@ public sealed class PrecisionStrike() : TashkentCard(0, CardType.Attack, CardRar
     
     protected override void OnUpgrade()
     {
-        DynamicVars.Damage.UpgradeValueBy(2M);
+        DynamicVars.Damage.UpgradeValueBy(1M);
         DynamicVars.Repeat.UpgradeValueBy(1M);
     }
 }

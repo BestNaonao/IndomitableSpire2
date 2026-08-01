@@ -18,7 +18,7 @@ public sealed class ModuleOrb : CustomOrbModel
     public override decimal PassiveVal => Math.Max(BaseValue - (ModifiedPositiveValue - BaseValue), 0m);
 
     // 激发效果数值
-    public override decimal EvokeVal => ModifyOrbValue(4);
+    public override decimal EvokeVal => ModifyOrbValue(6);
 
     // 暗色，使用球的主体色的暗色调
     public override Color DarkenedColor => new(0.4f, 0.2f, 0.5f);

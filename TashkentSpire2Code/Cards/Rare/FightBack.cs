@@ -13,7 +13,7 @@ public sealed class FightBack() : TashkentCard(0, CardType.Attack, CardRarity.Ra
     
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new DamageVar(8M, ValueProp.Move),
-        new MarkDynamicVar(2M)
+        new MarkDynamicVar(3M)
     ];
     
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)

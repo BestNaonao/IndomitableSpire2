@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://gdif5i2wjwa0"
-path="res://.godot/imported/markpreturn_power.png-5c62eefe3553b887514233d8ef9500e3.ctex"
+uid="uid://cwq78tdgkb6ki"
+path="res://.godot/imported/ChargeAfterTurnPower.png-320d6b76bf185da75c41a9e5bbf110de.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://TashkentSpire2/images/powers/big/markpreturn_power.png"
-dest_files=["res://.godot/imported/markpreturn_power.png-5c62eefe3553b887514233d8ef9500e3.ctex"]
+source_file="res://TashkentSpire2/images/powers/packed/ChargeAfterTurnPower.png"
+dest_files=["res://.godot/imported/ChargeAfterTurnPower.png-320d6b76bf185da75c41a9e5bbf110de.ctex"]
 
 [params]
 

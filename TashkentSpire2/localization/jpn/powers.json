@@ -7,10 +7,13 @@
   "TASHKENTSPIRE2-MINION_RIGHT_ACTION.smartDescription": "クリックして[gold]突撃[/gold]{Amount}する。",
   "TASHKENTSPIRE2-DISTANCE_POWER.title": "距離",
   "TASHKENTSPIRE2-DISTANCE_POWER.description": "前進するごとに与えるダメージが[blue]20[/blue]%増加し、受けるダメージが[blue]10[/blue]%増加する。後退する場合はその逆。",
-  "TASHKENTSPIRE2-DISTANCE_POWER.smartDescription": "与えるダメージが[blue]{Increase}[/blue]%増加し、受けるダメージが[blue]{Decrease}[/blue]%増加する。",
+  "TASHKENTSPIRE2-DISTANCE_POWER.smartDescription": "{CanApplyWarpDrive:cond:==0?効果なし。|与えるダメージが[blue]{Increase}[/blue]%増加し、受けるダメージが[blue]{Decrease}[/blue]%増加する。}",
   "TASHKENTSPIRE2-BACK_AFTER_TURN_POWER.title": "ターン終了時後退",
   "TASHKENTSPIRE2-BACK_AFTER_TURN_POWER.description": "ターン終了時に[gold]後退[/gold]する。",
   "TASHKENTSPIRE2-BACK_AFTER_TURN_POWER.smartDescription": "ターン終了時に[gold]後退[/gold][blue]{Amount}[/blue]する。",
+  "TASHKENTSPIRE2-CHARGE_AFTER_TURN_POWER.description": "ターン終了時、[gold]突進[/gold]する。",
+  "TASHKENTSPIRE2-CHARGE_AFTER_TURN_POWER.smartDescription": "ターン終了時、[gold]突進[/gold][blue]{Amount}[/blue]する。",
+  "TASHKENTSPIRE2-CHARGE_AFTER_TURN_POWER.title": "ターン終了時突進",
   "TASHKENTSPIRE2-TORPEDO_POWER.title": "魚雷",
   "TASHKENTSPIRE2-TORPEDO_POWER.title_bomb": "魚雷？爆弾？",
   "TASHKENTSPIRE2-TORPEDO_POWER.description": "[gold]距離[/gold]は魚雷ダメージに影響しないが、命中までの時間に影響する。\nダメージは対象の[gold]標的[/gold]による補正を受ける。",
@@ -114,5 +117,11 @@
   "TASHKENTSPIRE2-BARREL_MODIFICATION_LOAD_POWER.smartDescription": "プレイした[gold]弾薬[/gold]カードが[gold]発射[/gold]条件を満たした時、そのカードを[gold]装填[/gold]{Amount}する。",
   "TASHKENTSPIRE2-SPECIAL_SERVICES_POWER.title": "特別サービス",
   "TASHKENTSPIRE2-SPECIAL_SERVICES_POWER.description": "次に[gold]バフ[/gold]を付与するカードを使用した時、その効果を2倍にする。",
-  "TASHKENTSPIRE2-SPECIAL_SERVICES_POWER.smartDescription": "次の{Amount}回、[gold]バフ[/gold]を付与するカードを使用した時、その効果を2倍にする。"
+  "TASHKENTSPIRE2-SPECIAL_SERVICES_POWER.smartDescription": "次の{Amount}回、[gold]バフ[/gold]を付与するカードを使用した時、その効果を2倍にする。",
+  "TASHKENTSPIRE2-ILLUMINATION_ROUND_POWER.description": "[gold]標的[/gold]が付与された時、その層数がさらに[blue]1[/blue]増加する。",
+  "TASHKENTSPIRE2-ILLUMINATION_ROUND_POWER.smartDescription": "[gold]標的[/gold]が付与された時、その層数がさらに[blue]{Amount}[/blue]増加する。",
+  "TASHKENTSPIRE2-ILLUMINATION_ROUND_POWER.title": "照明弾",
+  "TASHKENTSPIRE2-WARP_DRIVE_POWER.description": "[gold]距離[/gold]の上限を増加させる。\n各ターン最初の[gold]攻撃カード[/gold]を使用した後、このターン中、[gold]距離[/gold]能力が[red]完全に無効化[/red]される。\n[gold]後退[/gold]はすべて[gold]突撃[/gold]に変更される。",
+  "TASHKENTSPIRE2-WARP_DRIVE_POWER.smartDescription": "[gold]距離[/gold]の上限を{Amount}増加させる。\n各ターン最初の[gold]攻撃カード[/gold]を使用した後、このターン中、[gold]距離[/gold]能力が[red]完全に無効化[/red]される。\n[gold]後退[/gold]はすべて[gold]突撃[/gold]に変更される。",
+  "TASHKENTSPIRE2-WARP_DRIVE_POWER.title": "ワープドライブ"
 }

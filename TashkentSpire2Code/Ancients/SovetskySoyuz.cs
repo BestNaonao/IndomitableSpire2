@@ -2,14 +2,22 @@
 using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Acts;
+using TashkentSpire2.TashkentSpire2Code.Config;
 using TashkentSpire2.TashkentSpire2Code.Relics;
 
 namespace TashkentSpire2.TashkentSpire2Code.Ancients;
 
 public sealed class SovetskySoyuz : CustomAncientModel
 {
-    public override bool IsValidForAct(ActModel act) =>
-        act.Id == ModelDb.Act<Hive>().Id || act.Id == ModelDb.Act<Glory>().Id;
+    public override bool IsValidForAct(ActModel act)
+    {
+        if (!TashkentConfig.SpawnAncientsSovetskySoyuz)
+        {
+            return false;
+        }
+
+        return act.Id == ModelDb.Act<Hive>().Id || act.Id == ModelDb.Act<Glory>().Id;
+    }
     
     public override string? CustomScenePath => "res://TashkentSpire2/scenes/ancients/SovetskySoyuz.tscn";
     

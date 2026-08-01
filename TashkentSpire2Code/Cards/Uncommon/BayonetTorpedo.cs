@@ -21,7 +21,7 @@ public sealed class BayonetTorpedo() : TashkentCard(1, CardType.Skill, CardRarit
     
     protected override void OnUpgrade()
     {
-        DynamicVars["TashkentSpire2-Torpedo"].UpgradeValueBy(6M);
+        DynamicVars["TashkentSpire2-Torpedo"].UpgradeValueBy(12M);
         DynamicVars["TashkentSpire2-Charge"].UpgradeValueBy(1M);
     }
 }

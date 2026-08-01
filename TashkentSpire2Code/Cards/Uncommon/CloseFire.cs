@@ -11,7 +11,7 @@ namespace TashkentSpire2.TashkentSpire2Code.Cards.Uncommon;
 public sealed class CloseFire() : TashkentCard(1, CardType.Attack, CardRarity.Uncommon, TargetType.AnyEnemy)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new DamageVar(6M, ValueProp.Move),
+        new DamageVar(8M, ValueProp.Move),
         new RepeatVar(1)
     ];
     

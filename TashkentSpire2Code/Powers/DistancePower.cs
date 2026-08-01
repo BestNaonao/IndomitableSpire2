@@ -37,8 +37,19 @@ public sealed class DistancePower : TashkentPower, IPersistentPower
         {
             new DynamicVar(VarKey, 0M),
             new DynamicVar("Increase", 0M),
-            new DynamicVar("Decrease", 0M)
+            new DynamicVar("Decrease", 0M),
+            new DynamicVar("CanApplyWarpDrive", 1M)
         };
+    
+    private bool CanApplyWarpDrive
+    {
+        get => base.DynamicVars["CanApplyWarpDrive"].BaseValue != 0M;
+        set
+        {
+            base.DynamicVars["CanApplyWarpDrive"].BaseValue = value ? 1M : 0M;
+            InvokeDisplayAmountChanged();
+        }
+    }
     
     public int TotalIncreasedAmount { get; private set; } = 0;
     
@@ -67,8 +78,15 @@ public sealed class DistancePower : TashkentPower, IPersistentPower
     {
         if (canonicalPower.Id == this.Id && target == this.Owner)
         {
+            int maxLimit = 5;
+            var warpDrive = target.GetPower<WarpDrivePower>();
+            if (warpDrive != null && warpDrive.Amount > 0)
+            {
+                maxLimit += (int)warpDrive.Amount;
+            }
+            
             int potential = (int)base.Amount + (int)amount;
-            int clamped = Mathf.Clamp(potential, -5, 5);
+            int clamped = Mathf.Clamp(potential, -5, maxLimit);
             modifiedAmount = (decimal)(clamped - (int)base.Amount);
             return true;
         }
@@ -113,6 +131,11 @@ public sealed class DistancePower : TashkentPower, IPersistentPower
     {
         if (base.Owner.Player == null) return;
         
+        if (participants.Contains(base.Owner))
+        {
+            CanApplyWarpDrive = true;
+        }
+        
         if (!participants.Contains(base.Owner) && HasActiveSandpit())
         {
             _isSyncing = true;  // 加锁
@@ -123,17 +146,32 @@ public sealed class DistancePower : TashkentPower, IPersistentPower
         }
     }
     
+    public override Task AfterCardPlayed(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+    {
+        if (cardPlay.Card.Owner.Creature == base.Owner && cardPlay.Card.Type == CardType.Attack)
+        {
+            CanApplyWarpDrive = false;
+        }
+        return Task.CompletedTask;
+    }
+    
     public override decimal ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource, CardPlay? cardPlay)
     {
         if (dealer == this.Owner && !props.IsPoweredAttack())
             return 1m;
 
+        var warpDrive = base.Owner.GetPower<WarpDrivePower>();
+        if (warpDrive != null && warpDrive.Amount > 0 && !CanApplyWarpDrive)
+        {
+            return 1m;
+        }
+        
         int dist = (int)base.Amount; 
         if (dist == 0) return 1m;
 
         int enemySide = 1;
         Creature? enemy = (dealer == base.Owner) ? target : dealer;
-        if (enemy == null) return 1m;
+        if (enemy == null) return Math.Max(1m + dist * 0.2m, 0m);
 
         if (enemy.HasPower<BackAttackLeftPower>()) enemySide = -1;
 
@@ -246,7 +284,16 @@ public sealed class DistancePower : TashkentPower, IPersistentPower
     private async Task UpdateCreaturePositions(int delta)
     {
         if (delta == 0) return;
-        
+
+        int currentAmount = (int)this.Amount;
+        int previousAmount = currentAmount - delta;
+    
+        int cappedCurrent = Math.Min(currentAmount, 10);
+        int cappedPrevious = Math.Min(previousAmount, 10);
+        int effectiveDelta = cappedCurrent - cappedPrevious;
+
+        if (effectiveDelta == 0) return;
+    
         bool isFacingLeft;
 
         if (base.Owner.Player != null)

@@ -1,17 +1,15 @@
-﻿using MegaCrit.Sts2.Core.Entities.Cards;
-using MegaCrit.Sts2.Core.Commands;
+﻿using MegaCrit.Sts2.Core.Commands;
+using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
-using TashkentSpire2.TashkentSpire2Code.Commands;
 using TashkentSpire2.TashkentSpire2Code.Powers;
 
 namespace TashkentSpire2.TashkentSpire2Code.Cards.Rare;
 
-public sealed class GoneWithTheWind() : TashkentCard(1, CardType.Power, CardRarity.Rare, TargetType.Self)
+public sealed class WarpDrive() : TashkentCard(1, CardType.Power, CardRarity.Rare, TargetType.Self)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new PowerVar<GoneWithTheWindPower>(4M),
-        new SummonVar(1M),
+        new PowerVar<WarpDrivePower>(5M),
         new RetreatDynamicVar(0M),
         new ChargeDynamicVar(0M)
     ];
@@ -19,12 +17,11 @@ public sealed class GoneWithTheWind() : TashkentCard(1, CardType.Power, CardRari
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
-        await PowerCmd.Apply<GoneWithTheWindPower>(choiceContext, Owner.Creature, base.DynamicVars["GoneWithTheWindPower"].BaseValue, base.Owner.Creature, this);
-        await MinionSummoncmd.Summon(choiceContext, base.Owner, base.DynamicVars.Summon.BaseValue, this);
+        await PowerCmd.Apply<WarpDrivePower>(choiceContext, Owner.Creature, base.DynamicVars["WarpDrivePower"].BaseValue, base.Owner.Creature, this);
     }
 
     protected override void OnUpgrade()
     {
-        AddKeyword(CardKeyword.Innate);
+        base.DynamicVars["WarpDrivePower"].UpgradeValueBy(994M);
     }
 }

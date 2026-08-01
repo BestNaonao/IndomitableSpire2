@@ -94,7 +94,7 @@ public sealed class TorpedoPower : TashkentPower, IHasSecondAmount
 
         if (dist == 2 || dist == 3)
             baseTurns = 2;
-        else if (dist == 4 || dist == 5)
+        else if (dist >= 4)
             baseTurns = 1;
         else if (distPower == null || dist <= 1)
             baseTurns = 3;

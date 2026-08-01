@@ -6,11 +6,14 @@
   "TASHKENTSPIRE2-MINION_RIGHT_ACTION.smartDescription": "点击以[gold]突进[/gold]{Amount}。",
   "TASHKENTSPIRE2-MINION_RIGHT_ACTION.title": "突进",
   "TASHKENTSPIRE2-DISTANCE_POWER.description": "向前一步增加[blue]20[/blue]%造成伤害，增加[blue]10[/blue]%受到的伤害，向后一步则反之。",
-  "TASHKENTSPIRE2-DISTANCE_POWER.smartDescription": "造成伤害增加[blue]{Increase}[/blue]%，受到伤害增加[blue]{Decrease}[/blue]%。",
+  "TASHKENTSPIRE2-DISTANCE_POWER.smartDescription": "{CanApplyWarpDrive:cond:==0?无效果。|造成伤害增加[blue]{Increase}[/blue]%，受到伤害增加[blue]{Decrease}[/blue]%。}",
   "TASHKENTSPIRE2-DISTANCE_POWER.title": "距离",
   "TASHKENTSPIRE2-BACK_AFTER_TURN_POWER.description": "你的回合结束时，[gold]后撤[/gold]。",
   "TASHKENTSPIRE2-BACK_AFTER_TURN_POWER.smartDescription": "你的回合结束时，[gold]后撤[/gold][blue]{Amount}[/blue]。",
   "TASHKENTSPIRE2-BACK_AFTER_TURN_POWER.title": "结束时后撤",
+  "TASHKENTSPIRE2-CHARGE_AFTER_TURN_POWER.description": "回合结束时，[gold]突进[/gold]。",
+  "TASHKENTSPIRE2-CHARGE_AFTER_TURN_POWER.smartDescription": "回合结束时，[gold]突进[/gold][blue]{Amount}[/blue]。",
+  "TASHKENTSPIRE2-CHARGE_AFTER_TURN_POWER.title": "结束时突进",
   "TASHKENTSPIRE2-TORPEDO_POWER.description": "[gold]距离[/gold]不影响鱼雷伤害，但会影响鱼雷命中的时间。\n伤害受目标身上的[gold]标记[/gold]加成。",
   "TASHKENTSPIRE2-TORPEDO_POWER.smartDescription": "在{Turns:choose(1):本回合|第[blue]{}[/blue]回合}结束时，{AOEFlag:cond:==1?对[gold]所有敌人[/gold]|对[gold]标记[/gold]最高的敌人}造成[blue]{Amount}[/blue]伤害。\n伤害受目标身上的[gold]标记[/gold]加成。",
   "TASHKENTSPIRE2-TORPEDO_POWER.title": "鱼雷",
@@ -114,5 +117,11 @@
   "TASHKENTSPIRE2-BARREL_MODIFICATION_LOAD_POWER.title": "炮膛改装-装填",
   "TASHKENTSPIRE2-SPECIAL_SERVICES_POWER.description": "下一次打出能给予[gold]正面效果[/gold]的牌时，将其效果翻倍。",
   "TASHKENTSPIRE2-SPECIAL_SERVICES_POWER.smartDescription": "下{Amount}次打出能给予[gold]正面效果[/gold]的牌时，将其效果翻倍。",
-  "TASHKENTSPIRE2-SPECIAL_SERVICES_POWER.title": "特别服务"
+  "TASHKENTSPIRE2-SPECIAL_SERVICES_POWER.title": "特别服务",
+  "TASHKENTSPIRE2-ILLUMINATION_ROUND_POWER.description": "被给予[gold]标记[/gold]时层数额外增加[blue]1[/blue]层。",
+  "TASHKENTSPIRE2-ILLUMINATION_ROUND_POWER.smartDescription": "被给予[gold]标记[/gold]时层数额外增加[blue]{Amount}[/blue]层。",
+  "TASHKENTSPIRE2-ILLUMINATION_ROUND_POWER.title": "照明弹",
+  "TASHKENTSPIRE2-WARP_DRIVE_POWER.description": "[gold]距离[/gold]上限提升。\n每回合首次打出[gold]攻击[/gold]牌后，你的[gold]距离[/gold]能力在本回合[red]完全失效[/red]。\n[gold]后撤[/gold]都将改为[gold]突进[/gold]。",
+  "TASHKENTSPIRE2-WARP_DRIVE_POWER.smartDescription": "[gold]距离[/gold]上限提升{Amount}。\n每回合首次打出[gold]攻击[/gold]牌后，你的[gold]距离[/gold]能力在本回合[red]完全失效[/red]。\n[gold]后撤[/gold]都将改为[gold]突进[/gold]。",
+  "TASHKENTSPIRE2-WARP_DRIVE_POWER.title": "曲速引擎"
 }

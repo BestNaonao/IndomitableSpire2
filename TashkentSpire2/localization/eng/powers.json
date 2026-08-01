@@ -6,11 +6,14 @@
   "TASHKENTSPIRE2-MINION_RIGHT_ACTION.smartDescription": "Click to [gold]Charge[/gold] {Amount}.",
   "TASHKENTSPIRE2-MINION_RIGHT_ACTION.title": "Charge",
   "TASHKENTSPIRE2-DISTANCE_POWER.description": "Each step forward increases damage dealt by [blue]20[/blue]% and damage taken by [blue]10[/blue]%; each step backward does the opposite.",
-  "TASHKENTSPIRE2-DISTANCE_POWER.smartDescription": "Damage dealt increased by [blue]{Increase}[/blue]%; damage taken increased by [blue]{Decrease}[/blue]%.",
+  "TASHKENTSPIRE2-DISTANCE_POWER.smartDescription": "{CanApplyWarpDrive:cond:==0?No effect.|Damage dealt increased by [blue]{Increase}[/blue]%, damage taken increased by [blue]{Decrease}[/blue]%.}",
   "TASHKENTSPIRE2-DISTANCE_POWER.title": "Distance",
   "TASHKENTSPIRE2-BACK_AFTER_TURN_POWER.description": "At the end of your turn, [gold]Retreat[/gold].",
   "TASHKENTSPIRE2-BACK_AFTER_TURN_POWER.smartDescription": "At the end of your turn, [gold]Retreat[/gold] [blue]{Amount}[/blue].",
   "TASHKENTSPIRE2-BACK_AFTER_TURN_POWER.title": "Retreat at End of Turn",
+  "TASHKENTSPIRE2-CHARGE_AFTER_TURN_POWER.description": "At the end of your turn, [gold]Charge[/gold].",
+  "TASHKENTSPIRE2-CHARGE_AFTER_TURN_POWER.smartDescription": "At the end of your turn, [gold]Charge[/gold] [blue]{Amount}[/blue].",
+  "TASHKENTSPIRE2-CHARGE_AFTER_TURN_POWER.title": "Charge at End of Turn",
   "TASHKENTSPIRE2-TORPEDO_POWER.description": "[gold]Distance[/gold] does not affect Torpedo damage, but it does affect when Torpedoes hit.\nDamage is increased by the target's [gold]Mark[/gold].",
   "TASHKENTSPIRE2-TORPEDO_POWER.smartDescription": "At the end of {Turns:choose(1):this turn|turn [blue]{}[/blue]}, {AOEFlag:cond:==1?deal damage to [gold]all enemies[/gold]|deal damage to the enemy with the highest [gold]Mark[/gold]} for [blue]{Amount}[/blue] damage.\nDamage is increased by the target's [gold]Mark[/gold].",
   "TASHKENTSPIRE2-TORPEDO_POWER.title": "Torpedo",
@@ -114,5 +117,11 @@
   "TASHKENTSPIRE2-BARREL_MODIFICATION_LOAD_POWER.title": "Barrel Modification - Load",
   "TASHKENTSPIRE2-SPECIAL_SERVICES_POWER.description": "The next time you play a card that grants a [gold]buff[/gold], double its effects.",
   "TASHKENTSPIRE2-SPECIAL_SERVICES_POWER.smartDescription": "The next {Amount} time(s) you play a card that grants a [gold]buff[/gold], double its effects.",
-  "TASHKENTSPIRE2-SPECIAL_SERVICES_POWER.title": "Special Services"
+  "TASHKENTSPIRE2-SPECIAL_SERVICES_POWER.title": "Special Services",
+  "TASHKENTSPIRE2-ILLUMINATION_ROUND_POWER.description": "When [gold]Mark[/gold] is applied, increase the amount by an additional [blue]1[/blue] stack.",
+  "TASHKENTSPIRE2-ILLUMINATION_ROUND_POWER.smartDescription": "When [gold]Mark[/gold] is applied, increase the amount by an additional [blue]{Amount}[/blue] stack.",
+  "TASHKENTSPIRE2-ILLUMINATION_ROUND_POWER.title": "Illumination Round",
+  "TASHKENTSPIRE2-WARP_DRIVE_POWER.description": "Increase your [gold]Distance[/gold] cap.\nAfter you play your first [gold]Attack[/gold] card each turn, your [gold]Distance[/gold] abilities are [red]disabled[/red] for the rest of this turn.\nAll [gold]Retreats[/gold] become [gold]Charges[/gold] instead.",
+  "TASHKENTSPIRE2-WARP_DRIVE_POWER.smartDescription": "Increase your [gold]Distance[/gold] cap by {Amount}.\nAfter you play your first [gold]Attack[/gold] card each turn, your [gold]Distance[/gold] abilities are [red]disabled[/red] for the rest of this turn.\nAll [gold]Retreats[/gold] become [gold]Charges[/gold] instead.",
+  "TASHKENTSPIRE2-WARP_DRIVE_POWER.title": "Warp Drive"
 }

@@ -1,4 +1,5 @@
-﻿using MegaCrit.Sts2.Core.Commands;
+﻿using MegaCrit.Sts2.Core.CardSelection;
+using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
@@ -10,19 +11,36 @@ public sealed class SwiftAsASwan() : TashkentCard(1, CardType.Skill, CardRarity.
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new CardsVar(1),
-        new PowerVar<AttackToDrawPower>(1M),
         new RetreatDynamicVar(3M)
     ];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         await PowerCmd.Apply<DistancePower>(choiceContext, base.Owner.Creature, -base.DynamicVars["TashkentSpire2-Retreat"].BaseValue, base.Owner.Creature, this);
-        await CardPileCmd.Draw(choiceContext, base.DynamicVars.Cards.BaseValue, base.Owner);
-        await PowerCmd.Apply<AttackToDrawPower>(choiceContext, base.Owner.Creature, base.DynamicVars["AttackToDrawPower"].BaseValue, base.Owner.Creature, this);
+        int num = Math.Min(base.DynamicVars.Cards.IntValue, CardPile.MaxCardsInHand - PileType.Hand.GetPile(base.Owner).Cards.Count);
+        if (num > 0)
+        {
+            var selectedCards = (await CardSelectCmd.FromCombatPile(
+                choiceContext, 
+                PileType.Discard.GetPile(base.Owner), 
+                base.Owner, 
+                new CardSelectorPrefs(base.SelectionScreenPrompt, 0, num)
+            )).ToList();
+            
+            if (selectedCards != null && selectedCards.Count > 0)
+            {
+                foreach (var card in selectedCards)
+                {
+                    card.AddKeyword(CardKeyword.Retain); 
+                }
+                await CardPileCmd.Add(selectedCards, PileType.Hand);
+            }
+        }
     }
     
     protected override void OnUpgrade()
     {
         DynamicVars["TashkentSpire2-Retreat"].UpgradeValueBy(1M);
+        DynamicVars.Cards.UpgradeValueBy(1M);
     }
 }

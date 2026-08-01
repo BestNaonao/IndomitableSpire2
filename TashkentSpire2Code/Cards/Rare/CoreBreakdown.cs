@@ -14,7 +14,7 @@ namespace TashkentSpire2.TashkentSpire2Code.Cards.Rare;
 public sealed class CoreBreakdown() : TashkentCard(3, CardType.Attack, CardRarity.Rare, TargetType.AnyEnemy)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new DamageVar(15M, ValueProp.Move)
+        new DamageVar(17M, ValueProp.Move)
     ];
     
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [
@@ -34,6 +34,6 @@ public sealed class CoreBreakdown() : TashkentCard(3, CardType.Attack, CardRarit
     
     protected override void OnUpgrade()
     {
-        DynamicVars.Damage.UpgradeValueBy(5M);
+        DynamicVars.Damage.UpgradeValueBy(6M);
     }
 }

@@ -6,11 +6,14 @@
   "TASHKENTSPIRE2-MINION_RIGHT_ACTION.smartDescription": "클릭하여 [gold]돌격[/gold]{Amount}합니다.",
   "TASHKENTSPIRE2-MINION_RIGHT_ACTION.title": "돌격",
   "TASHKENTSPIRE2-DISTANCE_POWER.description": "한 칸 전진할 때마다 주는 피해가 [blue]20[/blue]% 증가하고 받는 피해가 [blue]10[/blue]% 증가하며, 한 칸 후퇴하면 그 반대 효과를 얻습니다.",
-  "TASHKENTSPIRE2-DISTANCE_POWER.smartDescription": "주는 피해가 [blue]{Increase}[/blue]% 증가하고, 받는 피해가 [blue]{Decrease}[/blue]% 증가합니다.",
+  "TASHKENTSPIRE2-DISTANCE_POWER.smartDescription": "{CanApplyWarpDrive:cond:==0?효과 없음.|주는 피해가 [blue]{Increase}[/blue]% 증가하고, 받는 피해가 [blue]{Decrease}[/blue]% 증가합니다.}",
   "TASHKENTSPIRE2-DISTANCE_POWER.title": "거리",
   "TASHKENTSPIRE2-BACK_AFTER_TURN_POWER.description": "턴 종료 시 [gold]후퇴[/gold]합니다.",
   "TASHKENTSPIRE2-BACK_AFTER_TURN_POWER.smartDescription": "턴 종료 시 [gold]후퇴[/gold][blue]{Amount}[/blue]합니다.",
   "TASHKENTSPIRE2-BACK_AFTER_TURN_POWER.title": "턴 종료 후 후퇴",
+  "TASHKENTSPIRE2-CHARGE_AFTER_TURN_POWER.description": "턴 종료 시, [gold]돌격[/gold]합니다.",
+  "TASHKENTSPIRE2-CHARGE_AFTER_TURN_POWER.smartDescription": "턴 종료 시, [gold]돌격[/gold] [blue]{Amount}[/blue]합니다.",
+  "TASHKENTSPIRE2-CHARGE_AFTER_TURN_POWER.title": "턴 종료 시 돌격",
   "TASHKENTSPIRE2-TORPEDO_POWER.description": "[gold]거리[/gold]는 어뢰 피해에 영향을 주지 않지만, 명중 시점에는 영향을 줍니다.\n피해는 대상의 [gold]표식[/gold]에 의해 증가합니다.",
   "TASHKENTSPIRE2-TORPEDO_POWER.smartDescription": "{Turns:choose(1):이번 턴|[blue]{}[/blue]턴째} 종료 시 {AOEFlag:cond:==1?모든 [gold]적[/gold]에게|[gold]표식[/gold]이 가장 많은 적에게} [blue]{Amount}[/blue]의 피해를 줍니다.\n피해는 대상의 [gold]표식[/gold]에 의해 증가합니다.",
   "TASHKENTSPIRE2-TORPEDO_POWER.title": "어뢰",
@@ -114,5 +117,11 @@
   "TASHKENTSPIRE2-BARREL_MODIFICATION_LOAD_POWER.smartDescription": "플레이한 [gold]탄약[/gold] 카드가 [gold]발사[/gold] 조건을 충족하면, 그 카드를 [gold]장전[/gold]{Amount} 합니다.",
   "TASHKENTSPIRE2-SPECIAL_SERVICES_POWER.title": "특별 서비스",
   "TASHKENTSPIRE2-SPECIAL_SERVICES_POWER.description": "다음에 [gold]이로운 효과[/gold]를 부여하는 카드를 사용할 때, 그 효과를 두 배로 만듭니다.",
-  "TASHKENTSPIRE2-SPECIAL_SERVICES_POWER.smartDescription": "다음 {Amount}번 [gold]이로운 효과[/gold]를 부여하는 카드를 사용할 때, 그 효과를 두 배로 만듭니다."
+  "TASHKENTSPIRE2-SPECIAL_SERVICES_POWER.smartDescription": "다음 {Amount}번 [gold]이로운 효과[/gold]를 부여하는 카드를 사용할 때, 그 효과를 두 배로 만듭니다.",
+  "TASHKENTSPIRE2-ILLUMINATION_ROUND_POWER.description": "[gold]표식[/gold]이 부여될 때 중첩이 추가로 [blue]1[/blue] 증가합니다.",
+  "TASHKENTSPIRE2-ILLUMINATION_ROUND_POWER.smartDescription": "[gold]표식[/gold]이 부여될 때 중첩이 추가로 [blue]{Amount}[/blue] 증가합니다.",
+  "TASHKENTSPIRE2-ILLUMINATION_ROUND_POWER.title": "조명탄",
+  "TASHKENTSPIRE2-WARP_DRIVE_POWER.description": "[gold]거리[/gold] 상한이 증가합니다.\n매 턴 첫 번째 [gold]공격 카드[/gold]를 사용한 후, 이번 턴 동안 당신의 [gold]거리[/gold] 능력이 [red]완전히 무효화[/red]됩니다.\n모든 [gold]후퇴[/gold]가 [gold]돌격[/gold]으로 변경됩니다.",
+  "TASHKENTSPIRE2-WARP_DRIVE_POWER.smartDescription": "[gold]거리[/gold] 상한이 {Amount} 증가합니다.\n매 턴 첫 번째 [gold]공격 카드[/gold]를 사용한 후, 이번 턴 동안 당신의 [gold]거리[/gold] 능력이 [red]완전히 무효화[/red]됩니다.\n모든 [gold]후퇴[/gold]가 [gold]돌격[/gold]으로 변경됩니다.",
+  "TASHKENTSPIRE2-WARP_DRIVE_POWER.title": "워프 드라이브"
 }

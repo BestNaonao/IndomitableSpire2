@@ -10,8 +10,9 @@ namespace TashkentSpire2.TashkentSpire2Code.Cards.Uncommon;
 public sealed class SuppleAsAWave() : TashkentCard(1, CardType.Attack, CardRarity.Uncommon, TargetType.AnyEnemy)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new DamageVar(8M, ValueProp.Move),
-        new ChargeDynamicVar(3M)
+        new DamageVar(7M, ValueProp.Move),
+        new ChargeDynamicVar(3M),
+        new RetreatDynamicVar(2M)
     ];
     
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
@@ -23,6 +24,9 @@ public sealed class SuppleAsAWave() : TashkentCard(1, CardType.Attack, CardRarit
             .Targeting(cardPlay.Target)
             .WithHitFx("vfx/vfx_attack_slash")
             .Execute(choiceContext);
+        
+        await PowerCmd.Apply<DistancePower>(choiceContext, cardPlay.Target, -base.DynamicVars["TashkentSpire2-Retreat"].BaseValue, base.Owner.Creature, this);
+        await PowerCmd.Apply<ChargeAfterTurnPower>(choiceContext, cardPlay.Target, base.DynamicVars["TashkentSpire2-Retreat"].BaseValue, base.Owner.Creature, this);
     }
     
     protected override void OnUpgrade(){

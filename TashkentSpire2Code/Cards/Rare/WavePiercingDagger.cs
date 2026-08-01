@@ -25,7 +25,6 @@ public sealed class WavePiercingDagger() : TashkentCard(0, CardType.Skill, CardR
         await PowerCmd.Apply<VigorPower>(choiceContext, base.Owner.Creature, de, base.Owner.Creature, this);
         await PowerCmd.Apply<WavePiercingDaggerPower>(choiceContext, base.Owner.Creature, 1M, base.Owner.Creature, this);
         this.Owner.Creature.LoseBlockInternal(this.Owner.Creature.Block);
-        await PowerCmd.Apply<NoBlockPower>(choiceContext, base.Owner.Creature, 1M, base.Owner.Creature, this);
     }
     
     protected override void OnUpgrade()
