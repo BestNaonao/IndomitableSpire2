@@ -1,26 +1,31 @@
 ﻿using BaseLib.Hooks;
 using Godot;
-using IndomitableSpire2.IndomitableSpire2Code.Extensions; // 引入刚才的追踪器
+using IndomitableSpire2.IndomitableSpire2Code.Extensions;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Platform;
+using MegaCrit.Sts2.Core.Runs;
 using MegaCrit.Sts2.Core.ValueProps;
 
 namespace IndomitableSpire2.IndomitableSpire2Code.Abstracts;
 
 // ReSharper disable once InconsistentNaming for Special Abbreviation
-public abstract class DOTPower<TDerived> : DynamicVarSyncPower where TDerived :  DOTPower<TDerived>
+public abstract class DOTPower<TDerived> : DynamicVarSyncPower where TDerived : DOTPower<TDerived>
 {
     public override PowerType Type => PowerType.Debuff;
     public override PowerStackType StackType => PowerStackType.Counter;
     
-    // 【核心改造 1】：根据施加者（Applier）进行独立实例化。
+    // 按施加者独立实例化（多人模式下区分玩家）
     public override PowerInstanceType InstanceType => PowerInstanceType.InstancedPerApplier;
     
-    // 每回合前后损失生命占最大生命的百分比
+    // 【改进】：重写 InitInternalData 挂载内部数据类型
+    protected override object InitInternalData() => new DotData();
+    
     protected virtual decimal Proportion => 0.01m;
     
     // --- BaseLib 血条预测配置 ---
@@ -31,24 +36,36 @@ public abstract class DOTPower<TDerived> : DynamicVarSyncPower where TDerived : 
     // 3. 排序层级
     protected abstract int ForecastOrder { get; }
     
-    // 注册需要精确维护的四个动态变量
+    // 【改进】：精简 CanonicalVars，只保留展示用变量和 Applier 名称
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new("TotalLostHpExact", 0m), // 总累计小数伤害（后台静默运行）
-        new("TotalLostHpInt", 0m),   // 总累计已扣除的整数伤害
-        new("NextLostHpPercent", 0m),// 下次损失百分比（用于UI显示）
-        new("NextLostHpInt", 0m)     // 下次即将损失的整数生命（用于UI显示）
+        new("NextLostHpPercent", 0m),   // 下次损失百分比
+        new("NextLostHpInt", 0m),       // 下次即将损失的整数生命
+        new StringVar("Applier")        // 施加者名称
     ];
     
-    private DynamicVar TotalLostHpExact => DynamicVars["TotalLostHpExact"];
-    private DynamicVar TotalLostHpInt => DynamicVars["TotalLostHpInt"];
-    
-    // 获取带小数保留的下一次伤害
+    // 计算下次带小数保留的伤害与真实整数伤害
     private decimal ExactNextDamage => Owner.MaxHp * Amount * Proportion;
-    // 获取下一次即将造成的真实整数伤害
-    private int GetNextDamage => Math.Max(0, (int)Math.Floor(TotalLostHpExact.BaseValue + ExactNextDamage) - TotalLostHpInt.IntValue);
+    private int GetNextDamage
+    {
+        get
+        {
+            var data = GetInternalData<DotData>();
+            return Math.Max(0, (int)Math.Floor(data.TotalLostHpExact + ExactNextDamage) - data.TotalLostHpInt);
+        }
+    }
     
-    // 【修改】：重写基类的抽象方法，替代原先的 Update()
+    public override Task AfterApplied(Creature? applier, CardModel? cardSource)
+    {
+        if (Applier != null)
+        {
+            ((StringVar)DynamicVars["Applier"]).StringValue = Applier.Player != null
+                ? PlatformUtil.GetPlayerName(RunManager.Instance.NetService.Platform, Applier.Player.NetId)
+                : Applier.Name;
+        }
+        return Task.CompletedTask;
+    }
+    
     protected override void SyncDynamicVars()
     {
         DynamicVars["NextLostHpPercent"].BaseValue = Amount * 100 * Proportion;
@@ -56,26 +73,27 @@ public abstract class DOTPower<TDerived> : DynamicVarSyncPower where TDerived : 
         InvokeDisplayAmountChanged();
     }
     
-    // 核心伤害逻辑提取
+    // 核心伤害逻辑
     protected virtual async Task TriggerDamage()
     {
         if (Amount <= 0 || Owner.IsDead) return;
+        var data = GetInternalData<DotData>();
         
-        // 1. 计算精确伤害并入池
-        TotalLostHpExact.BaseValue += ExactNextDamage;
+        // 1. 计算精确伤害并累加至 DotData 内部变量
+        data.TotalLostHpExact += ExactNextDamage;
         
         // 2. 提取需要扣除的整数部分
-        var damageToDeal = (int)Math.Floor(TotalLostHpExact.BaseValue) - TotalLostHpInt.IntValue;
+        var damageToDeal = (int)Math.Floor(data.TotalLostHpExact) - data.TotalLostHpInt;
         if (damageToDeal > 0)
         {
-            TotalLostHpInt.BaseValue += damageToDeal;
+            data.TotalLostHpInt += damageToDeal;
             Flash();
             
             // 造成无视格挡、不受力量影响的绝对伤害（模仿 Poison）
             var results = await CreatureCmd.Damage(
                 new ThrowingPlayerChoiceContext(), Owner, damageToDeal, ValueProp.Unblockable | ValueProp.Unpowered, null, null);
             
-            // 【核心改造 2】：统计实际造成的未被格挡伤害（虽然我们是真实伤害，但这样写最严谨）
+            // 3. 统计实际造成伤害并写入 Applier 的战斗全局数据集中
             var actualDamageDealt = results.Sum(r => r.TotalDamage + r.OverkillDamage);
             if (actualDamageDealt > 0 && Applier?.Player?.PlayerCombatState != null)
             {
@@ -86,7 +104,7 @@ public abstract class DOTPower<TDerived> : DynamicVarSyncPower where TDerived : 
             }
         }
         
-        // 3. 层数衰减与UI更新
+        // 4. 层数衰减与 UI 更新
         if (Owner.IsAlive)
         {
             await PowerCmd.Decrement(this);
@@ -95,7 +113,6 @@ public abstract class DOTPower<TDerived> : DynamicVarSyncPower where TDerived : 
         else await Cmd.CustomScaledWait(0.1f, 0.25f);
     }
     
-    // 回合开始时和结束时各触发一次
     public override async Task AfterSideTurnStart(
         CombatSide side, IReadOnlyList<Creature> participants, ICombatState combatState)
     {
@@ -108,7 +125,6 @@ public abstract class DOTPower<TDerived> : DynamicVarSyncPower where TDerived : 
         if (participants.Contains(Owner) && side == Owner.Side) await TriggerDamage();
     }
     
-    // 【新增】：实现 BaseLib 对血条的接口要求的方法
     public override IEnumerable<HealthBarForecastSegment> GetHealthBarForecastSegments(HealthBarForecastContext context)
     {
         var damage = GetNextDamage;
@@ -123,5 +139,12 @@ public abstract class DOTPower<TDerived> : DynamicVarSyncPower where TDerived : 
                 OverlaySelfModulate: ForecastBarColor // 【核心】将血条颜色传给 OverlaySelfModulate
             );
         }
+    }
+    
+    // 【改进】：用于存储内部伤害计算状态的数据类型
+    protected class DotData
+    {
+        public decimal TotalLostHpExact; // 总累计小数伤害
+        public int TotalLostHpInt;       // 总累计已扣除的整数伤害
     }
 }
