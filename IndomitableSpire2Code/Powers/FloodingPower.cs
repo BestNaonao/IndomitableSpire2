@@ -9,7 +9,7 @@ using MegaCrit.Sts2.Core.ValueProps;
 
 namespace IndomitableSpire2.IndomitableSpire2Code.Powers;
 
-public sealed class FloodingPower : DOTPower
+public sealed class FloodingPower : DOTPower<FloodingPower>
 {
     // 使用天蓝色作为进水的层数显示颜色
     public override Color AmountLabelColor => new("33CCFF");
