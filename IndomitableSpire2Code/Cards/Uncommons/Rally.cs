@@ -5,6 +5,7 @@ using IndomitableSpire2.IndomitableSpire2Code.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 
 namespace IndomitableSpire2.IndomitableSpire2Code.Cards.Uncommons;
@@ -17,6 +18,8 @@ public sealed class Rally() : IndomitableCard(1, CardType.Skill, CardRarity.Unco
         new MotivationConsumeVar(10M),
         new("Threshold", 12M)
     ];
+    
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromCard<Refresh>()];
     
     // 核心限制：必须有足够的干劲才能打出
     protected override bool IsPlayable => this.CanAffordMotivationCost();
