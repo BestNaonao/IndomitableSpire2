@@ -92,5 +92,9 @@
   "INDOMITABLESPIRE2-ENGAGE_ON_SIGHT_POWER.description": "当你抽到的攻击牌时对所有敌人造成伤害。",
   "INDOMITABLESPIRE2-ENGAGE_ON_SIGHT_POWER.smartDescription": "每当你在回合进行中抽到一张攻击牌时，对所有敌人造成相当于[gold]手牌[/gold]数量的伤害[blue]{Amount}[/blue]次。",
   "INDOMITABLESPIRE2-ENGAGE_ON_SIGHT_POWER.smartDescriptionUpgraded": "每当你抽到一张攻击牌时，对所有敌人造成相当于[gold]手牌[/gold]数量的伤害。\n这在回合进行中触发[blue]{Amount}[/blue]次，回合外触发[blue]{UnrestrictedAmount}[/blue]次。",
-  "INDOMITABLESPIRE2-ENGAGE_ON_SIGHT_POWER.title": "见敌必战"
+  "INDOMITABLESPIRE2-ENGAGE_ON_SIGHT_POWER.title": "见敌必战",
+  "INDOMITABLESPIRE2-WITHERER_POWER.description": "在累计造成足够的起火或进水伤害后，每回合初次给予敌人的负面效果翻倍。",
+  "INDOMITABLESPIRE2-WITHERER_POWER.smartDescriptionInactive": "本场战斗中累计造成 [blue]{Threshold}[/blue] 点[gold]起火[/gold]或[gold]进水[/gold]伤害后，每回合前 [blue]{Amount}[/blue] 次给予敌人的[gold]负面效果[/gold]翻倍。",
+  "INDOMITABLESPIRE2-WITHERER_POWER.smartDescriptionActive": "已激活！每回合前 [blue]{Amount}[/blue] 次给予敌人的[gold]负面效果[/gold]翻倍。",
+  "INDOMITABLESPIRE2-WITHERER_POWER.title": "水火无情"
 }

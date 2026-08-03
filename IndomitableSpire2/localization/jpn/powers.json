@@ -92,5 +92,9 @@
   "INDOMITABLESPIRE2-ENGAGE_ON_SIGHT_POWER.description": "アタックを引いた時、敵にダメージを与える。",
   "INDOMITABLESPIRE2-ENGAGE_ON_SIGHT_POWER.smartDescription": "自身のターン中にアタックを引くたび、すべての敵に[gold]手札[/gold]の枚数に等しいダメージを[blue]{Amount}[/blue]回与える。",
   "INDOMITABLESPIRE2-ENGAGE_ON_SIGHT_POWER.smartDescriptionUpgraded": "アタックを引くたび、すべての敵に[gold]手札[/gold]の枚数に等しいダメージを与える。\nターン内[blue]{Amount}[/blue]回、ターン外[blue]{UnrestrictedAmount}[/blue]回。",
-  "INDOMITABLESPIRE2-ENGAGE_ON_SIGHT_POWER.title": "見敵必戦"
+  "INDOMITABLESPIRE2-ENGAGE_ON_SIGHT_POWER.title": "見敵必戦",
+  "INDOMITABLESPIRE2-WITHERER_POWER.description": "炎上または浸水で十分なダメージを与えた後、毎ターン最初に敵に与えるデバフを2倍にする。",
+  "INDOMITABLESPIRE2-WITHERER_POWER.smartDescriptionInactive": "この戦闘中に[gold]炎上[/gold]または[gold]浸水[/gold]で合計[blue]{Threshold}[/blue]ダメージを与えた後、毎ターン最初の[blue]{Amount}[/blue]回、敵に与える[gold]デバフ[/gold]を2倍にする。",
+  "INDOMITABLESPIRE2-WITHERER_POWER.smartDescriptionActive": "解放中！毎ターン最初の[blue]{Amount}[/blue]回、敵に与える[gold]デバフ[/gold]を2倍にする。",
+  "INDOMITABLESPIRE2-WITHERER_POWER.title": "災害誘発"
 }

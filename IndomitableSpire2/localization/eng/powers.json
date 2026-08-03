@@ -92,5 +92,9 @@
   "INDOMITABLESPIRE2-ENGAGE_ON_SIGHT_POWER.description": "Deal damage to ALL enemies when drawing Attack cards.",
   "INDOMITABLESPIRE2-ENGAGE_ON_SIGHT_POWER.smartDescription": "Whenever you draw an Attack during your turn, deal damage to ALL enemies equal to the number of cards in your [gold]Hand[/gold] [blue]{Amount}[/blue] {Amount:plural:time|times}.",
   "INDOMITABLESPIRE2-ENGAGE_ON_SIGHT_POWER.smartDescriptionUpgraded": "Whenever you draw an Attack, deal damage to ALL enemies equal to the number of cards in your [gold]Hand[/gold] [blue]{Amount}[/blue] {Amount:plural:time|times} during your turn, and [blue]{UnrestrictedAmount}[/blue] {UnrestrictedAmount:plural:time|times} outside your turn.",
-  "INDOMITABLESPIRE2-ENGAGE_ON_SIGHT_POWER.title": "Engage on Sight"
+  "INDOMITABLESPIRE2-ENGAGE_ON_SIGHT_POWER.title": "Engage on Sight",
+  "INDOMITABLESPIRE2-WITHERER_POWER.description": "After dealing enough On Fire or Flooding damage, double the Debuffs first applied to enemies each turn.",
+  "INDOMITABLESPIRE2-WITHERER_POWER.smartDescriptionInactive": "After dealing [blue]{Threshold}[/blue] [gold]On Fire[/gold] or [gold]Flooding[/gold] damage this combat, double the first [blue]{Amount}[/blue] {Amount:plural:Debuff|Debuffs} applied to enemies each turn.",
+  "INDOMITABLESPIRE2-WITHERER_POWER.smartDescriptionActive": "Activated! Double the first [blue]{Amount}[/blue] {Amount:plural:Debuff|Debuffs} applied to enemies each turn.",
+  "INDOMITABLESPIRE2-WITHERER_POWER.title": "Witherer"
 }

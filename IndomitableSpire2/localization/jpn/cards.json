@@ -113,6 +113,8 @@
   "INDOMITABLESPIRE2-LEND_LEASE_ACT.selectionScreenPrompt": "味方に貸与するカードを1枚選ぶ。",
   "INDOMITABLESPIRE2-ENGAGE_ON_SIGHT.title": "見敵必戦",
   "INDOMITABLESPIRE2-ENGAGE_ON_SIGHT.description": "{IfUpgraded:show:|自分のターン中に}アタックを引くたび、すべての敵に[gold]手札[/gold]の枚数に等しいダメージを与える。",
+  "INDOMITABLESPIRE2-WITHERER.title": "災害誘発",
+  "INDOMITABLESPIRE2-WITHERER.description": "この戦闘中に[gold]炎上[/gold]または[gold]浸水[/gold]で合計{Threshold}ダメージを与えた後、毎ターン最初に敵に[gold]デバフ[/gold]を与える{WithererPower:plural:時|{WithererPower:diff()}回}、その効果量を2倍にする。",
   
   "INDOMITABLESPIRE2-DESSERT.title": "デザート",
   "INDOMITABLESPIRE2-DESSERT.description": "HPを[green]{Heal:diff()}[/green]回復する。\n{Energy:energyIcons()}を得る。",
