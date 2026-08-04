@@ -8,6 +8,9 @@ public class CombatPowerDamageTracker
     // 按能力类型分类记录累计伤害
     private readonly Dictionary<Type, int> _damageByPowerType = new();
     
+    // 【新增】：数据更新事件
+    public event Action? OnDamageUpdated;
+    
     public void AddDamage(Type powerType, int damage)
     {
         if (damage <= 0) return;
@@ -15,6 +18,8 @@ public class CombatPowerDamageTracker
         {
             _damageByPowerType[powerType] += damage;
         }
+        // 数据真正入库后，立刻广播通知！
+        OnDamageUpdated?.Invoke();
     }
     
     public int GetDamage<TPower>() => GetDamage(typeof(TPower));
