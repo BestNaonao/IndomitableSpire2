@@ -1,12 +1,11 @@
 ﻿using BaseLib.Abstracts;
 using IndomitableSpire2.IndomitableSpire2Code.Cards.Uncommons;
+using IndomitableSpire2.IndomitableSpire2Code.Extensions;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
-using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
-using MegaCrit.Sts2.Core.ValueProps;
 
 namespace IndomitableSpire2.IndomitableSpire2Code.Powers;
 
@@ -28,6 +27,13 @@ public sealed class WithererPower : IndomitablePower, IHasSecondAmount
     public override Task AfterApplied(Creature? applier, CardModel? cardSource)
     {
         DynamicVars["Threshold"].BaseValue = ScaledThreshold;
+        // 订阅追踪器的数据更新事件：先退订防重复，再订阅 InvokeDisplayAmountChanged
+        if (Owner.Player?.PlayerCombatState is { } combatState && 
+            PlayerCombatStateTrackerExtensions.PowerDamageTracker.Get(combatState) is { } tracker)
+        {
+            tracker.OnDamageUpdated -= InvokeDisplayAmountChanged;
+            tracker.OnDamageUpdated += InvokeDisplayAmountChanged;
+        }
         return Task.CompletedTask;
     }
     
@@ -84,13 +90,15 @@ public sealed class WithererPower : IndomitablePower, IHasSecondAmount
         return Task.CompletedTask;
     }
     
-    // 拥有者造成伤害时刷新，通过伤害属性、目标是否是敌人和卡牌源来粗略筛选出起火和进水造成的伤害
-    public override Task AfterDamageGiven(PlayerChoiceContext choiceContext, Creature? dealer, DamageResult result, 
-        ValueProp props, Creature target, CardModel? cardSource)
+    // 【规范】：能力被移除时（或战斗结束时）退订事件，防止内存泄漏
+    public override Task AfterRemoved(Creature oldOwner)
     {
-        if (dealer == Owner && props.HasFlag(ValueProp.Unblockable | ValueProp.Unpowered) && target.IsEnemy && cardSource == null)
-            InvokeDisplayAmountChanged();
-        return Task.CompletedTask;
+        if (oldOwner.Player?.PlayerCombatState is { } combatState && 
+            PlayerCombatStateTrackerExtensions.PowerDamageTracker.Get(combatState) is { } tracker)
+        {
+            tracker.OnDamageUpdated -= InvokeDisplayAmountChanged;
+        }
+        return base.AfterRemoved(oldOwner);
     }
     
     private class Data
