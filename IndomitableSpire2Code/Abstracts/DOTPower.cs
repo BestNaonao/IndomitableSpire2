@@ -91,7 +91,7 @@ public abstract class DOTPower<TDerived> : DynamicVarSyncPower where TDerived : 
             
             // 造成无视格挡、不受力量影响的绝对伤害（模仿 Poison）
             var results = await CreatureCmd.Damage(
-                new ThrowingPlayerChoiceContext(), Owner, damageToDeal, ValueProp.Unblockable | ValueProp.Unpowered, null, null);
+                new ThrowingPlayerChoiceContext(), Owner, damageToDeal, ValueProp.Unblockable | ValueProp.Unpowered, Applier, null, null);
             
             // 3. 统计实际造成伤害并写入 Applier 的战斗全局数据集中
             var actualDamageDealt = results.Sum(r => r.TotalDamage + r.OverkillDamage);
