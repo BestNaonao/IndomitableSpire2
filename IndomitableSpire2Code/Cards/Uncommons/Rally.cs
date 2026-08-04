@@ -27,7 +27,7 @@ public sealed class Rally() : IndomitableCard(1, CardType.Skill, CardRarity.Unco
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         // 播放施法动画
-        await CreatureCmd.TriggerAnim(Owner.Creature, "Buff", Owner.Character.CastAnimDelay);
+        await CreatureCmd.TriggerAnim(Owner.Creature, "Cast", Owner.Character.CastAnimDelay);
         
         // 1. 扣除干劲
         await this.SpendMotivationCost(choiceContext);

@@ -14,7 +14,7 @@ public sealed class EngageOnSight() : IndomitableCard(1, CardType.Power, CardRar
     
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        await CreatureCmd.TriggerAnim(Owner.Creature, "Buff", Owner.Character.CastAnimDelay);
+        await CreatureCmd.TriggerAnim(Owner.Creature, "Cast", Owner.Character.CastAnimDelay);
         
         // 施加能力，能力内部的 AfterPowerAmountChanged 钩子会自动检查 this.IsUpgraded
         await PowerCmd.Apply<EngageOnSightPower>(
