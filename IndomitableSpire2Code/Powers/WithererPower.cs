@@ -3,8 +3,10 @@ using IndomitableSpire2.IndomitableSpire2Code.Cards.Uncommons;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
+using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.ValueProps;
 
 namespace IndomitableSpire2.IndomitableSpire2Code.Powers;
 
@@ -15,12 +17,19 @@ public sealed class WithererPower : IndomitablePower, IHasSecondAmount
     
     protected override object InitInternalData() => new Data();
     
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new("Threshold", ScaledThreshold)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new("Threshold", 9999)];
     
     // ========== UI 与进度展示 ==========
     // 获取当前玩家的起火+进水总伤害
     private int TotalDotDamage => Witherer.DealtDotDamage(Owner.Player);
     private int ScaledThreshold => Witherer.ScaledThreshold(CombatState);
+    
+    // 施加后修改门槛，因为在初始化 CanonicalVars 时调用 CombatState 会因为 Owner 未初始化而报错。
+    public override Task AfterApplied(Creature? applier, CardModel? cardSource)
+    {
+        DynamicVars["Threshold"].BaseValue = ScaledThreshold;
+        return Task.CompletedTask;
+    }
     
     // 是否激活
     private bool IsActive => TotalDotDamage >= ScaledThreshold;
@@ -28,8 +37,8 @@ public sealed class WithererPower : IndomitablePower, IHasSecondAmount
     // First Amount: 本回合剩余可用次数
     public override int DisplayAmount => Math.Max(0, Amount - GetInternalData<Data>().DebuffsMultipliedThisTurn);
     
-    // Second Amount: 展示伤害累计进度，满了显示 "MAX"
-    public string GetSecondAmount() => IsActive ? "MAX" : $"{TotalDotDamage}/{ScaledThreshold}";
+    // Second Amount: 展示伤害累计进度，满了显示 "✓️"
+    public string GetSecondAmount() => IsActive ? "✓️" : $"{TotalDotDamage}/{ScaledThreshold}";
     
     // 根据是否激活，动态切换本地化文本
     protected override string SmartDescriptionLocKey => 
@@ -62,7 +71,7 @@ public sealed class WithererPower : IndomitablePower, IHasSecondAmount
         await Task.CompletedTask;
     }
     
-    // ========== 回合刷新 ==========
+    // ========== 刷新逻辑 ==========
     // 回合开始时，重置本回合的使用次数
     public override Task AfterSideTurnStart(
         CombatSide side, IReadOnlyList<Creature> participants, ICombatState combatState)
@@ -72,6 +81,15 @@ public sealed class WithererPower : IndomitablePower, IHasSecondAmount
             GetInternalData<Data>().DebuffsMultipliedThisTurn = 0;
             InvokeDisplayAmountChanged();
         }
+        return Task.CompletedTask;
+    }
+    
+    // 拥有者造成伤害时刷新，通过伤害属性、目标是否是敌人和卡牌源来粗略筛选出起火和进水造成的伤害
+    public override Task AfterDamageGiven(PlayerChoiceContext choiceContext, Creature? dealer, DamageResult result, 
+        ValueProp props, Creature target, CardModel? cardSource)
+    {
+        if (dealer == Owner && props.HasFlag(ValueProp.Unblockable | ValueProp.Unpowered) && target.IsEnemy && cardSource == null)
+            InvokeDisplayAmountChanged();
         return Task.CompletedTask;
     }
     
