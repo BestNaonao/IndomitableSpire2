@@ -114,7 +114,7 @@
   "INDOMITABLESPIRE2-ENGAGE_ON_SIGHT.title": "Engage on Sight",
   "INDOMITABLESPIRE2-ENGAGE_ON_SIGHT.description": "Whenever you draw an Attack {IfUpgraded:show:| during your turn}, deal damage to ALL enemies equal to the number of cards in your [gold]Hand[/gold].",
   "INDOMITABLESPIRE2-WITHERER.title": "Witherer",
-  "INDOMITABLESPIRE2-WITHERER.description": "After dealing a total of {Threshold} [gold]On Fire[/gold] or [gold]Flooding[/gold] damage this combat, double the first {WithererPower:plural:time|{WithererPower:diff()} times} you apply a [gold]Debuff[/gold] to an enemy each turn.",
+  "INDOMITABLESPIRE2-WITHERER.description": "After dealing a total of {Threshold} [gold]On Fire[/gold] or [gold]Flooding[/gold] damage this combat, double the first [blue]{WithererPower:cond:>1?{WithererPower}|}[/blue] {WithererPower:plural:[gold]Debuff[/gold]|[gold]Debuffs[/gold]} applied to enemies each turn.",
   
   "INDOMITABLESPIRE2-DESSERT.title": "Dessert",
   "INDOMITABLESPIRE2-DESSERT.description": "Heal [green]{Heal:diff()}[/green] HP.\nGain {Energy:energyIcons()}.",
