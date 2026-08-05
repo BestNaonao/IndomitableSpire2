@@ -1,7 +1,7 @@
 {
-  "INDOMITABLESPIRE2-HYPNOTIZED_POWER.description": "强制进入沉睡，其回合内不会采取任何行动。",
-  "INDOMITABLESPIRE2-HYPNOTIZED_POWER.smartDescriptionAwake": "在它的回合结束时，该生物将陷入[gold]沉睡[/gold]并获得[blue]{HypnotizedBlock}[/blue]点[gold]格挡[/gold]。持续[blue]{Amount}[/blue]回合。",
-  "INDOMITABLESPIRE2-HYPNOTIZED_POWER.smartDescriptionSleeping": "该生物继续[gold]沉睡[/gold]并获得[blue]{HypnotizedBlock}[/blue]点[gold]格挡[/gold]。受到未被格挡的伤害时，层数减少[blue]1[/blue]。持续[blue]{Amount}[/blue]回合。",
+  "INDOMITABLESPIRE2-HYPNOTIZED_POWER.description": "基于层数减少攻击伤害，并在特定条件下陷入沉睡。",
+  "INDOMITABLESPIRE2-HYPNOTIZED_POWER.smartDescriptionAwake": "造成的攻击伤害减少[blue]{DamageDecreasePercent}%[/blue]。\n在它的回合结束时，如果层数达到[blue]5[/blue]层，将陷入[gold]沉睡[/gold]并获得[blue]{Block}[/blue]点[gold]格挡[/gold]，否则层数减少[blue]1[/blue]层。",
+  "INDOMITABLESPIRE2-HYPNOTIZED_POWER.smartDescriptionSleeping": "造成的攻击伤害减少[blue]{DamageDecreasePercent}%[/blue]。\n处于[gold]沉睡[/gold]状态，每回合结束时层数减少[blue]{Amount:cond:<5?1|5}[/blue]层。受到未被格挡的伤害时，额外减少[blue]1[/blue]层。",
   "INDOMITABLESPIRE2-HYPNOTIZED_POWER.title": "催眠",
   "INDOMITABLESPIRE2-MOTIVATION_POWER.description": "不挠的干劲。到达100点后可触发特殊效果。",
   "INDOMITABLESPIRE2-MOTIVATION_POWER.smartDescription": "当前拥有 [blue]{MotivationAmount}[/blue] / [blue]100[/blue] 点干劲。当达到 [blue]100[/blue] 点时，不挠将会认真起来并解锁特殊效果。",
