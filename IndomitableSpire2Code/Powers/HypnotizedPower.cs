@@ -1,4 +1,5 @@
 ﻿using BaseLib.Cards.Variables;
+using IndomitableSpire2.IndomitableSpire2Code.Extensions;
 using IndomitableSpire2.IndomitableSpire2Code.Localization.HoverTips;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
@@ -9,7 +10,6 @@ using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.MonsterMoves.Intents;
-using MegaCrit.Sts2.Core.MonsterMoves.MonsterMoveStateMachine;
 using MegaCrit.Sts2.Core.ValueProps;
 
 namespace IndomitableSpire2.IndomitableSpire2Code.Powers;
@@ -67,19 +67,8 @@ public sealed class HypnotizedPower : IndomitablePower
     private async Task ApplySleepState()
     {
         Flash();
-        // 1. 核心修改：直接注入包含 SleepIntent 的 MoveState，完美替换原有的 Stun
-        if (Owner.Monster is { MoveStateMachine: not null })
-        {
-            // 构建自定义的睡眠状态，传入官方原生的 SleepIntent
-            var sleepState = new MoveState("HYPNOTIZED_SLEEP", SleepMove, new SleepIntent())
-            {
-                // 获取被打断前的状态 ID，以便苏醒后恢复原来的行动轨迹
-                FollowUpStateId = Owner.Monster.MoveStateMachine.StateLog.Last().Id,
-                MustPerformOnceBeforeTransitioning = true
-            };
-            // 强制怪物立即执行该睡眠状态（这将自动把意图图标变更为睡眠）
-            Owner.Monster.SetMoveImmediate(sleepState);
-        }
+        // 1. 核心修改：调用自定义的生物睡眠扩展
+        Owner.SleepInternal(SleepMove, null);
         // 获得格挡，动态计算当前回合应赋予的格挡值：类型强转并调用 CalculateCustom
         if (DynamicVars[BlockVarName] is CustomCalculatedBlockVar customVar)
             await CreatureCmd.GainBlock(Owner, customVar.CalculateCustom(Owner), ValueProp.Unpowered, null);
@@ -100,6 +89,6 @@ public sealed class HypnotizedPower : IndomitablePower
     public override Task AfterRemoved(Creature oldOwner)
     {
         IsSleeping = false;
-        return Task.CompletedTask;
+        return base.AfterRemoved(oldOwner);
     }
 }
