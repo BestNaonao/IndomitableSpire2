@@ -1,7 +1,7 @@
 {
-  "INDOMITABLESPIRE2-HYPNOTIZED_POWER.description": "Reduces attack damage based on amount, and gets [gold]Sleeping[/gold] under certain conditions.",
-  "INDOMITABLESPIRE2-HYPNOTIZED_POWER.smartDescriptionAwake": "Attack damage is reduced by [blue]{DamageDecreasePercent}%[/blue].\nAt the end of its turn, if it has [blue]5[/blue] or more, it gets [gold]Sleeping[/gold] and gains [blue]{Block}[/blue] [gold]Block[/gold]; otherwise, reduces by [blue]1[/blue].",
-  "INDOMITABLESPIRE2-HYPNOTIZED_POWER.smartDescriptionSleeping": "Attack damage is reduced by [blue]{DamageDecreasePercent}%[/blue].\n[gold]Sleeping[/gold]. At the end of its turn, reduces by [blue]{Amount:cond:<5?1|5}[/blue]. Reduces by [blue]1[/blue] upon losing HP.",
+  "INDOMITABLESPIRE2-HYPNOTIZED_POWER.description": "Reduces attack damage and causes slumber or skips turns under certain conditions.",
+  "INDOMITABLESPIRE2-HYPNOTIZED_POWER.smartDescriptionPlayer": "Attack damage is reduced by [blue]{DamageDecreasePercent}%[/blue].\nAt the start of or during {OnPlayer:your|its} turn, if it reaches [blue]5[/blue] or more, ends {OnPlayer:your|its} turn, gains [blue]{Block}[/blue] [gold]Block[/gold], and reduces by [blue]5[/blue]. Otherwise, reduces by [blue]1[/blue] at the end of the turn. Taking unblocked damage reduces by [blue]1[/blue].",
+  "INDOMITABLESPIRE2-HYPNOTIZED_POWER.smartDescriptionAwake": "Attack damage is reduced by [blue]{DamageDecreasePercent}%[/blue].\nAt the end of {OnPlayer:your|its} turn, if it reaches [blue]5[/blue] or more, it gets [gold]Sleeping[/gold] and gains [blue]{Block}[/blue] [gold]Block[/gold]; otherwise, reduces by [blue]1[/blue]. Reduces by [blue]1[/blue] upon taking unblocked damage when sleeps.",
   "INDOMITABLESPIRE2-HYPNOTIZED_POWER.title": "Hypnotized",
   "INDOMITABLESPIRE2-MOTIVATION_POWER.description": "Indomitable's motivation. Triggers special effects at 100 points.",
   "INDOMITABLESPIRE2-MOTIVATION_POWER.smartDescription": "Currently at [blue]{MotivationAmount}[/blue] / [blue]100[/blue] Motivation. Reaching [blue]100[/blue] will [gold]Max[/gold] it out and unlock powerful exclusive effects.",
