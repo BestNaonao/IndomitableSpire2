@@ -21,7 +21,7 @@ public sealed class PajamaRevolution() : IndomitableCard(3, CardType.Skill, Card
     protected override IEnumerable<DynamicVar> CanonicalVars => 
     [
         new BlockVar(8M, ValueProp.Move),
-        new CustomPowerVar<HypnotizedPower>(4M),
+        new CustomPowerVar<HypnotizedPower>(5M),
         new EnergyVar(1)
     ];
     
@@ -78,7 +78,7 @@ public sealed class PajamaRevolution() : IndomitableCard(3, CardType.Skill, Card
     {
         // 升级效果：全队格挡 +2 (变为10点)，能量消耗 -1 (变为2点)
         DynamicVars.Block.UpgradeValueBy(2M);
-        DynamicVars.Hypnotized().UpgradeValueBy(2M);
+        DynamicVars.Hypnotized().UpgradeValueBy(3M);
         EnergyCost.UpgradeBy(-1);
     }
 }
