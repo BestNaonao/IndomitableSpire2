@@ -67,7 +67,7 @@
   "INDOMITABLESPIRE2-ARMOURED_CARRIER.title": "装甲航母",
   "INDOMITABLESPIRE2-ARMOURED_CARRIER.description": "在你的回合开始时获得[blue]{ShieldPower}[/blue]点[gold]护盾[/gold]，并且\n[gold]优雅[/gold]：获得[blue]{AviationPower}[/blue]层[gold]航空[/gold]。",
   "INDOMITABLESPIRE2-PAJAMA_REVOLUTION.title": "睡衣革命",
-  "INDOMITABLESPIRE2-PAJAMA_REVOLUTION.description": "给予[blue]{HypnotizedPower:diff()}[/blue]层[gold]催眠[/gold]。\n所有玩家获得{Block:diff()}点[gold]格挡[/gold]，下回合获得{Energy:energyIcons()}，结束当前回合。",
+  "INDOMITABLESPIRE2-PAJAMA_REVOLUTION.description": "给予所有敌人[blue]{EnemyHypnotized:diff()}[/blue]层[gold]催眠[/gold]。\n给予所有友方[blue]{AllyHypnotized:diff()}[/blue]层[gold]催眠[/gold]。\n所有玩家在下回合获得{Energy:energyIcons()}。",
   "INDOMITABLESPIRE2-NIGHT_RAID.title": "夜袭",
   "INDOMITABLESPIRE2-NIGHT_RAID.description": "[gold]需求[/gold][blue]{MotivationRequire:diff()}[/blue]点[gold]干劲[/gold]。\n选择你[gold]手牌[/gold]中的一张攻击牌并将其打出。这张牌对[gold]沉睡[/gold]的敌人造成{DamageMultiplier:diff()}倍伤害。",
   "INDOMITABLESPIRE2-NIGHT_RAID.selectionScreenPrompt": "选择一张攻击牌。",

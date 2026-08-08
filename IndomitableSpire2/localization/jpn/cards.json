@@ -67,7 +67,7 @@
   "INDOMITABLESPIRE2-ARMOURED_CARRIER.title": "装甲空母",
   "INDOMITABLESPIRE2-ARMOURED_CARRIER.description": "ターン開始時、[gold]シールド[/gold]を[blue]{ShieldPower}[/blue]得る、\n[gold]優雅[/gold]：[gold]航空[/gold]を[blue]{AviationPower}[/blue]得る。",
   "INDOMITABLESPIRE2-PAJAMA_REVOLUTION.title": "パジャマ革命",
-  "INDOMITABLESPIRE2-PAJAMA_REVOLUTION.description": "[blue]{HypnotizedPower:diff()}[/blue]の[gold]催眠[/gold]を与える。\nすべてのプレイヤーは{Block:diff()}[gold]ブロック[/gold]を得て、次のターンに{Energy:energyIcons()}を得る、このターンを終了する。",
+  "INDOMITABLESPIRE2-PAJAMA_REVOLUTION.description": "すべての敵に[blue]{EnemyHypnotized:diff()}[/blue]の[gold]催眠[/gold]を与える。\nすべての味方に[blue]{AllyHypnotized:diff()}[/blue]の[gold]催眠[/gold]を与える。\nすべてのプレイヤーは次のターンに{Energy:energyIcons()}を得る。",
   "INDOMITABLESPIRE2-NIGHT_RAID.title": "夜襲",
   "INDOMITABLESPIRE2-NIGHT_RAID.description": "[blue]{MotivationRequire:diff()}[/blue]の[gold]やる気[/gold]を[gold]必要[/gold]とする。\n[gold]手札[/gold]にあるアタックを1枚選び、それをプレイする。そのカードは[gold]睡眠[/gold]中の敵に対して{DamageMultiplier:diff()}倍のダメージを与える。",
   "INDOMITABLESPIRE2-NIGHT_RAID.selectionScreenPrompt": "アタックを選ぶ。",
