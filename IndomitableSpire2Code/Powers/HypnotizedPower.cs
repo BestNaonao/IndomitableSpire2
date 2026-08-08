@@ -4,11 +4,13 @@ using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
+using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Models.Cards;
 using MegaCrit.Sts2.Core.MonsterMoves.Intents;
 using MegaCrit.Sts2.Core.ValueProps;
 
@@ -29,17 +31,17 @@ public sealed class HypnotizedPower : IndomitablePower
     
     // 可复用的计算逻辑：玩家固定 20，怪物根据玩家人数缩放
     private decimal CalculatedBlockAmount => 
-        20m + 20m * (Owner.IsPlayer ? 0 : CombatState.PlayerCreatures.Count(c => c.IsAlive));
+        20m + 20m * (Owner.IsPlayer || Owner.IsPet ? 0 : CombatState.PlayerCreatures.Count(c => c.IsAlive));
     
-    // 怪物专用：区分“欲催眠状态”和“已催眠状态”
-    private bool IsSleeping => !Owner.IsPlayer && (Owner.Monster?.IntendsToSleep() ?? false);
+    // 仅限敌人使用的睡眠判定
+    private bool IsEnemySleeping => Owner.IsEnemy && (Owner.Monster?.IntendsToSleep() ?? false);
     
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => IsSleeping || Owner.IsPlayer 
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => IsEnemySleeping || Owner.IsPlayer || Owner.IsPet 
         ? Array.Empty<IHoverTip>() : [CustomHoverTipFactory.FromIntent<SleepIntent>()];
     
     // 动态文本切换：根据身份和睡眠状态，返回不同的本地化键值
-    protected override string SmartDescriptionLocKey => 
-        Owner.IsPlayer ? $"{Id.Entry}.smartDescriptionPlayer" : $"{Id.Entry}.smartDescriptionAwake";
+    protected override string SmartDescriptionLocKey => Owner.IsPlayer ? $"{Id.Entry}.smartDescriptionPlayer" :
+        Owner.IsPet ? $"{Id.Entry}.smartDescriptionPet" : $"{Id.Entry}.smartDescriptionEnemy";
     
     // 动态减伤数值同步
     public override async Task AfterPowerAmountChanged(
@@ -79,24 +81,37 @@ public sealed class HypnotizedPower : IndomitablePower
         if (Owner.IsPlayer && side == Owner.Side && participants.Contains(Owner)) await CheckPlayerSleep();
     }
     
-    // ========== 核心机制 3：回合结束判定与自然扣减 ==========
+    // ========== 核心机制 3：奥斯提专项控制 ==========
+    // 拦截卡牌打出：达标时禁止主人打出奥斯提攻击牌及“牺牲”
+    public override bool ShouldPlay(CardModel card, AutoPlayType autoPlayType) => 
+        !Owner.IsPet || Amount < 5 || card.Owner != Owner.PetOwner || 
+        (!card.Tags.Contains(CardTag.OstyAttack) && card is not Sacrifice);
+    
+    // 拦截召唤指令：达标时禁止主人召唤奥斯提（或增加生命上限）
+    public override decimal ModifySummonAmount(Player summoner, decimal amount, AbstractModel? source) => 
+        !Owner.IsPet || Amount < 5 || summoner != Owner.PetOwner ? amount : 0m;
+    
+    // ========== 核心机制 4：多端回合结束判定与自然扣减 ==========
     public override async Task AfterSideTurnEnd(
         PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)
     {
-        var data = GetInternalData<Data>();
+        // 结算逻辑：严格判定在敌方的回合结束时结算
+        if (side != CombatSide.Enemy) return;
         if (Owner.IsPlayer)
         {
-            // 玩家逻辑：在敌人回合结束时，像虚弱一样自然减少 1，如果应该忽略自然减少，则设置不应该忽略，否则自然减少
-            if (side == CombatSide.Enemy)
-            {
-                if (data.PlayerIsSleeping) data.PlayerIsSleeping = false;
-                else await PowerCmd.Decrement(this);
-            }
+            var data = GetInternalData<Data>();
+            // 玩家逻辑：如果应该忽略自然减少，则设置不应该忽略，否则像虚弱一样自然减少 1
+            if (data.PlayerIsSleeping) data.PlayerIsSleeping = false;
+            else await PowerCmd.Decrement(this);
         }
-        else
+        else if (Owner.IsPet)
         {
-            // 怪物逻辑：在怪物回合结束时结算
-            if (side != Owner.Side || !participants.Contains(Owner)) return;
+            if (Amount < 5) await PowerCmd.Decrement(this);
+            else await PowerCmd.ModifyAmount(choiceContext, this, -5, null, null);
+        }
+        else if (Owner.IsEnemy)
+        {
+            if (!participants.Contains(Owner)) return;
             // 如果足够 5 层，强制睡眠
             if (Amount >= 5)
             {
@@ -113,15 +128,13 @@ public sealed class HypnotizedPower : IndomitablePower
     
     private static async Task SleepMove(IReadOnlyList<Creature> targets) => await Task.CompletedTask;
     
-    // ========== 核心机制 4：受伤破防扣层数 ==========
+    // ========== 核心机制 5：受伤破防扣减 ==========
     public override async Task AfterDamageReceived(
         PlayerChoiceContext choiceContext, Creature target, DamageResult result, ValueProp props, Creature? dealer, CardModel? cardSource)
     {
-        // 任何受到未被格挡的伤害，都会额外扣除 1
-        if (target == Owner && result.UnblockedDamage > 0 && (Owner.IsPlayer || IsSleeping))
-        {
+        // 除了清醒的敌人，任何受到未被格挡的伤害，都会额外扣除 1
+        if (target == Owner && result.UnblockedDamage > 0 && (IsEnemySleeping || Owner.IsPlayer || Owner.IsPet))
             await PowerCmd.Decrement(this);
-        }
     }
     
     // 用于记录玩家身上的催眠是否应该自然减少
