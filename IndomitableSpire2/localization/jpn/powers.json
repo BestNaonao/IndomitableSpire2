@@ -1,7 +1,8 @@
 {
-  "INDOMITABLESPIRE2-HYPNOTIZED_POWER.description": "アタックダメージを減少させ、特定の条件で睡眠状態またはターン終了になる。",
+  "INDOMITABLESPIRE2-HYPNOTIZED_POWER.description": "アタックダメージを減少させ、特定の条件で睡眠状態やターン終了、または行動制限をもたらす。",
   "INDOMITABLESPIRE2-HYPNOTIZED_POWER.smartDescriptionPlayer": "アタックによるダメージが[blue]{DamageDecreasePercent}%[/blue]減少する。\n{OnPlayer:自身の|敵の}ターン開始時またはターン中に催眠が[blue]5[/blue]以上になった時、ターンを強制終了し、[blue]{Block}[/blue]の[gold]ブロック[/gold]を得て、催眠を[blue]5[/blue]減らす。そうでない場合、ターン終了時に[blue]1[/blue]減少する。ブロックされていないダメージを受けるたび、さらに[blue]1[/blue]減少する。",
-  "INDOMITABLESPIRE2-HYPNOTIZED_POWER.smartDescriptionAwake": "アタックによるダメージが[blue]{DamageDecreasePercent}%[/blue]減少する。\n{OnPlayer:自身の|敵の}ターン終了時、催眠が[blue]5[/blue]以上ある場合、[gold]睡眠[/gold]状態になり[blue]{Block}[/blue]の[gold]ブロック[/gold]を得る。そうでない場合は[blue]1[/blue]減少する。ブロックされていないダメージを受けるたび、さらに[blue]1[/blue]減少する。",
+  "INDOMITABLESPIRE2-HYPNOTIZED_POWER.smartDescriptionPet": "アタックによるダメージが[blue]{DamageDecreasePercent}%[/blue]減少する。\n催眠が[blue]5[/blue]以上ある場合、{OnPlayer:自身の|その}主人は[gold]オスティのアタック[/gold]と[gold]生贄[/gold]をプレイできず、召喚もできなくなる。ターン終了時に[blue]{Amount:cond:<5?1|5}[/blue]減少する。ブロックされていないダメージを受けるたび、さらに[blue]1[/blue]減少する。",
+  "INDOMITABLESPIRE2-HYPNOTIZED_POWER.smartDescriptionEnemy": "アタックによるダメージが[blue]{DamageDecreasePercent}%[/blue]減少する。\n{OnPlayer:自身の|敵の}ターン終了時、催眠が[blue]5[/blue]以上ある場合、[gold]睡眠[/gold]状態になり[blue]{Block}[/blue]の[gold]ブロック[/gold]を得る。そうでない場合は[blue]1[/blue]減少する。ブロックされていないダメージを受けるたび、さらに[blue]1[/blue]減少する。",
   "INDOMITABLESPIRE2-HYPNOTIZED_POWER.title": "催眠",
   "INDOMITABLESPIRE2-MOTIVATION_POWER.description": "インドミタブルのやる気。100に達すると特殊な効果を発動できる。",
   "INDOMITABLESPIRE2-MOTIVATION_POWER.smartDescription": "現在 [blue]{MotivationAmount}[/blue] / [blue]100[/blue] のやる気を持っています。[blue]100[/blue] に達すると、やる気が[gold]MAX[/gold]になり、強力な専用効果がアンロックされます。",
