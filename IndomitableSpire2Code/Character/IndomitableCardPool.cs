@@ -7,10 +7,7 @@ namespace IndomitableSpire2.IndomitableSpire2Code.Character;
 public sealed class IndomitableCardPool : CustomCardPoolModel
 {
     // 卡池的唯一标识符
-    public override string Title => Indomitable.CharacterId;
-    // 使用 BaseLib 的标准格式生成 EnergyColorName
-    public override string EnergyColorName => CustomEnergyIconPatches.GetEnergyColorName(Id);
-    // public override string EnergyColorName => IndomitableCharacter.CharacterId;
+    public override string Title => CustomEnergyIconPatches.GetEnergyColorName(Id);
     
     // 基础卡牌背景框材质，选择直接硬编码 HSV (色相、饱和度、明度) 的值来微调：
     public override float H => 0.114f;
