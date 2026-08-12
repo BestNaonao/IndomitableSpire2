@@ -9,6 +9,8 @@ namespace TashkentSpire2.TashkentSpire2Code.Cards.Common;
 
 public sealed class PrecisionStrike() : TashkentCard(0, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
 {
+    protected override HashSet<CardTag> CanonicalTags => [CardTag.Strike];
+    
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new DamageVar(4M, ValueProp.Move),
         new MarkDynamicVar(1M),

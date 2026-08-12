@@ -150,14 +150,18 @@ public sealed class DistancePower : TashkentPower, IPersistentPower
     {
         if (cardPlay.Card.Owner.Creature == base.Owner && cardPlay.Card.Type == CardType.Attack)
         {
-            CanApplyWarpDrive = false;
+            var warpDrive = base.Owner.GetPower<WarpDrivePower>();
+            if (warpDrive != null && warpDrive.Amount > 0)
+            {
+                CanApplyWarpDrive = false;
+            }
         }
         return Task.CompletedTask;
     }
     
     public override decimal ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource, CardPlay? cardPlay)
     {
-        if (dealer == this.Owner && !props.IsPoweredAttack())
+        if (!props.IsPoweredAttack())
             return 1m;
 
         var warpDrive = base.Owner.GetPower<WarpDrivePower>();

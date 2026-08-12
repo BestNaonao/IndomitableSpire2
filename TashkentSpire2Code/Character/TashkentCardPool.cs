@@ -11,7 +11,7 @@ namespace TashkentSpire2.TashkentSpire2Code.Character;
 public sealed class TashkentCardPool : CustomCardPoolModel, IPhilosophersCardPool
 {
     // 卡池的唯一标识符
-    public override string Title => TashkentCharacter.CharacterId;
+    public override string Title => CustomEnergyIconPatches.GetEnergyColorName(Id);
     // 使用 BaseLib 的标准格式生成 EnergyColorName
     public override string EnergyColorName => CustomEnergyIconPatches.GetEnergyColorName(Id);
 

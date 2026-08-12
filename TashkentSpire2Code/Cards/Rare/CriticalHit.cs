@@ -25,7 +25,8 @@ public sealed class CriticalHit() : TashkentCard(1, CardType.Attack, CardRarity.
         AttackCommand attackCommand = await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
             .FromCard(this, cardPlay)
             .Targeting(cardPlay.Target)
-            .WithHitFx("vfx/vfx_attack_slash")
+            .WithHitFx("vfx/vfx_heavy_blunt")
+            .WithHitVfxSpawnedAtBase()
             .Execute(choiceContext);
         
         await PowerCmd.Apply<MarkPower>(choiceContext, cardPlay.Target, attackCommand.Results.SelectMany((List<DamageResult> r) => r).Sum((DamageResult r) => r.TotalDamage + r.OverkillDamage), base.Owner.Creature, this);

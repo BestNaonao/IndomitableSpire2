@@ -9,7 +9,7 @@ using TashkentSpire2.TashkentSpire2Code.Commands;
 namespace TashkentSpire2.TashkentSpire2Code.Cards.Status;
 
 [Pool(typeof(StatusCardPool))]
-public sealed class ShellCasing() : TashkentCard(1, CardType.Status, CardRarity.Status, TargetType.Self)
+public sealed class ShellCasing() : TashkentCard(1, CardType.Status, CardRarity.Status, TargetType.None)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new LoadDynamicVar(1M)

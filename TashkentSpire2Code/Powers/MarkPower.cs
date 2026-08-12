@@ -21,7 +21,7 @@ public sealed class MarkPower : TashkentPower
     
     public override decimal ModifyDamageAdditive(Creature? target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource, CardPlay? cardPlay)
     {
-        if (target != base.Owner || !props.HasFlag(ValueProp.Move))
+        if (target != base.Owner || !props.IsPoweredAttack())
             return 0m;
         
         int counterattackAmount = (int)(base.Owner?.GetPower<CounterattackPower>()?.Amount ?? 0m);

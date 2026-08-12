@@ -12,6 +12,8 @@ namespace TashkentSpire2.TashkentSpire2Code.Cards.Rare;
 
 public sealed class FreeFire() : AmmunitionCard(3, CardType.Skill, CardRarity.Rare, TargetType.Self)
 {
+    public override bool CanBeGeneratedInCombat => false;
+    
     public override IEnumerable<CardKeyword> CanonicalKeywords => [TashkentKeyword.Barrage];
     
     protected override IEnumerable<DynamicVar> CanonicalVars => [

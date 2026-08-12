@@ -24,7 +24,7 @@ public sealed class Fuel : TashkentRelic
         HoverTipFactory.FromKeyword(CardKeyword.Exhaust)
     ];
     
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<VigorPower>(3M)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<VigorPower>(4M)];
 
     public override async Task AfterCardExhausted(PlayerChoiceContext choiceContext, CardModel card, bool causedByEthereal)
     {

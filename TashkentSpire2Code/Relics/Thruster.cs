@@ -6,7 +6,7 @@ namespace TashkentSpire2.TashkentSpire2Code.Relics;
 
 public sealed class Thruster : TashkentRelic
 {
-    public override RelicRarity Rarity => RelicRarity.Uncommon;
+    public override RelicRarity Rarity => RelicRarity.Rare;
     
     protected override string BigIconPath => 
         "res://TashkentSpire2/images/relics/big/Thruster.png";
