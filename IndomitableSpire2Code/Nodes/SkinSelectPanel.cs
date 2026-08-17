@@ -24,8 +24,9 @@ public partial class SkinSelectPanel : Control
     // 直接使用角色模型列表
     private static readonly List<Indomitable> Skins = 
     [
-        ModelDb.Character<IndomitableCharacter>(),
-        ModelDb.Character<IndomitableMaidCharacter>()
+        ModelDb.Character<IndomitableDefault>(),
+        ModelDb.Character<IndomitableMaid>(),
+        ModelDb.Character<IndomitableRaceQueen>()
     ];
     
     public override void _Ready()
