@@ -8,7 +8,8 @@ public partial class IndomitableMerchantCharacter : NMerchantCharacter
 {
     public override void _Ready()
     {
-        // 覆盖播放我们的 sleep 动画
-        PlayAnimation("sleep", true);
+        // 检查当前节点名称是否包含 "Queen" (不区分大小写)
+        var animName = Name.ToString().Contains("RaceQueen", StringComparison.OrdinalIgnoreCase) ? "sit" : "sleep";
+        PlayAnimation(animName, true);
     }
 }
