@@ -1,0 +1,14 @@
+[remap]
+
+importer="spine.skel"
+type="SpineSkeletonFileResource"
+uid="uid://dh1bfwyh58wte"
+path="res://.godot/imported/bunao_3.skel-a98e11ebaf48ca8cf149a5752e188ee2.spskel"
+
+[deps]
+
+source_file="res://IndomitableSpire2/animations/characters/indomitable_race_queen/bunao_3.skel"
+dest_files=["res://.godot/imported/bunao_3.skel-a98e11ebaf48ca8cf149a5752e188ee2.spskel"]
+
+[params]
+

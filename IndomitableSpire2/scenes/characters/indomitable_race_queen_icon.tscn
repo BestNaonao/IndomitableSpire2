@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://cd3ovuvxlbywu"]
+
+[ext_resource type="Texture2D" uid="uid://iu6sgp8eadrm" path="res://IndomitableSpire2/images/charui/character_icon_indomitable_race_queen.png" id="1_k8ydx"]
+
+[node name="IndomitableRaceQueenIcon" type="TextureRect"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("1_k8ydx")
+expand_mode = 1
+stretch_mode = 5

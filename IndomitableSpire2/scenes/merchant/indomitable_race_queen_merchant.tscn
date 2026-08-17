@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://dpg18ufytj5dk"]
+
+[ext_resource type="SpineSkeletonDataResource" uid="uid://cdu36158vgk4l" path="res://IndomitableSpire2/animations/characters/indomitable_race_queen/indomitable_race_queen_spine.tres" id="1_c4k7d"]
+[ext_resource type="Script" uid="uid://xmqtj03n13m8" path="res://IndomitableSpire2Code/Nodes/IndomitableMerchantCharacter.cs" id="1_n1jr0"]
+
+[node name="IndomitableRaceQueenMerchant" type="Node2D"]
+script = ExtResource("1_n1jr0")
+
+[node name="SpineSprite" type="SpineSprite" parent="."]
+skeleton_data_res = ExtResource("1_c4k7d")
+preview_skin = "Default"
+preview_animation = "sit"
+preview_frame = false
+preview_time = 5.4
+scale = Vector2(0.9, 0.9)

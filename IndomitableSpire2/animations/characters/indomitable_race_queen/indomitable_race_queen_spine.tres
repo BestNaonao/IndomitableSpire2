@@ -1,0 +1,8 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=3 format=3 uid="uid://cdu36158vgk4l"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://g3sfjjuj0mnu" path="res://IndomitableSpire2/animations/characters/indomitable_race_queen/bunao_3.atlas" id="1_fb0r5"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://dh1bfwyh58wte" path="res://IndomitableSpire2/animations/characters/indomitable_race_queen/bunao_3.skel" id="2_2juhj"]
+
+[resource]
+atlas_res = ExtResource("1_fb0r5")
+skeleton_file_res = ExtResource("2_2juhj")

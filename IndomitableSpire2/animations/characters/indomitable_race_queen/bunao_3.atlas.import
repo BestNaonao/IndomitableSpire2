@@ -1,0 +1,16 @@
+[remap]
+
+importer="spine.atlas"
+type="SpineAtlasResource"
+uid="uid://g3sfjjuj0mnu"
+path="res://.godot/imported/bunao_3.atlas-9dd719f3d8f4dc1730c07a2315e7c89f.spatlas"
+
+[deps]
+
+source_file="res://IndomitableSpire2/animations/characters/indomitable_race_queen/bunao_3.atlas"
+dest_files=["res://.godot/imported/bunao_3.atlas-9dd719f3d8f4dc1730c07a2315e7c89f.spatlas"]
+
+[params]
+
+normal_map_prefix="n"
+specular_map_prefix="s"
