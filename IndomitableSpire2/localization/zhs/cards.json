@@ -115,6 +115,10 @@
   "INDOMITABLESPIRE2-ENGAGE_ON_SIGHT.description": "每当你{IfUpgraded:show:|在回合进行中}抽到一张攻击牌时，对所有敌人造成相当于[gold]手牌[/gold]数量的伤害。",
   "INDOMITABLESPIRE2-WITHERER.title": "水火无情",
   "INDOMITABLESPIRE2-WITHERER.description": "你在本场战斗中累计造成{Threshold}点[gold]起火[/gold]或[gold]进水[/gold]伤害后，你每回合{WithererPower:choose(1):第一次|前{WithererPower:diff()}次}给予敌人的[gold]负面效果[/gold]翻倍。",
+  "INDOMITABLESPIRE2-ICED_DRINK.title": "冰镇饮料",
+  "INDOMITABLESPIRE2-ICED_DRINK.description": "[gold]需求[/gold][blue]{MotivationRequire:diff()}[/blue]点[gold]干劲[/gold]。\n移除敌人身上的所有[gold]起火[/gold]，并给予等量的[gold]进水[/gold]。如果移除了至少5层，抽{Cards:diff()}张牌。",
+  "INDOMITABLESPIRE2-BURNING_PASSION.title": "激情似火",
+  "INDOMITABLESPIRE2-BURNING_PASSION.description": "[gold]需求[/gold][blue]{MotivationRequire:diff()}[/blue]点[gold]干劲[/gold]。\n移除敌人身上的所有[gold]进水[/gold]，并给予等量的[gold]起火[/gold]。如果移除了至少1层，获得{Energy:energyIcons()}。",
   
   "INDOMITABLESPIRE2-DESSERT.title": "甜点",
   "INDOMITABLESPIRE2-DESSERT.description": "回复[green]{Heal:diff()}[/green]点生命。\n获得{Energy:energyIcons()}。",

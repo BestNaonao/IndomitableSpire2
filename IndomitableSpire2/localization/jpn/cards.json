@@ -115,6 +115,10 @@
   "INDOMITABLESPIRE2-ENGAGE_ON_SIGHT.description": "{IfUpgraded:show:|自分のターン中に}アタックを引くたび、すべての敵に[gold]手札[/gold]の枚数に等しいダメージを与える。",
   "INDOMITABLESPIRE2-WITHERER.title": "災害誘発",
   "INDOMITABLESPIRE2-WITHERER.description": "この戦闘中に[gold]炎上[/gold]または[gold]浸水[/gold]で合計{Threshold}ダメージを与えた後、毎ターン最初に敵に[gold]デバフ[/gold]を与える{WithererPower:cond:>1?{WithererPower:diff()}回|時}、その効果量を2倍にする。",
+  "INDOMITABLESPIRE2-ICED_DRINK.title": "アイスドリンク",
+  "INDOMITABLESPIRE2-ICED_DRINK.description": "[blue]{MotivationRequire:diff()}[/blue]の[gold]やる気[/gold]を[gold]必要[/gold]とする。\n敵の[gold]炎上[/gold]をすべて取り除き、同数の[gold]浸水[/gold]を与える。5以上取り除いた場合、カードを{Cards:diff()}枚引く。",
+  "INDOMITABLESPIRE2-BURNING_PASSION.title": "情熱の炎",
+  "INDOMITABLESPIRE2-BURNING_PASSION.description": "[blue]{MotivationRequire:diff()}[/blue]の[gold]やる気[/gold]を[gold]必要[/gold]とする。\n敵の[gold]浸水[/gold]をすべて取り除き、同数の[gold]炎上[/gold]を与える。1以上取り除いた場合、{Energy:energyIcons()}を得る。",
   
   "INDOMITABLESPIRE2-DESSERT.title": "デザート",
   "INDOMITABLESPIRE2-DESSERT.description": "HPを[green]{Heal:diff()}[/green]回復する。\n{Energy:energyIcons()}を得る。",
