@@ -54,7 +54,7 @@ public abstract class Indomitable : CustomCharacterModel
     
     // 全局通用的皮肤资产
     public override string CustomCharacterSelectBg =>               // 选择界面背景
-        $"res://IndomitableSpire2/scenes/characters/char_select_bg_indomitable_{new Random().Next(1, 5)}.tscn";
+        $"res://IndomitableSpire2/scenes/characters/char_select_bg_indomitable_{new Random().Next(1, 6)}.tscn";
     public override string CustomCharacterSelectIconPath =>         // 选择界面图标
         "res://IndomitableSpire2/images/charui/char_select_indomitable.png";
     public override string CustomCharacterSelectLockedIconPath =>   // 选择锁定图标

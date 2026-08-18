@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=3 uid="uid://dhueptegl632e"]
+
+[ext_resource type="Texture2D" uid="uid://cppifyrngmqmw" path="res://IndomitableSpire2/images/charui/char_select_bg_indomitable_5.png" id="1_5kxdu"]
+
+[node name="CharSelectBgIndomitable5" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -960.0
+offset_top = -523.0
+offset_right = 1600.0
+offset_bottom = 677.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(1280, 600)
+
+[node name="CharSelectBgIndomitable5" type="Sprite2D" parent="."]
+position = Vector2(1050, 520)
+texture = ExtResource("1_5kxdu")
