@@ -97,5 +97,11 @@
   "INDOMITABLESPIRE2-WITHERER_POWER.description": "在累计造成足够的起火或进水伤害后，每回合初次给予敌人的负面效果翻倍。",
   "INDOMITABLESPIRE2-WITHERER_POWER.smartDescriptionInactive": "本场战斗中累计造成 [blue]{Threshold}[/blue] 点[gold]起火[/gold]或[gold]进水[/gold]伤害后，每回合前 [blue]{Amount}[/blue] 次给予敌人的[gold]负面效果[/gold]翻倍。",
   "INDOMITABLESPIRE2-WITHERER_POWER.smartDescriptionActive": "已激活！每回合前 [blue]{Amount}[/blue] 次给予敌人的[gold]负面效果[/gold]翻倍。",
-  "INDOMITABLESPIRE2-WITHERER_POWER.title": "水火无情"
+  "INDOMITABLESPIRE2-WITHERER_POWER.title": "水火无情",
+  "INDOMITABLESPIRE2-FURIOUS_POWER.description": "每当你给予4层起火时，抽牌。",
+  "INDOMITABLESPIRE2-FURIOUS_POWER.smartDescription": "每当你给予至少4层[gold]起火[/gold]时，抽[blue]{Amount}[/blue]张牌。",
+  "INDOMITABLESPIRE2-FURIOUS_POWER.title": "怒火中烧",
+  "INDOMITABLESPIRE2-DEMOLITION_EXPERT_POWER.description": "增加给予敌人的起火和进水层数。",
+  "INDOMITABLESPIRE2-DEMOLITION_EXPERT_POWER.smartDescription": "你给予敌人的[gold]起火[/gold]或[gold]进水[/gold]层数增加[blue]{Amount}[/blue]层。",
+  "INDOMITABLESPIRE2-DEMOLITION_EXPERT_POWER.title": "破坏专家"
 }

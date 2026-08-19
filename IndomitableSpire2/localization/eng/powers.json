@@ -97,5 +97,11 @@
   "INDOMITABLESPIRE2-WITHERER_POWER.description": "After dealing enough On Fire or Flooding damage, double the Debuffs first applied to enemies each turn.",
   "INDOMITABLESPIRE2-WITHERER_POWER.smartDescriptionInactive": "After dealing [blue]{Threshold}[/blue] [gold]On Fire[/gold] or [gold]Flooding[/gold] damage this combat, double the first {Amount:plural:[gold]Debuff[/gold]|[blue]{Amount}[/blue] [gold]Debuffs[/gold]} applied to enemies each turn.",
   "INDOMITABLESPIRE2-WITHERER_POWER.smartDescriptionActive": "Activated! Double the first {Amount:plural:[gold]Debuff[/gold]|[blue]{Amount}[/blue] [gold]Debuffs[/gold]} applied to enemies each turn.",
-  "INDOMITABLESPIRE2-WITHERER_POWER.title": "Witherer"
+  "INDOMITABLESPIRE2-WITHERER_POWER.title": "Witherer",
+  "INDOMITABLESPIRE2-FURIOUS_POWER.description": "Whenever you apply 4 On Fire, draw cards.",
+  "INDOMITABLESPIRE2-FURIOUS_POWER.smartDescription": "Whenever you apply 4 or more [gold]On Fire[/gold], draw [blue]{Amount}[/blue] {Amount:plural:card|cards}.",
+  "INDOMITABLESPIRE2-FURIOUS_POWER.title": "Furious",
+  "INDOMITABLESPIRE2-DEMOLITION_EXPERT_POWER.description": "Apply additional On Fire and Flooding to enemies.",
+  "INDOMITABLESPIRE2-DEMOLITION_EXPERT_POWER.smartDescription": "Whenever you apply [gold]On Fire[/gold] or [gold]Flooding[/gold] to enemies, apply an additional [blue]{Amount}[/blue].",
+  "INDOMITABLESPIRE2-DEMOLITION_EXPERT_POWER.title": "Demolition Expert"
 }
