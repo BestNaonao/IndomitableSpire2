@@ -119,6 +119,10 @@
   "INDOMITABLESPIRE2-ICED_DRINK.description": "[gold]Requires[/gold] [blue]{MotivationRequire:diff()}[/blue] [gold]Motivation[/gold].\nRemove all [gold]On Fire[/gold] from the enemy and apply an equal amount of [gold]Flooding[/gold]. If at least 5 are removed, draw {Cards:diff()} {Cards:plural:card|cards}.",
   "INDOMITABLESPIRE2-BURNING_PASSION.title": "Burning Passion",
   "INDOMITABLESPIRE2-BURNING_PASSION.description": "[gold]Requires[/gold] [blue]{MotivationRequire:diff()}[/blue] [gold]Motivation[/gold].\nRemove all [gold]Flooding[/gold] from the enemy and apply an equal amount of [gold]On Fire[/gold]. If at least 1 is removed, gain {Energy:energyIcons()}.",
+  "INDOMITABLESPIRE2-FURIOUS.title": "Furious",
+  "INDOMITABLESPIRE2-FURIOUS.description": "Whenever you apply 4 or more [gold]On Fire[/gold], draw [blue]{Cards:diff()}[/blue] {Cards:plural:card|cards}.\nApply {OnFirePower:diff()} [gold]On Fire[/gold] to yourself.",
+  "INDOMITABLESPIRE2-DEMOLITION_EXPERT.title": "Demolition Expert",
+  "INDOMITABLESPIRE2-DEMOLITION_EXPERT.description": "Whenever you apply [gold]On Fire[/gold] or [gold]Flooding[/gold] to enemies, apply an additional [blue]{DemolitionExpertPower:diff()}[/blue].",
   
   "INDOMITABLESPIRE2-DESSERT.title": "Dessert",
   "INDOMITABLESPIRE2-DESSERT.description": "Heal [green]{Heal:diff()}[/green] HP.\nGain {Energy:energyIcons()}.",

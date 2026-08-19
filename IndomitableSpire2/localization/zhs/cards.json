@@ -119,6 +119,10 @@
   "INDOMITABLESPIRE2-ICED_DRINK.description": "[gold]需求[/gold][blue]{MotivationRequire:diff()}[/blue]点[gold]干劲[/gold]。\n移除敌人身上的所有[gold]起火[/gold]，并给予等量的[gold]进水[/gold]。如果移除了至少5层，抽{Cards:diff()}张牌。",
   "INDOMITABLESPIRE2-BURNING_PASSION.title": "激情似火",
   "INDOMITABLESPIRE2-BURNING_PASSION.description": "[gold]需求[/gold][blue]{MotivationRequire:diff()}[/blue]点[gold]干劲[/gold]。\n移除敌人身上的所有[gold]进水[/gold]，并给予等量的[gold]起火[/gold]。如果移除了至少1层，获得{Energy:energyIcons()}。",
+  "INDOMITABLESPIRE2-FURIOUS.title": "怒火中烧",
+  "INDOMITABLESPIRE2-FURIOUS.description": "每当你给予至少4层[gold]起火[/gold]时，抽[blue]{Cards:diff()}[/blue]张牌。\n给予自身{OnFirePower:diff()}层[gold]起火[/gold]。",
+  "INDOMITABLESPIRE2-DEMOLITION_EXPERT.title": "破坏专家",
+  "INDOMITABLESPIRE2-DEMOLITION_EXPERT.description": "你给予敌人的[gold]起火[/gold]或[gold]进水[/gold]层数增加[blue]{DemolitionExpertPower:diff()}[/blue]层。",
   
   "INDOMITABLESPIRE2-DESSERT.title": "甜点",
   "INDOMITABLESPIRE2-DESSERT.description": "回复[green]{Heal:diff()}[/green]点生命。\n获得{Energy:energyIcons()}。",

@@ -119,6 +119,10 @@
   "INDOMITABLESPIRE2-ICED_DRINK.description": "[blue]{MotivationRequire:diff()}[/blue]の[gold]やる気[/gold]を[gold]必要[/gold]とする。\n敵の[gold]炎上[/gold]をすべて取り除き、同数の[gold]浸水[/gold]を与える。5以上取り除いた場合、カードを{Cards:diff()}枚引く。",
   "INDOMITABLESPIRE2-BURNING_PASSION.title": "情熱の炎",
   "INDOMITABLESPIRE2-BURNING_PASSION.description": "[blue]{MotivationRequire:diff()}[/blue]の[gold]やる気[/gold]を[gold]必要[/gold]とする。\n敵の[gold]浸水[/gold]をすべて取り除き、同数の[gold]炎上[/gold]を与える。1以上取り除いた場合、{Energy:energyIcons()}を得る。",
+  "INDOMITABLESPIRE2-FURIOUS.title": "猛烈",
+  "INDOMITABLESPIRE2-FURIOUS.description": "[gold]炎上[/gold]を4以上付与するたび、カードを[blue]{Cards:diff()}[/blue]枚引く。\n自身に[gold]炎上[/gold]{OnFirePower:diff()}を付与する。",
+  "INDOMITABLESPIRE2-DEMOLITION_EXPERT.title": "爆発物専門家",
+  "INDOMITABLESPIRE2-DEMOLITION_EXPERT.description": "敵に[gold]炎上[/gold]または[gold]浸水[/gold]を付与するたび、追加で[blue]{DemolitionExpertPower:diff()}[/blue]付与する。",
   
   "INDOMITABLESPIRE2-DESSERT.title": "デザート",
   "INDOMITABLESPIRE2-DESSERT.description": "HPを[green]{Heal:diff()}[/green]回復する。\n{Energy:energyIcons()}を得る。",
