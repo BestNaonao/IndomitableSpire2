@@ -1,0 +1,7 @@
+[gd_resource type="AtlasTexture" load_steps=2 format=3 uid="uid://dky1q6o34egcy"]
+
+[ext_resource type="Texture2D" uid="uid://njmqlcvmrb8" path="res://IndomitableSpire2/images/powers/packed/furious_power_packed.png" id="1_4moru"]
+
+[resource]
+atlas = ExtResource("1_4moru")
+region = Rect2(0, 0, 64, 64)
