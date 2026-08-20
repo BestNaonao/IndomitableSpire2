@@ -152,5 +152,7 @@
   "INDOMITABLESPIRE2-TRANSPORT_COMMISSION.title": "貨物輸送",
   "INDOMITABLESPIRE2-TRANSPORT_COMMISSION.description": "[gold]委託[/gold]：カードを累計{MaxProgress}枚引くこと{InCombat:（{Progress}/{MaxProgress}）|}。\nあなたと{InCombat:[gold]{DelegatorName}[/gold]|委託元}はそれぞれカードを{Cards:diff()}枚引く。",
   "INDOMITABLESPIRE2-ESCORT_COMMISSION.title": "商船護衛",
-  "INDOMITABLESPIRE2-ESCORT_COMMISSION.description": "[gold]委託[/gold]：[gold]ブロック[/gold]を累計{MaxProgress}得ること{InCombat:（{Progress}/{MaxProgress}）|}。\n戦闘終了後、あなたと{InCombat:[gold]{DelegatorName}[/gold]|委託元}はそれぞれ{Gold:diff()}[gold]ゴールド[/gold]を得る。"
+  "INDOMITABLESPIRE2-ESCORT_COMMISSION.description": "[gold]委託[/gold]：[gold]ブロック[/gold]を累計{MaxProgress}得ること{InCombat:（{Progress}/{MaxProgress}）|}。\n戦闘終了後、あなたと{InCombat:[gold]{DelegatorName}[/gold]|委託元}はそれぞれ{Gold:diff()}[gold]ゴールド[/gold]を得る。",
+  "INDOMITABLESPIRE2-LAUNCH_CEREMONY.title": "観艦式",
+  "INDOMITABLESPIRE2-LAUNCH_CEREMONY.description": "[gold]委託[/gold]：カードを累計{MaxProgress:diff()}枚プレイすること{InCombat:（{Progress}/{MaxProgress}）|}。\n戦闘終了後、あなたと{InCombat:[gold]{DelegatorName}[/gold]|委託元}はそれぞれ追加のカード報酬を獲得する。"
 }

@@ -152,5 +152,7 @@
   "INDOMITABLESPIRE2-TRANSPORT_COMMISSION.title": "货物运输",
   "INDOMITABLESPIRE2-TRANSPORT_COMMISSION.description": "[gold]委托[/gold]：抽取{MaxProgress}张牌{InCombat:({Progress}/{MaxProgress})|}。\n你和{InCombat:{DelegatorName}|委托方}各抽{Cards:diff()}张牌。",
   "INDOMITABLESPIRE2-ESCORT_COMMISSION.title": "商船护卫",
-  "INDOMITABLESPIRE2-ESCORT_COMMISSION.description": "[gold]委托[/gold]：获得{MaxProgress}点[gold]格挡[/gold]{InCombat:({Progress}/{MaxProgress})|}。\n战斗结束后你和{InCombat:{DelegatorName}|委托方}各获得{Gold:diff()}[gold]金币[/gold]。"
+  "INDOMITABLESPIRE2-ESCORT_COMMISSION.description": "[gold]委托[/gold]：获得{MaxProgress}点[gold]格挡[/gold]{InCombat:({Progress}/{MaxProgress})|}。\n战斗结束后你和{InCombat:{DelegatorName}|委托方}各获得{Gold:diff()}[gold]金币[/gold]。",
+  "INDOMITABLESPIRE2-LAUNCH_CEREMONY.title": "观舰仪式",
+  "INDOMITABLESPIRE2-LAUNCH_CEREMONY.description": "[gold]委托[/gold]：打出{MaxProgress:diff()}张牌{InCombat:({Progress}/{MaxProgress})|}。\n战斗结束后你和{InCombat:{DelegatorName}|委托方}各额外获得一次卡牌奖励。"
 }

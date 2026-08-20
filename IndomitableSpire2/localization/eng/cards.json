@@ -152,5 +152,7 @@
   "INDOMITABLESPIRE2-TRANSPORT_COMMISSION.title": "Cargo Transport",
   "INDOMITABLESPIRE2-TRANSPORT_COMMISSION.description": "[gold]Commission[/gold]: drawing {MaxProgress} cards{InCombat: ({Progress}/{MaxProgress})|}.\nYou and {InCombat:[gold]{DelegatorName}[/gold]|the Delegator} each draw {Cards:diff()} {Cards:plural:card|cards}.",
   "INDOMITABLESPIRE2-ESCORT_COMMISSION.title": "Merchant Escort",
-  "INDOMITABLESPIRE2-ESCORT_COMMISSION.description": "[gold]Commission[/gold]: gaining {MaxProgress} [gold]Block[/gold]{InCombat: ({Progress}/{MaxProgress})|}.\nAfter combat, you and {InCombat:[gold]{DelegatorName}[/gold]|the Delegator} each gain {Gold:diff()} [gold]Gold[/gold]."
+  "INDOMITABLESPIRE2-ESCORT_COMMISSION.description": "[gold]Commission[/gold]: gaining {MaxProgress} [gold]Block[/gold]{InCombat: ({Progress}/{MaxProgress})|}.\nAfter combat, you and {InCombat:[gold]{DelegatorName}[/gold]|the Delegator} each gain {Gold:diff()} [gold]Gold[/gold].",
+  "INDOMITABLESPIRE2-LAUNCH_CEREMONY.title": "Launch Ceremony",
+  "INDOMITABLESPIRE2-LAUNCH_CEREMONY.description": "[gold]Commission[/gold]: playing {MaxProgress:diff()} cards{InCombat: ({Progress}/{MaxProgress})|}.\nAfter combat, you and {InCombat:[gold]{DelegatorName}[/gold]|the Delegator} each gain an additional card reward."
 }
