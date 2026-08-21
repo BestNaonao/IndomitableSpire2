@@ -50,7 +50,7 @@ public abstract class Indomitable : CustomCharacterModel
         ModelDb.Card<Ignite>()
     ];
     
-    public override IReadOnlyList<RelicModel> StartingRelics => [ModelDb.Relic<ShikikanDakimakura>()];
+    public override IReadOnlyList<RelicModel> StartingRelics => [ModelDb.Relic<ShikikanNuigurumi>()];
     
     // 全局通用的皮肤资产
     public override string CustomCharacterSelectBg =>               // 选择界面背景
