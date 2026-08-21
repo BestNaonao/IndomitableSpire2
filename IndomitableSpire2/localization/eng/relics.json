@@ -1,8 +1,10 @@
 {
+  "INDOMITABLESPIRE2-SHIKIKAN_NUIGURUMI.title": "Commander Nuigurumi",
+  "INDOMITABLESPIRE2-SHIKIKAN_NUIGURUMI.flavor": "As long as I hug it, even the most troublesome sortie missions can be completely forgotten in my dreams... Zzz...",
+  "INDOMITABLESPIRE2-SHIKIKAN_NUIGURUMI.description": "At the end of your turn, heal [green]{Heal}[/green] HP, gain [blue]{MotivationGain}[/blue] [gold]Motivation[/gold].",
   "INDOMITABLESPIRE2-SHIKIKAN_DAKIMAKURA.title": "Commander Dakimakura",
-  "INDOMITABLESPIRE2-SHIKIKAN_DAKIMAKURA.flavor": "As long as I hug it, even the most troublesome sortie missions can be completely forgotten in my dreams... Zzz...",
-  "INDOMITABLESPIRE2-SHIKIKAN_DAKIMAKURA.description": "At the end of your turn, heal [green]{Heal}[/green] HP, gain [blue]{MotivationGain}[/blue] [gold]Motivation[/gold].",
-
+  "INDOMITABLESPIRE2-SHIKIKAN_DAKIMAKURA.flavor": "Upgraded comfort! Now I really don't want to get out of bed...",
+  "INDOMITABLESPIRE2-SHIKIKAN_DAKIMAKURA.description": "At the start and end of your turn, heal [green]{Heal}[/green] HP, gain [blue]{MotivationGain}[/blue] [gold]Motivation[/gold].\nWhenever you enter a [gold]Rest Site[/gold], triggers an additional time on the first turn of the next combat.",
   "INDOMITABLESPIRE2-ROYAL_BOUNTY.title": "Royal Bounty",
   "INDOMITABLESPIRE2-ROYAL_BOUNTY.description": "At the end of combat, randomly distribute [gold]Gold[/gold] to ALL players equal to [blue]{BountyRate}%[/blue] of the total Max HP of all killed enemies.",
   "INDOMITABLESPIRE2-ROYAL_BOUNTY.flavor": "\"Sink the Bismarck!\" - Admiral John Tovey"

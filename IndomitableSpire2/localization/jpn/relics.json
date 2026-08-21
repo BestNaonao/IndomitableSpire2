@@ -1,8 +1,10 @@
 {
+  "INDOMITABLESPIRE2-SHIKIKAN_NUIGURUMI.title": "指揮官のぬいぐるみ",
+  "INDOMITABLESPIRE2-SHIKIKAN_NUIGURUMI.flavor": "これを抱いていれば、一番面倒な出撃任務でさえ夢の中で忘れられますわ……すー……",
+  "INDOMITABLESPIRE2-SHIKIKAN_NUIGURUMI.description": "あなたのターン終了時、ＨＰを[green]{Heal}[/green]回復し、[gold]やる気[/gold]を[blue]{MotivationGain}[/blue]得る。",
   "INDOMITABLESPIRE2-SHIKIKAN_DAKIMAKURA.title": "指揮官の抱き枕",
-  "INDOMITABLESPIRE2-SHIKIKAN_DAKIMAKURA.flavor": "これを抱いていれば、一番面倒な出撃任務でさえ夢の中で忘れられますわ……すー……",
-  "INDOMITABLESPIRE2-SHIKIKAN_DAKIMAKURA.description": "あなたのターン終了時、ＨＰを[green]{Heal}[/green]回復する、[gold]やる気[/gold]を[blue]{MotivationGain}[/blue]得る。",
-
+  "INDOMITABLESPIRE2-SHIKIKAN_DAKIMAKURA.flavor": "安らぎもアップグレード！もうベッドから出たくありませんわ……",
+  "INDOMITABLESPIRE2-SHIKIKAN_DAKIMAKURA.description": "あなたのターン開始時と終了時、ＨＰを[green]{Heal}[/green]回復し、[gold]やる気[/gold]を[blue]{MotivationGain}[/blue]得る。\n[gold]休憩所[/gold]を訪れるたび、次の戦闘の1ターン目にそれぞれ追加で1回発動する。",
   "INDOMITABLESPIRE2-ROYAL_BOUNTY.title": "ロイヤルバウンティ",
   "INDOMITABLESPIRE2-ROYAL_BOUNTY.description": "戦闘終了時、すべての倒された敵の最大HPの合計の[blue]{BountyRate}%[/blue]に等しい[gold]ゴールド[/gold]を、すべてのプレイヤーにランダムに分配する。",
   "INDOMITABLESPIRE2-ROYAL_BOUNTY.flavor": "「ビスマルクを撃沈せよ！」 —— ジョン・トーヴィー大将"
