@@ -1,0 +1,7 @@
+[gd_resource type="AtlasTexture" load_steps=2 format=3 uid="uid://baotd1a6dsn3x"]
+
+[ext_resource type="Texture2D" uid="uid://cjpb0jsas8whb" path="res://IndomitableSpire2/images/relics/packed/shikikan_nuigurumi.png" id="1_14knx"]
+
+[resource]
+atlas = ExtResource("1_14knx")
+region = Rect2(0, 0, 90, 90)
