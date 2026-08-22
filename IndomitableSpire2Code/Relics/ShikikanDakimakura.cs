@@ -70,7 +70,7 @@ public sealed class ShikikanDakimakura : IndomitableRelic
     public override async Task AfterSideTurnEnd(
         PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)
     {
-        if (side != Owner.Creature.Side || Owner.Creature.IsDead) return;
+        if (side != Owner.Creature.Side || Owner.Creature.IsDead || !participants.Contains(Owner.Creature)) return;
         await TriggerEffect(choiceContext);
         // 如果去了营火，并且是第一回合，额外触发一次
         if (GainExtraInNextCombat && Owner.PlayerCombatState?.TurnNumber == 1)

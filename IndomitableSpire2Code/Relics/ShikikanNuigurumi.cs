@@ -28,9 +28,7 @@ public sealed class ShikikanNuigurumi : IndomitableRelic
     public override async Task AfterSideTurnEnd(
         PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)
     {
-        if (side != Owner.Creature.Side || Owner.Creature.IsDead)
-            return;
-        
+        if (side != Owner.Creature.Side || Owner.Creature.IsDead || !participants.Contains(Owner.Creature)) return;
         Flash();
         await CreatureCmd.Heal(Owner.Creature, DynamicVars.Heal.BaseValue);
         await PowerCmd.Apply<MotivationPower>(
