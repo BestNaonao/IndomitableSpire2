@@ -3,8 +3,8 @@
   "name": "TashkentSpire2",
   "author": "HCP_A3",
   "description": "Adds 'Tashkent' from AzurLane and Worldofwarships as a playable character for Slay the Spire 2.",
-  "version": "v0.2.5",
-  "min_game_version": "0.110.1",
+  "version": "v0.2.6",
+  "min_game_version": "0.111.0",
   "has_pck": true,
   "has_dll": true,
   "dependencies": [

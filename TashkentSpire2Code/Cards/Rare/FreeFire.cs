@@ -2,6 +2,7 @@
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Factories;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using TashkentSpire2.TashkentSpire2Code.Cards.Status;
@@ -15,6 +16,10 @@ public sealed class FreeFire() : AmmunitionCard(3, CardType.Skill, CardRarity.Ra
     public override bool CanBeGeneratedInCombat => false;
     
     public override IEnumerable<CardKeyword> CanonicalKeywords => [TashkentKeyword.Barrage];
+    
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => [
+        HoverTipFactory.FromKeyword(CardKeyword.Exhaust)
+    ];
     
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new AmmunitionDynamicVar(0M),
