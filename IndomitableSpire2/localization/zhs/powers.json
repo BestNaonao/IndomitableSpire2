@@ -103,5 +103,11 @@
   "INDOMITABLESPIRE2-FURIOUS_POWER.title": "怒火中烧",
   "INDOMITABLESPIRE2-DEMOLITION_EXPERT_POWER.description": "增加给予敌人的起火和进水层数。",
   "INDOMITABLESPIRE2-DEMOLITION_EXPERT_POWER.smartDescription": "你给予敌人的[gold]起火[/gold]或[gold]进水[/gold]层数增加[blue]{Amount}[/blue]层。",
-  "INDOMITABLESPIRE2-DEMOLITION_EXPERT_POWER.title": "破坏专家"
+  "INDOMITABLESPIRE2-DEMOLITION_EXPERT_POWER.title": "破坏专家",
+  "INDOMITABLESPIRE2-FULL_CONCENTRATION_POWER.description": "干劲充满时解锁认真模式按钮。",
+  "INDOMITABLESPIRE2-FULL_CONCENTRATION_POWER.smartDescription": "每当你拥有[blue]100[/blue]点[gold]干劲[/gold]时，可以点击[gold]认真模式[/gold]按钮，获得[blue]{Amount}[/blue]层[gold]认真模式[/gold]并获得一个额外回合。",
+  "INDOMITABLESPIRE2-FULL_CONCENTRATION_POWER.title": "全神贯注",
+  "INDOMITABLESPIRE2-EARNEST_MODE_POWER.description": "获得一个强化的额外回合。",
+  "INDOMITABLESPIRE2-EARNEST_MODE_POWER.smartDescription": "获得一个额外回合。该回合开始时，额外获得[blue]{Amount:energyIcons()}[/blue]并抽[blue]{Amount}[/blue]张牌；该回合内，你打出的[gold]舰载机[/gold]牌额外打出[blue]{Amount}[/blue]次。该回合结束时，移除此能力并清空你的[gold]干劲[/gold]。",
+  "INDOMITABLESPIRE2-EARNEST_MODE_POWER.title": "认真模式"
 }

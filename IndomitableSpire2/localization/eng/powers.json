@@ -103,5 +103,11 @@
   "INDOMITABLESPIRE2-FURIOUS_POWER.title": "Furious",
   "INDOMITABLESPIRE2-DEMOLITION_EXPERT_POWER.description": "Apply additional On Fire and Flooding to enemies.",
   "INDOMITABLESPIRE2-DEMOLITION_EXPERT_POWER.smartDescription": "Whenever you apply [gold]On Fire[/gold] or [gold]Flooding[/gold] to enemies, apply an additional [blue]{Amount}[/blue].",
-  "INDOMITABLESPIRE2-DEMOLITION_EXPERT_POWER.title": "Demolition Expert"
+  "INDOMITABLESPIRE2-DEMOLITION_EXPERT_POWER.title": "Demolition Expert",
+  "INDOMITABLESPIRE2-FULL_CONCENTRATION_POWER.description": "Unlocks the Earnest Mode button at maximum Motivation.",
+  "INDOMITABLESPIRE2-FULL_CONCENTRATION_POWER.smartDescription": "When you have [blue]100[/blue] [gold]Motivation[/gold], you may click the [gold]Earnest Mode[/gold] button to gain [blue]{Amount}[/blue] [gold]Earnest Mode[/gold] and take an extra turn.",
+  "INDOMITABLESPIRE2-FULL_CONCENTRATION_POWER.title": "Total Focus",
+  "INDOMITABLESPIRE2-EARNEST_MODE_POWER.description": "Take an empowered extra turn.",
+  "INDOMITABLESPIRE2-EARNEST_MODE_POWER.smartDescription": "Take an extra turn. At its start, gain [blue]{Amount:energyIcons()}[/blue] and draw [blue]{Amount}[/blue] {Amount:plural:card|cards}. During it, your [gold]Carrier Aircraft[/gold] cards play [blue]{Amount}[/blue] additional {Amount:plural:time|times}. At its end, remove this power and clear your [gold]Motivation[/gold].",
+  "INDOMITABLESPIRE2-EARNEST_MODE_POWER.title": "Earnest Mode"
 }

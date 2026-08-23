@@ -103,5 +103,11 @@
   "INDOMITABLESPIRE2-FURIOUS_POWER.title": "猛烈",
   "INDOMITABLESPIRE2-DEMOLITION_EXPERT_POWER.description": "敵に付与する炎上または浸水を追加する。",
   "INDOMITABLESPIRE2-DEMOLITION_EXPERT_POWER.smartDescription": "敵に[gold]炎上[/gold]または[gold]浸水[/gold]を付与するたび、追加で[blue]{Amount}[/blue]付与する。",
-  "INDOMITABLESPIRE2-DEMOLITION_EXPERT_POWER.title": "爆発物専門家"
+  "INDOMITABLESPIRE2-DEMOLITION_EXPERT_POWER.title": "爆発物専門家",
+  "INDOMITABLESPIRE2-FULL_CONCENTRATION_POWER.description": "やる気が最大の時、本気モードボタンを解放する。",
+  "INDOMITABLESPIRE2-FULL_CONCENTRATION_POWER.smartDescription": "[gold]やる気[/gold]が[blue]100[/blue]ある時、[gold]本気モード[/gold]ボタンを押すことで、[gold]本気モード[/gold]を[blue]{Amount}[/blue]得て、追加ターンを得る。",
+  "INDOMITABLESPIRE2-FULL_CONCENTRATION_POWER.title": "全神経集中",
+  "INDOMITABLESPIRE2-EARNEST_MODE_POWER.description": "強化された追加ターンを得る。",
+  "INDOMITABLESPIRE2-EARNEST_MODE_POWER.smartDescription": "追加ターンを得る。そのターン開始時、追加で[blue]{Amount:energyIcons()}[/blue]を得て、カードを[blue]{Amount}[/blue]枚引く。そのターン中、自身の[gold]艦載機[/gold]カードは追加で[blue]{Amount}[/blue]回プレイされる。そのターン終了時、このパワーを取り除き、[gold]やる気[/gold]を0にする。",
+  "INDOMITABLESPIRE2-EARNEST_MODE_POWER.title": "本気モード"
 }
