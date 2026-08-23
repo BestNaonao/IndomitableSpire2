@@ -142,6 +142,8 @@
   
   "INDOMITABLESPIRE2-SCORCHING_FLAME_RAIN.title": "灼天焰雨",
   "INDOMITABLESPIRE2-SCORCHING_FLAME_RAIN.description": "[gold]需求[/gold][blue]{MotivationRequire:diff()}[/blue]点[gold]干劲[/gold]。\n对所有敌人造成{Damage:diff()}点伤害。\n给予所有敌人[blue]{OnFirePower:diff()}[/blue]层[gold]起火[/gold]。",
+  "INDOMITABLESPIRE2-FULL_CONCENTRATION.title": "全神贯注",
+  "INDOMITABLESPIRE2-FULL_CONCENTRATION.description": "每当你拥有[blue]100[/blue]点[gold]干劲[/gold]时，可以点击[gold]认真模式[/gold]按钮，获得[blue]{FullConcentrationPower:diff()}[/blue]层[gold]认真模式[/gold]并获得一个额外回合。",
   
   "INDOMITABLESPIRE2-DISPATCH_COMMISSION.title": "派发委托",
   "INDOMITABLESPIRE2-DISPATCH_COMMISSION.description": "将一张随机的{IfUpgraded:show:[gold]升级过的[/gold]}[gold]委托[/gold]牌添加至一位其他玩家的[gold]手牌[/gold]中。",

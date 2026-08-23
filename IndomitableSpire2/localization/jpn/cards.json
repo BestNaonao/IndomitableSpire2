@@ -142,6 +142,8 @@
   
   "INDOMITABLESPIRE2-SCORCHING_FLAME_RAIN.title": "灼天の焔雨",
   "INDOMITABLESPIRE2-SCORCHING_FLAME_RAIN.description": "[blue]{MotivationRequire:diff()}[/blue]の[gold]やる気[/gold]を[gold]必要[/gold]とする。\nすべての敵に{Damage:diff()}ダメージを与える。\nすべての敵に[gold]炎上[/gold] [blue]{OnFirePower:diff()}[/blue]を付与する。",
+  "INDOMITABLESPIRE2-FULL_CONCENTRATION.title": "全神経集中",
+  "INDOMITABLESPIRE2-FULL_CONCENTRATION.description": "[gold]やる気[/gold]が[blue]100[/blue]ある時、[gold]本気モード[/gold]ボタンを押すことで、[gold]本気モード[/gold]を[blue]{FullConcentrationPower:diff()}[/blue]得て、追加ターンを得る。",
   
   "INDOMITABLESPIRE2-DISPATCH_COMMISSION.title": "委託発令",
   "INDOMITABLESPIRE2-DISPATCH_COMMISSION.description": "他のプレイヤー1人は、ランダムな{IfUpgraded:show:[gold]アップグレード[/gold]済みの}[gold]委託[/gold]カードを1枚[gold]手札[/gold]に加える。",
