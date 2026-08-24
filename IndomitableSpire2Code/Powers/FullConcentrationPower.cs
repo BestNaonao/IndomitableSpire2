@@ -51,7 +51,7 @@ public sealed class FullConcentrationPower : IndomitablePower
     }
     
     /// <summary>
-    /// 本地按钮和同步 Action 共用的最终放行条件。
+    /// 本地按钮使用的最终放行条件。这里可以读取当前客户端的战斗输入状态。
     /// </summary>
     public bool CanEnterEarnestMode(Player player) => 
         player == Owner.Player && IsActivationAvailable && 
@@ -61,11 +61,17 @@ public sealed class FullConcentrationPower : IndomitablePower
         player.PlayerCombatState?.Phase == PlayerTurnPhase.Play;
     
     /// <summary>
+    /// 同步 Action 的确定性校验。不能读取 PlayerActionsDisabled、当前屏幕等本地 UI 状态，
+    /// 因为远端客户端执行别人的 Action 时这些值可以不同，否则会导致一端应用能力、另一端跳过应用。
+    /// </summary>
+    public bool CanApplyEarnestMode(Player player) => player == Owner.Player && IsActivationAvailable;
+    
+    /// <summary>
     /// 由 EarnestModeButtonAction 在所有客户端上同步执行。
     /// </summary>
     public async Task EnterEarnestMode(PlayerChoiceContext choiceContext, Player player)
     {
-        if (!CanEnterEarnestMode(player))
+        if (!CanApplyEarnestMode(player))
         {
             EarnestModeButton.RequestRefresh();
             return;
