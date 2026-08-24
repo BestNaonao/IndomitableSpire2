@@ -12,6 +12,7 @@ namespace IndomitableSpire2.IndomitableSpire2Code.Patches;
 public static class InjectSkinSelectPanelPatch
 {
     private static SkinSelectPanel? _panelInstance;
+    private const string ScenePath = "res://IndomitableSpire2/scenes/screens/char_select/skin_select_panel.tscn";
     
     /// <summary>
     /// 1：选中角色时，实例化并显示皮肤面板
@@ -25,7 +26,7 @@ public static class InjectSkinSelectPanelPatch
         {
             if (!GodotObject.IsInstanceValid(_panelInstance))
             {
-                var scene = ResourceLoader.Load<PackedScene>("res://IndomitableSpire2/scenes/screens/char_select/skin_select_panel.tscn");
+                var scene = ResourceLoader.Load<PackedScene>(ScenePath);
                 _panelInstance = scene.Instantiate<SkinSelectPanel>();
                 
                 // 将 UI 挂载在 InfoPanel 内，使其跟随左侧的文字描述面板
