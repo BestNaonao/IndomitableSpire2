@@ -1,0 +1,108 @@
+; 临时复用原版结束回合按钮的贴图；后续可替换为认真模式专属资源。
+[gd_scene load_steps=8 format=3]
+
+[ext_resource type="Script" path="res://IndomitableSpire2Code/Nodes/EarnestModeButton.cs" id="1_script"]
+[ext_resource type="Script" path="res://addons/mega_text/MegaLabel.cs" id="2_label"]
+[ext_resource type="FontVariation" path="res://themes/kreon_bold_shared.tres" id="3_font"]
+[ext_resource type="Shader" path="res://shaders/hsv.gdshader" id="4_hsv"]
+[ext_resource type="Texture2D" path="res://IndomitableSpire2/images/combatui/earnest_mode_button.png" id="5_image"]
+[ext_resource type="Texture2D" path="res://IndomitableSpire2/images/combatui/earnest_mode_button_glow.png" id="6_glow"]
+[ext_resource type="Material" path="res://themes/canvas_item_material_additive_shared.tres" id="7_additive"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_earnest"]
+resource_local_to_scene = true
+shader = ExtResource("4_hsv")
+shader_parameter/h = 1.0
+shader_parameter/s = 1.0
+shader_parameter/v = 1.0
+
+[node name="EarnestModeButton" type="Control"]
+layout_mode = 3
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1680.0
+offset_top = -234.0
+offset_right = -1440.0
+offset_bottom = -144.0
+grow_horizontal = 0
+grow_vertical = 0
+visible = false
+custom_minimum_size = Vector2(240, 90)
+mouse_filter = 0
+focus_mode = 2
+mouse_default_cursor_shape = 2
+script = ExtResource("1_script")
+
+[node name="Visuals" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Image" type="TextureRect" parent="Visuals"]
+material = SubResource("ShaderMaterial_earnest")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = -64.0
+offset_right = 128.0
+offset_bottom = 64.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("5_image")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Glow" type="TextureRect" parent="Visuals"]
+modulate = Color(1, 1, 1, 0)
+material = ExtResource("7_additive")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = -64.0
+offset_right = 128.0
+offset_bottom = 64.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("6_glow")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="Visuals"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_colors/font_color = Color(1, 0.964706, 0.886275, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.188235)
+theme_override_colors/font_outline_color = Color(0.0756, 0.12084, 0.18, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 12
+theme_override_constants/shadow_outline_size = 12
+theme_override_fonts/font = ExtResource("3_font")
+theme_override_font_sizes/font_size = 30
+text = "Earnest Mode"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("2_label")
+MaxFontSize = 30
