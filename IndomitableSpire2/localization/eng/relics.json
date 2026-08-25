@@ -7,5 +7,9 @@
   "INDOMITABLESPIRE2-SHIKIKAN_DAKIMAKURA.description": "At the start and end of your turn, heal [green]{Heal}[/green] HP, gain [blue]{MotivationGain}[/blue] [gold]Motivation[/gold].\nWhenever you enter a [gold]Rest Site[/gold], triggers an additional time on the first turn of the next combat.",
   "INDOMITABLESPIRE2-ROYAL_BOUNTY.title": "Royal Bounty",
   "INDOMITABLESPIRE2-ROYAL_BOUNTY.description": "At the end of combat, randomly distribute [gold]Gold[/gold] to ALL players equal to [blue]{BountyRate}%[/blue] of the total Max HP of all killed enemies.",
-  "INDOMITABLESPIRE2-ROYAL_BOUNTY.flavor": "\"Sink the Bismarck!\" - Admiral John Tovey"
+  "INDOMITABLESPIRE2-ROYAL_BOUNTY.flavor": "\"Sink the Bismarck!\" - Admiral John Tovey",
+  
+  "SEA_GLASS.INDOMITABLESPIRE2-INDOMITABLE_DEFAULT.title": "Celestial Glass",
+  "SEA_GLASS.INDOMITABLESPIRE2-INDOMITABLE_MAID.title": "Lace Glass",
+  "SEA_GLASS.INDOMITABLESPIRE2-INDOMITABLE_RACE_QUEEN.title": "Velocity Glass"
 }

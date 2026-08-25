@@ -7,5 +7,9 @@
   "INDOMITABLESPIRE2-SHIKIKAN_DAKIMAKURA.description": "在你的回合开始和结束时，回复[green]{Heal}[/green]点生命，获得[blue]{MotivationGain}[/blue]点[gold]干劲[/gold]。\n到达[gold]休息处[/gold]后的下一场战斗的第一回合额外触发一次。",
   "INDOMITABLESPIRE2-ROYAL_BOUNTY.title": "皇家赏金",
   "INDOMITABLESPIRE2-ROYAL_BOUNTY.description": "在战斗结束时，将相当于所有被击杀敌人总最大生命值[blue]{BountyRate}%[/blue]的[gold]金币[/gold]随机分配给所有玩家。",
-  "INDOMITABLESPIRE2-ROYAL_BOUNTY.flavor": "“击沉俾斯麦号！”——约翰·托维上将"
+  "INDOMITABLESPIRE2-ROYAL_BOUNTY.flavor": "“击沉俾斯麦号！”——约翰·托维上将",
+  
+  "SEA_GLASS.INDOMITABLESPIRE2-INDOMITABLE_DEFAULT.title": "天穹玻璃",
+  "SEA_GLASS.INDOMITABLESPIRE2-INDOMITABLE_MAID.title": "蕾丝玻璃",
+  "SEA_GLASS.INDOMITABLESPIRE2-INDOMITABLE_RACE_QUEEN.title": "极速玻璃"
 }
