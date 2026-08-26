@@ -11,7 +11,7 @@ using MegaCrit.Sts2.Core.Localization.DynamicVars;
 
 namespace IndomitableSpire2.IndomitableSpire2Code.Cards.Commons;
 
-public sealed class TroubleHandling() : IndomitableCard(0, CardType.Skill, CardRarity.Common, TargetType.Self)
+public sealed class IneffectiveEnergySaving() : IndomitableCard(0, CardType.Skill, CardRarity.Common, TargetType.Self)
 {
     // 在悬浮窗中提示“干劲”和“慵懒”状态牌
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromCard<Indolent>()];
