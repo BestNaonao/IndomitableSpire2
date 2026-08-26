@@ -19,7 +19,7 @@ public sealed class MotivationBurst() : IndomitableCard(1, CardType.Power, CardR
     ];
     
     // 注册变量：基础给予 2 层干劲迸发能力
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<MotivationBurstPower>(2M)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<MotivationBurstPower>(3M)];
     
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
@@ -39,6 +39,6 @@ public sealed class MotivationBurst() : IndomitableCard(1, CardType.Power, CardR
     protected override void OnUpgrade()
     {
         // 升级效果：单次转化的活力 +1（通过增加能力的层数实现）
-        DynamicVars["MotivationBurstPower"].UpgradeValueBy(1M);
+        DynamicVars["MotivationBurstPower"].UpgradeValueBy(2M);
     }
 }
