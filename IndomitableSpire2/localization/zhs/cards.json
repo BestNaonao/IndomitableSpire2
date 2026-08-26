@@ -123,6 +123,8 @@
   "INDOMITABLESPIRE2-FURIOUS.description": "每当你给予至少4层[gold]起火[/gold]时，抽[blue]{Cards:diff()}[/blue]张牌。\n给予自身{OnFirePower:diff()}层[gold]起火[/gold]。",
   "INDOMITABLESPIRE2-DEMOLITION_EXPERT.title": "破坏专家",
   "INDOMITABLESPIRE2-DEMOLITION_EXPERT.description": "你给予敌人的[gold]起火[/gold]或[gold]进水[/gold]层数增加[blue]{DemolitionExpertPower:diff()}[/blue]层。",
+  "INDOMITABLESPIRE2-SAFE_AND_SOUND.title": "安然",
+  "INDOMITABLESPIRE2-SAFE_AND_SOUND.description": "将你的[gold]干劲[/gold]翻倍。\n[gold]优雅[/gold]：获得{Energy:energyIcons()}。",
   
   "INDOMITABLESPIRE2-DESSERT.title": "甜点",
   "INDOMITABLESPIRE2-DESSERT.description": "回复[green]{Heal:diff()}[/green]点生命。\n获得{Energy:energyIcons()}。",

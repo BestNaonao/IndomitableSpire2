@@ -123,6 +123,8 @@
   "INDOMITABLESPIRE2-FURIOUS.description": "Whenever you apply 4 or more [gold]On Fire[/gold], draw [blue]{Cards:diff()}[/blue] {Cards:plural:card|cards}.\nApply {OnFirePower:diff()} [gold]On Fire[/gold] to yourself.",
   "INDOMITABLESPIRE2-DEMOLITION_EXPERT.title": "Demolition Expert",
   "INDOMITABLESPIRE2-DEMOLITION_EXPERT.description": "Whenever you apply [gold]On Fire[/gold] or [gold]Flooding[/gold] to enemies, apply an additional [blue]{DemolitionExpertPower:diff()}[/blue].",
+  "INDOMITABLESPIRE2-SAFE_AND_SOUND.title": "Safe and Sound",
+  "INDOMITABLESPIRE2-SAFE_AND_SOUND.description": "Double your [gold]Motivation[/gold].\n[gold]Elegance[/gold]: Gain {Energy:energyIcons()}.",
   
   "INDOMITABLESPIRE2-DESSERT.title": "Dessert",
   "INDOMITABLESPIRE2-DESSERT.description": "Heal [green]{Heal:diff()}[/green] HP.\nGain {Energy:energyIcons()}.",
