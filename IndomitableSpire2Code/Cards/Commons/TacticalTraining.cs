@@ -15,7 +15,7 @@ public sealed class TacticalTraining() : IndomitableCard(0, CardType.Skill, Card
     // 添加消耗关键字
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
     
-    // 使用 MagicVar 控制层数，基础 20 层，升级 25 层
+    // 使用 MagicVar 控制层数，基础 20 层，升级 30 层
     protected override IEnumerable<DynamicVar> CanonicalVars => [new("SpecialPowerAmount", 20M)];
     
     protected override IEnumerable<IHoverTip> ExtraHoverTips => 
@@ -54,6 +54,6 @@ public sealed class TacticalTraining() : IndomitableCard(0, CardType.Skill, Card
     
     protected override void OnUpgrade()
     {
-        DynamicVars["SpecialPowerAmount"].UpgradeValueBy(5M);
+        DynamicVars["SpecialPowerAmount"].UpgradeValueBy(10M);
     }
 }
