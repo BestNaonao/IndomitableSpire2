@@ -20,7 +20,7 @@ public sealed class Ignite() : IndomitableCard(1, CardType.Attack, CardRarity.Ba
     // 注册变量：8点伤害，3层起火
     protected override IEnumerable<DynamicVar> CanonicalVars => 
     [
-        new MotivationRequireVar(30M),
+        new MotivationRequireVar(25M),
         new DamageVar(8M, ValueProp.Move),
         new CustomPowerVar<OnFirePower>(3M)
     ];

@@ -14,10 +14,10 @@ namespace IndomitableSpire2.IndomitableSpire2Code.Cards.Ancients;
 
 public sealed class ScorchingFlameRain() : IndomitableCard(1, CardType.Attack, CardRarity.Ancient, TargetType.AllEnemies)
 {
-    // 注册变量：12点群体伤害，6层群体起火，30点干劲门槛
+    // 注册变量：12点群体伤害，6层群体起火，25点干劲门槛
     protected override IEnumerable<DynamicVar> CanonicalVars => 
     [
-        new MotivationRequireVar(30M),
+        new MotivationRequireVar(25M),
         new DamageVar(12M, ValueProp.Move),
         new CustomPowerVar<OnFirePower>(6M)
     ];
