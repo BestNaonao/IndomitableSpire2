@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cabbbxk1x0l2v"
-path="res://.godot/imported/trouble_handling.png-0e81fccb2b8f55af7520a5c3e51afb5a.ctex"
+uid="uid://c0mfat7pl5l4m"
+path="res://.godot/imported/refresh.png-fae435391f3e8b4ee22bb3427ea75427.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://IndomitableSpire2/images/card_portraits/big/trouble_handling.png"
-dest_files=["res://.godot/imported/trouble_handling.png-0e81fccb2b8f55af7520a5c3e51afb5a.ctex"]
+source_file="res://IndomitableSpire2/images/card_portraits/big/refresh.png"
+dest_files=["res://.godot/imported/refresh.png-fae435391f3e8b4ee22bb3427ea75427.ctex"]
 
 [params]
 
