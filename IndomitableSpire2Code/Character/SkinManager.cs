@@ -1,4 +1,5 @@
-﻿using Godot;
+﻿using BaseLib.Patches.UI;
+using Godot;
 using MegaCrit.Sts2.Core.Context;
 
 namespace IndomitableSpire2.IndomitableSpire2Code.Character;
@@ -28,6 +29,10 @@ public class SkinDefinition
     public string ArmScissorsTexturePath { get; init; } = "";
     public string CharacterSelectSfx { get; init; } = "";
     public Func<string> ArmPointingTexturePathFunc { get; init; } = () => "";
+    public RelicIconData YummyCookieIconData { get; init; } = new(
+        "res://IndomitableSpire2/images/relics/big/yummy_cookie_indomitable_default.png",
+        "res://IndomitableSpire2/images/relics/packed/yummy_cookie_indomitable_default.tres",
+        "res://IndomitableSpire2/images/relics/outline/yummy_cookie_indomitable_default.tres");
 }
 
 public static class SkinManager
@@ -49,7 +54,11 @@ public static class SkinManager
             ArmRockTexturePath = "res://IndomitableSpire2/images/charui/hands/multiplayer_hand_indomitable_rock.png",
             ArmScissorsTexturePath = "res://IndomitableSpire2/images/charui/hands/multiplayer_hand_indomitable_scissors.png",
             CharacterSelectSfx = "res://IndomitableSpire2/sfx/characters/indomitable/chumotaici_ex.wav",
-            ArmPointingTexturePathFunc = () => $"res://IndomitableSpire2/images/charui/hands/multiplayer_hand_indomitable_point{new Random().Next(1, 4)}.png"
+            ArmPointingTexturePathFunc = () => $"res://IndomitableSpire2/images/charui/hands/multiplayer_hand_indomitable_point{new Random().Next(1, 4)}.png", 
+            YummyCookieIconData = new RelicIconData(
+                "res://IndomitableSpire2/images/relics/big/yummy_cookie_indomitable_default.png",
+                "res://IndomitableSpire2/images/relics/packed/yummy_cookie_indomitable_default.tres",
+                "res://IndomitableSpire2/images/relics/outline/yummy_cookie_indomitable_default.tres")
         },
         [IndomitableSkin.Maid] = new SkinDefinition
         {
@@ -65,7 +74,11 @@ public static class SkinManager
             ArmRockTexturePath = "res://IndomitableSpire2/images/charui/hands/multiplayer_hand_indomitable_maid_rock.png",
             ArmScissorsTexturePath = "res://IndomitableSpire2/images/charui/hands/multiplayer_hand_indomitable_maid_scissors.png",
             CharacterSelectSfx = "res://IndomitableSpire2/sfx/characters/indomitable/maid_pifumiaoshu.wav",
-            ArmPointingTexturePathFunc = () => $"res://IndomitableSpire2/images/charui/hands/multiplayer_hand_indomitable_maid_point{new Random().Next(1, 4)}.png"
+            ArmPointingTexturePathFunc = () => $"res://IndomitableSpire2/images/charui/hands/multiplayer_hand_indomitable_maid_point{new Random().Next(1, 4)}.png",
+            YummyCookieIconData = new RelicIconData(
+                "res://IndomitableSpire2/images/relics/big/yummy_cookie_indomitable_maid.png",
+                "res://IndomitableSpire2/images/relics/packed/yummy_cookie_indomitable_maid.tres",
+                "res://IndomitableSpire2/images/relics/outline/yummy_cookie_indomitable_maid.tres")
         },
         [IndomitableSkin.RaceQueen] = new SkinDefinition
         {
@@ -81,7 +94,11 @@ public static class SkinManager
             ArmRockTexturePath = "res://IndomitableSpire2/images/charui/hands/multiplayer_hand_indomitable_rock.png",
             ArmScissorsTexturePath = "res://IndomitableSpire2/images/charui/hands/multiplayer_hand_indomitable_scissors.png",
             CharacterSelectSfx = "res://IndomitableSpire2/sfx/characters/indomitable/login_2.wav",
-            ArmPointingTexturePathFunc = () => $"res://IndomitableSpire2/images/charui/hands/multiplayer_hand_indomitable_point{new Random().Next(1, 4)}.png"
+            ArmPointingTexturePathFunc = () => $"res://IndomitableSpire2/images/charui/hands/multiplayer_hand_indomitable_point{new Random().Next(1, 4)}.png",
+            YummyCookieIconData = new RelicIconData(
+                "res://IndomitableSpire2/images/relics/big/yummy_cookie_indomitable_race_queen.png",
+                "res://IndomitableSpire2/images/relics/packed/yummy_cookie_indomitable_race_queen.tres",
+                "res://IndomitableSpire2/images/relics/outline/yummy_cookie_indomitable_race_queen.tres")
         }   // 暂时没有新的手模，暂时用默认的替代
     };
     

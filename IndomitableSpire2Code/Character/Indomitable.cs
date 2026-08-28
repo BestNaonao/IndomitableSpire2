@@ -1,5 +1,6 @@
 ﻿using System.Runtime.InteropServices;
 using BaseLib.Abstracts;
+using BaseLib.Patches.UI;
 using Godot;
 using IndomitableSpire2.IndomitableSpire2Code.Cards.Basics;
 using IndomitableSpire2.IndomitableSpire2Code.Relics;
@@ -81,6 +82,7 @@ public abstract class Indomitable : CustomCharacterModel
     public override string CustomArmRockTexturePath => CurrentSkinDefinition.ArmRockTexturePath;
     public override string CustomArmScissorsTexturePath => CurrentSkinDefinition.ArmScissorsTexturePath;
     public override string CharacterSelectSfx => CurrentSkinDefinition.CharacterSelectSfx;
+    public override RelicIconData CustomYummyCookie => CurrentSkinDefinition.YummyCookieIconData;
     
     // 原版逻辑构建动作映射，传入 Spine 文件中实际命名的动作字符串
     public override CreatureAnimator SetupCustomAnimationStates(MegaSprite controller) => SetupAnimationState(
