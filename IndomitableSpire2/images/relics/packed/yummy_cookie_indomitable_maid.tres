@@ -1,0 +1,7 @@
+[gd_resource type="AtlasTexture" load_steps=2 format=3 uid="uid://bndedt3vkpwl0"]
+
+[ext_resource type="Texture2D" uid="uid://bvfa0gbko7w6v" path="res://IndomitableSpire2/images/relics/packed/yummy_cookie_indomitable_maid.png" id="1_f1ggn"]
+
+[resource]
+atlas = ExtResource("1_f1ggn")
+region = Rect2(0, 0, 90, 90)
