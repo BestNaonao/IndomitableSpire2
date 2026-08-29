@@ -12,7 +12,7 @@
   "TASHKENTSPIRE2-COMMISSAR_ENCHANTMENT.title": "Commissar",
   "TASHKENTSPIRE2-COMMISSAR_ENCHANTMENT.extraCardText": "At the end of your turn, if this card is in your [gold]Hand[/gold], gain {Energy:energyIcons()} at the start of your next turn.",
   "TASHKENTSPIRE2-COMMISSAR_ENCHANTMENT.description": "This card gains [gold]Innate[/gold] and [gold]Retain[/gold].\nAt the end of your turn, if this card is in your [gold]Hand[/gold], gain {Energy:energyIcons()} at the start of your next turn.",
-  "TASHKENTSPIRE2-ENDEAVOUR_ENCHANTMENT.title": "Exhaust",
+  "TASHKENTSPIRE2-ENDEAVOUR_ENCHANTMENT.title": "Endeavour",
   "TASHKENTSPIRE2-ENDEAVOUR_ENCHANTMENT.extraCardText": "This card can be played for free.",
   "TASHKENTSPIRE2-ENDEAVOUR_ENCHANTMENT.description": "This card gains [gold]Exhaust[/gold] and [gold]Ethereal[/gold], and can be played for free."
 }

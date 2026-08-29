@@ -22,7 +22,7 @@ public sealed class Cellaring : TashkentPotion
     ];
     
     public override IEnumerable<IHoverTip> ExtraHoverTips => [
-        HoverTipFactory.FromCard<Vodka>()
+        HoverTipFactory.FromCard<Vodka>(true)
     ];
      
     public override string CustomPackedImagePath => "res://TashkentSpire2/images/potions/cellaring.png";

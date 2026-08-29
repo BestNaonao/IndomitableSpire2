@@ -170,7 +170,7 @@
   "TASHKENTSPIRE2-TORPEDO_TORPEDO_TORPEDO.title": "Torpedo! Torpedo! Torpedo!",
   "TASHKENTSPIRE2-TORPEDO_TORPEDO_TORPEDO.description": "For each {IfUpgraded:show:positive Buff|[gold]Torpedo[/gold] effect} you have, create a [gold]Torpedo[/gold] {TashkentSpire2-Torpedo:diff()}.{InCombat:\n(Create a total of {IfUpgraded:show:{CalculatedBuff:diff()}|{CalculatedTorpedo:diff()}} [gold]Torpedoes[/gold].)|}",
   "TASHKENTSPIRE2-ULTIMATE_WEAPON.title": "Ultimate Weapon",
-  "TASHKENTSPIRE2-ULTIMATE_WEAPON.description": "[red]Fire[/red]: Deal {CalculatedDamage:diff()} damage.\nGain {ExtraDamage:diff()} additional damage for each [gold]Ammo[/gold].\nWhen you [gold]Execute[/gold] an enemy, [gold]Load[/gold] {TashkentSpire2-Load:diff()} [gold]Ammo[/gold].",
+  "TASHKENTSPIRE2-ULTIMATE_WEAPON.description": "[red]Fire[/red]: Deal {CalculatedDamage:diff()} damage.\nGain {ExtraDamage:diff()} additional damage for each [gold]Ammo[/gold].\nIf [gold]Fatal[/gold], [gold]Load[/gold] {TashkentSpire2-Load:diff()} [gold]Ammo[/gold].",
   "TASHKENTSPIRE2-VIBRANT.title": "Vibrant",
   "TASHKENTSPIRE2-VIBRANT.selectionScreenPrompt": "Choose a card to Exhaust.",
   "TASHKENTSPIRE2-VIBRANT.description": "[gold]Exhaust[/gold] {Cards:diff()} Attack card(s) from your [gold]Hand[/gold].\nGain [gold]Vigor[/gold] equal to their Attack value.",
@@ -222,5 +222,5 @@
   "TASHKENTSPIRE2-VODKA.title": "Vodka",
   "TASHKENTSPIRE2-VODKA.description": "Gain {VigorPower:diff()} [gold]Vigor[/gold].\nDraw {Cards:diff()} cards.",
   "TASHKENTSPIRE2-ESPIONAGE_WARFARE.title": "Espionage Warfare",
-  "TASHKENTSPIRE2-ESPIONAGE_WARFARE.description": "Remove all [gold]Artifact[/gold] from the target enemy.\nApply [gold]Slow[/gold] and [gold]Off-Balance[/gold] to it."
+  "TASHKENTSPIRE2-ESPIONAGE_WARFARE.description": "Remove all [gold]Artifact[/gold] from the target enemy.\nApply [gold]Slow[/gold] and [gold]Imbalanced[/gold] to it."
 }

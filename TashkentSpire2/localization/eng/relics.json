@@ -23,7 +23,7 @@
   "TASHKENTSPIRE2-THRUSTER.description": "Your [gold]Torpedoes[/gold] activate [blue]1[/blue] turn earlier when created.",
   "TASHKENTSPIRE2-WILL_TO_WIN.title": "Will to Win",
   "TASHKENTSPIRE2-WILL_TO_WIN.flavor": "The instinct to survive in desperate moments is often sharper than any blade.",
-  "TASHKENTSPIRE2-WILL_TO_WIN.description": "The first time each combat you would take [red]fatal damage[/red], or whenever taking [red]fatal damage[/red], lose [blue]20[/blue] [gold]Vigor[/gold] instead, prevent death, and restore HP to [blue]1[/blue].\nWhile at exactly [blue]1[/blue] HP, gain [gold]Vigor[/gold] equal to [blue]20[/blue]% of damage dealt by cards.",
+  "TASHKENTSPIRE2-WILL_TO_WIN.description": "The FIRST time each combat you would take [red]fatal damage[/red], or lose [blue]20[/blue] [gold]Vigor[/gold] instead, prevent death, and restore HP to [blue]1[/blue].\nWhile at exactly [blue]1[/blue] HP, gain [gold]Vigor[/gold] equal to [blue]20[/blue]% of damage dealt by cards.",
   "TASHKENTSPIRE2-FUEL.title": "Fuel",
   "TASHKENTSPIRE2-FUEL.flavor": "Burn every resource to its fullest and turn it into the force that breaks through enemy lines.",
   "TASHKENTSPIRE2-FUEL.description": "Whenever you [gold]Exhaust[/gold] a card, gain [blue]{VigorPower}[/blue] [gold]Vigor[/gold].",
