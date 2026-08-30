@@ -42,6 +42,18 @@ public sealed class CasualStrike() : IndomitableCard(1, CardType.Attack, CardRar
             applier: Owner.Creature, 
             cardSource: this
         );
+        
+        // 3. 第一次获取结算后，如果干劲仍低于阈值，则再获得一次同等数量的干劲
+        if (Owner.GetMotivationAmount() < DynamicVars.Threshold().IntValue)
+        {
+            await PowerCmd.Apply<MotivationPower>(
+                choiceContext: choiceContext,
+                target: Owner.Creature,
+                amount: DynamicVars.MotivationGain().BaseValue,
+                applier: Owner.Creature,
+                cardSource: this
+            );
+        }
     }
     
     protected override void OnUpgrade()
