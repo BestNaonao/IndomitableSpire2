@@ -1,5 +1,7 @@
 {
   "TASHKENTSPIRE2.mod_title": "タシュケント MOD設定",
   "TASHKENTSPIRE2-REPLACE_HAND_WITH_LEG_IN_MULTIPLAYER.title": "マルチプレイで手のモデルを脚のモデルに置き換える",
-  "TASHKENTSPIRE2-SPAWN_ANCIENTS_SOVETSKY_SOYUZ.title": "古の存在を有効化：ソビエツキー・ソユーズ"
+  "TASHKENTSPIRE2-SPAWN_ANCIENTS_SOVETSKY_SOYUZ.title": "古の存在を有効化：ソビエツキー・ソユーズ",
+  "TASHKENTSPIRE2-THE_INSATIABLE_FIRST_ENCOUNTER_PROMPT.header": "タシュケントからのヒント",
+  "TASHKENTSPIRE2-THE_INSATIABLE_FIRST_ENCOUNTER_PROMPT.body": "タシュケントの[gold]距離[/gold]は貪りの獣と連動している。[gold]突撃[/gold]しすぎると呑み込まれてしまうが、適切なタイミングで[gold]後退[/gold]すれば脅威を遠ざけられる。[gold]距離[/gold]を保とう。"
 }

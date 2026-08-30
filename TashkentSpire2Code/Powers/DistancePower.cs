@@ -257,7 +257,7 @@ public sealed class DistancePower : TashkentPower, IPersistentPower
 
                 if (sandpitPower != null)
                 {
-                    await PowerCmd.ModifyAmount(new ThrowingPlayerChoiceContext(), sandpitPower, (decimal)delta, enemy, null);
+                    await ModifySandpitAmountSafely(sandpitPower, delta, enemy);
                 }
             }
         }
@@ -267,8 +267,31 @@ public sealed class DistancePower : TashkentPower, IPersistentPower
             var sandpitPower = base.Owner.Powers.OfType<SandpitPower>().FirstOrDefault();
             if (sandpitPower != null)
             {
-                await PowerCmd.ModifyAmount(new ThrowingPlayerChoiceContext(), sandpitPower, (decimal)delta, base.Owner, null);
+                await ModifySandpitAmountSafely(sandpitPower, delta, base.Owner);
             }
+        }
+    }
+
+    private static async Task ModifySandpitAmountSafely(SandpitPower sandpitPower, int requestedDelta,
+        Creature applier)
+    {
+        // Sandpit removes itself at zero. Never ask the official PowerCmd pipeline to write a
+        // negative intermediate value, because removal/AfterRemoved may already be in flight.
+        // Turn/phase validation on ClickCardAction prevents the Gone With The Wind action from
+        // racing the boss' own enemy-turn decrement; this clamp also protects large distance
+        // changes and stale instances without changing any positive/within-range adjustment.
+        if (!sandpitPower.Owner.Powers.Contains(sandpitPower) || sandpitPower.Amount <= 0)
+        {
+            return;
+        }
+
+        int safeDelta = requestedDelta < 0
+            ? Math.Max(requestedDelta, -sandpitPower.Amount)
+            : requestedDelta;
+
+        if (safeDelta != 0)
+        {
+            await PowerCmd.ModifyAmount(new ThrowingPlayerChoiceContext(), sandpitPower, safeDelta, applier, null);
         }
     }
     

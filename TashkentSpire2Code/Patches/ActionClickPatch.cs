@@ -39,14 +39,17 @@ public static class MinionBodyClickPatch
         if (!isLeft && !isRight && !isController) return;
 
         var me = LocalContext.GetMe(creature.CombatState);
-        if (me == null || (creature.Player != null && me.NetId != creature.Player.NetId)) return;
+        if (me == null || !ClickActionEligibility.IsOwnedBy(me, creature)) return;
+
+        bool isInCombat = CombatManager.Instance.IsInProgress;
+        if (isInCombat && !ClickActionEligibility.CanRequestLocally(me)) return;
 
         string metaStr = isRight ? "RIGHT" : "LEFT";
         var context = new ClickContext(me, targetModel, new ClickContext.Payload(isController, metaStr));
 
         if (clickable.CanHandleClickLocal(context))
         {
-            var queuedAction = new ClickCardAction(context, CombatManager.Instance.IsInProgress);
+            var queuedAction = new ClickCardAction(context, isInCombat);
             RunManager.Instance.ActionQueueSynchronizer.RequestEnqueue(queuedAction);
             node.GetViewport().SetInputAsHandled();
         }
