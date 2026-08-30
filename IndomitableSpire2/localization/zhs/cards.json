@@ -45,7 +45,7 @@
   "INDOMITABLESPIRE2-EMERGENCY_TAKEOFF.title": "紧急起飞",
   "INDOMITABLESPIRE2-EMERGENCY_TAKEOFF.description": "将[gold]抽牌堆[/gold]中的一张随机[gold]舰载机[/gold]牌或攻击牌（优先舰载机）放入你的[gold]手牌[/gold]。\n这张牌在本回合内免费打出。",
   "INDOMITABLESPIRE2-CASUAL_STRIKE.title": "随性打击",
-  "INDOMITABLESPIRE2-CASUAL_STRIKE.description": "造成{Damage:diff()}点伤害。\n获得[blue]{MotivationGain:diff()}[/blue]点[gold]干劲[/gold]。",
+  "INDOMITABLESPIRE2-CASUAL_STRIKE.description": "造成{Damage:diff()}点伤害。\n获得[blue]{MotivationGain:diff()}[/blue]点[gold]干劲[/gold]。如果[gold]干劲[/gold]少于[blue]{Threshold:diff()}[/blue]点，则再获得[blue]{MotivationGain:diff()}[/blue]点[gold]干劲[/gold]。",
   "INDOMITABLESPIRE2-FORMATION_STRIKE.title": "编队打击",
   "INDOMITABLESPIRE2-FORMATION_STRIKE.description": "造成{Damage:diff()}点伤害。\n为你[gold]抽牌堆[/gold]中的一张没有[gold]编队[/gold]的随机[gold]舰载机[/gold]牌添加[gold]编队[/gold]。",
   "INDOMITABLESPIRE2-WOOLWORTH_REPLENISHMENT.title": "伍尔沃斯补给",

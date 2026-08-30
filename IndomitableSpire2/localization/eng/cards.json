@@ -45,7 +45,7 @@
   "INDOMITABLESPIRE2-EMERGENCY_TAKEOFF.title": "Emergency Takeoff",
   "INDOMITABLESPIRE2-EMERGENCY_TAKEOFF.description": "Put a random [gold]Carrier Aircraft[/gold] or Attack card from your [gold]Draw Pile[/gold] into your [gold]Hand[/gold] (Aircraft takes priority).\nIt's free to play this turn.",
   "INDOMITABLESPIRE2-CASUAL_STRIKE.title": "Casual Strike",
-  "INDOMITABLESPIRE2-CASUAL_STRIKE.description": "Deal {Damage:diff()} damage.\nGain [blue]{MotivationGain:diff()}[/blue] [gold]Motivation[/gold].",
+  "INDOMITABLESPIRE2-CASUAL_STRIKE.description": "Deal {Damage:diff()} damage.\nGain [blue]{MotivationGain:diff()}[/blue] [gold]Motivation[/gold]. If you have less than [blue]{Threshold:diff()}[/blue] [gold]Motivation[/gold], gain [blue]{MotivationGain:diff()}[/blue] [gold]Motivation[/gold] again.",
   "INDOMITABLESPIRE2-FORMATION_STRIKE.title": "Formation Strike",
   "INDOMITABLESPIRE2-FORMATION_STRIKE.description": "Deal {Damage:diff()} damage.\nA random [gold]Carrier Aircraft[/gold] without [gold]Formation[/gold] in your [gold]Draw Pile[/gold] adds [gold]Formation[/gold].",
   "INDOMITABLESPIRE2-WOOLWORTH_REPLENISHMENT.title": "Woolworth Replenishment",
