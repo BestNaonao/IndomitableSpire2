@@ -1,0 +1,7 @@
+[gd_resource type="AtlasTexture" load_steps=2 format=3 uid="uid://csvj5uixm3fdk"]
+
+[ext_resource type="Texture2D" uid="uid://3vkoh5jvalvc" path="res://IndomitableSpire2/images/powers/packed/song_of_victory_power_packed.png" id="1_5wrie"]
+
+[resource]
+atlas = ExtResource("1_5wrie")
+region = Rect2(0, 0, 64, 64)
