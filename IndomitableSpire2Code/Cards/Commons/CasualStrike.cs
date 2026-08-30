@@ -15,11 +15,12 @@ public sealed class CasualStrike() : IndomitableCard(1, CardType.Attack, CardRar
     // 赋予打击标签
     protected override HashSet<CardTag> CanonicalTags => [CardTag.Strike];
     
-    // 注册变量：8点伤害，10点干劲获取 (使用你写好的专属 Var)
+    // 注册变量：8点伤害，10点干劲获取，20点追加获取阈值
     protected override IEnumerable<DynamicVar> CanonicalVars => 
     [
         new DamageVar(8M, ValueProp.Move),
-        new MotivationGainVar(10M)
+        new MotivationGainVar(10M),
+        new ThresholdVar(20M)
     ];
     
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
@@ -47,5 +48,6 @@ public sealed class CasualStrike() : IndomitableCard(1, CardType.Attack, CardRar
     {
         DynamicVars.Damage.UpgradeValueBy(3M);
         DynamicVars.MotivationGain().UpgradeValueBy(5M);
+        DynamicVars.Threshold().UpgradeValueBy(10M);
     }
 }

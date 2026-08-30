@@ -1,6 +1,7 @@
 ﻿using BaseLib.Abstracts;
 using IndomitableSpire2.IndomitableSpire2Code.Cards.Uncommons;
 using IndomitableSpire2.IndomitableSpire2Code.Extensions;
+using IndomitableSpire2.IndomitableSpire2Code.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
@@ -16,7 +17,7 @@ public sealed class WithererPower : IndomitablePower, IHasSecondAmount
     
     protected override object InitInternalData() => new Data();
     
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new("Threshold", 9999)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new ThresholdVar(9999M)];
     
     // ========== UI 与进度展示 ==========
     // 获取当前玩家的起火+进水总伤害
@@ -26,7 +27,7 @@ public sealed class WithererPower : IndomitablePower, IHasSecondAmount
     // 施加后修改门槛，因为在初始化 CanonicalVars 时调用 CombatState 会因为 Owner 未初始化而报错。
     public override Task AfterApplied(Creature? applier, CardModel? cardSource)
     {
-        DynamicVars["Threshold"].BaseValue = ScaledThreshold;
+        DynamicVars.Threshold().BaseValue = ScaledThreshold;
         // 订阅追踪器的数据更新事件：先退订防重复，再订阅 InvokeDisplayAmountChanged
         if (Owner.Player?.PlayerCombatState is { } combatState && 
             PlayerCombatStateTrackerExtensions.PowerDamageTracker.Get(combatState) is { } tracker)

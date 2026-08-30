@@ -16,7 +16,7 @@ public sealed class Rally() : IndomitableCard(1, CardType.Skill, CardRarity.Unco
     protected override IEnumerable<DynamicVar> CanonicalVars => 
     [
         new MotivationConsumeVar(10M),
-        new("Threshold", 12M)
+        new ThresholdVar(10M)
     ];
     
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromCard<Refresh>()];
@@ -39,7 +39,7 @@ public sealed class Rally() : IndomitableCard(1, CardType.Skill, CardRarity.Unco
         await CardPileCmd.Shuffle(choiceContext, Owner);
         
         // 4. 计算应该生成的“养神”数量
-        var refreshCount = discardCount / DynamicVars["Threshold"].IntValue;
+        var refreshCount = discardCount / DynamicVars.Threshold().IntValue;
         
         if (refreshCount > 0 && CombatState != null)
         {
@@ -55,6 +55,6 @@ public sealed class Rally() : IndomitableCard(1, CardType.Skill, CardRarity.Unco
     {
         // 升级效果：费用 -1（变为0费），阈值 -4（变为每8张生成一张）
         EnergyCost.UpgradeBy(-1);
-        DynamicVars["Threshold"].UpgradeValueBy(-4M);
+        DynamicVars.Threshold().UpgradeValueBy(-3M);
     }
 }

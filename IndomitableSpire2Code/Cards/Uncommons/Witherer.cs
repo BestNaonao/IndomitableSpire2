@@ -1,5 +1,6 @@
 ﻿using IndomitableSpire2.IndomitableSpire2Code.Cards.Abstracts;
 using IndomitableSpire2.IndomitableSpire2Code.Extensions;
+using IndomitableSpire2.IndomitableSpire2Code.Localization.DynamicVars;
 using IndomitableSpire2.IndomitableSpire2Code.Powers;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
@@ -27,7 +28,7 @@ public sealed class Witherer() : IndomitableCard(1, CardType.Power, CardRarity.U
     protected override IEnumerable<DynamicVar> CanonicalVars => 
     [
         new PowerVar<WithererPower>(1M),
-        new("Threshold", ScaledThreshold(CombatState))
+        new ThresholdVar(ScaledThreshold(CombatState))
     ];
     
     // 卡牌高亮：当造成的 DOT 总伤害达到门槛时，手牌中的卡牌闪烁金光

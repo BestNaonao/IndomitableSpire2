@@ -1,4 +1,5 @@
 ﻿using BaseLib.Abstracts;
+using IndomitableSpire2.IndomitableSpire2Code.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Players;
@@ -19,7 +20,7 @@ public sealed class IndustrialRevolutionPower : IndomitablePower, IHasSecondAmou
     // 允许有多个实例与内部独立数据
     public override PowerInstanceType InstanceType => PowerInstanceType.Instanced;
     protected override object InitInternalData() => new RevolutionData();
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new("Threshold", Threshold)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new ThresholdVar( Threshold)];
     
     // 第一个展示数：距离下一次触发还差几张牌
     public override int DisplayAmount => Threshold - GetInternalData<RevolutionData>().CardsGenerated % Threshold;
