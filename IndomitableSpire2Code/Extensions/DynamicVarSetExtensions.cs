@@ -36,6 +36,8 @@ public static class DynamicVarSetExtensions
     public static DamageMultiplierVar DamageMultiplier(this DynamicVarSet vars) => 
         (DamageMultiplierVar) vars[DamageMultiplierVar.DefaultName];
     
+    public static ThresholdVar Threshold(this DynamicVarSet vars) => (ThresholdVar) vars[ThresholdVar.DefaultName];
+    
     public static ReconVar Recon(this DynamicVarSet vars) => (ReconVar) vars[ReconVar.DefaultName];
     
     public static ShieldVar Shield(this DynamicVarSet vars) => (ShieldVar) vars[ShieldVar.DefaultName];
