@@ -85,9 +85,7 @@ public static class CardMotivationExtensions
     
     // 纯粹的底层判断：是否有 X 点干劲
     public static bool HasEnoughMotivation(this CardModel card, int amount) => 
-        card.CombatState != null && 
-        card.Owner.Creature.GetPower<MotivationPower>() is PowerModel power && 
-        power.DisplayAmount >= amount;
+        card.CombatState != null && card.Owner.GetMotivationAmount() >= amount;
     
     // 高阶判断：是否满足“需求”变量的数值
     public static bool MeetsMotivationRequirement(this CardModel card) => 
