@@ -16,6 +16,8 @@
   "INDOMITABLESPIRE2-WORK_ARRANGEMENT.selectionScreenPrompt": "Choose a card to put on the bottom of your Draw Pile.",
   "INDOMITABLESPIRE2-ILLUSTRIOUS_AEGIS.title": "Illustrious Aegis",
   "INDOMITABLESPIRE2-ILLUSTRIOUS_AEGIS.description": "Grant any player {Shield:diff()} [gold]Shield[/gold].\nHeals [green]{Heal:diff()}[/green] HP when this [gold]Shield[/gold] breaks.",
+  "INDOMITABLESPIRE2-SONG_OF_VICTORY.title": "Song of Victory",
+  "INDOMITABLESPIRE2-SONG_OF_VICTORY.description": "Deal [blue]{SongOfVictoryPower:diff()}[/blue] additional attack damage to the enemy with the highest current HP.\nTake [blue]{DamageReduction:diff()}[/blue] less attack damage from that enemy.",
   "INDOMITABLESPIRE2-SWORDFISH_BOMBER.title": "Swordfish",
   "INDOMITABLESPIRE2-SWORDFISH_BOMBER.description": "Deal {Damage:diff()} damage.\nApply [blue]{FloodingPower:diff()}[/blue] [blue]Flooded[/blue].",
   "INDOMITABLESPIRE2-SWORDFISH818_SQUADRON.title": "Swordfish (818 Sqn.)",

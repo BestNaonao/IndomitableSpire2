@@ -16,6 +16,8 @@
   "INDOMITABLESPIRE2-WORK_ARRANGEMENT.selectionScreenPrompt": "山札の一番下に置くカードを1枚選ぶ。",
   "INDOMITABLESPIRE2-ILLUSTRIOUS_AEGIS.title": "イラストリアス・イージス",
   "INDOMITABLESPIRE2-ILLUSTRIOUS_AEGIS.description": "任意のプレイヤーに[gold]シールド[/gold]を{Shield:diff()}与える。\nこの[gold]シールド[/gold]が砕けた時、ＨＰを[green]{Heal:diff()}[/green]回復する。",
+  "INDOMITABLESPIRE2-SONG_OF_VICTORY.title": "勝利の高歌",
+  "INDOMITABLESPIRE2-SONG_OF_VICTORY.description": "現在のＨＰが最も高い敵に与えるアタックダメージが[blue]{SongOfVictoryPower:diff()}[/blue]増加する。\nその敵から受けるアタックダメージが[blue]{DamageReduction:diff()}[/blue]減少する。",
   "INDOMITABLESPIRE2-SWORDFISH_BOMBER.title": "ソードフィッシュ",
   "INDOMITABLESPIRE2-SWORDFISH_BOMBER.description": "{Damage:diff()}ダメージを与える。\n[blue]浸水[/blue]を[blue]{FloodingPower:diff()}[/blue]与える。",
   "INDOMITABLESPIRE2-SWORDFISH818_SQUADRON.title": "ソードフィッシュ(第818飛行隊)",
