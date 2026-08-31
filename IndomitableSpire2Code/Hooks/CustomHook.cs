@@ -72,7 +72,9 @@ public static class CustomHook
         }
     }
     
-    // 【新增】：触发全局溢出事件的方法
+    /// <summary>
+    /// 触发全局资源溢出事件的方法
+    /// </summary>
     public static async Task AfterResourceOverflowed(
         PlayerChoiceContext choiceContext,
         Creature target,
@@ -82,7 +84,6 @@ public static class CustomHook
         CardModel? cardSource)
     {
         if (target.CombatState == null || overflowAmount <= 0) return;
-        
         // 遍历当前战斗中所有的合法监听器（包括手牌、遗物、能力等）
         foreach (var model in target.CombatState.IterateHookListeners())
         {
@@ -98,11 +99,10 @@ public static class CustomHook
         }
     }
     
-    // 【新增】：护盾破碎全局广播
+    // 护盾破碎全局广播
     public static async Task AfterShieldBroken(Creature target)
     {
         if (target.CombatState == null) return;
-        
         // 遍历当前战斗中所有的合法监听器（如内层装甲能力）
         foreach (var model in target.CombatState.IterateHookListeners())
         {
@@ -110,6 +110,20 @@ public static class CustomHook
             {
                 await subscriber.AfterShieldBroken(target);
                 model.InvokeExecutionFinished();
+            }
+        }
+    }
+    
+    // 新增：生物逃跑全局广播
+    public static async Task AfterCreatureEscaped(Creature escapedCreature, ICombatState combatState)
+    {
+        // 使用传入的战斗状态遍历监听器
+        foreach (var model in combatState.IterateHookListeners())
+        {
+            if (model is IAfterCreatureEscapedSubscriber subscriber)
+            {
+                await subscriber.AfterCreatureEscaped(escapedCreature);
+                model.InvokeExecutionFinished(); 
             }
         }
     }
