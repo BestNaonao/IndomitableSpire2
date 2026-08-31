@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://3vkoh5jvalvc"
-path="res://.godot/imported/song_of_victory_power_packed.png-653606c3de5cc2d1590c02d2021c5e61.ctex"
+path="res://.godot/imported/victorious_song_power_packed.png-0bd3190c6599f4299ae588c7014c8013.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://IndomitableSpire2/images/powers/packed/song_of_victory_power_packed.png"
-dest_files=["res://.godot/imported/song_of_victory_power_packed.png-653606c3de5cc2d1590c02d2021c5e61.ctex"]
+source_file="res://IndomitableSpire2/images/powers/packed/victorious_song_power_packed.png"
+dest_files=["res://.godot/imported/victorious_song_power_packed.png-0bd3190c6599f4299ae588c7014c8013.ctex"]
 
 [params]
 

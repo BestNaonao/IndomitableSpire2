@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://lnq6hhxyvst5"
-path="res://.godot/imported/song_of_victory_power.png-6b1b9fb739fd8476502111ff1f107eb5.ctex"
+uid="uid://dg05e2mfcygo8"
+path="res://.godot/imported/victorious_song.png-2aab6aec9dd70b89583f5e66a145555f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://IndomitableSpire2/images/powers/big/song_of_victory_power.png"
-dest_files=["res://.godot/imported/song_of_victory_power.png-6b1b9fb739fd8476502111ff1f107eb5.ctex"]
+source_file="res://IndomitableSpire2/images/card_portraits/big/victorious_song.png"
+dest_files=["res://.godot/imported/victorious_song.png-2aab6aec9dd70b89583f5e66a145555f.ctex"]
 
 [params]
 
