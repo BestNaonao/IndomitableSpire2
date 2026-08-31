@@ -127,6 +127,8 @@
   "INDOMITABLESPIRE2-DEMOLITION_EXPERT.description": "你给予敌人的[gold]起火[/gold]或[gold]进水[/gold]层数增加[blue]{DemolitionExpertPower:diff()}[/blue]层。",
   "INDOMITABLESPIRE2-SAFE_AND_SOUND.title": "安然",
   "INDOMITABLESPIRE2-SAFE_AND_SOUND.description": "将你的[gold]干劲[/gold]翻倍。\n[gold]优雅[/gold]：获得{Energy:energyIcons()}。",
+  "INDOMITABLESPIRE2-LADYS_WHIM.title": "大小姐的新奇",
+  "INDOMITABLESPIRE2-LADYS_WHIM.description": "你每打出一张本回合没打出过的种类的牌，就获得[blue]{LadysWhimPower:diff()}[/blue]点[gold]格挡[/gold]和[blue]{LadysWhimPower:diff()}[/blue]点[gold]干劲[/gold]。",
   
   "INDOMITABLESPIRE2-DESSERT.title": "甜点",
   "INDOMITABLESPIRE2-DESSERT.description": "回复[green]{Heal:diff()}[/green]点生命。\n获得{Energy:energyIcons()}。",

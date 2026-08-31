@@ -127,6 +127,8 @@
   "INDOMITABLESPIRE2-DEMOLITION_EXPERT.description": "Whenever you apply [gold]On Fire[/gold] or [gold]Flooding[/gold] to enemies, apply an additional [blue]{DemolitionExpertPower:diff()}[/blue].",
   "INDOMITABLESPIRE2-SAFE_AND_SOUND.title": "Safe and Sound",
   "INDOMITABLESPIRE2-SAFE_AND_SOUND.description": "Double your [gold]Motivation[/gold].\n[gold]Elegance[/gold]: Gain {Energy:energyIcons()}.",
+  "INDOMITABLESPIRE2-LADYS_WHIM.title": "Lady's Whim",
+  "INDOMITABLESPIRE2-LADYS_WHIM.description": "Whenever you play a kind of card you haven't played this turn, gain [blue]{LadysWhimPower:diff()}[/blue] [gold]Block[/gold] and [blue]{LadysWhimPower:diff()}[/blue] [gold]Motivation[/gold].",
   
   "INDOMITABLESPIRE2-DESSERT.title": "Dessert",
   "INDOMITABLESPIRE2-DESSERT.description": "Heal [green]{Heal:diff()}[/green] HP.\nGain {Energy:energyIcons()}.",

@@ -127,6 +127,8 @@
   "INDOMITABLESPIRE2-DEMOLITION_EXPERT.description": "敵に[gold]炎上[/gold]または[gold]浸水[/gold]を付与するたび、追加で[blue]{DemolitionExpertPower:diff()}[/blue]付与する。",
   "INDOMITABLESPIRE2-SAFE_AND_SOUND.title": "安心して",
   "INDOMITABLESPIRE2-SAFE_AND_SOUND.description": "[gold]やる気[/gold]を2倍にする。\n[gold]優雅[/gold]：{Energy:energyIcons()}を得る。",
+  "INDOMITABLESPIRE2-LADYS_WHIM.title": "お嬢様の気まぐれ",
+  "INDOMITABLESPIRE2-LADYS_WHIM.description": "このターンにまだプレイしていない種類のカードをプレイするたび、[gold]ブロック[/gold]を[blue]{LadysWhimPower:diff()}[/blue]、[gold]やる気[/gold]を[blue]{LadysWhimPower:diff()}[/blue]得る。",
   
   "INDOMITABLESPIRE2-DESSERT.title": "デザート",
   "INDOMITABLESPIRE2-DESSERT.description": "HPを[green]{Heal:diff()}[/green]回復する。\n{Energy:energyIcons()}を得る。",
