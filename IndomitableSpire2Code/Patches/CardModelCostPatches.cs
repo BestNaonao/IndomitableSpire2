@@ -1,7 +1,6 @@
 ﻿using System.Reflection;
 using HarmonyLib;
 using IndomitableSpire2.IndomitableSpire2Code.Extensions;
-using IndomitableSpire2.IndomitableSpire2Code.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Models;
 
