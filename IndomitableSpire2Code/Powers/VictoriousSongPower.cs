@@ -25,15 +25,20 @@ public sealed class VictoriousSongPower : IndomitablePower, IHasSecondAmount, IA
     
     public string GetSecondAmount() => DynamicVars["DamageReduction"].IntValue.ToString();
     
-    // 每次结算都重新查找；生命值并列时，按战场敌人顺序选择第一个，避免随机切换。
-    private Creature? HighestHpEnemy => IsMutable 
-        ? CombatState.Enemies.Where(enemy => enemy.IsAlive).MaxBy(enemy => enemy.CurrentHp) : null;
+    // 每次结算都重新查找，保留所有当前生命值并列最高的存活敌人。
+    private IReadOnlyList<Creature> HighestHpEnemies()
+    {
+        if (!IsMutable || CombatState.Enemies.Where(enemy => enemy.IsAlive).ToList() is not
+                { Count : > 0 } enemies) return [];
+        var highestHp = enemies.Max(enemy => enemy.CurrentHp);
+        return enemies.Where(enemy => enemy.CurrentHp == highestHp).ToList();
+    }
     
     private void SyncTarget()
     {
-        var enemy = HighestHpEnemy;
-        ((StringVar)DynamicVars["TargetName"]).StringValue = enemy?.Name ?? string.Empty;
-        ((BoolVar)DynamicVars["HasTarget"]).BoolVal = enemy != null;
+        var enemies = HighestHpEnemies();
+        ((StringVar)DynamicVars["TargetName"]).StringValue = string.Join(", ", enemies.Select(enemy => enemy.Name));
+        ((BoolVar)DynamicVars["HasTarget"]).BoolVal = enemies.Count > 0;
     }
     
     public override Task AfterApplied(Creature? applier, CardModel? cardSource)
@@ -83,9 +88,9 @@ public sealed class VictoriousSongPower : IndomitablePower, IHasSecondAmount, IA
     public override decimal ModifyDamageAdditive(
         Creature? target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource, CardPlay? cardPlay)
     {
-        if (!props.IsPoweredAttack() || HighestHpEnemy is not {} enemy) return 0M;
-        if (dealer == Owner && target == enemy) return Amount;
-        if (target == Owner && dealer == enemy) return -DynamicVars["DamageReduction"].BaseValue;
+        if (!props.IsPoweredAttack() || HighestHpEnemies() is not { Count : > 0 } enemies) return 0M;
+        if (dealer == Owner && target != null && enemies.Contains(target)) return Amount;
+        if (target == Owner && dealer != null && enemies.Contains(dealer)) return -DynamicVars["DamageReduction"].BaseValue;
         return 0M;
     }
 }
