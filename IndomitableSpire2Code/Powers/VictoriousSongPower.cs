@@ -1,4 +1,5 @@
 using BaseLib.Abstracts;
+using IndomitableSpire2.IndomitableSpire2Code.Abstracts;
 using IndomitableSpire2.IndomitableSpire2Code.Cards.Uncommons;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
@@ -10,7 +11,7 @@ using MegaCrit.Sts2.Core.ValueProps;
 
 namespace IndomitableSpire2.IndomitableSpire2Code.Powers;
 
-public sealed class VictoriousSongPower : IndomitablePower, IHasSecondAmount
+public sealed class VictoriousSongPower : IndomitablePower, IHasSecondAmount, IAfterCreatureEscapedSubscriber
 {
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;
@@ -27,16 +28,6 @@ public sealed class VictoriousSongPower : IndomitablePower, IHasSecondAmount
     // 每次结算都重新查找；生命值并列时，按战场敌人顺序选择第一个，避免随机切换。
     private Creature? HighestHpEnemy => IsMutable 
         ? CombatState.Enemies.Where(enemy => enemy.IsAlive).MaxBy(enemy => enemy.CurrentHp) : null;
-    
-    protected override string SmartDescriptionLocKey
-    {
-        get
-        {
-            // 悬浮提示由引擎随战斗状态刷新。这里也同步目标，覆盖逃跑、直接改血等情况。
-            if (IsMutable) SyncTarget();
-            return base.SmartDescriptionLocKey;
-        }
-    }
     
     private void SyncTarget()
     {
@@ -77,6 +68,13 @@ public sealed class VictoriousSongPower : IndomitablePower, IHasSecondAmount
     
     public override Task AfterDeath(
         PlayerChoiceContext choiceContext, Creature creature, bool wasRemovalPrevented, float deathAnimLength)
+    {
+        if (creature.IsEnemy) SyncTarget();
+        return Task.CompletedTask;
+    }
+    
+    // 使用自定义钩子接口重写，重新同步最高血量目标
+    public Task AfterCreatureEscaped(Creature creature)
     {
         if (creature.IsEnemy) SyncTarget();
         return Task.CompletedTask;
