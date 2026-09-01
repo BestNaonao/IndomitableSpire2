@@ -88,7 +88,7 @@
   "INDOMITABLESPIRE2-SECOND_HANGAR.title": "Second Hangar",
   "INDOMITABLESPIRE2-SECOND_HANGAR.description": "Increase your maximum hand size by {SecondHangarPower:diff()}.",
   "INDOMITABLESPIRE2-INNER_ARMOR.title": "Inner Armor",
-  "INDOMITABLESPIRE2-INNER_ARMOR.description": "The next time your [gold]Shield[/gold] breaks, gain [gold]Shield[/gold] equal to your current [gold]Shield[/gold].",
+  "INDOMITABLESPIRE2-INNER_ARMOR.description": "The next time you are attacked and your [gold]Block[/gold] or [gold]Shield[/gold] breaks, gain [gold]Shield[/gold] equal to your current [gold]Block[/gold].",
   "INDOMITABLESPIRE2-YOGA.title": "Yoga",
   "INDOMITABLESPIRE2-YOGA.description": "Whenever you gain, require, or consume [gold]Motivation[/gold] this turn, gain {YogaPower:diff()} [gold]Shield[/gold].\nGain [blue]{MotivationGain:diff()}[/blue] [gold]Motivation[/gold].",
   "INDOMITABLESPIRE2-SEA_GLADIATOR.title": "Sea Gladiator",

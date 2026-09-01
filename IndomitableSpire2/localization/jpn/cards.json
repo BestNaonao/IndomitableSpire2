@@ -88,7 +88,7 @@
   "INDOMITABLESPIRE2-SECOND_HANGAR.title": "第二格納庫",
   "INDOMITABLESPIRE2-SECOND_HANGAR.description": "手札の上限が{SecondHangarPower:diff()}枚増加する。",
   "INDOMITABLESPIRE2-INNER_ARMOR.title": "内装甲",
-  "INDOMITABLESPIRE2-INNER_ARMOR.description": "次にあなたの[gold]シールド[/gold]が破壊された時、現在の[gold]シールド[/gold]値に等しい[gold]シールド[/gold]を得る。",
+  "INDOMITABLESPIRE2-INNER_ARMOR.description": "次に攻撃を受けて[gold]ブロック[/gold]か[gold]シールド[/gold]が破壊された時、現在の[gold]ブロック[/gold]値に等しい[gold]シールド[/gold]を得る。",
   "INDOMITABLESPIRE2-YOGA.title": "ヨガ",
   "INDOMITABLESPIRE2-YOGA.description": "このターン、[gold]やる気[/gold]を得る、必要とする、または消費するたび、[gold]シールド[/gold]を{YogaPower:diff()}得る。\n[gold]やる気[/gold]を[blue]{MotivationGain:diff()}[/blue]得る。",
   "INDOMITABLESPIRE2-SEA_GLADIATOR.title": "シーグラディエーター",

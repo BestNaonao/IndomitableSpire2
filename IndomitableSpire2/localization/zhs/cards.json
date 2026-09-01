@@ -88,7 +88,7 @@
   "INDOMITABLESPIRE2-SECOND_HANGAR.title": "第二机库",
   "INDOMITABLESPIRE2-SECOND_HANGAR.description": "你的手牌上限增加{SecondHangarPower:diff()}张。",
   "INDOMITABLESPIRE2-INNER_ARMOR.title": "内层装甲",
-  "INDOMITABLESPIRE2-INNER_ARMOR.description": "在你下一次[gold]护盾[/gold]破碎时，获得等量于你当前[gold]护盾[/gold]层数的[gold]护盾[/gold]。",
+  "INDOMITABLESPIRE2-INNER_ARMOR.description": "在你下一次受击导致[gold]格挡[/gold]或[gold]护盾[/gold]破碎时，获得等量于你当前[gold]格挡[/gold]值的[gold]护盾[/gold]。",
   "INDOMITABLESPIRE2-YOGA.title": "瑜伽",
   "INDOMITABLESPIRE2-YOGA.description": "本回合内，每当你获得、需求或消耗[gold]干劲[/gold]时，获得{YogaPower:diff()}点[gold]护盾[/gold]。\n获得[blue]{MotivationGain:diff()}[/blue]点[gold]干劲[/gold]。",
   "INDOMITABLESPIRE2-SEA_GLADIATOR.title": "海斗士",
