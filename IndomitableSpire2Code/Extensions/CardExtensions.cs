@@ -1,22 +1,50 @@
 ﻿using IndomitableSpire2.IndomitableSpire2Code.Enums;
 using IndomitableSpire2.IndomitableSpire2Code.Localization.DynamicVars;
+using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Models;
 
 namespace IndomitableSpire2.IndomitableSpire2Code.Extensions;
 
 public static class CardExtensions
 {
-    /// <summary>
-    /// 判断卡牌是否原生属于舰载机分类。该判断只读取静态 Tag，不受后来添加的关键词影响。
-    /// </summary>
-    public static bool IsNativeCarrierAircraft(this CardModel? card) =>
-        card?.Tags.Contains(IndomitableTags.CarrierAircraft) == true;
+    private static readonly HashSet<CardKeyword> TargetAircraftKeywords =
+    [
+        IndomitableKeywords.CarrierAircraft,
+        IndomitableKeywords.StrikeFighter,
+        IndomitableKeywords.TorpedoBomber,
+        IndomitableKeywords.DiveBomber,
+        IndomitableKeywords.LevelBomber
+    ];
+    
+    private static readonly HashSet<CardTag> TargetAircraftTags =
+    [
+        IndomitableTags.CarrierAircraft,
+        IndomitableTags.StrikeFighter,
+        IndomitableTags.TorpedoBomber,
+        IndomitableTags.DiveBomber,
+        IndomitableTags.LevelBomber
+    ];
+    
+    private static bool HasAnyAircraftTag(this CardModel card) => card.Tags.Any(TargetAircraftTags.Contains);
+    
+    private static bool HasAnyAircraftKeyword(this CardModel card) => card.Keywords.Any(TargetAircraftKeywords.Contains);
     
     /// <summary>
-    /// 判断卡牌当前是否被视为舰载机，包括原生舰载机和后来获得舰载机关键词的卡牌。
+    /// 判断卡牌是否原生属于航空分类。该判断只读取静态 Tag，不受后来添加或移除的关键词影响。
     /// </summary>
-    public static bool IsCarrierAircraft(this CardModel? card) => 
-        card != null && (card.IsNativeCarrierAircraft() || card.Keywords.Contains(IndomitableKeywords.CarrierAircraft));
+    public static bool IsNativeCarrierAircraft(this CardModel card) => card.HasAnyAircraftTag();
+    
+    /// <summary>
+    /// 判断卡牌当前是否被视为航空卡牌。任意航空 Tag 或关键词都能使其获得通用航空加成。
+    /// </summary>
+    public static bool IsCarrierAircraft(this CardModel card) => 
+        card.HasAnyAircraftTag() || card.HasAnyAircraftKeyword();
+    
+    /// <summary>
+    /// 判断卡牌是否属于指定航空机种。原生航空卡牌只以 Tag 为准；非原生航空卡牌可以由后来获得的关键词分类。
+    /// </summary>
+    public static bool IsAircraftType(this CardModel card, CardTag nativeTypeTag, CardKeyword acquiredTypeKeyword) =>
+        card.Tags.Contains(nativeTypeTag) || card.Keywords.Contains(acquiredTypeKeyword);
     
     // ==========================================================
     // 耐久度系统判定扩展
