@@ -18,10 +18,10 @@ public sealed class EmergencyTakeoff() : IndomitableCard(1, CardType.Skill, Card
         // 播放技能动画
         await CreatureCmd.TriggerAnim(Owner.Creature, "Cast", Owner.Character.CastAnimDelay);
         
-        // 获取抽牌堆的所有卡牌，然后三级优先级的级联检索
+        // 获取抽牌堆的所有卡牌，然后三级优先级的级联检索：原生舰载机>普通舰载机>攻击牌。
         var drawPile = PileType.Draw.GetPile(Owner).Cards;
         var validCards = drawPile.GetByPriority(
-            c => c is CarrierAircraftCard,
+            c => c.IsNativeCarrierAircraft(),
             c => c.IsCarrierAircraft(),
             c => c.Type == CardType.Attack
         ).ToList();
@@ -31,10 +31,8 @@ public sealed class EmergencyTakeoff() : IndomitableCard(1, CardType.Skill, Card
         {
             // 使用战斗内卡牌选择的随机种子抽取一张牌
             var selectedCard = Owner.RunState.Rng.CombatCardSelection.NextItem(validCards)!;
-            
             // 设置在本回合内免费打出
             selectedCard.SetToFreeThisTurn();
-            
             // 将选中的卡牌加入手牌
             await CardPileCmd.Add(selectedCard, PileType.Hand);
         }
