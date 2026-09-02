@@ -13,7 +13,7 @@ using MegaCrit.Sts2.Core.ValueProps;
 
 namespace IndomitableSpire2.IndomitableSpire2Code.Cards.Rares;
 
-public sealed class SeafireFr47() : CarrierAircraftCard(2, CardType.Attack, CardRarity.Rare, TargetType.AnyEnemy)
+public sealed class SeafireFr47() : CarrierAircraftCard(1, CardType.Attack, CardRarity.Rare, TargetType.AnyEnemy)
 {
     // 机体稍加固，飞行极度平稳
     protected override int MaxDurability { get; set; } = 6;
@@ -24,8 +24,8 @@ public sealed class SeafireFr47() : CarrierAircraftCard(2, CardType.Attack, Card
     
     protected override IEnumerable<DynamicVar> AdditionalVars =>
     [
-        new DamageVar(6M, ValueProp.Move),
-        new RepeatVar(2), // 致敬共轴反转螺旋桨
+        new DamageVar(4M, ValueProp.Move),
+        new RepeatVar(2),
         new CustomPowerVar<VulnerablePower>(2M),
         new ReconVar(3M) // 搭载侦察变量
     ];
