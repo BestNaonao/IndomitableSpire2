@@ -1,5 +1,6 @@
 ﻿using IndomitableSpire2.IndomitableSpire2Code.Cards.Abstracts;
 using IndomitableSpire2.IndomitableSpire2Code.Enums;
+using IndomitableSpire2.IndomitableSpire2Code.Extensions;
 using IndomitableSpire2.IndomitableSpire2Code.Powers;
 using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Commands;
@@ -22,7 +23,7 @@ public sealed class TacticalTraining() : IndomitableCard(0, CardType.Skill, Card
         [HoverTipFactory.FromKeyword(IndomitableKeywords.CarrierAircraft), HoverTipFactory.FromPower<AviationPower>()];
     
     // 【核心限制】：只有手牌中包含至少一张带有“舰载机”标签的牌时，此卡才亮起可打出
-    protected override bool IsPlayable => PileType.Hand.GetPile(Owner).Cards.Any(c => c.Tags.Contains(IndomitableTags.CarrierAircraft));
+    protected override bool IsPlayable => PileType.Hand.GetPile(Owner).Cards.Any(c => c.IsCarrierAircraft());
     
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
@@ -31,20 +32,19 @@ public sealed class TacticalTraining() : IndomitableCard(0, CardType.Skill, Card
         
         // 调用原版的手牌选择指令。过滤器：只允许选择舰载机
         var selectedCard = (await CardSelectCmd.FromHand(choiceContext, Owner, prefs, 
-            c => c.Tags.Contains(IndomitableTags.CarrierAircraft), 
-            this)).FirstOrDefault();
+            c => c.IsCarrierAircraft(), this)).FirstOrDefault();
         
         if (selectedCard != null)
         {
             var amount = DynamicVars["SpecialPowerAmount"].BaseValue;
             // 根据选中的舰载机标签，精准投放对应的航空能力
-            if (selectedCard.Tags.Contains(IndomitableTags.StrikeFighter))
+            if (selectedCard.IsAircraftType(IndomitableTags.StrikeFighter, IndomitableKeywords.StrikeFighter))
                 await PowerCmd.Apply<AirCombatElitePower>(choiceContext: choiceContext, Owner.Creature, amount, Owner.Creature, this);
-            else if (selectedCard.Tags.Contains(IndomitableTags.TorpedoBomber))
+            else if (selectedCard.IsAircraftType(IndomitableTags.TorpedoBomber, IndomitableKeywords.TorpedoBomber))
                 await PowerCmd.Apply<TorpedoMasteryPower>(choiceContext: choiceContext, Owner.Creature, amount, Owner.Creature, this);
-            else if (selectedCard.Tags.Contains(IndomitableTags.DiveBomber))
+            else if (selectedCard.IsAircraftType(IndomitableTags.DiveBomber, IndomitableKeywords.DiveBomber))
                 await PowerCmd.Apply<LethalDivePower>(choiceContext: choiceContext, Owner.Creature, amount, Owner.Creature, this);
-            else if (selectedCard.Tags.Contains(IndomitableTags.LevelBomber))
+            else if (selectedCard.IsAircraftType(IndomitableTags.LevelBomber, IndomitableKeywords.LevelBomber))
                 await PowerCmd.Apply<ScorchedBombingPower>(choiceContext: choiceContext, Owner.Creature, amount, Owner.Creature, this);
             // 无特殊分类的舰载机（如水上侦察机、反潜机），提供通用航空 Buff 作为下限保障
             else

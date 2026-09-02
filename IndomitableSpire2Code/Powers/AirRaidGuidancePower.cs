@@ -1,4 +1,4 @@
-﻿using IndomitableSpire2.IndomitableSpire2Code.Enums;
+﻿using IndomitableSpire2.IndomitableSpire2Code.Extensions;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Commands.Builders;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -23,9 +23,8 @@ public sealed class AirRaidGuidancePower : IndomitablePower
             return Task.CompletedTask;
         
         var internalData = GetInternalData<Data>();
-        
         // 核心限制：只加成“舰载机牌”发起的攻击
-        if (internalData.CommandToModify != null || command.ModelSource is not CardModel card || !card.Tags.Contains(IndomitableTags.CarrierAircraft))
+        if (internalData.CommandToModify != null || command.ModelSource is not CardModel card || !card.IsCarrierAircraft())
             return Task.CompletedTask;
         
         internalData.CommandToModify = command;
@@ -37,15 +36,13 @@ public sealed class AirRaidGuidancePower : IndomitablePower
     public override decimal ModifyDamageAdditive(
         Creature? target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource, CardPlay? cardPlay)
     {
-        // 1. 基础校验
-        // 2. 预览与实战的双重校验：无论是否有攻击命令，加成的前提必须是“舰载机牌”
-        if (Owner != dealer || !props.IsPoweredAttack() ||
-            cardSource == null || !cardSource.Tags.Contains(IndomitableTags.CarrierAircraft)) return 0M;
+        // 1. 预览与实战的双重校验：无论是否有攻击命令，加成的前提必须是“舰载机牌”
+        if (Owner != dealer || !props.IsPoweredAttack() || cardSource == null || !cardSource.IsCarrierAircraft()) return 0M;
         
         var internalData = GetInternalData<Data>();
-        // 3. 拦截器：如果当前有记录在案的真实攻击动作，且发起者不是当前这张牌，则不生效
-        return internalData.CommandToModify == null || cardSource == internalData.CommandToModify.ModelSource ?
-            Amount: 0M;
+        // 2. 拦截器：如果当前有记录在案的真实攻击动作，且发起者不是当前这张牌，则不生效
+        return internalData.CommandToModify == null || cardSource == internalData.CommandToModify.ModelSource 
+            ? Amount: 0M;
     }
     
     public override async Task AfterAttack(PlayerChoiceContext choiceContext, AttackCommand command)
