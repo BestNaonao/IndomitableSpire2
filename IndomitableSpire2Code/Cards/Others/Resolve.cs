@@ -39,6 +39,7 @@ public sealed class Resolve() : IndomitableSpire2Card(1, CardType.Status, CardRa
         var resolveCards = playerCombatState.AllPiles
             .SelectMany(pile => pile.Cards)
             .OfType<Resolve>()
+            .Where(card => card != this)
             .ToList();
         foreach (var resolveCard in resolveCards) CardCmd.ApplyKeyword(resolveCard, IndomitableKeywords.CarrierAircraft);
     }
