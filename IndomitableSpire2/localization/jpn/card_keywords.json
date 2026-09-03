@@ -1,6 +1,6 @@
 {
   "INDOMITABLESPIRE2-CARRIER_AIRCRAFT.title": "艦載機",
-  "INDOMITABLESPIRE2-CARRIER_AIRCRAFT.description": "艦載機向けの効果を発動でき、トゲを無効化する特殊なカード。一部に耐久値を持つ。戦闘終了時、[gold]デッキ[/gold]に対応する艦載機のうち、最後に[gold]廃棄札[/gold]へ入った1枚だけをデッキから削除する。",
+  "INDOMITABLESPIRE2-CARRIER_AIRCRAFT.description": "艦載機向けの効果を発動でき、トゲを無効化する特殊なカード。一部は耐久値を持つ。戦闘終了時、自分の[gold]廃棄札[/gold]へ最後に入った艦載機に対応する[gold]デッキ[/gold]のカードを[gold]執念[/gold]に[gold]変化[/gold]させる。",
   "INDOMITABLESPIRE2-STRIKE_FIGHTER.title": "戦闘攻撃機",
   "INDOMITABLESPIRE2-STRIKE_FIGHTER.description": "制空と打撃の両方の性質を持つ艦載機。関連する効果を誘発できる。通常は[gold]ブロック[/gold]を提供するか、戦術的な効果を与える。",
   "INDOMITABLESPIRE2-TORPEDO_BOMBER.title": "雷撃機",
