@@ -1,6 +1,6 @@
 {
   "INDOMITABLESPIRE2-CARRIER_AIRCRAFT.title": "Carrier Aircraft",
-  "INDOMITABLESPIRE2-CARRIER_AIRCRAFT.description": "A special type of card that triggers effects applied to Carrier Aircraft. Has Durability and is immune to Thorns.",
+  "INDOMITABLESPIRE2-CARRIER_AIRCRAFT.description": "A special card type that triggers Carrier Aircraft effects and is immune to Thorns, some have Durability. At the end of combat, removes from your [gold]Deck[/gold] only the last corresponding Carrier Aircraft in [gold]Exhaust Pile[/gold].",
   "INDOMITABLESPIRE2-STRIKE_FIGHTER.title": "Strike Fighter",
   "INDOMITABLESPIRE2-STRIKE_FIGHTER.description": "A Carrier Aircraft classified as a Strike Fighter, triggering related effects. Usually provides [gold]Block[/gold] or tactical effects.",
   "INDOMITABLESPIRE2-TORPEDO_BOMBER.title": "Torpedo Bomber",
