@@ -130,6 +130,8 @@
   "INDOMITABLESPIRE2-SAFE_AND_SOUND.description": "Double your [gold]Motivation[/gold].\n[gold]Elegance[/gold]: Gain {Energy:energyIcons()}.",
   "INDOMITABLESPIRE2-LADYS_WHIM.title": "Lady's Whim",
   "INDOMITABLESPIRE2-LADYS_WHIM.description": "Whenever you play a kind of card you haven't played this turn, gain [blue]{LadysWhimPower:diff()}[/blue] [gold]Block[/gold] and [blue]{LadysWhimPower:diff()}[/blue] [gold]Motivation[/gold].",
+  "INDOMITABLESPIRE2-UNFULFILLED_VOW.title": "Unfulfilled Vow",
+  "INDOMITABLESPIRE2-UNFULFILLED_VOW.description": "Deal {Damage:diff()} damage.\nAt the end of your turn, if this card is in your [gold]hand[/gold], reduce its cost by [blue]1[/blue] this combat and put a [gold]Resolve[/gold] on top of your [gold]Draw Pile[/gold].",
   
   "INDOMITABLESPIRE2-DESSERT.title": "Dessert",
   "INDOMITABLESPIRE2-DESSERT.description": "Heal [green]{Heal:diff()}[/green] HP.\nGain {Energy:energyIcons()}.",

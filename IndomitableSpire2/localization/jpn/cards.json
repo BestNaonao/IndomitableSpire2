@@ -130,6 +130,8 @@
   "INDOMITABLESPIRE2-SAFE_AND_SOUND.description": "[gold]やる気[/gold]を2倍にする。\n[gold]優雅[/gold]：{Energy:energyIcons()}を得る。",
   "INDOMITABLESPIRE2-LADYS_WHIM.title": "お嬢様の気まぐれ",
   "INDOMITABLESPIRE2-LADYS_WHIM.description": "このターンにまだプレイしていない種類のカードをプレイするたび、[gold]ブロック[/gold]を[blue]{LadysWhimPower:diff()}[/blue]、[gold]やる気[/gold]を[blue]{LadysWhimPower:diff()}[/blue]得る。",
+  "INDOMITABLESPIRE2-UNFULFILLED_VOW.title": "未完の誓い",
+  "INDOMITABLESPIRE2-UNFULFILLED_VOW.description": "{Damage:diff()}ダメージを与える。\nターン終了時、このカードが[gold]手札[/gold]にある場合、戦闘終了までこのカードのコストを[blue]1[/blue]減らし、[gold]執念[/gold]を1枚[gold]山札[/gold]の一番上に置く。",
   
   "INDOMITABLESPIRE2-DESSERT.title": "デザート",
   "INDOMITABLESPIRE2-DESSERT.description": "HPを[green]{Heal:diff()}[/green]回復する。\n{Energy:energyIcons()}を得る。",
