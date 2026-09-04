@@ -1,5 +1,6 @@
 using BaseLib.Utils;
 using IndomitableSpire2.IndomitableSpire2Code.Cards.Abstracts;
+using IndomitableSpire2.IndomitableSpire2Code.Cards.Uncommons;
 using IndomitableSpire2.IndomitableSpire2Code.Extensions;
 using IndomitableSpire2.IndomitableSpire2Code.Localization.DynamicVars;
 using IndomitableSpire2.IndomitableSpire2Code.Powers;
@@ -34,10 +35,10 @@ public sealed class Resolve() : IndomitableSpire2Card(1, CardType.Status, CardRa
         );
         // AllPiles 只包含手牌、抽牌堆、弃牌堆、消耗牌堆和打出牌堆，不包含局外的 Deck。因此当前正在结算的执念也会获得虚无。
         if (Owner.PlayerCombatState is not { } playerCombatState) return;
-        var resolveCards = playerCombatState.AllPiles
+        var combatCards = playerCombatState.AllPiles
             .SelectMany(pile => pile.Cards)
-            .OfType<Resolve>()
             .ToList();
-        foreach (var resolveCard in resolveCards) CardCmd.ApplyKeyword(resolveCard, CardKeyword.Ethereal);
+        foreach (var vow in combatCards.OfType<UnfulfilledVow>()) vow.EnergyCost.AddThisCombat(-1);
+        foreach (var resolve in combatCards.OfType<Resolve>()) CardCmd.ApplyKeyword(resolve, CardKeyword.Ethereal);
     }
 }
