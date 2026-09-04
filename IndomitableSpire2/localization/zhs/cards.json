@@ -131,7 +131,7 @@
   "INDOMITABLESPIRE2-LADYS_WHIM.title": "大小姐的新奇",
   "INDOMITABLESPIRE2-LADYS_WHIM.description": "你每打出一张本回合没打出过的种类的牌，就获得[blue]{LadysWhimPower:diff()}[/blue]点[gold]格挡[/gold]和[blue]{LadysWhimPower:diff()}[/blue]点[gold]干劲[/gold]。",
   "INDOMITABLESPIRE2-UNFULFILLED_VOW.title": "未竟的誓言",
-  "INDOMITABLESPIRE2-UNFULFILLED_VOW.description": "造成{Damage:diff()}点伤害。\n在你的回合结束时，如果这张牌在你的[gold]手牌[/gold]中，则在本场战斗中使其耗能减少[blue]1[/blue]，并将一张[gold]执念[/gold]放在你的[gold]抽牌堆[/gold]顶部。",
+  "INDOMITABLESPIRE2-UNFULFILLED_VOW.description": "造成{Damage:diff()}点伤害。\n在你的回合结束时，如果这张牌在你的[gold]手牌[/gold]中，则将一张[gold]执念[/gold]放在你的[gold]抽牌堆[/gold]顶部。",
   
   "INDOMITABLESPIRE2-DESSERT.title": "甜点",
   "INDOMITABLESPIRE2-DESSERT.description": "回复[green]{Heal:diff()}[/green]点生命。\n获得{Energy:energyIcons()}。",
@@ -149,7 +149,7 @@
   "INDOMITABLESPIRE2-WELL_RESTED.title": "睡眠充足",
   "INDOMITABLESPIRE2-WELL_RESTED.description": "每当你抽到这张牌时，获得{Energy:energyIcons()}。",
   "INDOMITABLESPIRE2-RESOLVE.title": "执念",
-  "INDOMITABLESPIRE2-RESOLVE.description": "获得[blue]{MotivationGain:diff()}[/blue]点[gold]干劲[/gold]。\n你的所有[gold]执念[/gold]获得[gold]虚无[/gold]。",
+  "INDOMITABLESPIRE2-RESOLVE.description": "获得[blue]{MotivationGain:diff()}[/blue]点[gold]干劲[/gold]。\n你的所有[gold]未竟的誓言[/gold]的耗能减少[blue]1[/blue]，所有[gold]执念[/gold]获得[gold]虚无[/gold]。",
   
   "INDOMITABLESPIRE2-SCORCHING_FLAME_RAIN.title": "灼天焰雨",
   "INDOMITABLESPIRE2-SCORCHING_FLAME_RAIN.description": "[gold]需求[/gold][blue]{MotivationRequire:diff()}[/blue]点[gold]干劲[/gold]。\n对所有敌人造成{Damage:diff()}点伤害。\n给予所有敌人[blue]{OnFirePower:diff()}[/blue]层[gold]起火[/gold]。",

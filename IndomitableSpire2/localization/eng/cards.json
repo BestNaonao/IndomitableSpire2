@@ -131,7 +131,7 @@
   "INDOMITABLESPIRE2-LADYS_WHIM.title": "Lady's Whim",
   "INDOMITABLESPIRE2-LADYS_WHIM.description": "Whenever you play a kind of card you haven't played this turn, gain [blue]{LadysWhimPower:diff()}[/blue] [gold]Block[/gold] and [blue]{LadysWhimPower:diff()}[/blue] [gold]Motivation[/gold].",
   "INDOMITABLESPIRE2-UNFULFILLED_VOW.title": "Unfulfilled Vow",
-  "INDOMITABLESPIRE2-UNFULFILLED_VOW.description": "Deal {Damage:diff()} damage.\nAt the end of your turn, if this card is in your [gold]hand[/gold], reduce its cost by [blue]1[/blue] this combat and put a [gold]Resolve[/gold] on top of your [gold]Draw Pile[/gold].",
+  "INDOMITABLESPIRE2-UNFULFILLED_VOW.description": "Deal {Damage:diff()} damage.\nAt the end of your turn, if this card is in your [gold]hand[/gold], put a [gold]Resolve[/gold] on top of your [gold]Draw Pile[/gold].",
   
   "INDOMITABLESPIRE2-DESSERT.title": "Dessert",
   "INDOMITABLESPIRE2-DESSERT.description": "Heal [green]{Heal:diff()}[/green] HP.\nGain {Energy:energyIcons()}.",
@@ -149,7 +149,7 @@
   "INDOMITABLESPIRE2-WELL_RESTED.title": "Well-Rested",
   "INDOMITABLESPIRE2-WELL_RESTED.description": "Whenever you draw this card, gain {Energy:energyIcons()}.",
   "INDOMITABLESPIRE2-RESOLVE.title": "Resolve",
-  "INDOMITABLESPIRE2-RESOLVE.description": "Gain [blue]{MotivationGain:diff()}[/blue] [gold]Motivation[/gold].\nApply [gold]Ethereal[/gold] to all your [gold]Resolve[/gold] cards.",
+  "INDOMITABLESPIRE2-RESOLVE.description": "Gain [blue]{MotivationGain:diff()}[/blue] [gold]Motivation[/gold].\nReduce the cost of all your [gold]Unfulfilled Vow[/gold] cards by [blue]1[/blue], and apply [gold]Ethereal[/gold] to all your [gold]Resolve[/gold] cards.",
   
   "INDOMITABLESPIRE2-SCORCHING_FLAME_RAIN.title": "Scorching Flame Rain",
   "INDOMITABLESPIRE2-SCORCHING_FLAME_RAIN.description": "[gold]Requires[/gold] [blue]{MotivationRequire:diff()}[/blue] [gold]Motivation[/gold].\nDeal {Damage:diff()} damage to ALL enemies.\nApply [blue]{OnFirePower:diff()}[/blue] [gold]On Fire[/gold] to ALL enemies.",
