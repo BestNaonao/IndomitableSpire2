@@ -147,7 +147,7 @@
   "INDOMITABLESPIRE2-WELL_RESTED.title": "Well-Rested",
   "INDOMITABLESPIRE2-WELL_RESTED.description": "Whenever you draw this card, gain {Energy:energyIcons()}.",
   "INDOMITABLESPIRE2-RESOLVE.title": "Resolve",
-  "INDOMITABLESPIRE2-RESOLVE.description": "Gain [blue]{MotivationGain:diff()}[/blue] [gold]Motivation[/gold].\nAdd [gold]Carrier Aircraft[/gold] to all your other [gold]Resolve[/gold] cards.",
+  "INDOMITABLESPIRE2-RESOLVE.description": "Gain [blue]{MotivationGain:diff()}[/blue] [gold]Motivation[/gold].\nApply [gold]Ethereal[/gold] to all your [gold]Resolve[/gold] cards.",
   
   "INDOMITABLESPIRE2-SCORCHING_FLAME_RAIN.title": "Scorching Flame Rain",
   "INDOMITABLESPIRE2-SCORCHING_FLAME_RAIN.description": "[gold]Requires[/gold] [blue]{MotivationRequire:diff()}[/blue] [gold]Motivation[/gold].\nDeal {Damage:diff()} damage to ALL enemies.\nApply [blue]{OnFirePower:diff()}[/blue] [gold]On Fire[/gold] to ALL enemies.",
