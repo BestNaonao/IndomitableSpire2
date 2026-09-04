@@ -1,6 +1,6 @@
 {
   "INDOMITABLESPIRE2-CARRIER_AIRCRAFT.title": "舰载机",
-  "INDOMITABLESPIRE2-CARRIER_AIRCRAFT.description": "特殊类型的卡牌，能够触发应用于舰载机的效果并免疫荆棘，部分具有耐久。战斗结束时，将你的[gold]牌组[/gold]中与[gold]消耗牌堆[/gold]里最后一张有对应关系的舰载机牌[gold]变化[/gold]为[gold]执念[/gold]。",
+  "INDOMITABLESPIRE2-CARRIER_AIRCRAFT.description": "特殊类型的卡牌，能够触发应用于舰载机的效果并免疫荆棘，部分具有耐久。战斗结束时，为你的[gold]消耗牌堆[/gold]中所有舰载机牌所对应的[gold]牌组[/gold]版本添加[gold]虚无[/gold]。",
   "INDOMITABLESPIRE2-STRIKE_FIGHTER.title": "战斗攻击机",
   "INDOMITABLESPIRE2-STRIKE_FIGHTER.description": "兼具制空与打击性质的舰载机，能够触发相关效果。通常能提供[gold]格挡[/gold]或施加战术效果。",
   "INDOMITABLESPIRE2-TORPEDO_BOMBER.title": "鱼雷轰炸机",
