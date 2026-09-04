@@ -32,7 +32,6 @@ public sealed class UnfulfilledVow() : IndomitableCard(3, CardType.Attack, CardR
     public override async Task BeforeFlush(PlayerChoiceContext choiceContext, Player player)
     {
         if (player != Owner || Pile?.Type != PileType.Hand || CombatState is not { } combatState) return;
-        EnergyCost.AddThisCombat(-1);
         var resolve = combatState.CreateCard<Resolve>(Owner);
         CardCmd.PreviewCardPileAdd(await CardPileCmd.AddGeneratedCardToCombat(
             resolve, PileType.Draw, Owner, CardPilePosition.Top));
@@ -40,6 +39,6 @@ public sealed class UnfulfilledVow() : IndomitableCard(3, CardType.Attack, CardR
     
     protected override void OnUpgrade()
     {
-        DynamicVars.Damage.UpgradeValueBy(6M);
+        DynamicVars.Damage.UpgradeValueBy(8M);
     }
 }
