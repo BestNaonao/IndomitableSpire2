@@ -16,8 +16,7 @@ public sealed class WellRested() : IndomitableSpire2Card(-1, CardType.Status, Ca
     public override int MaxUpgradeLevel => 0;
     
     // 关键字：不能被打出、保留
-    public override IEnumerable<CardKeyword> CanonicalKeywords => 
-        [CardKeyword.Unplayable, CardKeyword.Retain];
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Unplayable, CardKeyword.Retain];
     
     // 注册能量变量：2点能量
     protected override IEnumerable<DynamicVar> CanonicalVars => [new EnergyVar(2)];
@@ -27,7 +26,6 @@ public sealed class WellRested() : IndomitableSpire2Card(-1, CardType.Status, Ca
     {
         // 确保是自己被抽到
         if (card != this) return;
-        
         // 稍作等待，让卡牌飞入手牌的动画播放一下，避免特效突兀，然后获得对应的能量
         await Cmd.Wait(0.25f);
         await PlayerCmd.GainEnergy(DynamicVars.Energy.IntValue, Owner);

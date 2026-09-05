@@ -20,7 +20,11 @@ public sealed class Resolve() : IndomitableSpire2Card(1, CardType.Status, CardRa
     
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Retain, CardKeyword.Exhaust];
     
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromKeyword(CardKeyword.Ethereal)];
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => 
+    [
+        HoverTipFactory.FromCard<UnfulfilledVow>(), 
+        HoverTipFactory.FromKeyword(CardKeyword.Ethereal)
+    ];
     
     protected override IEnumerable<DynamicVar> CanonicalVars => [new MotivationGainVar(10M)];
     
