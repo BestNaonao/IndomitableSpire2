@@ -132,6 +132,8 @@
   "INDOMITABLESPIRE2-LADYS_WHIM.description": "你每打出一张本回合没打出过的种类的牌，就获得[blue]{LadysWhimPower:diff()}[/blue]点[gold]格挡[/gold]和[blue]{LadysWhimPower:diff()}[/blue]点[gold]干劲[/gold]。",
   "INDOMITABLESPIRE2-UNFULFILLED_VOW.title": "未竟的誓言",
   "INDOMITABLESPIRE2-UNFULFILLED_VOW.description": "造成{Damage:diff()}点伤害。\n在你的回合结束时，如果这张牌在你的[gold]手牌[/gold]中，则将一张[gold]执念[/gold]放在你的[gold]抽牌堆[/gold]顶部。",
+  "INDOMITABLESPIRE2-SLACK_OFF.title": "摸鱼",
+  "INDOMITABLESPIRE2-SLACK_OFF.description": "消耗[blue]{MotivationConsume:diff()}[/blue]点[gold]干劲[/gold]。\n将{Cards:diff()}张[gold]{IfUpgraded:show:养神+|养神}[/gold]放在你的[gold]抽牌堆[/gold]顶部。",
   
   "INDOMITABLESPIRE2-DESSERT.title": "甜点",
   "INDOMITABLESPIRE2-DESSERT.description": "回复[green]{Heal:diff()}[/green]点生命。\n获得{Energy:energyIcons()}。",
