@@ -11,7 +11,7 @@ using MegaCrit.Sts2.Core.Nodes.Cards;
 
 namespace IndomitableSpire2.IndomitableSpire2Code.Powers;
 
-public sealed class IndustrialRevolutionPower : IndomitablePower, IHasSecondAmount
+public sealed class SelfiePower : IndomitablePower, IHasSecondAmount
 {
     private const int Threshold = 4;
     public override PowerType Type => PowerType.Buff;
@@ -19,13 +19,13 @@ public sealed class IndustrialRevolutionPower : IndomitablePower, IHasSecondAmou
     
     // 允许有多个实例与内部独立数据
     public override PowerInstanceType InstanceType => PowerInstanceType.Instanced;
-    protected override object InitInternalData() => new RevolutionData();
+    protected override object InitInternalData() => new SelfieData();
     protected override IEnumerable<DynamicVar> CanonicalVars => [new ThresholdVar( Threshold)];
     
     // 第一个展示数：距离下一次触发还差几张牌
-    public override int DisplayAmount => Threshold - GetInternalData<RevolutionData>().CardsGenerated % Threshold;
+    public override int DisplayAmount => Threshold - GetInternalData<SelfieData>().CardsGenerated % Threshold;
     // 第二个展示数：目前积攒了多少张牌将获得“重放”
-    public string GetSecondAmount() => GetInternalData<RevolutionData>().PendingReplays.ToString();
+    public string GetSecondAmount() => GetInternalData<SelfieData>().PendingReplays.ToString();
     
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.Static(StaticHoverTip.ReplayStatic)];
     
@@ -41,7 +41,7 @@ public sealed class IndustrialRevolutionPower : IndomitablePower, IHasSecondAmou
         if (poolName is "CurseCardPool" or "StatusCardPool" or "DeprecatedCardPool" or "MockCardPool") 
             return Task.CompletedTask;
         
-        var data = GetInternalData<RevolutionData>();
+        var data = GetInternalData<SelfieData>();
         data.CardsGenerated++;
         
         // 计算是否有新的转化
@@ -61,7 +61,7 @@ public sealed class IndustrialRevolutionPower : IndomitablePower, IHasSecondAmou
     // 1. 同步拦截钩子：直接修改卡牌的打出次数
     public override int ModifyCardPlayCount(CardModel card, Creature? target, int playCount)
     {
-        var data = GetInternalData<RevolutionData>();
+        var data = GetInternalData<SelfieData>();
         // 如果是玩家自己的卡，且还有待触发的重放充能
         if (card.Owner != Owner.Player || data.PendingReplays <= 0) return playCount;
         data.PendingReplays--;  // 消耗一层充能
@@ -79,7 +79,7 @@ public sealed class IndustrialRevolutionPower : IndomitablePower, IHasSecondAmou
     }
     
     // 内部数据类
-    private class RevolutionData
+    private class SelfieData
     {
         public int CardsGenerated;
         public int TriggerCount;

@@ -8,10 +8,10 @@ using MegaCrit.Sts2.Core.Localization.DynamicVars;
 
 namespace IndomitableSpire2.IndomitableSpire2Code.Cards.Rares;
 
-public sealed class IndustrialRevolution() : IndomitableCard(1, CardType.Power, CardRarity.Rare, TargetType.Self)
+public sealed class Selfie() : IndomitableCard(1, CardType.Power, CardRarity.Rare, TargetType.Self)
 {
     // 注册变量：施加 1 层“工业革命”能力（每次触发提供1个待触发的重放名额）
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<IndustrialRevolutionPower>(1M)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<SelfiePower>(1M)];
     
     // 悬浮提示框：展示原版游戏内置的“重放”静态提示
     protected override IEnumerable<IHoverTip> ExtraHoverTips => 
@@ -22,10 +22,10 @@ public sealed class IndustrialRevolution() : IndomitableCard(1, CardType.Power, 
     {
         await CreatureCmd.TriggerAnim(Owner.Creature, "Cast", Owner.Character.CastAnimDelay);
         
-        await PowerCmd.Apply<IndustrialRevolutionPower>(
+        await PowerCmd.Apply<SelfiePower>(
             choiceContext: choiceContext, 
             target: Owner.Creature,
-            amount: DynamicVars["IndustrialRevolutionPower"].BaseValue,
+            amount: DynamicVars["SelfiePower"].BaseValue,
             applier: Owner.Creature,
             cardSource: this
         );
