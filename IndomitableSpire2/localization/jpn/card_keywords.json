@@ -10,7 +10,7 @@
   "INDOMITABLESPIRE2-LEVEL_BOMBER.title": "水平爆撃機",
   "INDOMITABLESPIRE2-LEVEL_BOMBER.description": "水平爆撃機としての性質を持つ艦載機。関連する効果を誘発できる。通常は[gold]全体ダメージ[/gold]効果を持つ。",
   "INDOMITABLESPIRE2-DURABILITY.title": "耐久",
-  "INDOMITABLESPIRE2-DURABILITY.description": "攻撃を意図している敵を攻撃すると、敵の攻撃ダメージに応じて耐久を失う。耐久が0になると[gold]廃棄[/gold]される。",
+  "INDOMITABLESPIRE2-DURABILITY.description": "このカードの耐久が0にある場合、[gold]廃棄[/gold]される。",
   "INDOMITABLESPIRE2-REQUIRE.title": "必要",
   "INDOMITABLESPIRE2-REQUIRE.description": "対応する数値が条件以上である場合のみ、このカードをプレイできる。",
   "INDOMITABLESPIRE2-FORMATION.title": "編隊",
