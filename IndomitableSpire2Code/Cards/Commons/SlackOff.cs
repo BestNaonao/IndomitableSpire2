@@ -14,11 +14,8 @@ public sealed class SlackOff() : IndomitableCard(0, CardType.Skill, CardRarity.C
 {
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Retain];
     
-    protected override IEnumerable<DynamicVar> CanonicalVars =>
-    [
-        new MotivationConsumeVar(15M),
-        new CardsVar(2)
-    ];
+    protected override IEnumerable<DynamicVar> CanonicalVars => 
+        [new MotivationConsumeVar(20M), new CardsVar(2)];
     
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromCard<Refresh>(IsUpgraded)];
     
@@ -32,6 +29,7 @@ public sealed class SlackOff() : IndomitableCard(0, CardType.Skill, CardRarity.C
         
         if (CombatState is { } combatState)
         {
+            // 生成两张“养神(+)”并放入抽牌堆顶
             CardCmd.PreviewCardPileAdd(await CardPileCmd.AddGeneratedCardsToCombat(
                 combatState.CreateCards<Refresh>(Owner, DynamicVars.Cards.IntValue, IsUpgraded), 
                 PileType.Draw, Owner, CardPilePosition.Top)
