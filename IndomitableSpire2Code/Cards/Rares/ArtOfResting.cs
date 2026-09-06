@@ -1,5 +1,6 @@
 ﻿using IndomitableSpire2.IndomitableSpire2Code.Cards.Abstracts;
 using IndomitableSpire2.IndomitableSpire2Code.Cards.Others;
+using IndomitableSpire2.IndomitableSpire2Code.Commands;
 using IndomitableSpire2.IndomitableSpire2Code.Powers;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -27,7 +28,10 @@ public sealed class ArtOfResting() : IndomitableCard(2, CardType.Power, CardRari
         
         // 1. 播放施法动画，以及播放台词
         await CreatureCmd.TriggerAnim(Owner.Creature, "Cast", Owner.Character.CastAnimDelay);
-        TalkCmd.Play(RestingDialogue, Owner.Creature, VfxColor.Gold, VfxDuration.VeryLong);
+        CustomTalkCmd.Play(RestingDialogue, Owner.Creature, VfxColor.Gold)
+            .WithDuration(VfxDuration.VeryLong)
+            .WithAdditionalDuration(1d)
+            .Execute();
         
         // 2. 极其优雅地全堆查找：遍历该玩家所有牌堆（抽牌、弃牌、手牌、消耗），找到所有“慵懒”，将之前积攒的“慵懒”统统转化为“养神”
         var indolentCards = Owner.PlayerCombatState.AllPiles
