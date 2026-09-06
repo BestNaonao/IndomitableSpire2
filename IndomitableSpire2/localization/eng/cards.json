@@ -131,6 +131,7 @@
   "INDOMITABLESPIRE2-LADYS_WHIM.title": "Lady's Whim",
   "INDOMITABLESPIRE2-LADYS_WHIM.description": "Whenever you play a kind of card you haven't played this turn, gain [blue]{LadysWhimPower:diff()}[/blue] [gold]Block[/gold] and [blue]{LadysWhimPower:diff()}[/blue] [gold]Motivation[/gold].",
   "INDOMITABLESPIRE2-UNFULFILLED_VOW.title": "Unfulfilled Vow",
+  "INDOMITABLESPIRE2-UNFULFILLED_VOW.banter": "I swear to stand with you this time!",
   "INDOMITABLESPIRE2-UNFULFILLED_VOW.description": "Deal {Damage:diff()} damage.\nAt the end of your turn, if this card is in your [gold]Hand[/gold], put a [gold]Resolve[/gold] on top of your [gold]Draw Pile[/gold].",
   "INDOMITABLESPIRE2-SLACK_OFF.title": "Slack Off",
   "INDOMITABLESPIRE2-SLACK_OFF.description": "Cost [blue]{MotivationConsume:diff()}[/blue] [gold]Motivation[/gold].\nPut {Cards:diff()} [gold]{IfUpgraded:show:Refresh+|Refresh}[/gold] cards on top of your [gold]Draw Pile[/gold].",
