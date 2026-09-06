@@ -134,6 +134,9 @@
   "INDOMITABLESPIRE2-UNFULFILLED_VOW.description": "{Damage:diff()}ダメージを与える。\nターン終了時、このカードが[gold]手札[/gold]にある場合、[gold]執念[/gold]を1枚[gold]山札[/gold]の一番上に置く。",
   "INDOMITABLESPIRE2-SLACK_OFF.title": "サボり",
   "INDOMITABLESPIRE2-SLACK_OFF.description": "[gold]やる気[/gold]を[blue]{MotivationConsume:diff()}[/blue]消費する。\n[gold]{IfUpgraded:show:養神+|養神}[/gold]を{Cards:diff()}枚[gold]山札[/gold]の一番上に置く。",
+  "INDOMITABLESPIRE2-SALVAGE.title": "救援回収",
+  "INDOMITABLESPIRE2-SALVAGE.description": "[gold]廃棄札[/gold]からカードを最大{Cards:diff()}枚選び、[gold]山札[/gold]に加える。それらの[gold]エセリアル[/gold]を取り除き、[gold]耐久[/gold]を全回復する。",
+  "INDOMITABLESPIRE2-SALVAGE.selectionScreenPrompt": "[gold]山札[/gold]に加えるカードを最大{Amount}枚選ぶ。",
   
   "INDOMITABLESPIRE2-DESSERT.title": "デザート",
   "INDOMITABLESPIRE2-DESSERT.description": "HPを[green]{Heal:diff()}[/green]回復する。\n{Energy:energyIcons()}を得る。",
