@@ -15,8 +15,11 @@ public sealed class ScheduledMaintenance() : IndomitableCard(1, CardType.Power, 
     protected override IEnumerable<DynamicVar> CanonicalVars => 
         [new PowerVar<ScheduledMaintenancePower>(4M)];
     
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => 
-        [HoverTipFactory.FromKeyword(IndomitableKeywords.CarrierAircraft)];
+    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+    [
+        HoverTipFactory.FromKeyword(IndomitableKeywords.CarrierAircraft),
+        HoverTipFactory.FromKeyword(IndomitableKeywords.Durability)
+    ];
     
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {

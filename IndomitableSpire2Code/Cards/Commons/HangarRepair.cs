@@ -16,7 +16,10 @@ public sealed class HangarRepair() : IndomitableCard(0, CardType.Skill, CardRari
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
     
     protected override IEnumerable<IHoverTip> ExtraHoverTips => 
-        [HoverTipFactory.FromKeyword(IndomitableKeywords.CarrierAircraft)];
+    [
+        HoverTipFactory.FromKeyword(IndomitableKeywords.CarrierAircraft),
+        HoverTipFactory.FromKeyword(IndomitableKeywords.Durability)
+    ];
     
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
