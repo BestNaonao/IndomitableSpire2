@@ -20,6 +20,7 @@ obj/
 *.sln.DotSettings.user
 
 # 其他
+/prompt_journal/
 /packages/
 riderModule.iml
 /_ReSharper.Caches/
