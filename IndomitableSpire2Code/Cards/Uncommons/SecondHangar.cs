@@ -9,13 +9,25 @@ namespace IndomitableSpire2.IndomitableSpire2Code.Cards.Uncommons;
 
 public sealed class SecondHangar() : IndomitableCard(1, CardType.Power, CardRarity.Uncommon, TargetType.Self)
 {
-    // 注册能力变量：初始提供 3 层“第二机库”
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<SecondHangarPower>(3M)];
+    private const string BlockLossKey = "BlockLoss";
+    
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+    [
+        new(BlockLossKey, 3M),
+        new PowerVar<SecondHangarPower>(4M)
+    ];
     
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         // 播放施法动画
         await CreatureCmd.TriggerAnim(Owner.Creature, "Cast", Owner.Character.CastAnimDelay);
+        
+        // 先移除格挡；CreatureCmd.LoseBlock 会将实际损失同步给护盾。
+        await CreatureCmd.LoseBlock(
+            choiceContext,
+            Owner.Creature,
+            DynamicVars[BlockLossKey].BaseValue,
+            Owner.Creature);
         
         // 赋予玩家“第二机库”能力
         await PowerCmd.Apply<SecondHangarPower>(
@@ -28,7 +40,8 @@ public sealed class SecondHangar() : IndomitableCard(1, CardType.Power, CardRari
     
     protected override void OnUpgrade()
     {
-        // 升级后：增加 1 层，即总共增加 4 张手牌上限
-        DynamicVars["SecondHangarPower"].UpgradeValueBy(1M);
+        // 升级后：格挡损失由 3 降至 2，能力由 4 层提升至 6 层。
+        DynamicVars["SecondHangarPower"].UpgradeValueBy(2M);
+        DynamicVars[BlockLossKey].UpgradeValueBy(-1M);
     }
 }
