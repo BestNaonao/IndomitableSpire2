@@ -87,7 +87,7 @@
   "INDOMITABLESPIRE2-SELFIE.title": "Selfie",
   "INDOMITABLESPIRE2-SELFIE.description": "Every [blue]4[/blue] non-[gold]Status[/gold], non-[gold]Curse[/gold] cards you create, the next {SelfiePower:diff()} {SelfiePower:plural:card you play gains|cards you play gain} [gold]Replay[/gold] 1.",
   "INDOMITABLESPIRE2-SECOND_HANGAR.title": "Second Hangar",
-  "INDOMITABLESPIRE2-SECOND_HANGAR.description": "Increase your maximum hand size by {SecondHangarPower:diff()}.",
+  "INDOMITABLESPIRE2-SECOND_HANGAR.description": "Lose {BlockLoss:inverseDiff()} [gold]Block[/gold].\nIncrease your maximum hand size by {SecondHangarPower:diff()}.",
   "INDOMITABLESPIRE2-INNER_ARMOR.title": "Inner Armor",
   "INDOMITABLESPIRE2-INNER_ARMOR.description": "The next time you are attacked and your [gold]Block[/gold] or [gold]Shield[/gold] breaks, gain [gold]Shield[/gold] equal to your current [gold]Block[/gold].",
   "INDOMITABLESPIRE2-YOGA.title": "Yoga",
