@@ -9,6 +9,28 @@ namespace IndomitableSpire2.IndomitableSpire2Code.Hooks;
 
 public static class CustomHook
 {
+    /// <summary>
+    /// 广播 CreatureCmd.LoseBlock 实际造成的格挡损失。
+    /// 与原版 AfterBlockBroken 一样直接使用战斗监听器快照，并逐个等待监听器完成。
+    /// </summary>
+    public static async Task AfterBlockLost(
+        ICombatState? combatState,
+        PlayerChoiceContext choiceContext,
+        Creature target,
+        int amount,
+        Creature? remover)
+    {
+        if (combatState == null || amount <= 0) return;
+        foreach (var model in combatState.IterateHookListeners())
+        {
+            if (model is IAfterBlockLostSubscriber subscriber)
+            {
+                await subscriber.AfterBlockLost(choiceContext, target, amount, remover); 
+                model.InvokeExecutionFinished();
+            }
+        }
+    }
+    
     public static async Task AfterEnergyGained(Player player, decimal amount)
     {
         if (player.Creature.CombatState == null) return;
