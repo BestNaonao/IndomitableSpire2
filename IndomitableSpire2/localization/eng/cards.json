@@ -103,7 +103,7 @@
   "INDOMITABLESPIRE2-RADAR_DETECTION.title": "Radar Detection",
   "INDOMITABLESPIRE2-RADAR_DETECTION.description": "[gold]Recon[/gold] [blue]{Recon:diff()}[/blue].",
   "INDOMITABLESPIRE2-AIRSPACE_RECON.title": "Airspace Recon",
-  "INDOMITABLESPIRE2-AIRSPACE_RECON.description": "[gold]Recon[/gold] [blue]{IfUpgraded:show:3X+3|3X}[/blue].\nThe [blue]{IfUpgraded:show:first X (at least 1)|first}[/blue] card put into your [gold]Hand[/gold] this way is free to play this turn.",
+  "INDOMITABLESPIRE2-AIRSPACE_RECON.description": "[gold]Recon[/gold] [blue]{Recon:cond:>0?3X+{Recon:diff()}|3X}[/blue].\nThe [blue]{IfUpgraded:show:first X (at least 1)|first}[/blue] card put into your [gold]Hand[/gold] this way is free to play this turn.",
   "INDOMITABLESPIRE2-RETIRE.title": "Retire",
   "INDOMITABLESPIRE2-RETIRE.description": "[gold]Exhaust[/gold] 1 card from your [gold]Draw Pile[/gold].\nIf it is a [gold]Carrier Aircraft[/gold], [gold]Upgrade[/gold] {IfUpgraded:show:ALL cards|a card} in your [gold]Hand[/gold]; otherwise, gain [blue]{MotivationGain:diff()}[/blue] [gold]Motivation[/gold].",
   "INDOMITABLESPIRE2-RALLY.title": "Rally",

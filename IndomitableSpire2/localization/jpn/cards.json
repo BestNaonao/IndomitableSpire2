@@ -103,7 +103,7 @@
   "INDOMITABLESPIRE2-RADAR_DETECTION.title": "レーダー探知",
   "INDOMITABLESPIRE2-RADAR_DETECTION.description": "[gold]偵察[/gold][blue]{Recon:diff()}[/blue]。",
   "INDOMITABLESPIRE2-AIRSPACE_RECON.title": "空域偵察",
-  "INDOMITABLESPIRE2-AIRSPACE_RECON.description": "[gold]偵察[/gold][blue]{IfUpgraded:show:3X+3|3X}[/blue]を行う。\nこの[gold]偵察[/gold]で[gold]手札[/gold]に加えた[blue]{IfUpgraded:show:最初のX枚（最低1枚）|最初の1枚}[/blue]は、このターンコストを支払わずにプレイできる。",
+  "INDOMITABLESPIRE2-AIRSPACE_RECON.description": "[gold]偵察[/gold][blue]{Recon:cond:>0?3X+{Recon:diff()}|3X}[/blue]を行う。\nこの[gold]偵察[/gold]で[gold]手札[/gold]に加えた[blue]{IfUpgraded:show:最初のX枚（最低1枚）|最初の1枚}[/blue]は、このターンコストを支払わずにプレイできる。",
   "INDOMITABLESPIRE2-RETIRE.title": "退役",
   "INDOMITABLESPIRE2-RETIRE.description": "[gold]山札[/gold]のカードを1枚[gold]廃棄[/gold]する。\nそれが[gold]艦載機[/gold]なら、[gold]手札[/gold]のカードを{IfUpgraded:show:すべて|1枚}[gold]アップグレード[/gold]する。そうでない場合、[gold]やる気[/gold]を[blue]{MotivationGain:diff()}[/blue]得る。",
   "INDOMITABLESPIRE2-RALLY.title": "立て直し",
