@@ -19,8 +19,7 @@ public sealed class ShieldPower : IndomitablePower, IBlockRetentionProvider, IAf
         Creature target, DamageResult result, ValueProp props, Creature? dealer, CardModel? cardSource)
     {
         var damageAbsorbed = result.BlockedDamage;
-        if (target != Owner || damageAbsorbed <= 0 || !props.IsPoweredAttack()) return;
-        
+        if (target != Owner || damageAbsorbed <= 0) return;
         // 扣除护盾层数，最多扣到 0
         var absorb = Math.Min(Amount, damageAbsorbed);
         await PowerCmd.ModifyAmount(choiceContext, this, -absorb, dealer, cardSource);
