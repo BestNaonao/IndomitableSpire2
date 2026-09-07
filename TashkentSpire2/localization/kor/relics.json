@@ -59,5 +59,8 @@
   "TASHKENTSPIRE2-K_G_B.title": "KGB 기술",
   "TASHKENTSPIRE2-K_G_B.flavor": "오랑캐의 기술을 배워 오랑캐를 제압한다.",
   "TASHKENTSPIRE2-K_G_B.eventDescription": "[gold]첩보전 승리[/gold] 1장을 당신의 [gold]덱[/gold]에 추가합니다.",
-  "TASHKENTSPIRE2-K_G_B.description": "획득 시 [gold]첩보전 승리[/gold] 1장을 당신의 [gold]덱[/gold]에 추가합니다."
+  "TASHKENTSPIRE2-K_G_B.description": "획득 시 [gold]첩보전 승리[/gold] 1장을 당신의 [gold]덱[/gold]에 추가합니다.",
+  "SEA_GLASS.TASHKENTSPIRE2-TASHKENT_VARIANT_TWO.title": "동지짱 유리",
+  "SEA_GLASS.TASHKENTSPIRE2-TASHKENT_VARIANT_THREE.title": "동지짱 유리",
+  "SEA_GLASS.TASHKENTSPIRE2-TASHKENT_VARIANT_FOUR.title": "동지짱 유리"
 }

@@ -1,0 +1,8 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=3 format=3 uid="uid://dsn67cukjqssg"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://dunbu52sypili" path="res://TashkentSpire2/animations/characters/Tashkent/tashigan.atlas" id="1_atlas"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://b4rpn2ev7wse" path="res://TashkentSpire2/animations/characters/Tashkent/tashigan.skel" id="2_skel"]
+
+[resource]
+atlas_res = ExtResource("1_atlas")
+skeleton_file_res = ExtResource("2_skel")

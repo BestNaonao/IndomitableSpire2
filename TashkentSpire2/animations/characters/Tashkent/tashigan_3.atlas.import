@@ -1,0 +1,16 @@
+[remap]
+
+importer="spine.atlas"
+type="SpineAtlasResource"
+uid="uid://6770004hrr5h"
+path="res://.godot/imported/tashigan_3.atlas-3fe37ad3a3eb6b012d293be0b5107af3.spatlas"
+
+[deps]
+
+source_file="res://TashkentSpire2/animations/characters/Tashkent/tashigan_3.atlas"
+dest_files=["res://.godot/imported/tashigan_3.atlas-3fe37ad3a3eb6b012d293be0b5107af3.spatlas"]
+
+[params]
+
+normal_map_prefix="n"
+specular_map_prefix="s"

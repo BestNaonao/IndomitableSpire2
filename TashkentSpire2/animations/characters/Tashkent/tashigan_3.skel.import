@@ -1,0 +1,14 @@
+[remap]
+
+importer="spine.skel"
+type="SpineSkeletonFileResource"
+uid="uid://j0rpmbillrfm"
+path="res://.godot/imported/tashigan_3.skel-86c9fac94f1275a13c7258fbf782a7c2.spskel"
+
+[deps]
+
+source_file="res://TashkentSpire2/animations/characters/Tashkent/tashigan_3.skel"
+dest_files=["res://.godot/imported/tashigan_3.skel-86c9fac94f1275a13c7258fbf782a7c2.spskel"]
+
+[params]
+

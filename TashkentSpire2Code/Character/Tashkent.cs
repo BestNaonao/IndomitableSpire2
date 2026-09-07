@@ -5,14 +5,19 @@ using Godot;
 using TashkentSpire2.TashkentSpire2Code.Cards.Basics;
 using TashkentSpire2.TashkentSpire2Code.Relics;
 using TashkentSpire2.TashkentSpire2Code.Config;
+using MegaCrit.Sts2.Core.Animation;
+using MegaCrit.Sts2.Core.Bindings.MegaSpine;
 using MegaCrit.Sts2.Core.Entities.Characters;
 using MegaCrit.Sts2.Core.Models;
 
 namespace TashkentSpire2.TashkentSpire2Code.Character;
 
-public sealed class TashkentCharacter : CustomCharacterModel
+public class TashkentCharacter : CustomCharacterModel
 {
 	public const string CharacterId = "Tashkent";
+	public virtual TashkentSkin CurrentSkin => TashkentSkin.Default;
+	protected TashkentSkinDefinition CurrentSkinDefinition => TashkentSkinManager.GetDefinition(CurrentSkin);
+
 	public override CharacterGender Gender => CharacterGender.Feminine;
 	internal static readonly Color TopicColor = new("#9A72A1");
 	public override Color NameColor => TopicColor;
@@ -74,13 +79,13 @@ public sealed class TashkentCharacter : CustomCharacterModel
 		"res://TashkentSpire2/images/Tashkent/map_marker_tashkent.png";
 	
 	public override string CustomVisualPath =>                      //人物模型
-		"res://TashkentSpire2/scenes/characters/Tashkent.tscn";
+		CurrentSkinDefinition.VisualPath;
 	public override string CustomTrailPath =>                       // 卡牌轨迹特效
 		"res://TashkentSpire2/scenes/vfx/card_trail_tashkent.tscn";
 	public override string CustomRestSiteAnimPath =>                // 篝火休息
-		"res://TashkentSpire2/scenes/characters/tashkent_rest_site.tscn";  
+		CurrentSkinDefinition.RestSiteAnimPath;
 	public override string CustomMerchantAnimPath =>                // 商店场景
-		"res://TashkentSpire2/scenes/characters/tashkent_merchant.tscn";       
+		CurrentSkinDefinition.MerchantAnimPath;
 	public override string CustomCharacterSelectBg =>               // 选择界面背景
 		"res://TashkentSpire2/scenes/characters/char_select_bg_Tashkent.tscn";
 	public override string CustomCharacterSelectTransitionPath =>   // 选择专场素材
@@ -126,17 +131,17 @@ public sealed class TashkentCharacter : CustomCharacterModel
 			PackedIconOutlinePath: "res://TashkentSpire2/images/relics/outline/YummyCookie_tashkent.png"
 		);
 	
-	// // 原版逻辑构建动作映射，传入 Spine 文件中实际命名的动作字符串
-	// public override CreatureAnimator SetupCustomAnimationStates(MegaSprite controller) => SetupAnimationState(
-	//     controller: controller, 
-	//     idleName: "normal",     // 站立动画
-	//     deadName: "dead",       // 死亡动画
-	//     hitName: "touch",       // 受击动画
-	//     attackName: "attack",       // 攻击动画
-	//     castName: "attack_left",    // 释放技能动画
-	//     relaxedName: "sleep"    // 休息动画
-	//     );
-	//
+	// 将游戏的通用角色动作映射到这套 Spine 文件中的实际动画名。
+	public override CreatureAnimator SetupCustomAnimationStates(MegaSprite controller) => SetupAnimationState(
+		controller: controller,
+		idleName: "normal",
+		deadName: "dead",
+		hitName: "touch",
+		attackName: "attack",
+		castName: "attack_left",
+		relaxedName: "sleep"
+	);
+
 	public override List<string> GetArchitectAttackVfx()
 	{
 		const int num = 5;

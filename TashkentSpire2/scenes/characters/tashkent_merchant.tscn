@@ -1,12 +1,15 @@
 [gd_scene load_steps=3 format=3 uid="uid://c8812q7rndsmf"]
 
-[ext_resource type="Texture2D" uid="uid://b73ixjpx0hd0" path="res://TashkentSpire2/images/Tashkent/Tashkent_character.png" id="1_626iy"]
+[ext_resource type="SpineSkeletonDataResource" path="res://TashkentSpire2/animations/characters/Tashkent/tashkent_spine.tres" id="1_spine"]
 [ext_resource type="Script" uid="uid://dk4u2eqkmrsai" path="res://TashkentSpire2Code/Scripts/NMerchantCharacterTashkent.cs" id="1_vtor8"]
 
 [node name="TashkentMerchant" type="Node2D"]
 script = ExtResource("1_vtor8")
 
-[node name="TashkentCharacter" type="Sprite2D" parent="."]
-position = Vector2(1, -202)
-scale = Vector2(0.45, 0.45)
-texture = ExtResource("1_626iy")
+[node name="SpineSprite" type="SpineSprite" parent="."]
+skeleton_data_res = ExtResource("1_spine")
+preview_skin = "default"
+preview_animation = "normal"
+preview_frame = false
+preview_time = 0.0
+scale = Vector2(1, 1)

@@ -59,5 +59,8 @@
   "TASHKENTSPIRE2-K_G_B.title": "KGB技巧",
   "TASHKENTSPIRE2-K_G_B.flavor": "师夷长技以制夷。",
   "TASHKENTSPIRE2-K_G_B.eventDescription": "将[blue]1[/blue]张[gold]谍报制胜[/gold]加入你的[gold]牌组[/gold]",
-  "TASHKENTSPIRE2-K_G_B.description": "拾起时，将[blue]1[/blue]张[gold]谍报制胜[/gold]加入你的[gold]牌组[/gold]。"
+  "TASHKENTSPIRE2-K_G_B.description": "拾起时，将[blue]1[/blue]张[gold]谍报制胜[/gold]加入你的[gold]牌组[/gold]。",
+  "SEA_GLASS.TASHKENTSPIRE2-TASHKENT_VARIANT_TWO.title": "同志酱玻璃",
+  "SEA_GLASS.TASHKENTSPIRE2-TASHKENT_VARIANT_THREE.title": "同志酱玻璃",
+  "SEA_GLASS.TASHKENTSPIRE2-TASHKENT_VARIANT_FOUR.title": "同志酱玻璃"
 }
