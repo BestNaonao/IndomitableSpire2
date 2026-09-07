@@ -1,5 +1,6 @@
 ﻿using System.Runtime.CompilerServices;
 using HarmonyLib;
+using IndomitableSpire2.IndomitableSpire2Code.Hooks;
 using IndomitableSpire2.IndomitableSpire2Code.Registries;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
@@ -124,7 +125,14 @@ public static class BlockRetentionPatches
             var toLose = creature.Block - context.FinalRetainedAmount;
             
             // 1. 如果最终保留值小于当前格挡，扣除多余部分（如：15点格挡只保留10点，扣除5点）
-            if (toLose > 0) await CreatureCmd.LoseBlock(new ThrowingPlayerChoiceContext(), creature, toLose, null);
+            if (toLose > 0)
+            {
+                // 这是回合开始时为了保留上限而进行的维护性裁剪，不应被护盾视为一次外部格挡损失。
+                using (BlockLossHookSuppression.SuppressNext())
+                {
+                    await CreatureCmd.LoseBlock(new ThrowingPlayerChoiceContext(), creature, toLose, null);
+                }
+            }
             
             // 2. 触发对应模型的表现效果 (如闪烁)
             foreach (var model in context.TriggeredModels)
