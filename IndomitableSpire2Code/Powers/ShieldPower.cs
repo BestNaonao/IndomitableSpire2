@@ -9,27 +9,29 @@ using MegaCrit.Sts2.Core.ValueProps;
 
 namespace IndomitableSpire2.IndomitableSpire2Code.Powers;
 
-public sealed class ShieldPower : IndomitablePower, IBlockRetentionProvider
+public sealed class ShieldPower : IndomitablePower, IBlockRetentionProvider, IAfterBlockLostSubscriber
 {
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;
     
     // 监听受伤：当本体受到伤害且该伤害被格挡吸收时，扣除等量的护盾层数
-    public override async Task AfterDamageReceived(
-        PlayerChoiceContext choiceContext,
-        Creature target,
-        DamageResult result,
-        ValueProp props,
-        Creature? dealer,
-        CardModel? cardSource)
+    public override async Task AfterDamageReceived(PlayerChoiceContext choiceContext, 
+        Creature target, DamageResult result, ValueProp props, Creature? dealer, CardModel? cardSource)
     {
         var damageAbsorbed = result.BlockedDamage;
-        
         if (target != Owner || damageAbsorbed <= 0 || !props.IsPoweredAttack()) return;
         
         // 扣除护盾层数，最多扣到 0
         var absorb = Math.Min(Amount, damageAbsorbed);
         await PowerCmd.ModifyAmount(choiceContext, this, -absorb, dealer, cardSource);
+    }
+    
+    // 监听非伤害 LoseBlock：以指令实际移除的格挡值同步扣除护盾。
+    public async Task AfterBlockLost(PlayerChoiceContext choiceContext, Creature target, int amount, Creature? remover)
+    {
+        if (target != Owner || amount <= 0) return;
+        var lost = Math.Min(Amount, amount);
+        if (lost > 0) await PowerCmd.ModifyAmount(choiceContext, this, -lost, remover, null);
     }
     
     public override bool ShouldClearBlock(Creature creature) => Owner != creature;
