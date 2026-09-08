@@ -117,7 +117,7 @@
   "INDOMITABLESPIRE2-ENGAGE_ON_SIGHT.title": "Engage on Sight",
   "INDOMITABLESPIRE2-ENGAGE_ON_SIGHT.description": "Whenever you draw an Attack {IfUpgraded:show:| during your turn}, deal damage to ALL enemies equal to the number of cards in your [gold]Hand[/gold].",
   "INDOMITABLESPIRE2-WITHERER.title": "Witherer",
-  "INDOMITABLESPIRE2-WITHERER.description": "After dealing a total of {Threshold} [gold]On Fire[/gold] or [gold]Flooding[/gold] damage this combat, double the first {WithererPower:plural:[gold]Debuff[/gold]|{WithererPower:diff()} [gold]Debuffs[/gold]} applied to enemies each turn.",
+  "INDOMITABLESPIRE2-WITHERER.description": "After dealing a total of {Threshold} [gold]On Fire[/gold] or [gold]Flooding[/gold] damage this combat, the first {WithererPower:plural:[gold]Debuff[/gold] you apply to an enemy each turn is|{WithererPower:diff()} [gold]Debuffs[/gold] you apply to enemies each turn are} applied an extra time.",
   "INDOMITABLESPIRE2-ICED_DRINK.title": "Iced Drink",
   "INDOMITABLESPIRE2-ICED_DRINK.description": "[gold]Requires[/gold] [blue]{MotivationRequire:diff()}[/blue] [gold]Motivation[/gold].\nRemove all [gold]On Fire[/gold] from the enemy and apply an equal amount of [gold]Flooding[/gold]. If at least 5 are removed, draw {Cards:diff()} {Cards:plural:card|cards}.",
   "INDOMITABLESPIRE2-BURNING_PASSION.title": "Burning Passion",
