@@ -34,5 +34,6 @@ public sealed class LadysWhim() : IndomitableCard(1, CardType.Power, CardRarity.
     protected override void OnUpgrade()
     {
         RemoveKeyword(CardKeyword.Ethereal);
+        AddKeyword(CardKeyword.Innate);
     }
 }
