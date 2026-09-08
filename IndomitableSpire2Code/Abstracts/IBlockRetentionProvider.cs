@@ -26,5 +26,5 @@ public interface IBlockRetentionProvider
     /// <summary>
     /// 当保留行为最终生效时触发的视觉/额外效果（替代原先硬编码的 Flash）
     /// </summary>
-    void OnRetentionTriggered(AbstractModel sourceModel, Creature creature);
+    Task OnRetentionTriggered(AbstractModel sourceModel, Creature creature);
 }

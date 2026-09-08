@@ -40,7 +40,11 @@ public sealed class ShieldPower : IndomitablePower, IBlockRetentionProvider, IAf
     
     public int CalculateRetainedBlock(AbstractModel sourceModel, Creature creature) => Amount;
     
-    public void OnRetentionTriggered(AbstractModel sourceModel, Creature creature) => Flash();
+    public Task OnRetentionTriggered(AbstractModel sourceModel, Creature creature)
+    {
+        Flash();
+        return Task.CompletedTask;
+    }
     
     // 当护盾层数跌至 0，被引擎彻底移除时触发
     public override async Task AfterRemoved(Creature owner)

@@ -18,9 +18,10 @@ public class BarricadeProvider : IBlockRetentionProvider
         return creature.Block; // 保留当前所有的格挡
     }
 
-    public void OnRetentionTriggered(AbstractModel sourceModel, Creature creature)
+    public Task OnRetentionTriggered(AbstractModel sourceModel, Creature creature)
     {
         // 原版中没有闪烁特效
+        return Task.CompletedTask;
     }
 }
 
@@ -36,11 +37,8 @@ public class BlurProvider : IBlockRetentionProvider
         return creature.Block; 
     }
 
-    public void OnRetentionTriggered(AbstractModel sourceModel, Creature creature)
-    {
-        if (sourceModel is BlurPower)
-            sourceModel.AfterPreventingBlockClear(sourceModel, creature);
-    }
+    public Task OnRetentionTriggered(AbstractModel sourceModel, Creature creature) => 
+        sourceModel is BlurPower ? sourceModel.AfterPreventingBlockClear(sourceModel, creature) : Task.CompletedTask;
 }
 
 /// <summary>
@@ -55,9 +53,10 @@ public class BurrowedProvider : IBlockRetentionProvider
         return creature.Block;
     }
 
-    public void OnRetentionTriggered(AbstractModel sourceModel, Creature creature)
+    public Task OnRetentionTriggered(AbstractModel sourceModel, Creature creature)
     {
         // 破甲和移除的逻辑在它原本的重写方法里，这里仅处理保留表现
+        return Task.CompletedTask;
     }
 }
 
@@ -74,9 +73,9 @@ public class SturdyClampProvider : IBlockRetentionProvider
         return 10; // 核心逻辑：提供 10 点的基础保留值
     }
 
-    public void OnRetentionTriggered(AbstractModel sourceModel, Creature creature)
+    public Task OnRetentionTriggered(AbstractModel sourceModel, Creature creature)
     {
-        if (sourceModel is SturdyClamp sturdyClamp)
-            sturdyClamp.Flash();
+        if (sourceModel is SturdyClamp sturdyClamp) sturdyClamp.Flash();
+        return Task.CompletedTask;
     }
 }
