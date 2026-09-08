@@ -1,4 +1,5 @@
 ﻿using IndomitableSpire2.IndomitableSpire2Code.Abstracts;
+using IndomitableSpire2.IndomitableSpire2Code.Enums;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Players;
@@ -18,14 +19,15 @@ public static class CustomHook
         PlayerChoiceContext choiceContext,
         Creature target,
         int amount,
-        Creature? remover)
+        Creature? remover,
+        BlockLossReason reason)
     {
         if (combatState == null || amount <= 0) return;
         foreach (var model in combatState.IterateHookListeners())
         {
-            if (model is IAfterBlockLostSubscriber subscriber)
+            if (model is IAfterBlockLostSubscriber subscriber && subscriber.ShouldReceiveAfterBlockLost(reason))
             {
-                await subscriber.AfterBlockLost(choiceContext, target, amount, remover); 
+                await subscriber.AfterBlockLost(choiceContext, target, amount, remover, reason);
                 model.InvokeExecutionFinished();
             }
         }
