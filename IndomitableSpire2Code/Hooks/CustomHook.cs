@@ -10,6 +10,39 @@ namespace IndomitableSpire2.IndomitableSpire2Code.Hooks;
 
 public static class CustomHook
 {
+    /// <summary>沿用 ModifyCardPlayCount 的顺序，收集实际修改总次数的模型。</summary>
+    public static int ModifyPowerApplyCount(
+        ICombatState combatState, PowerModel power, Creature target, decimal amount,
+        Creature? applier, CardModel? cardSource, int applyCount, out List<AbstractModel> modifyingModels)
+    {
+        modifyingModels = [];
+        foreach (var model in combatState.IterateHookListeners())
+        {
+            if (model is not IPowerApplyCountModifier modifier) continue;
+            var nextCount = Math.Max(1, modifier.ModifyPowerApplyCount(
+                power, target, amount, applier, cardSource, applyCount));
+            if (nextCount != applyCount) modifyingModels.Add(model);
+            applyCount = nextCount;
+        }
+        return applyCount;
+    }
+    
+    /// <summary>在执行施加序列前，通知仍在战斗中且实际修改次数的模型。</summary>
+    public static async Task AfterModifyingPowerApplyCount(
+        ICombatState combatState, PlayerChoiceContext choiceContext, PowerModel power, Creature target,
+        decimal amount, Creature? applier, CardModel? cardSource, IEnumerable<AbstractModel> modifyingModels)
+    {
+        var modifyingModelsHashSet = new HashSet<AbstractModel>(modifyingModels);
+        foreach (var model in combatState.IterateHookListeners())
+        {
+            if (model is IPowerApplyCountModifier modifier && modifyingModelsHashSet.Contains(model))
+            {
+                await modifier.AfterModifyingPowerApplyCount(choiceContext, power, target, amount, applier, cardSource);
+                model.InvokeExecutionFinished();
+            }
+        }
+    }
+    
     /// <summary>
     /// 广播 CreatureCmd.LoseBlock 实际造成的格挡损失。
     /// 与原版 AfterBlockBroken 一样直接使用战斗监听器快照，并逐个等待监听器完成。
