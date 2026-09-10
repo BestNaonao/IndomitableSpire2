@@ -37,6 +37,10 @@ public static class IndomitableKeywords
     [CustomEnum("formation"), KeywordProperties(AutoKeywordPosition.After)]
     public static CardKeyword Formation;
     
+    // 同心：生成或变化的新牌继承来源牌的升级、关键词和附魔。
+    [CustomEnum("resonance"), KeywordProperties(AutoKeywordPosition.Before)]
+    public static CardKeyword Resonance;
+    
     // 委托：完成任务，和队友获得奖励
     [CustomEnum("commission"), KeywordProperties(AutoKeywordPosition.Before)]
     public static CardKeyword Commission;
