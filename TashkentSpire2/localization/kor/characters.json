@@ -29,7 +29,7 @@
   "TASHKENTSPIRE2-TASHKENT_VARIANT_TWO.goldMonologue": "[sine]이 금화들은 분명 동지짱에게 도움이 될 거야……[/sine]",
   "TASHKENTSPIRE2-TASHKENT_VARIANT_TWO.cardsModifierTitle": "타슈켄트 카드",
   "TASHKENTSPIRE2-TASHKENT_VARIANT_TWO.cardsModifierDescription": "이제 타슈켄트 카드가 보상과 상점에 등장합니다.",
-  "TASHKENTSPIRE2-TASHKENT_VARIANT_TWO.skinName": "의상 2",
+  "TASHKENTSPIRE2-TASHKENT_VARIANT_TWO.skinName": "속박된 순양함",
 
   "TASHKENTSPIRE2-TASHKENT_VARIANT_THREE.title": "타슈켄트",
   "TASHKENTSPIRE2-TASHKENT_VARIANT_THREE.titleObject": "타슈켄트",
@@ -45,7 +45,7 @@
   "TASHKENTSPIRE2-TASHKENT_VARIANT_THREE.goldMonologue": "[sine]이 금화들은 분명 동지짱에게 도움이 될 거야……[/sine]",
   "TASHKENTSPIRE2-TASHKENT_VARIANT_THREE.cardsModifierTitle": "타슈켄트 카드",
   "TASHKENTSPIRE2-TASHKENT_VARIANT_THREE.cardsModifierDescription": "이제 타슈켄트 카드가 보상과 상점에 등장합니다.",
-  "TASHKENTSPIRE2-TASHKENT_VARIANT_THREE.skinName": "의상 3",
+  "TASHKENTSPIRE2-TASHKENT_VARIANT_THREE.skinName": "하늘색 휴일",
 
   "TASHKENTSPIRE2-TASHKENT_VARIANT_FOUR.title": "타슈켄트",
   "TASHKENTSPIRE2-TASHKENT_VARIANT_FOUR.titleObject": "타슈켄트",
@@ -61,5 +61,5 @@
   "TASHKENTSPIRE2-TASHKENT_VARIANT_FOUR.goldMonologue": "[sine]이 금화들은 분명 동지짱에게 도움이 될 거야……[/sine]",
   "TASHKENTSPIRE2-TASHKENT_VARIANT_FOUR.cardsModifierTitle": "타슈켄트 카드",
   "TASHKENTSPIRE2-TASHKENT_VARIANT_FOUR.cardsModifierDescription": "이제 타슈켄트 카드가 보상과 상점에 등장합니다.",
-  "TASHKENTSPIRE2-TASHKENT_VARIANT_FOUR.skinName": "의상 4"
+  "TASHKENTSPIRE2-TASHKENT_VARIANT_FOUR.skinName": "스프라이트의 스냅샷"
 }

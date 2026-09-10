@@ -68,7 +68,7 @@
   "TASHKENTSPIRE2-CHARGED_STRIKE.title": "Charged Strike",
   "TASHKENTSPIRE2-CHARGED_STRIKE.description": "Deal {Damage:diff()} damage.\nGain [gold]Vigor[/gold] equal to the damage dealt.",
   "TASHKENTSPIRE2-CLOSE_FIRE.title": "Close Fire",
-  "TASHKENTSPIRE2-CLOSE_FIRE.description": "Deal {Damage:diff()} damage {Repeat:diff()} times.\nIf [gold]Distance[/gold] is at least [blue]3[/blue], double the number of hits.\nIf [gold]Distance[/gold] is at least [blue]5[/blue], double the number of hits.",
+  "TASHKENTSPIRE2-CLOSE_FIRE.description": "Deal {Damage:diff()} damage {Repeat:diff()} times.\nGain {SmokePower:diff()} [gold]Smoke[/gold].\nAt the end of the turn, if [gold]Distance[/gold] is at least [blue]3[/blue], play this card regardless of where it is.",
   "TASHKENTSPIRE2-COMBINED_ARTILLERY_AND_TORPEDO.title": "Combined Artillery and Torpedo",
   "TASHKENTSPIRE2-COMBINED_ARTILLERY_AND_TORPEDO.selectionScreenPrompt": "Choose a card in your hand to add [gold]Affliction[/gold]: [gold]Torpedo[/gold] [blue]18[/blue].",
   "TASHKENTSPIRE2-COMBINED_ARTILLERY_AND_TORPEDO.description": "Deal {Damage:diff()} damage {Repeat:diff()} times.\nAdd [gold]Affliction[/gold]: [gold]Torpedo[/gold] [blue]18[/blue] to a card in your hand.",

@@ -68,7 +68,7 @@
   "TASHKENTSPIRE2-CHARGED_STRIKE.title": "축력 타격",
   "TASHKENTSPIRE2-CHARGED_STRIKE.description": "{Damage:diff()}의 피해를 줍니다.\n가한 피해량만큼 [gold]활력[/gold]을 획득합니다.",
   "TASHKENTSPIRE2-CLOSE_FIRE.title": "근접 사격",
-  "TASHKENTSPIRE2-CLOSE_FIRE.description": "{Damage:diff()}의 피해를 {Repeat:diff()}회 줍니다.\n[gold]거리[/gold]가 [blue]3[/blue] 이상이면 횟수가 2배가 됩니다.\n[gold]거리[/gold]가 [blue]5[/blue] 이상이면 횟수가 다시 2배가 됩니다.",
+  "TASHKENTSPIRE2-CLOSE_FIRE.description": "{Damage:diff()}의 피해를 {Repeat:diff()}회 줍니다.\n[gold]연막[/gold]을 {SmokePower:diff()} 획득합니다.\n턴 종료 시 [gold]거리[/gold]가 [blue]3[/blue] 이상이면, 이 카드가 어디에 있든 사용합니다.",
   "TASHKENTSPIRE2-COMBINED_ARTILLERY_AND_TORPEDO.title": "포뢰 합동 공격",
   "TASHKENTSPIRE2-COMBINED_ARTILLERY_AND_TORPEDO.selectionScreenPrompt": "손패 1장을 선택하여 【[gold]어뢰[/gold][blue]18[/blue]】 [gold]침식[/gold]을 추가합니다.",
   "TASHKENTSPIRE2-COMBINED_ARTILLERY_AND_TORPEDO.description": "{Damage:diff()}의 피해를 {Repeat:diff()}회 줍니다.\n손패 1장에 【[gold]어뢰[/gold][blue]18[/blue]】 [gold]침식[/gold]을 추가합니다.",

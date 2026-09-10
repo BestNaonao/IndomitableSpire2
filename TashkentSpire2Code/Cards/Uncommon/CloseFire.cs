@@ -1,5 +1,6 @@
 ﻿using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
@@ -8,14 +9,16 @@ using TashkentSpire2.TashkentSpire2Code.Powers;
 
 namespace TashkentSpire2.TashkentSpire2Code.Cards.Uncommon;
 
-public sealed class CloseFire() : TashkentCard(1, CardType.Attack, CardRarity.Uncommon, TargetType.AnyEnemy)
+public sealed class CloseFire() : TashkentCard(2, CardType.Attack, CardRarity.Uncommon, TargetType.AnyEnemy)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new DamageVar(8M, ValueProp.Move),
-        new RepeatVar(1)
+        new DamageVar(7M, ValueProp.Move),
+        new RepeatVar(2),
+        new PowerVar<SmokePower>(1M)
     ];
     
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [
+        HoverTipFactory.FromPower<SmokePower>(),
         HoverTipFactory.FromPower<DistancePower>()
     ];
     
@@ -23,23 +26,29 @@ public sealed class CloseFire() : TashkentCard(1, CardType.Attack, CardRarity.Un
     {
         ArgumentNullException.ThrowIfNull(cardPlay.Target, nameof(cardPlay.Target));
 
-        int repeat = DynamicVars.Repeat.IntValue;
-        int distanceAmount = (int)(Owner.Creature.GetPower<DistancePower>()?.Amount ?? 0m);
-        if (distanceAmount >= 3)
-        {
-            repeat *= 2;
-        }
-        if (distanceAmount >= 5)
-        {
-            repeat *= 2;
-        }
-
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
-            .WithHitCount(repeat)
+            .WithHitCount(DynamicVars.Repeat.IntValue)
             .FromCard(this, cardPlay)
             .Targeting(cardPlay.Target)
             .WithHitFx("vfx/vfx_attack_slash")
             .Execute(choiceContext);
+
+        await PowerCmd.Apply<SmokePower>(choiceContext, base.Owner.Creature,
+            base.DynamicVars["SmokePower"].BaseValue, base.Owner.Creature, this);
+    }
+
+    public override async Task AfterAutoPostPlayPhaseEntered(PlayerChoiceContext choiceContext, Player player)
+    {
+        if (player != base.Owner || base.Pile is not { IsCombatPile: true })
+        {
+            return;
+        }
+
+        decimal distance = base.Owner.Creature.GetPower<DistancePower>()?.Amount ?? 0M;
+        if (distance >= 3M)
+        {
+            await CardCmd.AutoPlay(choiceContext, this, null);
+        }
     }
     
     protected override void OnUpgrade()

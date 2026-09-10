@@ -1,4 +1,5 @@
 ﻿using MegaCrit.Sts2.Core.Commands;
+using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
@@ -21,7 +22,7 @@ public sealed class SmokePower : TashkentPower
     public override decimal ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props,
         Creature? dealer, CardModel? cardSource, CardPlay? cardPlay)
     {
-        if (target == base.Owner && props.HasFlag(ValueProp.Move))
+        if (target == base.Owner && props.IsPoweredAttack())
         {
             return 0.7m;
         }
@@ -29,9 +30,10 @@ public sealed class SmokePower : TashkentPower
         return 1m;
     }
     
-    public override async Task AfterDamageReceived(PlayerChoiceContext choiceContext, Creature target, DamageResult result, ValueProp props, Creature? dealer, CardModel? cardSource)
+    public override async Task AfterSideTurnEnd(PlayerChoiceContext choiceContext, CombatSide side,
+        IEnumerable<Creature> participants)
     {
-        if (target == base.Owner && result.TotalDamage != 0 && props.HasFlag(ValueProp.Move))
+        if (side == CombatSide.Enemy)
         {
             Flash();
             await PowerCmd.Decrement(this);

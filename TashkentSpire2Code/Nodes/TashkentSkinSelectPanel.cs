@@ -28,7 +28,6 @@ public partial class TashkentSkinSelectPanel : Control
 	private Node2D? _currentVisualNode;
 	private ModelId? _renderedSkinId;
 	private int _currentIndex;
-	private bool _selectionInitialized;
 
 	public override void _Ready()
 	{
@@ -61,16 +60,13 @@ public partial class TashkentSkinSelectPanel : Control
 		_selectScreen = screen;
 		Visible = true;
 
-		if (!_selectionInitialized)
-		{
-			var selectedIndex = Array.FindIndex(Skins, skin => skin.GetType() == selectedSkin.GetType());
-			_currentIndex = selectedIndex >= 0 ? selectedIndex : 0;
-			_selectionInitialized = true;
-		}
+		var selectedIndex = Array.FindIndex(Skins, skin => skin.Id == selectedSkin.Id);
+		_currentIndex = selectedIndex >= 0 ? selectedIndex : 0;
 
-		var skin = Skins[_currentIndex];
-		_selectScreen.Lobby.SetLocalCharacter(skin);
-		RenderSkinVisuals(skin);
+		// NCharacterSelectScreen.SelectCharacter has already written the selected
+		// character to the lobby before this Harmony postfix runs. Writing it again
+		// would emit a duplicate multiplayer character-change message.
+		RenderSkinVisuals(Skins[_currentIndex]);
 	}
 
 	private void OnLeftPressed()

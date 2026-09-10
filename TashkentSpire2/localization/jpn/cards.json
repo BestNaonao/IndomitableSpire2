@@ -68,7 +68,7 @@
   "TASHKENTSPIRE2-CHARGED_STRIKE.title": "蓄力打撃",
   "TASHKENTSPIRE2-CHARGED_STRIKE.description": "{Damage:diff()}ダメージを与える。\n与えたダメージに等しい[gold]活力[/gold]を得る。",
   "TASHKENTSPIRE2-CLOSE_FIRE.title": "近接射撃",
-  "TASHKENTSPIRE2-CLOSE_FIRE.description": "{Damage:diff()}ダメージを{Repeat:diff()}回与える。\n[gold]距離[/gold]が[blue]3[/blue]以上なら回数を2倍にする。\n[gold]距離[/gold]が[blue]5[/blue]以上ならさらに回数を2倍にする。",
+  "TASHKENTSPIRE2-CLOSE_FIRE.description": "{Damage:diff()}ダメージを{Repeat:diff()}回与える。\n{SmokePower:diff()}層の[gold]煙幕[/gold]を得る。\nターン終了時、[gold]距離[/gold]が[blue]3[/blue]以上なら、このカードがどこにあってもプレイする。",
   "TASHKENTSPIRE2-COMBINED_ARTILLERY_AND_TORPEDO.title": "砲雷一斉攻撃",
   "TASHKENTSPIRE2-COMBINED_ARTILLERY_AND_TORPEDO.selectionScreenPrompt": "手札を1枚選び、【[gold]魚雷[/gold][blue]18[/blue]】の[gold]侵蝕[/gold]を追加する。",
   "TASHKENTSPIRE2-COMBINED_ARTILLERY_AND_TORPEDO.description": "{Damage:diff()}ダメージを{Repeat:diff()}回与える。\n手札1枚に【[gold]魚雷[/gold][blue]18[/blue]】の[gold]侵蝕[/gold]を追加する。",

@@ -68,7 +68,7 @@
   "TASHKENTSPIRE2-CHARGED_STRIKE.title": "蓄力打击",
   "TASHKENTSPIRE2-CHARGED_STRIKE.description": "造成{Damage:diff()}点伤害。\n获得等量于所造成伤害的[gold]活力[/gold]。",
   "TASHKENTSPIRE2-CLOSE_FIRE.title": "抵近射击",
-  "TASHKENTSPIRE2-CLOSE_FIRE.description": "造成{Damage:diff()}点伤害{Repeat:diff()}次。\n如果至少[gold]距离[/gold][blue]3[/blue]，将次数翻倍。\n如果至少[gold]距离[/gold][blue]5[/blue]，将次数翻倍。",
+  "TASHKENTSPIRE2-CLOSE_FIRE.description": "造成{Damage:diff()}点伤害{Repeat:diff()}次。\n获得{SmokePower:diff()}层[gold]烟雾[/gold]。\n回合结束时，如果[gold]距离[/gold]至少为[blue]3[/blue]，则无论这张牌位于何处，自动将其打出。",
   "TASHKENTSPIRE2-COMBINED_ARTILLERY_AND_TORPEDO.title": "炮雷合击",
   "TASHKENTSPIRE2-COMBINED_ARTILLERY_AND_TORPEDO.selectionScreenPrompt": "选择一张手牌添加【[gold]鱼雷[/gold][blue]18[/blue]】的[gold]侵蚀[/gold]。",
   "TASHKENTSPIRE2-COMBINED_ARTILLERY_AND_TORPEDO.description": "造成{Damage:diff()}点伤害{Repeat:diff()}次。\n为一张手牌添加【[gold]鱼雷[/gold][blue]18[/blue]】的[gold]侵蚀[/gold]。",
