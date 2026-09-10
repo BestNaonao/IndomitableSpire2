@@ -20,6 +20,8 @@
   "INDOMITABLESPIRE2-VICTORIOUS_SONG.description": "Deal [blue]{VictoriousSongPower:diff()}[/blue] additional attack damage to the enemy with the highest current HP.\nTake [blue]{DamageReduction:diff()}[/blue] less attack damage from that enemy.",
   "INDOMITABLESPIRE2-FORMIDABLE_PRESSURE.title": "Formidable Pressure",
   "INDOMITABLESPIRE2-FORMIDABLE_PRESSURE.description": "Deal {CalculatedDamage:diff()} damage.\nDeals {ExtraDamage:diff()} additional damage for each time a debuff was applied to this enemy this turn.",
+  "INDOMITABLESPIRE2-SORORAL_UNITY.title": "Sororal Unity",
+  "INDOMITABLESPIRE2-SORORAL_UNITY.description": "Add an Illustrious Aegis, a Victorious Song, and a Formidable Pressure to your [gold]Hand[/gold].",
   "INDOMITABLESPIRE2-SWORDFISH_BOMBER.title": "Swordfish",
   "INDOMITABLESPIRE2-SWORDFISH_BOMBER.description": "Deal {Damage:diff()} damage.\nApply [blue]{FloodingPower:diff()}[/blue] [blue]Flooded[/blue].",
   "INDOMITABLESPIRE2-SWORDFISH818_SQUADRON.title": "Swordfish (818 Sqn.)",
