@@ -70,4 +70,45 @@ public static class CardExtensions
         card.DynamicVars.Durability().BaseValue = 
             Math.Min(card.DynamicVars.MaxDurability().BaseValue, card.DynamicVars.Durability().BaseValue + amount);
     }
+    
+    // ==========================================================
+    // 同心关键词继承扩展
+    // ==========================================================
+    
+    /// <summary>
+    /// 只复制同心指定的三项属性，不复制卡牌身份、牌堆、费用修正或其它战斗状态。
+    /// 同时用于尚未入堆的实体和选择界面的预览，不触发升级/附魔的界面与永久牌组记录。
+    /// </summary>
+    public static void InheritResonanceFrom(this CardModel card, CardModel source)
+    {
+        if (card == source) return; // 防止自己复制自己。
+        card.AssertMutable();
+        // 1. 与 CardModel.DeepCloneFields 一致：全局光环关键词由各张牌自行计算。克隆附魔。计算升级等级。
+        var keywords = source.GetKeywordsWithSources(KeywordSources.Local).ToHashSet();
+        var enchantment = (EnchantmentModel?)source.Enchantment?.ClonePreservingMutability();
+        var upgradeLevel = Math.Min(source.CurrentUpgradeLevel, card.MaxUpgradeLevel);
+        // 2. 清理旧有附魔。
+        card.ClearEnchantmentInternal();
+        // 3. 调整升级等级。先降级回基础无升级，再升级至相同等级。
+        if (card.CurrentUpgradeLevel > upgradeLevel)
+            card.DowngradeInternal();
+        while (card.CurrentUpgradeLevel < upgradeLevel && card.IsUpgradable)
+            card.UpgradeInternal();
+        // 4. 如果来源有附魔，则给目标卡牌施加该附魔。
+        if (enchantment != null)
+        {
+            // 绑定独立附魔实例，并应用附魔对卡牌数值的修改。
+            // 不用 CanEnchant 重新筛选（例如 SoulsPower 的来源已经移除了 Exhaust）。
+            card.EnchantInternal(enchantment, enchantment.Amount);
+            // 新牌保留自己的数值，因此需施加附魔对新牌的修改。
+            enchantment.ModifyCard();
+        }
+        // 5. 放在升级和附魔之后，保留来源最终的关键词集合，包括已移除的关键词。
+        foreach (var keyword in card.GetKeywordsWithSources(KeywordSources.Local).Except(keywords).ToArray())
+            card.RemoveKeyword(keyword);
+        foreach (var keyword in keywords.Except(card.GetKeywordsWithSources(KeywordSources.Local)).ToArray())
+            card.AddKeyword(keyword);
+        // 6. 清理升级预览状态，确保卡牌在 UI 上正常显示。
+        card.FinalizeUpgradeInternal();
+    }
 }
