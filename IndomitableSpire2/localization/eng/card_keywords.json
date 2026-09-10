@@ -18,5 +18,7 @@
   "INDOMITABLESPIRE2-COMMISSION.title": "Commission",
   "INDOMITABLESPIRE2-COMMISSION.description": "Unplayable until completed. When played, both you and the player who gave it to you gain rewards.",
   "INDOMITABLESPIRE2-ELEGANCE.title": "Elegance",
-  "INDOMITABLESPIRE2-ELEGANCE.description": "If you take no unblocked damage in a turn, triggers its effect at the start of your next turn."
+  "INDOMITABLESPIRE2-ELEGANCE.description": "If you take no unblocked damage in a turn, triggers its effect at the start of your next turn.",
+  "INDOMITABLESPIRE2-RESONANCE.title": "Resonance",
+  "INDOMITABLESPIRE2-RESONANCE.description": "Cards generated or transformed during this card's play inherit its upgrades, keywords, and enchantment."
 }
