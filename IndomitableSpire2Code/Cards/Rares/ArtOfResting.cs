@@ -26,7 +26,7 @@ public sealed class ArtOfResting() : IndomitableCard(2, CardType.Power, CardRari
         // 1. 播放施法动画，以及播放台词
         await CreatureCmd.TriggerAnim(Owner.Creature, "Cast", Owner.Character.CastAnimDelay);
         Owner.PlayIndomitableCardBanter(cardPlay, Id.Entry, VfxColor.Gold,
-            duration: VfxDuration.VeryLong, additionalDurationSeconds: 1d);
+            "res://IndomitableSpire2/sfx/characters/indomitable/main_2.wav", exactDurationSeconds: 7.6d);
         
         // 2. 极其优雅地全堆查找：遍历该玩家所有牌堆（抽牌、弃牌、手牌、消耗），找到所有“慵懒”，将之前积攒的“慵懒”统统转化为“养神”
         var indolentCards = Owner.PlayerCombatState.AllPiles
