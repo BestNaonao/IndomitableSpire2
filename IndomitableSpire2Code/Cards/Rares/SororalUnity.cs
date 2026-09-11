@@ -1,11 +1,13 @@
 using IndomitableSpire2.IndomitableSpire2Code.Cards.Abstracts;
 using IndomitableSpire2.IndomitableSpire2Code.Cards.Uncommons;
 using IndomitableSpire2.IndomitableSpire2Code.Enums;
+using IndomitableSpire2.IndomitableSpire2Code.Extensions;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Nodes.Vfx;
 
 namespace IndomitableSpire2.IndomitableSpire2Code.Cards.Rares;
 
@@ -25,6 +27,9 @@ public sealed class SororalUnity() : IndomitableCard(0, CardType.Skill, CardRari
     {
         await CreatureCmd.TriggerAnim(Owner.Creature, "Cast", Owner.Character.CastAnimDelay);
         if (CombatState == null) return;
+        
+        Owner.PlayIndomitableCardBanter(cardPlay, Id.Entry, VfxColor.Gold,
+            "res://IndomitableSpire2/sfx/characters/indomitable/link1.wav", exactDurationSeconds: 3.3d);
         
         // 三张姐妹的卡牌各生成一张；入堆前由同心补丁统一继承升级、关键词和附魔。
         CardModel[] cards =
