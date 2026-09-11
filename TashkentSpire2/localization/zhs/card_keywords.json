@@ -1,4 +1,6 @@
 {
   "TASHKENTSPIRE2-BARRAGE.title" : "弹幕",
-  "TASHKENTSPIRE2-BARRAGE.description" : "能无视卡牌现有[gold]弹药[/gold]数量而能打出至多6枚[gold]弹药[/gold]。\n每超过现有[gold]弹药[/gold]数量而发射一枚，则往手牌放入一张[gold]空弹壳[/gold]。"
+  "TASHKENTSPIRE2-BARRAGE.description" : "能无视卡牌现有[gold]弹药[/gold]数量而能打出至多6枚[gold]弹药[/gold]。\n每超过现有[gold]弹药[/gold]数量而发射一枚，则往手牌放入一张[gold]空弹壳[/gold]。",
+  "TASHKENTSPIRE2-CHOICE.title": "抉择",
+  "TASHKENTSPIRE2-CHOICE.description": "从展示的选项中选择[blue]1[/blue]项并执行其效果。"
 }

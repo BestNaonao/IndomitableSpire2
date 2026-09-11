@@ -1,4 +1,6 @@
 {
   "TASHKENTSPIRE2-BARRAGE.title": "弾幕",
-  "TASHKENTSPIRE2-BARRAGE.description": "カードにある[gold]弾薬[/gold]数を無視して、最大6発まで[gold]弾薬[/gold]を発射できる。\n現在の[gold]弾薬[/gold]数を超えて発射した場合、超過1発ごとに[gold]薬莢[/gold]を1枚[gold]手札[/gold]に加える。"
+  "TASHKENTSPIRE2-BARRAGE.description": "カードにある[gold]弾薬[/gold]数を無視して、最大6発まで[gold]弾薬[/gold]を発射できる。\n現在の[gold]弾薬[/gold]数を超えて発射した場合、超過1発ごとに[gold]薬莢[/gold]を1枚[gold]手札[/gold]に加える。",
+  "TASHKENTSPIRE2-CHOICE.title": "選択",
+  "TASHKENTSPIRE2-CHOICE.description": "表示された選択肢から[blue]1[/blue]つを選び、その効果を実行する。"
 }

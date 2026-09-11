@@ -8,4 +8,8 @@ public class TashkentKeyword
     [CustomEnum("Barrage")]
     [KeywordProperties(AutoKeywordPosition.Before)]
     public static CardKeyword Barrage;
+
+    [CustomEnum("Choice")]
+    [KeywordProperties(AutoKeywordPosition.Before)]
+    public static CardKeyword Choice;
 }

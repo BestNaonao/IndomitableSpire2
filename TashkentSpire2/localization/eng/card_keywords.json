@@ -1,4 +1,6 @@
 {
   "TASHKENTSPIRE2-BARRAGE.title": "Barrage",
-  "TASHKENTSPIRE2-BARRAGE.description": "This card can fire up to 6 [gold]Ammo[/gold] regardless of its current [gold]Ammo[/gold] count.\nFor each shot fired beyond its current [gold]Ammo[/gold], add a [gold]Spent Shell Casing[/gold] to your hand."
+  "TASHKENTSPIRE2-BARRAGE.description": "This card can fire up to 6 [gold]Ammo[/gold] regardless of its current [gold]Ammo[/gold] count.\nFor each shot fired beyond its current [gold]Ammo[/gold], add a [gold]Spent Shell Casing[/gold] to your hand.",
+  "TASHKENTSPIRE2-CHOICE.title": "Choice",
+  "TASHKENTSPIRE2-CHOICE.description": "Choose [blue]1[/blue] of the displayed options and perform its effect."
 }

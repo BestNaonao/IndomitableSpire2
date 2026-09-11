@@ -11,29 +11,26 @@ namespace TashkentSpire2.TashkentSpire2Code.Cards.Common;
 public sealed class PreparatoryAction() : TashkentCard(1, CardType.Skill, CardRarity.Common, TargetType.Self)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new CardsVar(1)
+        new CardsVar(2)
     ];
     
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [
-        HoverTipFactory.FromCard<ChargePreparation>(base.IsUpgraded),
-        HoverTipFactory.FromCard<RetreatPreparation>(base.IsUpgraded)
+        HoverTipFactory.FromCard<Preparation>(base.IsUpgraded)
     ];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         ArgumentNullException.ThrowIfNull(CombatState);
-        CardModel card1 = base.CombatState.CreateCard<ChargePreparation>(base.Owner);
-        CardModel card2 = base.CombatState.CreateCard<RetreatPreparation>(base.Owner);
-        if (this.IsUpgraded)
-        {
-            CardCmd.Upgrade(card1);
-            CardCmd.Upgrade(card2);
-        }
-
+        List<CardModel> preparations = [];
         for (int i = 0; i < DynamicVars.Cards.IntValue; i++)
         {
-            await CardPileCmd.AddGeneratedCardToCombat(card1, PileType.Hand, base.Owner);
-            await CardPileCmd.AddGeneratedCardToCombat(card2, PileType.Hand, base.Owner);
+            Preparation preparation = base.CombatState.CreateCard<Preparation>(base.Owner);
+            if (base.IsUpgraded)
+            {
+                CardCmd.Upgrade(preparation);
+            }
+            preparations.Add(preparation);
         }
+        await CardPileCmd.AddGeneratedCardsToCombat(preparations, PileType.Hand, base.Owner);
     }
 }

@@ -4,25 +4,23 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models.CardPools;
+using MegaCrit.Sts2.Core.Models.Monsters;
 using TashkentSpire2.TashkentSpire2Code.Powers;
 
 namespace TashkentSpire2.TashkentSpire2Code.Cards.Token;
 
 [Pool(typeof(TokenCardPool))]
-public sealed class ChargePreparation() : TashkentCard(0, CardType.Skill, CardRarity.Token, TargetType.Self)
+public sealed class ChargePreparation() : TashkentCard(-1, CardType.Status, CardRarity.Status, TargetType.None), KnowledgeDemon.IChoosable
 {
-    public override IEnumerable<CardKeyword> CanonicalKeywords => [
-        CardKeyword.Retain,
-        CardKeyword.Exhaust
-    ];
+    public override bool CanBeGeneratedInCombat => false;
     
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new ChargeDynamicVar(2M)
     ];
 
-    protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+    public async Task OnChosen()
     {
-        await PowerCmd.Apply<DistancePower>(choiceContext, base.Owner.Creature, base.DynamicVars["TashkentSpire2-Charge"].BaseValue, base.Owner.Creature, this);
+        await PowerCmd.Apply<DistancePower>(new ThrowingPlayerChoiceContext(), base.Owner.Creature, base.DynamicVars["TashkentSpire2-Charge"].BaseValue, base.Owner.Creature, this);
     }
     
     protected override void OnUpgrade()
