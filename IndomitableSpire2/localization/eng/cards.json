@@ -124,6 +124,7 @@
   "INDOMITABLESPIRE2-WITHERER.title": "Witherer",
   "INDOMITABLESPIRE2-WITHERER.description": "After dealing a total of {Threshold} [gold]On Fire[/gold] or [gold]Flooding[/gold] damage this combat, the first {WithererPower:plural:[gold]Debuff[/gold] you apply to an enemy each turn is|{WithererPower:diff()} [gold]Debuffs[/gold] you apply to enemies each turn are} applied an extra time.",
   "INDOMITABLESPIRE2-ICED_DRINK.title": "Iced Drink",
+  "INDOMITABLESPIRE2-ICED_DRINK.banter": "Here, your ice-cold drink. I only drank a little of it.",
   "INDOMITABLESPIRE2-ICED_DRINK.description": "[gold]Requires[/gold] [blue]{MotivationRequire:diff()}[/blue] [gold]Motivation[/gold].\nRemove all [gold]On Fire[/gold] from the enemy and apply an equal amount of [gold]Flooding[/gold]. If at least 5 are removed, draw {Cards:diff()} {Cards:plural:card|cards}.",
   "INDOMITABLESPIRE2-BURNING_PASSION.title": "Burning Passion",
   "INDOMITABLESPIRE2-BURNING_PASSION.description": "[gold]Requires[/gold] [blue]{MotivationRequire:diff()}[/blue] [gold]Motivation[/gold].\nRemove all [gold]Flooding[/gold] from the enemy and apply an equal amount of [gold]On Fire[/gold]. If at least 1 is removed, gain {Energy:energyIcons()}.",
