@@ -35,9 +35,9 @@ public sealed class IcedDrink() : IndomitableCard(2, CardType.Skill, CardRarity.
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         ArgumentNullException.ThrowIfNull(cardPlay.Target, nameof(cardPlay.Target));
-        await CreatureCmd.TriggerAnim(Owner.Creature, "Cast", Owner.Character.CastAnimDelay);
-        Owner.PlayIndomitableCardBanter(cardPlay, Id.Entry, VfxColor.Gold,
-            "res://IndomitableSpire2/sfx/characters/indomitable/main_2_2.wav", exactDurationSeconds: 5.9d);
+        await Owner.PlayIndomitableCardPresentation(cardPlay, Id.Entry, VfxColor.Gold,
+            "res://IndomitableSpire2/sfx/characters/indomitable/main_2_2.wav",
+            animationTrigger: "Cast", exactDurationSeconds: 5.9d);
         var removedAmount = 0;
         
         // 1. 获取并移除敌人身上的所有“起火”

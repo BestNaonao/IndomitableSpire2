@@ -25,11 +25,10 @@ public sealed class SororalUnity() : IndomitableCard(0, CardType.Skill, CardRari
     
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        await CreatureCmd.TriggerAnim(Owner.Creature, "Cast", Owner.Character.CastAnimDelay);
+        await Owner.PlayIndomitableCardPresentation(cardPlay, Id.Entry, VfxColor.Gold,
+            "res://IndomitableSpire2/sfx/characters/indomitable/link1.wav",
+            animationTrigger: "Cast", exactDurationSeconds: 3.3d);
         if (CombatState == null) return;
-        
-        Owner.PlayIndomitableCardBanter(cardPlay, Id.Entry, VfxColor.Gold,
-            "res://IndomitableSpire2/sfx/characters/indomitable/link1.wav", exactDurationSeconds: 3.3d);
         
         // 三张姐妹的卡牌各生成一张；入堆前由同心补丁统一继承升级、关键词和附魔。
         CardModel[] cards =

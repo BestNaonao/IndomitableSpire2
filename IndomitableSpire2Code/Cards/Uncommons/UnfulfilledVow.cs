@@ -23,12 +23,14 @@ public sealed class UnfulfilledVow() : IndomitableCard(3, CardType.Attack, CardR
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         ArgumentNullException.ThrowIfNull(cardPlay.Target, nameof(cardPlay.Target));
-        // 播放角色台词和音频
-        Owner.PlayIndomitableCardBanter(cardPlay, Id.Entry, VfxColor.Gold,
-            "res://IndomitableSpire2/sfx/characters/indomitable/link2.wav", exactDurationSeconds: 2.6d);
-        // 造成大量伤害并播放重击动画
+        // 播放攻击动画、角色台词和专属语音。
+        await Owner.PlayIndomitableCardPresentation(cardPlay, Id.Entry, VfxColor.Gold,
+            "res://IndomitableSpire2/sfx/characters/indomitable/link2.wav",
+            animationTrigger: "Attack", exactDurationSeconds: 2.6d);
+        // 攻击者动画已播放；伤害指令仅保留命中重击特效，避免重复触发默认攻击音效。
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
             .FromCard(this, cardPlay)
+            .WithNoAttackerAnim()
             .Targeting(cardPlay.Target)
             .WithHitFx("vfx/vfx_heavy_blunt")
             .Execute(choiceContext);
