@@ -144,6 +144,8 @@
   "INDOMITABLESPIRE2-SALVAGE.title": "救援回収",
   "INDOMITABLESPIRE2-SALVAGE.description": "[gold]廃棄札[/gold]からカードを最大{Cards:diff()}枚選び、[gold]山札[/gold]に加える。それらの[gold]エセリアル[/gold]を取り除き、[gold]耐久[/gold]を全回復する。",
   "INDOMITABLESPIRE2-SALVAGE.selectionScreenPrompt": "[gold]山札[/gold]に加えるカードを最大{Amount}枚選ぶ。",
+  "INDOMITABLESPIRE2-HAPPY_BIRTHDAY.title": "お誕生日",
+  "INDOMITABLESPIRE2-HAPPY_BIRTHDAY.description": "{Damage:diff()}ダメージを与え、[gold]炎上[/gold] [blue]{OnFirePower:diff()}[/blue]を付与する。\n対象の敵の[gold]炎上[/gold]が[blue]{OnFireThreshold:diff()}[/blue]以上になるまで繰り返す。",
   
   "INDOMITABLESPIRE2-DESSERT.title": "デザート",
   "INDOMITABLESPIRE2-DESSERT.description": "HPを[green]{Heal:diff()}[/green]回復する。\n{Energy:energyIcons()}を得る。",

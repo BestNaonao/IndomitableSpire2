@@ -144,6 +144,8 @@
   "INDOMITABLESPIRE2-SALVAGE.title": "Salvage",
   "INDOMITABLESPIRE2-SALVAGE.description": "Choose up to {Cards:diff()} {Cards:plural:card|cards} from your [gold]Exhaust Pile[/gold] and put {Cards:plural:it|them} into your [gold]Draw Pile[/gold]. Remove [gold]Ethereal[/gold] from {Cards:plural:it|them} and fully restore {Cards:plural:its|their} [gold]Durability[/gold].",
   "INDOMITABLESPIRE2-SALVAGE.selectionScreenPrompt": "Choose up to {Amount} {Amount:plural:card|cards} to put into your [gold]Draw Pile[/gold].",
+  "INDOMITABLESPIRE2-HAPPY_BIRTHDAY.title": "Happy Birthday",
+  "INDOMITABLESPIRE2-HAPPY_BIRTHDAY.description": "Deal {Damage:diff()} damage and apply [blue]{OnFirePower:diff()}[/blue] [gold]On Fire[/gold].\nRepeat until the enemy has at least [blue]{OnFireThreshold:diff()}[/blue] [gold]On Fire[/gold].",
   
   "INDOMITABLESPIRE2-DESSERT.title": "Dessert",
   "INDOMITABLESPIRE2-DESSERT.description": "Heal [green]{Heal:diff()}[/green] HP.\nGain {Energy:energyIcons()}.",
