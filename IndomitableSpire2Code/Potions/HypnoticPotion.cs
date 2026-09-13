@@ -28,12 +28,10 @@ public sealed class HypnoticPotion : IndomitablePotion
         "res://IndomitableSpire2/images/potions/packed_outline/hypnotic_potion_outline.tres";
     
     // 定义药水数值：1 层催眠能力。STS2 中使用 PowerVar<T> 来绑定能力数值。现已自动显示“催眠”这个能力的说明框
-    protected override IEnumerable<DynamicVar> CanonicalVars => 
-        [new CustomPowerVar<HypnotizedPower>(5M)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new CustomPowerVar<HypnotizedPower>(5M)];
     
     // 添加悬浮提示 (HoverTip)：当玩家把鼠标放在药水上时，自动显示“催眠”这个能力的说明框
-    public override IEnumerable<IHoverTip> ExtraHoverTips => 
-        [HoverTipFactory.FromPower<HypnotizedPower>()];
+    public override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<HypnotizedPower>()];
     
     // 投掷药水时的实际逻辑
     protected override async Task OnUse(PlayerChoiceContext choiceContext, Creature? target)
@@ -41,8 +39,7 @@ public sealed class HypnoticPotion : IndomitablePotion
         // 安全性检查，确保目标不为空
         ArgumentNullException.ThrowIfNull(target);
         
-        // 给选中的敌人 (target) 施加催眠能力
-        // 来源是玩家自身 (Owner.Creature)
+        // 给选中的敌人 (target) 施加催眠能力，来源是玩家自身 (Owner.Creature)
         await PowerCmd.Apply<HypnotizedPower>(
             choiceContext: choiceContext, 
             target: target, 

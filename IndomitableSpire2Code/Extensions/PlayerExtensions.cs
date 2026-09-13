@@ -1,7 +1,7 @@
-﻿using IndomitableSpire2.IndomitableSpire2Code.Character;
+﻿using Godot;
+using IndomitableSpire2.IndomitableSpire2Code.Character;
 using IndomitableSpire2.IndomitableSpire2Code.Commands;
 using IndomitableSpire2.IndomitableSpire2Code.Powers;
-using Godot;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
