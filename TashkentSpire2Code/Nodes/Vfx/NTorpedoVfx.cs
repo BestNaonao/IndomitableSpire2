@@ -21,7 +21,9 @@ public partial class NTorpedoVfx : Node2D
 
     private const float SpawnDuration = 0.22f;
     private const float FlightDuration = 0.3f;
-    private const float DisplayCanvasWidth = 96f;
+    private const float DisplayCanvasWidth = 160f;
+    private const float OrbitAngularSpeed = 0.62f;
+    private const float GoldenAngle = 2.39996323f;
 
     private Node2D _torpedo = null!;
     private Node2D _facing = null!;
@@ -33,6 +35,11 @@ public partial class NTorpedoVfx : Node2D
     private Tween? _dismissTween;
     private TaskCompletionSource<bool>? _launchCompletion;
 
+    private float _leftDistance;
+    private float _height;
+    private float _orbitRadiusX;
+    private float _orbitRadiusY;
+    private float _orbitPhase;
     private float _phase;
     private double _elapsed;
     private bool _isHovering;
@@ -46,7 +53,7 @@ public partial class NTorpedoVfx : Node2D
     public int DisplaySlot { get; private set; }
     public bool CanLaunch => !_isFinishing;
 
-    // A flying final torpedo still occupies one of the twelve visible slots. The
+    // A flying final torpedo still occupies one of the visible slots. The
     // slot becomes reusable only after impact, when the sprite starts disappearing.
     public bool CountsTowardDisplayLimit => !_isFinishing || _isLaunching;
 
@@ -63,9 +70,8 @@ public partial class NTorpedoVfx : Node2D
         _sprite = GetNode<Sprite2D>("Torpedo/Facing/Sprite");
         _ownerNode = GetParent() as NCreature;
 
-        // The old packed icon occupied a 64 px canvas at scale 2.5. A 96 px
-        // canvas is exactly 60% of that on-screen footprint, independent of the
-        // new high-resolution texture's source dimensions.
+        // Match the first version's 64 px packed icon at scale 2.5 while keeping
+        // the remastered high-resolution texture.
         if (_sprite.Texture != null && _sprite.Texture.GetWidth() > 0)
         {
             float scale = DisplayCanvasWidth / _sprite.Texture.GetWidth();
@@ -84,16 +90,32 @@ public partial class NTorpedoVfx : Node2D
         float time = (float)_elapsed;
         float facingSign = GetFacingSign();
 
-        // Small incommensurate waves keep the rack alive without making twelve
-        // sprites overlap or requiring any particle emitters.
-        float driftX = Mathf.Sin(time * 0.91f + _phase) * 3.5f
-                     + Mathf.Sin(time * 2.17f + _phase * 0.37f) * 1.5f;
-        float driftY = Mathf.Cos(time * 1.13f + _phase * 0.71f) * 2.5f
-                     + Mathf.Sin(time * 1.79f + _phase) * 1.25f;
+        Vector2 targetPosition;
+        bool isGodOrbit = Power.Owner.GetPower<TorpedoGodPower>() != null;
+        if (isGodOrbit)
+        {
+            // Godot's Y axis points down, so increasing this angle produces a
+            // clockwise orbit. Only position follows the orbit; sprite rotation
+            // remains near horizontal and gently sways on its own.
+            float angle = _orbitPhase + time * OrbitAngularSpeed;
+            float radialWobble = Mathf.Sin(time * 1.37f + _phase) * 5f;
+            targetPosition = new Vector2(
+                Mathf.Cos(angle) * (_orbitRadiusX + radialWobble),
+                Mathf.Sin(angle) * (_orbitRadiusY + radialWobble * 0.6f));
+        }
+        else
+        {
+            // Two incommensurate waves reproduce the original loose, irregular loop.
+            float driftX = Mathf.Sin(time * 0.91f + _phase) * 18f
+                         + Mathf.Sin(time * 2.17f + _phase * 0.37f) * 6f;
+            float driftY = Mathf.Cos(time * 1.13f + _phase * 0.71f) * 13f
+                         + Mathf.Sin(time * 1.79f + _phase) * 5f;
+            targetPosition = new Vector2(-_leftDistance + driftX, -_height + driftY);
+        }
 
-        Vector2 targetPosition = new(driftX, driftY);
         _torpedo.Position = _torpedo.Position.Lerp(targetPosition, Mathf.Clamp((float)delta * 5.5f, 0f, 1f));
-        _torpedo.Rotation = Mathf.DegToRad(Mathf.Sin(time * 0.83f + _phase) * 1.5f);
+        float swayDegrees = isGodOrbit ? 3f : 2.5f;
+        _torpedo.Rotation = Mathf.DegToRad(Mathf.Sin(time * 0.83f + _phase) * swayDegrees);
         _facing.Scale = new Vector2(facingSign, 1f);
 
         float pulse = 0.5f + Mathf.Sin(time * 2.4f + _phase) * 0.5f;
@@ -124,29 +146,40 @@ public partial class NTorpedoVfx : Node2D
     }
 
     /// <summary>
-    /// Starts at the character center, then settles into its assigned slot below
-    /// the health bar. The root remains parented to NCreature so it follows it.
+    /// Starts at the character center, then settles into a deterministic random
+    /// point in the original upper-left range. The root follows NCreature.
     /// </summary>
-    public void BeginSpawn(Vector2 ownerCenter, Vector2 restPosition, int displaySlot)
+    public void BeginSpawn(Vector2 ownerCenter, int displaySlot)
     {
-        GlobalPosition = restPosition;
+        GlobalPosition = ownerCenter;
         DisplaySlot = displaySlot;
 
         uint ownerId = Power.Owner.CombatId ?? 0u;
         uint seed = unchecked(ownerId * 0x9E3779B9u + (uint)(displaySlot + 1) * 0x85EBCA6Bu);
+        _leftDistance = Mathf.Lerp(140f, 220f, StableUnit(seed));
+        _height = Mathf.Lerp(160f, 280f, StableUnit(seed ^ 0xC2B2AE35u));
+        bool outerOrbit = displaySlot >= 12;
+        _orbitRadiusX = Mathf.Lerp(outerOrbit ? 300f : 205f, outerOrbit ? 345f : 250f,
+            StableUnit(seed ^ 0xA24BAED5u));
+        _orbitRadiusY = Mathf.Lerp(outerOrbit ? 210f : 145f, outerOrbit ? 255f : 190f,
+            StableUnit(seed ^ 0x9FB21C65u));
+        _orbitPhase = Mathf.Tau * StableUnit(ownerId ^ 0xD1B54A35u) + displaySlot * GoldenAngle;
         _phase = Mathf.Tau * StableUnit(seed ^ 0x27D4EB2Fu);
+        Vector2 destination = Power.Owner.GetPower<TorpedoGodPower>() != null
+            ? new Vector2(Mathf.Cos(_orbitPhase) * _orbitRadiusX, Mathf.Sin(_orbitPhase) * _orbitRadiusY)
+            : new Vector2(-_leftDistance, -_height);
 
         _isHovering = false;
         _isLaunching = false;
         _isFinishing = false;
-        _torpedo.GlobalPosition = ownerCenter;
+        _torpedo.Position = Vector2.Zero;
         _torpedo.GlobalRotation = 0f;
         _torpedo.Scale = Vector2.Zero;
         _torpedo.Modulate = Colors.Transparent;
         _facing.Scale = new Vector2(GetFacingSign(), 1f);
 
         _spawnTween = CreateTween();
-        _spawnTween.TweenProperty(_torpedo, "position", Vector2.Zero, SpawnDuration)
+        _spawnTween.TweenProperty(_torpedo, "position", destination, SpawnDuration)
             .SetEase(Tween.EaseType.Out)
             .SetTrans(Tween.TransitionType.Back);
         _spawnTween.Parallel().TweenProperty(_torpedo, "scale", Vector2.One, 0.18f)
@@ -244,7 +277,7 @@ public partial class NTorpedoVfx : Node2D
         if (_isFinishing)
         {
             // The vanilla fire/smoke burst covers the impact. Hiding here makes
-            // the vacated rack slot reusable without ever drawing a 13th sprite.
+            // the vacated slot reusable without ever drawing above the active cap.
             _torpedo.Visible = false;
         }
         CompleteLaunch();

@@ -1,6 +1,5 @@
-using System.Reflection;
-using System.Reflection.Emit;
 using HarmonyLib;
+using MegaCrit.Sts2.Core.Entities.Relics;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Nodes.Screens.RelicCollection;
 using TashkentSpire2.TashkentSpire2Code.Character;
@@ -14,6 +13,9 @@ namespace TashkentSpire2.TashkentSpire2Code.Patches;
 /// </summary>
 public static class TashkentSharedCompendiumPatch
 {
+	[ThreadStatic]
+	private static bool _isLoadingStarterRelicCompendium;
+
 	[HarmonyPatch(typeof(ModelDb), nameof(ModelDb.AllCharacterPotionPools), MethodType.Getter)]
 	private static class DistinctPotionPools
 	{
@@ -58,41 +60,36 @@ public static class TashkentSharedCompendiumPatch
 
 	/// <summary>
 	/// Starter relics are collected from AllCharacters instead of AllCharacterRelicPools,
-	/// so the three hidden skin models must also be filtered at this call site.
+	/// so suppress the three hidden skin models only while that synchronous collection is
+	/// being built. The character getter remains unchanged for runs and character select.
 	/// </summary>
 	[HarmonyPatch(typeof(NRelicCollectionCategory), nameof(NRelicCollectionCategory.LoadRelics))]
 	private static class DistinctStarterRelics
 	{
-		private static readonly MethodInfo AllCharactersGetter =
-			AccessTools.PropertyGetter(typeof(ModelDb), nameof(ModelDb.AllCharacters));
-
-		private static readonly MethodInfo CompendiumCharactersMethod =
-			AccessTools.DeclaredMethod(typeof(DistinctStarterRelics), nameof(GetCompendiumCharacters));
-
-		[HarmonyTranspiler]
-		private static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
+		[HarmonyPrefix]
+		private static void Prefix(RelicRarity relicRarity, out bool __state)
 		{
-			var replaced = false;
-			foreach (var instruction in instructions)
-			{
-				if (instruction.Calls(AllCharactersGetter))
-				{
-					replaced = true;
-					yield return new CodeInstruction(OpCodes.Call, CompendiumCharactersMethod);
-					continue;
-				}
-
-				yield return instruction;
-			}
-
-			if (!replaced)
-				MainFile.Logger.Error("Unable to patch the relic compendium's character enumeration.");
+			__state = _isLoadingStarterRelicCompendium;
+			if (relicRarity == RelicRarity.Starter)
+				_isLoadingStarterRelicCompendium = true;
 		}
 
-		private static IEnumerable<CharacterModel> GetCompendiumCharacters()
+		[HarmonyFinalizer]
+		private static Exception? Finalizer(Exception? __exception, bool __state)
 		{
-			return ModelDb.AllCharacters.Where(character =>
-				character is not TashkentCharacter tashkent || tashkent.CurrentSkin == TashkentSkin.Default);
+			_isLoadingStarterRelicCompendium = __state;
+			return __exception;
+		}
+	}
+
+	[HarmonyPatch(typeof(TashkentCharacter), nameof(TashkentCharacter.StartingRelics), MethodType.Getter)]
+	private static class HideSkinStarterRelicsFromCompendium
+	{
+		[HarmonyPostfix]
+		private static void Postfix(TashkentCharacter __instance, ref IReadOnlyList<RelicModel> __result)
+		{
+			if (_isLoadingStarterRelicCompendium && __instance.CurrentSkin != TashkentSkin.Default)
+				__result = Array.Empty<RelicModel>();
 		}
 	}
 }

@@ -1,7 +1,7 @@
 using System.Reflection;
-using System.Reflection.Emit;
 using System.Runtime.CompilerServices;
 using HarmonyLib;
+using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Nodes.Screens.GameOverScreen;
 using MegaCrit.Sts2.Core.Nodes.Screens.StatsScreen;
@@ -20,6 +20,8 @@ public static class TashkentSharedProgressionPatch
 {
 	private static readonly FieldInfo? CharacterStatsField =
 		AccessTools.Field(typeof(ProgressState), "_characterStats");
+	private static readonly FieldInfo? LocalPlayerField =
+		AccessTools.Field(typeof(NGameOverScreen), "_localPlayer");
 
 	private static readonly ConditionalWeakTable<ProgressState, MigrationMarker> MigratedStates = new();
 	private static readonly object MigrationLock = new();
@@ -41,44 +43,59 @@ public static class TashkentSharedProgressionPatch
 	}
 
 	/// <summary>
-	/// The game-over badge writer is the one progression call site that indexes
-	/// ProgressState.CharacterStats directly instead of using one of the methods above.
-	/// Redirect that index without adding duplicate dictionary entries to the save.
+	/// The game-over badge writer indexes ProgressState.CharacterStats directly. During
+	/// that synchronous call, expose the shared stats through the selected skin ID too.
+	/// This also composes with other mods that transpile the same dictionary lookup.
 	/// </summary>
 	[HarmonyPatch(typeof(NGameOverScreen), "SaveBadgesToProgress")]
-	[HarmonyTranspiler]
-	private static IEnumerable<CodeInstruction> RedirectGameOverBadgeStats(
-		IEnumerable<CodeInstruction> instructions)
+	[HarmonyPrefix]
+	private static void AddTemporaryGameOverStatsAlias(
+		NGameOverScreen __instance,
+		out TemporaryStatsAlias? __state)
 	{
-		var dictionaryIndexer = AccessTools.PropertyGetter(
-			typeof(IReadOnlyDictionary<ModelId, CharacterStats>),
-			"Item");
-		var sharedIndexer = AccessTools.DeclaredMethod(
-			typeof(TashkentSharedProgressionPatch),
-			nameof(GetSharedCharacterStats));
-		var replaced = false;
-
-		foreach (var instruction in instructions)
+		__state = null;
+		if (LocalPlayerField?.GetValue(__instance) is not Player player)
 		{
-			if (instruction.Calls(dictionaryIndexer))
-			{
-				replaced = true;
-				yield return new CodeInstruction(OpCodes.Call, sharedIndexer);
-				continue;
-			}
-
-			yield return instruction;
+			MainFile.Logger.Error("Unable to access the game-over local player; Tashkent skin badges could not be redirected.");
+			return;
 		}
 
-		if (!replaced)
-			MainFile.Logger.Error("Unable to patch the game-over character badge lookup.");
+		var variantId = player.Character.Id;
+		if (!IsVariantId(variantId))
+			return;
+
+		var progress = SaveManager.Instance.Progress;
+		EnsureExistingStatsAreUnified(progress);
+		if (CharacterStatsField?.GetValue(progress) is not Dictionary<ModelId, CharacterStats> stats)
+		{
+			MainFile.Logger.Error("Unable to access ProgressState character stats; Tashkent skin badges could not be redirected.");
+			return;
+		}
+
+		var sharedId = GetProgressionId(variantId);
+		if (!stats.TryGetValue(sharedId, out var sharedStats))
+			sharedStats = progress.GetOrCreateCharacterStats(sharedId);
+
+		var hadOriginal = stats.TryGetValue(variantId, out var originalStats);
+		stats[variantId] = sharedStats;
+		__state = new TemporaryStatsAlias(stats, variantId, hadOriginal, originalStats);
 	}
 
-	private static CharacterStats GetSharedCharacterStats(
-		IReadOnlyDictionary<ModelId, CharacterStats> stats,
-		ModelId characterId)
+	[HarmonyPatch(typeof(NGameOverScreen), "SaveBadgesToProgress")]
+	[HarmonyFinalizer]
+	private static Exception? RemoveTemporaryGameOverStatsAlias(
+		Exception? __exception,
+		TemporaryStatsAlias? __state)
 	{
-		return stats[GetProgressionId(characterId)];
+		if (__state is not null)
+		{
+			if (__state.HadOriginal && __state.OriginalStats is not null)
+				__state.Stats[__state.VariantId] = __state.OriginalStats;
+			else
+				__state.Stats.Remove(__state.VariantId);
+		}
+
+		return __exception;
 	}
 
 	public static ModelId GetProgressionId(ModelId characterId)
@@ -201,6 +218,12 @@ public static class TashkentSharedProgressionPatch
 	private sealed class MigrationMarker
 	{
 	}
+
+	private sealed record TemporaryStatsAlias(
+		Dictionary<ModelId, CharacterStats> Stats,
+		ModelId VariantId,
+		bool HadOriginal,
+		CharacterStats? OriginalStats);
 }
 
 /// <summary>

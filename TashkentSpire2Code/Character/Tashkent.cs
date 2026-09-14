@@ -97,7 +97,7 @@ public class TashkentCharacter : CustomCharacterModel
 		"res://TashkentSpire2/scenes/vfx/tashkent_energy_counter.tscn";
 
 	// Keep the persistent Torpedo visual warm for the run. The scene is intentionally
-	// lightweight: at most twelve powers own one Sprite2D each and there are no emitters.
+	// lightweight: at most 12 Sprite2Ds (24 with TorpedoGodPower) and no emitters.
 	protected override IEnumerable<string> ExtraAssetPaths => NTorpedoVfx.AssetPaths;
 	
 	// public override string CustomArmPointingTexturePath =>
