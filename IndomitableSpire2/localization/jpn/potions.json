@@ -1,4 +1,8 @@
 {
+  "INDOMITABLESPIRE2-FLAMMABLE_POTION.description": "[blue]{OnFirePower}[/blue]の[gold]炎上[/gold]を与える。",
+  "INDOMITABLESPIRE2-FLAMMABLE_POTION.title": "可燃性ポーション",
   "INDOMITABLESPIRE2-HYPNOTIC_POTION.description": "[blue]{HypnotizedPower}[/blue]の[gold]催眠[/gold]を与える。",
-  "INDOMITABLESPIRE2-HYPNOTIC_POTION.title": "安眠ポーション"
+  "INDOMITABLESPIRE2-HYPNOTIC_POTION.title": "安眠ポーション",
+  "INDOMITABLESPIRE2-SHIELD_POTION.description": "[blue]{Shield}[/blue]の[gold]シールド[/gold]を与える。",
+  "INDOMITABLESPIRE2-SHIELD_POTION.title": "シールドポーション"
 }

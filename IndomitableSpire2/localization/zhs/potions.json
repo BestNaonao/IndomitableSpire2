@@ -1,4 +1,8 @@
 {
+  "INDOMITABLESPIRE2-FLAMMABLE_POTION.description": "给予[blue]{OnFirePower}[/blue]层[gold]起火[/gold]。",
+  "INDOMITABLESPIRE2-FLAMMABLE_POTION.title": "易燃药水",
   "INDOMITABLESPIRE2-HYPNOTIC_POTION.description": "给予[blue]{HypnotizedPower}[/blue]层[gold]催眠[/gold]。",
-  "INDOMITABLESPIRE2-HYPNOTIC_POTION.title": "安眠药水"
+  "INDOMITABLESPIRE2-HYPNOTIC_POTION.title": "安眠药水",
+  "INDOMITABLESPIRE2-SHIELD_POTION.description": "给予[blue]{Shield}[/blue]点[gold]护盾[/gold]。",
+  "INDOMITABLESPIRE2-SHIELD_POTION.title": "护盾药水"
 }

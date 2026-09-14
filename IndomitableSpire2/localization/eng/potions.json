@@ -1,4 +1,8 @@
 {
+  "INDOMITABLESPIRE2-FLAMMABLE_POTION.description": "Apply [blue]{OnFirePower}[/blue] [gold]On Fire[/gold].",
+  "INDOMITABLESPIRE2-FLAMMABLE_POTION.title": "Flammable Potion",
   "INDOMITABLESPIRE2-HYPNOTIC_POTION.description": "Apply [blue]{HypnotizedPower}[/blue] [gold]Hypnotized[/gold].",
-  "INDOMITABLESPIRE2-HYPNOTIC_POTION.title": "Hypnotic Potion"
+  "INDOMITABLESPIRE2-HYPNOTIC_POTION.title": "Hypnotic Potion",
+  "INDOMITABLESPIRE2-SHIELD_POTION.description": "Grant [blue]{Shield}[/blue] [gold]Shield[/gold].",
+  "INDOMITABLESPIRE2-SHIELD_POTION.title": "Shield Potion"
 }
