@@ -1,0 +1,8 @@
+[gd_resource type="AtlasTexture" load_steps=2 format=3 uid="uid://bp4rdn6fko1ks"]
+
+[ext_resource type="Texture2D" uid="uid://b4ptq1pvskcs8" path="res://IndomitableSpire2/images/potions/shield_potion.png" id="1_urpvl"]
+
+[resource]
+atlas = ExtResource("1_urpvl")
+region = Rect2(0, 0, 256, 256)
+margin = Rect2(1, 3, 2, 5)
