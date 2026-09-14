@@ -1,15 +1,21 @@
 ﻿using BaseLib.Abstracts;
+using Godot;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.Helpers;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Nodes.Combat;
+using MegaCrit.Sts2.Core.Nodes.Rooms;
+using MegaCrit.Sts2.Core.Nodes.Vfx;
 using MegaCrit.Sts2.Core.ValueProps;
 using TashkentSpire2.TashkentSpire2Code.Extensions;
+using TashkentSpire2.TashkentSpire2Code.Nodes.Vfx;
 using TashkentSpire2.TashkentSpire2Code.Relics;
 
 namespace TashkentSpire2.TashkentSpire2Code.Powers;
@@ -18,6 +24,11 @@ public sealed class TorpedoPower : TashkentPower, IHasSecondAmount
 {
     private const string TurnKey = "Turns";
     private const string BombKey = "IsTheBomb";
+    private const int MaxVisibleTorpedoes = 12;
+    private const int TorpedoColumns = 4;
+    private const float TorpedoColumnSpacing = 72f;
+    private const float TorpedoRowSpacing = 23f;
+    private const float TorpedoRackVerticalOffset = 80f;
 
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;
@@ -42,6 +53,7 @@ public sealed class TorpedoPower : TashkentPower, IHasSecondAmount
     ];
     
     private bool _oxygenApplied;
+    private int? _lastDisplaySlot;
     private bool IsTheBomb => Owner != null && DynamicVars.ContainsKey(BombKey) && DynamicVars[BombKey].BaseValue == 1m;
 
     public override LocString Title
@@ -140,6 +152,17 @@ public sealed class TorpedoPower : TashkentPower, IHasSecondAmount
         int turns = ComputeTurns(Owner!);
         DynamicVars[TurnKey].BaseValue = turns;
         InvokeDisplayAmountChanged();
+
+        EnsureTorpedoVfx();
+    }
+
+    public override Task AfterRemoved(Creature oldOwner)
+    {
+        NTorpedoVfx? vfx = GetTorpedoVfx(oldOwner);
+        int? vacatedSlot = vfx?.DisplaySlot ?? _lastDisplaySlot;
+        vfx?.Dismiss();
+        ReplenishVisibleTorpedoes(oldOwner, vacatedSlot);
+        return Task.CompletedTask;
     }
     
     public void SyncAOEFlag()
@@ -170,45 +193,42 @@ public sealed class TorpedoPower : TashkentPower, IHasSecondAmount
             return;
         }
 
-        Flash();
-        await Cmd.CustomScaledWait(0.2f, 0.4f);
-
         var enemies = CombatState.HittableEnemies.ToList();
         if (enemies.Count == 0)
             return;
 
         var godPower = Owner?.GetPower<TorpedoGodPower>();
-
-        List<Creature> targets = new List<Creature>();
-
         bool isAOE = IsTheBomb || godPower != null;
+        List<Creature> targets = isAOE
+            ? enemies
+            : SelectTarget(enemies) is { } selectedTarget
+                ? [selectedTarget]
+                : [];
 
-        if (isAOE)
+        if (targets.Count == 0)
+            return;
+
+        Flash();
+
+        // The first 0.3 s flight overlaps the power's original anticipation delay,
+        // preserving its normal pacing. TorpedoGod then visits later targets in
+        // strict settlement order, one 0.3 s flight at a time.
+        Task firstFlight = LaunchTorpedoAtAsync(targets[0], targets.Count == 1);
+        await Task.WhenAll(Cmd.CustomScaledWait(0.2f, 0.3f), firstFlight);
+
+        for (int i = 0; i < targets.Count; i++)
         {
-            foreach (var enemy in enemies)
+            Creature target = targets[i];
+            if (i > 0)
             {
-                if (enemy == null) continue;
-
-                int markAmount = enemy.GetPower<MarkPower>()?.Amount ?? 0;
-
-                var dmg = new DamageVar(Amount + markAmount, ValueProp.Unpowered);
-            
-                await CreatureCmd.Damage(choiceContext, enemy, dmg, Owner!);
-                targets.Add(enemy);
+                await LaunchTorpedoAtAsync(target, i == targets.Count - 1);
             }
-        }
-        else
-        {
-            var target = SelectTarget(enemies);
-            if (target == null)
-                return;
+
+            PlayTheBombHitVfx(target);
 
             int markAmount = target.GetPower<MarkPower>()?.Amount ?? 0;
-
             var dmg = new DamageVar(Amount + markAmount, ValueProp.Unpowered);
-
             await CreatureCmd.Damage(choiceContext, target, dmg, Owner!);
-            targets.Add(target);
         }
 
         var context = new TorpedoDamageContext
@@ -224,6 +244,137 @@ public sealed class TorpedoPower : TashkentPower, IHasSecondAmount
         await TriggerAfterTorpedoDamage(choiceContext, context);
 
         await PowerCmd.Remove(this);
+    }
+
+    private NTorpedoVfx? EnsureTorpedoVfx(int? preferredSlot = null)
+    {
+        var ownerNode = NCombatRoom.Instance?.GetCreatureNode(Owner);
+        if (ownerNode == null || Owner.IsDead)
+        {
+            return null;
+        }
+
+        NTorpedoVfx? existing = GetTorpedoVfx(Owner);
+        if (existing is { CanLaunch: true })
+        {
+            _lastDisplaySlot = existing.DisplaySlot;
+            return existing;
+        }
+
+        NTorpedoVfx[] currentVfx = ownerNode.GetChildren()
+            .OfType<NTorpedoVfx>()
+            .Where(node => node.CountsTowardDisplayLimit)
+            .ToArray();
+        if (currentVfx.Length >= MaxVisibleTorpedoes)
+        {
+            return null;
+        }
+
+        HashSet<int> occupiedSlots = currentVfx.Select(node => node.DisplaySlot).ToHashSet();
+        int displaySlot = preferredSlot is >= 0 and < MaxVisibleTorpedoes
+                          && !occupiedSlots.Contains(preferredSlot.Value)
+            ? preferredSlot.Value
+            : Enumerable.Range(0, MaxVisibleTorpedoes).First(slot => !occupiedSlots.Contains(slot));
+
+        NTorpedoVfx? vfx = NTorpedoVfx.Create(this);
+        if (vfx == null)
+        {
+            return null;
+        }
+
+        ownerNode.AddChildSafely(vfx);
+        ownerNode.MoveChildSafely(vfx, 0);
+        _lastDisplaySlot = displaySlot;
+        vfx.BeginSpawn(ownerNode.VfxSpawnPosition, GetTorpedoRestPosition(ownerNode, displaySlot), displaySlot);
+        return vfx;
+    }
+
+    private NTorpedoVfx? GetTorpedoVfx(Creature owner)
+    {
+        return NCombatRoom.Instance?.GetCreatureNode(owner)?.GetChildren()
+            .OfType<NTorpedoVfx>()
+            .FirstOrDefault(vfx => ReferenceEquals(vfx.Power, this));
+    }
+
+    private async Task LaunchTorpedoAtAsync(Creature target, bool isFinalTarget)
+    {
+        NTorpedoVfx? vfx = EnsureTorpedoVfx();
+        var targetNode = NCombatRoom.Instance?.GetCreatureNode(target);
+
+        if (vfx != null && targetNode != null)
+        {
+            _lastDisplaySlot = vfx.DisplaySlot;
+            await vfx.LaunchAsync(targetNode.VfxSpawnPosition, isFinalTarget);
+            if (isFinalTarget)
+            {
+                // Impact is the first frame on which the old sprite is invisible,
+                // so this is the earliest safe point to refill without exceeding 12.
+                ReplenishVisibleTorpedoes(Owner!, _lastDisplaySlot, this);
+            }
+            return;
+        }
+
+        if (isFinalTarget)
+        {
+            vfx?.Dismiss();
+        }
+
+    }
+
+    private static void PlayTheBombHitVfx(Creature target)
+    {
+        // This is the exact per-enemy effect used by the vanilla TheBombPower.
+        NCombatRoom.Instance?.CombatVfxContainer.AddChildSafely(NFireSmokePuffVfx.Create(target));
+    }
+
+    private static Vector2 GetTorpedoRestPosition(NCreature ownerNode, int displaySlot)
+    {
+        Vector2 rackOrigin = ownerNode.GetBottomOfHitbox() + Vector2.Down * 25f;
+        NHealthBar? healthBar = ownerNode.GetNodeOrNull<NHealthBar>("HealthBar/HealthBar");
+        if (healthBar?.HpBarContainer is { } hpBar)
+        {
+            Rect2 rect = hpBar.GetGlobalRect();
+            rackOrigin = new Vector2(
+                rect.Position.X + rect.Size.X * 0.5f,
+                rect.Position.Y + rect.Size.Y + 14f);
+        }
+
+        int column = displaySlot % TorpedoColumns;
+        int row = displaySlot / TorpedoColumns;
+        float centeredColumn = column - (TorpedoColumns - 1) * 0.5f;
+        return rackOrigin + new Vector2(
+            centeredColumn * TorpedoColumnSpacing,
+            row * TorpedoRowSpacing + TorpedoRackVerticalOffset);
+    }
+
+    private static void ReplenishVisibleTorpedoes(
+        Creature owner,
+        int? preferredSlot,
+        TorpedoPower? excludedPower = null)
+    {
+        if (owner.IsDead)
+        {
+            return;
+        }
+
+        foreach (TorpedoPower waitingPower in owner.Powers.OfType<TorpedoPower>())
+        {
+            if (ReferenceEquals(waitingPower, excludedPower))
+            {
+                continue;
+            }
+
+            NTorpedoVfx? existing = waitingPower.GetTorpedoVfx(owner);
+            if (existing is { CanLaunch: true })
+            {
+                continue;
+            }
+
+            // Ensure enforces the global twelve-sprite ceiling. One successful
+            // creation fills the single slot vacated by the triggering torpedo.
+            waitingPower.EnsureTorpedoVfx(preferredSlot);
+            return;
+        }
     }
 
     private Creature? SelectTarget(List<Creature> enemies)

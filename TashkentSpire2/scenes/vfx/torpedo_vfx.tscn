@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" uid="uid://deiacsvl325e2" path="res://TashkentSpire2Code/Nodes/Vfx/NTorpedoVfx.cs" id="1_script"]
+[ext_resource type="Texture2D" path="res://TashkentSpire2/images/vfx/torpedo_vfx.png" id="2_torpedo"]
+
+[node name="TorpedoVfx" type="Node2D"]
+script = ExtResource("1_script")
+
+[node name="Torpedo" type="Node2D" parent="."]
+
+[node name="Facing" type="Node2D" parent="Torpedo"]
+
+[node name="Sprite" type="Sprite2D" parent="Torpedo/Facing"]
+texture = ExtResource("2_torpedo")

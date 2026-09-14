@@ -9,6 +9,7 @@ using MegaCrit.Sts2.Core.Animation;
 using MegaCrit.Sts2.Core.Bindings.MegaSpine;
 using MegaCrit.Sts2.Core.Entities.Characters;
 using MegaCrit.Sts2.Core.Models;
+using TashkentSpire2.TashkentSpire2Code.Nodes.Vfx;
 
 namespace TashkentSpire2.TashkentSpire2Code.Character;
 
@@ -94,6 +95,10 @@ public class TashkentCharacter : CustomCharacterModel
 		"res://TashkentSpire2/scenes/characters/Tashkent_icon.tscn";
 	public override string CustomEnergyCounterPath =>               // 能量计数器
 		"res://TashkentSpire2/scenes/vfx/tashkent_energy_counter.tscn";
+
+	// Keep the persistent Torpedo visual warm for the run. The scene is intentionally
+	// lightweight: at most twelve powers own one Sprite2D each and there are no emitters.
+	protected override IEnumerable<string> ExtraAssetPaths => NTorpedoVfx.AssetPaths;
 	
 	// public override string CustomArmPointingTexturePath =>
 	//     "res://TashkentSpire2/images/Tashkent/hands/multiplayer_hand_tashkent_point.png";
