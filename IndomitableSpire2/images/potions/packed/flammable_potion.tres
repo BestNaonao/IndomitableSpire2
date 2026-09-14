@@ -1,0 +1,8 @@
+[gd_resource type="AtlasTexture" load_steps=2 format=3 uid="uid://dco4yh0ugpkan"]
+
+[ext_resource type="Texture2D" uid="uid://cbwgue8xti1aj" path="res://IndomitableSpire2/images/potions/flammable_potion.png" id="1_texture"]
+
+[resource]
+atlas = ExtResource("1_texture")
+region = Rect2(0, 0, 256, 256)
+margin = Rect2(1, 3, 2, 5)
