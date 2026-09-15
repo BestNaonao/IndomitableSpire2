@@ -9,7 +9,7 @@
   "INDOMITABLESPIRE2-IGNITE.title": "点火",
   "INDOMITABLESPIRE2-IGNITE.description": "[blue]{MotivationRequire:diff()}[/blue]の[gold]やる気[/gold]を[gold]必要[/gold]とする。\n{Damage:diff()}ダメージを与える。\n[gold]炎上[/gold] [blue]{OnFirePower:diff()}[/blue]を付与する",
   "INDOMITABLESPIRE2-DUAL_PURPOSE_GUN.title": "4.5インチ両用砲",
-  "INDOMITABLESPIRE2-DUAL_PURPOSE_GUN.description": "{Damage:diff()}ダメージを与える。\nターン終了時、このカードが[gold]手札[/gold]にあり、このターンにプレイされていなければ、[gold]ブロック[/gold]を{Block:diff()}得る。{InCombat:\n{WillAutoBlock:cond:>0?[green]（ブロックを得る）[/green]|[red]（このターンにプレイ済み）[/red]}|}",
+  "INDOMITABLESPIRE2-DUAL_PURPOSE_GUN.description": "自動でプレイされた場合、[gold]ブロック[/gold]を{Block:diff()}得る。それ以外の場合、{Damage:diff()}ダメージを与える。\n自分のターン終了時、このカードが[gold]手札[/gold]にあり、このターンにプレイされていなければ、自動でプレイする。{InCombat:{WillAutoBlock:cond:>0?[green]（対空防御として自動でプレイされる）[/green]|[red]（このターンにプレイ済み）[/red]}|}",
   "INDOMITABLESPIRE2-ZIGZAG_MANEUVER.title": "ジグザグ機動",
   "INDOMITABLESPIRE2-ZIGZAG_MANEUVER.description": "[blue]{MotivationRequire:diff()}[/blue]の[gold]やる気[/gold]を[gold]必要[/gold]とする。\nブロックを{Block:diff()}得る。\nターン終了時まで[gold]敏捷[/gold]{DexterityPower:diff()}を得る。",
   "INDOMITABLESPIRE2-WORK_ARRANGEMENT.title": "業務手配",
