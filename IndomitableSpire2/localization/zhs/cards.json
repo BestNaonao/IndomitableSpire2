@@ -4,6 +4,7 @@
   "INDOMITABLESPIRE2-STRIKE_INDOMITABLE.title": "打击",
   "INDOMITABLESPIRE2-STRIKE_INDOMITABLE.description": "造成{Damage:diff()}点伤害。",
   "INDOMITABLESPIRE2-TAKE_A_BREAK.title": "稍作休息",
+  "INDOMITABLESPIRE2-TAKE_A_BREAK.banter": "[sine]嗯…[/sine]突然感觉有点累了，要不就先这样吧？",
   "INDOMITABLESPIRE2-TAKE_A_BREAK.description": "回复[green]{Heal:diff()}[/green]点生命。\n获得[blue]{MotivationGain:diff()}[/blue]点[gold]干劲[/gold]。\n结束你的回合。",
   "INDOMITABLESPIRE2-IGNITE.title": "点燃",
   "INDOMITABLESPIRE2-IGNITE.description": "[gold]需求[/gold][blue]{MotivationRequire:diff()}[/blue]点[gold]干劲[/gold]。\n造成{Damage:diff()}点伤害。\n给予[blue]{OnFirePower:diff()}[/blue]层[gold]起火[/gold]。",
