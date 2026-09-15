@@ -3,6 +3,7 @@ using Godot;
 using IndomitableSpire2.IndomitableSpire2Code.Cards.Uncommons;
 using IndomitableSpire2.IndomitableSpire2Code.Character;
 using IndomitableSpire2.IndomitableSpire2Code.Potions;
+using MegaCrit.Sts2.Core.Assets;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Events;
@@ -25,6 +26,8 @@ public sealed class HydrangeaTeaParty : CustomEventModel
     private const string IllustriousPage = "ILLUSTRIOUS_BRANCH";
     private const string VictoriousPage = "VICTORIOUS_BRANCH";
     private const string FormidablePage = "FORMIDABLE_BRANCH";
+    private const string DescriptionBackdropScenePath = 
+        "res://IndomitableSpire2/scenes/vfx/events/events_description_backdrop.tscn";
     
     public override string CustomInitialPortraitPath => 
         "res://IndomitableSpire2/images/events/TeaParty.png";
@@ -33,10 +36,10 @@ public sealed class HydrangeaTeaParty : CustomEventModel
         "res://IndomitableSpire2/scenes/vfx/events/hydrangea_tea_party.tscn";
     
     /// <summary>
-    /// 默认事件布局只预加载立绘，因此显式追加茶会背景场景，供入场时从缓存创建。
+    /// 默认事件布局只预加载立绘，因此显式追加茶会背景和描述底框场景，供入场时从缓存创建。
     /// </summary>
     public override IEnumerable<string> GetAssetPaths(IRunState runState) => 
-        base.GetAssetPaths(runState).Append(CustomBackgroundScenePath);
+        base.GetAssetPaths(runState).Append(CustomBackgroundScenePath).Append(DescriptionBackdropScenePath);
     
     /// <summary>
     /// 保留原版标题、描述和选项，将等比铺满的背景放入文字后方的全屏特效容器。
@@ -49,6 +52,28 @@ public sealed class HydrangeaTeaParty : CustomEventModel
         Node.GetNode<Control>("%VfxContainer").AddChildSafely(background);
         // 默认立绘使用固定尺寸和额外缩放；由新场景统一控制图片比例与裁切，避免重复绘制。
         Node.GetNode<TextureRect>("%Portrait").Hide();
+        AddDescriptionBackdrop();
+    }
+    
+    /// <summary>
+    /// 将皮肤选择样式的九宫格底框挂在正文后方，自动跟随文字尺寸和原版淡入动画。
+    /// </summary>
+    private void AddDescriptionBackdrop()
+    {
+        ArgumentNullException.ThrowIfNull(Node);
+        var description = Node.GetNode<RichTextLabel>("%EventDescription");
+        // 正文原本至少高 280 像素；取消固定留白，让 FitContent 按当前阶段的实际文字高度收缩。
+        description.CustomMinimumSize = new Vector2(description.CustomMinimumSize.X, 0);
+        description.AddThemeStyleboxOverride("normal", new StyleBoxEmpty
+        {
+            ContentMarginLeft = 20,
+            ContentMarginTop = 12,
+            ContentMarginRight = 20,
+            ContentMarginBottom = 12
+        });
+        // 底框满锚点贴合正文控件，ShowBehindParent 使其位于文字下、茶会背景上且不遮挡输入。
+        var backdrop = PreloadManager.Cache.GetScene(DescriptionBackdropScenePath).Instantiate<NinePatchRect>();
+        description.AddChildSafely(backdrop);
     }
     
     /// <summary>
