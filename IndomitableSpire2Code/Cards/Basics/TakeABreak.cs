@@ -6,6 +6,7 @@ using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using MegaCrit.Sts2.Core.Nodes.Vfx;
 
 namespace IndomitableSpire2.IndomitableSpire2Code.Cards.Basics;
 
@@ -19,8 +20,10 @@ public sealed class TakeABreak() : IndomitableCard(0, CardType.Skill, CardRarity
     
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        // 1. 播放一个施法动画（可选，增加视觉反馈）
-        await CreatureCmd.TriggerAnim(Owner.Creature, "Cast", Owner.Character.CastAnimDelay);
+        // 1. 播放台词、音频和技能动画
+        await Owner.PlayIndomitableCardPresentation(cardPlay, Id.Entry, VfxColor.Gold,
+            "res://IndomitableSpire2/sfx/characters/indomitable/get.wav",
+            animationTrigger: "Cast", exactDurationSeconds: 10.5d);
         
         // 2. 回复生命值
         await CreatureCmd.Heal(Owner.Creature, DynamicVars.Heal.BaseValue);
