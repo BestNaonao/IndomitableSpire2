@@ -1,0 +1,27 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Texture2D" path="res://IndomitableSpire2/images/events/TeaParty.png" id="1_tea_party"]
+
+; 由事件挂到原版 VfxContainer，继承其全屏尺寸与位于事件文字下方的绘制顺序。
+[node name="HydrangeaTeaParty" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+; IgnoreSize + KeepAspectCovered：按原图比例居中裁切并覆盖整个屏幕，不受图片原始尺寸限制。
+; 后续构图可在 Background 的 Layout/Transform 中调整位置和尺寸；保持覆盖父节点即可避免露底。
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("1_tea_party")
+expand_mode = 1
+stretch_mode = 6
