@@ -1,0 +1,52 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://TashkentSpire2Code/Nodes/Vfx/NWarpDriveVfx.cs" id="1_script"]
+[ext_resource type="Texture2D" path="res://TashkentSpire2/images/vfx/warp_drive_exhaust.png" id="2_exhaust"]
+[ext_resource type="Texture2D" path="res://TashkentSpire2/images/vfx/warp_drive_speed_lines.png" id="3_speed"]
+
+[node name="WarpDriveVfx" type="Node2D"]
+script = ExtResource("1_script")
+
+[node name="Facing" type="Node2D" parent="."]
+
+[node name="EngineCore" type="Sprite2D" parent="Facing"]
+texture = ExtResource("2_exhaust")
+
+[node name="ExhaustParticles" type="Node2D" parent="Facing"]
+
+[node name="Exhaust0" type="Sprite2D" parent="Facing/ExhaustParticles"]
+texture = ExtResource("2_exhaust")
+
+[node name="Exhaust1" type="Sprite2D" parent="Facing/ExhaustParticles"]
+texture = ExtResource("2_exhaust")
+flip_v = true
+
+[node name="Exhaust2" type="Sprite2D" parent="Facing/ExhaustParticles"]
+texture = ExtResource("2_exhaust")
+
+[node name="Exhaust3" type="Sprite2D" parent="Facing/ExhaustParticles"]
+texture = ExtResource("2_exhaust")
+flip_v = true
+
+[node name="SpeedLines" type="Node2D" parent="Facing"]
+
+[node name="Speed0" type="Sprite2D" parent="Facing/SpeedLines"]
+texture = ExtResource("3_speed")
+
+[node name="Speed1" type="Sprite2D" parent="Facing/SpeedLines"]
+texture = ExtResource("3_speed")
+flip_v = true
+
+[node name="Speed2" type="Sprite2D" parent="Facing/SpeedLines"]
+texture = ExtResource("3_speed")
+
+[node name="Speed3" type="Sprite2D" parent="Facing/SpeedLines"]
+texture = ExtResource("3_speed")
+flip_v = true
+
+[node name="Speed4" type="Sprite2D" parent="Facing/SpeedLines"]
+texture = ExtResource("3_speed")
+
+[node name="Speed5" type="Sprite2D" parent="Facing/SpeedLines"]
+texture = ExtResource("3_speed")
+flip_v = true

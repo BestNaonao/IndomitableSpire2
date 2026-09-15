@@ -1,0 +1,41 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://TashkentSpire2Code/Nodes/Vfx/NPoseidonFormVfx.cs" id="1_script"]
+[ext_resource type="Texture2D" path="res://TashkentSpire2/images/vfx/poseidon_tide_ring.png" id="2_tide"]
+[ext_resource type="Texture2D" path="res://TashkentSpire2/images/vfx/poseidon_splash.png" id="3_splash"]
+
+[node name="PoseidonFormVfx" type="Node2D"]
+position = Vector2(0, 8)
+script = ExtResource("1_script")
+
+[node name="Tide" type="Node2D" parent="."]
+
+[node name="BackTide" type="Sprite2D" parent="Tide"]
+texture = ExtResource("2_tide")
+
+[node name="FrontTide" type="Sprite2D" parent="Tide"]
+texture = ExtResource("2_tide")
+flip_h = true
+
+[node name="Splashes" type="Node2D" parent="."]
+
+[node name="Splash0" type="Sprite2D" parent="Splashes"]
+texture = ExtResource("3_splash")
+
+[node name="Splash1" type="Sprite2D" parent="Splashes"]
+texture = ExtResource("3_splash")
+flip_h = true
+
+[node name="Splash2" type="Sprite2D" parent="Splashes"]
+texture = ExtResource("3_splash")
+
+[node name="Splash3" type="Sprite2D" parent="Splashes"]
+texture = ExtResource("3_splash")
+flip_h = true
+
+[node name="Splash4" type="Sprite2D" parent="Splashes"]
+texture = ExtResource("3_splash")
+
+[node name="Splash5" type="Sprite2D" parent="Splashes"]
+texture = ExtResource("3_splash")
+flip_h = true

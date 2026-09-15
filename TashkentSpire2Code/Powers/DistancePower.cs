@@ -50,6 +50,8 @@ public sealed class DistancePower : TashkentPower, IPersistentPower
             InvokeDisplayAmountChanged();
         }
     }
+
+    internal bool CanApplyWarpDriveThisTurn => CanApplyWarpDrive;
     
     public int TotalIncreasedAmount { get; private set; } = 0;
     
@@ -134,6 +136,7 @@ public sealed class DistancePower : TashkentPower, IPersistentPower
         if (participants.Contains(base.Owner))
         {
             CanApplyWarpDrive = true;
+            base.Owner.GetPower<WarpDrivePower>()?.SetSpeedVfxActive(true);
         }
         
         if (!participants.Contains(base.Owner) && HasActiveSandpit())
@@ -154,6 +157,7 @@ public sealed class DistancePower : TashkentPower, IPersistentPower
             if (warpDrive != null && warpDrive.Amount > 0)
             {
                 CanApplyWarpDrive = false;
+                warpDrive.SetSpeedVfxActive(false);
             }
         }
         return Task.CompletedTask;
