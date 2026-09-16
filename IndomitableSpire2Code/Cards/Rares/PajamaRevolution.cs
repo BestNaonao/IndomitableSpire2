@@ -1,4 +1,5 @@
 ﻿using IndomitableSpire2.IndomitableSpire2Code.Cards.Abstracts;
+using IndomitableSpire2.IndomitableSpire2Code.Extensions;
 using IndomitableSpire2.IndomitableSpire2Code.Powers;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -6,6 +7,7 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models.Powers;
+using MegaCrit.Sts2.Core.Nodes.Vfx;
 
 namespace IndomitableSpire2.IndomitableSpire2Code.Cards.Rares;
 
@@ -28,9 +30,11 @@ public sealed class PajamaRevolution() : IndomitableCard(3, CardType.Skill, Card
     
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        // 播放动画，稍后执行逻辑
-        await CreatureCmd.TriggerAnim(Owner.Creature, "Cast", Owner.Character.CastAnimDelay); 
-        await Cmd.CustomScaledWait(0.2f, 0.4f);   
+        // 播放台词、语音和动画，稍后执行逻辑
+        await Owner.PlayIndomitableCardPresentation(cardPlay, Id.Entry, VfxColor.Gold, 
+            "res://IndomitableSpire2/sfx/characters/indomitable/feeling5_2.wav", 
+            animationTrigger: "Cast", exactDurationSeconds: 7.5d);
+        await Cmd.CustomScaledWait(0.2f, 0.4f);
         if (CombatState != null)
         {
             foreach (var creature in CombatState.Creatures.Where(c => c.IsAlive))
