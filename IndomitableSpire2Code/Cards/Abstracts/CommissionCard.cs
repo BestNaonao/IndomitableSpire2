@@ -1,6 +1,7 @@
 ﻿using BaseLib.Utils;
 using Godot;
 using IndomitableSpire2.IndomitableSpire2Code.Enums;
+using IndomitableSpire2.IndomitableSpire2Code.Extensions;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Players;
@@ -78,15 +79,18 @@ public abstract class CommissionCard(TargetType target)
         // 避免被倾泻、抉择抉择等牌无条件打出获得奖励
         if (!IsCompleted) return;
         
-        // 1. 给予持卡方（自己）奖励
+        // 1. 自定义居中飞行特效，播放特殊音效
+        await PlayCommissionFlyVfx();
+        await PlayCommissionCompletedSfx(cardPlay);
+        
+        // 2. 给予持卡方（自己）奖励
         await GrantReward(choiceContext, Owner);
         
-        // 2. 给予委托方（队友）奖励，需判定委托方存在、不是自己（单人模式下防重），且仍然存活
+        // 3. 给予委托方（队友）奖励，需判定委托方存在、不是自己（单人模式下防重），且仍然存活
         if (Delegator != null && Delegator != Owner && Delegator.Creature.IsAlive)
             await GrantReward(choiceContext, Delegator);
         
-        // 3. 自定义居中飞行特效，逃生舱无声移除
-        await PlayCommissionFlyVfx();
+        // 4. 逃生舱无声移除
         await CardPileCmd.RemoveFromCombat(this, skipVisuals: true);
     }
     
@@ -134,5 +138,13 @@ public abstract class CommissionCard(TargetType target)
             // 动画播放完毕后，隐藏卡牌本体，为随后的“无声移除”做准备
             node.Visible = false;
         }
+    }
+    
+    private async Task PlayCommissionCompletedSfx(CardPlay cardPlay)
+    {
+        if (Delegator == null) return;
+        await Delegator.PlayIndomitableCardPresentation(cardPlay, 
+            "INDOMITABLESPIRE2-COMMISSION_CARD_COMPLETED", VfxColor.Gold, 
+            "res://IndomitableSpire2/sfx/characters/indomitable/mission_complete.wav", exactDurationSeconds:7.9);
     }
 }
