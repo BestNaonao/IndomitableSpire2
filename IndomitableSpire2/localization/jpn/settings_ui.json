@@ -1,0 +1,7 @@
+{
+  "INDOMITABLESPIRE2.mod_title": "IndomitableSpire2",
+  "INDOMITABLESPIRE2-PLAY_DIALOGUE.title": "カードの台詞を再生",
+  "INDOMITABLESPIRE2-PLAY_DIALOGUE.hover.desc": "無効にすると、インドミタブルのカード演出による台詞の吹き出しが表示されなくなります。",
+  "INDOMITABLESPIRE2-PLAY_SOUND_EFFECTS.title": "カードの効果音を再生",
+  "INDOMITABLESPIRE2-PLAY_SOUND_EFFECTS.hover.desc": "無効にすると、インドミタブルのカード演出による専用ボイスと効果音が再生されなくなります。"
+}

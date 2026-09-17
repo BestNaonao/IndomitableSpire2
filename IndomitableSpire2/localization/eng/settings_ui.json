@@ -1,0 +1,7 @@
+{
+  "INDOMITABLESPIRE2.mod_title": "IndomitableSpire2",
+  "INDOMITABLESPIRE2-PLAY_DIALOGUE.title": "Play card dialogue",
+  "INDOMITABLESPIRE2-PLAY_DIALOGUE.hover.desc": "When disabled, dialogue bubbles triggered by Indomitable card presentations will not be shown.",
+  "INDOMITABLESPIRE2-PLAY_SOUND_EFFECTS.title": "Play card sound effects",
+  "INDOMITABLESPIRE2-PLAY_SOUND_EFFECTS.hover.desc": "When disabled, custom voice lines and sounds triggered by Indomitable card presentations will be muted."
+}
