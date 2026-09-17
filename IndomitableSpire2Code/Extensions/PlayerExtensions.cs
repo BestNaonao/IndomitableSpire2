@@ -1,6 +1,7 @@
 ﻿using Godot;
 using IndomitableSpire2.IndomitableSpire2Code.Character;
 using IndomitableSpire2.IndomitableSpire2Code.Commands;
+using IndomitableSpire2.IndomitableSpire2Code.Configuration;
 using IndomitableSpire2.IndomitableSpire2Code.Powers;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
@@ -58,14 +59,14 @@ public static class PlayerExtensions
             var waitTime = animationDelay ?? (animationTrigger == "Attack"
                 ? player.Character.AttackAnimDelay
                 : player.Character.CastAnimDelay);
-            // 其他角色仍播放自己的动画和默认音效；不挠指定专属语音后，重放也不回退到默认音效。
-            animationTask = player.TriggerCardAnimation(animationTrigger, waitTime,
-                useDefaultSfx: !isIndomitable || sfxPath == null);
+            // 音效开关关闭或玩家为其他角色仍播放默认音效；不挠指定专属语音后则不播放默认音效，重放时也不回退。
+            animationTask = player.TriggerCardAnimation(animationTrigger, waitTime, 
+                useDefaultSfx: !isIndomitable || !IndomitableConfiguration.PlaySoundEffects || sfxPath == null);
         }
         // 台词和语音为不挠专属，卡牌重放时也不播放。
         if (!isIndomitable || cardPlay.PlayIndex != 0) return animationTask;
         // 参数中条目和颜色不为空时播放台词
-        if (cardEntry != null && vfxColor is { } color)
+        if (IndomitableConfiguration.PlayDialogue && cardEntry != null && vfxColor is { } color)
         {
             var talk = CustomTalkCmd.Play(new LocString("cards", $"{cardEntry}.banter"), player.Creature, color);
             if (exactDurationSeconds is { } seconds)
@@ -75,7 +76,7 @@ public static class PlayerExtensions
             talk.WithAdditionalDuration(additionalDurationSeconds).Execute();
         }
         // 参数中音频路径不为空时播放语音
-        if (sfxPath != null)
+        if (IndomitableConfiguration.PlaySoundEffects && sfxPath != null)
             SfxCmd.Play(sfxPath, volume);
         return animationTask;
     }
