@@ -1,6 +1,8 @@
+using BaseLib.Config;
 using Godot;
 using Godot.Bridge;
 using HarmonyLib;
+using IndomitableSpire2.IndomitableSpire2Code.Configuration;
 using IndomitableSpire2.IndomitableSpire2Code.Providers;
 using IndomitableSpire2.IndomitableSpire2Code.Registries;
 using MegaCrit.Sts2.Core.Modding;
@@ -13,17 +15,19 @@ namespace IndomitableSpire2.IndomitableSpire2Code;
 public partial class MainFile : Node
 {
     public const string ModId = "IndomitableSpire2";
-
+    
     public static MegaCrit.Sts2.Core.Logging.Logger Logger { get; } =
         new(ModId, MegaCrit.Sts2.Core.Logging.LogType.Generic);
-
+    
     public static void Initialize()
     {
+        ModConfigRegistry.Register(ModId, new IndomitableConfiguration());
+        
         InitializeBlockRetentionProviders();
         Logger.Info("Block Retention Providers registered successfully");
         
         Harmony harmony = new(ModId);
-
+        
         harmony.PatchAll();
         
         // 使得场景文件可以加载自定义脚本
