@@ -20,5 +20,7 @@
   "INDOMITABLESPIRE2-ELEGANCE.title": "优雅",
   "INDOMITABLESPIRE2-ELEGANCE.description": "如果你在一回合内没有受到未被格挡的伤害，在下个回合开始时触发效果。",
   "INDOMITABLESPIRE2-RESONANCE.title": "同心",
-  "INDOMITABLESPIRE2-RESONANCE.description": "这张牌打出期间生成或变化出的新卡牌继承其升级、关键词和附魔。"
+  "INDOMITABLESPIRE2-RESONANCE.description": "这张牌打出期间生成或变化出的新卡牌继承其升级、关键词和附魔。",
+  "INDOMITABLESPIRE2-VERSATILE.title": "多用途",
+  "INDOMITABLESPIRE2-VERSATILE.description": "这张牌具有多种打出效果，根据打出方式或打出时的选择执行对应效果。"
 }

@@ -20,5 +20,7 @@
   "INDOMITABLESPIRE2-ELEGANCE.title": "Elegance",
   "INDOMITABLESPIRE2-ELEGANCE.description": "If you take no unblocked damage in a turn, triggers its effect at the start of your next turn.",
   "INDOMITABLESPIRE2-RESONANCE.title": "Resonance",
-  "INDOMITABLESPIRE2-RESONANCE.description": "Cards generated or transformed during this card's play inherit its upgrades, keywords, and enchantment."
+  "INDOMITABLESPIRE2-RESONANCE.description": "Cards generated or transformed during this card's play inherit its upgrades, keywords, and enchantment.",
+  "INDOMITABLESPIRE2-VERSATILE.title": "Versatile",
+  "INDOMITABLESPIRE2-VERSATILE.description": "This card has multiple play effects. The effect used depends on how it is played or the choice made when playing it."
 }

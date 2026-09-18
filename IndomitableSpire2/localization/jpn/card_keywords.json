@@ -20,5 +20,7 @@
   "INDOMITABLESPIRE2-ELEGANCE.title": "優雅",
   "INDOMITABLESPIRE2-ELEGANCE.description": "1ターンの間にブロックされなかったダメージを受けなかった場合、次のターン開始時に効果を発動する。",
   "INDOMITABLESPIRE2-RESONANCE.title": "共鳴",
-  "INDOMITABLESPIRE2-RESONANCE.description": "このカードがプレイ中に生成または変化させたカードは、アップグレード、キーワード、エンチャントを引き継ぐ。"
+  "INDOMITABLESPIRE2-RESONANCE.description": "このカードがプレイ中に生成または変化させたカードは、アップグレード、キーワード、エンチャントを引き継ぐ。",
+  "INDOMITABLESPIRE2-VERSATILE.title": "多用途",
+  "INDOMITABLESPIRE2-VERSATILE.description": "複数のプレイ効果を持つカード。プレイ方法、またはプレイ時の選択に応じた効果を発動する。"
 }
