@@ -151,6 +151,12 @@
   "INDOMITABLESPIRE2-SALVAGE.selectionScreenPrompt": "选择最多{Amount}张牌放入你的[gold]抽牌堆[/gold]。",
   "INDOMITABLESPIRE2-HAPPY_BIRTHDAY.title": "生日快乐",
   "INDOMITABLESPIRE2-HAPPY_BIRTHDAY.description": "造成{Damage:diff()}点伤害，给予[blue]{OnFirePower:diff()}[/blue]层[gold]起火[/gold]。\n重复此效果，直到该敌人的[gold]起火[/gold]达到至少[blue]{OnFireThreshold:diff()}[/blue]层。",
+  "INDOMITABLESPIRE2-EXTRACT_THE_FIREWOOD.title": "釜底抽薪",
+  "INDOMITABLESPIRE2-EXTRACT_THE_FIREWOOD.description": "从你的[gold]弃牌堆[/gold]中选择最多{Cards:diff()}张牌[gold]消耗[/gold]。\n每[gold]消耗[/gold]一张牌，对随机敌人造成{Damage:diff()}点伤害并给予[blue]{OnFirePower:diff()}[/blue]层[gold]起火[/gold]。",
+  "INDOMITABLESPIRE2-EXTRACT_THE_FIREWOOD.selectionScreenPrompt": "从你的[gold]弃牌堆[/gold]中选择最多{Amount}张牌[gold]消耗[/gold]。",
+  "INDOMITABLESPIRE2-ONSEN_JOURNEY.title": "温泉之旅",
+  "INDOMITABLESPIRE2-ONSEN_JOURNEY.description": "从你的[gold]抽牌堆[/gold]中选择最多{Cards:diff()}张牌放入[gold]手牌[/gold]。\n每成功放入一张[gold]手牌[/gold]，给予随机敌人[blue]{FloodingPower:diff()}[/blue]层[blue]进水[/blue]。",
+  "INDOMITABLESPIRE2-ONSEN_JOURNEY.selectionScreenPrompt": "从你的[gold]抽牌堆[/gold]中选择最多{Amount}张牌放入[gold]手牌[/gold]。",
   
   "INDOMITABLESPIRE2-DESSERT.title": "甜点",
   "INDOMITABLESPIRE2-DESSERT.description": "回复[green]{Heal:diff()}[/green]点生命。\n获得{Energy:energyIcons()}。",

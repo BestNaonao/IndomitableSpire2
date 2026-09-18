@@ -151,6 +151,12 @@
   "INDOMITABLESPIRE2-SALVAGE.selectionScreenPrompt": "Choose up to {Amount} {Amount:plural:card|cards} to put into your [gold]Draw Pile[/gold].",
   "INDOMITABLESPIRE2-HAPPY_BIRTHDAY.title": "Happy Birthday",
   "INDOMITABLESPIRE2-HAPPY_BIRTHDAY.description": "Deal {Damage:diff()} damage and apply [blue]{OnFirePower:diff()}[/blue] [gold]On Fire[/gold].\nRepeat until the enemy has at least [blue]{OnFireThreshold:diff()}[/blue] [gold]On Fire[/gold].",
+  "INDOMITABLESPIRE2-EXTRACT_THE_FIREWOOD.title": "Extract the Firewood",
+  "INDOMITABLESPIRE2-EXTRACT_THE_FIREWOOD.description": "[gold]Exhaust[/gold] up to {Cards:diff()} cards from your [gold]Discard Pile[/gold].\nFor each card [gold]Exhausted[/gold], deal {Damage:diff()} damage and apply [blue]{OnFirePower:diff()}[/blue] [gold]On Fire[/gold] to a random enemy.",
+  "INDOMITABLESPIRE2-EXTRACT_THE_FIREWOOD.selectionScreenPrompt": "Choose up to {Amount} cards from your [gold]Discard Pile[/gold] to [gold]Exhaust[/gold].",
+  "INDOMITABLESPIRE2-ONSEN_JOURNEY.title": "Onsen Journey",
+  "INDOMITABLESPIRE2-ONSEN_JOURNEY.description": "Put up to {Cards:diff()} cards from your [gold]Draw Pile[/gold] into your [gold]Hand[/gold].\nFor each card that enters your [gold]Hand[/gold], apply [blue]{FloodingPower:diff()}[/blue] [blue]Flooded[/blue] to a random enemy.",
+  "INDOMITABLESPIRE2-ONSEN_JOURNEY.selectionScreenPrompt": "Choose up to {Amount} cards from your [gold]Draw Pile[/gold] to put into your [gold]Hand[/gold].",
   
   "INDOMITABLESPIRE2-DESSERT.title": "Dessert",
   "INDOMITABLESPIRE2-DESSERT.description": "Heal [green]{Heal:diff()}[/green] HP.\nGain {Energy:energyIcons()}.",

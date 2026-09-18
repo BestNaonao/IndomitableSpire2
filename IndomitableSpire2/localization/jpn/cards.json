@@ -151,6 +151,12 @@
   "INDOMITABLESPIRE2-SALVAGE.selectionScreenPrompt": "[gold]山札[/gold]に加えるカードを最大{Amount}枚選ぶ。",
   "INDOMITABLESPIRE2-HAPPY_BIRTHDAY.title": "お誕生日",
   "INDOMITABLESPIRE2-HAPPY_BIRTHDAY.description": "{Damage:diff()}ダメージを与え、[gold]炎上[/gold] [blue]{OnFirePower:diff()}[/blue]を付与する。\n対象の敵の[gold]炎上[/gold]が[blue]{OnFireThreshold:diff()}[/blue]以上になるまで繰り返す。",
+  "INDOMITABLESPIRE2-EXTRACT_THE_FIREWOOD.title": "釜底抽薪",
+  "INDOMITABLESPIRE2-EXTRACT_THE_FIREWOOD.description": "[gold]捨て札[/gold]からカードを最大{Cards:diff()}枚選び、[gold]廃棄[/gold]する。\n[gold]廃棄[/gold]したカード1枚につき、ランダムな敵に{Damage:diff()}ダメージを与え、[gold]炎上[/gold]を[blue]{OnFirePower:diff()}[/blue]付与する。",
+  "INDOMITABLESPIRE2-EXTRACT_THE_FIREWOOD.selectionScreenPrompt": "[gold]捨て札[/gold]から[gold]廃棄[/gold]するカードを最大{Amount}枚選ぶ。",
+  "INDOMITABLESPIRE2-ONSEN_JOURNEY.title": "温泉旅行",
+  "INDOMITABLESPIRE2-ONSEN_JOURNEY.description": "[gold]山札[/gold]からカードを最大{Cards:diff()}枚選び、[gold]手札[/gold]に加える。\n実際に[gold]手札[/gold]に加わったカード1枚につき、ランダムな敵に[blue]浸水[/blue]を[blue]{FloodingPower:diff()}[/blue]与える。",
+  "INDOMITABLESPIRE2-ONSEN_JOURNEY.selectionScreenPrompt": "[gold]山札[/gold]から[gold]手札[/gold]に加えるカードを最大{Amount}枚選ぶ。",
   
   "INDOMITABLESPIRE2-DESSERT.title": "デザート",
   "INDOMITABLESPIRE2-DESSERT.description": "HPを[green]{Heal:diff()}[/green]回復する。\n{Energy:energyIcons()}を得る。",
