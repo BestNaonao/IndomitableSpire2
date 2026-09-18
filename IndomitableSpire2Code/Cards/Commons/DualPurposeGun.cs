@@ -1,8 +1,10 @@
 ﻿using IndomitableSpire2.IndomitableSpire2Code.Cards.Abstracts;
+using IndomitableSpire2.IndomitableSpire2Code.Enums;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.ValueProps;
 
@@ -10,6 +12,11 @@ namespace IndomitableSpire2.IndomitableSpire2Code.Cards.Commons;
 
 public sealed class DualPurposeGun() : IndomitableCard(1, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
 {
+    protected override HashSet<CardTag> CanonicalTags => [IndomitableTags.Versatile];
+    
+    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+        [HoverTipFactory.FromKeyword(IndomitableKeywords.Versatile)];
+    
     // 重写此属性，以便游戏系统能自动在卡牌旁边展示“格挡的悬浮提示框
     public override bool GainsBlock => true;
     
