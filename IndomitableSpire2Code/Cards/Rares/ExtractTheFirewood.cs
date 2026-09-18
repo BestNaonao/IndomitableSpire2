@@ -5,6 +5,7 @@ using IndomitableSpire2.IndomitableSpire2Code.Powers;
 using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
+using MegaCrit.Sts2.Core.Commands.Builders;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
@@ -31,6 +32,10 @@ public sealed class ExtractTheFirewood() : IndomitableCard(3, CardType.Attack, C
         var selectedCards = (await CardSelectCmd.FromCombatPile(
             choiceContext, PileType.Discard.GetPile(Owner), Owner, prefs
         )).ToList();
+        if (selectedCards.Count == 0) return;
+        
+        // 所有伤害段共享一次攻击，活力等攻击后效果在整张牌结算完后统一触发。
+        await using var attackContext = await AttackCommand.CreateContextAsync(CombatState, choiceContext, cardPlay);
         
         foreach (var card in selectedCards.TakeWhile(_ => !CombatManager.Instance.IsOverOrEnding))
         {
@@ -40,19 +45,21 @@ public sealed class ExtractTheFirewood() : IndomitableCard(3, CardType.Attack, C
             // 每张牌重新选择目标；本次伤害与起火作用于同一个敌人。
             var enemy = Owner.RunState.Rng.CombatTargets.NextItem(CombatState.HittableEnemies);
             if (enemy == null) continue;
-            
-            await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
-                .FromCard(this, cardPlay)
-                .Targeting(enemy)
-                .WithHitFx("vfx/vfx_fire_burst")
-                .Execute(choiceContext);
-            if (enemy.IsAlive)
-                await PowerCmd.Apply<OnFirePower>(
-                    choiceContext, 
-                    enemy, 
-                    DynamicVars.OnFire().BaseValue, 
-                    Owner.Creature, 
-                    this);
+            // 播放动画，造成伤害并加入上下文共享活力加成，最后施加起火。
+            await CreatureCmd.TriggerAnim(Owner.Creature, "Attack", Owner.Character.AttackAnimDelay);
+            VfxCmd.PlayOnCreatureCenter(enemy, "vfx/vfx_fire_burst");
+            var results = await CreatureCmd.Damage(
+                choiceContext, enemy, DynamicVars.Damage, Owner.Creature, this, cardPlay);
+            attackContext.AddHit(results);
+            if (!CombatManager.Instance.IsInProgress || !enemy.IsHittable || !CombatState.ContainsCreature(enemy))
+                break;
+            await PowerCmd.Apply<OnFirePower>(
+                choiceContext: choiceContext, 
+                target: enemy, 
+                amount: DynamicVars.OnFire().BaseValue, 
+                applier: Owner.Creature, 
+                cardSource: this
+            );
         }
     }
     
