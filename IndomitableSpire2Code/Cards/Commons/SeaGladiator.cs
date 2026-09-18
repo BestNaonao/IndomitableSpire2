@@ -18,18 +18,15 @@ public sealed class SeaGladiator() : CarrierAircraftCard(1, CardType.Attack, Car
     public override IEnumerable<CardKeyword> CanonicalKeywords => [IndomitableKeywords.StrikeFighter];
     protected override IEnumerable<CardTag> SubclassTags => [IndomitableTags.StrikeFighter];
     
-    // 用于记录上一次触发起飞的回合数，防止多段攻击或多名敌人造成的无限回手
-    private int _lastTriggerRound = -1;
-    
-    // 添加专门记录局内成长格挡值的内部变量
-    private decimal _extraBlock;
-    private decimal ExtraBlock
+    // 记录本场战斗中同时增加的伤害和格挡，供降级后恢复。
+    private decimal _extraDamageAndBlock;
+    private decimal ExtraDamageAndBlock
     {
-        get => _extraBlock;
+        get => _extraDamageAndBlock;
         set
         {
             AssertMutable();
-            _extraBlock = value;
+            _extraDamageAndBlock = value;
         }
     }
     
@@ -56,7 +53,7 @@ public sealed class SeaGladiator() : CarrierAircraftCard(1, CardType.Attack, Car
         return attackCmd.Results;
     }
     
-    // 核心拦截：监听拥有者受到伤害
+    // 监听拥有者受到攻击，包括被格挡完全抵消的攻击。
     public override async Task AfterDamageReceived(
         PlayerChoiceContext choiceContext,
         Creature target,
@@ -65,17 +62,14 @@ public sealed class SeaGladiator() : CarrierAircraftCard(1, CardType.Attack, Car
         Creature? dealer,
         CardModel? cardSource)
     {
-        // 1. 安全校验：必须是本角色受到伤害，且必须是敌人的真实“攻击”
-        // 2. 频率控制：每回合（大回合）仅限触发一次
-        // 3. 状态校验：这张牌必须在弃牌堆或抽牌堆
+        // 排除手牌和消耗牌堆，其余战斗牌堆（包括 MOD 自定义牌堆）均可触发。
         if (target != Owner.Creature || dealer == null || !props.IsPoweredAttack() || 
-            CombatState == null || CombatState.RoundNumber <= _lastTriggerRound || 
-            Pile?.Type is not (PileType.Discard or PileType.Draw)) return;
+            CombatState == null || Pile?.Type is null or PileType.Hand or PileType.Exhaust) return;
         
-        // 记录本回合已触发，局内格挡值 +1，并且返回手牌
-        _lastTriggerRound = CombatState.RoundNumber;
+        // 每次满足条件时，伤害和格挡各增加 1 点，并返回手牌。
+        DynamicVars.Damage.BaseValue += 1M;
         DynamicVars.Block.BaseValue += 1M;
-        ExtraBlock += 1M;
+        ExtraDamageAndBlock += 1M;
         await CardPileCmd.Add(this, PileType.Hand);
     }
     
@@ -91,6 +85,7 @@ public sealed class SeaGladiator() : CarrierAircraftCard(1, CardType.Attack, Car
     protected override void AfterDowngraded()
     {
         base.AfterDowngraded();
-        DynamicVars.Block.BaseValue += ExtraBlock;
+        DynamicVars.Damage.BaseValue += ExtraDamageAndBlock;
+        DynamicVars.Block.BaseValue += ExtraDamageAndBlock;
     }
 }
