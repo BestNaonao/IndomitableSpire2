@@ -7,6 +7,12 @@ namespace IndomitableSpire2.IndomitableSpire2Code.Extensions;
 
 public static class CardExtensions
 {
+    /// <summary>
+    /// 判断卡牌是否具有多种打出效果；原生 Tag 或后来获得的关键词均可赋予多用途特性。
+    /// </summary>
+    public static bool IsVersatile(this CardModel card) => 
+        card.Tags.Contains(IndomitableTags.Versatile) || card.Keywords.Contains(IndomitableKeywords.Versatile);
+    
     private static readonly HashSet<CardKeyword> TargetAircraftKeywords =
     [
         IndomitableKeywords.CarrierAircraft,
