@@ -48,4 +48,8 @@ public static class IndomitableKeywords
     // 优雅：在一回合内没有受到未格挡伤害，下回合开始时触发
     [CustomEnum("elegance"), KeywordProperties(AutoKeywordPosition.Before)]
     public static CardKeyword Elegance;
+    
+    // 多用途：根据打出方式或选择，执行不同的效果。通过文本嵌入和 HoverTip 展示。
+    [CustomEnum("versatile"), KeywordProperties(AutoKeywordPosition.Before)]
+    public static CardKeyword Versatile;
 }

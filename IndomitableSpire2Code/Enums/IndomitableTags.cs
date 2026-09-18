@@ -12,4 +12,5 @@ public static class IndomitableTags
     [CustomEnum] public static CardTag TorpedoBomber;
     [CustomEnum] public static CardTag DiveBomber;
     [CustomEnum] public static CardTag LevelBomber;
+    [CustomEnum] public static CardTag Versatile;
 }
