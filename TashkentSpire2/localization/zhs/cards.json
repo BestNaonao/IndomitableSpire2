@@ -48,7 +48,7 @@
   "TASHKENTSPIRE2-SATURATION_BOMBING.selectionScreenPrompt": "[gold]丢弃[/gold]任意张手牌以[gold]装填[/gold]。",
   "TASHKENTSPIRE2-SATURATION_BOMBING.description": "丢弃任意张[gold]手牌[/gold]以[gold]装填[/gold]等量的值，然后对所有敌人造成伤害。\n每使用[blue]1[/blue][gold]弹药[/gold]增加{ExtraDamage:diff()}点伤害。{InCombat:\n（基础造成{Damage:diff()}点伤害。）|}",
   "TASHKENTSPIRE2-SPARE_SUPPLIES.title": "备用物资",
-  "TASHKENTSPIRE2-SPARE_SUPPLIES.description": "[gold]集火[/gold]{TashkentSpire2-Shot:diff()}:将{Cards:diff()}张[gold]{IfUpgraded:show:伏特加+|伏特加}[/gold]加入[gold]手牌[/gold]。\n[red]发射[/red]:获得{Energy:energyIcons()}。\n游戏开始时，[gold]装填[/gold]{TashkentSpire2-Load:diff()}。",
+  "TASHKENTSPIRE2-SPARE_SUPPLIES.description": "[gold]集火[/gold]{TashkentSpire2-Shot:diff()}:将{Cards:diff()}张[gold]{IfUpgraded:show:伏特加+|伏特加}[/gold]加入[gold]手牌[/gold]。\n[red]发射[/red]:获得{Energy:energyIcons()}。\n战斗开始时，[gold]装填[/gold]{TashkentSpire2-Load:diff()}。",
   "TASHKENTSPIRE2-TORPEDO_BEAT.title": "鱼雷节拍",
   "TASHKENTSPIRE2-TORPEDO_BEAT.description": "[gold]鱼雷[/gold]{TashkentSpire2-Torpedo:diff()}。\n抽{Cards:diff()}张牌。",
   "TASHKENTSPIRE2-ALL_ROUNDER.title": "多面手",

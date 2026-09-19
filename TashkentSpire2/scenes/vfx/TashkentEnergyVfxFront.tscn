@@ -1,12 +1,19 @@
-[gd_scene load_steps=5 format=3 uid="uid://dgxqno563xp3u"]
+[gd_scene load_steps=7 format=3 uid="uid://dgxqno563xp3u"]
 
 [ext_resource type="Script" uid="uid://b0bk4vh5yhy38" path="res://TashkentSpire2Code/Scripts/NParticlesContainerTashkent.cs" id="1_6mh0i"]
 [ext_resource type="Material" uid="uid://c4ycqv0gdxvmr" path="res://TashkentSpire2/materials/canvas_item_material_additive_shared.tres" id="2_3n4v0"]
 [ext_resource type="Texture2D" uid="uid://ndte67bqlpsi" path="res://TashkentSpire2/images/combatui/energy_counter/energy_orb_burst.png" id="2_dpu13"]
 
+[sub_resource type="Gradient" id="Gradient_energy_fade_front"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_energy_fade_front"]
+gradient = SubResource("Gradient_energy_fade_front")
+
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_sv3af"]
 particle_flag_disable_z = true
-gravity = Vector3(0, 98, 0)
+gravity = Vector3(0, 0, 0)
+color_ramp = SubResource("GradientTexture1D_energy_fade_front")
 
 [node name="TashkentEnergyVfxFront" type="Node2D" node_paths=PackedStringArray("_particles")]
 script = ExtResource("1_6mh0i")

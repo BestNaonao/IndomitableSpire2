@@ -21,7 +21,8 @@ public sealed class EquipmentUpgrade() : TashkentCard(1, CardType.Skill, CardRar
     ];
 
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [
-        HoverTipFactory.FromKeyword(TashkentKeyword.Barrage)
+        HoverTipFactory.FromKeyword(TashkentKeyword.Barrage),
+        LoadDynamicVar.GetHoverTip()
     ];
     
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)

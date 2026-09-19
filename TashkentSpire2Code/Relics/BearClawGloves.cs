@@ -25,7 +25,7 @@ public sealed class BearClawGloves : TashkentRelic
     ];
     
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [
-        ..HoverTipFactory.FromCardWithCardHoverTips<ChargedStrike>(true)
+        ..HoverTipFactory.FromCardWithCardHoverTips<ChargedStrike>()
     ];
 
     public override async Task AfterObtained()
@@ -42,7 +42,7 @@ public sealed class BearClawGloves : TashkentRelic
     private CardModel CreateChargedStrikeFromOriginal(CardModel original, bool forPreview)
     {
         CardModel cardModel = (forPreview ? ModelDb.Card<ChargedStrike>().ToMutable() : base.Owner.RunState.CreateCard<ChargedStrike>(base.Owner));
-        if (cardModel.IsUpgradable)
+        if (original.IsUpgraded && cardModel.IsUpgradable)
         {
             if (forPreview)
             {

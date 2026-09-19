@@ -21,6 +21,7 @@ public sealed class BreakThroughOnAllFronts() : TashkentCard(2, CardType.Power, 
 
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [
         HoverTipFactory.FromKeyword(TashkentKeyword.Barrage),
+        LoadDynamicVar.GetHoverTip(),
         ..HoverTipFactory.FromEnchantment<EndeavourEnchantment>()
     ];
     

@@ -16,6 +16,7 @@ public sealed class Trailblaze() : TashkentCard(1, CardType.Attack, CardRarity.U
         new CalculationBaseVar(4m),
         new ExtraDamageVar(2m),
         new ChargeDynamicVar(1m),
+        new RetreatDynamicVar(0m),
         new PowerVar<BackAfterTurnPower>(1m),
         new CalculatedDamageVar(ValueProp.Move).WithMultiplier((CardModel card, Creature? _) => 
         {
