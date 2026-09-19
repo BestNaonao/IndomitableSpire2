@@ -2,6 +2,8 @@
   "TASHKENTSPIRE2.mod_title": "塔什干模组设置",
   "TASHKENTSPIRE2-REPLACE_HAND_WITH_LEG_IN_MULTIPLAYER.title": "多人模式中将手部模型替换为腿部模型",
   "TASHKENTSPIRE2-SPAWN_ANCIENTS_SOVETSKY_SOYUZ.title": "启用先古之民：苏维埃同盟",
+  "TASHKENTSPIRE2-ENABLE_SPINE_MODELS.title": "启用 Spine 动态模型",
+  "TASHKENTSPIRE2-ENABLE_SPINE_MODELS.hover.desc": "启用时使用当前选择的 Spine 动态皮肤；关闭时在战斗、商店和休息处使用原版静态立绘。更改会在下次创建对应场景时生效。",
   "TASHKENTSPIRE2-THE_INSATIABLE_FIRST_ENCOUNTER_PROMPT.header": "来自塔什干的小提示",
   "TASHKENTSPIRE2-THE_INSATIABLE_FIRST_ENCOUNTER_PROMPT.body": "塔什干的[gold]距离[/gold]与沙虫一致，过度[gold]突进[/gold]会被沙虫吞下，及时[gold]后撤[/gold]也能减少沙虫的威胁，请保持[gold]距离[/gold]。"
 }

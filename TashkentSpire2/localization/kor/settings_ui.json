@@ -2,6 +2,8 @@
   "TASHKENTSPIRE2.mod_title": "타슈켄트 모드 설정",
   "TASHKENTSPIRE2-REPLACE_HAND_WITH_LEG_IN_MULTIPLAYER.title": "멀티플레이어에서 손 모델을 다리 모델로 교체",
   "TASHKENTSPIRE2-SPAWN_ANCIENTS_SOVETSKY_SOYUZ.title": "고대의 존재 활성화: 소비에츠키 소유즈",
+  "TASHKENTSPIRE2-ENABLE_SPINE_MODELS.title": "Spine 모델 활성화",
+  "TASHKENTSPIRE2-ENABLE_SPINE_MODELS.hover.desc": "활성화하면 선택한 Spine 애니메이션 스킨을 사용합니다. 비활성화하면 전투, 상점, 휴식 장소에서 기존 정적 이미지를 사용합니다. 변경 사항은 해당 장면이 다음에 생성될 때 적용됩니다.",
   "TASHKENTSPIRE2-THE_INSATIABLE_FIRST_ENCOUNTER_PROMPT.header": "타슈켄트의 작은 팁",
   "TASHKENTSPIRE2-THE_INSATIABLE_FIRST_ENCOUNTER_PROMPT.body": "타슈켄트의 [gold]거리[/gold]는 탐과 연동됩니다. 지나치게 [gold]돌격[/gold]하면 탐에게 삼켜지지만, 제때 [gold]후퇴[/gold]하면 탐의 위협을 줄일 수 있습니다. [gold]거리[/gold]를 유지하세요."
 }

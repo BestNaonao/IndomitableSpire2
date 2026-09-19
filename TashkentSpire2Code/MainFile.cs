@@ -3,6 +3,7 @@ using Godot;
 using Godot.Bridge;
 using HarmonyLib;
 using MegaCrit.Sts2.Core.Modding;
+using TashkentSpire2.TashkentSpire2Code.Character;
 using TashkentSpire2.TashkentSpire2Code.Config;
 using TashkentSpire2.TashkentSpire2Code.Rewards;
 
@@ -21,6 +22,7 @@ public partial class MainFile : Node
 		Harmony harmony = new(ModId);
 
 		ScriptManagerBridge.LookupScriptsInAssembly(typeof(MainFile).Assembly);
+		TashkentSkinManager.RegisterAllSceneConversions();
 		
 		ModConfigRegistry.Register(ModId, new TashkentConfig());
 		

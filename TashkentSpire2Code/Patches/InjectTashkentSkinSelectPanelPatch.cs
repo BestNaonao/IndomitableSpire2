@@ -4,6 +4,7 @@ using MegaCrit.Sts2.Core.Helpers;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Nodes.Screens.CharacterSelect;
 using TashkentSpire2.TashkentSpire2Code.Character;
+using TashkentSpire2.TashkentSpire2Code.Config;
 using TashkentSpire2.TashkentSpire2Code.Nodes;
 
 namespace TashkentSpire2.TashkentSpire2Code.Patches;
@@ -21,6 +22,13 @@ public static class InjectTashkentSkinSelectPanelPatch
 		CharacterModel characterModel)
 	{
 		if (characterModel is not TashkentCharacter tashkentSkin)
+		{
+			if (GodotObject.IsInstanceValid(_panelInstance))
+				_panelInstance.Visible = false;
+			return;
+		}
+
+		if (!TashkentConfig.EnableSpineModels)
 		{
 			if (GodotObject.IsInstanceValid(_panelInstance))
 				_panelInstance.Visible = false;

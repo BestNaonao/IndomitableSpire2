@@ -1,3 +1,8 @@
+using BaseLib.Extensions;
+using MegaCrit.Sts2.Core.Nodes.Combat;
+using MegaCrit.Sts2.Core.Nodes.RestSite;
+using MegaCrit.Sts2.Core.Nodes.Screens.Shops;
+
 namespace TashkentSpire2.TashkentSpire2Code.Character;
 
 public enum TashkentSkin
@@ -16,6 +21,13 @@ public sealed record TashkentSkinDefinition(
 
 public static class TashkentSkinManager
 {
+	public const string StaticVisualPath =
+		"res://TashkentSpire2/scenes/characters/Tashkent_static.tscn";
+	public const string StaticRestSiteAnimPath =
+		"res://TashkentSpire2/scenes/characters/tashkent_rest_site_static.tscn";
+	public const string StaticMerchantAnimPath =
+		"res://TashkentSpire2/scenes/characters/tashkent_merchant_static.tscn";
+
 	private static readonly IReadOnlyDictionary<TashkentSkin, TashkentSkinDefinition> Skins =
 		new Dictionary<TashkentSkin, TashkentSkinDefinition>
 		{
@@ -42,4 +54,18 @@ public static class TashkentSkinManager
 		};
 
 	public static TashkentSkinDefinition GetDefinition(TashkentSkin skin) => Skins[skin];
+
+	public static void RegisterAllSceneConversions()
+	{
+		StaticVisualPath.RegisterSceneForConversion<NCreatureVisuals>();
+		StaticRestSiteAnimPath.RegisterSceneForConversion<NRestSiteCharacter>();
+		StaticMerchantAnimPath.RegisterSceneForConversion<NMerchantCharacter>();
+
+		foreach (TashkentSkinDefinition skin in Skins.Values)
+		{
+			skin.VisualPath.RegisterSceneForConversion<NCreatureVisuals>();
+			skin.RestSiteAnimPath.RegisterSceneForConversion<NRestSiteCharacter>();
+			skin.MerchantAnimPath.RegisterSceneForConversion<NMerchantCharacter>();
+		}
+	}
 }

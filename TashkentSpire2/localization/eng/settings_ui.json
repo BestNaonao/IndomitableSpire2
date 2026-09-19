@@ -2,6 +2,8 @@
   "TASHKENTSPIRE2.mod_title": "Tashkent Mod Settings",
   "TASHKENTSPIRE2-REPLACE_HAND_WITH_LEG_IN_MULTIPLAYER.title": "Replace Hand Model with Leg Model in Multiplayer",
   "TASHKENTSPIRE2-SPAWN_ANCIENTS_SOVETSKY_SOYUZ.title": "Enable Ancient: Sovetsky Soyuz",
+  "TASHKENTSPIRE2-ENABLE_SPINE_MODELS.title": "Enable Spine Models",
+  "TASHKENTSPIRE2-ENABLE_SPINE_MODELS.hover.desc": "When enabled, use the selected animated Spine skin. When disabled, use the original static portrait in combat, shops, and rest sites. Changes take effect the next time those scenes are created.",
   "TASHKENTSPIRE2-THE_INSATIABLE_FIRST_ENCOUNTER_PROMPT.header": "A Tip from Tashkent",
   "TASHKENTSPIRE2-THE_INSATIABLE_FIRST_ENCOUNTER_PROMPT.body": "Tashkent's [gold]Distance[/gold] is linked to The Insatiable. Excessive [gold]Charge[/gold] will cause it to devour you, while a timely [gold]Retreat[/gold] can lessen the threat it poses. Keep your [gold]Distance[/gold]."
 }

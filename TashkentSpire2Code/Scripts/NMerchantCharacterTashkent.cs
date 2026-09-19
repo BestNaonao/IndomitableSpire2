@@ -10,7 +10,13 @@ public partial class NMerchantCharacterTashkent : NMerchantCharacter
 {
 	public override void _Ready()
 	{
-		var spineNode = GetNode<Node2D>("SpineSprite");
+		// The static fallback intentionally has no SpineSprite. Returning here keeps
+		// the original merchant adaptation, which displayed its Sprite2D as-is and
+		// suppressed the vanilla merchant animation setup.
+		var spineNode = GetNodeOrNull<Node2D>("SpineSprite");
+		if (!GodotObject.IsInstanceValid(spineNode) || spineNode.GetClass() != "SpineSprite")
+			return;
+
 		spineNode.Scale = Vector2.One;
 
 		var sprite = new MegaSprite(spineNode);
