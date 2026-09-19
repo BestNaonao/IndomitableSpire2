@@ -6,6 +6,7 @@ using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using MegaCrit.Sts2.Core.Nodes.Vfx;
 
 namespace IndomitableSpire2.IndomitableSpire2Code.Cards.Uncommons;
 
@@ -20,7 +21,9 @@ public sealed class Furious() : IndomitableCard(1, CardType.Power, CardRarity.Un
     
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        await CreatureCmd.TriggerAnim(Owner.Creature, "Cast", Owner.Character.CastAnimDelay);
+        await Owner.PlayIndomitableCardPresentation(cardPlay, Id.Entry, VfxColor.Gold,
+            "res://IndomitableSpire2/sfx/characters/indomitable/feeling1.wav",
+            animationTrigger: "Cast", exactDurationSeconds: 4d);
         
         // 1. 先给予自身“怒火中烧”能力
         await PowerCmd.Apply<FuriousPower>(

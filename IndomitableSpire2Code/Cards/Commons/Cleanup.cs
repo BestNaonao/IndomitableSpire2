@@ -1,10 +1,12 @@
 ﻿using IndomitableSpire2.IndomitableSpire2Code.Cards.Abstracts;
+using IndomitableSpire2.IndomitableSpire2Code.Extensions;
 using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using MegaCrit.Sts2.Core.Nodes.Vfx;
 using MegaCrit.Sts2.Core.ValueProps;
 
 namespace IndomitableSpire2.IndomitableSpire2Code.Cards.Commons;
@@ -25,9 +27,14 @@ public sealed class Cleanup() : IndomitableCard(1, CardType.Attack, CardRarity.C
     {
         ArgumentNullException.ThrowIfNull(cardPlay.Target, nameof(cardPlay.Target));
         
+        await Owner.PlayIndomitableCardPresentation(cardPlay, Id.Entry, VfxColor.Gold,
+            "res://IndomitableSpire2/sfx/characters/indomitable/main_3_1.wav",
+            animationTrigger: "Attack", exactDurationSeconds: 6.5d);
+        
         // 1. 先造成伤害
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
             .FromCard(this, cardPlay)
+            .WithNoAttackerAnim()
             .Targeting(cardPlay.Target)
             .WithHitFx("vfx/vfx_attack_slash") // 挥扫的视觉特效
             .Execute(choiceContext);

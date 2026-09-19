@@ -1,10 +1,12 @@
 ﻿using IndomitableSpire2.IndomitableSpire2Code.Cards.Abstracts;
+using IndomitableSpire2.IndomitableSpire2Code.Extensions;
 using IndomitableSpire2.IndomitableSpire2Code.Localization.DynamicVars;
 using IndomitableSpire2.IndomitableSpire2Code.Powers;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using MegaCrit.Sts2.Core.Nodes.Vfx;
 
 namespace IndomitableSpire2.IndomitableSpire2Code.Cards.Rares;
 
@@ -20,8 +22,10 @@ public sealed class ArmouredCarrier() : IndomitableCard(3, CardType.Power, CardR
     
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        // 1. 播放能力卡专属的施法动画
-        await CreatureCmd.TriggerAnim(Owner.Creature, "Cast", Owner.Character.CastAnimDelay);
+        // 1. 播放能力卡专属的施法动画、台词和语音
+        await Owner.PlayIndomitableCardPresentation(cardPlay, Id.Entry, VfxColor.Gold,
+            "res://IndomitableSpire2/sfx/characters/indomitable/get0.wav",
+            animationTrigger: "Cast", exactDurationSeconds: 6d);
         
         // 施加装甲航母能力，1 层代表 3 点护盾和 10 点航空的基础收益
         await PowerCmd.Apply<ArmouredCarrierPower>(
