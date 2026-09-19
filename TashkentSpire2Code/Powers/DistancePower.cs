@@ -1,4 +1,5 @@
 ﻿using Godot;
+using MegaCrit.Sts2.Core.Animation;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -12,6 +13,7 @@ using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.Nodes.Combat;
 using MegaCrit.Sts2.Core.Nodes.Rooms;
 using MegaCrit.Sts2.Core.ValueProps;
+using TashkentSpire2.TashkentSpire2Code.Character;
 using TashkentSpire2.TashkentSpire2Code.Commands;
 using TashkentSpire2.TashkentSpire2Code.Minion;
 
@@ -20,8 +22,10 @@ namespace TashkentSpire2.TashkentSpire2Code.Powers;
 public sealed class DistancePower : TashkentPower, IPersistentPower
 {
     private const string VarKey = "Tashkent_Distance";
+    private const float MovementDuration = 0.25f;
     private bool _isSyncing = false;
     private bool _isFlipping = false;
+    private int _movementAnimationRevision;
     
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;
@@ -311,6 +315,70 @@ public sealed class DistancePower : TashkentPower, IPersistentPower
 
         return result;
     }
+
+    private int TryStartTashkentMovementAnimation(int delta, out NCreature? ownerNode, out string? animationName)
+    {
+        ownerNode = null;
+        animationName = null;
+
+        if (delta == 0 || base.Owner.IsDead || base.Owner.Player?.Character is not TashkentCharacter)
+        {
+            return 0;
+        }
+
+        ownerNode = NCombatRoom.Instance?.GetCreatureNode(base.Owner);
+        if (ownerNode?.Visuals.SpineBody == null)
+        {
+            ownerNode = null;
+            return 0;
+        }
+
+        // SurroundedPower mirrors the entire SpineSprite when the character faces
+        // left. The animations therefore remain relative to the current facing:
+        // move is always advance and move_left is always retreat. Swapping them here
+        // as well would mirror the lean twice and make it point the wrong way.
+        bool isAdvancing = delta > 0;
+        animationName = isAdvancing
+            ? TashkentCharacter.AdvanceAnimationName
+            : TashkentCharacter.RetreatAnimationName;
+
+        if (!ownerNode.Visuals.SpineBody.HasAnimation(animationName))
+        {
+            ownerNode = null;
+            animationName = null;
+            return 0;
+        }
+
+        int revision = ++_movementAnimationRevision;
+        ownerNode.SetAnimationTrigger(isAdvancing
+            ? TashkentCharacter.AdvanceAnimationTrigger
+            : TashkentCharacter.RetreatAnimationTrigger);
+        return revision;
+    }
+
+    private void TryFinishTashkentMovementAnimation(
+        NCreature? ownerNode,
+        string? animationName,
+        int animationRevision)
+    {
+        if (animationRevision == 0
+            || animationRevision != _movementAnimationRevision
+            || animationName == null
+            || ownerNode == null
+            || !GodotObject.IsInstanceValid(ownerNode)
+            || !ownerNode.IsInsideTree()
+            || base.Owner.IsDead)
+        {
+            return;
+        }
+
+        // Do not overwrite an attack, hit, death, or newer movement animation that
+        // interrupted this movement while its position tween was still running.
+        if (ownerNode.SpineAnimation.GetCurrentAnimationName() == animationName)
+        {
+            ownerNode.SetAnimationTrigger(CreatureAnimator.idleTrigger);
+        }
+    }
     
     private async Task UpdateCreaturePositions(int delta)
     {
@@ -341,15 +409,27 @@ public sealed class DistancePower : TashkentPower, IPersistentPower
         float moveDir = isFacingLeft ? -1f : 1f;
         float moveDistance = delta * 40f * moveDir;
 
+        int animationRevision = TryStartTashkentMovementAnimation(
+            delta,
+            out NCreature? tashkentNode,
+            out string? movementAnimationName);
+
         Tween? tween = null;
         foreach (Creature creature in GetOwnerAndPets())
         {
             NCreature? node = NCombatRoom.Instance?.GetCreatureNode(creature);
             if (node == null || creature.IsDead) continue;
             if (tween == null) tween = NCombatRoom.Instance?.CreateTween().SetParallel().SetEase(Tween.EaseType.Out).SetTrans(Tween.TransitionType.Cubic);
-            tween?.TweenProperty(node, "global_position:x", node.GlobalPosition.X + moveDistance, 0.25f);
+            tween?.TweenProperty(node, "global_position:x", node.GlobalPosition.X + moveDistance, MovementDuration);
         }
-        if (tween != null) await tween.ToSignal(tween, Tween.SignalName.Finished);
+        try
+        {
+            if (tween != null) await tween.ToSignal(tween, Tween.SignalName.Finished);
+        }
+        finally
+        {
+            TryFinishTashkentMovementAnimation(tashkentNode, movementAnimationName, animationRevision);
+        }
     }
     
     public async Task ModifyAmountFromEscape(decimal delta, CardModel cardSource)

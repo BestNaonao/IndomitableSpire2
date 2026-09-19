@@ -16,6 +16,10 @@ namespace TashkentSpire2.TashkentSpire2Code.Character;
 public class TashkentCharacter : CustomCharacterModel
 {
 	public const string CharacterId = "Tashkent";
+	internal const string AdvanceAnimationName = "move";
+	internal const string RetreatAnimationName = "move_left";
+	internal const string AdvanceAnimationTrigger = "TashkentAdvance";
+	internal const string RetreatAnimationTrigger = "TashkentRetreat";
 	public virtual TashkentSkin CurrentSkin => TashkentSkin.Default;
 	protected TashkentSkinDefinition CurrentSkinDefinition => TashkentSkinManager.GetDefinition(CurrentSkin);
 
@@ -140,15 +144,25 @@ public class TashkentCharacter : CustomCharacterModel
 		);
 	
 	// 将游戏的通用角色动作映射到这套 Spine 文件中的实际动画名。
-	public override CreatureAnimator SetupCustomAnimationStates(MegaSprite controller) => SetupAnimationState(
-		controller: controller,
-		idleName: "normal",
-		deadName: "dead",
-		hitName: "touch",
-		attackName: "attack",
-		castName: "attack_left",
-		relaxedName: "sleep"
-	);
+	public override CreatureAnimator SetupCustomAnimationStates(MegaSprite controller)
+	{
+		CreatureAnimator animator = SetupAnimationState(
+			controller: controller,
+			idleName: "normal",
+			deadName: "dead",
+			hitName: "touch",
+			attackName: "attack",
+			castName: "attack_left",
+			relaxedName: "sleep"
+		);
+
+		// DistancePower explicitly returns these looping movement poses to Idle when
+		// its position tween finishes. Keeping them in CreatureAnimator means attack,
+		// hit, and death triggers can still interrupt them through the normal pipeline.
+		animator.AddAnyState(AdvanceAnimationTrigger, new AnimState(AdvanceAnimationName, true));
+		animator.AddAnyState(RetreatAnimationTrigger, new AnimState(RetreatAnimationName, true));
+		return animator;
+	}
 
 	public override List<string> GetArchitectAttackVfx()
 	{
