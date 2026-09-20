@@ -1,5 +1,5 @@
 {
-  "SEA_GLASS.TASHKENTSPIRE2-TASHKENT_CHARACTER.title": "Comrade-chan Glass",
+  "SEA_GLASS.TASHKENTSPIRE2-TASHKENT_CHARACTER.title": "Dear Comrade's Glass",
   "TASHKENTSPIRE2-EJECTION_START.title": "Ejection Start",
   "TASHKENTSPIRE2-EJECTION_START.flavor": "'Ura! Witness Tashkent's mobility!'",
   "TASHKENTSPIRE2-EJECTION_START.description": "At the start of your turn, [gold]Charge[/gold] [blue]1[/blue]; at the end of your turn, [gold]Retreat[/gold] [blue]1[/blue].",
@@ -60,7 +60,7 @@
   "TASHKENTSPIRE2-K_G_B.flavor": "Learn from others to surpass them.",
   "TASHKENTSPIRE2-K_G_B.eventDescription": "Add [blue]1[/blue] [gold]Espionage Warfare[/gold] to your [gold]Deck[/gold].",
   "TASHKENTSPIRE2-K_G_B.description": "Upon pickup, add [blue]1[/blue] [gold]Espionage Warfare[/gold] to your [gold]Deck[/gold].",
-  "SEA_GLASS.TASHKENTSPIRE2-TASHKENT_VARIANT_TWO.title": "Comrade-chan Glass",
-  "SEA_GLASS.TASHKENTSPIRE2-TASHKENT_VARIANT_THREE.title": "Comrade-chan Glass",
-  "SEA_GLASS.TASHKENTSPIRE2-TASHKENT_VARIANT_FOUR.title": "Comrade-chan Glass"
+  "SEA_GLASS.TASHKENTSPIRE2-TASHKENT_VARIANT_TWO.title": "Dear Comrade's Glass",
+  "SEA_GLASS.TASHKENTSPIRE2-TASHKENT_VARIANT_THREE.title": "Dear Comrade's Glass",
+  "SEA_GLASS.TASHKENTSPIRE2-TASHKENT_VARIANT_FOUR.title": "Dear Comrade's Glass"
 }

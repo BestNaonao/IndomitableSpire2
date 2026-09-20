@@ -128,7 +128,7 @@
   "TASHKENTSPIRE2-BACK_IN_ACTION.selectionScreenPrompt": "Choose two cards to play in order.",
   "TASHKENTSPIRE2-BACK_IN_ACTION.description": "Choose {Cards:diff()} cards from your [gold]Discard Pile[/gold] and play them in sequence.",
   "TASHKENTSPIRE2-BREAK_THROUGH_ON_ALL_FRONTS.title": "Break Through on All Fronts",
-  "TASHKENTSPIRE2-BREAK_THROUGH_ON_ALL_FRONTS.banter": "Comrade-chan, the timing is perfect. Watch me shine!",
+  "TASHKENTSPIRE2-BREAK_THROUGH_ON_ALL_FRONTS.banter": "Dear comrade, the timing is perfect. Watch me shine!",
   "TASHKENTSPIRE2-BREAK_THROUGH_ON_ALL_FRONTS.description": "All [gold]Ammo[/gold] cards in every pile gain [gold]Barrage[/gold].\nAt the start of each turn, choose an [gold]Ammo[/gold] card in your hand, [gold]Load[/gold] {BreakThroughOnAllFrontsPower:diff()} onto it, and create a copy enchanted with [purple]Exhaust[/purple].",
   "TASHKENTSPIRE2-CLUSTER_BOMB.title": "Cluster Bomb",
   "TASHKENTSPIRE2-CLUSTER_BOMB.description": "Deal {Damage:diff()} damage.\nWhen [gold]Exhausted[/gold], add a [gold]Copy[/gold] with doubled damage to your [gold]Discard Pile[/gold].",

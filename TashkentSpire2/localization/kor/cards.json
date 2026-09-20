@@ -128,7 +128,7 @@
   "TASHKENTSPIRE2-BACK_IN_ACTION.selectionScreenPrompt": "카드 2장을 선택하여 순서대로 사용합니다.",
   "TASHKENTSPIRE2-BACK_IN_ACTION.description": "[gold]버린 더미[/gold]에서 {Cards:diff()}장의 카드를 선택하여 순서대로 사용합니다.",
   "TASHKENTSPIRE2-BREAK_THROUGH_ON_ALL_FRONTS.title": "전선 돌파",
-  "TASHKENTSPIRE2-BREAK_THROUGH_ON_ALL_FRONTS.banter": "동지짱, 지금이야! 내 활약을 보여줄게!",
+  "TASHKENTSPIRE2-BREAK_THROUGH_ON_ALL_FRONTS.banter": "동지쨩, 지금이야! 내 활약을 보여줄게!",
   "TASHKENTSPIRE2-BREAK_THROUGH_ON_ALL_FRONTS.description": "모든 더미의 [gold]탄약[/gold] 카드가 [gold]탄막[/gold]을 획득합니다.\n매 턴 시작 시 손에 있는 [gold]탄약[/gold] 카드 1장을 {BreakThroughOnAllFrontsPower:diff()} [gold]장전[/gold]하고 [purple]소진[/purple]이 부여된 복사본을 생성합니다.",
   "TASHKENTSPIRE2-CLUSTER_BOMB.title": "집속 폭탄",
   "TASHKENTSPIRE2-CLUSTER_BOMB.description": "{Damage:diff()}의 피해를 줍니다.\n[gold]소멸[/gold]될 때 피해가 2배인 [gold]복사 카드[/gold]를 버린 더미에 추가합니다.",
