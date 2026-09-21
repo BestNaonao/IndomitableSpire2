@@ -1,6 +1,4 @@
-﻿{
+{
   "INDOMITABLESPIRE2-RECON_TO_HAND": "选择最多[blue]{Amount}[/blue]张牌放入你的[gold]手牌[/gold]。",
-  "INDOMITABLESPIRE2-RECON_TO_DISCARD": "选择最多[blue]{Amount}[/blue]张牌来[gold]丢弃[/gold]。",
-  "INDOMITABLESPIRE2-TRANSFER_DOWNGRADE": "选择最多[blue]{Amount}[/blue]张牌[gold]降级[/gold]。",
-  "INDOMITABLESPIRE2-TRANSFER_UPGRADE": "选择最多[blue]{Amount}[/blue]张牌进行升级。"
+  "INDOMITABLESPIRE2-RECON_TO_DISCARD": "选择最多[blue]{Amount}[/blue]张牌来[gold]丢弃[/gold]。"
 }
