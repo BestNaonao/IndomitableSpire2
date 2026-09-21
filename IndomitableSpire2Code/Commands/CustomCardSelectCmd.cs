@@ -1,4 +1,7 @@
-﻿using MegaCrit.Sts2.Core.CardSelection;
+﻿using Godot;
+using MegaCrit.Sts2.addons.mega_text;
+using MegaCrit.Sts2.Core.Assets;
+using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Context;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -6,10 +9,12 @@ using MegaCrit.Sts2.Core.Entities.Multiplayer;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.GameActions;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.Helpers;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Multiplayer.Game;
 using MegaCrit.Sts2.Core.Nodes.Combat;
 using MegaCrit.Sts2.Core.Nodes.Screens.CardSelection;
+using MegaCrit.Sts2.Core.Nodes.Screens.Overlays;
 using MegaCrit.Sts2.Core.Runs;
 
 namespace IndomitableSpire2.IndomitableSpire2Code.Commands;
@@ -39,8 +44,64 @@ public static class CustomCardSelectCmd
             enchantment.CanEnchant(c) && (additionalFilter == null || additionalFilter(c))
         ).ToList();
         
+        return await SelectCombatCards(context, player, validCards, prefs, () =>
+            NDeckEnchantSelectScreen.ShowScreen(validCards, enchantment, amount, prefs));
+    }
+    
+    /// <summary>
+    /// 使用普通战斗选牌界面，并在右下角显示附魔信息。
+    /// 候选牌由调用方提供，因此也能包含只可升级、不可附魔的牌。
+    /// </summary>
+    public static Task<IEnumerable<CardModel>> FromCombatWithEnchantmentInfo(
+        PlayerChoiceContext context,
+        Player player,
+        IReadOnlyList<CardModel> cards,
+        EnchantmentModel enchantment,
+        CardSelectorPrefs prefs) =>
+        SelectCombatCards(context, player, cards, prefs, () =>
+        {
+            var screen = NSimpleCardSelectScreen.Create(cards, prefs);
+            screen.Ready += () => AddEnchantmentInfo(screen, enchantment);
+            NOverlayStack.Instance!.Push(screen);
+            return screen;
+        });
+    
+    private static void AddEnchantmentInfo(NSimpleCardSelectScreen screen, EnchantmentModel enchantment)
+    {
+        // 只取原版的说明面板，保留它的右下角定位、字体、图标和自动布局。
+        // 不使用附魔确认预览：它会把不能附魔的牌也预览为已附魔。
+        var template = PreloadManager.Cache.GetScene(
+            SceneHelper.GetScenePath("screens/card_selection/deck_enchant_select_screen")).Instantiate<Control>();
+        var panel = template.GetNode<Control>("%EnchantmentDescriptionContainer");
+        var title = template.GetNode<MegaLabel>("%EnchantmentTitle");
+        var description = template.GetNode<MegaRichTextLabel>("%EnchantmentDescription");
+        var icon = template.GetNode<TextureRect>("%EnchantmentIcon");
+        template.RemoveChild(panel);
+        template.Free();
+        screen.AddChild(panel);
+        
+        var display = (EnchantmentModel)enchantment.ClonePreservingMutability();
+        display.RecalculateValues();
+        title.SetTextAutoSize(display.Title.GetFormattedText());
+        description.Text = display.DynamicDescription.GetFormattedText();
+        icon.Texture = display.Icon;
+        screen.GetNode<NPeekButton>("%PeekButton").AddTargets(panel);
+    }
+    
+    private static async Task<IEnumerable<CardModel>> SelectCombatCards(
+        PlayerChoiceContext context,
+        Player player,
+        IReadOnlyList<CardModel> validCards,
+        CardSelectorPrefs prefs,
+        Func<NCardGridSelectionScreen> showScreen)
+    {
+        
         // 3. 边界处理：如果没有合法的牌，直接返回空集合（原版 FromSimpleGrid 和 FromHand 也自带了这个处理）
         if (validCards.Count == 0) return [];
+        
+        // 与原版 FromSimpleGrid 一样，自动选牌不启动玩家选择和联网界面。
+        if (CardSelectCmd.Selector != null)
+            return await CardSelectCmd.Selector.GetSelectedCards(validCards, prefs.MinSelect, prefs.MaxSelect);
         
         IReadOnlyList<CardModel> result;
         
@@ -58,16 +119,15 @@ public static class CustomCardSelectCmd
             if (LocalContext.IsMe(player) && RunManager.Instance.NetService.Type != NetGameType.Replay)
             {
                 // 【本地玩家逻辑】
-                if (CardSelectCmd.Selector != null) // 自动化测试环境兼容
+                if (CardSelectCmd.LocalSelector != null)
                 {
-                    result = (await CardSelectCmd.Selector.GetSelectedCards(validCards, prefs.MinSelect, prefs.MaxSelect)).ToList();
+                    result = (await CardSelectCmd.LocalSelector.GetSelectedCards(validCards, prefs.MinSelect, prefs.MaxSelect)).ToList();
                 }
                 else
                 {
                     // 确保玩家手牌没在被拖拽
                     NPlayerHand.Instance?.CancelAllCardPlay();
-                    // 【核心 UI 替换】：调用原版的牌组附魔专属 UI，但传入我们组装的战斗内卡牌列表！
-                    var screen = NDeckEnchantSelectScreen.ShowScreen(validCards, enchantment, amount, prefs);
+                    var screen = showScreen();
                     result = (await screen.CardsSelected()).ToList();
                 }
                 // 【核心同步替换】：绝对不能用 FromMutableDeckCards！直接使用实体 CombatCards 进行同步，更安全！
@@ -84,7 +144,7 @@ public static class CustomCardSelectCmd
             }
             await context.SignalPlayerChoiceEnded();
         }
-        MainFile.Logger.Info($"Player {player.NetId} combat-enchanted cards: {string.Join(",", result.Select(c => c.Id.Entry))}");
+        MainFile.Logger.Info($"Player {player.NetId} selected combat cards: {string.Join(",", result.Select(c => c.Id.Entry))}");
         return result;
     }
 }
