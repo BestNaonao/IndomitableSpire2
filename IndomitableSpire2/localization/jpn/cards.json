@@ -177,7 +177,7 @@
   "INDOMITABLESPIRE2-ENHANCED_AP_AMMO.selectionScreenPrompt": "[gold]エンチャント[/gold]するカードを{Cards}枚選ぶ。",
   "INDOMITABLESPIRE2-INSIGHT.title": "こころえ",
   "INDOMITABLESPIRE2-INSIGHT.description": "[gold]手札[/gold]か[gold]山札[/gold]のカードを最大[blue]{Cards:diff()}[/blue]枚選んで[gold]アップグレード[/gold]し、このカードの[gold]エンチャント[/gold]を引き継がせる。\n何度でも[gold]アップグレード[/gold]でき、そのたびに選べる枚数が1枚増える。",
-  "INDOMITABLESPIRE2-INSIGHT.selectionScreenPrompt": "アップグレードしてこころえのエンチャントを引き継ぐカードを最大{Amount}枚選ぶ。",
+  "INDOMITABLESPIRE2-INSIGHT.selectionScreenPrompt": "アップグレードやエンチャントを引き継ぐカードを最大{Amount}枚選ぶ。",
   
   "INDOMITABLESPIRE2-INDOLENT.title": "怠惰",
   "INDOMITABLESPIRE2-INDOLENT.description": "このカードを引くたび、[gold]やる気[/gold]を{MotivationConsume}失う。\nカードを1枚捨てる。",

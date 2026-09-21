@@ -176,8 +176,8 @@
   "INDOMITABLESPIRE2-ENHANCED_AP_AMMO.description": "从[gold]手牌[/gold]或[gold]抽牌堆[/gold]中选择[blue]{Cards:diff()}[/blue]张牌，为其[gold]附魔[/gold]：[purple]穿甲[/purple]。",
   "INDOMITABLESPIRE2-ENHANCED_AP_AMMO.selectionScreenPrompt": "选择{Cards}张牌进行附魔。",
   "INDOMITABLESPIRE2-INSIGHT.title": "心得",
-  "INDOMITABLESPIRE2-INSIGHT.description": "选择最多[blue]{Cards:diff()}[/blue]张[gold]手牌[/gold]或[gold]抽牌堆[/gold]中的牌[gold]升级[/gold]，并继承这张牌的[gold]附魔[/gold]。\n可多次[gold]升级[/gold]，每次增加1张可选牌。",
-  "INDOMITABLESPIRE2-INSIGHT.selectionScreenPrompt": "选择最多{Amount}张牌升级，并继承心得的附魔。",
+  "INDOMITABLESPIRE2-INSIGHT.description": "选择最多[blue]{Cards:diff()}[/blue]张[gold]手牌[/gold]或[gold]抽牌堆[/gold]中的牌，[gold]升级[/gold]并继承此牌的[gold]附魔[/gold]。\n可多次[gold]升级[/gold]，每次增加1张可选牌。",
+  "INDOMITABLESPIRE2-INSIGHT.selectionScreenPrompt": "选择最多{Amount}张牌升级或继承附魔（可同时生效）。",
   
   "INDOMITABLESPIRE2-INDOLENT.title": "慵懒",
   "INDOMITABLESPIRE2-INDOLENT.description": "每当你抽到这张牌时，失去{MotivationConsume}点[gold]干劲[/gold]。\n打出时丢弃一张[gold]手牌[/gold]。",
