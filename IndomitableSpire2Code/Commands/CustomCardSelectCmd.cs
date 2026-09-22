@@ -4,7 +4,6 @@ using MegaCrit.Sts2.Core.Assets;
 using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Context;
-using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Multiplayer;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.GameActions;
@@ -22,35 +21,35 @@ namespace IndomitableSpire2.IndomitableSpire2Code.Commands;
 public static class CustomCardSelectCmd
 {
     /// <summary>
-    /// 从指定的战斗内牌堆中，选择卡牌以进行临时附魔，调出带有附魔提示框的专属界面进行选择。
-    /// 支持单牌堆或多个牌堆的并集（例如同时展示手牌和抽牌堆）。兼容多人联机模式。
+    /// 从调用方提供的战斗卡牌中选择可附魔的牌，使用原版附魔选择界面。
+    /// 保留候选牌的输入顺序，兼容多人联机模式。
     /// </summary>
     public static async Task<IEnumerable<CardModel>> FromCombatForEnchantment(
         PlayerChoiceContext context,
         Player player,
+        IReadOnlyList<CardModel> cards,
         EnchantmentModel enchantment,
         int amount,
         CardSelectorPrefs prefs,
-        Func<CardModel, bool>? additionalFilter = null,
-        params PileType[] piles)
+        Func<CardModel, bool>? additionalFilter = null)
     {
-        // 1. 语义防呆：战斗内的临时附魔绝对不能操作卡组 (Deck)，否则会变成永久修改！
-        if (piles.Any(p => !p.IsCombatPile()))
-            throw new ArgumentException("Combat enchantment selection cannot include PileType.Deck or PileType.None.");
+        // 临时附魔仅接受战斗牌，避免误改永久卡组。
+        if (cards.Any(card => card.Pile?.IsCombatPile != true))
+            throw new ArgumentException("Combat enchantment selection requires cards in combat piles.", nameof(cards));
         
-        // 2. 收集所有指定牌堆的卡牌并进行初步过滤
-        var validCards = CardPile.GetCards(player, piles).Where(c => 
+        // 只过滤附魔资格，不收集牌堆或改变展示顺序。
+        var validCards = cards.Where(c =>
             // 必须能被该附魔目标接纳，并附加用户的自定义过滤条件
             enchantment.CanEnchant(c) && (additionalFilter == null || additionalFilter(c))
         ).ToList();
         
-        return await SelectCombatCards(context, player, validCards, prefs, () =>
-            NDeckEnchantSelectScreen.ShowScreen(validCards, enchantment, amount, prefs));
+        return await SelectCombatCards(context, player, validCards, prefs, displayCards =>
+            NDeckEnchantSelectScreen.ShowScreen(displayCards, enchantment, amount, prefs));
     }
     
     /// <summary>
     /// 使用普通战斗选牌界面，并在右下角显示附魔信息。
-    /// 候选牌由调用方提供，因此也能包含只可升级、不可附魔的牌。
+    /// 候选牌和顺序由调用方提供，因此也能包含只可升级、不可附魔的牌。
     /// </summary>
     public static Task<IEnumerable<CardModel>> FromCombatWithEnchantmentInfo(
         PlayerChoiceContext context,
@@ -58,9 +57,10 @@ public static class CustomCardSelectCmd
         IReadOnlyList<CardModel> cards,
         EnchantmentModel enchantment,
         CardSelectorPrefs prefs) =>
-        SelectCombatCards(context, player, cards, prefs, () =>
+        SelectCombatCards(context, player, cards, prefs, displayCards =>
         {
-            var screen = NSimpleCardSelectScreen.Create(cards, prefs);
+            // 已由调用方排好顺序，不再通过原版界面的 Comparison 重排。
+            var screen = NSimpleCardSelectScreen.Create(displayCards, prefs with { Comparison = null });
             screen.Ready += () => AddEnchantmentInfo(screen, enchantment);
             NOverlayStack.Instance!.Push(screen);
             return screen;
@@ -93,11 +93,13 @@ public static class CustomCardSelectCmd
         Player player,
         IReadOnlyList<CardModel> validCards,
         CardSelectorPrefs prefs,
-        Func<NCardGridSelectionScreen> showScreen)
+        Func<IReadOnlyList<CardModel>, NCardGridSelectionScreen> showScreen)
     {
-        
-        // 3. 边界处理：如果没有合法的牌，直接返回空集合（原版 FromSimpleGrid 和 FromHand 也自带了这个处理）
+        // 没有候选牌时不打开选择界面。
         if (validCards.Count == 0) return [];
+        
+        // 固定此次选择的候选牌快照，保持调用方提供的顺序。
+        validCards = validCards.ToArray();
         
         // 与原版 FromSimpleGrid 一样，自动选牌不启动玩家选择和联网界面。
         if (CardSelectCmd.Selector != null)
@@ -105,7 +107,7 @@ public static class CustomCardSelectCmd
         
         IReadOnlyList<CardModel> result;
         
-        // 4. 处理自动确认逻辑（例如只让选1张，且刚好只有1张合法牌）
+        // 处理自动确认逻辑（例如只让选1张，且刚好只有1张合法牌）。
         if (!prefs.RequireManualConfirmation && validCards.Count <= prefs.MinSelect)
         {
             result = validCards;
@@ -127,7 +129,7 @@ public static class CustomCardSelectCmd
                 {
                     // 确保玩家手牌没在被拖拽
                     NPlayerHand.Instance?.CancelAllCardPlay();
-                    var screen = showScreen();
+                    var screen = showScreen(validCards);
                     result = (await screen.CardsSelected()).ToList();
                 }
                 // 【核心同步替换】：绝对不能用 FromMutableDeckCards！直接使用实体 CombatCards 进行同步，更安全！
