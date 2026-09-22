@@ -2,6 +2,7 @@
 using IndomitableSpire2.IndomitableSpire2Code.Cards.Abstracts;
 using IndomitableSpire2.IndomitableSpire2Code.Commands;
 using IndomitableSpire2.IndomitableSpire2Code.Enchantments;
+using IndomitableSpire2.IndomitableSpire2Code.Extensions;
 using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -34,16 +35,11 @@ public sealed class IncendiaryExpert() : IndomitableSpire2Card(0, CardType.Skill
         var prefs = new CardSelectorPrefs(SelectionScreenPrompt, cardsToSelect, cardsToSelect);
         
         var enchantment = ModelDb.Enchantment<HighExplosiveEnchantment>();
+        var cards = Owner.GetCards(sortDrawPile: true, mixPiles: false, PileType.Hand, PileType.Draw);
         
         // 调用我们自定义的战斗内附魔命令，允许选择手牌和抽牌堆
         foreach (var card in await CustomCardSelectCmd.FromCombatForEnchantment(
-                     choiceContext,
-                     Owner,
-                     enchantment,
-                     amount,
-                     prefs,
-                     null, // 高爆附魔自带的 CanEnchantCardType 已经限制了只能选攻击牌
-                     PileType.Hand, PileType.Draw)
+                     choiceContext, Owner, cards, enchantment, amount, prefs)
                  )
         {
             CardCmd.Enchant<HighExplosiveEnchantment>(card, amount);

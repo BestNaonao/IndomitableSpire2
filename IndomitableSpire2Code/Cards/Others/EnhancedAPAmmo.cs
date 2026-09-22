@@ -2,6 +2,7 @@
 using IndomitableSpire2.IndomitableSpire2Code.Cards.Abstracts;
 using IndomitableSpire2.IndomitableSpire2Code.Commands;
 using IndomitableSpire2.IndomitableSpire2Code.Enchantments;
+using IndomitableSpire2.IndomitableSpire2Code.Extensions;
 using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -31,15 +32,10 @@ public sealed class EnhancedApAmmo() : IndomitableSpire2Card(0, CardType.Skill, 
         var prefs = new CardSelectorPrefs(SelectionScreenPrompt, cardsToSelect, cardsToSelect);
         
         var enchantment = ModelDb.Enchantment<ArmorPiercingEnchantment>();
+        var cards = Owner.GetCards(sortDrawPile: true, mixPiles: false, PileType.Hand, PileType.Draw);
         
         foreach (var card in await CustomCardSelectCmd.FromCombatForEnchantment(
-                     choiceContext,
-                     Owner,
-                     enchantment,
-                     1, // 穿甲附魔是无层数的，随便传个数
-                     prefs,
-                     null, 
-                     PileType.Hand, PileType.Draw)
+                     choiceContext, Owner, cards, enchantment, 1, prefs)    // 穿甲附魔是无层数的，随便传个数
                  )
         {
             CardCmd.Enchant<ArmorPiercingEnchantment>(card, 1M);

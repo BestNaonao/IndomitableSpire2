@@ -1,6 +1,7 @@
 using BaseLib.Utils;
 using IndomitableSpire2.IndomitableSpire2Code.Cards.Abstracts;
 using IndomitableSpire2.IndomitableSpire2Code.Commands;
+using IndomitableSpire2.IndomitableSpire2Code.Extensions;
 using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -26,17 +27,17 @@ public sealed class Insight() : IndomitableSpire2Card(0, CardType.Skill, CardRar
         if (CombatState == null) return;
         
         var enchantment = Enchantment;
-        var candidates = CardPile.GetCards(Owner, PileType.Hand, PileType.Draw)
+        var candidates = Owner.GetCards(sortDrawPile: true, mixPiles: false, PileType.Hand, PileType.Draw)
             .Where(card => card != this && (card.IsUpgradable || enchantment?.CanEnchant(card) == true))
             .ToList();
         if (candidates.Count == 0) return;
         
         var maxCards = Math.Min(DynamicVars.Cards.IntValue, candidates.Count);
         var prefs = new CardSelectorPrefs(SelectionScreenPrompt, 0, maxCards);
-        var selected = (enchantment == null
-            ? await CardSelectCmd.FromSimpleGrid(choiceContext, candidates, Owner, prefs)
-            : await CustomCardSelectCmd.FromCombatWithEnchantmentInfo(
-                choiceContext, Owner, candidates, enchantment, prefs)).ToList();
+        var selected = (enchantment == null 
+            ? await CardSelectCmd.FromSimpleGrid(choiceContext, candidates, Owner, prefs) 
+            : await CustomCardSelectCmd.FromCombatWithEnchantmentInfo(choiceContext, Owner, candidates, enchantment, prefs)
+            ).ToList();
         foreach (var card in selected)
         {
             // 两种效果独立判断；不能继承附魔时，仍可升级并保留原附魔。先附魔，避免升级移除消耗等关键词后改变附魔条件。
