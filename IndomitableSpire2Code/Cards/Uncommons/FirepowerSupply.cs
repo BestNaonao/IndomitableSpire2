@@ -1,5 +1,6 @@
 ﻿using IndomitableSpire2.IndomitableSpire2Code.Cards.Abstracts;
 using IndomitableSpire2.IndomitableSpire2Code.Cards.Others;
+using IndomitableSpire2.IndomitableSpire2Code.Enums;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -10,9 +11,12 @@ namespace IndomitableSpire2.IndomitableSpire2Code.Cards.Uncommons;
 
 public sealed class FirepowerSupply() : IndomitableCard(0, CardType.Skill, CardRarity.Uncommon, TargetType.Self)
 {
+    protected override HashSet<CardTag> CanonicalTags => [IndomitableTags.Versatile];
+    
     // 【细节拉满】：根据本卡牌是否已升级，动态展示升级或未升级的衍生牌悬浮窗！
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
     [
+        HoverTipFactory.FromKeyword(IndomitableKeywords.Versatile),
         HoverTipFactory.FromCard<IncendiaryExpert>(IsUpgraded),
         HoverTipFactory.FromCard<EnhancedApAmmo>(IsUpgraded)
     ];

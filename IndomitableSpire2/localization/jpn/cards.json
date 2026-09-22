@@ -75,7 +75,7 @@
   "INDOMITABLESPIRE2-SCHEDULED_MAINTENANCE.title": "定期点検",
   "INDOMITABLESPIRE2-SCHEDULED_MAINTENANCE.description": "ターン開始時、[gold]山札[/gold]または[gold]手札[/gold]にあるランダムな[gold]艦載機[/gold]の耐久を合计で{ScheduledMaintenancePower:diff()}回復する。",
   "INDOMITABLESPIRE2-FIREPOWER_SUPPLY.title": "火力補給",
-  "INDOMITABLESPIRE2-FIREPOWER_SUPPLY.description": "{IfUpgraded:show:[gold]アップグレード[/gold]済みの}[gold]焼夷エキスパート[/gold]または[gold]強化徹甲弾[/gold]を1枚選び、[gold]手札[/gold]に加える。",
+  "INDOMITABLESPIRE2-FIREPOWER_SUPPLY.description": "[gold]多用途[/gold]：{IfUpgraded:show:[gold]アップグレード[/gold]済みの}[gold]焼夷エキスパート[/gold]または[gold]強化徹甲弾[/gold]を1枚選び、[gold]手札[/gold]に加える。",
   "INDOMITABLESPIRE2-ARMOURED_CARRIER.title": "装甲空母",
   "INDOMITABLESPIRE2-ARMOURED_CARRIER.banter": "イラストリアス級四番艦、装甲空母のインドミタブルですわ。",
   "INDOMITABLESPIRE2-ARMOURED_CARRIER.description": "ターン開始時、[gold]シールド[/gold]を[blue]{ShieldPower}[/blue]得る、\n[gold]優雅[/gold]：[gold]航空[/gold]を[blue]{AviationPower}[/blue]得る。",

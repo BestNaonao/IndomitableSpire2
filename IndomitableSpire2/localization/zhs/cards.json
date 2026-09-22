@@ -75,7 +75,7 @@
   "INDOMITABLESPIRE2-SCHEDULED_MAINTENANCE.title": "定期检修",
   "INDOMITABLESPIRE2-SCHEDULED_MAINTENANCE.description": "在你的回合开始时，为[gold]抽牌堆[/gold]或[gold]手牌[/gold]中的随机[gold]舰载机[/gold]牌总计恢复{ScheduledMaintenancePower:diff()}点耐久。",
   "INDOMITABLESPIRE2-FIREPOWER_SUPPLY.title": "火力补给",
-  "INDOMITABLESPIRE2-FIREPOWER_SUPPLY.description": "选择1张{IfUpgraded:show:[gold]升级过的[/gold]}[gold]起火专家[/gold]或[gold]增强穿甲弹药[/gold]加入你的[gold]手牌[/gold]。",
+  "INDOMITABLESPIRE2-FIREPOWER_SUPPLY.description": "[gold]多用途[/gold]：选择1张{IfUpgraded:show:[gold]升级过的[/gold]}[gold]起火专家[/gold]或[gold]增强穿甲弹药[/gold]加入你的[gold]手牌[/gold]。",
   "INDOMITABLESPIRE2-ARMOURED_CARRIER.title": "装甲航母",
   "INDOMITABLESPIRE2-ARMOURED_CARRIER.banter": "光辉级四号舰，装甲航母不挠。",
   "INDOMITABLESPIRE2-ARMOURED_CARRIER.description": "在你的回合开始时获得[blue]{ShieldPower}[/blue]点[gold]护盾[/gold]，并且\n[gold]优雅[/gold]：获得[blue]{AviationPower}[/blue]层[gold]航空[/gold]。",
