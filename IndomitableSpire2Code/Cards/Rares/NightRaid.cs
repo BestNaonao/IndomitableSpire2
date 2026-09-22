@@ -47,8 +47,8 @@ public sealed class NightRaid() : IndomitableCard(1, CardType.Skill, CardRarity.
         };
         
         // 从手牌中选择一张攻击牌，并记录这张牌，以便在随后的伤害计算中为其提供特判加成
-        _selectedCard = (await CardSelectCmd.FromHand(
-            choiceContext, Owner, prefs, c => c.Type == CardType.Attack, this
+        _selectedCard = (await CardSelectCmd.FromHand(choiceContext, Owner, prefs, 
+            c => c.Type == CardType.Attack && !c.Keywords.Contains(CardKeyword.Unplayable), this
         )).FirstOrDefault();
         
         if (_selectedCard != null)

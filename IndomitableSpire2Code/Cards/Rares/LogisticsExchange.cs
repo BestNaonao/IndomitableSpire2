@@ -22,8 +22,8 @@ public sealed class LogisticsExchange() : IndomitableCard(1, CardType.Skill, Car
         
         // 呼出选择界面：强制要求选择2张手牌
         var prefs = new CardSelectorPrefs(SelectionScreenPrompt, 2, 2);
-        var selectedCards = (await CardSelectCmd.FromHand(
-            choiceContext, Owner, prefs, c => !c.EnergyCost.CostsX, this
+        var selectedCards = (await CardSelectCmd.FromHand(choiceContext, Owner, prefs, 
+            c => !c.EnergyCost.CostsX && !c.Keywords.Contains(CardKeyword.Unplayable), this
         )).ToList();
         
         if (selectedCards.Count == 2)

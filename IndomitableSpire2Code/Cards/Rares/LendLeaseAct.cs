@@ -16,7 +16,8 @@ public sealed class LendLeaseAct() : IndomitableCard(2, CardType.Skill, CardRari
     
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
     
-    private static bool Filter(CardModel c) => c.Type is CardType.Attack or CardType.Skill or CardType.Power;
+    private static bool Filter(CardModel c) => 
+        c.Type is CardType.Attack or CardType.Skill or CardType.Power && !c.Keywords.Contains(CardKeyword.Unplayable);
     
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
