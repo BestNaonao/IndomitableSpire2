@@ -11,7 +11,7 @@ using MegaCrit.Sts2.Core.Runs;
 
 namespace IndomitableSpire2.IndomitableSpire2Code.Powers;
 
-public sealed class LendLeaseActPower : IndomitablePower
+public sealed class SweetDealPower : IndomitablePower
 {
     public override PowerType Type => PowerType.Buff;
     public override PowerInstanceType InstanceType => PowerInstanceType.Instanced; // 允许存在多份独立契约

@@ -1,4 +1,5 @@
 ﻿using IndomitableSpire2.IndomitableSpire2Code.Cards.Abstracts;
+using IndomitableSpire2.IndomitableSpire2Code.Extensions;
 using IndomitableSpire2.IndomitableSpire2Code.Powers;
 using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Commands;
@@ -6,10 +7,11 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Nodes.Vfx;
 
 namespace IndomitableSpire2.IndomitableSpire2Code.Cards.Rares;
 
-public sealed class LendLeaseAct() : IndomitableCard(2, CardType.Skill, CardRarity.Rare, TargetType.AnyAlly)
+public sealed class SweetDeal() : IndomitableCard(2, CardType.Skill, CardRarity.Rare, TargetType.AnyAlly)
 {
     // 仅限多人模式可用
     public override CardMultiplayerConstraint MultiplayerConstraint => CardMultiplayerConstraint.MultiplayerOnly;
@@ -23,7 +25,9 @@ public sealed class LendLeaseAct() : IndomitableCard(2, CardType.Skill, CardRari
     {
         ArgumentNullException.ThrowIfNull(cardPlay.Target, nameof(cardPlay.Target));
         
-        await CreatureCmd.TriggerAnim(Owner.Creature, "Cast", Owner.Character.CastAnimDelay);
+        await Owner.PlayIndomitableCardPresentation(cardPlay, Id.Entry, VfxColor.Gold,
+            "res://IndomitableSpire2/sfx/characters/indomitable/touch_2.wav",
+            animationTrigger: "Cast", exactDurationSeconds: 12.8f);
         
         // 1. 获取目标玩家（另一名玩家）
         var otherPlayer = cardPlay.Target.Player;
@@ -63,7 +67,7 @@ public sealed class LendLeaseAct() : IndomitableCard(2, CardType.Skill, CardRari
     private async Task ApplyCardContracts(
         PlayerChoiceContext choiceContext, Player from, CardModel card, Player to, bool isLending)
     {
-        var power = await PowerCmd.Apply<LendLeaseActPower>(
+        var power = await PowerCmd.Apply<SweetDealPower>(
             choiceContext, from.Creature, 1M, Owner.Creature, this);
         power?.SetContract(card, to, isLending);
     }
