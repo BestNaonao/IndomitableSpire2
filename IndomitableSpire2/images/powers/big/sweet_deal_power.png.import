@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://6ayqx85d77sm"
-path="res://.godot/imported/lend_lease_act_power.png-e67424cb0e331ad21de00f15fb5ebf8e.ctex"
+uid="uid://cwnikidk23jxb"
+path="res://.godot/imported/sweet_deal_power.png-271c2acc55933c6d1bcfff3aa85a3741.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://IndomitableSpire2/images/powers/big/lend_lease_act_power.png"
-dest_files=["res://.godot/imported/lend_lease_act_power.png-e67424cb0e331ad21de00f15fb5ebf8e.ctex"]
+source_file="res://IndomitableSpire2/images/powers/big/sweet_deal_power.png"
+dest_files=["res://.godot/imported/sweet_deal_power.png-271c2acc55933c6d1bcfff3aa85a3741.ctex"]
 
 [params]
 
