@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=2 format=3 uid="uid://712ug8lbxg1s"]
 
-[ext_resource type="Texture2D" path="res://IndomitableSpire2/images/events/TeaParty.png" id="1_tea_party"]
+[ext_resource type="Texture2D" uid="uid://d3p2uyhhlvqpe" path="res://IndomitableSpire2/images/events/TeaParty.png" id="1_tea_party"]
 
 ; 由事件挂到原版 VfxContainer，继承其全屏尺寸与位于事件文字下方的绘制顺序。
 [node name="HydrangeaTeaParty" type="Control"]
