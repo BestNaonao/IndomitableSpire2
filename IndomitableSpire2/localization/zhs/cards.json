@@ -24,7 +24,7 @@
   "INDOMITABLESPIRE2-FORMIDABLE_PRESSURE.description": "造成{CalculatedDamage:diff()}点伤害。\n本回合内，该敌人每被给予一次负面状态，这张牌就额外造成{ExtraDamage:diff()}点伤害。",
   "INDOMITABLESPIRE2-SORORAL_UNITY.title": "姐妹同心",
   "INDOMITABLESPIRE2-SORORAL_UNITY.banter": "姐姐们，加油~",
-  "INDOMITABLESPIRE2-SORORAL_UNITY.description": "将光辉的庇护、胜利的高歌和可畏的威压各1张加入你的[gold]手牌[/gold]。",
+  "INDOMITABLESPIRE2-SORORAL_UNITY.description": "将[gold]{IfUpgraded:show:光辉的庇护+|光辉的庇护}[/gold]、[gold]{IfUpgraded:show:胜利的高歌+|胜利的高歌}[/gold]和[gold]{IfUpgraded:show:可畏的威压+|可畏的威压}[/gold]各1张加入你的[gold]手牌[/gold]。",
   "INDOMITABLESPIRE2-SWORDFISH_BOMBER.title": "剑鱼鱼雷机",
   "INDOMITABLESPIRE2-SWORDFISH_BOMBER.description": "造成{Damage:diff()}点伤害。\n给予[blue]{FloodingPower:diff()}[/blue]层[blue]进水[/blue]。",
   "INDOMITABLESPIRE2-SWORDFISH818_SQUADRON.title": "剑鱼(818中队)",
