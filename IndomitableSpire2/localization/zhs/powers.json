@@ -22,7 +22,7 @@
   "INDOMITABLESPIRE2-ILLUSTRIOUS_AEGIS_POWER.smartDescription": "当你的[gold]护盾[/gold]吸收伤害时，此层数随之减少。当层数归零时，回复[green]{Heal}[/green]点生命。\n[purple]多个庇护效果依次触发。[/purple]",
   "INDOMITABLESPIRE2-ILLUSTRIOUS_AEGIS_POWER.title": "光辉的庇护",
   "INDOMITABLESPIRE2-VICTORIOUS_SONG_POWER.description": "对当前生命值最高的敌人造成更多攻击伤害，并减少受到该敌人的攻击伤害。",
-  "INDOMITABLESPIRE2-VICTORIOUS_SONG_POWER.smartDescription": "当前生命值最高的敌人：{HasTarget:cond:>0?[gold]{TargetName}[/gold]|无}。{OnPlayer:你|[gold]{OwnerName}[/gold]}对其造成的攻击伤害增加[blue]{Amount}[/blue]点；它对{OnPlayer:你|[gold]{OwnerName}[/gold]}造成的攻击伤害减少[blue]{DamageReduction}[/blue]点。",
+  "INDOMITABLESPIRE2-VICTORIOUS_SONG_POWER.smartDescription": "当前生命值最高的敌人：{HasTarget:cond:>0?[gold]{TargetName}[/gold]|无}。{OnPlayer:你|[gold]{OwnerName}[/gold]}对其造成的攻击伤害增加[blue]{Amount}[/blue]点；它对{OnPlayer:你|[gold]{OwnerName}[/gold]}造成的攻击伤害减少[blue]{Amount}[/blue]点。",
   "INDOMITABLESPIRE2-VICTORIOUS_SONG_POWER.title": "胜利的高歌",
   "INDOMITABLESPIRE2-ARMOR_BREAK_POWER.description": "受到攻击伤害前，失去等同于层数的[gold]格挡[/gold]。",
   "INDOMITABLESPIRE2-ARMOR_BREAK_POWER.smartDescription": "[blue]{Amount}[/blue]回合内，受到攻击伤害前，失去等同于层数的[gold]格挡[/gold]。",

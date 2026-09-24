@@ -19,7 +19,7 @@
   "INDOMITABLESPIRE2-ILLUSTRIOUS_AEGIS.title": "イラストリアスのイージス",
   "INDOMITABLESPIRE2-ILLUSTRIOUS_AEGIS.description": "任意のプレイヤーに[gold]シールド[/gold]を{Shield:diff()}与える。\nこの[gold]シールド[/gold]が砕けた時、ＨＰを[green]{Heal:diff()}[/green]回復する。",
   "INDOMITABLESPIRE2-VICTORIOUS_SONG.title": "ヴィクトリアスの高歌",
-  "INDOMITABLESPIRE2-VICTORIOUS_SONG.description": "現在のＨＰが最も高い敵に与えるアタックダメージが[blue]{VictoriousSongPower:diff()}[/blue]増加する。\nその敵から受けるアタックダメージが[blue]{DamageReduction:diff()}[/blue]減少する。",
+  "INDOMITABLESPIRE2-VICTORIOUS_SONG.description": "現在のＨＰが最も高い敵に与えるアタックダメージが[blue]{VictoriousSongPower:diff()}[/blue]増加する。\nその敵から受けるアタックダメージが[blue]{VictoriousSongPower:diff()}[/blue]減少する。",
   "INDOMITABLESPIRE2-FORMIDABLE_PRESSURE.title": "フォーミダブルの重圧",
   "INDOMITABLESPIRE2-FORMIDABLE_PRESSURE.description": "{CalculatedDamage:diff()}ダメージを与える。\nこのターン、この敵にデバフが付与されるたび、このカードのダメージが{ExtraDamage:diff()}増加する。",
   "INDOMITABLESPIRE2-SORORAL_UNITY.title": "麗しき姉妹の絆",

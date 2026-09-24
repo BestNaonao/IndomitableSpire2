@@ -19,7 +19,7 @@
   "INDOMITABLESPIRE2-ILLUSTRIOUS_AEGIS.title": "Illustrious Aegis",
   "INDOMITABLESPIRE2-ILLUSTRIOUS_AEGIS.description": "Grant any player {Shield:diff()} [gold]Shield[/gold].\nHeals [green]{Heal:diff()}[/green] HP when this [gold]Shield[/gold] breaks.",
   "INDOMITABLESPIRE2-VICTORIOUS_SONG.title": "Victorious Song",
-  "INDOMITABLESPIRE2-VICTORIOUS_SONG.description": "Deal [blue]{VictoriousSongPower:diff()}[/blue] additional attack damage to the enemy with the highest current HP.\nTake [blue]{DamageReduction:diff()}[/blue] less attack damage from that enemy.",
+  "INDOMITABLESPIRE2-VICTORIOUS_SONG.description": "Deal [blue]{VictoriousSongPower:diff()}[/blue] additional attack damage to the enemy with the highest current HP.\nTake [blue]{VictoriousSongPower:diff()}[/blue] less attack damage from that enemy.",
   "INDOMITABLESPIRE2-FORMIDABLE_PRESSURE.title": "Formidable Pressure",
   "INDOMITABLESPIRE2-FORMIDABLE_PRESSURE.description": "Deal {CalculatedDamage:diff()} damage.\nDeals {ExtraDamage:diff()} additional damage for each time a debuff was applied to this enemy this turn.",
   "INDOMITABLESPIRE2-SORORAL_UNITY.title": "Sororal Unity",
