@@ -1,3 +1,4 @@
+using BaseLib.Utils;
 using IndomitableSpire2.IndomitableSpire2Code.Cards.Abstracts;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Combat.History.Entries;
@@ -6,11 +7,13 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using MegaCrit.Sts2.Core.Models.CardPools;
 using MegaCrit.Sts2.Core.ValueProps;
 
-namespace IndomitableSpire2.IndomitableSpire2Code.Cards.Uncommons;
+namespace IndomitableSpire2.IndomitableSpire2Code.Cards.Others;
 
-public sealed class FormidablePressure() : IndomitableCard(2, CardType.Attack, CardRarity.Uncommon, TargetType.AnyEnemy)
+[Pool(typeof(ColorlessCardPool))]
+public sealed class FormidablePressure() : IndomitableSpire2Card(2, CardType.Attack, CardRarity.Uncommon, TargetType.AnyEnemy)
 {
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Retain];
     

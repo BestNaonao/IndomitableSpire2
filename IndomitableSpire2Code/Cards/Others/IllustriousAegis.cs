@@ -1,4 +1,5 @@
-﻿using IndomitableSpire2.IndomitableSpire2Code.Cards.Abstracts;
+﻿using BaseLib.Utils;
+using IndomitableSpire2.IndomitableSpire2Code.Cards.Abstracts;
 using IndomitableSpire2.IndomitableSpire2Code.Commands;
 using IndomitableSpire2.IndomitableSpire2Code.Extensions;
 using IndomitableSpire2.IndomitableSpire2Code.Localization.DynamicVars;
@@ -7,12 +8,14 @@ using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using MegaCrit.Sts2.Core.Models.CardPools;
 using MegaCrit.Sts2.Core.ValueProps;
 
-namespace IndomitableSpire2.IndomitableSpire2Code.Cards.Uncommons;
+namespace IndomitableSpire2.IndomitableSpire2Code.Cards.Others;
 
 // 指定为 AnyPlayer，支持联机模式下套给自己或队友
-public sealed class IllustriousAegis() : IndomitableCard(2, CardType.Skill, CardRarity.Uncommon, TargetType.AnyPlayer)
+[Pool(typeof(ColorlessCardPool))]
+public sealed class IllustriousAegis() : IndomitableSpire2Card(2, CardType.Skill, CardRarity.Uncommon, TargetType.AnyPlayer)
 {
     public override bool GainsBlock => true;
     

@@ -1,6 +1,6 @@
 using BaseLib.Abstracts;
 using Godot;
-using IndomitableSpire2.IndomitableSpire2Code.Cards.Uncommons;
+using IndomitableSpire2.IndomitableSpire2Code.Cards.Others;
 using IndomitableSpire2.IndomitableSpire2Code.Character;
 using IndomitableSpire2.IndomitableSpire2Code.Potions;
 using MegaCrit.Sts2.Core.Assets;

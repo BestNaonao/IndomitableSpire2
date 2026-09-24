@@ -1,13 +1,16 @@
+using BaseLib.Utils;
 using IndomitableSpire2.IndomitableSpire2Code.Cards.Abstracts;
 using IndomitableSpire2.IndomitableSpire2Code.Powers;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using MegaCrit.Sts2.Core.Models.CardPools;
 
-namespace IndomitableSpire2.IndomitableSpire2Code.Cards.Uncommons;
+namespace IndomitableSpire2.IndomitableSpire2Code.Cards.Others;
 
-public sealed class VictoriousSong() : IndomitableCard(2, CardType.Power, CardRarity.Uncommon, TargetType.Self)
+[Pool(typeof(ColorlessCardPool))]
+public sealed class VictoriousSong() : IndomitableSpire2Card(2, CardType.Power, CardRarity.Uncommon, TargetType.Self)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<VictoriousSongPower>(2M)];
     
