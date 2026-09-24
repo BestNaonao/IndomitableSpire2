@@ -9,12 +9,7 @@ namespace IndomitableSpire2.IndomitableSpire2Code.Cards.Uncommons;
 
 public sealed class VictoriousSong() : IndomitableCard(2, CardType.Power, CardRarity.Uncommon, TargetType.Self)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars =>
-    [
-        new PowerVar<VictoriousSongPower>(3M), 
-        ..MakeCalculatedVar("DamageReduction", 1, (card, _) => 
-            card.DynamicVars["VictoriousSongPower"].PreviewValue - card.DynamicVars["VictoriousSongPower"].BaseValue)
-    ];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<VictoriousSongPower>(2M)];
     
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
@@ -32,6 +27,5 @@ public sealed class VictoriousSong() : IndomitableCard(2, CardType.Power, CardRa
     protected override void OnUpgrade()
     {
         DynamicVars["VictoriousSongPower"].UpgradeValueBy(1M);
-        DynamicVars["DamageReductionBase"].UpgradeValueBy(1M);
     }
 }

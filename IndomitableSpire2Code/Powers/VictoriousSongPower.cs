@@ -1,6 +1,4 @@
-using BaseLib.Abstracts;
 using IndomitableSpire2.IndomitableSpire2Code.Abstracts;
-using IndomitableSpire2.IndomitableSpire2Code.Cards.Uncommons;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
@@ -11,19 +9,13 @@ using MegaCrit.Sts2.Core.ValueProps;
 
 namespace IndomitableSpire2.IndomitableSpire2Code.Powers;
 
-public sealed class VictoriousSongPower : IndomitablePower, IHasSecondAmount, IAfterCreatureEscapedSubscriber
+public sealed class VictoriousSongPower : IndomitablePower, IAfterCreatureEscapedSubscriber
 {
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;
     
     protected override IEnumerable<DynamicVar> CanonicalVars => 
-    [
-        new("DamageReduction", 0M), 
-        new StringVar("TargetName"), 
-        new BoolVar("HasTarget")
-    ];
-    
-    public string GetSecondAmount() => DynamicVars["DamageReduction"].IntValue.ToString();
+        [new StringVar("TargetName"), new BoolVar("HasTarget")];
     
     // 每次结算都重新查找，保留所有当前生命值并列最高的存活敌人。
     private IReadOnlyList<Creature> HighestHpEnemies()
@@ -51,9 +43,6 @@ public sealed class VictoriousSongPower : IndomitablePower, IHasSecondAmount, IA
         PlayerChoiceContext choiceContext, PowerModel power, decimal amount, Creature? applier, CardModel? cardSource)
     {
         if (power != this) return Task.CompletedTask;
-        // amount 是经过能力数量修正后的本次实际增量，而不是累计 Amount。每次打出本牌分别累计减伤：3 -> 1、4 -> 2，翻倍后为 6 -> 4、8 -> 6。
-        if (amount > 0 && cardSource is VictoriousSong)
-            DynamicVars["DamageReduction"].BaseValue += Math.Max(0, (int)amount - 2);
         SyncTarget();
         InvokeDisplayAmountChanged();
         return Task.CompletedTask;
@@ -90,7 +79,7 @@ public sealed class VictoriousSongPower : IndomitablePower, IHasSecondAmount, IA
     {
         if (!props.IsPoweredAttack() || HighestHpEnemies() is not { Count : > 0 } enemies) return 0M;
         if (dealer == Owner && target != null && enemies.Contains(target)) return Amount;
-        if (target == Owner && dealer != null && enemies.Contains(dealer)) return -DynamicVars["DamageReduction"].BaseValue;
+        if (target == Owner && dealer != null && enemies.Contains(dealer)) return -Amount;
         return 0M;
     }
 }
