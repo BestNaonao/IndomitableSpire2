@@ -165,6 +165,8 @@
   "INDOMITABLESPIRE2-ONSEN_JOURNEY.title": "温泉之旅",
   "INDOMITABLESPIRE2-ONSEN_JOURNEY.description": "从你的[gold]抽牌堆[/gold]中选择最多{Cards:diff()}张牌放入[gold]手牌[/gold]。\n每成功放入一张[gold]手牌[/gold]，给予随机敌人[blue]{FloodingPower:diff()}[/blue]层[blue]进水[/blue]。",
   "INDOMITABLESPIRE2-ONSEN_JOURNEY.selectionScreenPrompt": "从你的[gold]抽牌堆[/gold]中选择最多{Amount}张牌放入[gold]手牌[/gold]。",
+  "INDOMITABLESPIRE2-INDOMITABLE_PRAYER.title": "不挠之祈",
+  "INDOMITABLESPIRE2-INDOMITABLE_PRAYER.description": "获得{Shield:diff()}点[gold]护盾[/gold]。\n本回合内，你每次受到的伤害不会超过前一次受到的伤害。",
   
   "INDOMITABLESPIRE2-DESSERT.title": "甜点",
   "INDOMITABLESPIRE2-DESSERT.description": "回复[green]{Heal:diff()}[/green]点生命。\n获得{Energy:energyIcons()}。",

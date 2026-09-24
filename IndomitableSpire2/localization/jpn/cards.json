@@ -165,6 +165,8 @@
   "INDOMITABLESPIRE2-ONSEN_JOURNEY.title": "温泉旅行",
   "INDOMITABLESPIRE2-ONSEN_JOURNEY.description": "[gold]山札[/gold]からカードを最大{Cards:diff()}枚選び、[gold]手札[/gold]に加える。\n実際に[gold]手札[/gold]に加わったカード1枚につき、ランダムな敵に[blue]浸水[/blue]を[blue]{FloodingPower:diff()}[/blue]与える。",
   "INDOMITABLESPIRE2-ONSEN_JOURNEY.selectionScreenPrompt": "[gold]山札[/gold]から[gold]手札[/gold]に加えるカードを最大{Amount}枚選ぶ。",
+  "INDOMITABLESPIRE2-INDOMITABLE_PRAYER.title": "インドミタブルの祈り",
+  "INDOMITABLESPIRE2-INDOMITABLE_PRAYER.description": "[gold]シールド[/gold]を{Shield:diff()}得る。\nこのターン、受けるダメージは毎回、直前に受けたダメージを超えない。",
   
   "INDOMITABLESPIRE2-DESSERT.title": "デザート",
   "INDOMITABLESPIRE2-DESSERT.description": "HPを[green]{Heal:diff()}[/green]回復する。\n{Energy:energyIcons()}を得る。",

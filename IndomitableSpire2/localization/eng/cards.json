@@ -165,6 +165,8 @@
   "INDOMITABLESPIRE2-ONSEN_JOURNEY.title": "Onsen Journey",
   "INDOMITABLESPIRE2-ONSEN_JOURNEY.description": "Put up to {Cards:diff()} cards from your [gold]Draw Pile[/gold] into your [gold]Hand[/gold].\nFor each card that enters your [gold]Hand[/gold], apply [blue]{FloodingPower:diff()}[/blue] [blue]Flooded[/blue] to a random enemy.",
   "INDOMITABLESPIRE2-ONSEN_JOURNEY.selectionScreenPrompt": "Choose up to {Amount} cards from your [gold]Draw Pile[/gold] to put into your [gold]Hand[/gold].",
+  "INDOMITABLESPIRE2-INDOMITABLE_PRAYER.title": "Indomitable Prayer",
+  "INDOMITABLESPIRE2-INDOMITABLE_PRAYER.description": "Gain {Shield:diff()} [gold]Shield[/gold].\nThis turn, whenever you take damage, it is capped at the previous damage you took.",
   
   "INDOMITABLESPIRE2-DESSERT.title": "Dessert",
   "INDOMITABLESPIRE2-DESSERT.description": "Heal [green]{Heal:diff()}[/green] HP.\nGain {Energy:energyIcons()}.",

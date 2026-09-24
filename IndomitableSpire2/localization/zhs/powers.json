@@ -115,5 +115,8 @@
   "INDOMITABLESPIRE2-FULL_CONCENTRATION_POWER.title": "全神贯注",
   "INDOMITABLESPIRE2-EARNEST_MODE_POWER.description": "获得一个强化的额外回合。",
   "INDOMITABLESPIRE2-EARNEST_MODE_POWER.smartDescription": "获得一个额外回合。该回合开始时，额外获得[blue]{Amount:energyIcons()}[/blue]并抽[blue]{Amount}[/blue]张牌；该回合内，你打出的[gold]舰载机[/gold]牌额外打出[blue]{Amount}[/blue]次。该回合结束时，移除此能力并清空你的[gold]干劲[/gold]。",
-  "INDOMITABLESPIRE2-EARNEST_MODE_POWER.title": "认真模式"
+  "INDOMITABLESPIRE2-EARNEST_MODE_POWER.title": "认真模式",
+  "INDOMITABLESPIRE2-INDOMITABLE_PRAYER_POWER.description": "本回合内，每次受到的伤害不会超过本场战斗中前一次受到的伤害（包括格挡部分）。若尚无伤害记录，首次伤害不受限制。",
+  "INDOMITABLESPIRE2-INDOMITABLE_PRAYER_POWER.smartDescription": "本回合内，{OnPlayer:你|[gold]{OwnerName}[/gold]}每次受到的伤害不会超过本场战斗中前一次受到的伤害（包括格挡部分）。\n{HasDamageCap:cond:>0?下一次受到的伤害最多为[blue]{DamageCap}[/blue]点。|本场战斗尚无伤害记录，首次伤害不受限制。}",
+  "INDOMITABLESPIRE2-INDOMITABLE_PRAYER_POWER.title": "不挠之祈"
 }

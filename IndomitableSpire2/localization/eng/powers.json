@@ -115,5 +115,8 @@
   "INDOMITABLESPIRE2-FULL_CONCENTRATION_POWER.title": "Total Focus",
   "INDOMITABLESPIRE2-EARNEST_MODE_POWER.description": "Take an empowered extra turn.",
   "INDOMITABLESPIRE2-EARNEST_MODE_POWER.smartDescription": "Take an extra turn. At its start, gain [blue]{Amount:energyIcons()}[/blue] and draw [blue]{Amount}[/blue] {Amount:plural:card|cards}. During it, your [gold]Carrier Aircraft[/gold] cards play [blue]{Amount}[/blue] additional {Amount:plural:time|times}. At its end, remove this power and clear your [gold]Motivation[/gold].",
-  "INDOMITABLESPIRE2-EARNEST_MODE_POWER.title": "Earnest Mode"
+  "INDOMITABLESPIRE2-EARNEST_MODE_POWER.title": "Earnest Mode",
+  "INDOMITABLESPIRE2-INDOMITABLE_PRAYER_POWER.description": "This turn, incoming damage is capped at the previous damage taken this combat (including blocked damage). If no damage has been taken yet, the first instance is uncapped.",
+  "INDOMITABLESPIRE2-INDOMITABLE_PRAYER_POWER.smartDescription": "This turn, whenever {OnPlayer:you take|[gold]{OwnerName}[/gold] takes} damage, it is capped at the previous damage taken this combat (including blocked damage).\n{HasDamageCap:cond:>0?The next incoming damage is capped at [blue]{DamageCap}[/blue].|No damage has been taken this combat. The first instance is uncapped.}",
+  "INDOMITABLESPIRE2-INDOMITABLE_PRAYER_POWER.title": "Indomitable Prayer"
 }

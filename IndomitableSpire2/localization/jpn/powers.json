@@ -115,5 +115,8 @@
   "INDOMITABLESPIRE2-FULL_CONCENTRATION_POWER.title": "全神経集中",
   "INDOMITABLESPIRE2-EARNEST_MODE_POWER.description": "強化された追加ターンを得る。",
   "INDOMITABLESPIRE2-EARNEST_MODE_POWER.smartDescription": "追加ターンを得る。そのターン開始時、追加で[blue]{Amount:energyIcons()}[/blue]を得て、カードを[blue]{Amount}[/blue]枚引く。そのターン中、自身の[gold]艦載機[/gold]カードは追加で[blue]{Amount}[/blue]回プレイされる。そのターン終了時、このパワーを取り除き、[gold]やる気[/gold]を0にする。",
-  "INDOMITABLESPIRE2-EARNEST_MODE_POWER.title": "本気モード"
+  "INDOMITABLESPIRE2-EARNEST_MODE_POWER.title": "本気モード",
+  "INDOMITABLESPIRE2-INDOMITABLE_PRAYER_POWER.description": "このターン、受けるダメージは毎回、この戦闘で直前に受けたダメージ（ブロックで防いだ分を含む）を超えない。まだダメージを受けていない場合、最初のダメージには上限がない。",
+  "INDOMITABLESPIRE2-INDOMITABLE_PRAYER_POWER.smartDescription": "このターン、{OnPlayer:自身が|[gold]{OwnerName}[/gold]が}受けるダメージは毎回、この戦闘で直前に受けたダメージ（ブロックで防いだ分を含む）を超えない。\n{HasDamageCap:cond:>0?次に受けるダメージの上限は[blue]{DamageCap}[/blue]。|この戦闘ではまだダメージを受けていないため、最初のダメージには上限がない。}",
+  "INDOMITABLESPIRE2-INDOMITABLE_PRAYER_POWER.title": "インドミタブルの祈り"
 }
