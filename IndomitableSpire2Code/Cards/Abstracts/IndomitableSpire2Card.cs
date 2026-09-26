@@ -47,7 +47,7 @@ public abstract class IndomitableSpire2Card(
         }
     }
     
-    // Marks cards with a dedicated dialogue and voice line.
-    public virtual string? SpecialSfxAudioPath => null;
-    public virtual string? SpecialTalkBanterLocKey => null;
+    // Marks cards with a dedicated special line, which may include dialogue, audio, or both.
+    public virtual string? SpecialLineAudioPath => null;
+    public virtual string? SpecialLineBanterLocKey => null;
 }
