@@ -46,4 +46,8 @@ public abstract class IndomitableSpire2Card(
             return _cachedPortraitPath;
         }
     }
+    
+    // Marks cards with a dedicated dialogue and voice line.
+    public virtual string? SpecialSfxAudioPath => null;
+    public virtual string? SpecialTalkBanterLocKey => null;
 }
