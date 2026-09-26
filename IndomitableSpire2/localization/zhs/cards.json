@@ -166,6 +166,7 @@
   "INDOMITABLESPIRE2-ONSEN_JOURNEY.description": "从你的[gold]抽牌堆[/gold]中选择最多{Cards:diff()}张牌放入[gold]手牌[/gold]。\n每成功放入一张[gold]手牌[/gold]，给予随机敌人[blue]{FloodingPower:diff()}[/blue]层[blue]进水[/blue]。",
   "INDOMITABLESPIRE2-ONSEN_JOURNEY.selectionScreenPrompt": "从你的[gold]抽牌堆[/gold]中选择最多{Amount}张牌放入[gold]手牌[/gold]。",
   "INDOMITABLESPIRE2-INDOMITABLE_PRAYER.title": "不挠之祈",
+  "INDOMITABLESPIRE2-INDOMITABLE_PRAYER.banter": "希望指挥官能平安回来…啊啊全身酸痛…光是保持祈祷这个姿势就感觉好累…",
   "INDOMITABLESPIRE2-INDOMITABLE_PRAYER.description": "获得{Shield:diff()}点[gold]护盾[/gold]。\n本回合内，你每次受到的伤害不会超过前一次受到的伤害。",
   
   "INDOMITABLESPIRE2-DESSERT.title": "甜点",
