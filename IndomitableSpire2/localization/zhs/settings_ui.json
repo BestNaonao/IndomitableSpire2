@@ -1,9 +1,9 @@
 {
   "INDOMITABLESPIRE2.mod_title": "IndomitableSpire2",
-  "INDOMITABLESPIRE2-PLAY_DIALOGUE.title": "播放卡牌对话",
+  "INDOMITABLESPIRE2-PLAY_DIALOGUE.title": "播放卡牌特殊对话",
   "INDOMITABLESPIRE2-PLAY_DIALOGUE.hover.desc": "关闭后，通过不挠卡牌表现播放的对话气泡将不会显示。",
-  "INDOMITABLESPIRE2-PLAY_SOUND_EFFECTS.title": "播放卡牌音效",
-  "INDOMITABLESPIRE2-PLAY_SOUND_EFFECTS.hover.desc": "关闭后，通过不挠卡牌表现播放的专属语音和音效都将静音。",
+  "INDOMITABLESPIRE2-PLAY_SOUND_EFFECTS.title": "播放卡牌特殊音效",
+  "INDOMITABLESPIRE2-PLAY_SOUND_EFFECTS.hover.desc": "关闭后，通过不挠卡牌表现播放的专属语音和音效不会播放，但仍可播放默认动画音效。",
   "INDOMITABLESPIRE2-PLAY_SPECIAL_LINE_ONCE_PER_COMBAT.title": "每种卡牌的特殊台词每场战斗仅播放一次",
-  "INDOMITABLESPIRE2-PLAY_SPECIAL_LINE_ONCE_PER_COMBAT.hover.desc": "开启后，每种卡牌的特殊对话和专属音频在每场战斗中最多播放一次；同种卡牌后续打出时改为播放默认动画音效。进入或离开战斗时（包括读档后）会重置次数。"
+  "INDOMITABLESPIRE2-PLAY_SPECIAL_LINE_ONCE_PER_COMBAT.hover.desc": "开启后，每种卡牌的特殊对话和专属音频共用每场战斗一次的播放机会；已播放过的同种卡牌再次打出时，改用默认动画音效。进入或离开战斗时（包括读档后）会重置次数。"
 }

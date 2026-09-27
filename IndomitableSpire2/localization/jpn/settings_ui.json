@@ -1,9 +1,9 @@
 {
   "INDOMITABLESPIRE2.mod_title": "IndomitableSpire2",
-  "INDOMITABLESPIRE2-PLAY_DIALOGUE.title": "カードの台詞を再生",
+  "INDOMITABLESPIRE2-PLAY_DIALOGUE.title": "カードの専用台詞を再生",
   "INDOMITABLESPIRE2-PLAY_DIALOGUE.hover.desc": "無効にすると、インドミタブルのカード演出による台詞の吹き出しが表示されなくなります。",
-  "INDOMITABLESPIRE2-PLAY_SOUND_EFFECTS.title": "カードの効果音を再生",
-  "INDOMITABLESPIRE2-PLAY_SOUND_EFFECTS.hover.desc": "無効にすると、インドミタブルのカード演出による専用ボイスと効果音が再生されなくなります。",
+  "INDOMITABLESPIRE2-PLAY_SOUND_EFFECTS.title": "カードの専用音声を再生",
+  "INDOMITABLESPIRE2-PLAY_SOUND_EFFECTS.hover.desc": "無効にすると、インドミタブルのカード演出による専用ボイスと効果音は再生されませんが、通常のアニメーション効果音が再生されます。",
   "INDOMITABLESPIRE2-PLAY_SPECIAL_LINE_ONCE_PER_COMBAT.title": "カードごとの特殊台詞を1戦闘につき1回のみ再生",
-  "INDOMITABLESPIRE2-PLAY_SPECIAL_LINE_ONCE_PER_COMBAT.hover.desc": "有効にすると、カードの種類ごとに特殊台詞と専用音声は各戦闘で1回のみ再生されます。同じ種類のカードを再度使用した場合は、代わりに通常のアニメーション効果音が再生されます。戦闘への入退室時（セーブデータのロード後を含む）に回数はリセットされます。"
+  "INDOMITABLESPIRE2-PLAY_SPECIAL_LINE_ONCE_PER_COMBAT.hover.desc": "有効にすると、カードの種類ごとに特殊台詞と専用音声の再生機会を各戦闘で1回だけ共有します。再生済みの種類のカードを再度使用すると、通常のアニメーション効果音に切り替わります。戦闘への入退室時（セーブデータのロード後を含む）に回数はリセットされます。"
 }
