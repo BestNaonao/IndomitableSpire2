@@ -3,5 +3,7 @@
   "INDOMITABLESPIRE2-PLAY_DIALOGUE.title": "Play card dialogue",
   "INDOMITABLESPIRE2-PLAY_DIALOGUE.hover.desc": "When disabled, dialogue bubbles triggered by Indomitable card presentations will not be shown.",
   "INDOMITABLESPIRE2-PLAY_SOUND_EFFECTS.title": "Play card sound effects",
-  "INDOMITABLESPIRE2-PLAY_SOUND_EFFECTS.hover.desc": "When disabled, custom voice lines and sounds triggered by Indomitable card presentations will be muted."
+  "INDOMITABLESPIRE2-PLAY_SOUND_EFFECTS.hover.desc": "When disabled, custom voice lines and sounds triggered by Indomitable card presentations will be muted.",
+  "INDOMITABLESPIRE2-PLAY_SPECIAL_LINE_ONCE_PER_COMBAT.title": "Play each card's special line once per combat",
+  "INDOMITABLESPIRE2-PLAY_SPECIAL_LINE_ONCE_PER_COMBAT.hover.desc": "When enabled, each card type's special dialogue and audio can play only once per combat. Later copies use the default animation sound instead. The limit resets when you enter or leave combat, including after loading a save."
 }
