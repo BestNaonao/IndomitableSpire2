@@ -15,7 +15,7 @@ public sealed class IndomitableConfiguration : SimpleModConfig
     public static bool PlayDialogue { get; set; } = true;
     
     /// <summary>
-    /// 特殊卡牌播放语音开关
+    /// 特殊卡牌播放专属音频的开关；关闭后，第 0 次结算仍可播放默认动画音效。
     /// </summary>
     public static bool PlaySoundEffects { get; set; } = true;
     

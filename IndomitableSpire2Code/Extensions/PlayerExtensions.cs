@@ -1,8 +1,10 @@
 ﻿using Godot;
+using IndomitableSpire2.IndomitableSpire2Code.Cards.Abstracts;
 using IndomitableSpire2.IndomitableSpire2Code.Character;
 using IndomitableSpire2.IndomitableSpire2Code.Commands;
 using IndomitableSpire2.IndomitableSpire2Code.Configuration;
 using IndomitableSpire2.IndomitableSpire2Code.Powers;
+using IndomitableSpire2.IndomitableSpire2Code.Registries;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -24,13 +26,13 @@ public static class PlayerExtensions
     
     /// <summary>
     /// 播放卡牌动画，并仅为不挠（含所有皮肤）播放台词和专属语音。
-    /// 重放时仍播放动画，但不重复台词和专属语音；只等待动画延迟，不等待台词或语音结束。
+    /// 仅第 0 次结算播放台词和音效；后续重放只播放动画，且不查询或更新特殊台词记录。
+    /// 特殊台词从卡牌属性读取，对话和专属音频共用每种卡牌每场战斗一次的记录。
+    /// 只等待动画延迟，不等待台词或语音结束。
     /// </summary>
     /// <param name="player">打出卡牌的玩家。</param>
     /// <param name="cardPlay">单次打出卡牌的实例。</param>
-    /// <param name="cardEntry">卡牌 Id.Entry，读取 cards 表的 {cardEntry}.banter；null 时不显示对话。</param>
     /// <param name="vfxColor">对话气泡颜色；null 时不显示对话。</param>
-    /// <param name="sfxPath">专属语音路径；有动画时替换默认音效。null 时动画使用角色默认音效，无动画时不播放音效。</param>
     /// <param name="volume">专属语音音量，默认 1；角色默认音效沿用原版音量。</param>
     /// <param name="animationTrigger">动画触发名，如 Cast、Attack、PowerUp；null 时不播放动画。</param>
     /// <param name="animationDelay">动画结算前的等待秒数；null 时 Attack 使用角色 AttackAnimDelay，其他动画使用 CastAnimDelay。</param>
@@ -40,9 +42,7 @@ public static class PlayerExtensions
     public static Task PlayIndomitableCardPresentation(
         this Player player,
         CardPlay cardPlay,
-        string? cardEntry = null,
         VfxColor? vfxColor = VfxColor.Gold,
-        string? sfxPath = null,
         float volume = 1f,
         string? animationTrigger = null,
         float? animationDelay = null,
@@ -51,33 +51,48 @@ public static class PlayerExtensions
         double additionalDurationSeconds = 0d)
     {
         if (player.Creature.IsDead) return Task.CompletedTask;
-        // 处理动画
-        var isIndomitable = player.Character is Indomitable;
+        var isFirstPlay = cardPlay.PlayIndex == 0;
+        string? banterLocKey = null;
+        string? specialAudioPath = null;
+        
+        // 重放与其他角色不读取特殊台词资源，也不消耗每场战斗的播放次数。
+        if (isFirstPlay && player.Character is Indomitable && cardPlay.Card is IndomitableSpire2Card card)
+        {
+            if (IndomitableConfiguration.PlayDialogue && vfxColor != null)
+                banterLocKey = card.SpecialLineBanterLocKey;
+            if (IndomitableConfiguration.PlaySoundEffects)
+                specialAudioPath = card.SpecialLineAudioPath;
+            // 仅在实际有台词或音频可播放时登记；关闭仅一次开关时不访问注册表。
+            if ((banterLocKey != null || specialAudioPath != null) &&
+                IndomitableConfiguration.PlaySpecialLineOncePerCombat &&
+                !SpecialLinesPlaybackRegistry.TryRecord(card.Id.Entry))
+            {
+                banterLocKey = null;
+                specialAudioPath = null;
+            }
+        }
+        
         var animationTask = Task.CompletedTask;
         if (animationTrigger != null)
         {
             var waitTime = animationDelay ?? (animationTrigger == "Attack"
                 ? player.Character.AttackAnimDelay
                 : player.Character.CastAnimDelay);
-            // 音效开关关闭或玩家为其他角色仍播放默认音效；不挠指定专属语音后则不播放默认音效，重放时也不回退。
+            // 第 0 次未播放特殊音频时回退默认音效；后续重放始终使用无音效的动画入口。
             animationTask = player.TriggerCardAnimation(animationTrigger, waitTime, 
-                useDefaultSfx: !isIndomitable || !IndomitableConfiguration.PlaySoundEffects || sfxPath == null);
+                useDefaultSfx: isFirstPlay && specialAudioPath == null);
         }
-        // 台词和语音为不挠专属，卡牌重放时也不播放。
-        if (!isIndomitable || cardPlay.PlayIndex != 0) return animationTask;
-        // 参数中条目和颜色不为空时播放台词
-        if (IndomitableConfiguration.PlayDialogue && cardEntry != null && vfxColor is { } color)
+        
+        if (banterLocKey != null && vfxColor is { } color)
         {
-            var talk = CustomTalkCmd.Play(new LocString("cards", $"{cardEntry}.banter"), player.Creature, color);
+            var talk = CustomTalkCmd.Play(new LocString("cards", banterLocKey), player.Creature, color);
             if (exactDurationSeconds is { } seconds)
                 talk.WithExactDuration(seconds);
             else
                 talk.WithDuration(duration);
             talk.WithAdditionalDuration(additionalDurationSeconds).Execute();
         }
-        // 参数中音频路径不为空时播放语音
-        if (IndomitableConfiguration.PlaySoundEffects && sfxPath != null)
-            SfxCmd.Play(sfxPath, volume);
+        if (specialAudioPath != null) SfxCmd.Play(specialAudioPath, volume);
         return animationTask;
     }
     
