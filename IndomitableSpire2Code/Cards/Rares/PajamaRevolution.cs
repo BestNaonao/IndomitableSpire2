@@ -7,12 +7,14 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models.Powers;
-using MegaCrit.Sts2.Core.Nodes.Vfx;
 
 namespace IndomitableSpire2.IndomitableSpire2Code.Cards.Rares;
 
 public sealed class PajamaRevolution() : IndomitableCard(3, CardType.Skill, CardRarity.Rare, TargetType.AllEnemies)
 {
+    public override string SpecialLineAudioPath => "res://IndomitableSpire2/sfx/characters/indomitable/feeling5_2.wav";
+    public override string SpecialLineBanterLocKey => $"{Id.Entry}.banter";
+    
     // 包含“消耗”关键字
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
     
@@ -31,9 +33,7 @@ public sealed class PajamaRevolution() : IndomitableCard(3, CardType.Skill, Card
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         // 播放台词、语音和动画，稍后执行逻辑
-        await Owner.PlayIndomitableCardPresentation(cardPlay, Id.Entry, VfxColor.Gold, 
-            "res://IndomitableSpire2/sfx/characters/indomitable/feeling5_2.wav", 
-            animationTrigger: "Cast", exactDurationSeconds: 7.5d);
+        await Owner.PlayIndomitableCardPresentation(cardPlay, animationTrigger: "Cast", exactDurationSeconds: 7.5d);
         await Cmd.CustomScaledWait(0.2f, 0.4f);
         if (CombatState != null)
         {

@@ -6,12 +6,14 @@ using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
-using MegaCrit.Sts2.Core.Nodes.Vfx;
 
 namespace IndomitableSpire2.IndomitableSpire2Code.Cards.Basics;
 
 public sealed class TakeABreak() : IndomitableCard(0, CardType.Skill, CardRarity.Basic, TargetType.Self)
 {
+    public override string SpecialLineAudioPath => "res://IndomitableSpire2/sfx/characters/indomitable/get.wav";
+    public override string SpecialLineBanterLocKey => $"{Id.Entry}.banter";
+    
     protected override IEnumerable<DynamicVar> CanonicalVars => 
     [
         new HealVar(3M),
@@ -21,9 +23,7 @@ public sealed class TakeABreak() : IndomitableCard(0, CardType.Skill, CardRarity
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         // 1. 播放台词、音频和技能动画
-        await Owner.PlayIndomitableCardPresentation(cardPlay, Id.Entry, VfxColor.Gold,
-            "res://IndomitableSpire2/sfx/characters/indomitable/get.wav",
-            animationTrigger: "Cast", exactDurationSeconds: 10.5d);
+        await Owner.PlayIndomitableCardPresentation(cardPlay, animationTrigger: "Cast", exactDurationSeconds: 10.5d);
         
         // 2. 回复生命值
         await CreatureCmd.Heal(Owner.Creature, DynamicVars.Heal.BaseValue);

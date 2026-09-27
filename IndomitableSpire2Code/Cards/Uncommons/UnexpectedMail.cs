@@ -8,12 +8,14 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
-using MegaCrit.Sts2.Core.Nodes.Vfx;
 
 namespace IndomitableSpire2.IndomitableSpire2Code.Cards.Uncommons;
 
 public sealed class UnexpectedMail() : IndomitableCard(0, CardType.Skill, CardRarity.Uncommon, TargetType.Self)
 {
+    public override string SpecialLineAudioPath => "res://IndomitableSpire2/sfx/characters/indomitable/mail.wav";
+    public override string SpecialLineBanterLocKey => $"{Id.Entry}.banter";
+    
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
     
     // 添加能量相关的悬浮提示
@@ -28,9 +30,7 @@ public sealed class UnexpectedMail() : IndomitableCard(0, CardType.Skill, CardRa
     
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        await Owner.PlayIndomitableCardPresentation(cardPlay, Id.Entry, VfxColor.Gold,
-            "res://IndomitableSpire2/sfx/characters/indomitable/mail.wav",
-            animationTrigger: "Cast", exactDurationSeconds: 9.4d);
+        await Owner.PlayIndomitableCardPresentation(cardPlay, animationTrigger: "Cast", exactDurationSeconds: 9.4d);
         
         // 1. 获得 1 点能量
         await PlayerCmd.GainEnergy(DynamicVars.Energy.BaseValue, Owner);

@@ -22,6 +22,9 @@ namespace IndomitableSpire2.IndomitableSpire2Code.Cards.Abstracts;
 public abstract class CommissionCard(TargetType target) 
     : IndomitableSpire2Card(0, CardType.Quest, CardRarity.Quest, target)
 {
+    public override string SpecialLineAudioPath => "res://IndomitableSpire2/sfx/characters/indomitable/mission_complete.wav";
+    public override string SpecialLineBanterLocKey => "INDOMITABLESPIRE2-COMMISSION_CARD_COMPLETED.banter";
+    
     private Player? _delegator; // 必须声明后备字段
     
     // 记录是谁派发了这张委托
@@ -143,8 +146,6 @@ public abstract class CommissionCard(TargetType target)
     private async Task PlayCommissionCompletedSfx(CardPlay cardPlay)
     {
         if (Delegator == null) return;
-        await Delegator.PlayIndomitableCardPresentation(cardPlay, 
-            "INDOMITABLESPIRE2-COMMISSION_CARD_COMPLETED", VfxColor.Gold, 
-            "res://IndomitableSpire2/sfx/characters/indomitable/mission_complete.wav", exactDurationSeconds:7.9);
+        await Delegator.PlayIndomitableCardPresentation(cardPlay, exactDurationSeconds: 7.9d);
     }
 }

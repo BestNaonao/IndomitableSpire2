@@ -8,12 +8,14 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.CardPools;
-using MegaCrit.Sts2.Core.Nodes.Vfx;
 
 namespace IndomitableSpire2.IndomitableSpire2Code.Cards.Uncommons;
 
 public sealed class DispatchCommission() : IndomitableCard(1, CardType.Skill, CardRarity.Uncommon, TargetType.AnyAlly)
 {
+    public override string SpecialLineAudioPath => "res://IndomitableSpire2/sfx/characters/indomitable/task.wav";
+    public override string SpecialLineBanterLocKey => $"{Id.Entry}.banter";
+    
     // 仅限多人模式可用
     public override CardMultiplayerConstraint MultiplayerConstraint => CardMultiplayerConstraint.MultiplayerOnly;
     
@@ -27,9 +29,7 @@ public sealed class DispatchCommission() : IndomitableCard(1, CardType.Skill, Ca
         ArgumentNullException.ThrowIfNull(cardPlay.Target, nameof(cardPlay.Target));
         
         // 播放台词、语音和动画，稍后执行逻辑
-        await Owner.PlayIndomitableCardPresentation(cardPlay, Id.Entry, VfxColor.Gold, 
-            "res://IndomitableSpire2/sfx/characters/indomitable/task.wav", 
-            animationTrigger: "Cast", exactDurationSeconds: 7.8d);
+        await Owner.PlayIndomitableCardPresentation(cardPlay, animationTrigger: "Cast", exactDurationSeconds: 7.8d);
         
         // 1. 【动态过滤】：获取衍生牌池中的所有牌，并筛选出所有继承自 CommissionCard 的子类
         IEnumerable<CardModel> allCommissions = ModelDb.CardPool<QuestCardPool>().AllCards.OfType<CommissionCard>();

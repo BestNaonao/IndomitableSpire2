@@ -6,12 +6,14 @@ using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
-using MegaCrit.Sts2.Core.Nodes.Vfx;
 
 namespace IndomitableSpire2.IndomitableSpire2Code.Cards.Commons;
 
 public sealed class WorkArrangement() : IndomitableCard(0, CardType.Skill, CardRarity.Common, TargetType.Self)
 {
+    public override string SpecialLineAudioPath => "res://IndomitableSpire2/sfx/characters/indomitable/main_3.wav";
+    public override string SpecialLineBanterLocKey => $"{Id.Entry}.banter";
+    
     // 注册变量：抽 2 张牌
     protected override IEnumerable<DynamicVar> CanonicalVars => 
         [new CardsVar(2), new MotivationConsumeVar(10M)];
@@ -22,9 +24,7 @@ public sealed class WorkArrangement() : IndomitableCard(0, CardType.Skill, CardR
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         // 播放台词、语音和动画，稍后执行逻辑
-        await Owner.PlayIndomitableCardPresentation(cardPlay, Id.Entry, VfxColor.Gold, 
-            "res://IndomitableSpire2/sfx/characters/indomitable/main_3.wav", 
-            animationTrigger: "Cast", exactDurationSeconds: 4.8d);
+        await Owner.PlayIndomitableCardPresentation(cardPlay, animationTrigger: "Cast", exactDurationSeconds: 4.8d);
         
         // 1. 消耗干劲：通过施加负数的能力层数来实现扣除
         await this.SpendMotivationCost(choiceContext);

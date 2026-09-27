@@ -7,12 +7,14 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
-using MegaCrit.Sts2.Core.Nodes.Vfx;
 
 namespace IndomitableSpire2.IndomitableSpire2Code.Cards.Rares;
 
 public sealed class SweetDeal() : IndomitableCard(2, CardType.Skill, CardRarity.Rare, TargetType.AnyAlly)
 {
+    public override string SpecialLineAudioPath => "res://IndomitableSpire2/sfx/characters/indomitable/touch_2.wav";
+    public override string SpecialLineBanterLocKey => $"{Id.Entry}.banter";
+    
     // 仅限多人模式可用
     public override CardMultiplayerConstraint MultiplayerConstraint => CardMultiplayerConstraint.MultiplayerOnly;
     
@@ -25,9 +27,7 @@ public sealed class SweetDeal() : IndomitableCard(2, CardType.Skill, CardRarity.
     {
         ArgumentNullException.ThrowIfNull(cardPlay.Target, nameof(cardPlay.Target));
         
-        await Owner.PlayIndomitableCardPresentation(cardPlay, Id.Entry, VfxColor.Gold,
-            "res://IndomitableSpire2/sfx/characters/indomitable/touch_2.wav",
-            animationTrigger: "Cast", exactDurationSeconds: 12.8f);
+        await Owner.PlayIndomitableCardPresentation(cardPlay, animationTrigger: "Cast", exactDurationSeconds: 12.8f);
         
         // 1. 获取目标玩家（另一名玩家）
         var otherPlayer = cardPlay.Target.Player;

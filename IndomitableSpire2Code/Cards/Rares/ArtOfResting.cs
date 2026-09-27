@@ -6,12 +6,14 @@ using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
-using MegaCrit.Sts2.Core.Nodes.Vfx;
 
 namespace IndomitableSpire2.IndomitableSpire2Code.Cards.Rares;
 
 public sealed class ArtOfResting() : IndomitableCard(2, CardType.Power, CardRarity.Rare, TargetType.Self)
 {
+    public override string SpecialLineAudioPath => "res://IndomitableSpire2/sfx/characters/indomitable/main_2.wav";
+    public override string SpecialLineBanterLocKey => $"{Id.Entry}.banter";
+    
     // 提供完善的提示窗
     protected override IEnumerable<IHoverTip> ExtraHoverTips => 
     [
@@ -24,9 +26,7 @@ public sealed class ArtOfResting() : IndomitableCard(2, CardType.Power, CardRari
         if (Owner.PlayerCombatState is null) return;
         
         // 1. 播放施法动画、台词和专属语音
-        await Owner.PlayIndomitableCardPresentation(cardPlay, Id.Entry, VfxColor.Gold,
-            "res://IndomitableSpire2/sfx/characters/indomitable/main_2.wav",
-            animationTrigger: "Cast", exactDurationSeconds: 7.6d);
+        await Owner.PlayIndomitableCardPresentation(cardPlay, animationTrigger: "Cast", exactDurationSeconds: 7.6d);
         
         // 2. 极其优雅地全堆查找：遍历该玩家所有牌堆（抽牌、弃牌、手牌、消耗），找到所有“慵懒”，将之前积攒的“慵懒”统统转化为“养神”
         var indolentCards = Owner.PlayerCombatState.AllPiles

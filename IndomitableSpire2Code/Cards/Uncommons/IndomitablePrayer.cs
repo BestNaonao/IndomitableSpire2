@@ -7,13 +7,15 @@ using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
-using MegaCrit.Sts2.Core.Nodes.Vfx;
 using MegaCrit.Sts2.Core.ValueProps;
 
 namespace IndomitableSpire2.IndomitableSpire2Code.Cards.Uncommons;
 
 public sealed class IndomitablePrayer() : IndomitableCard(2, CardType.Skill, CardRarity.Uncommon, TargetType.Self)
 {
+    public override string SpecialLineAudioPath => "res://IndomitableSpire2/sfx/characters/indomitable/home_ex1100.wav";
+    public override string SpecialLineBanterLocKey => $"{Id.Entry}.banter";
+    
     public override bool GainsBlock => true;
     
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
@@ -23,9 +25,7 @@ public sealed class IndomitablePrayer() : IndomitableCard(2, CardType.Skill, Car
     
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        await Owner.PlayIndomitableCardPresentation(cardPlay, Id.Entry, VfxColor.Gold,
-            "res://IndomitableSpire2/sfx/characters/indomitable/home_ex1100.wav",
-            animationTrigger: "Cast", exactDurationSeconds: 11.4d);
+        await Owner.PlayIndomitableCardPresentation(cardPlay, animationTrigger: "Cast", exactDurationSeconds: 11.4d);
         await CustomCreatureCmd.GainShield(choiceContext, Owner.Creature, DynamicVars.Shield(), cardPlay);
         await PowerCmd.Apply<IndomitablePrayerPower>(choiceContext, Owner.Creature, 1M, Owner.Creature, this);
     }

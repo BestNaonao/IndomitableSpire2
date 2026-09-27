@@ -8,12 +8,14 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
-using MegaCrit.Sts2.Core.Nodes.Vfx;
 
 namespace IndomitableSpire2.IndomitableSpire2Code.Cards.Uncommons;
 
 public sealed class IcedDrink() : IndomitableCard(2, CardType.Skill, CardRarity.Uncommon, TargetType.AnyEnemy)
 {
+    public override string SpecialLineAudioPath => "res://IndomitableSpire2/sfx/characters/indomitable/main_2_2.wav";
+    public override string SpecialLineBanterLocKey => $"{Id.Entry}.banter";
+    
     // 注册变量：需求 10 点干劲，抽 2 张牌
     protected override IEnumerable<DynamicVar> CanonicalVars => 
     [
@@ -35,9 +37,7 @@ public sealed class IcedDrink() : IndomitableCard(2, CardType.Skill, CardRarity.
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         ArgumentNullException.ThrowIfNull(cardPlay.Target, nameof(cardPlay.Target));
-        await Owner.PlayIndomitableCardPresentation(cardPlay, Id.Entry, VfxColor.Gold,
-            "res://IndomitableSpire2/sfx/characters/indomitable/main_2_2.wav",
-            animationTrigger: "Cast", exactDurationSeconds: 5.9d);
+        await Owner.PlayIndomitableCardPresentation(cardPlay, animationTrigger: "Cast", exactDurationSeconds: 5.9d);
         var removedAmount = 0;
         
         // 1. 获取并移除敌人身上的所有“起火”
