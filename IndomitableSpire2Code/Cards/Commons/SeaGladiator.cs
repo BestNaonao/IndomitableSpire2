@@ -1,9 +1,12 @@
 ﻿using IndomitableSpire2.IndomitableSpire2Code.Cards.Abstracts;
+using IndomitableSpire2.IndomitableSpire2Code.Commands;
 using IndomitableSpire2.IndomitableSpire2Code.Enums;
+using IndomitableSpire2.IndomitableSpire2Code.Localization.HoverTips;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.ValueProps;
@@ -17,6 +20,8 @@ public sealed class SeaGladiator() : CarrierAircraftCard(1, CardType.Attack, Car
     
     public override IEnumerable<CardKeyword> CanonicalKeywords => [IndomitableKeywords.StrikeFighter];
     protected override IEnumerable<CardTag> SubclassTags => [IndomitableTags.StrikeFighter];
+    
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => [CustomHoverTipFactory.FromRecall()];
     
     // 记录本场战斗中同时增加的伤害和格挡，供降级后恢复。
     private decimal _extraDamageAndBlock;
@@ -62,15 +67,12 @@ public sealed class SeaGladiator() : CarrierAircraftCard(1, CardType.Attack, Car
         Creature? dealer,
         CardModel? cardSource)
     {
-        // 排除手牌和消耗牌堆，其余战斗牌堆（包括 MOD 自定义牌堆）均可触发。
-        if (target != Owner.Creature || dealer == null || !props.IsPoweredAttack() || 
-            CombatState == null || Pile?.Type is null or PileType.Hand or PileType.Exhaust) return;
-        
-        // 每次满足条件时，伤害和格挡各增加 1 点，并返回手牌。
+        if (target != Owner.Creature || dealer == null || !props.IsPoweredAttack()) return;
+        // 先召回，只有实际回到手牌后才增加数值。
+        if (!await CustomCardPileCmd.Recall(this)) return;
         DynamicVars.Damage.BaseValue += 1M;
         DynamicVars.Block.BaseValue += 1M;
         ExtraDamageAndBlock += 1M;
-        await CardPileCmd.Add(this, PileType.Hand);
     }
     
     protected override void OnUpgrade()
