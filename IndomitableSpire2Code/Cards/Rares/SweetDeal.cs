@@ -10,7 +10,7 @@ using MegaCrit.Sts2.Core.Models;
 
 namespace IndomitableSpire2.IndomitableSpire2Code.Cards.Rares;
 
-public sealed class SweetDeal() : IndomitableCard(2, CardType.Skill, CardRarity.Rare, TargetType.AnyAlly)
+public sealed class SweetDeal() : IndomitableCard(1, CardType.Skill, CardRarity.Rare, TargetType.AnyAlly)
 {
     public override string SpecialLineAudioPath => "res://IndomitableSpire2/sfx/characters/indomitable/touch_2.wav";
     public override string SpecialLineBanterLocKey => $"{Id.Entry}.banter";
