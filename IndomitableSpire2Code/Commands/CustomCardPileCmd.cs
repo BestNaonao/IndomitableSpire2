@@ -7,6 +7,17 @@ namespace IndomitableSpire2.IndomitableSpire2Code.Commands;
 public class CustomCardPileCmd
 {
     /// <summary>
+    /// 将不在手牌或消耗牌堆中的战斗卡牌放回手牌，兼容自定义牌堆。
+    /// 只有卡牌实际进入手牌才算成功；手牌已满等导致的移动失败不算召回成功。
+    /// </summary>
+    public static async Task<bool> Recall(CardModel card)
+    {
+        if (card.CombatState == null || card.Pile?.Type is null or PileType.Hand or PileType.Exhaust) return false;
+        var result = await CardPileCmd.Add(card, PileType.Hand);
+        return result.success && card.Pile?.Type == PileType.Hand;
+    }
+    
+    /// <summary>
     /// 从抽牌堆和弃牌堆的并集中，随机抽取一张与指定卡牌“同名”的卡牌放入手牌。
     /// </summary>
     /// <param name="card">打出的参照卡牌</param>

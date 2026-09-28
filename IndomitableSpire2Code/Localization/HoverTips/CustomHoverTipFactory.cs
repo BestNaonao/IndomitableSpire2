@@ -9,6 +9,11 @@ namespace IndomitableSpire2.IndomitableSpire2Code.Localization.HoverTips;
 
 public static class CustomHoverTipFactory
 {
+    /// <summary>召回仅作为静态说明使用，不注册为卡牌关键词。</summary>
+    public static IHoverTip FromRecall() => new HoverTip(
+        new LocString("static_hover_tips", "INDOMITABLESPIRE2-RECALL.title"),
+        new LocString("static_hover_tips", "INDOMITABLESPIRE2-RECALL.description"));
+    
     /// <summary>
     /// 获取任意 Intent 的 HoverTip。
     /// 每次调用生成新实例以保证 Godot 资源的安全性，但反射和文本拼接过程通过泛型缓存实现了零开销。
