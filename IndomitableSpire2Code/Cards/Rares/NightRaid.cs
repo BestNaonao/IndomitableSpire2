@@ -1,13 +1,16 @@
 ﻿using IndomitableSpire2.IndomitableSpire2Code.Cards.Abstracts;
+using IndomitableSpire2.IndomitableSpire2Code.Commands;
 using IndomitableSpire2.IndomitableSpire2Code.Enums;
 using IndomitableSpire2.IndomitableSpire2Code.Extensions;
 using IndomitableSpire2.IndomitableSpire2Code.Localization.DynamicVars;
 using IndomitableSpire2.IndomitableSpire2Code.Localization.HoverTips;
 using IndomitableSpire2.IndomitableSpire2Code.Powers;
 using MegaCrit.Sts2.Core.CardSelection;
+using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
+using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
@@ -32,11 +35,15 @@ public sealed class NightRaid() : IndomitableCard(1, CardType.Skill, CardRarity.
     [
         HoverTipFactory.FromKeyword(IndomitableKeywords.Require),   // “需求”提示框
         HoverTipFactory.FromPower<MotivationPower>(),   // “干劲”提示框
+        CustomHoverTipFactory.FromRecall(),             // “召回”提示框
         CustomHoverTipFactory.FromIntent<SleepIntent>() // “沉睡”提示框
     ];
     
     // 核心限制：干劲不足时不可打出
     protected override bool IsPlayable => this.MeetsMotivationRequirement();
+    
+    protected override bool ShouldGlowGoldInternal => 
+        CombatState!.HittableEnemies.Any(e => e.Monster != null && e.Monster.IntendsToSleep());
     
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
@@ -75,6 +82,12 @@ public sealed class NightRaid() : IndomitableCard(1, CardType.Skill, CardRarity.
         return cardSource != null && cardSource == _selectedCard && props.IsPoweredAttack() &&
                target?.Monster != null && target.Monster.IntendsToSleep()
             ? DynamicVars.DamageMultiplier().BaseValue : 1M;
+    }
+    
+    public override async Task BeforeHandDraw(Player player, PlayerChoiceContext choiceContext, ICombatState combatState)
+    {
+        if (player != Owner) return;
+        await CustomCardPileCmd.Recall(this);
     }
     
     protected override void OnUpgrade()
