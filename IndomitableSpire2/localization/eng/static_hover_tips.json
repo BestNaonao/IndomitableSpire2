@@ -2,5 +2,7 @@
   "INDOMITABLESPIRE2-DURABILITY.title": "Durability",
   "INDOMITABLESPIRE2-DURABILITY.description": "Loses durability based on the target's attack damage when attacking an enemy intending to attack. [gold]Exhaust[/gold] when durability reaches zero.",
   "INDOMITABLESPIRE2-RECON.title": "Recon",
-  "INDOMITABLESPIRE2-RECON.description": "Look at the top X cards of your [gold]Draw Pile[/gold]. You may put any of them into your [gold]Hand[/gold], and [gold]Discard[/gold] any of them."
+  "INDOMITABLESPIRE2-RECON.description": "Look at the top X cards of your [gold]Draw Pile[/gold]. You may put any of them into your [gold]Hand[/gold], and [gold]Discard[/gold] any of them.",
+  "INDOMITABLESPIRE2-RECALL.title": "Recall",
+  "INDOMITABLESPIRE2-RECALL.description": "If this card is in neither your [gold]Hand[/gold] nor your [gold]Exhaust Pile[/gold], return it to your [gold]Hand[/gold]."
 }
