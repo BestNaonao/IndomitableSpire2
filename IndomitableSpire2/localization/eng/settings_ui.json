@@ -4,6 +4,8 @@
   "INDOMITABLESPIRE2-PLAY_DIALOGUE.hover.desc": "When disabled, dialogue bubbles triggered by Indomitable card presentations will not be shown.",
   "INDOMITABLESPIRE2-PLAY_SOUND_EFFECTS.title": "Play special card audio",
   "INDOMITABLESPIRE2-PLAY_SOUND_EFFECTS.hover.desc": "When disabled, custom voice lines and sounds triggered by Indomitable card presentations will be muted, but can still use the default animation sound.",
+  "INDOMITABLESPIRE2-PLAY_HYPNOTIZED_ANIMATION.title": "Play special hypnosis animation",
+  "INDOMITABLESPIRE2-PLAY_HYPNOTIZED_ANIMATION.hover.desc": "When enabled, a special animation plays if available when a player's Hypnotized reaches 5 stacks and triggers its effect. This setting only affects animations, not the effects of Hypnotized.",
   "INDOMITABLESPIRE2-PLAY_SPECIAL_LINE_ONCE_PER_COMBAT.title": "Play each card's special line once per combat",
   "INDOMITABLESPIRE2-PLAY_SPECIAL_LINE_ONCE_PER_COMBAT.hover.desc": "When enabled, each card type's special dialogue and audio share one use per combat. After that use, playing the same card type again uses the default animation sound. The limit resets when you enter or leave combat, including after loading a save."
 }
