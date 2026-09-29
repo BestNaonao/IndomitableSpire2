@@ -29,4 +29,9 @@ public sealed class EngageOnSight() : IndomitableCard(1, CardType.Power, CardRar
             this
         );
     }
+    
+    protected override void OnUpgrade()
+    {
+        AddKeyword(CardKeyword.Innate);
+    }
 }
