@@ -2,6 +2,7 @@
 using BaseLib.Abstracts;
 using BaseLib.Patches.UI;
 using Godot;
+using IndomitableSpire2.IndomitableSpire2Code.Abstracts;
 using IndomitableSpire2.IndomitableSpire2Code.Cards.Basics;
 using IndomitableSpire2.IndomitableSpire2Code.Relics;
 using MegaCrit.Sts2.Core.Animation;
@@ -12,7 +13,7 @@ using MegaCrit.Sts2.Core.Models;
 namespace IndomitableSpire2.IndomitableSpire2Code.Character;
 
 // 【核心】：必须是 abstract，该类只是玩法数据的容器，不是一个具体角色
-public abstract class Indomitable : CustomCharacterModel
+public abstract class Indomitable : CustomCharacterModel, IHypnotizedAnimationProvider
 {
     public const string CharacterId = "Indomitable";
     public override CharacterGender Gender => CharacterGender.Feminine;
@@ -94,6 +95,9 @@ public abstract class Indomitable : CustomCharacterModel
         castName: "attack_left",    // 释放技能动画
         relaxedName: "sleep"    // 休息动画
         );
+    
+    // 各皮肤可重写为自己的催眠动作；实际播放前会检查当前 Spine 模型是否拥有该动画。
+    public virtual string HypnotizedAnimationName => "sleep";
     
     public override List<string> GetArchitectAttackVfx()
     {
