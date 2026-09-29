@@ -26,19 +26,12 @@ public sealed class DeckTieDown() : IndomitableCard(0, CardType.Skill, CardRarit
         // 1. 设置选牌参数：最小 0 张，最大为动态变量 Cards 的值
         var prefs = new CardSelectorPrefs(SelectionScreenPrompt, 0, DynamicVars.Cards.IntValue);
         
-        // 2. 调出原生的手牌选择界面
-        // 过滤条件 (!c.ShouldRetainThisTurn) : 防止玩家选到那些本来就已经自带保留的牌，优化体验
+        // 2. 调出原生的手牌选择界面。过滤条件 : 防止玩家选到那些本来就已经自带保留的牌，优化体验
         var selectedCards = await CardSelectCmd.FromHand(
-            choiceContext, 
-            Owner, 
-            prefs, 
-            c => !c.ShouldRetainThisTurn, 
-            this
-        );
+            choiceContext, Owner, prefs, c => !c.ShouldRetainThisTurn, this);
         
         // 3. 为选中的牌打上单回合“保留”的标记
-        foreach (var card in selectedCards.ToList())
-            card.GiveSingleTurnRetain();
+        foreach (var card in selectedCards.ToList()) CardCmd.ApplySingleTurnRetain(card);
     }
     
     protected override void OnUpgrade()
