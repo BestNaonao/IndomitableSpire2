@@ -16,6 +16,7 @@ namespace TashkentSpire2.TashkentSpire2Code.Character;
 public class TashkentCharacter : CustomCharacterModel
 {
 	public const string CharacterId = "Tashkent";
+	internal const string AttackVoicePath = "res://TashkentSpire2/sfx/tashkent_attacksfx.mp3";
 	internal const string AdvanceAnimationName = "move";
 	internal const string RetreatAnimationName = "move_left";
 	internal const string AdvanceAnimationTrigger = "TashkentAdvance";
@@ -61,8 +62,7 @@ public class TashkentCharacter : CustomCharacterModel
 		ModelDb.Relic<EjectionStart>()
 	];
 	
-	public override string CustomAttackSfx => 
-		"res://TashkentSpire2/sfx/tashkent_attacksfx.mp3";
+	public override string CustomAttackSfx => AttackVoicePath;
 	public override string CustomCastSfx => 
 		"res://TashkentSpire2/sfx/tashkent_castsfx.mp3";
 	public override string CustomDeathSfx => 

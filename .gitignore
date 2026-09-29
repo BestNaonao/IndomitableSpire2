@@ -7,9 +7,7 @@ obj/
 /*cache/
 
 # godot 屏蔽
-.godot/editor/
-.godot/imported/
-.godot/shader_cache/
+.godot/
 
 # --- IDE ---
 .idea/

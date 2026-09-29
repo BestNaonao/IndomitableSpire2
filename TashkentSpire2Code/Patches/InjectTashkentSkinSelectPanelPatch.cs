@@ -16,6 +16,10 @@ public static class InjectTashkentSkinSelectPanelPatch
 	private static TashkentSkinSelectPanel? _panelInstance;
 
 	[HarmonyPatch(nameof(NCharacterSelectScreen.SelectCharacter))]
+	[HarmonyPrefix]
+	public static void SelectCharacterPrefix() => TashkentCharacterSelectVoice.Stop();
+
+	[HarmonyPatch(nameof(NCharacterSelectScreen.SelectCharacter))]
 	[HarmonyPostfix]
 	public static void SelectCharacterPostfix(
 		NCharacterSelectScreen __instance,
@@ -72,4 +76,8 @@ public static class InjectTashkentSkinSelectPanelPatch
 		if (GodotObject.IsInstanceValid(_panelInstance))
 			_panelInstance.SetInteractable(true);
 	}
+
+	[HarmonyPatch(nameof(NCharacterSelectScreen.OnSubmenuClosed))]
+	[HarmonyPrefix]
+	public static void OnSubmenuClosedPrefix() => TashkentCharacterSelectVoice.Stop();
 }

@@ -1,8 +1,16 @@
-[gd_scene load_steps=2 format=3 uid="uid://4mbns7o6j4k6"]
+[gd_scene load_steps=3 format=3 uid="uid://4mbns7o6j4k6"]
 
 [ext_resource type="Texture2D" uid="uid://cmej5410sn2yb" path="res://TashkentSpire2/images/orbs/module_orb.png" id="1_3dvb1"]
+[ext_resource type="SpineSkeletonDataResource" uid="uid://t3fckcb7ah43" path="res://animations/ui/combat/orbs/frost_orb_skel_data.tres" id="2_spine"]
 
 [node name="ModuleOrb" type="Node2D"]
+
+[node name="SpineSkeleton" type="SpineSprite" parent="."]
+self_modulate = Color(1, 1, 1, 0)
+skeleton_data_res = ExtResource("2_spine")
+preview_skin = "Default"
+preview_animation = "idle_loop"
+scale = Vector2(0.1, 0.1)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.18, 0.18)
