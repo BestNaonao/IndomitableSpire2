@@ -1,10 +1,11 @@
 using HarmonyLib;
 using IndomitableSpire2.IndomitableSpire2Code.Abstracts;
+using IndomitableSpire2.IndomitableSpire2Code.Configuration;
 using MegaCrit.Sts2.Core.Animation;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Nodes.Combat;
 
-namespace IndomitableSpire2.IndomitableSpire2Code.Combat;
+namespace IndomitableSpire2.IndomitableSpire2Code.Animation;
 
 public static class HypnotizedAnimation
 {
@@ -18,7 +19,8 @@ public static class HypnotizedAnimation
     
     public static bool TryPlay(Creature creature)
     {
-        if (!creature.IsPlayer || !creature.IsAlive ||
+        if (!IndomitableConfiguration.PlayHypnotizedAnimation) return false;
+        if (!creature.IsPlayer || !creature.IsAlive || 
             creature.GetCreatureNode() is not { HasSpineAnimation: true } node) return false;
         var controller = node.Visuals.SpineBody;
         var animator = SpineAnimator(node);
@@ -31,16 +33,16 @@ public static class HypnotizedAnimation
             if (!controller.HasAnimation(animationName)) return false;
         }
         
+        // 非重复地添加状态。然后交给状态机播放，不排队返回待机；原版 Hit / Idle / Dead 等触发器仍可正常切换状态。
         if (!animator.HasTrigger(Trigger))
             animator.AddAnyState(Trigger, new HypnotizedAnimState(animationName));
-        
-        // 交给状态机播放，不排队返回待机；原版 Hit / Idle / Dead 等触发器仍可正常切换状态。
         node.SetAnimationTrigger(Trigger);
         return true;
     }
     
     internal static void WakeAtTurnStart(Creature creature)
     {
+        // 不受播放开关影响，确保关闭设置前已经开始的催眠动画仍能正常结束。
         if (!creature.IsPlayer || !creature.IsAlive || creature.GetCreatureNode() is not { } node) return;
         var animator = SpineAnimator(node);
         // 只恢复仍处于催眠动画的玩家，避免打断已经开始的受击、死亡或其他动画。

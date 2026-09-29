@@ -1,4 +1,4 @@
-﻿using IndomitableSpire2.IndomitableSpire2Code.Combat;
+﻿using IndomitableSpire2.IndomitableSpire2Code.Animation;
 using IndomitableSpire2.IndomitableSpire2Code.Extensions;
 using IndomitableSpire2.IndomitableSpire2Code.Localization.HoverTips;
 using MegaCrit.Sts2.Core.Combat;

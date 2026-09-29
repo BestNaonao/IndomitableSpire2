@@ -18,6 +18,11 @@ public sealed class IndomitableConfiguration : SimpleModConfig
     /// 特殊卡牌播放专属音频的开关；关闭后，第 0 次结算仍可播放默认动画音效。
     /// </summary>
     public static bool PlaySoundEffects { get; set; } = true;
+
+    /// <summary>
+    /// 玩家催眠爆发时是否播放特殊动画，仅影响视觉表现。
+    /// </summary>
+    public static bool PlayHypnotizedAnimation { get; set; } = true;
     
     /// <summary>
     /// 同种卡牌的特殊台词是否每场战斗仅播放一次
