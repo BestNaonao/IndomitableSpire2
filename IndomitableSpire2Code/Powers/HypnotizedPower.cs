@@ -1,4 +1,5 @@
-﻿using IndomitableSpire2.IndomitableSpire2Code.Extensions;
+﻿using IndomitableSpire2.IndomitableSpire2Code.Combat;
+using IndomitableSpire2.IndomitableSpire2Code.Extensions;
 using IndomitableSpire2.IndomitableSpire2Code.Localization.HoverTips;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
@@ -68,6 +69,7 @@ public sealed class HypnotizedPower : IndomitablePower
         if (!Owner.IsPlayer || Amount < 5 || Owner.CombatState?.CurrentSide != Owner.Side) return;
         Flash();
         GetInternalData<Data>().PlayerIsSleeping = true;
+        HypnotizedAnimation.TryPlay(Owner);
         await CreatureCmd.GainBlock(Owner, CalculatedBlockAmount, ValueProp.Unpowered, null);
         await PowerCmd.ModifyAmount(new ThrowingPlayerChoiceContext(), this, -5, null, null);
         // 强行结束玩家回合
