@@ -1,4 +1,6 @@
 ﻿using IndomitableSpire2.IndomitableSpire2Code.Cards.Abstracts;
+using IndomitableSpire2.IndomitableSpire2Code.Character;
+using IndomitableSpire2.IndomitableSpire2Code.Configuration;
 using IndomitableSpire2.IndomitableSpire2Code.Enums;
 using IndomitableSpire2.IndomitableSpire2Code.Extensions;
 using IndomitableSpire2.IndomitableSpire2Code.Localization.DynamicVars;
@@ -37,7 +39,12 @@ public sealed class IcedDrink() : IndomitableCard(2, CardType.Skill, CardRarity.
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         ArgumentNullException.ThrowIfNull(cardPlay.Target, nameof(cardPlay.Target));
-        await Owner.PlayIndomitableCardPresentation(cardPlay, animationTrigger: "Cast", exactDurationSeconds: 5.9d);
+        var useSpecialAnimation = IndomitableConfiguration.PlaySpecialCardAnimations &&
+                                  Owner.Character is Indomitable { CurrentSkin: IndomitableSkin.RaceQueen };
+        await Owner.PlayIndomitableCardPresentation(cardPlay,
+            animationTrigger: useSpecialAnimation ? "victory" : "Cast",
+            waitTime: Owner.Character.CastAnimDelay,
+            exactDurationSeconds: 5.9d);
         var removedAmount = 0;
         
         // 1. 获取并移除敌人身上的所有“起火”

@@ -1,4 +1,7 @@
 ﻿using IndomitableSpire2.IndomitableSpire2Code.Cards.Abstracts;
+using IndomitableSpire2.IndomitableSpire2Code.Character;
+using IndomitableSpire2.IndomitableSpire2Code.Configuration;
+using IndomitableSpire2.IndomitableSpire2Code.Extensions;
 using IndomitableSpire2.IndomitableSpire2Code.Powers;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -20,7 +23,11 @@ public sealed class Selfie() : IndomitableCard(1, CardType.Power, CardRarity.Rar
     
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        await CreatureCmd.TriggerAnim(Owner.Creature, "Cast", Owner.Character.CastAnimDelay);
+        var useSpecialAnimation = IndomitableConfiguration.PlaySpecialCardAnimations &&
+                                  Owner.Character is Indomitable { CurrentSkin: IndomitableSkin.Maid };
+        await Owner.PlayIndomitableCardPresentation(cardPlay,
+            animationTrigger: useSpecialAnimation ? "victory" : "Cast",
+            waitTime: Owner.Character.CastAnimDelay);
         
         await PowerCmd.Apply<SelfiePower>(
             choiceContext: choiceContext, 
