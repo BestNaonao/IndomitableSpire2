@@ -1,55 +1,34 @@
-using HarmonyLib;
 using IndomitableSpire2.IndomitableSpire2Code.Abstracts;
 using IndomitableSpire2.IndomitableSpire2Code.Configuration;
-using MegaCrit.Sts2.Core.Animation;
 using MegaCrit.Sts2.Core.Entities.Creatures;
-using MegaCrit.Sts2.Core.Nodes.Combat;
 
 namespace IndomitableSpire2.IndomitableSpire2Code.Animation;
 
 public static class HypnotizedAnimation
 {
-    private const string Trigger = "IndomitableSpire2.Hypnotized";
+    private const string AnimationGroup = "Hypnotized";
     private const string DefaultAnimationName = "sleep";
     
-    private static readonly AccessTools.FieldRef<NCreature, CreatureAnimator?> SpineAnimator =
-        AccessTools.FieldRefAccess<NCreature, CreatureAnimator?>("_spineAnimator");
-    private static readonly AccessTools.FieldRef<CreatureAnimator, AnimState> CurrentState =
-        AccessTools.FieldRefAccess<CreatureAnimator, AnimState>("_currentState");
-    
+    /// <summary>在玩家催眠爆发时尝试启动循环动作；不等待，也不改变催眠的玩法状态。</summary>
+    /// <param name="creature">触发催眠爆发的玩家生物。</param>
+    /// <returns>开关开启、玩家存活且拥有指定动作或 sleep，并成功发送动画触发器时为 true。</returns>
     public static bool TryPlay(Creature creature)
     {
         if (!IndomitableConfiguration.PlayHypnotizedAnimation) return false;
-        if (!creature.IsPlayer || !creature.IsAlive || 
-            creature.GetCreatureNode() is not { HasSpineAnimation: true } node) return false;
-        var controller = node.Visuals.SpineBody;
-        var animator = SpineAnimator(node);
-        if (controller == null || animator == null) return false;
-        
+        if (!creature.IsPlayer || !creature.IsAlive || creature.GetCreatureNode() is not { } node) return false;
         var animationName = (creature.Player?.Character as IHypnotizedAnimationProvider)?.HypnotizedAnimationName;
-        if (string.IsNullOrWhiteSpace(animationName) || !controller.HasAnimation(animationName))
-        {
-            animationName = DefaultAnimationName;
-            if (!controller.HasAnimation(animationName)) return false;
-        }
-        
-        // 非重复地添加状态。然后交给状态机播放，不排队返回待机；原版 Hit / Idle / Dead 等触发器仍可正常切换状态。
-        if (!animator.HasTrigger(Trigger))
-            animator.AddAnyState(Trigger, new HypnotizedAnimState(animationName));
-        node.SetAnimationTrigger(Trigger);
+        if (!CreatureAnimation.TryResolveSpineAnimation(node, animationName, out var trigger,
+                isLooping: true, fallbackAnimationName: DefaultAnimationName, animationGroup: AnimationGroup)) return false;
+        node.SetAnimationTrigger(trigger);
         return true;
     }
     
+    /// <summary>在该玩家回合开始时恢复尚未被其他动作打断的催眠动画，与能力是否仍存在无关。</summary>
+    /// <param name="creature">本次开始行动的生物；非玩家或已死亡时跳过。</param>
     internal static void WakeAtTurnStart(Creature creature)
     {
         // 不受播放开关影响，确保关闭设置前已经开始的催眠动画仍能正常结束。
         if (!creature.IsPlayer || !creature.IsAlive || creature.GetCreatureNode() is not { } node) return;
-        var animator = SpineAnimator(node);
-        // 只恢复仍处于催眠动画的玩家，避免打断已经开始的受击、死亡或其他动画。
-        if (animator != null && CurrentState(animator) is HypnotizedAnimState)
-            node.SetAnimationTrigger(CreatureAnimator.idleTrigger);
+        CreatureAnimation.RestoreIdleIfPlaying(node, AnimationGroup);
     }
-    
-    // 用独立状态标识催眠，避免将同名的营地/战后休息动画误认成催眠。
-    private sealed class HypnotizedAnimState(string animationName) : AnimState(animationName, isLooping: true);
 }
