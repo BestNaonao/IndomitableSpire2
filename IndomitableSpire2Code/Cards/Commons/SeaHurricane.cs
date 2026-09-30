@@ -10,7 +10,7 @@ using MegaCrit.Sts2.Core.ValueProps;
 
 namespace IndomitableSpire2.IndomitableSpire2Code.Cards.Commons;
 
-public sealed class SeaHurricane() : CarrierAircraftCard(2, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
+public sealed class SeaHurricane() : CarrierAircraftCard(2, CardType.Attack, CardRarity.Common, TargetType.AllEnemies)
 {
     protected override int MaxDurability { get; set; } = 6;
     protected override int UpgradeDurabilityAmount { get; set; } = 2;
@@ -29,18 +29,16 @@ public sealed class SeaHurricane() : CarrierAircraftCard(2, CardType.Attack, Car
         }
     }
     
-    protected override IEnumerable<DynamicVar> AdditionalVars => [new DamageVar(12M, ValueProp.Move)];
+    protected override IEnumerable<DynamicVar> AdditionalVars => [new DamageVar(10M, ValueProp.Move)];
     
     protected override async Task<IEnumerable<IEnumerable<DamageResult>>> OnAircraftPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        ArgumentNullException.ThrowIfNull(cardPlay.Target, nameof(cardPlay.Target));
-        
+        ArgumentNullException.ThrowIfNull(CombatState);
         var attackCmd = await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
             .FromCard(this, cardPlay)
-            .Targeting(cardPlay.Target)
+            .TargetingAllOpponents(CombatState)
             .WithHitFx("vfx/vfx_heavy_blunt")
             .Execute(choiceContext);
-        
         return attackCmd.Results;
     }
     
