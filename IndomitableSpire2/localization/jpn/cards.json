@@ -108,7 +108,7 @@
   "INDOMITABLESPIRE2-SEA_GLADIATOR.title": "シーグラディエーター",
   "INDOMITABLESPIRE2-SEA_GLADIATOR.description": "{Damage:diff()}ダメージを与える。{Block:diff()}[gold]ブロック[/gold]を得る。\n攻撃を受けるたび、このカードを[gold]再現[/gold]する。成功したら、このカードのダメージと[gold]ブロック[/gold]をそれぞれ[blue]1[/blue]増やす。",
   "INDOMITABLESPIRE2-SEA_HURRICANE.title": "シーハリケーン",
-  "INDOMITABLESPIRE2-SEA_HURRICANE.description": "{Damage:diff()}ダメージを与える。\n攻撃を受けるたび、戦闘終了までダメージが2増加する。",
+  "INDOMITABLESPIRE2-SEA_HURRICANE.description": "すべての敵に{Damage:diff()}ダメージを与える。\n攻撃を受けるたび、戦闘終了までダメージが2増加する。",
   "INDOMITABLESPIRE2-SEA_HURRICANE_TAC_R.title": "シーハリケーン Tac R",
   "INDOMITABLESPIRE2-SEA_HURRICANE_TAC_R.description": "{Damage:diff()}ダメージを与える。\n[gold]偵察[/gold][blue]{Recon:diff()}[/blue]。\n[gold]空襲先導[/gold]を[blue]{AirRaidGuidancePower:diff()}[/blue]得る。",
   "INDOMITABLESPIRE2-SKUA.title": "スクア",
