@@ -18,7 +18,12 @@ public sealed class IndomitableConfiguration : SimpleModConfig
     /// 特殊卡牌播放专属音频的开关；关闭后，第 0 次结算仍可播放默认动画音效。
     /// </summary>
     public static bool PlaySoundEffects { get; set; } = true;
-
+    
+    /// <summary>
+    /// 启用与角色皮肤匹配的卡牌特殊动作；关闭时使用普通出牌动作，不影响战后胜利动画。
+    /// </summary>
+    public static bool PlaySpecialCardAnimations { get; set; } = true;
+    
     /// <summary>
     /// 玩家催眠爆发时是否播放特殊动画，仅影响视觉表现。
     /// </summary>

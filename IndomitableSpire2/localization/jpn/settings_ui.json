@@ -4,6 +4,8 @@
   "INDOMITABLESPIRE2-PLAY_DIALOGUE.hover.desc": "無効にすると、インドミタブルのカード演出による台詞の吹き出しが表示されなくなります。",
   "INDOMITABLESPIRE2-PLAY_SOUND_EFFECTS.title": "カードの専用音声を再生",
   "INDOMITABLESPIRE2-PLAY_SOUND_EFFECTS.hover.desc": "無効にすると、インドミタブルのカード演出による専用ボイスと効果音は再生されませんが、通常のアニメーション効果音が再生されます。",
+  "INDOMITABLESPIRE2-PLAY_SPECIAL_CARD_ANIMATIONS.title": "カードの特殊アニメーションを再生",
+  "INDOMITABLESPIRE2-PLAY_SPECIAL_CARD_ANIMATIONS.hover.desc": "有効にすると、特定の着せ替え衣装を着たインドミタブルが特定のカードを使用した際に専用アニメーションが再生されます。無効にすると通常の動作になります。戦闘勝利時のアニメーションには影響しません。",
   "INDOMITABLESPIRE2-PLAY_HYPNOTIZED_ANIMATION.title": "催眠時の特殊アニメーションを再生",
   "INDOMITABLESPIRE2-PLAY_HYPNOTIZED_ANIMATION.hover.desc": "有効にすると、プレイヤーの催眠が5スタックに達して効果が発動した際、対応するアニメーションがある場合に再生します。この設定はアニメーションのみに影響し、催眠の効果は変わりません。",
   "INDOMITABLESPIRE2-PLAY_SPECIAL_LINE_ONCE_PER_COMBAT.title": "カードごとの特殊台詞を1戦闘につき1回のみ再生",

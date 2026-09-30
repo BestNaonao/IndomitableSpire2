@@ -4,6 +4,8 @@
   "INDOMITABLESPIRE2-PLAY_DIALOGUE.hover.desc": "关闭后，通过不挠卡牌表现播放的对话气泡将不会显示。",
   "INDOMITABLESPIRE2-PLAY_SOUND_EFFECTS.title": "播放卡牌特殊音效",
   "INDOMITABLESPIRE2-PLAY_SOUND_EFFECTS.hover.desc": "关闭后，通过不挠卡牌表现播放的专属语音和音效不会播放，但仍可播放默认动画音效。",
+  "INDOMITABLESPIRE2-PLAY_SPECIAL_CARD_ANIMATIONS.title": "播放卡牌特殊动画",
+  "INDOMITABLESPIRE2-PLAY_SPECIAL_CARD_ANIMATIONS.hover.desc": "开启后，特殊换装的不挠打出特殊卡牌时会播放专属动作。关闭后使用普通动作，不影响战斗胜利动画。",
   "INDOMITABLESPIRE2-PLAY_HYPNOTIZED_ANIMATION.title": "播放催眠特殊动画",
   "INDOMITABLESPIRE2-PLAY_HYPNOTIZED_ANIMATION.hover.desc": "开启后，玩家催眠达到 5 层并触发爆发时，若角色拥有对应动画则播放。此选项仅影响动画，不改变催眠效果。",
   "INDOMITABLESPIRE2-PLAY_SPECIAL_LINE_ONCE_PER_COMBAT.title": "每种卡牌的特殊台词每场战斗仅播放一次",
