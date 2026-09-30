@@ -87,13 +87,13 @@ public abstract class Indomitable : CustomCharacterModel, IHypnotizedAnimationPr
     
     // 原版逻辑构建动作映射，传入 Spine 文件中实际命名的动作字符串
     public override CreatureAnimator SetupCustomAnimationStates(MegaSprite controller) => SetupAnimationState(
-        controller: controller, 
-        idleName: "normal",     // 站立动画
-        deadName: "dead",       // 死亡动画
-        hitName: "touch",       // 受击动画
-        attackName: "attack",       // 攻击动画
-        castName: "attack_left",    // 释放技能动画
-        relaxedName: "sleep"    // 休息动画
+        controller: controller,
+        idleName: "normal",        // 站立动画
+        deadName: "dead",          // 死亡动画
+        hitName: "touch",          // 受击动画
+        attackName: "attack",      // 攻击动画
+        castName: "attack_left",   // 释放技能动画
+        relaxedName: "sleep"       // 休息动画
         );
     
     // 各皮肤可重写为自己的催眠动作；实际播放前会检查当前 Spine 模型是否拥有该动画。
