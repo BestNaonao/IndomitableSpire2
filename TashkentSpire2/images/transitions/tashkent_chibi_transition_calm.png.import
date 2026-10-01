@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b0q6dnlub21f7"
-path="res://.godot/imported/tashkent_transition.png-1709f69a40ebe1bab4959c31aff3787d.ctex"
+uid="uid://dqdrjpnauyqh5"
+path="res://.godot/imported/tashkent_chibi_transition_calm.png-307eca6277d75275349fb8e235498ed9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://TashkentSpire2/images/transitions/tashkent_transition.png"
-dest_files=["res://.godot/imported/tashkent_transition.png-1709f69a40ebe1bab4959c31aff3787d.ctex"]
+source_file="res://TashkentSpire2/images/transitions/tashkent_chibi_transition_calm.png"
+dest_files=["res://.godot/imported/tashkent_chibi_transition_calm.png-307eca6277d75275349fb8e235498ed9.ctex"]
 
 [params]
 

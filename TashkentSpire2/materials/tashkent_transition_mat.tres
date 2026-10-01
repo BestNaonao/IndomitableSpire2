@@ -1,25 +1,13 @@
-[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://cuhsxeswx1qg7"]
+[gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://cuhsxeswx1qg7"]
 
-[ext_resource type="Texture2D" uid="uid://b0q6dnlub21f7" path="res://TashkentSpire2/images/transitions/tashkent_transition.png" id="1_3hrfg"]
-
-[sub_resource type="Shader" id="Shader_spnx5"]
-code = "shader_type canvas_item;
-
-uniform sampler2D transitionTex;
-uniform float threshold : hint_range(0,1);
-
-void fragment() {
-    float falloff = 1.0 - texture(transitionTex, UV).r;
-    
-    // helps with falloff artifacts issues towards the transition extremes
-    float remap  = mix(-0.1, 1.1, threshold);
-    falloff = step(falloff, remap);
-    COLOR.a = falloff;
-}
-"
+[ext_resource type="Texture2D" path="res://TashkentSpire2/images/transitions/tashkent_chibi_transition_calm.png" id="1_calm"]
+[ext_resource type="Texture2D" path="res://TashkentSpire2/images/transitions/tashkent_chibi_transition.png" id="2_reaction"]
+[ext_resource type="Shader" path="res://TashkentSpire2/shaders/tashkent_chibi_transition.gdshader" id="3_shader"]
 
 [resource]
 resource_local_to_scene = true
-shader = SubResource("Shader_spnx5")
-shader_parameter/transitionTex = ExtResource("1_3hrfg")
-shader_parameter/threshold = 0.332
+shader = ExtResource("3_shader")
+shader_parameter/calm_tex = ExtResource("1_calm")
+shader_parameter/reaction_tex = ExtResource("2_reaction")
+shader_parameter/threshold = 0.0
+shader_parameter/chibi_height = 0.86
