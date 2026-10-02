@@ -168,6 +168,8 @@
   "INDOMITABLESPIRE2-INDOMITABLE_PRAYER.title": "不挠之祈",
   "INDOMITABLESPIRE2-INDOMITABLE_PRAYER.banter": "希望指挥官能平安回来…啊啊全身酸痛…光是保持祈祷这个姿势就感觉好累…",
   "INDOMITABLESPIRE2-INDOMITABLE_PRAYER.description": "获得{Shield:diff()}点[gold]护盾[/gold]。\n本回合内，你每次受到的伤害不会超过前一次受到的伤害。",
+  "INDOMITABLESPIRE2-WHATEVER.title": "摆烂",
+  "INDOMITABLESPIRE2-WHATEVER.description": "在你的回合，每当一张牌因[gold]手牌[/gold]已满而未能抽取或放入手牌，或你的[gold]手牌[/gold]为空时，回复[green]{Heal:diff()}[/green]点生命，并在下回合获得{Energy:energyIcons()}。",
   
   "INDOMITABLESPIRE2-DESSERT.title": "甜点",
   "INDOMITABLESPIRE2-DESSERT.description": "回复[green]{Heal:diff()}[/green]点生命。\n获得{Energy:energyIcons()}。",

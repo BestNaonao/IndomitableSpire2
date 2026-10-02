@@ -168,6 +168,8 @@
   "INDOMITABLESPIRE2-INDOMITABLE_PRAYER.title": "インドミタブルの祈り",
   "INDOMITABLESPIRE2-INDOMITABLE_PRAYER.banter": "指揮官が無事に戻ってきますように……あいたたた…祈っているだけでも疲れましたわ…",
   "INDOMITABLESPIRE2-INDOMITABLE_PRAYER.description": "[gold]シールド[/gold]を{Shield:diff()}得る。\nこのターン、受けるダメージは毎回、直前に受けたダメージを超えない。",
+  "INDOMITABLESPIRE2-WHATEVER.title": "投げやり",
+  "INDOMITABLESPIRE2-WHATEVER.description": "自身のターン中、[gold]手札[/gold]が満杯でカードを1枚引けない、または手札に加えられないたび、あるいは[gold]手札[/gold]が0枚の時、HPを[green]{Heal:diff()}[/green]回復し、次のターンに{Energy:energyIcons()}を得る。",
   
   "INDOMITABLESPIRE2-DESSERT.title": "デザート",
   "INDOMITABLESPIRE2-DESSERT.description": "HPを[green]{Heal:diff()}[/green]回復する。\n{Energy:energyIcons()}を得る。",
