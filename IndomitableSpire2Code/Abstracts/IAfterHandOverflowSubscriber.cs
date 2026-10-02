@@ -5,7 +5,7 @@ using MegaCrit.Sts2.Core.Models;
 
 namespace IndomitableSpire2.IndomitableSpire2Code.Abstracts;
 
-/// <summary>自定义战斗钩子：卡牌尝试加入满手牌，实际被改送弃牌堆后触发。</summary>
+/// <summary>自定义战斗钩子：卡牌因手牌已满被拒绝入手，改送操作成功后触发，不要求其最终仍在弃牌堆。</summary>
 public interface IAfterHandOverflowSubscriber
 {
     /// <param name="player">本次尝试接收卡牌的玩家。</param>

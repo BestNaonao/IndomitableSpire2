@@ -18,7 +18,7 @@ public sealed class WhateverPower : IndomitablePower, IAfterHandOverflowSubscrib
     
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.ForEnergy(this)];
     
-    // 实际溢出的每一张牌对应一次收益，不要求它结算时仍位于弃牌堆。
+    // 每张因满手而未能入手的牌对应一次收益，不要求它结算时仍位于弃牌堆。
     public Task AfterHandOverflow(Player player, CardModel card, PileType oldPileType, PlayerTurnPhase phase) =>
         Trigger(new ThrowingPlayerChoiceContext(), player, 1, phase);
     
@@ -34,7 +34,7 @@ public sealed class WhateverPower : IndomitablePower, IAfterHandOverflowSubscrib
             ? Trigger(choiceContext, player, 1, phase.Value) : Task.CompletedTask;
     }
     
-    /// <summary>只允许自己参与的玩家回合；结束回合、死亡、能力移除后不再产生新收益。</summary>
+    /// <summary>只允许自己参与的玩家回合；结束回合、死亡或层数归零后不再产生新收益。</summary>
     /// <param name="player">原事件对应玩家，必须是本能力拥有者。</param>
     /// <param name="phase">事件发生时的阶段，End 和 None 均不属于本能力的有效阶段。</param>
     private bool CanTrigger(Player player, PlayerTurnPhase phase) =>
@@ -59,7 +59,7 @@ public sealed class WhateverPower : IndomitablePower, IAfterHandOverflowSubscrib
         var turnNumber = player.PlayerCombatState!.TurnNumber;
         for (var i = 0; i < count; i++)
         {
-            // 防止前一次收益的嵌套效果结束战斗、移除本能力或切换回合后，继续处理旧事件。
+            // 防止前一次收益的嵌套效果结束战斗、使层数归零或切换回合后，继续处理旧事件。
             if (!CanTrigger(player, phase) || !ReferenceEquals(Owner.CombatState, combatState) ||
                 player.PlayerCombatState?.TurnNumber != turnNumber) break;
             if (i == 0) Flash();
