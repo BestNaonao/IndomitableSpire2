@@ -118,5 +118,8 @@
   "INDOMITABLESPIRE2-EARNEST_MODE_POWER.title": "认真模式",
   "INDOMITABLESPIRE2-INDOMITABLE_PRAYER_POWER.description": "本回合内，每次受到的伤害不会超过本场战斗中前一次受到的伤害（包括格挡部分）。若尚无伤害记录，首次伤害不受限制。",
   "INDOMITABLESPIRE2-INDOMITABLE_PRAYER_POWER.smartDescription": "本回合内，{OnPlayer:你|[gold]{OwnerName}[/gold]}每次受到的伤害不会超过本场战斗中前一次受到的伤害（包括格挡部分）。\n{HasDamageCap:cond:>0?下一次受到的伤害最多为[blue]{DamageCap}[/blue]点。|本场战斗尚无伤害记录，首次伤害不受限制。}",
-  "INDOMITABLESPIRE2-INDOMITABLE_PRAYER_POWER.title": "不挠之祈"
+  "INDOMITABLESPIRE2-INDOMITABLE_PRAYER_POWER.title": "不挠之祈",
+  "INDOMITABLESPIRE2-WHATEVER_POWER.description": "在你的回合，每当一张牌因[gold]手牌[/gold]已满而未能抽取或放入手牌，或你的[gold]手牌[/gold]为空时，回复生命，并在下回合获得额外{energyPrefix:energyIcons(1)}。",
+  "INDOMITABLESPIRE2-WHATEVER_POWER.smartDescription": "在你的回合，每当一张牌因[gold]手牌[/gold]已满而未能抽取或放入手牌，或你的[gold]手牌[/gold]为空时，回复[green]{Amount}[/green]点生命，并在下回合获得{Amount:energyIcons()}。",
+  "INDOMITABLESPIRE2-WHATEVER_POWER.title": "摆烂"
 }

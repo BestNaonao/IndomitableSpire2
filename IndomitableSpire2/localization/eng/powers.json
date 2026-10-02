@@ -118,5 +118,8 @@
   "INDOMITABLESPIRE2-EARNEST_MODE_POWER.title": "Earnest Mode",
   "INDOMITABLESPIRE2-INDOMITABLE_PRAYER_POWER.description": "This turn, incoming damage is capped at the previous damage taken this combat (including blocked damage). If no damage has been taken yet, the first instance is uncapped.",
   "INDOMITABLESPIRE2-INDOMITABLE_PRAYER_POWER.smartDescription": "This turn, whenever {OnPlayer:you take|[gold]{OwnerName}[/gold] takes} damage, it is capped at the previous damage taken this combat (including blocked damage).\n{HasDamageCap:cond:>0?The next incoming damage is capped at [blue]{DamageCap}[/blue].|No damage has been taken this combat. The first instance is uncapped.}",
-  "INDOMITABLESPIRE2-INDOMITABLE_PRAYER_POWER.title": "Indomitable Prayer"
+  "INDOMITABLESPIRE2-INDOMITABLE_PRAYER_POWER.title": "Indomitable Prayer",
+  "INDOMITABLESPIRE2-WHATEVER_POWER.description": "During your turn, whenever a card cannot be drawn or added to your [gold]Hand[/gold] because it is full, or your [gold]Hand[/gold] is empty, heal HP and gain additional {energyPrefix:energyIcons(1)} next turn.",
+  "INDOMITABLESPIRE2-WHATEVER_POWER.smartDescription": "During your turn, whenever a card cannot be drawn or added to your [gold]Hand[/gold] because it is full, or your [gold]Hand[/gold] is empty, heal [green]{Amount}[/green] HP and gain {Amount:energyIcons()} next turn.",
+  "INDOMITABLESPIRE2-WHATEVER_POWER.title": "Whatever..."
 }

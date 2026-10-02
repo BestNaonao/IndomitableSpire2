@@ -118,5 +118,8 @@
   "INDOMITABLESPIRE2-EARNEST_MODE_POWER.title": "本気モード",
   "INDOMITABLESPIRE2-INDOMITABLE_PRAYER_POWER.description": "このターン、受けるダメージは毎回、この戦闘で直前に受けたダメージ（ブロックで防いだ分を含む）を超えない。まだダメージを受けていない場合、最初のダメージには上限がない。",
   "INDOMITABLESPIRE2-INDOMITABLE_PRAYER_POWER.smartDescription": "このターン、{OnPlayer:自身が|[gold]{OwnerName}[/gold]が}受けるダメージは毎回、この戦闘で直前に受けたダメージ（ブロックで防いだ分を含む）を超えない。\n{HasDamageCap:cond:>0?次に受けるダメージの上限は[blue]{DamageCap}[/blue]。|この戦闘ではまだダメージを受けていないため、最初のダメージには上限がない。}",
-  "INDOMITABLESPIRE2-INDOMITABLE_PRAYER_POWER.title": "インドミタブルの祈り"
+  "INDOMITABLESPIRE2-INDOMITABLE_PRAYER_POWER.title": "インドミタブルの祈り",
+  "INDOMITABLESPIRE2-WHATEVER_POWER.description": "自身のターン中、[gold]手札[/gold]が満杯でカードを1枚引けない、または手札に加えられないたび、あるいは[gold]手札[/gold]が0枚の時、HPを回復し、次のターンに追加の{energyPrefix:energyIcons(1)}を得る。",
+  "INDOMITABLESPIRE2-WHATEVER_POWER.smartDescription": "自身のターン中、[gold]手札[/gold]が満杯でカードを1枚引けない、または手札に加えられないたび、あるいは[gold]手札[/gold]が0枚の時、HPを[green]{Amount}[/green]回復し、次のターンに{Amount:energyIcons()}を得る。",
+  "INDOMITABLESPIRE2-WHATEVER_POWER.title": "投げやり"
 }
