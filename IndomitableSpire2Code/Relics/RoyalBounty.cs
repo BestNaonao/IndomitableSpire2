@@ -1,8 +1,10 @@
-﻿using IndomitableSpire2.IndomitableSpire2Code.Extensions;
+﻿using BaseLib.Utils;
+using IndomitableSpire2.IndomitableSpire2Code.Extensions;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Relics;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using MegaCrit.Sts2.Core.Models.RelicPools;
 using MegaCrit.Sts2.Core.Rewards;
 using MegaCrit.Sts2.Core.Rooms;
 
@@ -11,7 +13,8 @@ namespace IndomitableSpire2.IndomitableSpire2Code.Relics;
 /// <summary>
 /// ！！！需要测试：组装师，偷窃草蜢，地精佣兵，门扉缔造者，瀑布巨兽，千足虫，胧光兽、实验体！！！
 /// </summary>
-public sealed class RoyalBounty : IndomitableRelic
+[Pool(typeof(SharedRelicPool))]
+public sealed class RoyalBounty : IndomitableSpire2Relic
 {
     public override RelicRarity Rarity => RelicRarity.Uncommon;
     
@@ -94,15 +97,13 @@ public sealed class RoyalBounty : IndomitableRelic
         if (_enemyMaxHpTracker.TryGetValue(creature, out var record))
         {
             // 计算尚未发放赏金的血量差值
-            var unrewardedHp = record.MaxHpSeen - record.MaxHpRewarded;
-            if (unrewardedHp > 0)
+            if (record.MaxHpSeen - record.MaxHpRewarded is var unrewardedHp and > 0)
             {
                 Flash();
                 CombatTotalEnemyMaxHp += unrewardedHp; // 累加至右上角赏金池
                 record.MaxHpRewarded += unrewardedHp;  // 更新已兑现记录，防止反复刷钱
             }
         }
-        
         return Task.CompletedTask;
     }
     
