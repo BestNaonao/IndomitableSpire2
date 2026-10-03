@@ -1,3 +1,4 @@
+using BaseLib.Utils;
 using IndomitableSpire2.IndomitableSpire2Code.Commands;
 using IndomitableSpire2.IndomitableSpire2Code.Extensions;
 using IndomitableSpire2.IndomitableSpire2Code.Localization.DynamicVars;
@@ -8,22 +9,19 @@ using MegaCrit.Sts2.Core.Entities.Potions;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using MegaCrit.Sts2.Core.Models.PotionPools;
 using MegaCrit.Sts2.Core.ValueProps;
 
 namespace IndomitableSpire2.IndomitableSpire2Code.Potions;
 
-public sealed class ShieldPotion : IndomitablePotion
+[Pool(typeof(SharedPotionPool))]
+public sealed class ShieldPotion : IndomitableSpire2Potion
 {
     public override PotionRarity Rarity => PotionRarity.Common;
     
     public override PotionUsage Usage => PotionUsage.CombatOnly;
     
     public override TargetType TargetType => TargetType.AnyPlayer;
-    
-    public override string CustomPackedImagePath => 
-        "res://IndomitableSpire2/images/potions/packed/shield_potion.tres";
-    public override string CustomPackedOutlinePath => 
-        "res://IndomitableSpire2/images/potions/packed_outline/shield_potion_outline.tres";
     
     protected override IEnumerable<DynamicVar> CanonicalVars => [new ShieldVar(10M, ValueProp.Unpowered)];
     
