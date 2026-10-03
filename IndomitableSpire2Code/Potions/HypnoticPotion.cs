@@ -21,12 +21,6 @@ public sealed class HypnoticPotion : IndomitablePotion
     // 指定药水需要玩家手动选择一个敌人作为目标
     public override TargetType TargetType => TargetType.AnyEnemy;
     
-    // 压缩图标和轮廓的资源路径
-    public override string CustomPackedImagePath => 
-        "res://IndomitableSpire2/images/potions/packed/hypnotic_potion.tres";
-    public override string CustomPackedOutlinePath => 
-        "res://IndomitableSpire2/images/potions/packed_outline/hypnotic_potion_outline.tres";
-    
     // 定义药水数值：1 层催眠能力。STS2 中使用 PowerVar<T> 来绑定能力数值。现已自动显示“催眠”这个能力的说明框
     protected override IEnumerable<DynamicVar> CanonicalVars => [new CustomPowerVar<HypnotizedPower>(5M)];
     
