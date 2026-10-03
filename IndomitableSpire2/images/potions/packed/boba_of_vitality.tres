@@ -1,0 +1,8 @@
+[gd_resource type="AtlasTexture" load_steps=2 format=3 uid="uid://b1q25o31g23gn"]
+
+[ext_resource type="Texture2D" uid="uid://dwclmvmu7pl5" path="res://IndomitableSpire2/images/potions/boba_of_vatality.png" id="1_7t4xr"]
+
+[resource]
+atlas = ExtResource("1_7t4xr")
+region = Rect2(0, 0, 256, 256)
+margin = Rect2(1, 3, 2, 5)
