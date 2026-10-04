@@ -11,7 +11,7 @@
   "INDOMITABLESPIRE2-DUAL_PURPOSE_GUN.title": "4.5-Inch Dual-Purpose Gun",
   "INDOMITABLESPIRE2-DUAL_PURPOSE_GUN.description": "[gold]Versatile[/gold]: If played automatically, gain {Block:diff()} [gold]Block[/gold]. Otherwise, deal {Damage:diff()} damage.\nAt the end of your turn, if this card is in your [gold]hand[/gold] and hasn't been played this turn, automatically play it.{InCombat:{WillAutoBlock:cond:>0?[green](Will automatically play for anti-air defense)[/green]|[red](Already played this turn)[/red]}|}",
   "INDOMITABLESPIRE2-ZIGZAG_MANEUVER.title": "Zigzag Maneuver",
-  "INDOMITABLESPIRE2-ZIGZAG_MANEUVER.description": "[gold]Requires[/gold] [blue]{MotivationRequire:diff()}[/blue] [gold]Motivation[/gold].\nGain {Block:diff()} Block.\nGain {DexterityPower:diff()} [gold]Dexterity[/gold] this turn.",
+  "INDOMITABLESPIRE2-ZIGZAG_MANEUVER.description": "[gold]Requires[/gold] [blue]{MotivationRequire:diff()}[/blue] [gold]Motivation[/gold].\nGain {DexterityPower:diff()} [gold]Dexterity[/gold] this turn.\nGain {Shield:diff()} [gold]Shield[/gold].",
   "INDOMITABLESPIRE2-WORK_ARRANGEMENT.title": "Work Arrangement",
   "INDOMITABLESPIRE2-WORK_ARRANGEMENT.banter": "Huh, work? I've already finished all of it.",
   "INDOMITABLESPIRE2-WORK_ARRANGEMENT.description": "Cost [blue]{MotivationConsume:diff()}[/blue] [gold]Motivation[/gold].\nDraw {Cards:diff()} cards.\nPut a card from your hand on the bottom of your [gold]Draw Pile[/gold].",
