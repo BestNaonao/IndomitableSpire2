@@ -1,4 +1,5 @@
 ﻿using IndomitableSpire2.IndomitableSpire2Code.Cards.Abstracts;
+using IndomitableSpire2.IndomitableSpire2Code.Commands;
 using IndomitableSpire2.IndomitableSpire2Code.Enums;
 using IndomitableSpire2.IndomitableSpire2Code.Extensions;
 using IndomitableSpire2.IndomitableSpire2Code.Localization.DynamicVars;
@@ -15,11 +16,13 @@ namespace IndomitableSpire2.IndomitableSpire2Code.Cards.Commons;
 
 public sealed class ZigzagManeuver() : IndomitableCard(1, CardType.Skill, CardRarity.Common, TargetType.Self)
 {
-    // 注册变量：5点格挡，2点敏捷
+    public override bool GainsBlock => true;
+    
+    // 注册变量：2点敏捷，4点基础护盾
     protected override IEnumerable<DynamicVar> CanonicalVars => 
     [
         new MotivationRequireVar(20M),
-        new BlockVar(5M, ValueProp.Move),
+        new ShieldVar(4M, ValueProp.Move),
         new CustomPowerVar<DexterityPower>(2M)
     ];
     
@@ -27,7 +30,7 @@ public sealed class ZigzagManeuver() : IndomitableCard(1, CardType.Skill, CardRa
     protected override IEnumerable<IHoverTip> ExtraHoverTips => 
         [HoverTipFactory.FromKeyword(IndomitableKeywords.Require)];
     
-    // 核心限制：必须有至少 10 点干劲才能打出
+    // 干劲需求由 MotivationRequireVar 决定。
     protected override bool IsPlayable => this.MeetsMotivationRequirement();
     
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
@@ -35,10 +38,7 @@ public sealed class ZigzagManeuver() : IndomitableCard(1, CardType.Skill, CardRa
         // 1. 播放释放技能的骨骼动画
         await CreatureCmd.TriggerAnim(Owner.Creature, "Cast", Owner.Character.CastAnimDelay);
         
-        // 2. 获得格挡
-        await CreatureCmd.GainBlock(Owner.Creature, DynamicVars.Block, cardPlay);
-        
-        // 3. 获得本回合敏捷 (核心：这里施加的是 之字机动能力 临时敏捷)
+        // 2. 先获得本回合敏捷，使随后获得的护盾受其加成。
         await PowerCmd.Apply<ZigzagManeuverPower>(
             choiceContext: choiceContext, 
             target: Owner.Creature, 
@@ -46,12 +46,15 @@ public sealed class ZigzagManeuver() : IndomitableCard(1, CardType.Skill, CardRa
             applier: Owner.Creature, 
             cardSource: this
         );
+        
+        // 3. 获得护盾。
+        await CustomCreatureCmd.GainShield(choiceContext, Owner.Creature, DynamicVars.Shield(), cardPlay);
     }
     
     protected override void OnUpgrade()
     {
-        // 升级效果：格挡 +3 (变为8)，敏捷 +1 (变为3)
-        DynamicVars.Block.UpgradeValueBy(3M);
+        // 升级增量不变：基础护盾 +3（变为7），敏捷 +1（变为3）。
+        DynamicVars.Shield().UpgradeValueBy(3M);
         DynamicVars.Dexterity.UpgradeValueBy(1M);
     }
 }
