@@ -121,5 +121,8 @@
   "INDOMITABLESPIRE2-INDOMITABLE_PRAYER_POWER.title": "Indomitable Prayer",
   "INDOMITABLESPIRE2-WHATEVER_POWER.description": "During your turn, whenever a card cannot be drawn or added to your [gold]Hand[/gold] because it is full, or your [gold]Hand[/gold] is empty, heal HP and gain additional {energyPrefix:energyIcons(1)} next turn.",
   "INDOMITABLESPIRE2-WHATEVER_POWER.smartDescription": "During your turn, whenever a card cannot be drawn or added to your [gold]Hand[/gold] because it is full, or your [gold]Hand[/gold] is empty, heal [green]{Amount}[/green] HP and gain {Amount:energyIcons()} next turn.",
-  "INDOMITABLESPIRE2-WHATEVER_POWER.title": "Whatever..."
+  "INDOMITABLESPIRE2-WHATEVER_POWER.title": "Whatever...",
+  "INDOMITABLESPIRE2-RESTING_EYES_POWER.description": "Your [gold]Refresh[/gold] cards draw 1 additional card.",
+  "INDOMITABLESPIRE2-RESTING_EYES_POWER.smartDescription": "For [blue]{Amount}[/blue] {Amount:plural:turn|turns}, your [gold]Refresh[/gold] cards draw 1 additional card.",
+  "INDOMITABLESPIRE2-RESTING_EYES_POWER.title": "Resting Eyes"
 }

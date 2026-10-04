@@ -170,6 +170,9 @@
   "INDOMITABLESPIRE2-INDOMITABLE_PRAYER.description": "Gain {Shield:diff()} [gold]Shield[/gold].\nThis turn, whenever you take damage, it is capped at the previous damage you took.",
   "INDOMITABLESPIRE2-WHATEVER.title": "Whatever...",
   "INDOMITABLESPIRE2-WHATEVER.description": "During your turn, whenever a card cannot be drawn or added to your [gold]Hand[/gold] because it is full, or your [gold]Hand[/gold] is empty, heal [green]{Heal:diff()}[/green] HP and gain {Energy:energyIcons()} next turn.",
+  "INDOMITABLESPIRE2-RESTING_EYES.title": "Resting Eyes",
+  "INDOMITABLESPIRE2-RESTING_EYES.banter": "Oh, but I need to close my eyes and relax to remember it clearly...",
+  "INDOMITABLESPIRE2-RESTING_EYES.description": "Add a [gold]{IfUpgraded:show:Refresh+|Refresh}[/gold] to your hand.\nFor 1 turn, your [gold]Refresh[/gold] cards draw 1 additional card.",
   
   "INDOMITABLESPIRE2-DESSERT.title": "Dessert",
   "INDOMITABLESPIRE2-DESSERT.description": "Heal [green]{Heal:diff()}[/green] HP.\nGain {Energy:energyIcons()}.",

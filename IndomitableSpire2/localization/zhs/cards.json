@@ -170,6 +170,9 @@
   "INDOMITABLESPIRE2-INDOMITABLE_PRAYER.description": "获得{Shield:diff()}点[gold]护盾[/gold]。\n本回合内，你每次受到的伤害不会超过前一次受到的伤害。",
   "INDOMITABLESPIRE2-WHATEVER.title": "摆烂",
   "INDOMITABLESPIRE2-WHATEVER.description": "在你的回合，每当一张牌因[gold]手牌[/gold]已满而未能抽取或放入手牌，或你的[gold]手牌[/gold]为空时，回复[green]{Heal:diff()}[/green]点生命，并在下回合获得{Energy:energyIcons()}。",
+  "INDOMITABLESPIRE2-RESTING_EYES.title": "闭目",
+  "INDOMITABLESPIRE2-RESTING_EYES.banter": "只是现在需要先闭目养神一下，才能更清晰地回忆起来……",
+  "INDOMITABLESPIRE2-RESTING_EYES.description": "将一张[gold]{IfUpgraded:show:养神+|养神}[/gold]放入你的手牌。\n1回合内，你的[gold]养神[/gold]额外抽1张牌。",
   
   "INDOMITABLESPIRE2-DESSERT.title": "甜点",
   "INDOMITABLESPIRE2-DESSERT.description": "回复[green]{Heal:diff()}[/green]点生命。\n获得{Energy:energyIcons()}。",

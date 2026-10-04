@@ -121,5 +121,8 @@
   "INDOMITABLESPIRE2-INDOMITABLE_PRAYER_POWER.title": "インドミタブルの祈り",
   "INDOMITABLESPIRE2-WHATEVER_POWER.description": "自身のターン中、[gold]手札[/gold]が満杯でカードを1枚引けない、または手札に加えられないたび、あるいは[gold]手札[/gold]が0枚の時、HPを回復し、次のターンに追加の{energyPrefix:energyIcons(1)}を得る。",
   "INDOMITABLESPIRE2-WHATEVER_POWER.smartDescription": "自身のターン中、[gold]手札[/gold]が満杯でカードを1枚引けない、または手札に加えられないたび、あるいは[gold]手札[/gold]が0枚の時、HPを[green]{Amount}[/green]回復し、次のターンに{Amount:energyIcons()}を得る。",
-  "INDOMITABLESPIRE2-WHATEVER_POWER.title": "投げやり"
+  "INDOMITABLESPIRE2-WHATEVER_POWER.title": "投げやり",
+  "INDOMITABLESPIRE2-RESTING_EYES_POWER.description": "自分の[gold]養神[/gold]が引くカードの枚数が1枚増える。",
+  "INDOMITABLESPIRE2-RESTING_EYES_POWER.smartDescription": "[blue]{Amount}[/blue]ターンの間、自分の[gold]養神[/gold]が引くカードの枚数が1枚増える。",
+  "INDOMITABLESPIRE2-RESTING_EYES_POWER.title": "目休め"
 }

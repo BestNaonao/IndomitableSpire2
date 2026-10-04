@@ -170,6 +170,9 @@
   "INDOMITABLESPIRE2-INDOMITABLE_PRAYER.description": "[gold]シールド[/gold]を{Shield:diff()}得る。\nこのターン、受けるダメージは毎回、直前に受けたダメージを超えない。",
   "INDOMITABLESPIRE2-WHATEVER.title": "投げやり",
   "INDOMITABLESPIRE2-WHATEVER.description": "自身のターン中、[gold]手札[/gold]が満杯でカードを1枚引けない、または手札に加えられないたび、あるいは[gold]手札[/gold]が0枚の時、HPを[green]{Heal:diff()}[/green]回復し、次のターンに{Energy:energyIcons()}を得る。",
+  "INDOMITABLESPIRE2-RESTING_EYES.title": "目休め",
+  "INDOMITABLESPIRE2-RESTING_EYES.banter": "ただ、目を閉じて休まないと、はっきり思い出せなくて……",
+  "INDOMITABLESPIRE2-RESTING_EYES.description": "[gold]{IfUpgraded:show:養神+|養神}[/gold]を1枚手札に加える。\n1ターンの間、自分の[gold]養神[/gold]が引くカードの枚数が1枚増える。",
   
   "INDOMITABLESPIRE2-DESSERT.title": "デザート",
   "INDOMITABLESPIRE2-DESSERT.description": "HPを[green]{Heal:diff()}[/green]回復する。\n{Energy:energyIcons()}を得る。",
