@@ -38,7 +38,7 @@ public sealed class WhateverPower : IndomitablePower, IAfterHandOverflowSubscrib
     /// <param name="player">原事件对应玩家，必须是本能力拥有者。</param>
     /// <param name="phase">事件发生时的阶段，End 和 None 均不属于本能力的有效阶段。</param>
     private bool CanTrigger(Player player, PlayerTurnPhase phase) =>
-        player == Owner.Player && Amount > 0 && !Owner.IsDead &&
+        player == Owner.Player && Amount > 0 && Owner.IsAlive &&
         CombatManager.Instance.IsInProgress && !CombatManager.Instance.IsOverOrEnding &&
         CombatManager.Instance.IsPartOfPlayerTurn(player) &&
         phase is PlayerTurnPhase.Start or PlayerTurnPhase.AutoPrePlay or PlayerTurnPhase.Play or PlayerTurnPhase.AutoPostPlay;
