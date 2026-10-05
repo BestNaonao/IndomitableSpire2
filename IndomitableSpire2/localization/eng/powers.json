@@ -124,5 +124,8 @@
   "INDOMITABLESPIRE2-WHATEVER_POWER.title": "Whatever...",
   "INDOMITABLESPIRE2-RESTING_EYES_POWER.description": "Your [gold]Refresh[/gold] cards draw 1 additional card.",
   "INDOMITABLESPIRE2-RESTING_EYES_POWER.smartDescription": "For [blue]{Amount}[/blue] {Amount:plural:turn|turns}, your [gold]Refresh[/gold] cards draw 1 additional card.",
-  "INDOMITABLESPIRE2-RESTING_EYES_POWER.title": "Resting Eyes"
+  "INDOMITABLESPIRE2-RESTING_EYES_POWER.title": "Resting Eyes",
+  "INDOMITABLESPIRE2-DROWSY_POWER.description": "This turn, whenever you spend Energy, gain [blue]1[/blue] [gold]Hypnotized[/gold].",
+  "INDOMITABLESPIRE2-DROWSY_POWER.smartDescription": "This turn, whenever you spend Energy, gain [blue]{Amount}[/blue] [gold]Hypnotized[/gold].",
+  "INDOMITABLESPIRE2-DROWSY_POWER.title": "Drowsy"
 }

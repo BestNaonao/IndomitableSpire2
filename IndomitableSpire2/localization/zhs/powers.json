@@ -124,5 +124,8 @@
   "INDOMITABLESPIRE2-WHATEVER_POWER.title": "摆烂",
   "INDOMITABLESPIRE2-RESTING_EYES_POWER.description": "你的[gold]养神[/gold]额外抽1张牌。",
   "INDOMITABLESPIRE2-RESTING_EYES_POWER.smartDescription": "[blue]{Amount}[/blue]回合内，你的[gold]养神[/gold]额外抽1张牌。",
-  "INDOMITABLESPIRE2-RESTING_EYES_POWER.title": "闭目"
+  "INDOMITABLESPIRE2-RESTING_EYES_POWER.title": "闭目",
+  "INDOMITABLESPIRE2-DROWSY_POWER.description": "本回合内，你每次花费能量，都会获得[blue]1[/blue]层[gold]催眠[/gold]。",
+  "INDOMITABLESPIRE2-DROWSY_POWER.smartDescription": "本回合内，你每次花费能量，都会获得[blue]{Amount}[/blue]层[gold]催眠[/gold]。",
+  "INDOMITABLESPIRE2-DROWSY_POWER.title": "困倦"
 }

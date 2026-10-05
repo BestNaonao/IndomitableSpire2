@@ -124,5 +124,8 @@
   "INDOMITABLESPIRE2-WHATEVER_POWER.title": "投げやり",
   "INDOMITABLESPIRE2-RESTING_EYES_POWER.description": "自分の[gold]養神[/gold]が引くカードの枚数が1枚増える。",
   "INDOMITABLESPIRE2-RESTING_EYES_POWER.smartDescription": "[blue]{Amount}[/blue]ターンの間、自分の[gold]養神[/gold]が引くカードの枚数が1枚増える。",
-  "INDOMITABLESPIRE2-RESTING_EYES_POWER.title": "目休め"
+  "INDOMITABLESPIRE2-RESTING_EYES_POWER.title": "目休め",
+  "INDOMITABLESPIRE2-DROWSY_POWER.description": "このターン、エナジーを消費するたび、[gold]催眠[/gold]を[blue]1[/blue]得る。",
+  "INDOMITABLESPIRE2-DROWSY_POWER.smartDescription": "このターン、エナジーを消費するたび、[gold]催眠[/gold]を[blue]{Amount}[/blue]得る。",
+  "INDOMITABLESPIRE2-DROWSY_POWER.title": "眠気"
 }
