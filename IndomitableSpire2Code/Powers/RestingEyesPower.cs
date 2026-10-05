@@ -16,10 +16,6 @@ public sealed class RestingEyesPower : IndomitablePower
     // Amount 只表示剩余回合数；养神的抽牌加成始终为 1。
     public override PowerStackType StackType => PowerStackType.Counter;
     
-    // 暂用休憩的艺术图标，直到闭目有独立美术资源。
-    public override string CustomBigIconPath => "res://IndomitableSpire2/images/powers/big/art_of_resting_power.png";
-    public override string CustomPackedIconPath => "res://IndomitableSpire2/images/powers/packed/art_of_resting_power_packed.tres";
-    
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromCard<Refresh>()];
     
     public override Task AfterApplied(Creature? applier, CardModel? cardSource)
