@@ -8,6 +8,9 @@
   "INDOMITABLESPIRE2-ROYAL_BOUNTY.title": "Royal Bounty",
   "INDOMITABLESPIRE2-ROYAL_BOUNTY.description": "At the end of combat, randomly distribute [gold]Gold[/gold] to ALL players equal to [blue]{BountyRate}%[/blue] of the total Max HP of all killed enemies.",
   "INDOMITABLESPIRE2-ROYAL_BOUNTY.flavor": "\"Sink the Bismarck!\" - Admiral John Tovey",
+  "INDOMITABLESPIRE2-LUCKY_BAG.title": "Lucky Bag",
+  "INDOMITABLESPIRE2-LUCKY_BAG.description": "After spending more than [blue]{Gold}[/blue] [gold]Gold[/gold] in a single [gold]Shop[/gold], obtain a random [gold]Relic[/gold]. Once per shop.",
+  "INDOMITABLESPIRE2-LUCKY_BAG.flavor": "\"Illustrious, we've said our prayers and bought our lucky bags... Shall we find somewhere warm to rest? This little fellow can do the hard work of bringing us good luck this year.\"",
   
   "SEA_GLASS.INDOMITABLESPIRE2-INDOMITABLE_DEFAULT.title": "Celestial Glass",
   "SEA_GLASS.INDOMITABLESPIRE2-INDOMITABLE_MAID.title": "Lace Glass",

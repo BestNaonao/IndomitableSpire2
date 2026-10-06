@@ -8,6 +8,9 @@
   "INDOMITABLESPIRE2-ROYAL_BOUNTY.title": "皇家赏金",
   "INDOMITABLESPIRE2-ROYAL_BOUNTY.description": "在战斗结束时，将相当于所有被击杀敌人总最大生命值[blue]{BountyRate}%[/blue]的[gold]金币[/gold]随机分配给所有玩家。",
   "INDOMITABLESPIRE2-ROYAL_BOUNTY.flavor": "“击沉俾斯麦号！”——约翰·托维上将",
+  "INDOMITABLESPIRE2-LUCKY_BAG.title": "福袋",
+  "INDOMITABLESPIRE2-LUCKY_BAG.description": "在每个[gold]商店[/gold]中累计消费超过[blue]{Gold}[/blue][gold]金币[/gold]后，获得一件随机[gold]遗物[/gold]。每个商店仅触发一次。",
+  "INDOMITABLESPIRE2-LUCKY_BAG.flavor": "“光辉姐姐，参谒也结束了，福袋也买好了……接下来，该找个暖和的地方休息了吧？新年的好运，就拜托这个小家伙了。”",
   
   "SEA_GLASS.INDOMITABLESPIRE2-INDOMITABLE_DEFAULT.title": "天穹玻璃",
   "SEA_GLASS.INDOMITABLESPIRE2-INDOMITABLE_MAID.title": "蕾丝玻璃",

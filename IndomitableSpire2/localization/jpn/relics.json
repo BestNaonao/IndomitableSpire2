@@ -8,6 +8,9 @@
   "INDOMITABLESPIRE2-ROYAL_BOUNTY.title": "ロイヤルバウンティ",
   "INDOMITABLESPIRE2-ROYAL_BOUNTY.description": "戦闘終了時、すべての倒された敵の最大HPの合計の[blue]{BountyRate}%[/blue]に等しい[gold]ゴールド[/gold]を、すべてのプレイヤーにランダムに分配する。",
   "INDOMITABLESPIRE2-ROYAL_BOUNTY.flavor": "「ビスマルクを撃沈せよ！」 —— ジョン・トーヴィー大将",
+  "INDOMITABLESPIRE2-LUCKY_BAG.title": "福袋",
+  "INDOMITABLESPIRE2-LUCKY_BAG.description": "1つの[gold]ショップ[/gold]での累計購入額が[blue]{Gold}[/blue][gold]ゴールド[/gold]を超えると、ランダムな[gold]レリック[/gold]を1つ獲得する。各ショップで1回のみ。",
+  "INDOMITABLESPIRE2-LUCKY_BAG.flavor": "「イラストリアス姉さん、お参りも済みましたし、福袋も買いましたし……そろそろ暖かいところで休みません？今年の幸運は、この子に頑張ってもらいましょう。」",
   
   "SEA_GLASS.INDOMITABLESPIRE2-INDOMITABLE_DEFAULT.title": "セレスティアルグラス",
   "SEA_GLASS.INDOMITABLESPIRE2-INDOMITABLE_MAID.title": "レースグラス",
