@@ -43,4 +43,7 @@ public sealed class IndomitableConfiguration : SimpleModConfig
             if (!value) SpecialLinesPlaybackRegistry.Reset();
         }
     }
+    
+    /// <summary>每次福袋触发时读取房主的规则；客户端的本地偏好不会覆盖房主。</summary>
+    public static LuckyBagRelicRule LuckyBagRelicRule { get; set; } = LuckyBagRelicRule.Direct;
 }

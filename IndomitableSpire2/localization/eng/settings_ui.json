@@ -9,5 +9,10 @@
   "INDOMITABLESPIRE2-PLAY_HYPNOTIZED_ANIMATION.title": "Play special hypnosis animation",
   "INDOMITABLESPIRE2-PLAY_HYPNOTIZED_ANIMATION.hover.desc": "When enabled, a special animation plays if available when a player's Hypnotized reaches 5 stacks and triggers its effect. This setting only affects animations, not the effects of Hypnotized.",
   "INDOMITABLESPIRE2-PLAY_SPECIAL_LINE_ONCE_PER_COMBAT.title": "Play each card's special line once per combat",
-  "INDOMITABLESPIRE2-PLAY_SPECIAL_LINE_ONCE_PER_COMBAT.hover.desc": "When enabled, each card type's special dialogue and audio share one use per combat. After that use, playing the same card type again uses the default animation sound. The limit resets when you enter or leave combat, including after loading a save."
+  "INDOMITABLESPIRE2-PLAY_SPECIAL_LINE_ONCE_PER_COMBAT.hover.desc": "When enabled, each card type's special dialogue and audio share one use per combat. After that use, playing the same card type again uses the default animation sound. The limit resets when you enter or leave combat, including after loading a save.",
+  "INDOMITABLESPIRE2-LUCKY_BAG_RELIC_RULE.title": "Lucky Bag relic collection rule",
+  "INDOMITABLESPIRE2-LUCKY_BAG_RELIC_RULE.hover.desc": "Collect automatically: receive the gift immediately. Allow skipping and return: skipped gifts remain available. Allow skipping and destroy: skipped gifts are consumed as if collected, without granting the relic or its effects. Skipping still uses Lucky Bag's activation for this shop. In multiplayer, the host's setting applies.",
+  "INDOMITABLESPIRE2-LUCKY_BAG_RELIC_RULE.Direct": "Collect automatically",
+  "INDOMITABLESPIRE2-LUCKY_BAG_RELIC_RULE.SkipAndReturn": "Allow skipping and return",
+  "INDOMITABLESPIRE2-LUCKY_BAG_RELIC_RULE.SkipAndDestroy": "Allow skipping and destroy"
 }

@@ -9,5 +9,10 @@
   "INDOMITABLESPIRE2-PLAY_HYPNOTIZED_ANIMATION.title": "催眠時の特殊アニメーションを再生",
   "INDOMITABLESPIRE2-PLAY_HYPNOTIZED_ANIMATION.hover.desc": "有効にすると、プレイヤーの催眠が5スタックに達して効果が発動した際、対応するアニメーションがある場合に再生します。この設定はアニメーションのみに影響し、催眠の効果は変わりません。",
   "INDOMITABLESPIRE2-PLAY_SPECIAL_LINE_ONCE_PER_COMBAT.title": "カードごとの特殊台詞を1戦闘につき1回のみ再生",
-  "INDOMITABLESPIRE2-PLAY_SPECIAL_LINE_ONCE_PER_COMBAT.hover.desc": "有効にすると、カードの種類ごとに特殊台詞と専用音声の再生機会を各戦闘で1回だけ共有します。再生済みの種類のカードを再度使用すると、通常のアニメーション効果音に切り替わります。戦闘への入退室時（セーブデータのロード後を含む）に回数はリセットされます。"
+  "INDOMITABLESPIRE2-PLAY_SPECIAL_LINE_ONCE_PER_COMBAT.hover.desc": "有効にすると、カードの種類ごとに特殊台詞と専用音声の再生機会を各戦闘で1回だけ共有します。再生済みの種類のカードを再度使用すると、通常のアニメーション効果音に切り替わります。戦闘への入退室時（セーブデータのロード後を含む）に回数はリセットされます。",
+  "INDOMITABLESPIRE2-LUCKY_BAG_RELIC_RULE.title": "福袋のランダムレリック獲得ルール",
+  "INDOMITABLESPIRE2-LUCKY_BAG_RELIC_RULE.hover.desc": "自動獲得：景品をそのまま獲得します。スキップして戻す：景品を残し、後で再び獲得できます。スキップして破棄：獲得した場合と同様に景品を消費しますが、レリックもその効果も得られません。スキップしても、そのショップでの福袋の発動回数は消費されます。マルチプレイではホストの設定が適用されます。",
+  "INDOMITABLESPIRE2-LUCKY_BAG_RELIC_RULE.Direct": "自動獲得",
+  "INDOMITABLESPIRE2-LUCKY_BAG_RELIC_RULE.SkipAndReturn": "スキップして戻す",
+  "INDOMITABLESPIRE2-LUCKY_BAG_RELIC_RULE.SkipAndDestroy": "スキップして破棄"
 }

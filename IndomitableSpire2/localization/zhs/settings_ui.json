@@ -9,5 +9,10 @@
   "INDOMITABLESPIRE2-PLAY_HYPNOTIZED_ANIMATION.title": "播放催眠特殊动画",
   "INDOMITABLESPIRE2-PLAY_HYPNOTIZED_ANIMATION.hover.desc": "开启后，玩家催眠达到 5 层并触发爆发时，若角色拥有对应动画则播放。此选项仅影响动画，不改变催眠效果。",
   "INDOMITABLESPIRE2-PLAY_SPECIAL_LINE_ONCE_PER_COMBAT.title": "每种卡牌的特殊台词每场战斗仅播放一次",
-  "INDOMITABLESPIRE2-PLAY_SPECIAL_LINE_ONCE_PER_COMBAT.hover.desc": "开启后，每种卡牌的特殊对话和专属音频共用每场战斗一次的播放机会；已播放过的同种卡牌再次打出时，改用默认动画音效。进入或离开战斗时（包括读档后）会重置次数。"
+  "INDOMITABLESPIRE2-PLAY_SPECIAL_LINE_ONCE_PER_COMBAT.hover.desc": "开启后，每种卡牌的特殊对话和专属音频共用每场战斗一次的播放机会；已播放过的同种卡牌再次打出时，改用默认动画音效。进入或离开战斗时（包括读档后）会重置次数。",
+  "INDOMITABLESPIRE2-LUCKY_BAG_RELIC_RULE.title": "福袋随机遗物获取规则",
+  "INDOMITABLESPIRE2-LUCKY_BAG_RELIC_RULE.hover.desc": "直接获取：自动获得赠品。可跳过并放回：跳过后保留赠品，之后仍可获取。可跳过并销毁：跳过后按领取处理赠品，但不获得遗物及其效果。跳过也会消耗本商店的福袋机会。多人游戏以房主的设置为准。",
+  "INDOMITABLESPIRE2-LUCKY_BAG_RELIC_RULE.Direct": "直接获取",
+  "INDOMITABLESPIRE2-LUCKY_BAG_RELIC_RULE.SkipAndReturn": "可跳过并放回",
+  "INDOMITABLESPIRE2-LUCKY_BAG_RELIC_RULE.SkipAndDestroy": "可跳过并销毁"
 }
