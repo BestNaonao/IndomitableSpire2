@@ -1,14 +1,13 @@
 using BaseLib.Utils;
-using MegaCrit.Sts2.Core.Commands;
+using IndomitableSpire2.IndomitableSpire2Code.Commands;
+using IndomitableSpire2.IndomitableSpire2Code.Multiplayer;
 using MegaCrit.Sts2.Core.Context;
 using MegaCrit.Sts2.Core.Entities.Merchant;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Relics;
-using MegaCrit.Sts2.Core.Factories;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models.RelicPools;
 using MegaCrit.Sts2.Core.Rooms;
-using MegaCrit.Sts2.Core.Runs;
 
 namespace IndomitableSpire2.IndomitableSpire2Code.Relics;
 
@@ -69,16 +68,17 @@ public sealed class LuckyBag : IndomitableSpire2Relic
         Status = RelicStatus.Disabled;
         InvokeDisplayAmountChanged();
         
+        var rule = await LuckyBagRuleSynchronizer.GetRule();
+        // 在等待房主响应期间，可能已离店；不能把旧商店的赠品发到下一个房间。
+        if (Owner.RunState.CurrentRoom != room || Owner.Creature.IsDead) return;
         var stockedRelics = inventory.RelicEntries.Where(e => e.IsStocked).ToList();
         if (stockedRelics.Count > 0)
         {
             var entry = stockedRelics[Owner.PlayerRng.Shops.NextInt(stockedRelics.Count)];
-            if (await entry.OnTryPurchaseWrapper(inventory, ignoreCost: true)) return;
+            await CustomMerchantCmd.GiveRelic(inventory, entry, rule);
+            return;
         }
         
-        // 与巨大扭蛋相同，从本局遗物池取出并直接获得，而非另开一个奖励选择界面。
-        var relic = RelicFactory.PullNextRelicFromFront(Owner).ToMutable();
-        await RelicCmd.Obtain(relic, Owner);
-        RunManager.Instance.RewardSynchronizer.SyncLocalObtainedRelic(relic);
+        await CustomRelicCmd.GiveFromPool(Owner, rule);
     }
 }
