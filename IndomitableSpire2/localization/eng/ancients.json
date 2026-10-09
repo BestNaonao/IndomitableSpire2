@@ -1,4 +1,9 @@
 ﻿{
+  "INDOMITABLESPIRE2-IMPLACABLE.title": "Implacable",
+  "INDOMITABLESPIRE2-IMPLACABLE.epithet": "She Who Awaits Confession",
+  "INDOMITABLESPIRE2-IMPLACABLE.talk.firstVisitEver.0-0.ancient": "Good day, traveler. I am Implacable.\nThe paths you've walked, the wishes you keep close... I find them all rather intriguing. But there's no hurry. We have time to get acquainted.",
+  "INDOMITABLESPIRE2-IMPLACABLE.talk.ANY.0-0r.ancient": "Hehe, we meet again. Before you climb any higher, will you let me offer a prayer? Rest assured, this blessing is meant just for you.",
+
   "THE_ARCHITECT.talk.INDOMITABLESPIRE2-INDOMITABLE_DEFAULT.0-0r.char": "Finally reached the top, huh...? Climbing the spire is just too exhausting. I really just want to go back and take a nap right now...",
   "THE_ARCHITECT.talk.INDOMITABLESPIRE2-INDOMITABLE_DEFAULT.0-0r.next": "Complain",
   "THE_ARCHITECT.talk.INDOMITABLESPIRE2-INDOMITABLE_DEFAULT.0-1r.ancient": "You scaled this Spire through countless hardships, merely to seek a place for eternal rest? Utterly absurd.",

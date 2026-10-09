@@ -1,4 +1,9 @@
 ﻿{
+  "INDOMITABLESPIRE2-IMPLACABLE.title": "インプラカブル",
+  "INDOMITABLESPIRE2-IMPLACABLE.epithet": "懺悔を待つ者",
+  "INDOMITABLESPIRE2-IMPLACABLE.talk.firstVisitEver.0-0.ancient": "ごきげんよう、塔を登る旅人さん。私はインプラカブル。\nあなたが歩んできた道も、胸に秘めた願いも……知りたくなってしまうわ。でも、急いで話さなくても大丈夫。ゆっくり、お互いを知っていきましょう。",
+  "INDOMITABLESPIRE2-IMPLACABLE.talk.ANY.0-0r.ancient": "ふふ、また会えたわね。先へ進む前に、私の祈りを聞いていかない？安心して。今度の祝福は、あなただけのために用意したものよ。",
+
   "THE_ARCHITECT.talk.INDOMITABLESPIRE2-INDOMITABLE_DEFAULT.0-0r.char": "やっと最上階ですの……塔を登るのって本当に疲れましたわ。今は早く帰って一眠りしたいですわ……",
   "THE_ARCHITECT.talk.INDOMITABLESPIRE2-INDOMITABLE_DEFAULT.0-0r.next": "愚痴る",
   "THE_ARCHITECT.talk.INDOMITABLESPIRE2-INDOMITABLE_DEFAULT.0-1r.ancient": "数多の苦難を越えて塔を登りつめながら、ただ安眠の地を求めるとは？言語道断だ。",

@@ -1,4 +1,9 @@
 ﻿{
+  "INDOMITABLESPIRE2-IMPLACABLE.title": "怨仇",
+  "INDOMITABLESPIRE2-IMPLACABLE.epithet": "静候告解之人",
+  "INDOMITABLESPIRE2-IMPLACABLE.talk.firstVisitEver.0-0.ancient": "贵安，攀塔者。我是怨仇。\n你走过的路、心底的愿望……我都很感兴趣呢。不过不必急着开口，我们可以慢慢熟悉彼此。",
+  "INDOMITABLESPIRE2-IMPLACABLE.talk.ANY.0-0r.ancient": "呵呵，又见面了。继续往上走之前，要不要先听听我的祈愿？放心，这一次的祝福，只为你而准备。",
+
   "THE_ARCHITECT.talk.INDOMITABLESPIRE2-INDOMITABLE_DEFAULT.0-0r.char": "终于到顶层了么……爬塔真是太累人了，我现在只想赶紧回去睡一觉……",
   "THE_ARCHITECT.talk.INDOMITABLESPIRE2-INDOMITABLE_DEFAULT.0-0r.next": "抱怨",
   "THE_ARCHITECT.talk.INDOMITABLESPIRE2-INDOMITABLE_DEFAULT.0-1r.ancient": "千辛万苦攀上塔顶，只为寻一处长眠？荒谬至极。",
