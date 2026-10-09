@@ -1,0 +1,45 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Texture2D" path="res://IndomitableSpire2/images/ancients/implacable.png" id="1_art"]
+[ext_resource type="Script" path="res://IndomitableSpire2/scenes/events/implacable_background.gd" id="2_layout"]
+
+[sub_resource type="Gradient" id="Gradient_dialogue"]
+offsets = PackedFloat32Array(0, 0.45, 0.72, 1)
+colors = PackedColorArray(0.025, 0.035, 0.065, 0.04, 0.025, 0.035, 0.065, 0.04, 0.025, 0.035, 0.065, 0.30, 0.025, 0.035, 0.065, 0.78)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_dialogue"]
+gradient = SubResource("Gradient_dialogue")
+width = 4
+height = 512
+fill_from = Vector2(0, 0)
+fill_to = Vector2(0, 1)
+
+[node name="Implacable" type="Control"]
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+mouse_filter = 2
+script = ExtResource("2_layout")
+
+[node name="Artwork" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("1_art")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="DialogueShade" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("GradientTexture2D_dialogue")
+expand_mode = 1
