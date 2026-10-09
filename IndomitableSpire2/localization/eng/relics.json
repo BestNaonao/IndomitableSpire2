@@ -12,6 +12,10 @@
   "INDOMITABLESPIRE2-LUCKY_BAG.description": "After spending more than [blue]{Gold}[/blue] [gold]Gold[/gold] in a single [gold]Shop[/gold], obtain a random [gold]Relic[/gold]. Once per shop.",
   "INDOMITABLESPIRE2-LUCKY_BAG.flavor": "\"Illustrious, we've said our prayers and bought our lucky bags... Shall we find somewhere warm to rest? This little fellow can do the hard work of bringing us good luck this year.\"",
   
+  "INDOMITABLESPIRE2-IMPLACABLE_HORN.title": "Implacable Horn",
+  "INDOMITABLESPIRE2-IMPLACABLE_HORN.description": "Whenever your Attacks deal damage, also convert that much of the enemy's HP into its own [gold]Block[/gold]. This conversion cannot reduce its HP below [blue]1[/blue].",
+  "INDOMITABLESPIRE2-IMPLACABLE_HORN.flavor": "One of Miss Implacable's hair ornaments. Hmm... nuns don't usually wear these, do they? Still, she never seems to tire of wearing it while hearing the Commander's confessions...",
+  
   "SEA_GLASS.INDOMITABLESPIRE2-INDOMITABLE_DEFAULT.title": "Celestial Glass",
   "SEA_GLASS.INDOMITABLESPIRE2-INDOMITABLE_MAID.title": "Lace Glass",
   "SEA_GLASS.INDOMITABLESPIRE2-INDOMITABLE_RACE_QUEEN.title": "Velocity Glass"

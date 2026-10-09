@@ -12,6 +12,10 @@
   "INDOMITABLESPIRE2-LUCKY_BAG.description": "1つの[gold]ショップ[/gold]での累計購入額が[blue]{Gold}[/blue][gold]ゴールド[/gold]を超えると、ランダムな[gold]レリック[/gold]を1つ獲得する。各ショップで1回のみ。",
   "INDOMITABLESPIRE2-LUCKY_BAG.flavor": "「イラストリアス姉さん、お参りも済みましたし、福袋も買いましたし……そろそろ暖かいところで休みません？今年の幸運は、この子に頑張ってもらいましょう。」",
   
+  "INDOMITABLESPIRE2-IMPLACABLE_HORN.title": "インプラカブルの角",
+  "INDOMITABLESPIRE2-IMPLACABLE_HORN.description": "あなたのアタックでダメージを与えるたび、さらにそのダメージに等しい敵のHPを、その敵自身の[gold]ブロック[/gold]に変換する。この変換でHPが[blue]1[/blue]未満になることはない。",
+  "INDOMITABLESPIRE2-IMPLACABLE_HORN.flavor": "インプラカブルさんの髪飾りの一つですわ。ん……普通、シスターはこういうものをつけませんわよね？でも、これをつけて指揮官の懺悔を聞くのは、ちっとも疲れないみたいですわね……",
+  
   "SEA_GLASS.INDOMITABLESPIRE2-INDOMITABLE_DEFAULT.title": "セレスティアルグラス",
   "SEA_GLASS.INDOMITABLESPIRE2-INDOMITABLE_MAID.title": "レースグラス",
   "SEA_GLASS.INDOMITABLESPIRE2-INDOMITABLE_RACE_QUEEN.title": "ベロシティグラス"
