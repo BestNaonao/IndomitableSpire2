@@ -61,13 +61,42 @@ public abstract class DurableCard(
         }
     }
     
+    // 只记录升级实际增加的数值，区别于维修、受损和外部的最大耐久增益。
+    // 数值字段随 MutableClone 复制，不会在原牌和预览之间共享可变状态。
+    private decimal _upgradeMaxDurability;
+    private decimal _upgradeCurrentDurability;
+    private (decimal Max, decimal Current)? _durabilityBeforeDowngrade;
+    
+    internal void CaptureDurabilityBeforeDowngrade()
+    {
+        AssertMutable();
+        _durabilityBeforeDowngrade = (DynamicVars.MaxDurability().BaseValue - _upgradeMaxDurability,
+            DynamicVars.Durability().BaseValue - _upgradeCurrentDurability);
+    }
+    
     /// <summary>
     /// 供子类在 OnUpgrade 中调用的打包升级方法，同时提高当前耐久和最大耐久，并同步更新 UI
     /// </summary>
     protected void UpgradeDurability()
     {
         if (UpgradeDurabilityAmount <= 0) return;
+        var previousMax = DynamicVars.MaxDurability().BaseValue;
+        var previousCurrent = DynamicVars.Durability().BaseValue;
         DynamicVars.MaxDurability().UpgradeValueBy(UpgradeDurabilityAmount);
         DynamicVars.Durability().UpgradeValueBy(UpgradeDurabilityAmount);
+        _upgradeMaxDurability += DynamicVars.MaxDurability().BaseValue - previousMax;
+        _upgradeCurrentDurability += DynamicVars.Durability().BaseValue - previousCurrent;
+    }
+    
+    protected override void AfterDowngraded()
+    {
+        if (_durabilityBeforeDowngrade is { } previous)
+        {
+            DynamicVars.MaxDurability().BaseValue = Math.Max(0M, previous.Max);
+            DynamicVars.Durability().BaseValue = Math.Clamp(previous.Current, 0M, DynamicVars.MaxDurability().BaseValue);
+        }
+        _upgradeMaxDurability = 0M;
+        _upgradeCurrentDurability = 0M;
+        _durabilityBeforeDowngrade = null;
     }
 }
