@@ -29,7 +29,7 @@ public sealed class ScheduledMaintenancePower : IndomitablePower
         if (damagedAircraft.Count > 0)
         {
             Flash();
-            await RepairCmd.RandomRepair(player, damagedAircraft, Amount);
+            await DurabilityCmd.RandomRepair(player, damagedAircraft, Amount);
         }
     }
 }

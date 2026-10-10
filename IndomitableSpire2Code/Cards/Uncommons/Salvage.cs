@@ -31,7 +31,7 @@ public sealed class Salvage() : IndomitableCard(1, CardType.Skill, CardRarity.Un
         {
             // 移除关键词，修复，加入抽牌堆
             CardCmd.RemoveKeyword(card, CardKeyword.Ethereal);
-            await RepairCmd.FullyRepair(card);
+            await DurabilityCmd.FullyRepair(card);
         }
         await CardPileCmd.Add(selectedCards, PileType.Draw, CardPilePosition.Random);
     }
