@@ -65,14 +65,26 @@ public static class RepairCmd
             durVar.PreviewValue = durVar.BaseValue + healToApply;
             
             CardCmd.Preview(card); // 弹出卡牌进行展示
-            
             await Cmd.CustomScaledWait(0.2f, 0.5f); // 等待动画播放
-            
             durVar.PredictedHeal = 0;
             durVar.PreviewValue = 0;
         }
         
         // 2. 实际逻辑层：恢复耐久
         card.Repair(healToApply);
+    }
+    
+    /// <summary>增加最大耐久，并恢复等量当前耐久；按实际增加量结算，保留已有的耐久损失。</summary>
+    public static async Task GainMaxDurability(CardModel card, int amount, bool skipVisuals = false)
+    {
+        if (amount < 0) throw new ArgumentOutOfRangeException(nameof(amount), "Amount must be non-negative.");
+        if (amount == 0 || !card.HasDurability()) return;
+        card.AssertMutable();
+        var maxDurabilityVar = card.DynamicVars.MaxDurability();
+        var previousMax = maxDurabilityVar.BaseValue;
+        maxDurabilityVar.BaseValue += amount;
+        var gained = (int)(maxDurabilityVar.BaseValue - previousMax);
+        // 以实际获得的最大耐久度为准，提供维修。
+        if (gained > 0) await ApplyRepairWithVisuals(card, gained, skipVisuals);
     }
 }
