@@ -69,14 +69,6 @@ public static class CardExtensions
     public static bool IsFullDurability(this CardModel card) => 
         !card.HasDurability() || card.DynamicVars.Durability().BaseValue >= card.DynamicVars.MaxDurability().BaseValue;
     
-    // 4. 底层数据修改：恢复指定的耐久值
-    public static void Repair(this CardModel card, int amount)
-    {
-        if (amount <= 0 || !card.HasDurability()) return;
-        card.DynamicVars.Durability().BaseValue = 
-            Math.Min(card.DynamicVars.MaxDurability().BaseValue, card.DynamicVars.Durability().BaseValue + amount);
-    }
-    
     // ==========================================================
     // 同心关键词继承扩展
     // ==========================================================
