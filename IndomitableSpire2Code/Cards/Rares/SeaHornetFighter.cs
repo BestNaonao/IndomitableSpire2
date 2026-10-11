@@ -1,8 +1,9 @@
 using IndomitableSpire2.IndomitableSpire2Code.Cards.Abstracts;
+using IndomitableSpire2.IndomitableSpire2Code.Cards.Options;
+using IndomitableSpire2.IndomitableSpire2Code.Commands;
 using IndomitableSpire2.IndomitableSpire2Code.Enums;
 using IndomitableSpire2.IndomitableSpire2Code.Localization.DynamicVars;
 using IndomitableSpire2.IndomitableSpire2Code.Powers;
-using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -16,17 +17,21 @@ using MegaCrit.Sts2.Core.ValueProps;
 namespace IndomitableSpire2.IndomitableSpire2Code.Cards.Rares;
 
 // 保留原 F.20 的模型 ID；两种挂载都是同一模型的临时形态。
-public sealed class SeaHornetFighter() : CarrierAircraftCard(2, CardType.Attack, CardRarity.Rare, TargetType.AnyEnemy)
+public sealed class SeaHornetFighter() : CarrierAircraftCard(2, CardType.Attack, CardRarity.Rare, TargetType.AnyEnemy), IVersatileCard
 {
-    public enum LoadoutType
-    {
-        Unmounted,
-        Rockets,
-        Bombs
-    }
+    private static readonly IReadOnlyList<VersatileCardOption> Options =
+        Array.AsReadOnly<VersatileCardOption>([new SeaHornetRockets(), new SeaHornetBombs()]);
     
     // 不保存到牌组：实牌离开打出区后卸载，选项/百科预览则保留其挂载。
-    public LoadoutType Loadout { get; private set; }
+    public string? SelectedOptionId { get; private set; }
+    private VersatileCardOption? SelectedOption => Options.FirstOrDefault(option => option.Id == SelectedOptionId);
+    private IEnumerable<IEnumerable<DamageResult>> _loadoutDamageResults = [];
+    
+    public IReadOnlyList<VersatileCardOption> CreateVersatileOptions() => Options;
+    
+    // 选项将攻击结果交回母卡，由舰载机基类统一结算防空造成的耐久损失。
+    internal void RecordLoadoutDamageResults(IEnumerable<IEnumerable<DamageResult>> results)
+        => _loadoutDamageResults = results;
     
     protected override int MaxDurability { get; set; } = 15;
     protected override int UpgradeDurabilityAmount { get; set; } = 3;
@@ -35,10 +40,10 @@ public sealed class SeaHornetFighter() : CarrierAircraftCard(2, CardType.Attack,
     public override IEnumerable<CardKeyword> CanonicalKeywords => 
         [IndomitableKeywords.StrikeFighter, IndomitableKeywords.LevelBomber, IndomitableKeywords.Formation];
     
-    protected override IEnumerable<CardTag> SubclassTags => Loadout switch
+    protected override IEnumerable<CardTag> SubclassTags => SelectedOptionId switch
     {
-        LoadoutType.Rockets => [IndomitableTags.Versatile, IndomitableTags.StrikeFighter],
-        LoadoutType.Bombs => [IndomitableTags.Versatile, IndomitableTags.LevelBomber],
+        SeaHornetRockets.OptionId => [IndomitableTags.Versatile, IndomitableTags.StrikeFighter],
+        SeaHornetBombs.OptionId => [IndomitableTags.Versatile, IndomitableTags.LevelBomber],
         _ => [IndomitableTags.Versatile, IndomitableTags.StrikeFighter, IndomitableTags.LevelBomber]
     };
     
@@ -56,18 +61,13 @@ public sealed class SeaHornetFighter() : CarrierAircraftCard(2, CardType.Attack,
         new CustomPowerVar<OnFirePower>("BombOnFire", 3M)
     ];
     
-    public override string Title => Loadout switch
-    {
-        LoadoutType.Rockets => new LocString("cards", $"{Id.Entry}.rockets.title").GetFormattedText(),
-        LoadoutType.Bombs => new LocString("cards", $"{Id.Entry}.bombs.title").GetFormattedText(),
-        _ => base.Title
-    } + (IsUpgraded && Loadout != LoadoutType.Unmounted ? "+" : "");
+    public override string Title => SelectedOption?.GetTitle(this) ?? base.Title;
     
     protected override void AddExtraArgsToDescription(LocString description)
     {
         base.AddExtraArgsToDescription(description);
-        description.Add("HasRockets", Loadout == LoadoutType.Rockets);
-        description.Add("HasBombs", Loadout == LoadoutType.Bombs);
+        description.Add("HasOption", SelectedOption != null);
+        SelectedOption?.AddDescriptionArgs(this, description);
     }
     
     protected override IEnumerable<IHoverTip> ExtraHoverTips
@@ -75,91 +75,38 @@ public sealed class SeaHornetFighter() : CarrierAircraftCard(2, CardType.Attack,
         get
         {
             yield return HoverTipFactory.FromKeyword(IndomitableKeywords.Versatile);
-            if (Loadout != LoadoutType.Unmounted) yield break;
-            yield return new LoadoutHoverTip(CreateLoadoutPreview(LoadoutType.Rockets));
-            yield return new LoadoutHoverTip(CreateLoadoutPreview(LoadoutType.Bombs));
+            if (SelectedOption != null) yield break;
+            foreach (var option in Options) yield return option.CreateHoverTip(this);
         }
     }
     
-    private SeaHornetFighter CreateLoadoutPreview(LoadoutType loadout)
-    {
-        // 克隆实际数值、升级、耐久和附魔，保证选项与实际效果一致；预览不注册进战斗卡牌集合。
-        var preview = (SeaHornetFighter)MutableClone();
-        preview.SetLoadout(loadout);
-        return preview;
-    }
-    
-    private void SetLoadout(LoadoutType loadout)
+    public void SelectVersatileOption(string? optionId)
     {
         AssertMutable();
-        Loadout = loadout;
+        if (optionId != null && Options.All(option => option.Id != optionId))
+            throw new ArgumentException("Unknown Sea Hornet option.", nameof(optionId));
+        SelectedOptionId = optionId;
         // CanonicalKeywords 只负责首次初始化；克隆后必须操作实例的关键词集合。
-        if (loadout == LoadoutType.Bombs) RemoveKeyword(IndomitableKeywords.StrikeFighter);
+        if (optionId == SeaHornetBombs.OptionId) RemoveKeyword(IndomitableKeywords.StrikeFighter);
         else AddKeyword(IndomitableKeywords.StrikeFighter);
-        if (loadout == LoadoutType.Rockets) RemoveKeyword(IndomitableKeywords.LevelBomber);
+        if (optionId == SeaHornetRockets.OptionId) RemoveKeyword(IndomitableKeywords.LevelBomber);
         else AddKeyword(IndomitableKeywords.LevelBomber);
     }
     
     protected override async Task<IEnumerable<IEnumerable<DamageResult>>> OnAircraftPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         if (CombatState == null) return [];
-        // 卡牌初始为未挂载时，提供玩家选择挂载的选项。
-        if (Loadout == LoadoutType.Unmounted)
-        {
-            CardModel[] options =
-            [
-                CreateLoadoutPreview(LoadoutType.Rockets),
-                CreateLoadoutPreview(LoadoutType.Bombs)
-            ];
-            var selected = await CardSelectCmd.FromChooseACardScreen(choiceContext, options, Owner);
-            if (selected is not SeaHornetFighter selectedHornet) return [];
-            SetLoadout(selectedHornet.Loadout);
-            NCard.FindOnTable(this)?.UpdateVisuals(PileType.Play, CardPreviewMode.Normal);
-        }
-        // 如果玩家选择的挂载类型造成不同的伤害和效果：
-        switch (Loadout)
-        {
-            case LoadoutType.Unmounted: goto default;
-            case LoadoutType.Rockets:
-            {
-                ArgumentNullException.ThrowIfNull(cardPlay.Target, nameof(cardPlay.Target));
-                var attack = await DamageCmd.Attack(DynamicVars["RocketDamage"].BaseValue)
-                    .WithHitCount(DynamicVars["RocketRepeat"].IntValue)
-                    .FromCard(this, cardPlay)
-                    .OnlyPlayAnimOnce()
-                    .Targeting(cardPlay.Target)
-                    .WithHitFx("vfx/vfx_fire_burst")
-                    .Execute(choiceContext);
-                
-                if (cardPlay.Target.IsAlive)
-                    await PowerCmd.Apply<OnFirePower>(choiceContext, cardPlay.Target,
-                        DynamicVars["RocketOnFire"].BaseValue, Owner.Creature, this);
-                return attack.Results;
-            }
-            case LoadoutType.Bombs:
-            {
-                var bombing = await DamageCmd.Attack(DynamicVars["BombDamage"].BaseValue)
-                    .WithHitCount(DynamicVars["BombRepeat"].IntValue)
-                    .FromCard(this, cardPlay)
-                    .TargetingAllOpponents(CombatState)
-                    .WithHitFx("vfx/vfx_fire_burst")
-                    .Execute(choiceContext);
-                
-                await PowerCmd.Apply<OnFirePower>(choiceContext, CombatState.HittableEnemies,
-                    DynamicVars["BombOnFire"].BaseValue, Owner.Creature, this);
-                return bombing.Results;
-            }
-            default:
-                return [];
-        }
+        _loadoutDamageResults = [];
+        await VersatileCardCmd.ChooseAndExecute(choiceContext, cardPlay);
+        return _loadoutDamageResults;
     }
     
     public override Task AfterCardChangedPiles(CardModel card, PileType oldPileType, AbstractModel? clonedBy)
     {
         // 返回手牌时立即刷新；弃牌/消耗堆中的预览会从已卸载的模型重新生成。
-        if (card == this && Pile?.Type != PileType.Play && Loadout != LoadoutType.Unmounted)
+        if (card == this && Pile?.Type != PileType.Play && SelectedOptionId != null)
         {
-            SetLoadout(LoadoutType.Unmounted);
+            SelectVersatileOption(null);
             NCard.FindOnTable(this)?.UpdateVisuals(Pile?.Type ?? PileType.None, CardPreviewMode.Normal);
         }
         return base.AfterCardChangedPiles(card, oldPileType, clonedBy);
@@ -169,7 +116,7 @@ public sealed class SeaHornetFighter() : CarrierAircraftCard(2, CardType.Attack,
     protected override void AfterDowngraded()
     {
         base.AfterDowngraded();
-        SetLoadout(Loadout);
+        SelectVersatileOption(SelectedOptionId);
     }
     
     protected override void OnUpgrade()
@@ -179,11 +126,5 @@ public sealed class SeaHornetFighter() : CarrierAircraftCard(2, CardType.Attack,
         DynamicVars["BombDamage"].UpgradeValueBy(3M);
         DynamicVars["BombOnFire"].UpgradeValueBy(1M);
         UpgradeDurability();
-    }
-    
-    // 原生 CardHoverTip 按模型 ID 去重；同一模型的两种挂载必须有不同的提示 ID。
-    private sealed class LoadoutHoverTip(SeaHornetFighter card) : CardHoverTip(card), IHoverTip
-    {
-        string IHoverTip.Id => $"{base.Id}-{card.Loadout}";
     }
 }
