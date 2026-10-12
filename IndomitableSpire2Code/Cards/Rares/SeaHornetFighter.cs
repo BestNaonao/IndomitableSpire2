@@ -2,8 +2,7 @@ using IndomitableSpire2.IndomitableSpire2Code.Cards.Abstracts;
 using IndomitableSpire2.IndomitableSpire2Code.Cards.Options;
 using IndomitableSpire2.IndomitableSpire2Code.Commands;
 using IndomitableSpire2.IndomitableSpire2Code.Enums;
-using IndomitableSpire2.IndomitableSpire2Code.Localization.DynamicVars;
-using IndomitableSpire2.IndomitableSpire2Code.Powers;
+using IndomitableSpire2.IndomitableSpire2Code.Extensions;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -11,8 +10,6 @@ using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
-using MegaCrit.Sts2.Core.Nodes.Cards;
-using MegaCrit.Sts2.Core.ValueProps;
 
 namespace IndomitableSpire2.IndomitableSpire2Code.Cards.Rares;
 
@@ -22,9 +19,15 @@ public sealed class SeaHornetFighter() : CarrierAircraftCard(2, CardType.Attack,
     private static readonly IReadOnlyList<VersatileCardOption> Options =
         Array.AsReadOnly<VersatileCardOption>([new SeaHornetRockets(), new SeaHornetBombs()]);
     
+    public CardModel CardModel => this;
     // 不保存到牌组：实牌离开打出区后卸载，选项/百科预览则保留其挂载。
     public string? SelectedOptionId { get; private set; }
-    private VersatileCardOption? SelectedOption => Options.FirstOrDefault(option => option.Id == SelectedOptionId);
+    string? IVersatileCard.SelectedOptionId
+    {
+        get => SelectedOptionId;
+        set => SelectedOptionId = value;
+    }
+    
     private IEnumerable<IEnumerable<DamageResult>> _loadoutDamageResults = [];
     
     public IReadOnlyList<VersatileCardOption> CreateVersatileOptions() => Options;
@@ -51,45 +54,24 @@ public sealed class SeaHornetFighter() : CarrierAircraftCard(2, CardType.Attack,
     public override IEnumerable<CardTag> Tags => CanonicalTags;
     
     // DynamicVars 在克隆时已经初始化。始终注册两套命名变量，切换挂载只选择使用哪一套。
-    protected override IEnumerable<DynamicVar> AdditionalVars =>
-    [
-        new DamageVar("RocketDamage", 2M, ValueProp.Move),
-        new RepeatVar("RocketRepeat", 8),
-        new CustomPowerVar<OnFirePower>("RocketOnFire", 4M),
-        new DamageVar("BombDamage", 8M, ValueProp.Move),
-        new RepeatVar("BombRepeat", 2),
-        new CustomPowerVar<OnFirePower>("BombOnFire", 3M)
-    ];
+    protected override IEnumerable<DynamicVar> AdditionalVars => this.CreateVersatileVars();
     
-    public override string Title => SelectedOption?.GetTitle(this) ?? base.Title;
+    public override string Title => this.SelectedOption()?.GetTitle(this) ?? base.Title;
     
     protected override void AddExtraArgsToDescription(LocString description)
     {
         base.AddExtraArgsToDescription(description);
-        description.Add("HasOption", SelectedOption != null);
-        SelectedOption?.AddDescriptionArgs(this, description);
+        this.AddVersatileDescriptionArgs(description);
     }
     
-    protected override IEnumerable<IHoverTip> ExtraHoverTips
-    {
-        get
-        {
-            yield return HoverTipFactory.FromKeyword(IndomitableKeywords.Versatile);
-            if (SelectedOption != null) yield break;
-            foreach (var option in Options) yield return option.CreateHoverTip(this);
-        }
-    }
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => this.GetVersatileHoverTips();
     
-    public void SelectVersatileOption(string? optionId)
+    void IVersatileCard.OnVersatileOptionSelected()
     {
-        AssertMutable();
-        if (optionId != null && Options.All(option => option.Id != optionId))
-            throw new ArgumentException("Unknown Sea Hornet option.", nameof(optionId));
-        SelectedOptionId = optionId;
         // CanonicalKeywords 只负责首次初始化；克隆后必须操作实例的关键词集合。
-        if (optionId == SeaHornetBombs.OptionId) RemoveKeyword(IndomitableKeywords.StrikeFighter);
+        if (SelectedOptionId == SeaHornetBombs.OptionId) RemoveKeyword(IndomitableKeywords.StrikeFighter);
         else AddKeyword(IndomitableKeywords.StrikeFighter);
-        if (optionId == SeaHornetRockets.OptionId) RemoveKeyword(IndomitableKeywords.LevelBomber);
+        if (SelectedOptionId == SeaHornetRockets.OptionId) RemoveKeyword(IndomitableKeywords.LevelBomber);
         else AddKeyword(IndomitableKeywords.LevelBomber);
     }
     
@@ -103,12 +85,7 @@ public sealed class SeaHornetFighter() : CarrierAircraftCard(2, CardType.Attack,
     
     public override Task AfterCardChangedPiles(CardModel card, PileType oldPileType, AbstractModel? clonedBy)
     {
-        // 返回手牌时立即刷新；弃牌/消耗堆中的预览会从已卸载的模型重新生成。
-        if (card == this && Pile?.Type != PileType.Play && SelectedOptionId != null)
-        {
-            SelectVersatileOption(null);
-            NCard.FindOnTable(this)?.UpdateVisuals(Pile?.Type ?? PileType.None, CardPreviewMode.Normal);
-        }
+        if (card == this && Pile?.Type != PileType.Play) VersatileCardCmd.ResetAfterPileChange(this);
         return base.AfterCardChangedPiles(card, oldPileType, clonedBy);
     }
     
@@ -116,15 +93,12 @@ public sealed class SeaHornetFighter() : CarrierAircraftCard(2, CardType.Attack,
     protected override void AfterDowngraded()
     {
         base.AfterDowngraded();
-        SelectVersatileOption(SelectedOptionId);
+        this.SelectVersatileOption(SelectedOptionId);
     }
     
     protected override void OnUpgrade()
     {
-        DynamicVars["RocketDamage"].UpgradeValueBy(1M);
-        DynamicVars["RocketOnFire"].UpgradeValueBy(1M);
-        DynamicVars["BombDamage"].UpgradeValueBy(3M);
-        DynamicVars["BombOnFire"].UpgradeValueBy(1M);
+        VersatileCardCmd.UpgradeVersatileOptions(this);
         UpgradeDurability();
     }
 }
