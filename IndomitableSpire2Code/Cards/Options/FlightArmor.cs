@@ -5,6 +5,7 @@ using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 
 namespace IndomitableSpire2.IndomitableSpire2Code.Cards.Options;
@@ -12,6 +13,10 @@ namespace IndomitableSpire2.IndomitableSpire2Code.Cards.Options;
 public sealed class FlightArmor() : VersatileCardOption(OptionId, durabilityCost: 1)
 {
     public const string OptionId = "flight_armor";
+    
+    public override IEnumerable<DynamicVar> CreateVars() => [new DynamicVar("DurabilityGain", 4M)];
+    
+    public override void Upgrade(CardModel source) => source.DynamicVars["DurabilityGain"].UpgradeValueBy(2M);
     
     public override async Task Execute(CardModel source, PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
