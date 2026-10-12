@@ -9,11 +9,12 @@ using MegaCrit.Sts2.Core.Models;
 namespace IndomitableSpire2.IndomitableSpire2Code.Localization.DynamicVars;
 
 /// <summary>
-/// 用于舰载机卡的耐久度变量，用于记录当前耐久和展示耐久与预测损失。
+/// 当前耐久变量；舰载机指向敌人时，通过 PreviewValue 展示防空造成的预计耐久损失。
+/// 维修先修改实际值再展示，不使用额外的恢复预测状态。
 /// </summary>
 public class DurabilityVar : DynamicVar
 {
-    // 记录预览时将要损失的耐久度和回复的耐久度
+    // 记录指向敌人时预计损失的耐久，供描述中的 {Durability} 格式化使用。
     private int _predictedLoss;
     public int PredictedHeal { get; set; }
     
@@ -28,7 +29,7 @@ public class DurabilityVar : DynamicVar
     /// </summary>
     public override void UpdateCardPreview(CardModel card, CardPreviewMode previewMode, Creature? target, bool runGlobalHooks)
     {
-        // 先调用基类，确保数值底座正确
+        // 卡面刷新会先 ClearPreview，再调用此钩子；这里只重算当前目标的预测损失。
         base.UpdateCardPreview(card, previewMode, target, runGlobalHooks);
         _predictedLoss = 0; // 重置预测
         
@@ -52,10 +53,9 @@ public class DurabilityVar : DynamicVar
             _predictedLoss = CustomHook.ModifyDurabilityLossInCombat(
                 aircraftCard.CombatState, aircraftCard, aircraftCard.CalculateDurabilityLoss(potentialTargets), out _);
         
-        // 我们利用 PreviewValue 来告诉基类的 ToHighlightedString 是否发生了“变化”（虽然我们自己会接管文本格式）
+        // 数字表盘读取 PreviewValue：显示指向敌人时的预计剩余耐久，不改变实际值。
         if (_predictedLoss > 0)
-             // 故意让预览值变小，触发 STS2 底层的“降低变红”逻辑（用于给其他可能探测这个变量的 Mod 一个交代）
-             PreviewValue = BaseValue - _predictedLoss; 
+            PreviewValue = BaseValue - _predictedLoss;
     }
     
     /// <summary>

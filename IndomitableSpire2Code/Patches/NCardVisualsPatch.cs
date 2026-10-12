@@ -113,7 +113,7 @@ public static class NCardVisualsPatch
             {
                 durabilityIcon.Visible = true;
                 
-                // 同时获取基础值（Base）、预测值（Preview）和最大值（Max）
+                // 普通展示读取已结算的耐久；指向敌人时读取预计剩余耐久。维修不额外叠加预测恢复量。
                 var previewCurrent = (int)model.DynamicVars.Durability().PreviewValue;
                 var max = (int)model.DynamicVars.MaxDurability().BaseValue;
                 durabilityLabel.Text = $"{previewCurrent}/{max}";

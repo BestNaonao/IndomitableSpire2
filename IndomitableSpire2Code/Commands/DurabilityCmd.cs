@@ -1,7 +1,6 @@
 using IndomitableSpire2.IndomitableSpire2Code.Cards.Abstracts;
 using IndomitableSpire2.IndomitableSpire2Code.Extensions;
 using IndomitableSpire2.IndomitableSpire2Code.Hooks;
-using IndomitableSpire2.IndomitableSpire2Code.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -40,28 +39,19 @@ public static class DurabilityCmd
         var maximum = card.DynamicVars.MaxDurability();
         var heal = Math.Min(amount, Math.Max(0, maximum.IntValue - durability.IntValue));
         if (heal == 0) return 0;
-        // 1. 表现层展示：修改预测值并闪烁
-        if (!skipVisuals && durability is DurabilityVar durVar)
+        // 先结算实际数值和 DurableCard 的变化记录，再展示结果。
+        // NCard 刷新会清除临时 PreviewValue，维修不能依赖手动设置的预测恢复量。
+        if (card is DurableCard durable) heal = durable.GainDurabilityInternal(heal);
+        else
         {
-            durVar.PredictedHeal = heal;
-            durVar.PreviewValue = durVar.BaseValue + heal;
-            try
-            {
-                CardCmd.Preview(card);
-                await Cmd.CustomScaledWait(0.2f, 0.5f);
-            }
-            finally
-            {
-                durVar.PredictedHeal = 0;
-                durVar.ResetToBase();
-            }
+            var previous = durability.BaseValue;
+            durability.BaseValue = Math.Min(previous + heal, maximum.BaseValue);
+            heal = (int)(durability.BaseValue - previous);
         }
-        // 2. 实际逻辑层：恢复耐久
-        if (card is DurableCard durable) return durable.GainDurabilityInternal(heal);
-        // 普通卡也按结算时的最大耐久限制恢复后的数值。
-        var previous = durability.BaseValue;
-        durability.BaseValue = Math.Min(previous + heal, maximum.BaseValue);
-        return (int)(durability.BaseValue - previous);
+        if (skipVisuals || heal <= 0) return heal;
+        CardCmd.Preview(card);
+        await Cmd.CustomScaledWait(0.2f, 0.5f);
+        return heal;
     }
     
     /// <summary>增加最大耐久，然后像 GainMaxHp 一样恢复等量当前耐久。</summary>
