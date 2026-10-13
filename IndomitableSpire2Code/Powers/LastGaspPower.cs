@@ -36,8 +36,10 @@ public sealed class LastGaspPower : IndomitablePower, IDurabilityLossModifier
         return Task.CompletedTask;
     }
     
-    public override async Task AfterSideTurnEnd(PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)
+    // Amount 仅表示剩余回合数，伤害和损失的倍率始终为 2。
+    public override async Task AfterSideTurnEnd(
+        PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)
     {
-        if (side == Owner.Side) await PowerCmd.Decrement(this); // Amount 仅表示剩余回合数，伤害和损失的倍率始终为 2。
+        if (side == Owner.Side && participants.Contains(Owner)) await PowerCmd.Decrement(this);
     }
 }
