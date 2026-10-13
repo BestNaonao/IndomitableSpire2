@@ -1,6 +1,7 @@
 using IndomitableSpire2.IndomitableSpire2Code.Cards.Abstracts;
 using IndomitableSpire2.IndomitableSpire2Code.Commands;
 using IndomitableSpire2.IndomitableSpire2Code.Extensions;
+using IndomitableSpire2.IndomitableSpire2Code.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -14,9 +15,9 @@ public sealed class FlightArmor() : VersatileCardOption(OptionId, durabilityCost
 {
     public const string OptionId = "flight_armor";
     
-    public override IEnumerable<DynamicVar> CreateVars() => [new DynamicVar("DurabilityGain", 4M)];
+    public override IEnumerable<DynamicVar> CreateVars() => [new DurabilityGainVar( 4M)];
     
-    public override void Upgrade(CardModel source) => source.DynamicVars["DurabilityGain"].UpgradeValueBy(2M);
+    public override void Upgrade(CardModel source) => source.DynamicVars.DurabilityGain().UpgradeValueBy(2M);
     
     public override async Task Execute(CardModel source, PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
@@ -28,6 +29,6 @@ public sealed class FlightArmor() : VersatileCardOption(OptionId, durabilityCost
         var prefs = new CardSelectorPrefs(GetSelectionPrompt(source), 1);
         var selected = await CardSelectCmd.FromSimpleGrid(choiceContext, candidates, source.Owner, prefs);
         foreach (var card in selected)
-            await DurabilityCmd.GainMaxDurability(card, source.DynamicVars["DurabilityGain"].IntValue);
+            await DurabilityCmd.GainMaxDurability(card, source.DynamicVars.DurabilityGain().IntValue);
     }
 }
