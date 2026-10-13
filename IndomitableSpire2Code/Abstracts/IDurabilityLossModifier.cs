@@ -11,8 +11,8 @@ public interface IDurabilityLossModifier
     /// 尝试在战斗中修改卡牌的耐久度损失。
     /// </summary>
     /// <param name="card">当前结算的卡牌</param>
-    /// <param name="originalLoss">原始计算出的防空火力反击损失</param>
-    /// <param name="modifiedLoss">修改后的最终损失</param>
+    /// <param name="originalLoss">经过前序修改者处理后，传入当前修改者的耐久损失</param>
+    /// <param name="modifiedLoss">当前修改者处理后的损失，将继续传给后续修改者</param>
     /// <returns>若触发了修改返回 true，否则返回 false</returns>
     bool TryModifyDurabilityLoss(CardModel card, int originalLoss, out int modifiedLoss);
     
