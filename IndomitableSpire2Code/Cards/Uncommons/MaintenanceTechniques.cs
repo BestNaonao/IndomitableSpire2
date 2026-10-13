@@ -54,7 +54,7 @@ public sealed class MaintenanceTechniques() : DurableCard(0, CardType.Skill, Car
         await CreatureCmd.TriggerAnim(Owner.Creature, "Cast", Owner.Character.CastAnimDelay);
         _durabilityCost = 0;
         var option = await VersatileCardCmd.ChooseAndExecute(choiceContext, cardPlay);
-        _durabilityCost = option?.DurabilityCost ?? 0;
+        _durabilityCost = option?.GetDurabilityCost(this) ?? 0;
     }
     
     protected override Task<int> CalculateDurabilityLossAfterPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)

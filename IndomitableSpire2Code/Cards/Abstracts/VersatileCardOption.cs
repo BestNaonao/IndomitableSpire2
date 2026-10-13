@@ -15,7 +15,9 @@ namespace IndomitableSpire2.IndomitableSpire2Code.Cards.Abstracts;
 public abstract class VersatileCardOption(string id, int? durabilityCost = null, string? localizationKey = null)
 {
     public string Id { get; } = id;
-    public int? DurabilityCost { get; } = durabilityCost;
+    
+    /// <summary>按母卡当前状态计算本次耐久消耗；默认使用固定消耗，null 表示不指定。</summary>
+    public virtual int? GetDurabilityCost(CardModel source) => durabilityCost;
     
     public abstract Task Execute(CardModel source, PlayerChoiceContext choiceContext, CardPlay cardPlay);
     

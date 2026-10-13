@@ -15,8 +15,7 @@ public static class VersatileCardCmd
         if (cardPlay.Card is not IVersatileCard card)
             throw new ArgumentException("The played card must implement IVersatileCard.", nameof(cardPlay));
         var options = card.CreateVersatileOptions();
-        var option = card.SelectedOption();
-        if (option == null)
+        if (card.SelectedOption() is not {} option)
         {
             if (options.Count == 0) return null;
             var previews = options.Select(candidate => candidate.CreatePreview(cardPlay.Card)).ToArray();
