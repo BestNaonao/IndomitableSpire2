@@ -15,8 +15,6 @@ public sealed class LastGaspPower : IndomitablePower, IDurabilityLossModifier
 {
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;
-    public override string CustomBigIconPath => "intercepted_power.png".BigPowerImagePath();
-    public override string CustomPackedIconPath => "packed/intercepted_power_packed.tres".PowerImagePath();
     
     public override decimal ModifyDamageMultiplicative(
         Creature? target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource, CardPlay? cardPlay)

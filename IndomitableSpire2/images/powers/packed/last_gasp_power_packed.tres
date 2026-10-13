@@ -1,0 +1,7 @@
+[gd_resource type="AtlasTexture" load_steps=2 format=3 uid="uid://br3snc2enar0t"]
+
+[ext_resource type="Texture2D" uid="uid://bshbspgnlhs6b" path="res://IndomitableSpire2/images/powers/packed/last_gasp_power_packed.png" id="1_last_gasp"]
+
+[resource]
+atlas = ExtResource("1_last_gasp")
+region = Rect2(0, 0, 64, 64)
