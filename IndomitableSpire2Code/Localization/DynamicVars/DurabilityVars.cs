@@ -79,3 +79,12 @@ public class MaxDurabilityVar : DynamicVar
     
     public MaxDurabilityVar(string name, decimal baseValue) : base(name, baseValue) { }
 }
+
+public class DurabilityCostVar : DynamicVar
+{
+    public const string DefaultName = "DurabilityCost";
+    
+    public DurabilityCostVar(decimal baseValue) : base(DefaultName, baseValue) { }
+    
+    public DurabilityCostVar(string name, decimal baseValue) : base(name, baseValue) { }
+}
