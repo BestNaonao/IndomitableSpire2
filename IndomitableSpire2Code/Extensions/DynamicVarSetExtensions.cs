@@ -13,6 +13,8 @@ public static class DynamicVarSetExtensions
     
     public static DynamicVar DurabilityCost(this DynamicVarSet vars) => vars[DurabilityCostVar.DefaultName];
     
+    public static DynamicVar DurabilityGain(this DynamicVarSet vars) => vars[DurabilityGainVar.DefaultName];
+    
     public static DynamicVar MotivationGain(this DynamicVarSet vars) => vars[nameof(MotivationGain)];
     
     public static DynamicVar MotivationRequire(this DynamicVarSet vars) => vars[nameof(MotivationRequire)];

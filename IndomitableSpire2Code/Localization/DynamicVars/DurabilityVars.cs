@@ -88,3 +88,12 @@ public class DurabilityCostVar : DynamicVar
     
     public DurabilityCostVar(string name, decimal baseValue) : base(name, baseValue) { }
 }
+
+public class DurabilityGainVar : DynamicVar
+{
+    public const string DefaultName = "DurabilityGain";
+    
+    public DurabilityGainVar(decimal baseValue) : base(DefaultName, baseValue) { }
+    
+    public DurabilityGainVar(string name, decimal baseValue) : base(name, baseValue) { }
+}
