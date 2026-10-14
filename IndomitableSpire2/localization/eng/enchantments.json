@@ -6,5 +6,5 @@
   "INDOMITABLESPIRE2-ARMOR_PIERCING_ENCHANTMENT.description": "This card's damage is doubled against enemies with [gold]Block[/gold].",
   "INDOMITABLESPIRE2-SAMPLE_ENCHANTMENT.title": "Sample",
   "INDOMITABLESPIRE2-SAMPLE_ENCHANTMENT.description": "This card gains [gold]Exhaust[/gold].\nWhen played, draw [blue]{Cards}[/blue] {Cards:plural:card|cards}.\nAt the end of combat, if this card was played, remove its corresponding card from your deck.",
-  "INDOMITABLESPIRE2-SAMPLE_ENCHANTMENT.extraCardText": "Draw {Cards} {Cards:plural:card|cards}.{PendingRemoval:cond:>0?\nWill be removed from your deck at the end of combat.|}"
+  "INDOMITABLESPIRE2-SAMPLE_ENCHANTMENT.extraCardText": "Draw {Cards} {Cards:plural:card|cards}.{PlayedThisCombat:cond:>0?\nAlready played.|}"
 }

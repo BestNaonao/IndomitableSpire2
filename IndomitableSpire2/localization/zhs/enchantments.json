@@ -6,5 +6,5 @@
   "INDOMITABLESPIRE2-ARMOR_PIERCING_ENCHANTMENT.description": "这张牌攻击带有[gold]格挡[/gold]的敌人时，伤害翻倍。",
   "INDOMITABLESPIRE2-SAMPLE_ENCHANTMENT.title": "试吃",
   "INDOMITABLESPIRE2-SAMPLE_ENCHANTMENT.description": "这张牌获得[gold]消耗[/gold]。\n当被打出时，抽[blue]{Cards}[/blue]张牌。\n战斗结束时，若打出过这张牌，移除其在牌组中的对应卡牌。",
-  "INDOMITABLESPIRE2-SAMPLE_ENCHANTMENT.extraCardText": "抽{Cards}张牌。{PendingRemoval:cond:>0?\n战斗结束时将移除出牌组。|}"
+  "INDOMITABLESPIRE2-SAMPLE_ENCHANTMENT.extraCardText": "抽{Cards}张牌。{PlayedThisCombat:cond:>0?\n已打出过。|}"
 }

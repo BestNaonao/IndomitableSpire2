@@ -6,5 +6,5 @@
   "INDOMITABLESPIRE2-ARMOR_PIERCING_ENCHANTMENT.description": "[gold]ブロック[/gold]を持つ敵を攻撃する時、ダメージが2倍になる。",
   "INDOMITABLESPIRE2-SAMPLE_ENCHANTMENT.title": "試食",
   "INDOMITABLESPIRE2-SAMPLE_ENCHANTMENT.description": "このカードは[gold]廃棄[/gold]を得る。\nプレイ時、カードを[blue]{Cards}[/blue]枚引く。\n戦闘終了時、この戦闘中にこのカードをプレイしていた場合、デッキ内の対応するカードを除去する。",
-  "INDOMITABLESPIRE2-SAMPLE_ENCHANTMENT.extraCardText": "カードを{Cards}枚引く。{PendingRemoval:cond:>0?\n戦闘終了時にデッキから除去される。|}"
+  "INDOMITABLESPIRE2-SAMPLE_ENCHANTMENT.extraCardText": "カードを{Cards}枚引く。{PlayedThisCombat:cond:>0?\nプレイ済み。|}"
 }
