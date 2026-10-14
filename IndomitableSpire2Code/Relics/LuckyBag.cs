@@ -8,6 +8,7 @@ using MegaCrit.Sts2.Core.Entities.Relics;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models.RelicPools;
 using MegaCrit.Sts2.Core.Rooms;
+using MegaCrit.Sts2.Core.Runs;
 
 namespace IndomitableSpire2.IndomitableSpire2Code.Relics;
 
@@ -23,6 +24,9 @@ public sealed class LuckyBag : IndomitableSpire2Relic
     protected override IEnumerable<DynamicVar> CanonicalVars => [new GoldVar(168)];
     public override bool ShowCounter => _merchantRoom != null && !_triggered;
     public override int DisplayAmount => _goldSpent;
+    
+    // 只允许在第三阶段的宝箱房之前出现
+    public override bool IsAllowed(IRunState runState) => IsBeforeAct3TreasureChest(runState);
     
     private int? RecordedGoldSpent => Owner.RunState.CurrentMapPointHistoryEntry?.GetEntry(Owner.NetId).GoldSpent;
     
