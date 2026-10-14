@@ -15,6 +15,9 @@
   "INDOMITABLESPIRE2-LUCKY_BAG.title": "Lucky Bag",
   "INDOMITABLESPIRE2-LUCKY_BAG.flavor": "\"Illustrious, we've said our prayers and bought our lucky bags... Shall we find somewhere warm to rest? This little fellow can do the hard work of bringing us good luck this year.\"",
   "INDOMITABLESPIRE2-LUCKY_BAG.description": "After spending more than [blue]{Gold}[/blue] [gold]Gold[/gold] in a single [gold]Shop[/gold], obtain a random [gold]Relic[/gold]. Once per shop.",
+  "INDOMITABLESPIRE2-DELIVERY_MANJUU.title": "Delivery Manjuu",
+  "INDOMITABLESPIRE2-DELIVERY_MANJUU.flavor": "\"Commander, since I'm trying my hand at being a maid, do leave the dessert tasting to me. Just set the plates beside the sofa—that way, I can take my time with each one.\"",
+  "INDOMITABLESPIRE2-DELIVERY_MANJUU.description": "At the end of each combat, receive an additional card reward containing a [gold]Dessert[/gold] enchanted with [gold]Sample[/gold].\nWhenever you enter a [gold]Rest Site[/gold], remove all [gold]Desserts[/gold] enchanted with [gold]Sample[/gold] from your deck. Gain [blue]{MaxHp}[/blue] Max HP for each one removed.",
   
   "INDOMITABLESPIRE2-IMPLACABLE_HORN.title": "Implacable Horn",
   "INDOMITABLESPIRE2-IMPLACABLE_HORN.flavor": "One of Miss Implacable's hair ornaments. Hmm... nuns don't usually wear these, do they? Still, she never seems to tire of wearing it while hearing the Commander's confessions...",

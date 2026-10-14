@@ -15,6 +15,9 @@
   "INDOMITABLESPIRE2-LUCKY_BAG.title": "福袋",
   "INDOMITABLESPIRE2-LUCKY_BAG.flavor": "「イラストリアス姉さん、お参りも済みましたし、福袋も買いましたし……そろそろ暖かいところで休みません？今年の幸運は、この子に頑張ってもらいましょう。」",
   "INDOMITABLESPIRE2-LUCKY_BAG.description": "1つの[gold]ショップ[/gold]での累計購入額が[blue]{Gold}[/blue][gold]ゴールド[/gold]を超えると、ランダムな[gold]レリック[/gold]を1つ獲得する。各ショップで1回のみ。",
+  "INDOMITABLESPIRE2-DELIVERY_MANJUU.title": "出前饅頭",
+  "INDOMITABLESPIRE2-DELIVERY_MANJUU.flavor": "「指揮官、デザートの試食は、メイド体験中の私にお任せくださいませ。お皿はソファのそばに置いてくださる？これなら、一品ずつゆっくり味わえますわ。」",
+  "INDOMITABLESPIRE2-DELIVERY_MANJUU.description": "戦闘終了時、[gold]試食[/gold]が付与された[gold]デザート[/gold]1枚を、追加のカード報酬として得る。\n[gold]休憩所[/gold]に到着するたび、デッキから[gold]試食[/gold]が付与された[gold]デザート[/gold]をすべて除去する。1枚除去するごとに最大HPを[blue]{MaxHp}[/blue]得る。",
   
   "INDOMITABLESPIRE2-IMPLACABLE_HORN.title": "インプラカブルの角",
   "INDOMITABLESPIRE2-IMPLACABLE_HORN.flavor": "インプラカブルさんの髪飾りの一つですわ。ん……普通、シスターはこういうものをつけませんわよね？でも、これをつけて指揮官の懺悔を聞くのは、ちっとも疲れないみたいですわね……",
