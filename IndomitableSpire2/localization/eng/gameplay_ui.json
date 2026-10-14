@@ -1,5 +1,6 @@
 {
   "INDOMITABLESPIRE2-EARNEST_MODE_BUTTON": "Earnest Mode",
   "INDOMITABLESPIRE2-EARNEST_MODE_BUTTON.description": "Click at 100 Motivation to enter Earnest Mode and take an extra turn.",
-  "INDOMITABLESPIRE2-GIFT_REWARD_HEADER": "A Gift!"
+  "INDOMITABLESPIRE2-GIFT_REWARD_HEADER": "A Gift!",
+  "INDOMITABLESPIRE2-SAMPLE_CARD_REWARD": "Sample: {Card}"
 }
