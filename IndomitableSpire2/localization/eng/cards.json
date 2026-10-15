@@ -189,6 +189,11 @@
   "INDOMITABLESPIRE2-RESTING_EYES.title": "Resting Eyes",
   "INDOMITABLESPIRE2-RESTING_EYES.banter": "Oh, but I need to close my eyes and relax to remember it clearly...",
   "INDOMITABLESPIRE2-RESTING_EYES.description": "Add a [gold]{IfUpgraded:show:Refresh+|Refresh}[/gold] to your hand.\nFor 1 turn, your [gold]Refresh[/gold] cards draw 1 additional card.",
+  "INDOMITABLESPIRE2-LEST_WE_FORGET.title": "Lest We Forget",
+  "INDOMITABLESPIRE2-LEST_WE_FORGET.description": "Consume [blue]{MotivationConsume:diff()}[/blue] [gold]Motivation[/gold]. Deal {Damage:diff()} damage.\nWhenever a [gold]Carrier Aircraft[/gold] card is [gold]Exhausted[/gold], permanently increase this card's damage by {Increase:diff()}.",
+  "INDOMITABLESPIRE2-HOME_FLAGSHIP.title": "Home Flagship",
+  "INDOMITABLESPIRE2-HOME_FLAGSHIP.banter": "M-me, flagship? Sounds like a pain in the... Err, it's nothing! I'll do it!",
+  "INDOMITABLESPIRE2-HOME_FLAGSHIP.description": "Discard all [gold]Carrier Aircraft[/gold] cards in your [gold]Hand[/gold].\nFill your [gold]Hand[/gold] with random {IfUpgraded:show:[gold]Upgraded[/gold] }[gold]Carrier Aircraft[/gold] cards, gaining {Shield:diff()} [gold]Shield[/gold] for each card added.",
   
   "INDOMITABLESPIRE2-DESSERT.title": "Dessert",
   "INDOMITABLESPIRE2-DESSERT.description": "Heal [green]{Heal:diff()}[/green] HP.\nGain {Energy:energyIcons()}.",

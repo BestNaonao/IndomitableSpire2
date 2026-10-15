@@ -189,6 +189,11 @@
   "INDOMITABLESPIRE2-RESTING_EYES.title": "目休め",
   "INDOMITABLESPIRE2-RESTING_EYES.banter": "ただ、目を閉じて休まないと、はっきり思い出せなくて……",
   "INDOMITABLESPIRE2-RESTING_EYES.description": "[gold]{IfUpgraded:show:養神+|養神}[/gold]を1枚手札に加える。\n1ターンの間、自分の[gold]養神[/gold]が引くカードの枚数が1枚増える。",
+  "INDOMITABLESPIRE2-LEST_WE_FORGET.title": "忘れぬために",
+  "INDOMITABLESPIRE2-LEST_WE_FORGET.description": "[gold]やる気[/gold]を[blue]{MotivationConsume:diff()}[/blue]消費し、{Damage:diff()}ダメージを与える。\n[gold]艦載機[/gold]カードが[gold]廃棄[/gold]されるたび、このカードのダメージが永続的に{Increase:diff()}増加する。",
+  "INDOMITABLESPIRE2-HOME_FLAGSHIP.title": "本国旗艦",
+  "INDOMITABLESPIRE2-HOME_FLAGSHIP.banter": "き、旗艦ですの？めんど…じゃなくて行きますわよ！",
+  "INDOMITABLESPIRE2-HOME_FLAGSHIP.description": "[gold]手札[/gold]の[gold]艦載機[/gold]カードをすべて捨てる。\n[gold]手札[/gold]をランダムな{IfUpgraded:show:[gold]アップグレード[/gold]済みの}[gold]艦載機[/gold]カードで満たし、加えたカード1枚につき、[gold]シールド[/gold]{Shield:diff()}を得る。",
   
   "INDOMITABLESPIRE2-DESSERT.title": "デザート",
   "INDOMITABLESPIRE2-DESSERT.description": "HPを[green]{Heal:diff()}[/green]回復する。\n{Energy:energyIcons()}を得る。",

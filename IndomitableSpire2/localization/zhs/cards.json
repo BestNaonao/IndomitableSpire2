@@ -189,6 +189,11 @@
   "INDOMITABLESPIRE2-RESTING_EYES.title": "闭目",
   "INDOMITABLESPIRE2-RESTING_EYES.banter": "只是现在需要先闭目养神一下，才能更清晰地回忆起来……",
   "INDOMITABLESPIRE2-RESTING_EYES.description": "将一张[gold]{IfUpgraded:show:养神+|养神}[/gold]放入你的手牌。\n1回合内，你的[gold]养神[/gold]额外抽1张牌。",
+  "INDOMITABLESPIRE2-LEST_WE_FORGET.title": "永志不忘",
+  "INDOMITABLESPIRE2-LEST_WE_FORGET.description": "消耗[blue]{MotivationConsume:diff()}[/blue]点[gold]干劲[/gold]，造成{Damage:diff()}点伤害。\n每当有一张[gold]舰载机[/gold]牌被[gold]消耗[/gold]时，这张牌在本局游戏中的伤害永久增加{Increase:diff()}点。",
+  "INDOMITABLESPIRE2-HOME_FLAGSHIP.title": "本土旗舰",
+  "INDOMITABLESPIRE2-HOME_FLAGSHIP.banter": "旗、旗舰位？好麻……总之大家一起上吧！",
+  "INDOMITABLESPIRE2-HOME_FLAGSHIP.description": "丢弃[gold]手牌[/gold]中的所有[gold]舰载机[/gold]牌。\n用{IfUpgraded:show:[gold]升级过的[/gold]}随机[gold]舰载机[/gold]牌填满你的[gold]手牌[/gold]，每张获得{Shield:diff()}点[gold]护盾[/gold]。",
   
   "INDOMITABLESPIRE2-DESSERT.title": "甜点",
   "INDOMITABLESPIRE2-DESSERT.description": "回复[green]{Heal:diff()}[/green]点生命。\n获得{Energy:energyIcons()}。",
