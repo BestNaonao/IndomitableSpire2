@@ -20,6 +20,7 @@ public partial class SkinSelectPanel : Control
     
     private Node2D? _currentVisualNode;  // 记录当前实例化的模型节点，用于在切换时销毁
     private int _currentIndex;
+    private ModelId? _renderedSkinId;
     
     // 直接使用角色模型列表
     private static readonly List<Indomitable> Skins = 
@@ -43,23 +44,28 @@ public partial class SkinSelectPanel : Control
     public void SetInteractable(bool interactable)
     {
         // 直接控制左和右箭头的可见性（或者设置 Disabled 属性也可以）
-        if (IsInstanceValid(_leftArrow)) _leftArrow.Visible = interactable;
-        if (IsInstanceValid(_rightArrow)) _rightArrow.Visible = interactable;
+        if (IsInstanceValid(_leftArrow))
+        {
+            _leftArrow.Visible = interactable;
+            _leftArrow.Disabled = !interactable;
+        }
+        if (IsInstanceValid(_rightArrow))
+        {
+            _rightArrow.Visible = interactable;
+            _rightArrow.Disabled = !interactable;
+        }
     }
     
     // 每次选中该角色时被调用（包括重进界面）
-    public void ShowAndSync(NCharacterSelectScreen screen)
+    public void ShowAndSync(NCharacterSelectScreen screen, Indomitable selectedSkin)
     {
         _selectScreen = screen; // 及时更新为当前最新的角色选择屏幕（大厅对象可能已重建）
         Visible = true;
-        var skin = Skins[_currentIndex];
+        var selectedIndex = Skins.FindIndex(skin => skin.Id == selectedSkin.Id);
+        _currentIndex = selectedIndex >= 0 ? selectedIndex : 0;
         
-        // 我们必须在这里强行将大厅重写为当前皮肤面板记忆的皮肤！
-        _selectScreen.Lobby.SetLocalCharacter(skin);
-        
-        // 如果是初次打开，UI节点还没加载，则渲染它（避免每次点击按钮重复加载导致闪烁）
-        if (!IsInstanceValid(_currentVisualNode))
-            RenderSkinVisuals(skin);
+        // SelectCharacter 已经把选择的角色写入大厅。
+        RenderSkinVisuals(Skins[_currentIndex]);
     }
     
     private void OnLeftPressed()
@@ -77,8 +83,8 @@ public partial class SkinSelectPanel : Control
     private void OnSelection()
     {
         var skin = Skins[_currentIndex];
-        RenderSkinVisuals(skin);
         _selectScreen.Lobby.SetLocalCharacter(skin);
+        RenderSkinVisuals(skin);
         
         // 播放当前皮肤的专属选人音效
         SfxCmd.Play(skin.CharacterSelectSfx);
@@ -87,11 +93,17 @@ public partial class SkinSelectPanel : Control
     // 专注处理 UI 视觉的替换
     private void RenderSkinVisuals(Indomitable skin)
     {
+        _skinNameLabel.SetTextAutoSize(new LocString("characters", $"{skin.Id.Entry}.skinName").GetFormattedText());
+        if (_renderedSkinId == skin.Id && IsInstanceValid(_currentVisualNode))
+            return;
+        
+        _renderedSkinId = skin.Id;
         // 1. 清理上一套皮肤的节点
         if (IsInstanceValid(_currentVisualNode))
         {
             _visualContainer.RemoveChild(_currentVisualNode);
             _currentVisualNode.QueueFree();
+            _currentVisualNode = null;
         }
         
         // 2. 动态加载并实例化 CustomVisualPath 对应的场景
@@ -113,7 +125,5 @@ public partial class SkinSelectPanel : Control
                 megaSprite.GetAnimationState().SetAnimation("normal");
             }
         }
-        // 3. 获取多语言软编码文本
-        _skinNameLabel.SetTextAutoSize(new LocString("characters", $"{skin.Id.Entry}.skinName").GetFormattedText());
     }
 }
