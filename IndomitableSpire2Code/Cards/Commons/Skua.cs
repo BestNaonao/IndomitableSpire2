@@ -1,5 +1,6 @@
 ﻿using IndomitableSpire2.IndomitableSpire2Code.Cards.Abstracts;
 using IndomitableSpire2.IndomitableSpire2Code.Enums;
+using IndomitableSpire2.IndomitableSpire2Code.Extensions;
 using IndomitableSpire2.IndomitableSpire2Code.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -15,8 +16,6 @@ namespace IndomitableSpire2.IndomitableSpire2Code.Cards.Commons;
 
 public sealed class Skua() : CarrierAircraftCard(2, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
 {
-    private const string IncreaseKey = "Increase";
-    
     // 全金属水密机身，十分耐造
     protected override int MaxDurability { get; set; } = 6;
     protected override int UpgradeDurabilityAmount { get; set; } = 2;
@@ -32,7 +31,7 @@ public sealed class Skua() : CarrierAircraftCard(2, CardType.Attack, CardRarity.
     protected override IEnumerable<DynamicVar> AdditionalVars =>
     [
         new DamageVar(10M, ValueProp.Move),
-        new(IncreaseKey, 5M),       // 成长变量，初始为 5
+        new IncreaseVar(5M),       // 成长变量，初始为 5
         new CustomPowerVar<WeakPower>(0M),  // 初始 0 层虚弱
         new("RetainedTurns", 0M)    // 专用于向玩家展示的爬升回合数
     ];
@@ -71,7 +70,7 @@ public sealed class Skua() : CarrierAircraftCard(2, CardType.Attack, CardRarity.
         if (retainedCards.Contains(this))
         {
             // 伤害与虚弱成长
-            var increaseAmount = DynamicVars[IncreaseKey].BaseValue;
+            var increaseAmount = DynamicVars.Increase().BaseValue;
             DynamicVars.Damage.BaseValue += increaseAmount;
             _extraDamage += increaseAmount;
             
@@ -88,7 +87,7 @@ public sealed class Skua() : CarrierAircraftCard(2, CardType.Attack, CardRarity.
     protected override void OnUpgrade()
     {
         DynamicVars.Damage.UpgradeValueBy(4M);
-        DynamicVars[IncreaseKey].UpgradeValueBy(1M);
+        DynamicVars.Increase().UpgradeValueBy(1M);
         UpgradeDurability();
     }
     
