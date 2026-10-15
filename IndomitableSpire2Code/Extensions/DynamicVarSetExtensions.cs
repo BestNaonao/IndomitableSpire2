@@ -42,6 +42,8 @@ public static class DynamicVarSetExtensions
     
     public static ThresholdVar Threshold(this DynamicVarSet vars) => (ThresholdVar) vars[ThresholdVar.DefaultName];
     
+    public static IncreaseVar Increase(this DynamicVarSet vars) => (IncreaseVar) vars[IncreaseVar.DefaultName];
+    
     public static ReconVar Recon(this DynamicVarSet vars) => (ReconVar) vars[ReconVar.DefaultName];
     
     public static ShieldVar Shield(this DynamicVarSet vars) => (ShieldVar) vars[ShieldVar.DefaultName];
