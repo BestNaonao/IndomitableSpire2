@@ -4,6 +4,8 @@
   "INDOMITABLESPIRE2-PLAY_DIALOGUE.hover.desc": "[gold]关闭后：[/gold]通过不挠卡牌表现播放的对话气泡将不会显示。",
   "INDOMITABLESPIRE2-PLAY_SOUND_EFFECTS.title": "播放卡牌特殊音效",
   "INDOMITABLESPIRE2-PLAY_SOUND_EFFECTS.hover.desc": "[gold]关闭后：[/gold]通过不挠卡牌表现播放的专属语音和音效不会播放，但仍可播放默认动画音效。",
+  "INDOMITABLESPIRE2-ISOLATE_SPECIAL_VOICE_BY_PLAYER.title": "按玩家隔离卡牌特殊语音",
+  "INDOMITABLESPIRE2-ISOLATE_SPECIAL_VOICE_BY_PLAYER.hover.desc": "[gold]开启后：[/gold]同一玩家后播放的卡牌特殊语音会打断自己前一句，不同玩家的语音可以同时播放。\n[gold]关闭后：[/gold]所有不挠语音共用一个播放通道，后播放的会打断前一句。\n仅影响本机听到的声音，不改变队友的设置。",
   "INDOMITABLESPIRE2-PLAY_SPECIAL_CARD_ANIMATIONS.title": "播放卡牌特殊动画",
   "INDOMITABLESPIRE2-PLAY_SPECIAL_CARD_ANIMATIONS.hover.desc": "[gold]开启：[/gold]特殊换装的不挠打出特殊卡牌时会播放专属动作。\n[gold]关闭：[/gold]使用普通动作，不影响战斗胜利动画。",
   "INDOMITABLESPIRE2-PLAY_HYPNOTIZED_ANIMATION.title": "播放催眠特殊动画",

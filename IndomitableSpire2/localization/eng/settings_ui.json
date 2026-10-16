@@ -4,6 +4,8 @@
   "INDOMITABLESPIRE2-PLAY_DIALOGUE.hover.desc": "[gold]When disabled:[/gold] dialogue bubbles triggered by Indomitable card presentations will not be shown.",
   "INDOMITABLESPIRE2-PLAY_SOUND_EFFECTS.title": "Play special card audio",
   "INDOMITABLESPIRE2-PLAY_SOUND_EFFECTS.hover.desc": "[gold]When disabled:[/gold] custom voice lines and sounds from Indomitable card presentations are muted, but the default animation sound can still play.",
+  "INDOMITABLESPIRE2-ISOLATE_SPECIAL_VOICE_BY_PLAYER.title": "Separate special card voices by player",
+  "INDOMITABLESPIRE2-ISOLATE_SPECIAL_VOICE_BY_PLAYER.hover.desc": "[gold]When enabled:[/gold] a player's next special card voice interrupts their own previous line, while different players' voices can overlap.\n[gold]When disabled:[/gold] all Indomitable voices share one playback channel, so the next line interrupts the previous one.\nThis only changes what you hear on this device; it does not change teammates' settings.",
   "INDOMITABLESPIRE2-PLAY_SPECIAL_CARD_ANIMATIONS.title": "Play special card animations",
   "INDOMITABLESPIRE2-PLAY_SPECIAL_CARD_ANIMATIONS.hover.desc": "[gold]When enabled:[/gold] Indomitable in specific outfits performs unique animations for certain cards.\n[gold]When disabled:[/gold] normal animations play. Combat victory animations are unaffected.",
   "INDOMITABLESPIRE2-PLAY_HYPNOTIZED_ANIMATION.title": "Play special hypnosis animation",

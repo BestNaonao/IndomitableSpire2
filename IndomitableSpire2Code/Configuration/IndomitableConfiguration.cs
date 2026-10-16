@@ -1,4 +1,5 @@
 using BaseLib.Config;
+using IndomitableSpire2.IndomitableSpire2Code.Patches;
 using IndomitableSpire2.IndomitableSpire2Code.Registries;
 
 namespace IndomitableSpire2.IndomitableSpire2Code.Configuration;
@@ -18,6 +19,23 @@ public sealed class IndomitableConfiguration : SimpleModConfig
     /// 特殊卡牌播放专属音频的开关；关闭后，第 0 次结算仍可播放默认动画音效。
     /// </summary>
     public static bool PlaySoundEffects { get; set; } = true;
+    
+    /// <summary>
+    /// 仅在本机按玩家分别管理卡牌特殊语音；关闭时所有不挠语音仍共用一个播放通道。
+    /// </summary>
+    private static bool _isolateSpecialVoiceByPlayer = true;
+    
+    public static bool IsolateSpecialVoiceByPlayer
+    {
+        get => _isolateSpecialVoiceByPlayer;
+        set
+        {
+            if (_isolateSpecialVoiceByPlayer == value) return;
+            _isolateSpecialVoiceByPlayer = value;
+            // 运行中改动设置时，先清掉旧通道，下一句语音按新规则播放。
+            IndomitableVoice.Stop();
+        }
+    }
     
     /// <summary>
     /// 启用与角色皮肤匹配的卡牌特殊动作；关闭时使用普通出牌动作，不影响战后胜利动画。
