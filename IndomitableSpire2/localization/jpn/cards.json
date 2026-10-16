@@ -234,5 +234,12 @@
   "INDOMITABLESPIRE2-ESCORT_COMMISSION.title": "商船護衛",
   "INDOMITABLESPIRE2-ESCORT_COMMISSION.description": "[gold]委託[/gold]：[gold]ブロック[/gold]を累計{MaxProgress}得ること{InCombat:（{Progress}/{MaxProgress}）|}。\n戦闘終了後、あなたと{InCombat:[gold]{DelegatorName}[/gold]|委託元}はそれぞれ{Gold:diff()}[gold]ゴールド[/gold]を得る。",
   "INDOMITABLESPIRE2-LAUNCH_CEREMONY.title": "観艦式",
-  "INDOMITABLESPIRE2-LAUNCH_CEREMONY.description": "[gold]委託[/gold]：カードを累計{MaxProgress:diff()}枚プレイすること{InCombat:（{Progress}/{MaxProgress}）|}。\n戦闘終了後、あなたと{InCombat:[gold]{DelegatorName}[/gold]|委託元}はそれぞれ追加のカード報酬を獲得する。"
+  "INDOMITABLESPIRE2-LAUNCH_CEREMONY.description": "[gold]委託[/gold]：カードを累計{MaxProgress:diff()}枚プレイすること{InCombat:（{Progress}/{MaxProgress}）|}。\n戦闘終了後、あなたと{InCombat:[gold]{DelegatorName}[/gold]|委託元}はそれぞれ追加のカード報酬を獲得する。",
+  
+  "INDOMITABLESPIRE2-XTB2D1_SKYPIRATE.title": "XTB2D-1 スカイパイレート",
+  "INDOMITABLESPIRE2-XTB2D1_SKYPIRATE.description": "ブロックされない{Damage:diff()}ダメージを{Repeat}回与える。\n[gold]浸水[/gold]を[blue]{FloodingPower:diff()}[/blue]付与する。\n[gold]機種シナジー[/gold]：戦闘攻撃機、雷撃機。",
+  "INDOMITABLESPIRE2-AD1_SKYRAIDER.title": "AD-1 スカイレイダー",
+  "INDOMITABLESPIRE2-AD1_SKYRAIDER.description": "{Damage:diff()}ダメージを{Repeat:diff()}回与える。\nすべての敵に{AoeDamage:diff()}ダメージを与える。\n[gold]機種シナジー[/gold]：戦闘攻撃機、水平爆撃機、急降下爆撃機。",
+  "INDOMITABLESPIRE2-XF5U_FLYING_FLAPJACK.title": "XF5U フライング・フラップジャック",
+  "INDOMITABLESPIRE2-XF5U_FLYING_FLAPJACK.description": "このカードの現在の耐久値に等しいダメージを与える。現在の耐久値の半分に等しい[gold]ブロック[/gold]を得る。"
 }

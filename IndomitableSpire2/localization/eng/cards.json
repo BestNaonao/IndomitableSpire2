@@ -234,5 +234,12 @@
   "INDOMITABLESPIRE2-ESCORT_COMMISSION.title": "Merchant Escort",
   "INDOMITABLESPIRE2-ESCORT_COMMISSION.description": "[gold]Commission[/gold]: gaining {MaxProgress} [gold]Block[/gold]{InCombat: ({Progress}/{MaxProgress})|}.\nAfter combat, you and {InCombat:[gold]{DelegatorName}[/gold]|the Delegator} each gain {Gold:diff()} [gold]Gold[/gold].",
   "INDOMITABLESPIRE2-LAUNCH_CEREMONY.title": "Launch Ceremony",
-  "INDOMITABLESPIRE2-LAUNCH_CEREMONY.description": "[gold]Commission[/gold]: playing {MaxProgress:diff()} cards{InCombat: ({Progress}/{MaxProgress})|}.\nAfter combat, you and {InCombat:[gold]{DelegatorName}[/gold]|the Delegator} each gain an additional card reward."
+  "INDOMITABLESPIRE2-LAUNCH_CEREMONY.description": "[gold]Commission[/gold]: playing {MaxProgress:diff()} cards{InCombat: ({Progress}/{MaxProgress})|}.\nAfter combat, you and {InCombat:[gold]{DelegatorName}[/gold]|the Delegator} each gain an additional card reward.",
+  
+  "INDOMITABLESPIRE2-XTB2D1_SKYPIRATE.title": "XTB2D-1 Skypirate",
+  "INDOMITABLESPIRE2-XTB2D1_SKYPIRATE.description": "Deal {Damage:diff()} unblockable damage {Repeat} times.\nApply [blue]{FloodingPower:diff()}[/blue] [gold]Flooding[/gold].\n[gold]Aircraft Type Synergy[/gold]: Strike Fighter, Torpedo Bomber.",
+  "INDOMITABLESPIRE2-AD1_SKYRAIDER.title": "AD-1 Skyraider",
+  "INDOMITABLESPIRE2-AD1_SKYRAIDER.description": "Deal {Damage:diff()} damage {Repeat:diff()} times.\nDeal {AoeDamage:diff()} damage to ALL enemies.\n[gold]Aircraft Type Synergy[/gold]: Strike Fighter, Level Bomber, Dive Bomber.",
+  "INDOMITABLESPIRE2-XF5U_FLYING_FLAPJACK.title": "XF5U Flying Flapjack",
+  "INDOMITABLESPIRE2-XF5U_FLYING_FLAPJACK.description": "Deal damage equal to this card's current Durability. Gain [gold]Block[/gold] equal to half current Durability."
 }
