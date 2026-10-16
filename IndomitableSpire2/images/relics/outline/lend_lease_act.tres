@@ -1,0 +1,7 @@
+[gd_resource type="AtlasTexture" load_steps=2 format=3 uid="uid://s0es1p3c1p7p"]
+
+[ext_resource type="Texture2D" uid="uid://b72pwkbis2p3v" path="res://IndomitableSpire2/images/relics/outline/lend_lease_act.png" id="1"]
+
+[resource]
+atlas = ExtResource("1")
+region = Rect2(0, 0, 90, 90)
