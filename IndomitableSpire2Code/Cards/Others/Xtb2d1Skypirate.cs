@@ -38,15 +38,18 @@ public sealed class Xtb2d1Skypirate() : WhiteEagleAircraftCard(8, TargetType.Any
         PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         ArgumentNullException.ThrowIfNull(cardPlay.Target);
-        var results = new List<IEnumerable<DamageResult>>();
-        for (var hit = 0; hit < DynamicVars.Repeat.IntValue && cardPlay.Target.IsAlive; hit++)
-            results.Add(await CreatureCmd.Damage(
-                choiceContext, cardPlay.Target, DynamicVars.Damage, Owner.Creature, this, cardPlay));
+        // 使用自定义的 WithUnblockableDamage 来让 DamageCmd 造成无法格挡的伤害。
+        var attack = await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
+            .FromCard(this, cardPlay)
+            .Targeting(cardPlay.Target)
+            .WithHitCount(DynamicVars.Repeat.IntValue)
+            .WithUnblockableDamage()
+            .Execute(choiceContext);
         
         if (cardPlay.Target.IsAlive)
             await PowerCmd.Apply<FloodingPower>(choiceContext, cardPlay.Target,
                 DynamicVars.Flooding().BaseValue, Owner.Creature, this);
-        return results;
+        return attack.Results;
     }
     
     protected override void OnUpgrade()
