@@ -22,5 +22,7 @@
   "INDOMITABLESPIRE2-RESONANCE.title": "同心",
   "INDOMITABLESPIRE2-RESONANCE.description": "这张牌打出期间生成或变化出的新卡牌继承其升级、关键词和附魔。",
   "INDOMITABLESPIRE2-VERSATILE.title": "多用途",
-  "INDOMITABLESPIRE2-VERSATILE.description": "这张牌具有多种打出效果，根据打出方式或打出时的选择执行对应效果。"
+  "INDOMITABLESPIRE2-VERSATILE.description": "这张牌具有多种打出效果，根据打出方式或打出时的选择执行对应效果。",
+  "INDOMITABLESPIRE2-TYPE_SYNERGY.title": "机种协同",
+  "INDOMITABLESPIRE2-TYPE_SYNERGY.description": "本场战斗，任何人每打出过一张指定类型的舰载机牌，这张牌的能量费用减少1。"
 }

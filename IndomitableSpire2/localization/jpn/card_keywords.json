@@ -22,5 +22,7 @@
   "INDOMITABLESPIRE2-RESONANCE.title": "共鳴",
   "INDOMITABLESPIRE2-RESONANCE.description": "このカードがプレイ中に生成または変化させたカードは、アップグレード、キーワード、エンチャントを引き継ぐ。",
   "INDOMITABLESPIRE2-VERSATILE.title": "多用途",
-  "INDOMITABLESPIRE2-VERSATILE.description": "複数のプレイ効果を持つカード。プレイ方法、またはプレイ時の選択に応じた効果を発動する。"
+  "INDOMITABLESPIRE2-VERSATILE.description": "複数のプレイ効果を持つカード。プレイ方法、またはプレイ時の選択に応じた効果を発動する。",
+  "INDOMITABLESPIRE2-TYPE_SYNERGY.title": "機種シナジー",
+  "INDOMITABLESPIRE2-TYPE_SYNERGY.description": "この戦闘中、誰かが指定された種類の艦載機カードを1枚プレイするたび、このカードのエナジーコストが1減少する。"
 }

@@ -52,4 +52,8 @@ public static class IndomitableKeywords
     // 多用途：根据打出方式或选择，执行不同的效果。通过文本嵌入和 HoverTip 展示。
     [CustomEnum("versatile"), KeywordProperties(AutoKeywordPosition.Before)]
     public static CardKeyword Versatile;
+    
+    // 机种协同：仅用于卡面文字和悬浮提示，费用变化由舰载机牌自行处理。
+    [CustomEnum("type_synergy"), KeywordProperties(AutoKeywordPosition.Before)]
+    public static CardKeyword TypeSynergy;
 }
