@@ -4,6 +4,7 @@ using IndomitableSpire2.IndomitableSpire2Code.Cards.Abstracts;
 using IndomitableSpire2.IndomitableSpire2Code.Character;
 using IndomitableSpire2.IndomitableSpire2Code.Commands;
 using IndomitableSpire2.IndomitableSpire2Code.Configuration;
+using IndomitableSpire2.IndomitableSpire2Code.Patches;
 using IndomitableSpire2.IndomitableSpire2Code.Powers;
 using IndomitableSpire2.IndomitableSpire2Code.Registries;
 using MegaCrit.Sts2.Core.Animation;
@@ -59,7 +60,6 @@ public static class PlayerExtensions
         var isFirstPlay = cardPlay.PlayIndex == 0;
         string? banterLocKey = null;
         string? specialAudioPath = null;
-        
         // 重放与其他角色不读取特殊台词资源，也不消耗每场战斗的播放次数。
         if (isFirstPlay && player.Character is Indomitable && cardPlay.Card is IndomitableSpire2Card card)
         {
@@ -94,7 +94,8 @@ public static class PlayerExtensions
                 talk.WithDuration(duration);
             talk.WithAdditionalDuration(additionalDurationSeconds).Execute();
         }
-        if (specialAudioPath != null) SfxCmd.Play(specialAudioPath, volume);
+        // 同步传递这句语音的玩家身份，音频补丁据此选择本机的播放通道。
+        if (specialAudioPath != null) IndomitableVoice.PlayCardLine(player.NetId, specialAudioPath, volume);
         return animationTask;
     }
     
