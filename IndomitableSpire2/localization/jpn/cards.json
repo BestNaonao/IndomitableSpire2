@@ -26,7 +26,7 @@
   "INDOMITABLESPIRE2-SORORAL_UNITY.banter": "お姉様方、頑張ってくださいましー",
   "INDOMITABLESPIRE2-SORORAL_UNITY.description": "[gold]{IfUpgraded:show:イラストリアスのイージス+|イラストリアスのイージス}[/gold]、[gold]{IfUpgraded:show:ヴィクトリアスの高歌+|ヴィクトリアスの高歌}[/gold]、[gold]{IfUpgraded:show:フォーミダブルの重圧+|フォーミダブルの重圧}[/gold]を1枚ずつ[gold]手札[/gold]に加える。",
   "INDOMITABLESPIRE2-SWORDFISH_BOMBER.title": "ソードフィッシュ",
-  "INDOMITABLESPIRE2-SWORDFISH_BOMBER.description": "{Damage:diff()}ダメージを与える。\n[blue]浸水[/blue]を[blue]{FloodingPower:diff()}[/blue]与える。",
+  "INDOMITABLESPIRE2-SWORDFISH_BOMBER.description": "{Damage:diff()}ダメージを与える。\n[blue]浸水[/blue]を[blue]{FloodingPower:diff()}[/blue]与える。\n自分の[gold]デッキ[/gold]にある他のカードが[gold]アップグレード[/gold]されるたび、このカードのダメージがこのラン中、永続的に[blue]1[/blue]増加する。",
   "INDOMITABLESPIRE2-SWORDFISH818_SQUADRON.title": "ソードフィッシュ(第818飛行隊)",
   "INDOMITABLESPIRE2-SWORDFISH818_SQUADRON.description": "{Damage:diff()}ダメージを与える。[blue]浸水[/blue]を[blue]{FloodingPower:diff()}[/blue]与える。\n敵が攻撃または逃亡を予定している場合、[gold]スロウ[/gold]を与える。",
   "INDOMITABLESPIRE2-SEA_HORNET_FIGHTER.title": "シーホーネット F.20",

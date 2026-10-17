@@ -26,7 +26,7 @@
   "INDOMITABLESPIRE2-SORORAL_UNITY.banter": "姐姐们，加油~",
   "INDOMITABLESPIRE2-SORORAL_UNITY.description": "将[gold]{IfUpgraded:show:光辉的庇护+|光辉的庇护}[/gold]、[gold]{IfUpgraded:show:胜利的高歌+|胜利的高歌}[/gold]和[gold]{IfUpgraded:show:可畏的威压+|可畏的威压}[/gold]各1张加入你的[gold]手牌[/gold]。",
   "INDOMITABLESPIRE2-SWORDFISH_BOMBER.title": "剑鱼鱼雷机",
-  "INDOMITABLESPIRE2-SWORDFISH_BOMBER.description": "造成{Damage:diff()}点伤害。\n给予[blue]{FloodingPower:diff()}[/blue]层[blue]进水[/blue]。",
+  "INDOMITABLESPIRE2-SWORDFISH_BOMBER.description": "造成{Damage:diff()}点伤害。\n给予[blue]{FloodingPower:diff()}[/blue]层[blue]进水[/blue]。\n每当你的[gold]牌组[/gold]中的一张其他卡牌[gold]升级[/gold]时，这张牌在本局游戏中的伤害永久增加[blue]1[/blue]点。",
   "INDOMITABLESPIRE2-SWORDFISH818_SQUADRON.title": "剑鱼(818中队)",
   "INDOMITABLESPIRE2-SWORDFISH818_SQUADRON.description": "造成{Damage:diff()}点伤害。给予[blue]{FloodingPower:diff()}[/blue]层[blue]进水[/blue]。\n如果敌人的意图是攻击或逃跑，则给予[gold]缓慢[/gold]。",
   "INDOMITABLESPIRE2-SEA_HORNET_FIGHTER.title": "海大黄蜂 F.20",

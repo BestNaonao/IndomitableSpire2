@@ -26,7 +26,7 @@
   "INDOMITABLESPIRE2-SORORAL_UNITY.banter": "Sisters, let's do our best~",
   "INDOMITABLESPIRE2-SORORAL_UNITY.description": "Add an [gold]{IfUpgraded:show:Illustrious Aegis+|Illustrious Aegis}[/gold], a [gold]{IfUpgraded:show:Victorious Song+|Victorious Song}[/gold], and a [gold]{IfUpgraded:show:Formidable Pressure+|Formidable Pressure}[/gold] to your [gold]Hand[/gold].",
   "INDOMITABLESPIRE2-SWORDFISH_BOMBER.title": "Swordfish",
-  "INDOMITABLESPIRE2-SWORDFISH_BOMBER.description": "Deal {Damage:diff()} damage.\nApply [blue]{FloodingPower:diff()}[/blue] [blue]Flooded[/blue].",
+  "INDOMITABLESPIRE2-SWORDFISH_BOMBER.description": "Deal {Damage:diff()} damage.\nApply [blue]{FloodingPower:diff()}[/blue] [blue]Flooded[/blue].\nWhenever another card in your [gold]Deck[/gold] is [gold]Upgraded[/gold], permanently increase this card's damage by [blue]1[/blue] this run.",
   "INDOMITABLESPIRE2-SWORDFISH818_SQUADRON.title": "Swordfish (818 Sqn.)",
   "INDOMITABLESPIRE2-SWORDFISH818_SQUADRON.description": "Deal {Damage:diff()} damage. Apply [blue]{FloodingPower:diff()}[/blue] [blue]Flooded[/blue].\nIf the enemy intends to attack or escape, apply [gold]Slow[/gold].",
   "INDOMITABLESPIRE2-SEA_HORNET_FIGHTER.title": "Sea Hornet F.20",
