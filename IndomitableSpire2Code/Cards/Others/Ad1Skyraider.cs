@@ -1,6 +1,8 @@
 using IndomitableSpire2.IndomitableSpire2Code.Cards.Abstracts;
 using IndomitableSpire2.IndomitableSpire2Code.Enums;
+using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
+using MegaCrit.Sts2.Core.Commands.Builders;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -33,16 +35,32 @@ public sealed class Ad1Skyraider() : WhiteEagleAircraftCard(6, TargetType.AnyEne
     {
         ArgumentNullException.ThrowIfNull(cardPlay.Target);
         ArgumentNullException.ThrowIfNull(CombatState);
-        var focused = await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
-            .WithHitCount(DynamicVars.Repeat.IntValue)
-            .FromCard(this, cardPlay)
-            .Targeting(cardPlay.Target)
-            .Execute(choiceContext);
-        var area = await DamageCmd.Attack(DynamicVars["AoeDamage"].BaseValue)
-            .FromCard(this, cardPlay)
-            .TargetingAllOpponents(CombatState)
-            .Execute(choiceContext);
-        return focused.Results.Concat(area.Results);
+        var results = new List<IEnumerable<DamageResult>>();
+        // 点杀与群伤共用一次攻击，活力在两部分伤害结束后才消耗。
+        await using (var attackContext = await AttackCommand.CreateContextAsync(CombatState, choiceContext, cardPlay))
+        {
+            for (var hit = 0; hit < DynamicVars.Repeat.IntValue && cardPlay.Target.IsAlive &&
+                              !CombatManager.Instance.IsOverOrEnding; hit++)
+            {
+                await CreatureCmd.TriggerAnim(Owner.Creature, "Attack", Owner.Character.AttackAnimDelay);
+                var focused = (await CreatureCmd.Damage(
+                    choiceContext, cardPlay.Target, DynamicVars.Damage, Owner.Creature, this, cardPlay))
+                    .ToList();
+                attackContext.AddHit(focused);
+                results.Add(focused);
+            }
+            // 然后造成群体伤害，共用一个 attackContext 以共享活力加成。
+            if (!CombatManager.Instance.IsOverOrEnding)
+            {
+                await CreatureCmd.TriggerAnim(Owner.Creature, "Attack", Owner.Character.AttackAnimDelay);
+                var area = (await CreatureCmd.Damage(
+                    choiceContext, CombatState.HittableEnemies, (DamageVar)DynamicVars["AoeDamage"],
+                    Owner.Creature, this, cardPlay)).ToList();
+                attackContext.AddHit(area);
+                results.Add(area);
+            }
+        }
+        return results;
     }
     
     protected override void OnUpgrade()
