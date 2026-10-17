@@ -1,5 +1,5 @@
 {
-  "OPTION_TASHKENTSPIRE2-LOAD.description": "[gold]Load[/gold] [blue]6[/blue] onto {Count} [gold]Ammo[/gold] card(s) in your [gold]Deck[/gold].",
+  "OPTION_TASHKENTSPIRE2-LOAD.description": "[gold]Load[/gold] [blue]6[/blue] onto {Count} [gold]Ammo[/gold] {Count:plural:card|cards} in your [gold]Deck[/gold].",
   "OPTION_TASHKENTSPIRE2-LOAD.descriptionDisabled": "[red]You have no [gold]Ammo[/gold] cards that can be [gold]Loaded[/gold].[/red]",
   "OPTION_TASHKENTSPIRE2-LOAD.name": "Load"
 }

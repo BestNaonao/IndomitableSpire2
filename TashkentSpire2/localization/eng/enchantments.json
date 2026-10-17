@@ -1,8 +1,8 @@
 {
   "TASHKENTSPIRE2-OATH_ENCHANTMENT.title": "Oath",
-  "TASHKENTSPIRE2-OATH_ENCHANTMENT.extraCardText": "At the start of your next turn, return this card to your [gold]Hand[/gold].",
+  "TASHKENTSPIRE2-OATH_ENCHANTMENT.extraCardText": "After this card is played, return it to your [gold]Hand[/gold] at the start of your next turn.",
   "COMBAT_REWARD_CARD_ENCHANT_OATH": "Choose a card in your Deck to [gold]Enchant[/gold] with: [pink]Oath[/pink].",
-  "TASHKENTSPIRE2-OATH_ENCHANTMENT.description": "This card gains [gold]Eternal[/gold] and [gold]Retain[/gold].\nAt the start of your next turn, return this card to your [gold]Hand[/gold].",
+  "TASHKENTSPIRE2-OATH_ENCHANTMENT.description": "This card gains [gold]Eternal[/gold] and [gold]Retain[/gold].\nAfter this card is played, return it to your [gold]Hand[/gold] at the start of your next turn.",
   "TASHKENTSPIRE2-SOLIDARITY_ENCHANTMENT.title": "Solidarity",
   "TASHKENTSPIRE2-SOLIDARITY_ENCHANTMENT.extraCardText": "Whenever you play a card [gold]Enchanted[/gold] with [gold]Solidarity[/gold], play this card automatically.",
   "TASHKENTSPIRE2-SOLIDARITY_ENCHANTMENT.description": "Whenever you play a card [gold]Enchanted[/gold] with [gold]Solidarity[/gold], play this card automatically.",

@@ -1,7 +1,7 @@
 {
   "TASHKENTSPIRE2-MARK_POTION.description": "Apply [blue]{MarkPower}[/blue] [gold]Mark[/gold].",
   "TASHKENTSPIRE2-MARK_POTION.title": "Mark Potion",
-  "TASHKENTSPIRE2-RELOAD_CONSUMABLES.description": "[gold]Load[/gold] {TashkentSpire2-Load:diff()} [gold]Ammo[/gold] onto an [gold]Ammo[/gold] card in your hand.",
+  "TASHKENTSPIRE2-RELOAD_CONSUMABLES.description": "[gold]Load[/gold] {TashkentSpire2-Load:diff()} [gold]Ammo[/gold] onto an [gold]Ammo[/gold] card in your Hand.",
   "TASHKENTSPIRE2-RELOAD_CONSUMABLES.selectionScreenPrompt": "Choose an [gold]Ammo[/gold] card to [gold]Load[/gold] [blue]6[/blue].",
   "TASHKENTSPIRE2-RELOAD_CONSUMABLES.title": "Reload Consumable",
   "TASHKENTSPIRE2-CELLARING.description": "Add [blue]{Cards}[/blue] [gold]Vodka+[/gold] to your [gold]Hand[/gold].",

@@ -28,7 +28,7 @@ public class TashkentCharacter : CustomCharacterModel
 	internal static readonly Color TopicColor = new("#9A72A1");
 	public override Color NameColor => TopicColor;
 	protected override CharacterModel? UnlocksAfterRunAs => null;
-	public override int StartingHp => 70; // 初始血量
+	public override int StartingHp => 75; // 初始血量
 	public override int StartingGold => 99; // 初始金币
 	
 	// 小地图、对话、能量球相关的颜色设置
@@ -107,9 +107,10 @@ public class TashkentCharacter : CustomCharacterModel
 		"res://TashkentSpire2/scenes/vfx/tashkent_energy_counter.tscn";
 
 	// Keep persistent combat visuals warm. These effects reuse a small, fixed number
-	// of Sprite2Ds and never consume gameplay RNG.
+	// of sprites/draw primitives and never consume gameplay RNG.
 	protected override IEnumerable<string> ExtraAssetPaths =>
 		NTorpedoVfx.AssetPaths
+			.Concat(NTorpedoAfflictionVfx.AssetPaths)
 			.Concat(NPoseidonFormVfx.AssetPaths)
 			.Concat(NWarpDriveVfx.AssetPaths);
 	

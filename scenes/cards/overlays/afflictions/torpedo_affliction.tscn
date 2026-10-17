@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" uid="uid://ddv7r6b4rt3yi" path="res://TashkentSpire2Code/Nodes/Vfx/NTorpedoAfflictionVfx.cs" id="1_script"]
+[ext_resource type="Texture2D" path="res://TashkentSpire2/images/vfx/torpedo_vfx.png" id="2_torpedo"]
+
+[node name="TorpedoAfflictionVfx" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+mouse_filter = 2
+script = ExtResource("1_script")
+TorpedoTexture = ExtResource("2_torpedo")
