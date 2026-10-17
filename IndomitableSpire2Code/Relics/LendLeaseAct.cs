@@ -1,5 +1,6 @@
 using IndomitableSpire2.IndomitableSpire2Code.Cards.Abstracts;
 using IndomitableSpire2.IndomitableSpire2Code.Cards.Others;
+using IndomitableSpire2.IndomitableSpire2Code.Enums;
 using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -18,6 +19,7 @@ public sealed class LendLeaseAct : IndomitableRelic
     protected override IEnumerable<DynamicVar> CanonicalVars => [new EnergyVar(2)];
     protected override IEnumerable<IHoverTip> ExtraHoverTips => 
     [
+        HoverTipFactory.FromKeyword(IndomitableKeywords.TypeSynergy),
         HoverTipFactory.ForEnergy(this),
         HoverTipFactory.FromCard<Xtb2d1Skypirate>(),
         HoverTipFactory.FromCard<Ad1Skyraider>(),
