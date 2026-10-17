@@ -1,0 +1,9 @@
+[gd_resource type="AtlasTexture" load_steps=2 format=3]
+
+[ext_resource type="Texture2D" path="res://IndomitableSpire2/images/packed/sprite_fonts/strike_fighter_icon.png" id="1"]
+
+[resource]
+atlas = ExtResource("1")
+region = Rect2(0, 0, 40, 25)
+; 40×25 原图不缩放；左右各 4px 透明留白，整个 48px 图标对象占两枚 24px 能量图标的宽度。
+margin = Rect2(4, 0, 8, 0)
