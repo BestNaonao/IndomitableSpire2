@@ -1,133 +1,103 @@
-﻿import os
+"""按遗物池、原版稀有度和原有行号整理模组遗物本地化。"""
+
+import json
+import os
 import re
 import sys
+from pathlib import Path
 
-def process_file(file_path):
-    # 读取文件内容
-    with open(file_path, 'r', encoding='utf-8') as f:
-        lines = f.readlines()
 
-    # 正则表达式匹配 JSON 的键值对行，提取键名
-    kv_pattern = re.compile(r'^\s*"([^"]+)"\s*:')
+RELICS_DIR = Path(__file__).resolve().parents[1] / "Relics"
+# 与原版 Core/Entities/Relics/RelicRarity.cs 的声明顺序一致。
+RARITIES = ("None", "Starter", "Common", "Uncommon", "Rare", "Shop", "Event", "Ancient")
+GROUPS = ("indomitable", "implacable", "shared", "sea_glass")
+KEY_PATTERN = re.compile(r'^\s*"([^"]+)"\s*:')
+CLASS_PATTERN = re.compile(r"\bclass\s+(\w+)\s*:\s*(\w+)")
+RARITY_PATTERN = re.compile(r"\bRarity\s*=>\s*RelicRarity\.(\w+)")
 
-    blocks = []
-    current_prefix = None
-    current_items = []
-    current_empty_lines = []
 
-    for line in lines:
-        stripped = line.strip()
-        if not stripped:
-            # 处理空行
-            if current_prefix is not None and current_items:
-                # 如果当前块已有内容，遇到空行则结束当前块，空行作为下一个块的前导空行
-                blocks.append({
-                    'type': 'prefix',
-                    'prefix': current_prefix,
-                    'leading_empty_lines': current_empty_lines,
-                    'items': current_items
-                })
-                current_prefix = None
-                current_items = []
-                current_empty_lines = [line]
-            else:
-                current_empty_lines.append(line)
+def to_key(name):
+    return re.sub(r"(?<=[a-z0-9])(?=[A-Z])|(?<=[A-Z])(?=[A-Z][a-z])", "_", name).upper()
+
+
+def relic_metadata():
+    metadata = {}
+    for source in RELICS_DIR.rglob("*.cs"):
+        code = source.read_text(encoding="utf-8-sig")
+        declaration = CLASS_PATTERN.search(code)
+        rarity = RARITY_PATTERN.search(code)
+        if not declaration or not rarity:
+            continue
+        name, base = declaration.groups()
+        if base == "IndomitableRelic":
+            group = "indomitable"
+        elif base == "ImplacableRelic":
+            group = "implacable"
+        elif base == "IndomitableSpire2Relic" and "[Pool(typeof(SharedRelicPool))]" in code:
+            group = "shared"
         else:
-            match = kv_pattern.match(line)
-            if match:
-                key = match.group(1)
-                # 分离前缀和后缀 (以最后一个 '.' 为界)
-                if '.' in key:
-                    prefix, suffix = key.rsplit('.', 1)
-                else:
-                    prefix, suffix = key, ""
+            raise ValueError(f"无法确定遗物 {name} 的卡池：{source}")
+        if rarity.group(1) not in RARITIES:
+            raise ValueError(f"未知遗物稀有度：{source}")
+        metadata[f"INDOMITABLESPIRE2-{to_key(name)}"] = (group, RARITIES.index(rarity.group(1)))
+    return metadata
 
-                if current_prefix is None:
-                    current_prefix = prefix
-                    current_items = []
-                elif current_prefix != prefix:
-                    # 前缀改变，结束当前块
-                    blocks.append({
-                        'type': 'prefix',
-                        'prefix': current_prefix,
-                        'leading_empty_lines': current_empty_lines,
-                        'items': current_items
-                    })
-                    current_prefix = prefix
-                    current_items = []
-                    current_empty_lines = []
 
-                current_items.append({'suffix': suffix, 'line': line})
-            else:
-                # 非键值对的非空行（如 {, }, 注释等），作为独立块处理以保持结构
-                if current_prefix is not None:
-                    blocks.append({
-                        'type': 'prefix',
-                        'prefix': current_prefix,
-                        'leading_empty_lines': current_empty_lines,
-                        'items': current_items
-                    })
-                    current_prefix = None
-                    current_items = []
-                    current_empty_lines = []
+def process_file(file_path, metadata=None):
+    file_path = Path(file_path)
+    metadata = metadata if metadata is not None else relic_metadata()
+    original = file_path.read_text(encoding="utf-8-sig")
+    parsed = json.loads(original)
+    lines = original.splitlines()
+    entries = {}
+    for line_number, line in enumerate(lines):
+        match = KEY_PATTERN.match(line)
+        if not match:
+            continue
+        key = match.group(1)
+        if "." not in key:
+            raise ValueError(f"无后缀的本地化键：{key}")
+        relic, suffix = key.rsplit(".", 1)
+        entries.setdefault(relic, []).append((suffix, line_number, line.rstrip().removesuffix(",")))
 
-                blocks.append({
-                    'type': 'other',
-                    'leading_empty_lines': current_empty_lines,
-                    'line': line
-                })
-                current_empty_lines = []
+    if {f"{relic}.{suffix}" for relic, items in entries.items() for suffix, _, _ in items} != set(parsed):
+        raise ValueError(f"请确认 {file_path} 的每个本地化条目都独占一行")
 
-    # 处理文件末尾剩余的内容
-    if current_prefix is not None:
-        blocks.append({
-            'type': 'prefix',
-            'prefix': current_prefix,
-            'leading_empty_lines': current_empty_lines,
-            'items': current_items
-        })
-    elif current_empty_lines:
-        blocks.append({
-            'type': 'other',
-            'leading_empty_lines': current_empty_lines,
-            'line': None
-        })
+    def order(relic):
+        group, rarity = ("sea_glass", 0) if relic.startswith("SEA_GLASS.") else metadata[relic]
+        return GROUPS.index(group), rarity, entries[relic][0][1]
 
-    # 重建文件内容
-    output_lines = []
-    for block in blocks:
-        output_lines.extend(block['leading_empty_lines'])
-        if block['type'] == 'prefix':
-            # 按照后缀的逆字典序（降序：title > flavor > description > additional...）排列
-            sorted_items = sorted(block['items'], key=lambda x: x['suffix'], reverse=True)
-            for item in sorted_items:
-                output_lines.append(item['line'])
-        else:
-            if block['line'] is not None:
-                output_lines.append(block['line'])
+    ordered_relics = sorted(entries, key=order)
+    ordered_lines = []
+    previous_group = None
+    for relic in ordered_relics:
+        group = "sea_glass" if relic.startswith("SEA_GLASS.") else metadata[relic][0]
+        if previous_group is not None and group != previous_group:
+            ordered_lines.append("")
+        previous_group = group
+        ordered_lines.extend(line for _, _, line in sorted(entries[relic], key=lambda item: item[0], reverse=True))
 
-    # 写回文件
-    with open(file_path, 'w', encoding='utf-8') as f:
-        f.writelines(output_lines)
+    for index, line in enumerate(ordered_lines):
+        if line and any(next_line for next_line in ordered_lines[index + 1:]):
+            ordered_lines[index] += ","
+    result = "{\n" + "\n".join(ordered_lines) + "\n}\n"
+    if json.loads(result) != parsed:
+        raise ValueError(f"排序后本地化内容发生变化：{file_path}")
+    file_path.write_text(result, encoding="utf-8", newline="")
+
 
 def main():
-    if len(sys.argv) < 2:
-        print("用法: python sort_relics.py <目录路径>")
+    if len(sys.argv) != 2 or not os.path.isdir(sys.argv[1]):
+        print("用法: python relics_sort.py <本地化目录>")
         sys.exit(1)
-
-    directory = sys.argv[1]
-    if not os.path.isdir(directory):
-        print(f"错误: {directory} 不是一个有效的目录。")
-        sys.exit(1)
-
-    # 遍历目录及子目录，寻找 relics.json
-    for root, _, files in os.walk(directory):
-        for file in files:
-            if file == 'relics.json':
-                file_path = os.path.join(root, file)
-                print(f"正在处理 {file_path}...")
-                process_file(file_path)
+    metadata = relic_metadata()
+    for root, _, files in os.walk(sys.argv[1]):
+        if "relics.json" in files:
+            path = Path(root) / "relics.json"
+            print(f"正在处理 {path}...")
+            process_file(path, metadata)
     print("处理完成。")
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     main()
