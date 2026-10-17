@@ -237,9 +237,9 @@
   "INDOMITABLESPIRE2-LAUNCH_CEREMONY.description": "[gold]委托[/gold]：打出{MaxProgress:diff()}张牌{InCombat:({Progress}/{MaxProgress})|}。\n战斗结束后你和{InCombat:{DelegatorName}|委托方}各额外获得一次卡牌奖励。",
   
   "INDOMITABLESPIRE2-XTB2D1_SKYPIRATE.title": "XTB2D-1 天空海盗",
-  "INDOMITABLESPIRE2-XTB2D1_SKYPIRATE.description": "造成{Damage:diff()}点不可格挡的伤害{Repeat}次。\n给予[blue]{FloodingPower:diff()}[/blue]层[gold]进水[/gold]。\n[gold]机种协同[/gold]：战斗攻击机、鱼雷轰炸机。",
+  "INDOMITABLESPIRE2-XTB2D1_SKYPIRATE.description": "造成{Damage:diff()}点[gold]不可格挡[/gold]的伤害{Repeat}次。\n给予[blue]{FloodingPower:diff()}[/blue]层[gold]进水[/gold]。\n[gold]机种协同[/gold]：战斗攻击机、鱼雷轰炸机。",
   "INDOMITABLESPIRE2-AD1_SKYRAIDER.title": "AD-1 天袭者",
   "INDOMITABLESPIRE2-AD1_SKYRAIDER.description": "造成{Damage:diff()}点伤害{Repeat:diff()}次。\n对所有敌人造成{AoeDamage:diff()}点伤害。\n[gold]机种协同[/gold]：战斗攻击机、水平轰炸机、俯冲轰炸机。",
   "INDOMITABLESPIRE2-XF5U_FLYING_FLAPJACK.title": "XF5U 飞碟",
-  "INDOMITABLESPIRE2-XF5U_FLYING_FLAPJACK.description": "造成当前耐久的伤害。获得当前耐久一半的[gold]格挡[/gold]。"
+  "INDOMITABLESPIRE2-XF5U_FLYING_FLAPJACK.description": "造成当前[gold]耐久[/gold]的伤害。获得当前[gold]耐久[/gold]一半的[gold]格挡[/gold]。"
 }
