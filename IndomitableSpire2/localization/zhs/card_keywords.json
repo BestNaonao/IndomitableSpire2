@@ -24,5 +24,5 @@
   "INDOMITABLESPIRE2-VERSATILE.title": "多用途",
   "INDOMITABLESPIRE2-VERSATILE.description": "这张牌具有多种打出效果，根据打出方式或打出时的选择执行对应效果。",
   "INDOMITABLESPIRE2-TYPE_SYNERGY.title": "机种协同",
-  "INDOMITABLESPIRE2-TYPE_SYNERGY.description": "本场战斗，任何人每打出过一张指定类型的舰载机牌，这张牌的能量费用减少1。"
+  "INDOMITABLESPIRE2-TYPE_SYNERGY.description": "本场战斗，任何人每打出过一张指定类型的[gold]舰载机[/gold]牌，这张牌的能量费用减少{energyPrefix:energyIcons(1)}。"
 }
