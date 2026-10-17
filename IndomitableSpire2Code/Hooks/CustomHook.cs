@@ -6,11 +6,28 @@ using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Runs;
 
 namespace IndomitableSpire2.IndomitableSpire2Code.Hooks;
 
 public static class CustomHook
 {
+    /// <summary>
+    /// 广播一次已完成的真实升级。RunState 在战斗外包含牌组监听者；传入战斗时还包含战斗实例。
+    /// 与同步的 CardCmd.Upgrade 一起完成，不用于升级预览、读档或直接调用 UpgradeInternal 的初始化流程。
+    /// </summary>
+    public static void AfterCardUpgraded(IRunState runState, ICombatState? combatState, CardModel card)
+    {
+        foreach (var model in runState.IterateHookListeners(combatState))
+        {
+            if (model is IAfterCardUpgradedSubscriber subscriber)
+            {
+                subscriber.AfterCardUpgraded(card);
+                model.InvokeExecutionFinished();
+            }
+        }
+    }
+    
     /// <summary>
     /// 广播一张牌因满手而未能加入手牌的事实，不要求该牌结算时仍在弃牌堆。
     /// 与原版通知钩子一样，在广播时枚举当前战斗监听者，逐个等待并通知 ExecutionFinished。
