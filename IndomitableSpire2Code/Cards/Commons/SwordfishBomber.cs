@@ -42,7 +42,7 @@ public sealed class SwordfishBomber() : CarrierAircraftCard(1, CardType.Attack, 
     // 优雅地继承父类的耐久变量，并追加伤害与进水变量
     protected override IEnumerable<DynamicVar> AdditionalVars =>
     [
-        new DamageVar(7M, ValueProp.Move),
+        new DamageVar(6M, ValueProp.Move),
         new CustomPowerVar<FloodingPower>(2M)
     ];
     
