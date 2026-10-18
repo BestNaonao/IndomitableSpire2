@@ -2,6 +2,7 @@
 using HarmonyLib;
 using IndomitableSpire2.IndomitableSpire2Code.Character;
 using IndomitableSpire2.IndomitableSpire2Code.Extensions;
+using IndomitableSpire2.IndomitableSpire2Code.Localization;
 using MegaCrit.Sts2.addons.mega_text;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.UI;
@@ -22,6 +23,14 @@ public static class NCardVisualsPatch
     private const string DurabilityLabelName = "IndomitableDurabilityLabel";
     private const string DurabilityIconPath = "res://IndomitableSpire2/images/combatui/durability_panel2.png";
     private const float IconSize = 75f;
+    
+    // ===== 右侧徽标可手调参数（CardContainer 本地坐标，随整张卡一起缩放）=====
+    private static readonly Vector2 DurabilityPosition = new(96f, -234f);   // 耐久表盘左上角；直径 IconSize=75。
+    private const float AircraftBadgeCenterX = 133.5f;  // 航空徽标中心 X，与耐久表盘中心对齐。
+    private const float AircraftBadgeTop = -135f;       // 舰载机徽标固定顶边；无耐久表盘也不向上移动。
+    private const float AircraftBadgeScale = 0.85f;     // 79×50 大图的节点缩放，显示约 67×42.5，略小于表盘。
+    private const float AircraftBadgeGap = 8f;          // 舰载机/各机型之间统一净间距；表盘到舰载机净距为 24。
+    private static readonly Vector2 AircraftBadgeSize = new(79f, 50f);      // 大图原生尺寸；不修改 PNG。
     
     // 阴影与描边常量 (参照原版 UI 风格)
     private static readonly StringName ShadowOffsetX = "shadow_offset_x";
@@ -60,11 +69,19 @@ public static class NCardVisualsPatch
         // 2. 初始化耐久度图标与文字 (放置在右上角)
         var durabilityNode = EnsureNodeExists(container, DurabilityIconName, LoadDurabilityTexture());
         // 卡牌大小约为 300x422，中心点为 (0,0)。右上角大约在 X: 70~100, Y: -200~-170
-        durabilityNode.Position = new Vector2(96f, -234f);
+        durabilityNode.Position = DurabilityPosition;
         durabilityNode.Size = new Vector2(IconSize, IconSize);
         durabilityNode.PivotOffset = durabilityNode.Size * 0.5f;
         
         EnsureLabelExists(durabilityNode);
+        
+        // 节点跟随 NCard 对象池复用，后续只刷新位置和可见性，不反复创建/销毁。
+        foreach (var icon in AircraftIcons.All)
+        {
+            var badge = EnsureNodeExists(container, icon.NodeName, ResourceLoader.Load<Texture2D>(icon.LargePath));
+            badge.Size = AircraftBadgeSize;
+            badge.Scale = Vector2.One * AircraftBadgeScale;
+        }
         
         RefreshAllVisuals(__instance);
     }
@@ -94,6 +111,22 @@ public static class NCardVisualsPatch
         var logoNode = container?.GetNodeOrNull<TextureRect>(LogoNodeName);
         var durabilityIcon = container?.GetNodeOrNull<TextureRect>(DurabilityIconName);
         var durabilityLabel = durabilityIcon?.GetNodeOrNull<Label>(DurabilityLabelName);
+        
+        // 每次 Reload/UpdateVisuals 都重算：挂载切换、改装、关键词移除、隐藏牌与对象池复用均同步。
+        if (container != null)
+        {
+            var row = 0;
+            foreach (var icon in AircraftIcons.All)
+            {
+                var badge = container.GetNodeOrNull<TextureRect>(icon.NodeName);
+                if (badge == null) continue;
+                badge.Visible = cardNode is { Visibility: ModelVisibility.Visible, Model: { } aircraft } &&
+                                icon.ShouldShowFor(aircraft);
+                if (!badge.Visible) continue;
+                badge.Position = new Vector2(AircraftBadgeCenterX - AircraftBadgeSize.X * AircraftBadgeScale / 2f,
+                    AircraftBadgeTop + row++ * (AircraftBadgeSize.Y * AircraftBadgeScale + AircraftBadgeGap));
+            }
+        }
         
         // 1. 刷新 Logo 逻辑
         if (logoNode != null)

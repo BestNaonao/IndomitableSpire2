@@ -84,6 +84,11 @@
             <HintPath>$(Sts2DataDir)/sts2.dll</HintPath>
             <Private>false</Private>
         </Reference>
+        <!-- 航空图标的本地化 formatter 使用游戏自带 SmartFormat，避免引入版本不匹配的包。 -->
+        <Reference Include="SmartFormat">
+            <HintPath>$(Sts2DataDir)/SmartFormat.dll</HintPath>
+            <Private>false</Private>
+        </Reference>
     </ItemGroup>
 
     <ItemGroup>
