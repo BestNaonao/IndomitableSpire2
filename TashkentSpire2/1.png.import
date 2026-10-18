@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://baqo0vmx2luc8"
-path="res://.godot/imported/1.jpg-be495cc2f4eb13b1eb38d0d843f058a5.ctex"
+uid="uid://7wjxop30g25r"
+path="res://.godot/imported/1.png-22b95189e94d77058b8eec662add2c4e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://TashkentSpire2/1.jpg"
-dest_files=["res://.godot/imported/1.jpg-be495cc2f4eb13b1eb38d0d843f058a5.ctex"]
+source_file="res://TashkentSpire2/1.png"
+dest_files=["res://.godot/imported/1.png-22b95189e94d77058b8eec662add2c4e.ctex"]
 
 [params]
 

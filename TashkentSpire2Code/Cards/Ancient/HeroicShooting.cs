@@ -17,7 +17,7 @@ public sealed class HeroicShooting() : AmmunitionCard(1, CardType.Attack, CardRa
     
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new DamageVar(4M, ValueProp.Move),
+        new DamageVar(3M, ValueProp.Move),
         new AmmunitionDynamicVar(6M),
         new LoadDynamicVar(3M),
         new AmmuMaxDynamicVar(6M),
@@ -69,6 +69,6 @@ public sealed class HeroicShooting() : AmmunitionCard(1, CardType.Attack, CardRa
 
     protected override void OnUpgrade()
     {
-        DynamicVars["TashkentSpire2-Mark"].UpgradeValueBy(3M);
+        DynamicVars["TashkentSpire2-Mark"].UpgradeValueBy(2M);
     }
 }

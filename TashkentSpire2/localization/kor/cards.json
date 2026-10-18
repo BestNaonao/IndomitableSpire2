@@ -158,7 +158,7 @@
   "TASHKENTSPIRE2-REPEL.title": "격퇴",
   "TASHKENTSPIRE2-REPEL.description": "모든 적에게 {Damage:diff()}의 피해를 줍니다.\n모든 적을 [gold]후퇴[/gold]{TashkentSpire2-Retreat:diff()}시킵니다.",
   "TASHKENTSPIRE2-SLAY_THE_WHALES.title": "고래 사냥",
-  "TASHKENTSPIRE2-SLAY_THE_WHALES.description": "{IfUpgraded:show:[gold]후퇴[/gold]{TashkentSpire2-Retreat:diff()}.\n|}[red]반복[/red]하여 [gold]거리[/gold]가 [blue]5[/blue]가 될 때까지: {Damage:diff()}의 피해를 줍니다.\n[gold]돌격[/gold]{TashkentSpire2-Charge:diff()}.\n턴 종료 시 [gold]후퇴[/gold]{TashkentSpire2-Retreat:diff()}.",
+  "TASHKENTSPIRE2-SLAY_THE_WHALES.description": "{IfUpgraded:show:[gold]후퇴[/gold]{TashkentSpire2-Retreat:diff()}.\n|}[gold]거리[/gold]가 [blue]5[/blue]가 될 때까지 다음 단계를 [red]반복[/red]합니다: 피해를 {Damage:diff()} 줍니다;\n[gold]돌격[/gold] {TashkentSpire2-Charge:diff()};\n내 턴 종료 시 [gold]후퇴[/gold] {TashkentSpire2-Retreat:diff()}.",
   "TASHKENTSPIRE2-TARGET_SHIP.title": "표적함",
   "TASHKENTSPIRE2-TARGET_SHIP.description": "대상에게 [gold]표식[/gold] {TashkentSpire2-Mark:diff()}을 부여합니다.\n대상에게 [gold]표적함[/gold] 1중첩을 부여합니다.",
   "TASHKENTSPIRE2-THE_FINAL_FRONT.title": "최후의 전선",
