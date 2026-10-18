@@ -24,7 +24,7 @@ public sealed class Barracuda831Squadron() : CarrierAircraftCard(2, CardType.Att
     // 仅需破甲提示框
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<ArmorBreakPower>()];
     
-    protected override IEnumerable<DynamicVar> AdditionalVars => [new DamageVar(12M, ValueProp.Move)];
+    protected override IEnumerable<DynamicVar> AdditionalVars => [new DamageVar(16M, ValueProp.Move)];
     
     protected override async Task<IEnumerable<IEnumerable<DamageResult>>> OnAircraftPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
@@ -67,7 +67,7 @@ public sealed class Barracuda831Squadron() : CarrierAircraftCard(2, CardType.Att
     
     protected override void OnUpgrade()
     {
-        DynamicVars.Damage.UpgradeValueBy(4M);
+        DynamicVars.Damage.UpgradeValueBy(5M);
         UpgradeDurability();
     }
 }
