@@ -1,14 +1,14 @@
 {
   "INDOMITABLESPIRE2-CARRIER_AIRCRAFT.title": "艦載機",
-  "INDOMITABLESPIRE2-CARRIER_AIRCRAFT.description": "艦載機向けの効果を発動でき、トゲを無効化する特殊なカード。一部は耐久値を持つ。戦闘終了時、自分の[gold]廃棄札[/gold]にあるすべての艦載機に対応する[gold]デッキ[/gold]内のカードに[gold]エセリアル[/gold]を追加する。",
+  "INDOMITABLESPIRE2-CARRIER_AIRCRAFT.description": "{aircraftPrefix:carrierAircraftIcons()}向けの効果を発動でき、トゲを無効化する特殊なカード。一部は耐久値を持つ。戦闘終了時、自分の[gold]廃棄札[/gold]にあるすべての{aircraftPrefix:carrierAircraftIcons()}に対応する[gold]デッキ[/gold]内のカードに[gold]エセリアル[/gold]を追加する。",
   "INDOMITABLESPIRE2-STRIKE_FIGHTER.title": "戦闘攻撃機",
-  "INDOMITABLESPIRE2-STRIKE_FIGHTER.description": "制空と打撃の両方の性質を持つ艦載機。関連する効果を誘発できる。通常は[gold]ブロック[/gold]を提供するか、戦術的な効果を与える。",
+  "INDOMITABLESPIRE2-STRIKE_FIGHTER.description": "制空と打撃の両方の性質を持つ{aircraftPrefix:carrierAircraftIcons()}。関連する効果を誘発できる。通常は[gold]ブロック[/gold]を提供するか、戦術的な効果を与える。",
   "INDOMITABLESPIRE2-TORPEDO_BOMBER.title": "雷撃機",
-  "INDOMITABLESPIRE2-TORPEDO_BOMBER.description": "雷撃機としての性質を持つ艦載機。関連する効果を誘発できる。[blue]浸水[/blue]や[gold]装甲破壊[/gold]を与えることがある。",
+  "INDOMITABLESPIRE2-TORPEDO_BOMBER.description": "{aircraftPrefix:torpedoBomberIcons()}としての性質を持つ{aircraftPrefix:carrierAircraftIcons()}。関連する効果を誘発できる。[blue]浸水[/blue]や[gold]装甲破壊[/gold]を与えることがある。",
   "INDOMITABLESPIRE2-DIVE_BOMBER.title": "急降下爆撃機",
-  "INDOMITABLESPIRE2-DIVE_BOMBER.description": "急降下爆撃機としての性質を持つ艦載機。関連する効果を誘発できる。通常は敵の一部防御ギミックを無視できる。",
+  "INDOMITABLESPIRE2-DIVE_BOMBER.description": "{aircraftPrefix:diveBomberIcons()}としての性質を持つ{aircraftPrefix:carrierAircraftIcons()}。関連する効果を誘発できる。通常は敵の一部防御ギミックを無視できる。",
   "INDOMITABLESPIRE2-LEVEL_BOMBER.title": "水平爆撃機",
-  "INDOMITABLESPIRE2-LEVEL_BOMBER.description": "水平爆撃機としての性質を持つ艦載機。関連する効果を誘発できる。通常は[gold]全体ダメージ[/gold]効果を持つ。",
+  "INDOMITABLESPIRE2-LEVEL_BOMBER.description": "{aircraftPrefix:levelBomberIcons()}としての性質を持つ{aircraftPrefix:carrierAircraftIcons()}。関連する効果を誘発できる。通常は[gold]全体ダメージ[/gold]効果を持つ。",
   "INDOMITABLESPIRE2-DURABILITY.title": "耐久",
   "INDOMITABLESPIRE2-DURABILITY.description": "このカードの耐久が0にある場合、[gold]廃棄[/gold]される。",
   "INDOMITABLESPIRE2-REQUIRE.title": "必要",
@@ -24,5 +24,5 @@
   "INDOMITABLESPIRE2-VERSATILE.title": "多用途",
   "INDOMITABLESPIRE2-VERSATILE.description": "複数のプレイ効果を持つカード。プレイ方法、またはプレイ時の選択に応じた効果を発動する。",
   "INDOMITABLESPIRE2-TYPE_SYNERGY.title": "機種シナジー",
-  "INDOMITABLESPIRE2-TYPE_SYNERGY.description": "この戦闘中、誰かが指定された種類の[gold]艦載機[/gold]カードを1枚プレイするたび、このカードのエナジーコストが{energyPrefix:energyIcons(1)}減少する。"
+  "INDOMITABLESPIRE2-TYPE_SYNERGY.description": "この戦闘中、誰かが指定された種類の{aircraftPrefix:carrierAircraftIcons()}カードを1枚プレイするたび、このカードのエナジーコストが{energyPrefix:energyIcons(1)}減少する。"
 }

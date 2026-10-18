@@ -1,14 +1,14 @@
 {
   "INDOMITABLESPIRE2-CARRIER_AIRCRAFT.title": "Carrier Aircraft",
-  "INDOMITABLESPIRE2-CARRIER_AIRCRAFT.description": "A special card type that triggers Carrier Aircraft effects and is immune to Thorns; some have Durability. At the end of combat, add [gold]Ethereal[/gold] to the [gold]Deck[/gold] versions corresponding to all Carrier Aircraft in your [gold]Exhaust Pile[/gold].",
+  "INDOMITABLESPIRE2-CARRIER_AIRCRAFT.description": "A special card type that triggers {aircraftPrefix:carrierAircraftIcons()} effects and is immune to Thorns; some have Durability. At the end of combat, add [gold]Ethereal[/gold] to the [gold]Deck[/gold] versions corresponding to all {aircraftPrefix:carrierAircraftIcons()} in your [gold]Exhaust Pile[/gold].",
   "INDOMITABLESPIRE2-STRIKE_FIGHTER.title": "Strike Fighter",
-  "INDOMITABLESPIRE2-STRIKE_FIGHTER.description": "A Carrier Aircraft classified as a Strike Fighter, triggering related effects. Usually provides [gold]Block[/gold] or tactical effects.",
+  "INDOMITABLESPIRE2-STRIKE_FIGHTER.description": "A {aircraftPrefix:carrierAircraftIcons()} classified as a {aircraftPrefix:strikeFighterIcons()}, triggering related effects. Usually provides [gold]Block[/gold] or tactical effects.",
   "INDOMITABLESPIRE2-TORPEDO_BOMBER.title": "Torpedo Bomber",
-  "INDOMITABLESPIRE2-TORPEDO_BOMBER.description": "A Carrier Aircraft classified as a Torpedo Bomber, triggering related effects. May apply [blue]Flooded[/blue] or [gold]Armor Break[/gold].",
+  "INDOMITABLESPIRE2-TORPEDO_BOMBER.description": "A {aircraftPrefix:carrierAircraftIcons()} classified as a {aircraftPrefix:torpedoBomberIcons()}, triggering related effects. May apply [blue]Flooded[/blue] or [gold]Armor Break[/gold].",
   "INDOMITABLESPIRE2-DIVE_BOMBER.title": "Dive Bomber",
-  "INDOMITABLESPIRE2-DIVE_BOMBER.description": "A Carrier Aircraft classified as a Dive Bomber, triggering related effects. Usually bypasses some of the enemy's defense mechanisms.",
+  "INDOMITABLESPIRE2-DIVE_BOMBER.description": "A {aircraftPrefix:carrierAircraftIcons()} classified as a {aircraftPrefix:diveBomberIcons()}, triggering related effects. Usually bypasses some of the enemy's defense mechanisms.",
   "INDOMITABLESPIRE2-LEVEL_BOMBER.title": "Level Bomber",
-  "INDOMITABLESPIRE2-LEVEL_BOMBER.description": "A Carrier Aircraft classified as a Level Bomber, triggering related effects. Usually features [gold]AoE Damage[/gold].",
+  "INDOMITABLESPIRE2-LEVEL_BOMBER.description": "A {aircraftPrefix:carrierAircraftIcons()} classified as a {aircraftPrefix:levelBomberIcons()}, triggering related effects. Usually features [gold]AoE Damage[/gold].",
   "INDOMITABLESPIRE2-DURABILITY.title": "Durability",
   "INDOMITABLESPIRE2-DURABILITY.description": "If this card's durability reaches zero, it is [gold]Exhausted[/gold].",
   "INDOMITABLESPIRE2-REQUIRE.title": "Requires",
@@ -24,5 +24,5 @@
   "INDOMITABLESPIRE2-VERSATILE.title": "Versatile",
   "INDOMITABLESPIRE2-VERSATILE.description": "This card has multiple play effects. The effect used depends on how it is played or the choice made when playing it.",
   "INDOMITABLESPIRE2-TYPE_SYNERGY.title": "Aircraft Type Synergy",
-  "INDOMITABLESPIRE2-TYPE_SYNERGY.description": "For each [gold]Carrier Aircraft[/gold] card of a specified type played by anyone this combat, this card costs {energyPrefix:energyIcons(1)} less."
+  "INDOMITABLESPIRE2-TYPE_SYNERGY.description": "For each {aircraftPrefix:carrierAircraftIcons()} card of a specified type played by anyone this combat, this card costs {energyPrefix:energyIcons(1)} less."
 }

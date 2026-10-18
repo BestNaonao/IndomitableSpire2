@@ -10,9 +10,9 @@
   "INDOMITABLESPIRE2-ROYAL_VIOLIN.description": "每当你在[gold]休息处[/gold][gold]休息[/gold]后，直到到达下一个[gold]休息处[/gold]为止，在每场战斗的每个回合开始时，额外抽[blue]{Cards}[/blue]张牌。",
   "INDOMITABLESPIRE2-ROYAL_VIOLIN.additionalRestSiteHealText": "直到到达下一个[gold]休息处[/gold]为止，每场战斗的每个回合开始时额外抽[blue]{Cards}[/blue]张牌。",
   "INDOMITABLESPIRE2-LEND_LEASE_ACT.title": "租借法案",
-  "INDOMITABLESPIRE2-LEND_LEASE_ACT.selectionScreenPrompt": "选择一张白鹰舰载机牌添加到抽牌堆。",
+  "INDOMITABLESPIRE2-LEND_LEASE_ACT.selectionScreenPrompt": "选择一张白鹰{aircraftPrefix:carrierAircraftIcons()}牌添加到抽牌堆。",
   "INDOMITABLESPIRE2-LEND_LEASE_ACT.flavor": "白鹰的援助，已抵达甲板。",
-  "INDOMITABLESPIRE2-LEND_LEASE_ACT.description": "每场战斗开始时，从三张白鹰舰载机中选择一张牌添加到[gold]抽牌堆[/gold]。第一次抽到这张牌时，获得{Energy:energyIcons()}。",
+  "INDOMITABLESPIRE2-LEND_LEASE_ACT.description": "每场战斗开始时，从三张白鹰{aircraftPrefix:carrierAircraftIcons()}中选择一张牌添加到[gold]抽牌堆[/gold]。第一次抽到这张牌时，获得{Energy:energyIcons()}。",
   
   "INDOMITABLESPIRE2-IMPLACABLE_HORN.title": "怨仇之角",
   "INDOMITABLESPIRE2-IMPLACABLE_HORN.flavor": "怨仇小姐的头饰之一。唔……修女一般不会戴这种东西吧？不过，她戴着它听指挥官告解时，倒是从来不会嫌累呢……",

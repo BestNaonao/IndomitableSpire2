@@ -10,9 +10,9 @@
   "INDOMITABLESPIRE2-ROYAL_VIOLIN.description": "After you [gold]Rest[/gold] at a [gold]Rest Site[/gold], draw [blue]{Cards}[/blue] additional {Cards:plural:card|cards} at the start of each turn in every combat until you enter the next [gold]Rest Site[/gold].",
   "INDOMITABLESPIRE2-ROYAL_VIOLIN.additionalRestSiteHealText": "Draw [blue]{Cards}[/blue] additional {Cards:plural:card|cards} at the start of each turn in every combat until you enter the next [gold]Rest Site[/gold].",
   "INDOMITABLESPIRE2-LEND_LEASE_ACT.title": "Lend-Lease Act",
-  "INDOMITABLESPIRE2-LEND_LEASE_ACT.selectionScreenPrompt": "Choose a Eagle Union Carrier Aircraft card to add to your Draw Pile.",
+  "INDOMITABLESPIRE2-LEND_LEASE_ACT.selectionScreenPrompt": "Choose a Eagle Union {aircraftPrefix:carrierAircraftIcons()} card to add to your Draw Pile.",
   "INDOMITABLESPIRE2-LEND_LEASE_ACT.flavor": "Eagle Union support has reached the flight deck.",
-  "INDOMITABLESPIRE2-LEND_LEASE_ACT.description": "At the start of each combat, choose 1 of 3 Eagle Union Carrier Aircraft cards to add to your [gold]Draw Pile[/gold]. The first time you draw that card, gain {Energy:energyIcons()}.",
+  "INDOMITABLESPIRE2-LEND_LEASE_ACT.description": "At the start of each combat, choose 1 of 3 Eagle Union {aircraftPrefix:carrierAircraftIcons()} cards to add to your [gold]Draw Pile[/gold]. The first time you draw that card, gain {Energy:energyIcons()}.",
   
   "INDOMITABLESPIRE2-IMPLACABLE_HORN.title": "Implacable Horn",
   "INDOMITABLESPIRE2-IMPLACABLE_HORN.flavor": "One of Miss Implacable's hair ornaments. Hmm... nuns don't usually wear these, do they? Still, she never seems to tire of wearing it while hearing the Commander's confessions...",

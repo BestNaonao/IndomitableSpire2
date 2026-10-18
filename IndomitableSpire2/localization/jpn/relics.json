@@ -10,9 +10,9 @@
   "INDOMITABLESPIRE2-ROYAL_VIOLIN.description": "[gold]休憩所[/gold]で[gold]休憩[/gold]すると、次の[gold]休憩所[/gold]に到着するまで、すべての戦闘で毎ターン開始時に追加でカードを[blue]{Cards}[/blue]枚引く。",
   "INDOMITABLESPIRE2-ROYAL_VIOLIN.additionalRestSiteHealText": "次の[gold]休憩所[/gold]に到着するまで、すべての戦闘で毎ターン開始時に追加でカードを[blue]{Cards}[/blue]枚引く。",
   "INDOMITABLESPIRE2-LEND_LEASE_ACT.title": "レンドリース法",
-  "INDOMITABLESPIRE2-LEND_LEASE_ACT.selectionScreenPrompt": "山札に加えるユニオンの艦載機カードを1枚選ぶ。",
+  "INDOMITABLESPIRE2-LEND_LEASE_ACT.selectionScreenPrompt": "山札に加えるユニオンの{aircraftPrefix:carrierAircraftIcons()}カードを1枚選ぶ。",
   "INDOMITABLESPIRE2-LEND_LEASE_ACT.flavor": "ユニオンの援軍が飛行甲板に到着しましたわ。",
-  "INDOMITABLESPIRE2-LEND_LEASE_ACT.description": "各戦闘の開始時、ユニオンの艦載機カード3枚から1枚を選び、[gold]山札[/gold]に加える。そのカードを初めて引いた時、{Energy:energyIcons()}を得る。",
+  "INDOMITABLESPIRE2-LEND_LEASE_ACT.description": "各戦闘の開始時、ユニオンの{aircraftPrefix:carrierAircraftIcons()}カード3枚から1枚を選び、[gold]山札[/gold]に加える。そのカードを初めて引いた時、{Energy:energyIcons()}を得る。",
   
   "INDOMITABLESPIRE2-IMPLACABLE_HORN.title": "インプラカブルの角",
   "INDOMITABLESPIRE2-IMPLACABLE_HORN.flavor": "インプラカブルさんの髪飾りの一つですわ。ん……普通、シスターはこういうものをつけませんわよね？でも、これをつけて指揮官の懺悔を聞くのは、ちっとも疲れないみたいですわね……",
