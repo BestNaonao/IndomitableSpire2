@@ -17,6 +17,9 @@
   "INDOMITABLESPIRE2-IMPLACABLE_HORN.title": "インプラカブルの角",
   "INDOMITABLESPIRE2-IMPLACABLE_HORN.flavor": "インプラカブルさんの髪飾りの一つですわ。ん……普通、シスターはこういうものをつけませんわよね？でも、これをつけて指揮官の懺悔を聞くのは、ちっとも疲れないみたいですわね……",
   "INDOMITABLESPIRE2-IMPLACABLE_HORN.description": "あなたのアタックでダメージを与えるたび、さらにそのダメージに等しい敵のHPを、その敵自身の[gold]ブロック[/gold]に変換する。この変換でHPが[blue]1[/blue]未満になることはない。",
+  "INDOMITABLESPIRE2-IMPLACABLE_VEIL.title": "インプラカブルのヴェール",
+  "INDOMITABLESPIRE2-IMPLACABLE_VEIL.flavor": "「インプラカブルさんは、救済の前には罰が必要だとおっしゃるの。でしたら、お昼寝を邪魔した罪も、まとめて裁いていただけるかしら？……指揮官、あなたの罪を告げ口するとは言っていませんわよ。」",
+  "INDOMITABLESPIRE2-IMPLACABLE_VEIL.description": "獲得時、[gold]容赦なき信条[/gold]を[blue]1[/blue]枚[gold]デッキ[/gold]に加える。",
   
   "INDOMITABLESPIRE2-ROYAL_BOUNTY.title": "ロイヤルバウンティ",
   "INDOMITABLESPIRE2-ROYAL_BOUNTY.flavor": "「ビスマルクを撃沈せよ！」 —— ジョン・トーヴィー大将",

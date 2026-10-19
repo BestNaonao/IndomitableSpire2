@@ -17,6 +17,9 @@
   "INDOMITABLESPIRE2-IMPLACABLE_HORN.title": "Implacable Horn",
   "INDOMITABLESPIRE2-IMPLACABLE_HORN.flavor": "One of Miss Implacable's hair ornaments. Hmm... nuns don't usually wear these, do they? Still, she never seems to tire of wearing it while hearing the Commander's confessions...",
   "INDOMITABLESPIRE2-IMPLACABLE_HORN.description": "Whenever your Attacks deal damage, also convert that much of the enemy's HP into its own [gold]Block[/gold]. This conversion cannot reduce its HP below [blue]1[/blue].",
+  "INDOMITABLESPIRE2-IMPLACABLE_VEIL.title": "Implacable Veil",
+  "INDOMITABLESPIRE2-IMPLACABLE_VEIL.flavor": "“Miss Implacable says punishment must come before redemption. Perhaps she could settle the sin of interrupting my nap as well? ...Commander, I never said I was confessing your sins.”",
+  "INDOMITABLESPIRE2-IMPLACABLE_VEIL.description": "Upon pickup, add [blue]1[/blue] [gold]Creed of Reprisal[/gold] to your [gold]Deck[/gold].",
   
   "INDOMITABLESPIRE2-ROYAL_BOUNTY.title": "Royal Bounty",
   "INDOMITABLESPIRE2-ROYAL_BOUNTY.flavor": "\"Sink the Bismarck!\" - Admiral John Tovey",

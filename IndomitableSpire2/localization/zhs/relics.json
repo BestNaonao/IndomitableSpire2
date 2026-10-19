@@ -17,6 +17,9 @@
   "INDOMITABLESPIRE2-IMPLACABLE_HORN.title": "怨仇之角",
   "INDOMITABLESPIRE2-IMPLACABLE_HORN.flavor": "怨仇小姐的头饰之一。唔……修女一般不会戴这种东西吧？不过，她戴着它听指挥官告解时，倒是从来不会嫌累呢……",
   "INDOMITABLESPIRE2-IMPLACABLE_HORN.description": "每当你的攻击造成伤害时，额外将该敌人等量的生命转化为其自身的[gold]格挡[/gold]。该转化不会使其生命值低于[blue]1[/blue]。",
+  "INDOMITABLESPIRE2-IMPLACABLE_VEIL.title": "怨仇之纱",
+  "INDOMITABLESPIRE2-IMPLACABLE_VEIL.flavor": "「怨仇小姐说，救赎之前总得先有惩罚。那打扰午睡的罪，也可以请她一并清算吧？……指挥官，我可没说是在告您的状哦。」",
+  "INDOMITABLESPIRE2-IMPLACABLE_VEIL.description": "拾起时，将[blue]1[/blue]张[gold]予怨予还的信条[/gold]加入你的[gold]牌组[/gold]。",
   
   "INDOMITABLESPIRE2-ROYAL_BOUNTY.title": "皇家赏金",
   "INDOMITABLESPIRE2-ROYAL_BOUNTY.flavor": "“击沉俾斯麦号！”——约翰·托维上将",
