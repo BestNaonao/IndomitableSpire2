@@ -27,7 +27,7 @@ public sealed class Implacable : CustomAncientModel
     protected override OptionPools MakeOptionPools => 
         new(MakePool(ModelDb.RelicPool<ImplacableRelicPool>().AllRelics.ToArray()));
     
-    // 单池构造器会将同一个池用于三次不放回抽取；当前只有一件遗物，不能调用默认 Roll。
+    // 单池构造器会将同一个池用于三次不放回抽取；目前先展示已实现的全部遗物选项。
     public override IEnumerable<EventOption> AllPossibleOptions => 
         ModelDb.RelicPool<ImplacableRelicPool>().AllRelics.Select(relic => RelicOption(relic.ToMutable()));
     
