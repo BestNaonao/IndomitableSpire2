@@ -219,6 +219,8 @@
   "INDOMITABLESPIRE2-SCORCHING_FLAME_RAIN.description": "[blue]{MotivationRequire:diff()}[/blue]の[gold]やる気[/gold]を[gold]必要[/gold]とする。\nすべての敵に{Damage:diff()}ダメージを与える。\nすべての敵に[gold]炎上[/gold] [blue]{OnFirePower:diff()}[/blue]を付与する。",
   "INDOMITABLESPIRE2-FULL_CONCENTRATION.title": "全神経集中",
   "INDOMITABLESPIRE2-FULL_CONCENTRATION.description": "[gold]やる気[/gold]が[blue]100[/blue]ある時、[gold]本気モード[/gold]ボタンを押すことで、[gold]本気モード[/gold]を[blue]{FullConcentrationPower:diff()}[/blue]得て、追加ターンを得る。",
+  "INDOMITABLESPIRE2-CREED_OF_REPRISAL.title": "容赦なき信条",
+  "INDOMITABLESPIRE2-CREED_OF_REPRISAL.description": "敵から[gold]ブロック[/gold]されなかったダメージを受けるたび、[gold]アタック[/gold]を[blue]{CreedOfReprisalPower:diff()}[/blue]枚プレイするまで、[gold]山札[/gold]の一番上からカードを1枚ずつその敵に対してプレイする。その[gold]アタック[/gold]はプレイ後に[gold]廃棄[/gold]する。",
   
   "INDOMITABLESPIRE2-DISPATCH_COMMISSION.title": "委託発令",
   "INDOMITABLESPIRE2-DISPATCH_COMMISSION.banter": "新しい任務ですわ…指揮官ほどの歴戦の方なら楽勝でしょうね",

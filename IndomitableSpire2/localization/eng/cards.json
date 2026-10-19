@@ -219,6 +219,8 @@
   "INDOMITABLESPIRE2-SCORCHING_FLAME_RAIN.description": "[gold]Requires[/gold] [blue]{MotivationRequire:diff()}[/blue] [gold]Motivation[/gold].\nDeal {Damage:diff()} damage to ALL enemies.\nApply [blue]{OnFirePower:diff()}[/blue] [gold]On Fire[/gold] to ALL enemies.",
   "INDOMITABLESPIRE2-FULL_CONCENTRATION.title": "Total Focus",
   "INDOMITABLESPIRE2-FULL_CONCENTRATION.description": "Whenever you have [blue]100[/blue] [gold]Motivation[/gold], you may click the [gold]Earnest Mode[/gold] button to gain [blue]{FullConcentrationPower:diff()}[/blue] [gold]Earnest Mode[/gold] and take an extra turn.",
+  "INDOMITABLESPIRE2-CREED_OF_REPRISAL.title": "Creed of Reprisal",
+  "INDOMITABLESPIRE2-CREED_OF_REPRISAL.description": "Whenever you take unblocked damage from an enemy, play cards from the top of your [gold]Draw Pile[/gold] against it one at a time until [blue]{CreedOfReprisalPower:diff()}[/blue] {CreedOfReprisalPower:plural:Attack has|Attacks have} been played. [gold]Exhaust[/gold] those Attacks after playing them.",
   
   "INDOMITABLESPIRE2-DISPATCH_COMMISSION.title": "Dispatch Commission",
   "INDOMITABLESPIRE2-DISPATCH_COMMISSION.banter": "New missions, huh... Should be no problem at all for someone as experienced as you, right?",
