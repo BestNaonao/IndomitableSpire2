@@ -12,6 +12,25 @@ namespace IndomitableSpire2.IndomitableSpire2Code.Hooks;
 
 public static class CustomHook
 {
+    /// <summary>一次侦察选择全部结束后广播一次；不按查看或选择的牌数重复触发。</summary>
+    public static async Task AfterRecon(ICombatState combatState, PlayerChoiceContext choiceContext, Player player)
+    {
+        foreach (var model in combatState.IterateHookListeners())
+        {
+            if (model is not IAfterReconSubscriber subscriber) continue;
+            choiceContext.PushModel(model);
+            try
+            {
+                await subscriber.AfterRecon(choiceContext, player);
+                model.InvokeExecutionFinished();
+            }
+            finally
+            {
+                choiceContext.PopModel(model);
+            }
+        }
+    }
+    
     /// <summary>
     /// 广播一次已完成的真实升级。RunState 在战斗外包含牌组监听者；传入战斗时还包含战斗实例。
     /// 与同步的 CardCmd.Upgrade 一起完成，不用于升级预览、读档或直接调用 UpgradeInternal 的初始化流程。

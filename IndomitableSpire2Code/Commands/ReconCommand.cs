@@ -1,4 +1,5 @@
-﻿using MegaCrit.Sts2.Core.CardSelection;
+﻿using IndomitableSpire2.IndomitableSpire2Code.Hooks;
+using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Players;
@@ -58,25 +59,26 @@ public class ReconCommand
         }
         CardsToHand = toHandList;
         
-        if (cardsToRecon.Count == 0) return this;
-        
-        // 阶段 2：选择弃置
-        var discardSelection = await CardSelectCmd.FromSimpleGrid(
-            choiceContext, cardsToRecon, _player, new CardSelectorPrefs(DiscardPrompt, 0, cardsToRecon.Count));
-        var toDiscardList = discardSelection.ToList();
-        foreach (var card in toDiscardList)
+        if (cardsToRecon.Count > 0)
         {
-            await CardCmd.Discard(choiceContext, card);
-            cardsToRecon.Remove(card);
+            // 阶段 2：全部拿入手牌时跳过弃置，但仍广播侦察完成。
+            var discardSelection = await CardSelectCmd.FromSimpleGrid(
+                choiceContext, cardsToRecon, _player, new CardSelectorPrefs(DiscardPrompt, 0, cardsToRecon.Count));
+            var toDiscardList = discardSelection.ToList();
+            foreach (var card in toDiscardList)
+            {
+                await CardCmd.Discard(choiceContext, card);
+                cardsToRecon.Remove(card);
+            }
+            CardsToDiscard = toDiscardList;
         }
-        CardsToDiscard = toDiscardList;
         
         // 阶段 3：记录剩下的牌（保持在牌库顶不动）
         CardsKept = cardsToRecon.ToList();
         
-        // 阶段 4：之后我们可以在这里触发我们的自定义钩子。
-        // await CustomHook.AfterRecon(CardModel card, Player player, int amount);
-        
+        // 阶段 4：触发钩子
+        if (_player.Creature.CombatState is not { } combatState) return this;
+        await CustomHook.AfterRecon(combatState, choiceContext, _player);
         return this;
     }
 }
