@@ -136,5 +136,11 @@
   "INDOMITABLESPIRE2-RESTING_EYES_POWER.title": "目休め",
   "INDOMITABLESPIRE2-DROWSY_POWER.description": "このターン、エナジーを消費するたび、[gold]催眠[/gold]を[blue]1[/blue]得る。",
   "INDOMITABLESPIRE2-DROWSY_POWER.smartDescription": "このターン、エナジーを消費するたび、[gold]催眠[/gold]を[blue]{Amount}[/blue]得る。",
-  "INDOMITABLESPIRE2-DROWSY_POWER.title": "眠気"
+  "INDOMITABLESPIRE2-DROWSY_POWER.title": "眠気",
+  "INDOMITABLESPIRE2-ILLUMINATED_POWER.description": "{aircraftPrefix:carrierAircraftIcons()}カードによるアタックから受けるダメージが増加する。敵ターン終了時、この効果でダメージが増加したカードのプレイ1回につき1減少する。",
+  "INDOMITABLESPIRE2-ILLUMINATED_POWER.smartDescription": "{aircraftPrefix:carrierAircraftIcons()}カードによるアタックから受けるダメージが[blue]{Amount}[/blue]増加する。敵ターン終了時、この効果でダメージが増加したカードのプレイ1回につき1減少する。",
+  "INDOMITABLESPIRE2-ILLUMINATED_POWER.title": "照明",
+  "INDOMITABLESPIRE2-NAVIGATOR_POWER.description": "[gold]偵察[/gold]するたび、[gold]やる気[/gold]を得る。",
+  "INDOMITABLESPIRE2-NAVIGATOR_POWER.smartDescription": "[gold]偵察[/gold]するたび、[gold]やる気[/gold][blue]{Amount}[/blue]を得る。",
+  "INDOMITABLESPIRE2-NAVIGATOR_POWER.title": "先導者"
 }
