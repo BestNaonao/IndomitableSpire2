@@ -9,6 +9,11 @@ namespace IndomitableSpire2.IndomitableSpire2Code.Localization.HoverTips;
 
 public static class CustomHoverTipFactory
 {
+    /// <summary>侦察仅作为静态说明使用，不注册为卡牌关键词。</summary>
+    public static IHoverTip FromRecon() => new HoverTip(
+        new LocString("static_hover_tips", "INDOMITABLESPIRE2-RECON.title"),
+        new LocString("static_hover_tips", "INDOMITABLESPIRE2-RECON.description"));
+    
     /// <summary>召回仅作为静态说明使用，不注册为卡牌关键词。</summary>
     public static IHoverTip FromRecall() => new HoverTip(
         new LocString("static_hover_tips", "INDOMITABLESPIRE2-RECALL.title"),
