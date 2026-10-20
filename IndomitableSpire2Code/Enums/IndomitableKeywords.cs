@@ -38,6 +38,10 @@ public static class IndomitableKeywords
     [CustomEnum("formation"), KeywordProperties(AutoKeywordPosition.After)]
     public static CardKeyword Formation;
     
+    // 回光：将被消耗时立即额外打出一次，由通用补丁处理。在卡面末尾自动显示。
+    [CustomEnum("afterglow"), KeywordProperties(AutoKeywordPosition.After)]
+    public static CardKeyword Afterglow;
+    
     // 同心：生成或变化的新牌继承来源牌的升级、关键词和附魔。
     [CustomEnum("resonance"), KeywordProperties(AutoKeywordPosition.Before)]
     public static CardKeyword Resonance;

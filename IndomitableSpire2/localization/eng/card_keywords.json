@@ -15,6 +15,8 @@
   "INDOMITABLESPIRE2-REQUIRE.description": "This card can only be played if you meet the specified amount.",
   "INDOMITABLESPIRE2-FORMATION.title": "Formation",
   "INDOMITABLESPIRE2-FORMATION.description": "When played, put a random card with the same name that does not cost 0 Energy from your [gold]Draw Pile[/gold] or [gold]Discard Pile[/gold] into your [gold]Hand[/gold].",
+  "INDOMITABLESPIRE2-AFTERGLOW.title": "Afterglow",
+  "INDOMITABLESPIRE2-AFTERGLOW.description": "Immediately play this card one additional time before it is [gold]Exhausted[/gold].",
   "INDOMITABLESPIRE2-COMMISSION.title": "Commission",
   "INDOMITABLESPIRE2-COMMISSION.description": "Unplayable until completed. When played, both you and the player who gave it to you gain rewards.",
   "INDOMITABLESPIRE2-ELEGANCE.title": "Elegance",
