@@ -202,6 +202,7 @@
   "INDOMITABLESPIRE2-FIRECREST.title": "ファイアクレスト",
   "INDOMITABLESPIRE2-FIRECREST.description": "{Damage:diff()}ダメージを与える。\n[gold]浸水[/gold][blue]{FloodingPower:diff()}[/blue]を与える。敵が[gold]炎上[/gold]している場合、[gold]耐久[/gold]を追加で{DurabilityCost}失い、[gold]浸水[/gold][blue]{FloodingPower:diff()}[/blue]を追加で与える。",
   "INDOMITABLESPIRE2-NAVIGATOR.title": "先導者",
+  "INDOMITABLESPIRE2-NAVIGATOR.banter": "じゃあ今回は私にナビを任せてくれません？……ん？指揮官は…私を「助手席で風景を眺めるだけ」だと思っています？",
   "INDOMITABLESPIRE2-NAVIGATOR.description": "[gold]偵察[/gold]するたび、[gold]やる気[/gold][blue]{NavigatorPower:diff()}[/blue]を得る。",
   
   "INDOMITABLESPIRE2-DESSERT.title": "デザート",

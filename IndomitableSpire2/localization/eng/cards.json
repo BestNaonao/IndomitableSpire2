@@ -202,6 +202,7 @@
   "INDOMITABLESPIRE2-FIRECREST.title": "Firecrest",
   "INDOMITABLESPIRE2-FIRECREST.description": "Deal {Damage:diff()} damage.\nApply [blue]{FloodingPower:diff()}[/blue] [gold]Flooding[/gold]. If the enemy has [gold]On Fire[/gold], lose {DurabilityCost} additional [gold]Durability[/gold] and apply [blue]{FloodingPower:diff()}[/blue] additional [gold]Flooding[/gold].",
   "INDOMITABLESPIRE2-NAVIGATOR.title": "Navigator",
+  "INDOMITABLESPIRE2-NAVIGATOR.banter": "Will you let me navigate today? Huh? You don't think I'll just sit on the passenger seat and enjoy the view, do you?",
   "INDOMITABLESPIRE2-NAVIGATOR.description": "Whenever you [gold]Recon[/gold], gain [blue]{NavigatorPower:diff()}[/blue] [gold]Motivation[/gold].",
   
   "INDOMITABLESPIRE2-DESSERT.title": "Dessert",
