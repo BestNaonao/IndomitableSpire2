@@ -65,9 +65,11 @@ public abstract class CarrierAircraftCard(
         return Task.CompletedTask;
     }
     
-    /// <summary>
-    /// 根据受击目标集合的攻击意图计算耐久损失。
-    /// </summary>
+    /// <summary> 预览的基础损耗；子类可合并自身的附加消耗，之后统一接受耐久修正。 </summary>
+    public virtual int CalculateDurabilityLossForPreview(IEnumerable<Creature> targets) =>
+        CalculateDurabilityLoss(targets);
+    
+    /// <summary>根据受击目标集合的攻击意图计算耐久损失。</summary>
     public int CalculateDurabilityLoss(IEnumerable<Creature> targets)
     {
         if (CombatState == null) return 0;

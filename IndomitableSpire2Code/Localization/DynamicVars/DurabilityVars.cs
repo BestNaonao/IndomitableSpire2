@@ -50,8 +50,8 @@ public class DurabilityVar : DynamicVar
         
         // 3. 调用舰载机的纯计算函数，获取预测损失
         if (potentialTargets.Count != 0)
-            _predictedLoss = CustomHook.ModifyDurabilityLossInCombat(
-                aircraftCard.CombatState, aircraftCard, aircraftCard.CalculateDurabilityLoss(potentialTargets), out _);
+            _predictedLoss = CustomHook.ModifyDurabilityLossInCombat(aircraftCard.CombatState, aircraftCard,
+                aircraftCard.CalculateDurabilityLossForPreview(potentialTargets), out _);
         
         // 数字表盘读取 PreviewValue：显示指向敌人时的预计剩余耐久，不改变实际值。
         if (_predictedLoss > 0)
