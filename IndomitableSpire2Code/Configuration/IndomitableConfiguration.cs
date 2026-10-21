@@ -42,6 +42,9 @@ public sealed class IndomitableConfiguration : SimpleModConfig
     /// </summary>
     public static bool PlaySpecialCardAnimations { get; set; } = true;
     
+    /// <summary>舰载机特殊飞行演出；不影响一次 Attack 动作、命中特效、音效和伤害。</summary>
+    public static bool PlayAircraftFlightAnimations { get; set; } = true;
+    
     /// <summary>
     /// 玩家催眠爆发时是否播放特殊动画，仅影响视觉表现。
     /// </summary>

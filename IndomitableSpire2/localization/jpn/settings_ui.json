@@ -8,6 +8,8 @@
   "INDOMITABLESPIRE2-ISOLATE_SPECIAL_VOICE_BY_PLAYER.hover.desc": "[gold]有効の場合：[/gold]同じプレイヤーの次の専用ボイスは前のボイスを中断します。別のプレイヤーのボイスは同時に再生できます。\n[gold]無効の場合：[/gold]インドミタブルのボイスはすべて同じ再生枠を使い、次のボイスが前のボイスを中断します。\nこの設定は自分の端末で聞こえる音だけに適用され、仲間の設定には影響しません。",
   "INDOMITABLESPIRE2-PLAY_SPECIAL_CARD_ANIMATIONS.title": "カードの特殊アニメーションを再生",
   "INDOMITABLESPIRE2-PLAY_SPECIAL_CARD_ANIMATIONS.hover.desc": "[gold]有効の場合：[/gold]特定の着せ替え衣装を着たインドミタブルが特定のカードを使うと、専用アニメーションが再生されます。\n[gold]無効の場合：[/gold]通常の動作になります。戦闘勝利時のアニメーションには影響しません。",
+  "INDOMITABLESPIRE2-PLAY_AIRCRAFT_FLIGHT_ANIMATIONS.title": "艦載機の飛行アニメーションを再生",
+  "INDOMITABLESPIRE2-PLAY_AIRCRAFT_FLIGHT_ANIMATIONS.hover.desc": "[gold]有効の場合：[/gold]艦載機が機種に応じた飛行と投弾を行ってから攻撃します。高速モードでは2倍速になります。\n[gold]無効の場合：[/gold]飛行アニメーションをスキップ。",
   "INDOMITABLESPIRE2-PLAY_HYPNOTIZED_ANIMATION.title": "催眠時の特殊アニメーションを再生",
   "INDOMITABLESPIRE2-PLAY_HYPNOTIZED_ANIMATION.hover.desc": "[gold]有効の場合：[/gold]プレイヤーの催眠が5スタックに達して効果が発動すると、対応するアニメーションが再生されます。\nこの設定はアニメーションのみに影響し、催眠の効果は変わりません。",
   "INDOMITABLESPIRE2-PLAY_SPECIAL_LINE_ONCE_PER_COMBAT.title": "カードごとの特殊台詞を1戦闘につき1回のみ再生",

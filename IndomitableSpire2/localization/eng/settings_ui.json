@@ -8,6 +8,8 @@
   "INDOMITABLESPIRE2-ISOLATE_SPECIAL_VOICE_BY_PLAYER.hover.desc": "[gold]When enabled:[/gold] a player's next special card voice interrupts their own previous line, while different players' voices can overlap.\n[gold]When disabled:[/gold] all Indomitable voices share one playback channel, so the next line interrupts the previous one.\nThis only changes what you hear on this device; it does not change teammates' settings.",
   "INDOMITABLESPIRE2-PLAY_SPECIAL_CARD_ANIMATIONS.title": "Play special card animations",
   "INDOMITABLESPIRE2-PLAY_SPECIAL_CARD_ANIMATIONS.hover.desc": "[gold]When enabled:[/gold] Indomitable in specific outfits performs unique animations for certain cards.\n[gold]When disabled:[/gold] normal animations play. Combat victory animations are unaffected.",
+  "INDOMITABLESPIRE2-PLAY_AIRCRAFT_FLIGHT_ANIMATIONS.title": "Play carrier aircraft flight animations",
+  "INDOMITABLESPIRE2-PLAY_AIRCRAFT_FLIGHT_ANIMATIONS.hover.desc": "[gold]When enabled:[/gold] carrier aircraft fly and release ordnance before attacking, following their aircraft type. Fast mode plays at twice the speed.\n[gold]When disabled:[/gold] skips the flight.",
   "INDOMITABLESPIRE2-PLAY_HYPNOTIZED_ANIMATION.title": "Play special hypnosis animation",
   "INDOMITABLESPIRE2-PLAY_HYPNOTIZED_ANIMATION.hover.desc": "[gold]When enabled:[/gold] a special animation plays, if available, when a player's Hypnotized reaches 5 stacks and triggers.\nThis setting only affects animations, not the effects of Hypnotized.",
   "INDOMITABLESPIRE2-PLAY_SPECIAL_LINE_ONCE_PER_COMBAT.title": "Play each card's special line once per combat",
