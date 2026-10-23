@@ -35,4 +35,7 @@ public static class StringExtensions
     
     public static string EnchantmentImagePath(this string path) => 
         Path.Join(MainFile.ModId, "images", "enchantments", path);
+    
+    public static string AircraftImagePath(this string path) => 
+        Path.Join(MainFile.ModId, "images", "vfx", "aircraft", path);
 }
