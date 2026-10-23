@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b4v3eki1qeudr"
-path="res://.godot/imported/haiduya.png-428ae48da442230e8fdf437377a33c3f.ctex"
+uid="uid://dmjkq7q7ub3e3"
+path="res://.godot/imported/ad1_skyraider.png-cf4a0eb314997bfdb5b5501dd8ce506d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://IndomitableSpire2/images/vfx/aircraft/haiduya.png"
-dest_files=["res://.godot/imported/haiduya.png-428ae48da442230e8fdf437377a33c3f.ctex"]
+source_file="res://IndomitableSpire2/images/vfx/aircraft/ad1_skyraider.png"
+dest_files=["res://.godot/imported/ad1_skyraider.png-cf4a0eb314997bfdb5b5501dd8ce506d.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://170fq5qn0qsx"
-path="res://.godot/imported/haidahuangfeng.png-c756afaa0eed128d3620a1387961e55c.ctex"
+uid="uid://cjqpu3hve7078"
+path="res://.godot/imported/firecrest.png-4713e87ff8a430f826e0b91d4070d889.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://IndomitableSpire2/images/vfx/aircraft/haidahuangfeng.png"
-dest_files=["res://.godot/imported/haidahuangfeng.png-c756afaa0eed128d3620a1387961e55c.ctex"]
+source_file="res://IndomitableSpire2/images/vfx/aircraft/firecrest.png"
+dest_files=["res://.godot/imported/firecrest.png-4713e87ff8a430f826e0b91d4070d889.ctex"]
 
 [params]
 

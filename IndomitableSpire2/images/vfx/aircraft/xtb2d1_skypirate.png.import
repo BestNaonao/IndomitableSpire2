@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://doqic8j8tsp4c"
-path="res://.godot/imported/haipenhuo.png-493e428d753337655afbccd4a8f28201.ctex"
+uid="uid://dght07a101q6g"
+path="res://.godot/imported/xtb2d1_skypirate.png-b68a18e8e11fb73fff8e6124308297a0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://IndomitableSpire2/images/vfx/aircraft/haipenhuo.png"
-dest_files=["res://.godot/imported/haipenhuo.png-493e428d753337655afbccd4a8f28201.ctex"]
+source_file="res://IndomitableSpire2/images/vfx/aircraft/xtb2d1_skypirate.png"
+dest_files=["res://.godot/imported/xtb2d1_skypirate.png-b68a18e8e11fb73fff8e6124308297a0.ctex"]
 
 [params]
 

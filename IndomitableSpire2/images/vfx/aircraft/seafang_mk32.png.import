@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c08sppoffa1fv"
-path="res://.godot/imported/jianyu.png-dd68e9f0fc59a09cf0dfbad49231962c.ctex"
+uid="uid://cfqy1jj5hjebx"
+path="res://.godot/imported/seafang_mk32.png-d5495c255ce30b22e4b515d5670639e3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://IndomitableSpire2/images/vfx/aircraft/jianyu.png"
-dest_files=["res://.godot/imported/jianyu.png-dd68e9f0fc59a09cf0dfbad49231962c.ctex"]
+source_file="res://IndomitableSpire2/images/vfx/aircraft/seafang_mk32.png"
+dest_files=["res://.godot/imported/seafang_mk32.png-d5495c255ce30b22e4b515d5670639e3.ctex"]
 
 [params]
 

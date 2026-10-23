@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dbc44hk28cfsx"
-path="res://.godot/imported/haijufeng.png-e3547a94f79b988f8c72cb7e2772f179.ctex"
+uid="uid://w7w4qqapy4nu"
+path="res://.godot/imported/sea_gladiator.png-2a652e9a4fc3f1d879536852ddfac252.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://IndomitableSpire2/images/vfx/aircraft/haijufeng.png"
-dest_files=["res://.godot/imported/haijufeng.png-e3547a94f79b988f8c72cb7e2772f179.ctex"]
+source_file="res://IndomitableSpire2/images/vfx/aircraft/sea_gladiator.png"
+dest_files=["res://.godot/imported/sea_gladiator.png-2a652e9a4fc3f1d879536852ddfac252.ctex"]
 
 [params]
 

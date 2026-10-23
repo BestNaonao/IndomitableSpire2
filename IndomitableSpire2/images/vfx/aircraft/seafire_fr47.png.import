@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ca10x5i3hskid"
-path="res://.godot/imported/ad1.png-d7d692a976ee15442a756bde6406c76f.ctex"
+uid="uid://bxelkg1wiahqs"
+path="res://.godot/imported/seafire_fr47.png-e865e889d7a82b452f27e78ecf11e97d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://IndomitableSpire2/images/vfx/aircraft/ad1.png"
-dest_files=["res://.godot/imported/ad1.png-d7d692a976ee15442a756bde6406c76f.ctex"]
+source_file="res://IndomitableSpire2/images/vfx/aircraft/seafire_fr47.png"
+dest_files=["res://.godot/imported/seafire_fr47.png-e865e889d7a82b452f27e78ecf11e97d.ctex"]
 
 [params]
 

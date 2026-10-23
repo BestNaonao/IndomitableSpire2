@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ded2jixl61vic"
-path="res://.godot/imported/haidoushi.png-54b8cd5bd0291b114c4b7092e7086ad2.ctex"
+uid="uid://cayqqmj2hu6ur"
+path="res://.godot/imported/sea_hornet_fighter.png-68f4f941489ba2327bea2785a4c28a55.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://IndomitableSpire2/images/vfx/aircraft/haidoushi.png"
-dest_files=["res://.godot/imported/haidoushi.png-54b8cd5bd0291b114c4b7092e7086ad2.ctex"]
+source_file="res://IndomitableSpire2/images/vfx/aircraft/sea_hornet_fighter.png"
+dest_files=["res://.godot/imported/sea_hornet_fighter.png-68f4f941489ba2327bea2785a4c28a55.ctex"]
 
 [params]
 

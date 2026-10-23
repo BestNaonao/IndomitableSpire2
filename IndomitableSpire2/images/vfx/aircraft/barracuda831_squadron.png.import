@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bo6vahygam3yn"
-path="res://.godot/imported/jianyu810.png-65ad58f5d2ebb3b6dda52ca56ef0a15b.ctex"
+uid="uid://iyj8nx7tw1bo"
+path="res://.godot/imported/barracuda831_squadron.png-4be0ab28bb4af93f8782936148809d9d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://IndomitableSpire2/images/vfx/aircraft/jianyu810.png"
-dest_files=["res://.godot/imported/jianyu810.png-65ad58f5d2ebb3b6dda52ca56ef0a15b.ctex"]
+source_file="res://IndomitableSpire2/images/vfx/aircraft/barracuda831_squadron.png"
+dest_files=["res://.godot/imported/barracuda831_squadron.png-4be0ab28bb4af93f8782936148809d9d.ctex"]
 
 [params]
 

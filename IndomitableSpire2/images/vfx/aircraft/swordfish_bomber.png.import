@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c0vqui1uxvbnn"
-path="res://.godot/imported/hainu.png-f4193b3fc0704fe86f2f6237cfb60400.ctex"
+uid="uid://bbj7thhk3g0j2"
+path="res://.godot/imported/swordfish_bomber.png-149db15f15868ba7573158820b7fa104.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://IndomitableSpire2/images/vfx/aircraft/hainu.png"
-dest_files=["res://.godot/imported/hainu.png-f4193b3fc0704fe86f2f6237cfb60400.ctex"]
+source_file="res://IndomitableSpire2/images/vfx/aircraft/swordfish_bomber.png"
+dest_files=["res://.godot/imported/swordfish_bomber.png-149db15f15868ba7573158820b7fa104.ctex"]
 
 [params]
 
