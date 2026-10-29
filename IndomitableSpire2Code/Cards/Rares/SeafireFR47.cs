@@ -3,6 +3,7 @@ using IndomitableSpire2.IndomitableSpire2Code.Commands;
 using IndomitableSpire2.IndomitableSpire2Code.Enums;
 using IndomitableSpire2.IndomitableSpire2Code.Extensions;
 using IndomitableSpire2.IndomitableSpire2Code.Localization.DynamicVars;
+using IndomitableSpire2.IndomitableSpire2Code.Powers;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
@@ -26,8 +27,9 @@ public sealed class SeafireFr47() : CarrierAircraftCard(1, CardType.Attack, Card
     [
         new DamageVar(4M, ValueProp.Move),
         new RepeatVar(2),
-        new CustomPowerVar<VulnerablePower>(2M),
-        new ReconVar(3M) // 搭载侦察变量
+        new CustomPowerVar<VulnerablePower>(1M),
+        new CustomPowerVar<OnFirePower>(1M),
+        new ReconVar(4M)
     ];
     
     protected override async Task<IEnumerable<IEnumerable<DamageResult>>> OnAircraftPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
@@ -40,17 +42,18 @@ public sealed class SeafireFr47() : CarrierAircraftCard(1, CardType.Attack, Card
             .Targeting(cardPlay.Target)
             .ExecuteWithAircraftFlight(choiceContext);
         
-        if (cardPlay.Target is { IsAlive: true })
-            await PowerCmd.Apply<VulnerablePower>(
-                choiceContext: choiceContext, 
-                target: cardPlay.Target,
-                amount: DynamicVars.Vulnerable.BaseValue,
-                applier: Owner.Creature,
-                cardSource: this
-            );
-        
-        // 核心机制：呼叫战区侦察
-        await ReconCommand.Recon(Owner, DynamicVars.Recon().IntValue).Execute(choiceContext);
+        var recon = await ReconCommand.Recon(Owner, DynamicVars.Recon().IntValue).Execute(choiceContext);
+        // 按本次侦察实际看到的全部牌计算，不受玩家把牌拿入手、弃置或留顶的选择影响。
+        var skills = recon.CardsToHand.Concat(recon.CardsToDiscard)
+            .Concat(recon.CardsKept)
+            .Count(card => card.Type == CardType.Skill);
+        if (skills > 0 && cardPlay.Target.IsAlive)
+        {
+            await PowerCmd.Apply<VulnerablePower>(choiceContext, cardPlay.Target,
+                skills * DynamicVars.Vulnerable.BaseValue, Owner.Creature, this);
+            await PowerCmd.Apply<OnFirePower>(choiceContext, cardPlay.Target,
+                skills * DynamicVars.OnFire().BaseValue, Owner.Creature, this);
+        }
         return attackCmd.Results;
     }
     
