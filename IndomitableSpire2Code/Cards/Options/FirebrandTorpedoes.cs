@@ -30,7 +30,7 @@ public sealed class FirebrandTorpedoes() : VersatileCardOption(OptionId)
     public override async Task Execute(CardModel source, PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         ArgumentNullException.ThrowIfNull(cardPlay.Target);
-        var aircraft = (FirebrandTF4)source;
+        
         var attack = await DamageCmd.Attack(source.DynamicVars["TorpedoDamage"].BaseValue)
             .FromCard(source, cardPlay)
             .Targeting(cardPlay.Target)
@@ -40,6 +40,6 @@ public sealed class FirebrandTorpedoes() : VersatileCardOption(OptionId)
             await PowerCmd.Apply<IlluminatedPower>(choiceContext, cardPlay.Target,
                 source.DynamicVars["TorpedoIlluminated"].BaseValue, source.Owner.Creature, source);
         
-        aircraft.RecordLoadoutDamageResults(attack.Results);
+        ((VersatileAircraftCard)source).RecordLoadoutDamageResults(attack.Results);
     }
 }

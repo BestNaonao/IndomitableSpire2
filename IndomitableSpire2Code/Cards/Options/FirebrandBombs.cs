@@ -24,13 +24,13 @@ public sealed class FirebrandBombs() : VersatileCardOption(OptionId)
     public override async Task Execute(CardModel source, PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         ArgumentNullException.ThrowIfNull(cardPlay.Target);
-        var aircraft = (FirebrandTF4)source;
+        
         var attack = await DamageCmd.Attack(source.DynamicVars["BombDamage"].BaseValue)
             .WithHitCount(source.DynamicVars["BombRepeat"].IntValue)
             .FromCard(source, cardPlay)
             .Targeting(cardPlay.Target)
             .ExecuteWithAircraftFlight(choiceContext);
         
-        aircraft.RecordLoadoutDamageResults(attack.Results);
+        ((VersatileAircraftCard)source).RecordLoadoutDamageResults(attack.Results);
     }
 }

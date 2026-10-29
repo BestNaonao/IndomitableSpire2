@@ -30,12 +30,11 @@ public sealed class SeaHornetRockets() : VersatileCardOption(OptionId)
     
     public override async Task Execute(CardModel source, PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        var fighter = (SeaHornetFighter)source;
-        if (fighter.CombatState == null) return;
+        if (source.CombatState == null) return;
         ArgumentNullException.ThrowIfNull(cardPlay.Target, nameof(cardPlay.Target));
-        var attack = await DamageCmd.Attack(fighter.DynamicVars["RocketDamage"].BaseValue)
-            .WithHitCount(fighter.DynamicVars["RocketRepeat"].IntValue)
-            .FromCard(fighter, cardPlay)
+        var attack = await DamageCmd.Attack(source.DynamicVars["RocketDamage"].BaseValue)
+            .WithHitCount(source.DynamicVars["RocketRepeat"].IntValue)
+            .FromCard(source, cardPlay)
             .OnlyPlayAnimOnce()
             .Targeting(cardPlay.Target)
             .WithHitFx("vfx/vfx_fire_burst")
@@ -43,7 +42,7 @@ public sealed class SeaHornetRockets() : VersatileCardOption(OptionId)
         
         if (cardPlay.Target.IsAlive)
             await PowerCmd.Apply<OnFirePower>(choiceContext, cardPlay.Target,
-                fighter.DynamicVars["RocketOnFire"].BaseValue, fighter.Owner.Creature, fighter);
-        fighter.RecordLoadoutDamageResults(attack.Results);
+                source.DynamicVars["RocketOnFire"].BaseValue, source.Owner.Creature, source);
+        ((VersatileAircraftCard)source).RecordLoadoutDamageResults(attack.Results);
     }
 }
