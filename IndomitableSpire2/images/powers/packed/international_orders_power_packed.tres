@@ -1,0 +1,7 @@
+[gd_resource type="AtlasTexture" load_steps=2 format=3 uid="uid://66ojaqdxmv5c"]
+
+[ext_resource type="Texture2D" uid="uid://cp074jb3abmi8" path="res://IndomitableSpire2/images/powers/packed/international_orders_power_packed.png" id="1"]
+
+[resource]
+atlas = ExtResource("1")
+region = Rect2(0, 0, 64, 64)
