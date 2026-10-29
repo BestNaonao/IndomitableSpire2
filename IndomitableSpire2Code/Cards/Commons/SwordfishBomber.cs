@@ -53,7 +53,7 @@ public sealed class SwordfishBomber() : CarrierAircraftCard(1, CardType.Attack, 
         var attackCmd = await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
             .FromCard(this, cardPlay)
             .Targeting(cardPlay.Target)
-            .Execute(choiceContext);
+            .ExecuteWithAircraftFlight(choiceContext);
         
         // 如果目标承受了鱼雷伤害后仍然存活，则施加进水效果
         if (cardPlay.Target is { IsAlive: true })

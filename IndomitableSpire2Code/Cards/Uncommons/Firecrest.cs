@@ -46,7 +46,7 @@ public sealed class Firecrest() : CarrierAircraftCard(1, CardType.Attack, CardRa
         var attack = await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
             .FromCard(this, cardPlay)
             .Targeting(cardPlay.Target)
-            .Execute(choiceContext);
+            .ExecuteWithAircraftFlight(choiceContext);
         if (cardPlay.Target.IsAlive)
             await PowerCmd.Apply<FloodingPower>(choiceContext, cardPlay.Target,
                 DynamicVars.Flooding().BaseValue * (burning ? 2 : 1), Owner.Creature, this);

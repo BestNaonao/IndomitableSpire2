@@ -1,5 +1,5 @@
 using IndomitableSpire2.IndomitableSpire2Code.Cards.Abstracts;
-using IndomitableSpire2.IndomitableSpire2Code.Cards.Rares;
+using IndomitableSpire2.IndomitableSpire2Code.Extensions;
 using IndomitableSpire2.IndomitableSpire2Code.Localization.DynamicVars;
 using IndomitableSpire2.IndomitableSpire2Code.Powers;
 using MegaCrit.Sts2.Core.Commands;
@@ -37,7 +37,7 @@ public sealed class SeaHornetBombs() : VersatileCardOption(OptionId)
             .FromCard(fighter, cardPlay)
             .TargetingAllOpponents(fighter.CombatState)
             .WithHitFx("vfx/vfx_fire_burst")
-            .Execute(choiceContext);
+            .ExecuteWithAircraftFlight(choiceContext);
         
         await PowerCmd.Apply<OnFirePower>(choiceContext, fighter.CombatState.HittableEnemies,
             fighter.DynamicVars["BombOnFire"].BaseValue, fighter.Owner.Creature, fighter);

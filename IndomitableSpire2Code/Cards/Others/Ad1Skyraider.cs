@@ -39,10 +39,14 @@ public sealed class Ad1Skyraider() : WhiteEagleAircraftCard(6, TargetType.AnyEne
         // 点杀与群伤共用一次攻击，活力在两部分伤害结束后才消耗。
         await using (var attackContext = await AttackCommand.CreateContextAsync(CombatState, choiceContext, cardPlay))
         {
+            // 手写 AttackContext 不经过 AttackCommand.Execute；整组点杀与群伤仅起飞/Attack 一次。
+            var visualTargets = cardPlay.Target.IsAlive ? [cardPlay.Target]
+                : CombatState.HittableEnemies.Where(c => c.IsAlive).ToArray();
+            if (visualTargets.Length > 0 && !CombatManager.Instance.IsOverOrEnding)
+                await PlayAircraftAttackPresentation(visualTargets);
             for (var hit = 0; hit < DynamicVars.Repeat.IntValue && cardPlay.Target.IsAlive &&
                               !CombatManager.Instance.IsOverOrEnding; hit++)
             {
-                await CreatureCmd.TriggerAnim(Owner.Creature, "Attack", Owner.Character.AttackAnimDelay);
                 var focused = (await CreatureCmd.Damage(
                     choiceContext, cardPlay.Target, DynamicVars.Damage, Owner.Creature, this, cardPlay))
                     .ToList();
@@ -52,7 +56,6 @@ public sealed class Ad1Skyraider() : WhiteEagleAircraftCard(6, TargetType.AnyEne
             // 然后造成群体伤害，共用一个 attackContext 以共享活力加成。
             if (!CombatManager.Instance.IsOverOrEnding)
             {
-                await CreatureCmd.TriggerAnim(Owner.Creature, "Attack", Owner.Character.AttackAnimDelay);
                 var area = (await CreatureCmd.Damage(
                     choiceContext, CombatState.HittableEnemies, (DamageVar)DynamicVars["AoeDamage"],
                     Owner.Creature, this, cardPlay)).ToList();

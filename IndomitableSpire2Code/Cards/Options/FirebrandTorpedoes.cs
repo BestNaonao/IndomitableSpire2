@@ -1,5 +1,5 @@
 using IndomitableSpire2.IndomitableSpire2Code.Cards.Abstracts;
-using IndomitableSpire2.IndomitableSpire2Code.Cards.Uncommons;
+using IndomitableSpire2.IndomitableSpire2Code.Extensions;
 using IndomitableSpire2.IndomitableSpire2Code.Localization.DynamicVars;
 using IndomitableSpire2.IndomitableSpire2Code.Powers;
 using MegaCrit.Sts2.Core.Commands;
@@ -34,7 +34,7 @@ public sealed class FirebrandTorpedoes() : VersatileCardOption(OptionId)
         var attack = await DamageCmd.Attack(source.DynamicVars["TorpedoDamage"].BaseValue)
             .FromCard(source, cardPlay)
             .Targeting(cardPlay.Target)
-            .Execute(choiceContext);
+            .ExecuteWithAircraftFlight(choiceContext);
         
         if (cardPlay.Target.IsAlive)
             await PowerCmd.Apply<IlluminatedPower>(choiceContext, cardPlay.Target,

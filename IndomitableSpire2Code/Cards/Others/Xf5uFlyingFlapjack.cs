@@ -42,7 +42,7 @@ public sealed class Xf5uFlyingFlapjack() : WhiteEagleAircraftCard(4, TargetType.
         var attack = await DamageCmd.Attack(DynamicVars.CalculatedDamage)
             .FromCard(this, cardPlay)
             .Targeting(cardPlay.Target)
-            .Execute(choiceContext);
+            .ExecuteWithAircraftFlight(choiceContext);
         await CreatureCmd.GainBlock(Owner.Creature,
             DynamicVars.CalculatedBlock.Calculate(null), ValueProp.Move, cardPlay);
         return attack.Results;

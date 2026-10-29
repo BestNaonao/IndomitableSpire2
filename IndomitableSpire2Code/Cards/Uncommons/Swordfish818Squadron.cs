@@ -36,7 +36,7 @@ public sealed class Swordfish818Squadron() : CarrierAircraftCard(2, CardType.Att
         var attackCmd = await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
             .FromCard(this, cardPlay)
             .Targeting(cardPlay.Target)
-            .Execute(choiceContext);
+            .ExecuteWithAircraftFlight(choiceContext);
         
         if (cardPlay.Target is { IsAlive: true })
         {

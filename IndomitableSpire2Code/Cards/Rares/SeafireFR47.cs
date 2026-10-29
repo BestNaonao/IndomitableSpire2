@@ -38,7 +38,7 @@ public sealed class SeafireFr47() : CarrierAircraftCard(1, CardType.Attack, Card
             .WithHitCount(DynamicVars.Repeat.IntValue)
             .FromCard(this, cardPlay)
             .Targeting(cardPlay.Target)
-            .Execute(choiceContext);
+            .ExecuteWithAircraftFlight(choiceContext);
         
         if (cardPlay.Target is { IsAlive: true })
             await PowerCmd.Apply<VulnerablePower>(

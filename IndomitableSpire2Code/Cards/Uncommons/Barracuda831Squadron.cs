@@ -1,5 +1,6 @@
 ﻿using IndomitableSpire2.IndomitableSpire2Code.Cards.Abstracts;
 using IndomitableSpire2.IndomitableSpire2Code.Enums;
+using IndomitableSpire2.IndomitableSpire2Code.Extensions;
 using IndomitableSpire2.IndomitableSpire2Code.Powers;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -37,7 +38,7 @@ public sealed class Barracuda831Squadron() : CarrierAircraftCard(2, CardType.Att
             .FromCard(this, cardPlay)
             .Targeting(cardPlay.Target)
             .WithHitFx(hasBlock ? "vfx/vfx_heavy_blunt" : "vfx/vfx_attack_slash")
-            .Execute(choiceContext);
+            .ExecuteWithAircraftFlight(choiceContext);
         
         if (cardPlay.Target is not { IsAlive: true }) return attackCmd.Results;
         

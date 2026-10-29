@@ -44,7 +44,7 @@ public sealed class Xtb2d1Skypirate() : WhiteEagleAircraftCard(8, TargetType.Any
             .Targeting(cardPlay.Target)
             .WithHitCount(DynamicVars.Repeat.IntValue)
             .WithUnblockableDamage()
-            .Execute(choiceContext);
+            .ExecuteWithAircraftFlight(choiceContext);
         
         if (cardPlay.Target.IsAlive)
             await PowerCmd.Apply<FloodingPower>(choiceContext, cardPlay.Target,

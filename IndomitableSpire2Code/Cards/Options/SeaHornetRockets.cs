@@ -1,5 +1,5 @@
 using IndomitableSpire2.IndomitableSpire2Code.Cards.Abstracts;
-using IndomitableSpire2.IndomitableSpire2Code.Cards.Rares;
+using IndomitableSpire2.IndomitableSpire2Code.Extensions;
 using IndomitableSpire2.IndomitableSpire2Code.Localization.DynamicVars;
 using IndomitableSpire2.IndomitableSpire2Code.Powers;
 using MegaCrit.Sts2.Core.Commands;
@@ -39,7 +39,7 @@ public sealed class SeaHornetRockets() : VersatileCardOption(OptionId)
             .OnlyPlayAnimOnce()
             .Targeting(cardPlay.Target)
             .WithHitFx("vfx/vfx_fire_burst")
-            .Execute(choiceContext);
+            .ExecuteWithAircraftFlight(choiceContext);
         
         if (cardPlay.Target.IsAlive)
             await PowerCmd.Apply<OnFirePower>(choiceContext, cardPlay.Target,

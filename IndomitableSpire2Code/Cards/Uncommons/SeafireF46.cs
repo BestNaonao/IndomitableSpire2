@@ -36,7 +36,7 @@ public sealed class SeafireF46() : CarrierAircraftCard(1, CardType.Attack, CardR
             .FromCard(this, cardPlay)
             .Targeting(cardPlay.Target)
             .WithHitFx("vfx/vfx_attack_slash")
-            .Execute(choiceContext);
+            .ExecuteWithAircraftFlight(choiceContext);
         
         // 如果目标意图攻击，迎面施加截击削弱其火力，否则掩护获得格挡
         if (cardPlay.Target is { IsAlive: true, Monster.IntendsToAttack: true })

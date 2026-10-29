@@ -1,5 +1,6 @@
 ﻿using IndomitableSpire2.IndomitableSpire2Code.Cards.Abstracts;
 using IndomitableSpire2.IndomitableSpire2Code.Enums;
+using IndomitableSpire2.IndomitableSpire2Code.Extensions;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
@@ -38,7 +39,7 @@ public sealed class SeaHurricane() : CarrierAircraftCard(2, CardType.Attack, Car
             .FromCard(this, cardPlay)
             .TargetingAllOpponents(CombatState)
             .WithHitFx("vfx/vfx_heavy_blunt")
-            .Execute(choiceContext);
+            .ExecuteWithAircraftFlight(choiceContext);
         return attackCmd.Results;
     }
     

@@ -1,5 +1,5 @@
 using IndomitableSpire2.IndomitableSpire2Code.Cards.Abstracts;
-using IndomitableSpire2.IndomitableSpire2Code.Cards.Uncommons;
+using IndomitableSpire2.IndomitableSpire2Code.Extensions;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -29,7 +29,7 @@ public sealed class FirebrandBombs() : VersatileCardOption(OptionId)
             .WithHitCount(source.DynamicVars["BombRepeat"].IntValue)
             .FromCard(source, cardPlay)
             .Targeting(cardPlay.Target)
-            .Execute(choiceContext);
+            .ExecuteWithAircraftFlight(choiceContext);
         
         aircraft.RecordLoadoutDamageResults(attack.Results);
     }

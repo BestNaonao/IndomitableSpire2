@@ -45,7 +45,7 @@ public sealed class Skua() : CarrierAircraftCard(2, CardType.Attack, CardRarity.
             .FromCard(this, cardPlay)
             .Targeting(cardPlay.Target)
             .WithHitFx("vfx/vfx_heavy_blunt")
-            .Execute(choiceContext);
+            .ExecuteWithAircraftFlight(choiceContext);
         
         // 尖啸震慑：只有当虚弱层数大于 0 时才施加（因为初始为0）
         if (cardPlay.Target is { IsAlive: true } && DynamicVars.Weak.BaseValue > 0)
