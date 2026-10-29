@@ -95,6 +95,9 @@
   "INDOMITABLESPIRE2-AIR_RAID_GUIDANCE_POWER.description": "次にプレイする{aircraftPrefix:carrierAircraftIcons()}のアタックは追加ダメージを与える。",
   "INDOMITABLESPIRE2-AIR_RAID_GUIDANCE_POWER.smartDescription": "{OnPlayer:自身が|[gold]{OwnerName}[/gold]が}次にプレイする{aircraftPrefix:carrierAircraftIcons()}のアタックは追加で[blue]{Amount}[/blue]ダメージを与える。",
   "INDOMITABLESPIRE2-AIR_RAID_GUIDANCE_POWER.title": "空襲先導",
+  "INDOMITABLESPIRE2-FULMAR_ESCORT_POWER.description": "次の{aircraftPrefix:torpedoBomberIcons()}カードのアタックダメージが増加し、耐久の減少が半分になる。",
+  "INDOMITABLESPIRE2-FULMAR_ESCORT_POWER.smartDescription": "{OnPlayer:自身が|[gold]{OwnerName}[/gold]が}次にプレイする{aircraftPrefix:torpedoBomberIcons()}カードのアタックダメージが[blue]{Amount}[/blue]増加し、耐久の減少が半分になる。",
+  "INDOMITABLESPIRE2-FULMAR_ESCORT_POWER.title": "海燕の護衛",
   "INDOMITABLESPIRE2-SWEET_DEAL_POWER.description": "特定のカードをプレイした時、契約者に返還される。",
   "INDOMITABLESPIRE2-SWEET_DEAL_POWER.smartDescriptionLend": "[gold]{CardName}[/gold]をプレイした時、それを[gold]{TargetName}[/gold]の手札に渡す。",
   "INDOMITABLESPIRE2-SWEET_DEAL_POWER.smartDescriptionReturn": "借りた[gold]{CardName}[/gold]をプレイした時、それは[gold]{TargetName}[/gold]に返還される。",
@@ -142,5 +145,8 @@
   "INDOMITABLESPIRE2-ILLUMINATED_POWER.title": "照明",
   "INDOMITABLESPIRE2-NAVIGATOR_POWER.description": "[gold]偵察[/gold]するたび、[gold]やる気[/gold]を得る。",
   "INDOMITABLESPIRE2-NAVIGATOR_POWER.smartDescription": "[gold]偵察[/gold]するたび、[gold]やる気[/gold][blue]{Amount}[/blue]を得る。",
-  "INDOMITABLESPIRE2-NAVIGATOR_POWER.title": "先導者"
+  "INDOMITABLESPIRE2-NAVIGATOR_POWER.title": "先導者",
+  "INDOMITABLESPIRE2-INTERNATIONAL_ORDERS_POWER.description": "戦闘終了時、[gold]ゴールド[/gold]を得る。",
+  "INDOMITABLESPIRE2-INTERNATIONAL_ORDERS_POWER.smartDescription": "戦闘終了時、[blue]{Amount}[/blue][gold]ゴールド[/gold]を得る。",
+  "INDOMITABLESPIRE2-INTERNATIONAL_ORDERS_POWER.title": "国際受注"
 }

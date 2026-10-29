@@ -95,6 +95,9 @@
   "INDOMITABLESPIRE2-AIR_RAID_GUIDANCE_POWER.description": "Your next {aircraftPrefix:carrierAircraftIcons()} Attack deals additional damage.",
   "INDOMITABLESPIRE2-AIR_RAID_GUIDANCE_POWER.smartDescription": "{OnPlayer:Your|[gold]{OwnerName}'s[/gold]} next {aircraftPrefix:carrierAircraftIcons()} Attack deals [blue]{Amount}[/blue] additional damage.",
   "INDOMITABLESPIRE2-AIR_RAID_GUIDANCE_POWER.title": "Air Raid Guidance",
+  "INDOMITABLESPIRE2-FULMAR_ESCORT_POWER.description": "Your next {aircraftPrefix:torpedoBomberIcons()} card deals additional attack damage and loses half as much Durability.",
+  "INDOMITABLESPIRE2-FULMAR_ESCORT_POWER.smartDescription": "{OnPlayer:Your|[gold]{OwnerName}'s[/gold]} next {aircraftPrefix:torpedoBomberIcons()} card deals [blue]{Amount}[/blue] additional attack damage and loses half as much Durability.",
+  "INDOMITABLESPIRE2-FULMAR_ESCORT_POWER.title": "Fulmar Escort",
   "INDOMITABLESPIRE2-SWEET_DEAL_POWER.description": "When you play the specific card, it returns to its signatory.",
   "INDOMITABLESPIRE2-SWEET_DEAL_POWER.smartDescriptionLend": "When you play [gold]{CardName}[/gold], it goes to [gold]{TargetName}[/gold]'s Hand.",
   "INDOMITABLESPIRE2-SWEET_DEAL_POWER.smartDescriptionReturn": "When you play the borrowed [gold]{CardName}[/gold], it returns to [gold]{TargetName}[/gold].",
@@ -142,5 +145,8 @@
   "INDOMITABLESPIRE2-ILLUMINATED_POWER.title": "Illuminated",
   "INDOMITABLESPIRE2-NAVIGATOR_POWER.description": "Whenever you [gold]Recon[/gold], gain [gold]Motivation[/gold].",
   "INDOMITABLESPIRE2-NAVIGATOR_POWER.smartDescription": "Whenever you [gold]Recon[/gold], gain [blue]{Amount}[/blue] [gold]Motivation[/gold].",
-  "INDOMITABLESPIRE2-NAVIGATOR_POWER.title": "Navigator"
+  "INDOMITABLESPIRE2-NAVIGATOR_POWER.title": "Navigator",
+  "INDOMITABLESPIRE2-INTERNATIONAL_ORDERS_POWER.description": "At the end of combat, gain [gold]Gold[/gold].",
+  "INDOMITABLESPIRE2-INTERNATIONAL_ORDERS_POWER.smartDescription": "At the end of combat, gain [blue]{Amount}[/blue] [gold]Gold[/gold].",
+  "INDOMITABLESPIRE2-INTERNATIONAL_ORDERS_POWER.title": "International Orders"
 }
