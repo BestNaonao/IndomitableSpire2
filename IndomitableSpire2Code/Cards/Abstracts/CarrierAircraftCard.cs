@@ -1,5 +1,8 @@
-﻿using IndomitableSpire2.IndomitableSpire2Code.Enums;
+﻿using BaseLib.Extensions;
+using IndomitableSpire2.IndomitableSpire2Code.Animation;
+using IndomitableSpire2.IndomitableSpire2Code.Enums;
 using IndomitableSpire2.IndomitableSpire2Code.Extensions;
+using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -20,6 +23,29 @@ public abstract class CarrierAircraftCard(
     protected abstract IEnumerable<CardTag> SubclassTags { get; }
     
     protected override HashSet<CardTag> CanonicalTags => [IndomitableTags.CarrierAircraft, ..SubclassTags];
+    
+    /// <summary>优先加载此资源；支持 Texture2D 的 .png 或 .tres。返回 null 明确禁用模型。</summary>
+    public virtual string? AircraftModelPath => $"{Id.Entry.RemovePrefix().ToLowerInvariant()}.png".AircraftImagePath();
+    
+    /// <summary>所使用的飞行轨迹的配置，支持子类自定义，提供默认参数。</summary>
+    public virtual AircraftFlightSettings AircraftFlightSettings => AircraftFlightSettings.Default;
+    
+    // 使用实时机种标签，使火把/海大黄蜂的不同挂载自动切换轨迹。
+    public virtual AircraftFlightKind AircraftFlightKind =>
+        SubclassTags.Contains(IndomitableTags.DiveBomber) ? AircraftFlightKind.DiveBomber :
+        SubclassTags.Contains(IndomitableTags.TorpedoBomber) ? AircraftFlightKind.TorpedoBomber :
+        SubclassTags.Contains(IndomitableTags.LevelBomber) ? AircraftFlightKind.LevelBomber :
+        AircraftFlightKind.StrikeFighter;
+    
+    /// <summary>
+    /// ExecuteWithAircraftFlight 显式执行扩展调用；手写 AttackContext 的牌须在第一次伤害之前调用一次。
+    /// 始终执行一次 Attack；飞行开关只控制其后的飞机演出。
+    /// </summary>
+    public virtual async Task PlayAircraftAttackPresentation(IEnumerable<Creature> targets)
+    {
+        await CreatureCmd.TriggerAnim(Owner.Creature, "Attack", Owner.Character.AttackAnimDelay);
+        await AircraftFlightVfx.Play(this, targets);
+    }
     
     private IReadOnlyList<IReadOnlyList<DamageResult>> _lastDamageResults = [];
     
