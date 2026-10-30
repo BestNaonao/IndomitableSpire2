@@ -1,6 +1,7 @@
 using Godot;
 using IndomitableSpire2.IndomitableSpire2Code.Cards.Abstracts;
 using IndomitableSpire2.IndomitableSpire2Code.Configuration;
+using IndomitableSpire2.IndomitableSpire2Code.Extensions;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Helpers;
@@ -71,8 +72,7 @@ public partial class AircraftFlightVfx : Node2D
     {
         if (path == null) return null;
         var tres = Path.ChangeExtension(path, ".tres"); // .tres 优先
-        if (ResourceLoader.Exists(tres, "Texture2D")) return ResourceLoader.Load<Texture2D>(tres);
-        return ResourceLoader.Exists(path, "Texture2D") ? ResourceLoader.Load<Texture2D>(path) : null;
+        return tres.LoadTexture() ?? path.LoadTexture();
     }
     
     public override void _Process(double delta)
