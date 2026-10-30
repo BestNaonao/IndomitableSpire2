@@ -204,6 +204,20 @@
   "INDOMITABLESPIRE2-NAVIGATOR.title": "Navigator",
   "INDOMITABLESPIRE2-NAVIGATOR.banter": "Will you let me navigate today? Huh? You don't think I'll just sit on the passenger seat and enjoy the view, do you?",
   "INDOMITABLESPIRE2-NAVIGATOR.description": "Whenever you [gold]Recon[/gold], gain [blue]{NavigatorPower:diff()}[/blue] [gold]Motivation[/gold].",
+  "INDOMITABLESPIRE2-FULMAR.title": "Fulmar",
+  "INDOMITABLESPIRE2-FULMAR.description": "{HasOption:{OptionDescription}|[gold]Versatile[/gold]: Choose a {aircraftPrefix:strikeFighterIcons()} fighter loadout or a {aircraftPrefix:diveBomberIcons()} bomb loadout.}",
+  "INDOMITABLESPIRE2-FULMAR.fighter.title": "Fulmar (Fighter Loadout)",
+  "INDOMITABLESPIRE2-FULMAR.fighter.description": "Deal {FighterDamage:diff()} damage to a random enemy {FighterRepeat} times.\n[gold]Recon[/gold] {FighterRecon:diff()} for each enemy attacked.",
+  "INDOMITABLESPIRE2-FULMAR.bombs.title": "Fulmar (Bomb Loadout)",
+  "INDOMITABLESPIRE2-FULMAR.bombs.description": "Deal {BombDamage:diff()} damage {BombRepeat} times.\nGain [blue]{FulmarEscortPower:diff()}[/blue] [gold]Fulmar Escort[/gold].",
+  "INDOMITABLESPIRE2-SEAFANG_MK32.title": "Seafang Mk.32",
+  "INDOMITABLESPIRE2-SEAFANG_MK32.description": "Deal damage equal to current [gold]Durability[/gold].\nIf [gold]Fatal[/gold], permanently gain {Increase:diff()} maximum [gold]Durability[/gold].",
+  "INDOMITABLESPIRE2-SEA_FURY_FB11.title": "Sea Fury FB.11",
+  "INDOMITABLESPIRE2-SEA_FURY_FB11.description": "{HasOption:{OptionDescription}|[gold]Versatile[/gold]: {aircraftPrefix:strikeFighterIcons()} / {aircraftPrefix:diveBomberIcons()}}\nAdd a copy of this card to every ally's [gold]Draw Pile[/gold].\nThe first time an ally plays each copy, grant its exporter [blue]{InternationalOrdersPower:diff()}[/blue] [gold]International Orders[/gold].",
+  "INDOMITABLESPIRE2-SEA_FURY_FB11.fighter.title": "Sea Fury FB.11 (Fighter Loadout)",
+  "INDOMITABLESPIRE2-SEA_FURY_FB11.fighter.description": "Deal {FighterDamage:diff()} damage.",
+  "INDOMITABLESPIRE2-SEA_FURY_FB11.bombs.title": "Sea Fury FB.11 (Bomb Loadout)",
+  "INDOMITABLESPIRE2-SEA_FURY_FB11.bombs.description": "Deal {BombDamage:diff()} unblockable damage.",
   
   "INDOMITABLESPIRE2-DESSERT.title": "Dessert",
   "INDOMITABLESPIRE2-DESSERT.description": "Heal [green]{Heal:diff()}[/green] HP.\nGain {Energy:energyIcons()}.",
@@ -253,5 +267,5 @@
   "INDOMITABLESPIRE2-AD1_SKYRAIDER.title": "AD-1 Skyraider",
   "INDOMITABLESPIRE2-AD1_SKYRAIDER.description": "Deal {Damage:diff()} damage {Repeat:diff()} times.\nDeal {AoeDamage:diff()} damage to ALL enemies.\n[gold]Aircraft Type Synergy[/gold]: {aircraftPrefix:strikeFighterIcons()}{aircraftPrefix:levelBomberIcons()}{aircraftPrefix:diveBomberIcons()}.",
   "INDOMITABLESPIRE2-XF5U_FLYING_FLAPJACK.title": "XF5U Flying Flapjack",
-  "INDOMITABLESPIRE2-XF5U_FLYING_FLAPJACK.description": "Deal damage equal to this card's current [gold]Durability[/gold]. Gain [gold]Block[/gold] equal to half current [gold]Durability[/gold]."
+  "INDOMITABLESPIRE2-XF5U_FLYING_FLAPJACK.description": "Deal damage equal to current [gold]Durability[/gold]. Gain [gold]Block[/gold] equal to half current [gold]Durability[/gold]."
 }

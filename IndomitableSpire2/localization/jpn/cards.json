@@ -204,6 +204,20 @@
   "INDOMITABLESPIRE2-NAVIGATOR.title": "先導者",
   "INDOMITABLESPIRE2-NAVIGATOR.banter": "じゃあ今回は私にナビを任せてくれません？……ん？指揮官は…私を「助手席で風景を眺めるだけ」だと思っています？",
   "INDOMITABLESPIRE2-NAVIGATOR.description": "[gold]偵察[/gold]するたび、[gold]やる気[/gold][blue]{NavigatorPower:diff()}[/blue]を得る。",
+  "INDOMITABLESPIRE2-FULMAR.title": "フルマー",
+  "INDOMITABLESPIRE2-FULMAR.description": "{HasOption:{OptionDescription}|[gold]多用途[/gold]：{aircraftPrefix:strikeFighterIcons()}戦闘装備か{aircraftPrefix:diveBomberIcons()}爆弾装備を選ぶ。}",
+  "INDOMITABLESPIRE2-FULMAR.fighter.title": "フルマー (戦闘装備)",
+  "INDOMITABLESPIRE2-FULMAR.fighter.description": "ランダムな敵に{FighterDamage:diff()}ダメージを{FighterRepeat}回与える。\n攻撃した敵1体につき[gold]偵察[/gold]{FighterRecon:diff()}。",
+  "INDOMITABLESPIRE2-FULMAR.bombs.title": "フルマー (爆弾装備)",
+  "INDOMITABLESPIRE2-FULMAR.bombs.description": "{BombDamage:diff()}ダメージを{BombRepeat}回与える。\n[gold]海燕の護衛[/gold][blue]{FulmarEscortPower:diff()}[/blue]を得る。",
+  "INDOMITABLESPIRE2-SEAFANG_MK32.title": "シーファング Mk.32",
+  "INDOMITABLESPIRE2-SEAFANG_MK32.description": "現在の[gold]耐久[/gold]に等しいダメージを与える。\n[gold]リーサル[/gold]時、最大[gold]耐久[/gold]が永続的に{Increase:diff()}増加する。",
+  "INDOMITABLESPIRE2-SEA_FURY_FB11.title": "シーフューリー FB.11",
+  "INDOMITABLESPIRE2-SEA_FURY_FB11.description": "{HasOption:{OptionDescription}|[gold]多用途[/gold]：{aircraftPrefix:strikeFighterIcons()}／{aircraftPrefix:diveBomberIcons()}}\nすべての味方の[gold]山札[/gold]にこのカードのコピーを1枚追加する。\n味方が各コピーを初めてプレイした時、その輸出元に[gold]国際受注[/gold][blue]{InternationalOrdersPower:diff()}[/blue]を与える。",
+  "INDOMITABLESPIRE2-SEA_FURY_FB11.fighter.title": "シーフューリー FB.11 (戦闘装備)",
+  "INDOMITABLESPIRE2-SEA_FURY_FB11.fighter.description": "{FighterDamage:diff()}ダメージを与える。",
+  "INDOMITABLESPIRE2-SEA_FURY_FB11.bombs.title": "シーフューリー FB.11 (爆弾装備)",
+  "INDOMITABLESPIRE2-SEA_FURY_FB11.bombs.description": "ブロックされない{BombDamage:diff()}ダメージを与える。",
   
   "INDOMITABLESPIRE2-DESSERT.title": "デザート",
   "INDOMITABLESPIRE2-DESSERT.description": "HPを[green]{Heal:diff()}[/green]回復する。\n{Energy:energyIcons()}を得る。",
@@ -253,5 +267,5 @@
   "INDOMITABLESPIRE2-AD1_SKYRAIDER.title": "AD-1 スカイレイダー",
   "INDOMITABLESPIRE2-AD1_SKYRAIDER.description": "{Damage:diff()}ダメージを{Repeat:diff()}回与える。\nすべての敵に{AoeDamage:diff()}ダメージを与える。\n[gold]機種シナジー[/gold]：{aircraftPrefix:strikeFighterIcons()}{aircraftPrefix:levelBomberIcons()}{aircraftPrefix:diveBomberIcons()}。",
   "INDOMITABLESPIRE2-XF5U_FLYING_FLAPJACK.title": "XF5U フライング・フラップジャック",
-  "INDOMITABLESPIRE2-XF5U_FLYING_FLAPJACK.description": "このカードの現在の[gold]耐久[/gold]値に等しいダメージを与える。現在の[gold]耐久[/gold]値の半分に等しい[gold]ブロック[/gold]を得る。"
+  "INDOMITABLESPIRE2-XF5U_FLYING_FLAPJACK.description": "現在の[gold]耐久[/gold]に等しいダメージを与える。現在の[gold]耐久[/gold]値の半分に等しい[gold]ブロック[/gold]を得る。"
 }
