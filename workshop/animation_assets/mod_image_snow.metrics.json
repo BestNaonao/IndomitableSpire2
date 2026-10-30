@@ -1,0 +1,30 @@
+{
+  "width": 420,
+  "height": 420,
+  "requested_fps": 55,
+  "quality": 90,
+  "mixed": false,
+  "method": 4,
+  "bytes": 995094,
+  "particles": 26,
+  "stable_lossy_base": true,
+  "encoding_seconds": 64.75,
+  "frames": 275,
+  "duration_ms": 5000,
+  "frame_durations_ms": [
+    18,
+    19
+  ],
+  "lossy_frames": 1,
+  "lossless_frames": 274,
+  "decoded_unique_frames": 275,
+  "effective_fps": 55.0,
+  "psnr_db": 128.13,
+  "face_psnr_db": 128.13,
+  "loop_source_endpoint_identical": true,
+  "mean_adjacent_frame_difference": 0.13859,
+  "loop_seam_difference": 0.00253,
+  "seam_to_median_step_ratio": 0.018,
+  "base_psnr_db": 35.45,
+  "base_face_psnr_db": 35.05
+}
