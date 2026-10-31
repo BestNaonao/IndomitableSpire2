@@ -1,9 +1,11 @@
+using IndomitableSpire2.IndomitableSpire2Code.Abstracts;
 using IndomitableSpire2.IndomitableSpire2Code.Cards.Abstracts;
 using IndomitableSpire2.IndomitableSpire2Code.Cards.Options;
 using IndomitableSpire2.IndomitableSpire2Code.Enums;
 using IndomitableSpire2.IndomitableSpire2Code.Extensions;
 using IndomitableSpire2.IndomitableSpire2Code.Localization.DynamicVars;
 using IndomitableSpire2.IndomitableSpire2Code.Powers;
+using IndomitableSpire2.IndomitableSpire2Code.Rewards;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Players;
@@ -12,7 +14,7 @@ using MegaCrit.Sts2.Core.Localization.DynamicVars;
 
 namespace IndomitableSpire2.IndomitableSpire2Code.Cards.Rares;
 
-public sealed class SeaFuryFb11() : VersatileAircraftCard(0, CardRarity.Rare)
+public sealed class SeaFuryFb11() : VersatileAircraftCard(0, CardRarity.Rare), IAllyRewardPreview
 {
     private static readonly IReadOnlyList<VersatileCardOption> Options =
         Array.AsReadOnly<VersatileCardOption>([new SeaFuryFighter(), new SeaFuryBombs()]);
@@ -40,6 +42,10 @@ public sealed class SeaFuryFb11() : VersatileAircraftCard(0, CardRarity.Rare)
                                       exporter != Owner && exporter.Creature.IsAlive &&
                                       exporter.RunState == Owner.RunState &&
                                       exporter.Creature.CombatState == CombatState ? exporter : null;
+    
+    public IEnumerable<AllyRewardPreview> GetAllyRewardPreviews(AllyRewardPreviewContext context) =>
+        IsMutable && OrderRecipient is { } recipient
+            ? [new AllyRewardPreview(recipient, AllyRewardPreviewIcons.Gold, DynamicVars["InternationalOrdersPower"].BaseValue)] : [];
     
     protected override async Task BeforeLoadout(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {

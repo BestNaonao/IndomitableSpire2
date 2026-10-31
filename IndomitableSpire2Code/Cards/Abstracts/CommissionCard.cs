@@ -1,7 +1,9 @@
 ﻿using BaseLib.Utils;
 using Godot;
+using IndomitableSpire2.IndomitableSpire2Code.Abstracts;
 using IndomitableSpire2.IndomitableSpire2Code.Enums;
 using IndomitableSpire2.IndomitableSpire2Code.Extensions;
+using IndomitableSpire2.IndomitableSpire2Code.Rewards;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Players;
@@ -20,7 +22,7 @@ namespace IndomitableSpire2.IndomitableSpire2Code.Cards.Abstracts;
 
 [Pool(typeof(QuestCardPool))]
 public abstract class CommissionCard(TargetType target) 
-    : IndomitableSpire2Card(0, CardType.Quest, CardRarity.Quest, target)
+    : IndomitableSpire2Card(0, CardType.Quest, CardRarity.Quest, target), IAllyRewardPreview
 {
     public override string SpecialLineAudioPath => "res://IndomitableSpire2/sfx/characters/indomitable/mission_complete.wav";
     public override string SpecialLineBanterLocKey => "INDOMITABLESPIRE2-COMMISSION_CARD_COMPLETED.banter";
@@ -105,6 +107,15 @@ public abstract class CommissionCard(TargetType target)
     /// 子类必须实现的奖励发放逻辑
     /// </summary>
     protected abstract Task GrantReward(PlayerChoiceContext choiceContext, Player player);
+    
+    // 完成进度与收奖者检查集中在此处；各委托只声明奖励类型和当前数量。
+    public IEnumerable<AllyRewardPreview> GetAllyRewardPreviews(AllyRewardPreviewContext context) =>
+        IsCompleted && Delegator is { } recipient && AllyRewardPreviewRules.IsEligibleRecipient(this, recipient)
+            ? GetCommissionRewardPreviews(recipient, context)
+            : [];
+    
+    protected abstract IEnumerable<AllyRewardPreview> GetCommissionRewardPreviews(
+        Player recipient, AllyRewardPreviewContext context);
     
     /// <summary>
     /// 自定义的委托完成吸收特效。提取自原版 PlayPowerCardFlyVfx。

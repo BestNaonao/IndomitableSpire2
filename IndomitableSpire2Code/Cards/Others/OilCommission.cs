@@ -1,5 +1,6 @@
 ﻿using IndomitableSpire2.IndomitableSpire2Code.Abstracts;
 using IndomitableSpire2.IndomitableSpire2Code.Cards.Abstracts;
+using IndomitableSpire2.IndomitableSpire2Code.Rewards;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Players;
@@ -24,8 +25,7 @@ public sealed class OilCommission() : CommissionCard(TargetType.Self), IAfterEne
     // 监听能量获取。这里采用无损拦截的方式，拦截能量然后返回原值。
     public Task AfterEnergyGained(Player player, decimal finalAmount)
     {
-        if (player == Owner)
-            AddProgress((int)finalAmount);
+        if (player == Owner) AddProgress((int)finalAmount);
         return Task.CompletedTask;
     }
     
@@ -34,8 +34,9 @@ public sealed class OilCommission() : CommissionCard(TargetType.Self), IAfterEne
         await PlayerCmd.GainEnergy(DynamicVars.Energy.BaseValue, player);
     }
     
-    protected override void OnUpgrade()
-    {
-        DynamicVars["MaxProgress"].UpgradeValueBy(-1);
-    }
+    protected override void OnUpgrade() => DynamicVars["MaxProgress"].UpgradeValueBy(-1);
+    
+    protected override IEnumerable<AllyRewardPreview> GetCommissionRewardPreviews(
+        Player recipient, AllyRewardPreviewContext context) =>
+        [new(recipient, AllyRewardPreviewIcons.Energy(recipient), DynamicVars.Energy.BaseValue)];
 }

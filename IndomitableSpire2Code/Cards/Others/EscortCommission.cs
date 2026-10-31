@@ -1,4 +1,6 @@
-﻿using IndomitableSpire2.IndomitableSpire2Code.Cards.Abstracts;
+﻿using IndomitableSpire2.IndomitableSpire2Code.Abstracts;
+using IndomitableSpire2.IndomitableSpire2Code.Cards.Abstracts;
+using IndomitableSpire2.IndomitableSpire2Code.Rewards;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Players;
@@ -15,17 +17,12 @@ public sealed class EscortCommission() : CommissionCard(TargetType.Self)
 {
     protected override int InitialMaxProgressAmount => 30;
     
-    protected override IEnumerable<DynamicVar> CanonicalVars => 
-    [
-        ..base.CanonicalVars,
-        new GoldVar(20)
-    ];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [..base.CanonicalVars, new GoldVar(20)];
     
     // 监听格挡获取
     public override Task AfterBlockGained(Creature creature, decimal amount, ValueProp props, CardModel? cardSource)
     {
-        if (creature == Owner.Creature)
-            AddProgress((int)amount);
+        if (creature == Owner.Creature) AddProgress((int)amount);
         return Task.CompletedTask;
     }
     
@@ -37,8 +34,9 @@ public sealed class EscortCommission() : CommissionCard(TargetType.Self)
         return Task.CompletedTask;
     }
     
-    protected override void OnUpgrade()
-    {
-        DynamicVars.Gold.UpgradeValueBy(5);
-    }
+    protected override void OnUpgrade() => DynamicVars.Gold.UpgradeValueBy(5);
+    
+    protected override IEnumerable<AllyRewardPreview> GetCommissionRewardPreviews(
+        Player recipient, AllyRewardPreviewContext context) => Owner.RunState.CurrentRoom is CombatRoom
+        ? [new AllyRewardPreview(recipient, AllyRewardPreviewIcons.Gold, DynamicVars.Gold.BaseValue)] : [];
 }

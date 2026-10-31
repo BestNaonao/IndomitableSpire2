@@ -1,4 +1,6 @@
-﻿using IndomitableSpire2.IndomitableSpire2Code.Cards.Abstracts;
+﻿using IndomitableSpire2.IndomitableSpire2Code.Abstracts;
+using IndomitableSpire2.IndomitableSpire2Code.Cards.Abstracts;
+using IndomitableSpire2.IndomitableSpire2Code.Rewards;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
@@ -22,21 +24,20 @@ public sealed class ExerciseCommission() : CommissionCard(TargetType.Self)
         new PowerVar<DexterityPower>(2m)
     ];
     
-    // 监听造成的伤害
-    public override Task AfterDamageGiven(
-        PlayerChoiceContext choiceContext, Creature? dealer, DamageResult result, ValueProp props, Creature target, CardModel? cardSource)
+    // 监听并记录造成的总伤害
+    public override Task AfterDamageGiven(PlayerChoiceContext choiceContext, 
+        Creature? dealer, DamageResult result, ValueProp props, Creature target, CardModel? cardSource)
     {
-        if (dealer == Owner.Creature && target.IsEnemy)
-            AddProgress(result.TotalDamage + result.OverkillDamage); // 记录总伤害
+        if (dealer == Owner.Creature && target.IsEnemy) AddProgress(result.TotalDamage + result.OverkillDamage);
         return Task.CompletedTask;
     }
     
     protected override async Task GrantReward(PlayerChoiceContext choiceContext, Player player)
     {
-        await PowerCmd.Apply<StrengthPower>(
-            choiceContext: choiceContext, player.Creature, DynamicVars.Strength.BaseValue, Owner.Creature, this);
-        await PowerCmd.Apply<DexterityPower>(
-            choiceContext: choiceContext, player.Creature, DynamicVars.Dexterity.BaseValue, Owner.Creature, this);
+        await PowerCmd.Apply<StrengthPower>(choiceContext: choiceContext, 
+            player.Creature, DynamicVars.Strength.BaseValue, Owner.Creature, this);
+        await PowerCmd.Apply<DexterityPower>(choiceContext: choiceContext, 
+            player.Creature, DynamicVars.Dexterity.BaseValue, Owner.Creature, this);
     }
     
     protected override void OnUpgrade()
@@ -44,4 +45,11 @@ public sealed class ExerciseCommission() : CommissionCard(TargetType.Self)
         DynamicVars.Strength.UpgradeValueBy(1m);
         DynamicVars.Dexterity.UpgradeValueBy(1m);
     }
+    
+    protected override IEnumerable<AllyRewardPreview> GetCommissionRewardPreviews(
+        Player recipient, AllyRewardPreviewContext context) =>
+    [
+        new(recipient, AllyRewardPreviewIcons.Strength, DynamicVars.Strength.BaseValue),
+        new(recipient, AllyRewardPreviewIcons.Dexterity, DynamicVars.Dexterity.BaseValue)
+    ];
 }

@@ -1,4 +1,6 @@
-﻿using IndomitableSpire2.IndomitableSpire2Code.Cards.Abstracts;
+﻿using IndomitableSpire2.IndomitableSpire2Code.Abstracts;
+using IndomitableSpire2.IndomitableSpire2Code.Cards.Abstracts;
+using IndomitableSpire2.IndomitableSpire2Code.Rewards;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Players;
@@ -12,17 +14,12 @@ public sealed class TransportCommission() : CommissionCard(TargetType.Self)
 {
     protected override int InitialMaxProgressAmount => 10;
     
-    protected override IEnumerable<DynamicVar> CanonicalVars =>
-    [
-        ..base.CanonicalVars,
-        new CardsVar(4)
-    ];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [..base.CanonicalVars, new CardsVar(4)];
     
     // 监听抽牌
     public override Task AfterCardDrawn(PlayerChoiceContext choiceContext, CardModel card, bool fromHandDraw)
     {
-        if (card.Owner == Owner)
-            AddProgress(1); // 每抽 1 张牌记录 1 点
+        if (card.Owner == Owner) AddProgress(1); // 每抽 1 张牌记录 1 点
         return Task.CompletedTask;
     }
     
@@ -31,8 +28,9 @@ public sealed class TransportCommission() : CommissionCard(TargetType.Self)
         await CardPileCmd.Draw(choiceContext, DynamicVars.Cards.BaseValue, player);
     }
     
-    protected override void OnUpgrade()
-    {
-        DynamicVars.Cards.UpgradeValueBy(1M);
-    }
+    protected override void OnUpgrade() => DynamicVars.Cards.UpgradeValueBy(1M);
+    
+    protected override IEnumerable<AllyRewardPreview> GetCommissionRewardPreviews(
+        Player recipient, AllyRewardPreviewContext context) =>
+        [new(recipient, AllyRewardPreviewIcons.DrawCards, DynamicVars.Cards.BaseValue)];
 }
