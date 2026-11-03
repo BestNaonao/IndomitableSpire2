@@ -218,6 +218,12 @@
   "INDOMITABLESPIRE2-SEA_FURY_FB11.fighter.description": "造成{FighterDamage:diff()}点伤害。",
   "INDOMITABLESPIRE2-SEA_FURY_FB11.bombs.title": "海怒 FB.11 (航弹挂载)",
   "INDOMITABLESPIRE2-SEA_FURY_FB11.bombs.description": "造成{BombDamage:diff()}点不可格挡的伤害。",
+  "INDOMITABLESPIRE2-WYVERN_S4.title": "飞龙 S.4",
+  "INDOMITABLESPIRE2-WYVERN_S4.description": "{HasOption:{OptionDescription}|[gold]多用途[/gold]：选择{aircraftPrefix:strikeFighterIcons()}战斗挂载或{aircraftPrefix:torpedoBomberIcons()}鱼雷挂载。}",
+  "INDOMITABLESPIRE2-WYVERN_S4.fighter.title": "飞龙 S.4（战斗挂载）",
+  "INDOMITABLESPIRE2-WYVERN_S4.fighter.description": "造成{FighterDamage:diff()}点伤害，给予[blue]{FighterIntercepted:diff()}[/blue]层[gold]截击[/gold]。\n自动打出时，以上效果翻倍。\n将这张牌放置于你的[gold]抽牌堆[/gold]底部。",
+  "INDOMITABLESPIRE2-WYVERN_S4.torpedoes.title": "飞龙 S.4（鱼雷挂载）",
+  "INDOMITABLESPIRE2-WYVERN_S4.torpedoes.description": "造成{TorpedoDamage:diff()}点不可格挡的伤害{TorpedoRepeat}次。\n给予[blue]{TorpedoFlooding:diff()}[/blue]层[gold]进水[/gold]。\n这张牌获得[gold]飞龙在天[/gold]。",
   
   "INDOMITABLESPIRE2-DESSERT.title": "甜点",
   "INDOMITABLESPIRE2-DESSERT.description": "回复[green]{Heal:diff()}[/green]点生命。\n获得{Energy:energyIcons()}。",

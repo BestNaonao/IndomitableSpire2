@@ -218,6 +218,12 @@
   "INDOMITABLESPIRE2-SEA_FURY_FB11.fighter.description": "Deal {FighterDamage:diff()} damage.",
   "INDOMITABLESPIRE2-SEA_FURY_FB11.bombs.title": "Sea Fury FB.11 (Bomb Loadout)",
   "INDOMITABLESPIRE2-SEA_FURY_FB11.bombs.description": "Deal {BombDamage:diff()} unblockable damage.",
+  "INDOMITABLESPIRE2-WYVERN_S4.title": "Wyvern S.4",
+  "INDOMITABLESPIRE2-WYVERN_S4.description": "{HasOption:{OptionDescription}|[gold]Versatile[/gold]: Choose a {aircraftPrefix:strikeFighterIcons()} fighter loadout or a {aircraftPrefix:torpedoBomberIcons()} torpedo loadout.}",
+  "INDOMITABLESPIRE2-WYVERN_S4.fighter.title": "Wyvern S.4 (Fighter Loadout)",
+  "INDOMITABLESPIRE2-WYVERN_S4.fighter.description": "Deal {FighterDamage:diff()} damage and apply [blue]{FighterIntercepted:diff()}[/blue] [gold]Intercepted[/gold].\nDouble these effects when auto-played.\nPut this card on the bottom of your [gold]Draw Pile[/gold].",
+  "INDOMITABLESPIRE2-WYVERN_S4.torpedoes.title": "Wyvern S.4 (Torpedo Loadout)",
+  "INDOMITABLESPIRE2-WYVERN_S4.torpedoes.description": "Deal {TorpedoDamage:diff()} unblockable damage {TorpedoRepeat} times.\nApply [blue]{TorpedoFlooding:diff()}[/blue] [gold]Flooding[/gold].\nThis card gains [gold]Wyvern Aloft[/gold].",
   
   "INDOMITABLESPIRE2-DESSERT.title": "Dessert",
   "INDOMITABLESPIRE2-DESSERT.description": "Heal [green]{Heal:diff()}[/green] HP.\nGain {Energy:energyIcons()}.",
