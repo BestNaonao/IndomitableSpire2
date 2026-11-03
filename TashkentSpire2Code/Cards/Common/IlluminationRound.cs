@@ -3,6 +3,7 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using TashkentSpire2.TashkentSpire2Code.Powers;
+using TashkentSpire2.TashkentSpire2Code.Nodes.Vfx;
 
 namespace TashkentSpire2.TashkentSpire2Code.Cards.Common;
 
@@ -18,6 +19,7 @@ public sealed class IlluminationRound() : TashkentCard(1, CardType.Skill, CardRa
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
+        NIlluminationRoundVfx.Play(cardPlay.Target);
         await PowerCmd.Apply<MarkPower>(choiceContext, cardPlay.Target, DynamicVars["TashkentSpire2-Mark"].BaseValue, base.Owner.Creature, this);
         await PowerCmd.Apply<IlluminationRoundPower>(choiceContext, cardPlay.Target, DynamicVars["IlluminationRoundPower"].BaseValue, base.Owner.Creature, this);
     }

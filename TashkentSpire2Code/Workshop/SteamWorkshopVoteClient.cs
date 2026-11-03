@@ -17,6 +17,8 @@ internal sealed class SteamWorkshopVoteClient : IWorkshopVoteClient
     public bool TryGetCurrentUser(out ulong userId)
     {
         userId = 0;
+        if (!MainFile.EnableWorkshopVote)
+            return false;
 #if !DISABLESTEAMWORKS
         try
         {

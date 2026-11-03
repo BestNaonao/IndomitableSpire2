@@ -16,6 +16,7 @@ using MegaCrit.Sts2.Core.ValueProps;
 using TashkentSpire2.TashkentSpire2Code.Character;
 using TashkentSpire2.TashkentSpire2Code.Commands;
 using TashkentSpire2.TashkentSpire2Code.Minion;
+using TashkentSpire2.TashkentSpire2Code.Nodes.Vfx;
 
 namespace TashkentSpire2.TashkentSpire2Code.Powers;
 
@@ -23,6 +24,8 @@ public sealed class DistancePower : TashkentPower, IPersistentPower
 {
     private const string VarKey = "Tashkent_Distance";
     private const float MovementDuration = 0.25f;
+    private const float MovementDistancePerStack = 40f;
+    internal const float VisualMovementSpeed = MovementDistancePerStack / MovementDuration;
     private bool _isSyncing = false;
     private bool _isFlipping = false;
     private int _movementAnimationRevision;
@@ -407,7 +410,7 @@ public sealed class DistancePower : TashkentPower, IPersistentPower
         }
         
         float moveDir = isFacingLeft ? -1f : 1f;
-        float moveDistance = delta * 40f * moveDir;
+        float moveDistance = delta * MovementDistancePerStack * moveDir;
 
         int animationRevision = TryStartTashkentMovementAnimation(
             delta,
@@ -421,6 +424,8 @@ public sealed class DistancePower : TashkentPower, IPersistentPower
             if (node == null || creature.IsDead) continue;
             if (tween == null) tween = NCombatRoom.Instance?.CreateTween().SetParallel().SetEase(Tween.EaseType.Out).SetTrans(Tween.TransitionType.Cubic);
             tween?.TweenProperty(node, "global_position:x", node.GlobalPosition.X + moveDistance, MovementDuration);
+            if (tween != null && creature == Owner && Owner.Player?.Character is TashkentCharacter)
+                NWaterFoamVfx.PlayMovement(node, moveDistance, MovementDuration);
         }
         try
         {

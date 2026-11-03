@@ -14,6 +14,9 @@ internal static class TashkentWorkshopVoteButtonPatch
     private const string NodePath = "InfoPanel/TashkentWorkshopVoteButton";
     private const string ScenePath = "res://TashkentSpire2/scenes/ui/tashkent_workshop_vote_button.tscn";
 
+    [HarmonyPrepare]
+    private static bool Prepare() => MainFile.EnableWorkshopVote;
+
     [HarmonyPostfix, HarmonyPatch(nameof(NCharacterSelectScreen.SelectCharacter))]
     private static void SelectCharacterPostfix(NCharacterSelectScreen __instance, NCharacterSelectButton charSelectButton, CharacterModel characterModel)
     {

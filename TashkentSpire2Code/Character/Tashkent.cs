@@ -21,6 +21,8 @@ public class TashkentCharacter : CustomCharacterModel
 	internal const string RetreatAnimationName = "move_left";
 	internal const string AdvanceAnimationTrigger = "TashkentAdvance";
 	internal const string RetreatAnimationTrigger = "TashkentRetreat";
+	internal const string VictoryAnimationName = "victory";
+	internal const string VictoryAnimationTrigger = "TashkentVictory";
 	public virtual TashkentSkin CurrentSkin => TashkentSkin.Default;
 	protected TashkentSkinDefinition CurrentSkinDefinition => TashkentSkinManager.GetDefinition(CurrentSkin);
 
@@ -112,7 +114,11 @@ public class TashkentCharacter : CustomCharacterModel
 		NTorpedoVfx.AssetPaths
 			.Concat(NTorpedoAfflictionVfx.AssetPaths)
 			.Concat(NPoseidonFormVfx.AssetPaths)
-			.Concat(NWarpDriveVfx.AssetPaths);
+			.Concat(NWarpDriveVfx.AssetPaths)
+			.Concat(NMarkTargetVfx.AssetPaths)
+			.Concat(NIlluminationRoundVfx.AssetPaths)
+			.Concat(NWaterFoamVfx.AssetPaths)
+			.Concat(NAmmunitionMuzzleVfx.AssetPaths);
 	
 	// public override string CustomArmPointingTexturePath =>
 	//     "res://TashkentSpire2/images/Tashkent/hands/multiplayer_hand_tashkent_point.png";
@@ -168,6 +174,13 @@ public class TashkentCharacter : CustomCharacterModel
 		// hit, and death triggers can still interrupt them through the normal pipeline.
 		animator.AddAnyState(AdvanceAnimationTrigger, new AnimState(AdvanceAnimationName, true));
 		animator.AddAnyState(RetreatAnimationTrigger, new AnimState(RetreatAnimationName, true));
+		if (controller.HasAnimation(VictoryAnimationName))
+		{
+			animator.AddAnyState(VictoryAnimationTrigger, new AnimState(VictoryAnimationName)
+			{
+				NextState = new AnimState("normal", true)
+			});
+		}
 		return animator;
 	}
 

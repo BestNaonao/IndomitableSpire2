@@ -29,6 +29,7 @@ public partial class NTorpedoVfx : Node2D
     private Node2D _facing = null!;
     private Sprite2D _sprite = null!;
     private NCreature? _ownerNode;
+    private NWaterFoamVfx? _foamTrail;
 
     private Tween? _spawnTween;
     private Tween? _flightTween;
@@ -129,6 +130,8 @@ public partial class NTorpedoVfx : Node2D
         _spawnTween?.Kill();
         _flightTween?.Kill();
         _dismissTween?.Kill();
+        StopFoamTrail();
+        _foamTrail = null;
         CompleteLaunch();
     }
 
@@ -224,6 +227,7 @@ public partial class NTorpedoVfx : Node2D
             direction = Vector2.Right;
         }
         _torpedo.GlobalRotation = direction.Angle();
+        _foamTrail = NWaterFoamVfx.StartFlight(this, _torpedo, Power.Owner);
 
         _launchCompletion = new TaskCompletionSource<bool>();
         Task completionTask = _launchCompletion.Task;
@@ -261,6 +265,7 @@ public partial class NTorpedoVfx : Node2D
         _isLaunching = false;
         _spawnTween?.Kill();
         _flightTween?.Kill();
+        StopFoamTrail();
         CompleteLaunch();
 
         _dismissTween = CreateTween();
@@ -273,6 +278,7 @@ public partial class NTorpedoVfx : Node2D
 
     private void OnImpact()
     {
+        StopFoamTrail();
         _isLaunching = false;
         if (_isFinishing)
         {
@@ -294,6 +300,7 @@ public partial class NTorpedoVfx : Node2D
         _spawnTween?.Kill();
         _flightTween?.Kill();
         _dismissTween?.Kill();
+        StopFoamTrail();
         if (_torpedo != null && GodotObject.IsInstanceValid(_torpedo))
         {
             _torpedo.Visible = false;
@@ -304,8 +311,17 @@ public partial class NTorpedoVfx : Node2D
 
     private void CompleteLaunch()
     {
-        _launchCompletion?.TrySetResult(true);
+        // Completion can synchronously resume TorpedoGod and launch its next
+        // flight. Detach first, or we'd erase that new flight's completion source.
+        TaskCompletionSource<bool>? completion = _launchCompletion;
         _launchCompletion = null;
+        completion?.TrySetResult(true);
+    }
+
+    private void StopFoamTrail()
+    {
+        if (_foamTrail != null && GodotObject.IsInstanceValid(_foamTrail))
+            _foamTrail.StopImmediately();
     }
 
     private float GetFacingSign()

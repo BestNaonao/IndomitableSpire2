@@ -7,6 +7,7 @@ using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.ValueProps;
+using TashkentSpire2.TashkentSpire2Code.Nodes.Vfx;
 
 namespace TashkentSpire2.TashkentSpire2Code.Cards.Uncommon;
 
@@ -24,11 +25,10 @@ public sealed class ChargedStrike() : TashkentCard(1, CardType.Attack, CardRarit
     {
         ArgumentNullException.ThrowIfNull(cardPlay.Target, nameof(cardPlay.Target));
         
-        AttackCommand attackCommand = await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
+        AttackCommand attackCommand = await NCloseStrikeVfx.Attach(DamageCmd.Attack(DynamicVars.Damage.BaseValue)
             .FromCard(this, cardPlay)
             .Targeting(cardPlay.Target)
-            .WithHitFx("vfx/vfx_heavy_blunt")
-            .WithHitVfxSpawnedAtBase()
+            .WithHitFx("vfx/vfx_heavy_blunt"), Owner.Creature, cardPlay.Target, charged: true)
             .Execute(choiceContext);
         
         await PowerCmd.Apply<VigorPower>(choiceContext, base.Owner.Creature, attackCommand.Results.SelectMany((List<DamageResult> r) => r).Sum((DamageResult r) => r.TotalDamage + r.OverkillDamage), base.Owner.Creature, this);
