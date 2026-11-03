@@ -148,5 +148,8 @@
   "INDOMITABLESPIRE2-NAVIGATOR_POWER.title": "领航者",
   "INDOMITABLESPIRE2-INTERNATIONAL_ORDERS_POWER.description": "战斗结束时，获得[gold]金币[/gold]。",
   "INDOMITABLESPIRE2-INTERNATIONAL_ORDERS_POWER.smartDescription": "战斗结束时，获得[blue]{Amount}[/blue][gold]金币[/gold]。",
-  "INDOMITABLESPIRE2-INTERNATIONAL_ORDERS_POWER.title": "国际订单"
+  "INDOMITABLESPIRE2-INTERNATIONAL_ORDERS_POWER.title": "国际订单",
+  "INDOMITABLESPIRE2-WYVERN_ALOFT_POWER.description": "绑定的{aircraftPrefix:carrierAircraftIcons()}牌若未被消耗，在回到你的[gold]手牌[/gold]前，每回合你第一次被敌人攻击后，对该敌人以{aircraftPrefix:strikeFighterIcons()}战斗挂载自动打出。",
+  "INDOMITABLESPIRE2-WYVERN_ALOFT_POWER.smartDescription": "绑定的{aircraftPrefix:carrierAircraftIcons()}牌若未被消耗，在回到{OnPlayer:你的|[gold]{OwnerName}的[/gold]}[gold]手牌[/gold]前，每回合{OnPlayer:你|[gold]{OwnerName}[/gold]}第一次被敌人攻击后，对该敌人以{aircraftPrefix:strikeFighterIcons()}战斗挂载自动打出。",
+  "INDOMITABLESPIRE2-WYVERN_ALOFT_POWER.title": "飞龙在天"
 }
