@@ -50,6 +50,13 @@ public sealed class IndomitableConfiguration : SimpleModConfig
     /// </summary>
     public static bool PlayHypnotizedAnimation { get; set; } = true;
     
+    /// <summary>连续保持 normal 多久后播放一次 motou（秒）；0 关闭自动播放，仅影响本机。</summary>
+    [ConfigSlider(0, 300, 1)]
+    public static int IdleAnimationDelaySeconds { get; set; } = 30;
+    
+    /// <summary>收到或发出 EndTurnPing 时，在本机为对应的存活不挠播放一次 motou。</summary>
+    public static bool PlayIdleAnimationOnEndTurnPing { get; set; } = true;
+    
     /// <summary>
     /// 同种卡牌的特殊台词是否每场战斗仅播放一次
     /// </summary>
