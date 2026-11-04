@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bk3tsmt4e2k3j"
-path="res://.godot/imported/feilong.png-d9fa7331678398e1b50f970b78a64703.ctex"
+uid="uid://b7olkc1cnww64"
+path="res://.godot/imported/wyvern_s4.png-2d07cf3f8ea52fbc8b6f4f58e828b1c5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://IndomitableSpire2/images/vfx/aircraft/feilong.png"
-dest_files=["res://.godot/imported/feilong.png-d9fa7331678398e1b50f970b78a64703.ctex"]
+source_file="res://IndomitableSpire2/images/vfx/aircraft/wyvern_s4.png"
+dest_files=["res://.godot/imported/wyvern_s4.png-2d07cf3f8ea52fbc8b6f4f58e828b1c5.ctex"]
 
 [params]
 
