@@ -149,7 +149,7 @@
   "INDOMITABLESPIRE2-INTERNATIONAL_ORDERS_POWER.description": "戦闘終了時、[gold]ゴールド[/gold]を得る。",
   "INDOMITABLESPIRE2-INTERNATIONAL_ORDERS_POWER.smartDescription": "戦闘終了時、[blue]{Amount}[/blue][gold]ゴールド[/gold]を得る。",
   "INDOMITABLESPIRE2-INTERNATIONAL_ORDERS_POWER.title": "国際受注",
-  "INDOMITABLESPIRE2-WYVERN_ALOFT_POWER.description": "紐づけられた{aircraftPrefix:carrierAircraftIcons()}カードが自分の[gold]手札[/gold]に戻るまで、各ターン最初に敵から攻撃された後、そのカードが[gold]廃棄[/gold]されていなければ、攻撃した敵に{aircraftPrefix:strikeFighterIcons()}戦闘装備で自動プレイする。",
-  "INDOMITABLESPIRE2-WYVERN_ALOFT_POWER.smartDescription": "紐づけられた{aircraftPrefix:carrierAircraftIcons()}カードが{OnPlayer:自分|[gold]{OwnerName}[/gold]}の[gold]手札[/gold]に戻るまで、各ターン最初に{OnPlayer:自分|[gold]{OwnerName}[/gold]}が敵から攻撃された後、そのカードが[gold]廃棄[/gold]されていなければ、攻撃した敵に{aircraftPrefix:strikeFighterIcons()}戦闘装備で自動プレイする。",
+  "INDOMITABLESPIRE2-WYVERN_ALOFT_POWER.description": "紐づけられた{aircraftPrefix:carrierAircraftIcons()}カードが自分の[gold]手札[/gold]に戻るか[gold]廃棄[/gold]されるまで、各ターン最初に敵が自分を攻撃しようとした時、その攻撃の前に、その敵に{aircraftPrefix:strikeFighterIcons()}戦闘装備で自動プレイする。",
+  "INDOMITABLESPIRE2-WYVERN_ALOFT_POWER.smartDescription": "紐づけられた{aircraftPrefix:carrierAircraftIcons()}カードが{OnPlayer:自分|[gold]{OwnerName}[/gold]}の[gold]手札[/gold]に戻るか[gold]廃棄[/gold]されるまで、各ターン最初に敵が{OnPlayer:自分|[gold]{OwnerName}[/gold]}を攻撃しようとした時、その攻撃の前に、その敵に{aircraftPrefix:strikeFighterIcons()}戦闘装備で自動プレイする。",
   "INDOMITABLESPIRE2-WYVERN_ALOFT_POWER.title": "飛竜飛翔"
 }

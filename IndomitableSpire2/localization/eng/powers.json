@@ -149,7 +149,7 @@
   "INDOMITABLESPIRE2-INTERNATIONAL_ORDERS_POWER.description": "At the end of combat, gain [gold]Gold[/gold].",
   "INDOMITABLESPIRE2-INTERNATIONAL_ORDERS_POWER.smartDescription": "At the end of combat, gain [blue]{Amount}[/blue] [gold]Gold[/gold].",
   "INDOMITABLESPIRE2-INTERNATIONAL_ORDERS_POWER.title": "International Orders",
-  "INDOMITABLESPIRE2-WYVERN_ALOFT_POWER.description": "Until the bound {aircraftPrefix:carrierAircraftIcons()} card returns to your [gold]Hand[/gold], the first time an enemy attacks you each turn, auto-play it against that enemy with its {aircraftPrefix:strikeFighterIcons()} fighter loadout if it is not [gold]Exhausted[/gold].",
-  "INDOMITABLESPIRE2-WYVERN_ALOFT_POWER.smartDescription": "Until the bound {aircraftPrefix:carrierAircraftIcons()} card returns to {OnPlayer:your|[gold]{OwnerName}'s[/gold]} [gold]Hand[/gold], the first time an enemy attacks {OnPlayer:you|[gold]{OwnerName}[/gold]} each turn, auto-play it against that enemy with its {aircraftPrefix:strikeFighterIcons()} fighter loadout if it is not [gold]Exhausted[/gold].",
+  "INDOMITABLESPIRE2-WYVERN_ALOFT_POWER.description": "Until the bound {aircraftPrefix:carrierAircraftIcons()} card returns to your [gold]Hand[/gold] or is [gold]Exhausted[/gold], the first time an enemy is about to attack you each turn, play it against that enemy with its {aircraftPrefix:strikeFighterIcons()} fighter loadout before the attack.",
+  "INDOMITABLESPIRE2-WYVERN_ALOFT_POWER.smartDescription": "Until the bound {aircraftPrefix:carrierAircraftIcons()} card returns to {OnPlayer:your|[gold]{OwnerName}'s[/gold]} [gold]Hand[/gold] or is [gold]Exhausted[/gold], the first time an enemy is about to attack {OnPlayer:you|[gold]{OwnerName}[/gold]} each turn, play it against that enemy with its {aircraftPrefix:strikeFighterIcons()} fighter loadout before the attack.",
   "INDOMITABLESPIRE2-WYVERN_ALOFT_POWER.title": "Wyvern Aloft"
 }
