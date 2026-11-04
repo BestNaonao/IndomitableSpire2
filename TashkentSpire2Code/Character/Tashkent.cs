@@ -120,10 +120,15 @@ public class TashkentCharacter : CustomCharacterModel
 			.Concat(NIlluminationRoundVfx.AssetPaths)
 			.Concat(NWaterFoamVfx.AssetPaths)
 			.Concat(NAmmunitionMuzzleVfx.AssetPaths)
-			.Append(TashkentBattleRewardsAssets.ScenePath)
-			.Append(TashkentBattleRewardsAssets.ButtonPath)
-			.Append(TashkentBattleRewardsAssets.OutlinePath)
-			.Append(TashkentBattleRewardsAssets.PaintingPaths[(int)CurrentSkin]);
+			.Concat(TashkentConfig.EnableCustomBattleRewards
+				? new[]
+				{
+					TashkentBattleRewardsAssets.ScenePath,
+					TashkentBattleRewardsAssets.ButtonPath,
+					TashkentBattleRewardsAssets.OutlinePath,
+					TashkentBattleRewardsAssets.PaintingPaths[(int)CurrentSkin]
+				}
+				: Array.Empty<string>());
 	
 	// public override string CustomArmPointingTexturePath =>
 	//     "res://TashkentSpire2/images/Tashkent/hands/multiplayer_hand_tashkent_point.png";

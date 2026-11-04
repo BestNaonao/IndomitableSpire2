@@ -6,6 +6,7 @@ using MegaCrit.Sts2.Core.Rewards;
 using MegaCrit.Sts2.Core.Rooms;
 using MegaCrit.Sts2.Core.TestSupport;
 using TashkentSpire2.TashkentSpire2Code.Character;
+using TashkentSpire2.TashkentSpire2Code.Config;
 using TashkentSpire2.TashkentSpire2Code.Nodes.UI;
 
 namespace TashkentSpire2.TashkentSpire2Code.Patches;
@@ -18,7 +19,7 @@ public static class TashkentBattleRewardsPatch
         [HarmonyPostfix]
         public static void Postfix(NRewardsScreen __instance, RewardsSet ____rewardsSet, bool ____isTerminal)
         {
-            if (TestMode.IsOn || !____isTerminal || ____rewardsSet.Room is not CombatRoom
+            if (!TashkentConfig.EnableCustomBattleRewards || TestMode.IsOn || !____isTerminal || ____rewardsSet.Room is not CombatRoom
                 || ____rewardsSet.Player.Character is not TashkentCharacter character)
                 return;
             NTashkentBattleRewardsController.Attach(__instance, character);
