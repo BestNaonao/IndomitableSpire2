@@ -27,6 +27,8 @@ public partial class TashkentSkinSelectPanel : Control
 	private Node2D? _currentVisualNode;
 	private ModelId? _renderedSkinId;
 	private int _currentIndex;
+	private bool _interactable = true;
+	private NTashkentIdleAnimation? _idleAnimation;
 
 	public override void _Ready()
 	{
@@ -37,10 +39,13 @@ public partial class TashkentSkinSelectPanel : Control
 
 		_leftArrow.Pressed += OnLeftPressed;
 		_rightArrow.Pressed += OnRightPressed;
+		VisibilityChanged += ResetIdleAnimation;
 	}
 
 	public void SetInteractable(bool interactable)
 	{
+		_interactable = interactable;
+		ResetIdleAnimation();
 		if (GodotObject.IsInstanceValid(_leftArrow))
 		{
 			_leftArrow.Visible = interactable;
@@ -89,6 +94,7 @@ public partial class TashkentSkinSelectPanel : Control
 
 	private void RenderSkinVisuals(TashkentCharacter skin)
 	{
+		ResetIdleAnimation();
 		_skinNameLabel.Text = new LocString("characters", $"{skin.Id.Entry}.skinName").GetFormattedText();
 
 		if (_renderedSkinId == skin.Id && GodotObject.IsInstanceValid(_currentVisualNode))
@@ -100,6 +106,7 @@ public partial class TashkentSkinSelectPanel : Control
 			_visualContainer.RemoveChild(_currentVisualNode);
 			_currentVisualNode.QueueFree();
 			_currentVisualNode = null;
+			_idleAnimation = null;
 		}
 
 		var scene = ResourceLoader.Load<PackedScene>(skin.CustomVisualPath);
@@ -115,6 +122,13 @@ public partial class TashkentSkinSelectPanel : Control
 			return;
 
 		var sprite = new MegaSprite((Variant)(GodotObject)spineNode);
-		this.RunWhenSpineReady(sprite, animationState => animationState.SetAnimation("normal"));
+		_idleAnimation = NTashkentIdleAnimation.AttachPreview(_currentVisualNode, sprite,
+			this, () => _interactable);
+	}
+
+	private void ResetIdleAnimation()
+	{
+		if (GodotObject.IsInstanceValid(_idleAnimation))
+			_idleAnimation!.ResetActivity();
 	}
 }

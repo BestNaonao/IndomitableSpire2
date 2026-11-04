@@ -184,6 +184,12 @@ public class TashkentCharacter : CustomCharacterModel
 		// hit, and death triggers can still interrupt them through the normal pipeline.
 		animator.AddAnyState(AdvanceAnimationTrigger, new AnimState(AdvanceAnimationName, true));
 		animator.AddAnyState(RetreatAnimationTrigger, new AnimState(RetreatAnimationName, true));
+		foreach (string animation in Nodes.NTashkentIdleAnimation.AnimationNames)
+		{
+			if (controller.HasAnimation(animation))
+				animator.AddAnyState(Nodes.NTashkentIdleAnimation.TriggerPrefix + animation,
+					new AnimState(animation) { NextState = new AnimState("normal", true) });
+		}
 		if (controller.HasAnimation(VictoryAnimationName))
 		{
 			animator.AddAnyState(VictoryAnimationTrigger, new AnimState(VictoryAnimationName)
