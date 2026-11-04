@@ -1,3 +1,4 @@
+using HarmonyLib;
 using IndomitableSpire2.IndomitableSpire2Code.Cards.Options;
 using IndomitableSpire2.IndomitableSpire2Code.Cards.Rares;
 using MegaCrit.Sts2.Core.Combat;
@@ -15,6 +16,11 @@ namespace IndomitableSpire2.IndomitableSpire2Code.Powers;
 
 public sealed class WyvernAloftPower : IndomitablePower
 {
+    // 只初始化一次目标读取委托；BeforeAttack 尚未产生 Results，也不应额外抽取随机目标。
+    private static readonly Func<AttackCommand, IReadOnlyList<Creature>> GetTargets =
+        AccessTools.MethodDelegate<Func<AttackCommand, IReadOnlyList<Creature>>>(
+            AccessTools.Method(typeof(AttackCommand), "GetPossibleTargets"));
+    
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Single;
     public override PowerInstanceType InstanceType => PowerInstanceType.Instanced;
@@ -55,22 +61,22 @@ public sealed class WyvernAloftPower : IndomitablePower
         return Task.CompletedTask;
     }
     
-    public override async Task AfterAttack(PlayerChoiceContext context, AttackCommand command)
+    public override async Task BeforeAttack(AttackCommand command)
     {
         var data = GetInternalData<Data>();
-        if (data.TriggeredThisTurn || data.Resolving || 
-            command.Attacker is not { IsEnemy: true } attacker || !command.DamageProps.IsPoweredAttack() || 
-            command.Results.SelectMany(hit => hit).All(result => result.Receiver != Owner)) return;
-        // 先消耗首次攻击的机会，再 await，防止多段/嵌套攻击重入；完全格挡仍属于被攻击。
+        if (data.TriggeredThisTurn || data.Resolving || command.Attacker is not { IsEnemy: true } attacker || 
+            !command.DamageProps.IsPoweredAttack() || Owner.IsDead || !GetTargets(command).Contains(Owner)) return;
+        // 原版怪物不随机选受击玩家。随机命令在本钩子后才逐段抽取，只要处理可能的目标即可。
+        // 先登记首次来袭，再 await：多段/嵌套攻击不重复触发，其他飞龙击杀来袭者也可以阻止攻击。
         data.TriggeredThisTurn = true;
-        if (Owner.IsDead || !attacker.IsHittable || data.Card is not { } card ||
-            card.Owner.Creature != Owner || card.CombatState != CombatState ||
-            card.Pile?.Type is not (PileType.Draw or PileType.Discard)) return;
+        if (!attacker.IsHittable || data.Card is not { } card || card.Owner.Creature != Owner || 
+            card.CombatState != CombatState || card.Pile?.Type is not (PileType.Draw or PileType.Discard)) return;
         data.Resolving = true;
         try
         {
             Flash();
-            await card.AutoPlayAloft(context, attacker);
+            // BeforeAttack 没有传入选牌上下文；完整等待迎击及其潜在选牌，再继续敌人的伤害结算。
+            await card.AutoPlayAloft(new BlockingPlayerChoiceContext(), attacker);
         }
         finally { data.Resolving = false; }
     }
