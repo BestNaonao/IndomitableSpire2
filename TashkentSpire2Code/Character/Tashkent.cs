@@ -10,6 +10,7 @@ using MegaCrit.Sts2.Core.Bindings.MegaSpine;
 using MegaCrit.Sts2.Core.Entities.Characters;
 using MegaCrit.Sts2.Core.Models;
 using TashkentSpire2.TashkentSpire2Code.Nodes.Vfx;
+using TashkentSpire2.TashkentSpire2Code.Nodes.UI;
 
 namespace TashkentSpire2.TashkentSpire2Code.Character;
 
@@ -118,7 +119,11 @@ public class TashkentCharacter : CustomCharacterModel
 			.Concat(NMarkTargetVfx.AssetPaths)
 			.Concat(NIlluminationRoundVfx.AssetPaths)
 			.Concat(NWaterFoamVfx.AssetPaths)
-			.Concat(NAmmunitionMuzzleVfx.AssetPaths);
+			.Concat(NAmmunitionMuzzleVfx.AssetPaths)
+			.Append(TashkentBattleRewardsAssets.ScenePath)
+			.Append(TashkentBattleRewardsAssets.ButtonPath)
+			.Append(TashkentBattleRewardsAssets.OutlinePath)
+			.Append(TashkentBattleRewardsAssets.PaintingPaths[(int)CurrentSkin]);
 	
 	// public override string CustomArmPointingTexturePath =>
 	//     "res://TashkentSpire2/images/Tashkent/hands/multiplayer_hand_tashkent_point.png";
