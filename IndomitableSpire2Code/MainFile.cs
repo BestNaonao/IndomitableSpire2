@@ -22,6 +22,7 @@ public partial class MainFile : Node
     public static void Initialize()
     {
         ModConfigRegistry.Register(ModId, new IndomitableConfiguration());
+        Services.EyeInTheSkyService.RegisterSave();
         
         InitializeBlockRetentionProviders();
         Logger.Info("Block Retention Providers registered successfully");
