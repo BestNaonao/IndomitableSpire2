@@ -19,7 +19,7 @@ public partial class EyeInTheSkyMarker : TextureRect
     private const string ImagePath = "res://IndomitableSpire2/images/packed/map/icons/map_eye_in_the_sky_marker.png";
     private const float MarkerSize = 48f;
     private const float CellWidth = 144f;
-    private const float CellHeight = 174f;
+    private const float CellHeight = 200f; // 为较长的敌人名保留两行（含字体行距），避免文字重叠。
     private const float Padding = 14f;
     private NMapPoint _point = null!; // 依附的地图节点
     private IRunState _run = null!; // 游戏运行状态
@@ -123,10 +123,10 @@ public partial class EyeInTheSkyMarker : TextureRect
                 MouseFilter = MouseFilterEnum.Ignore
             };
             _popup.AddChild(cell);
-            EyeInTheSkyPortrait.Add(cell, monsters[i], CellWidth);
+            // 名称先于画像创建。某个 Mod 怪物的 Visual 失败时仍保留其名称及其他怪物，不让异常留下一个只有背景、此后也不再重建的空弹窗。
             var label = new Label
             {
-                Text = monsters[i].Title.GetFormattedText(),
+                Text = monsters[i].Title.GetFormattedText(), ClipText = true,
                 Position = new Vector2(0, CellWidth),
                 Size = new Vector2(CellWidth, CellHeight - CellWidth),
                 HorizontalAlignment = HorizontalAlignment.Center,
@@ -135,6 +135,24 @@ public partial class EyeInTheSkyMarker : TextureRect
             };
             label.AddThemeFontSizeOverride("font_size", 16);
             cell.AddChild(label);
+            // Godot 在设置 Text 时可能按未启用换行前的最小宽度扩张控件；主题与换行就绪后再收回。
+            label.Size = new Vector2(CellWidth, CellHeight - CellWidth);
+            var portrait = new Control
+            {
+                Size = Vector2.One * CellWidth,
+                MouseFilter = MouseFilterEnum.Ignore
+            };
+            cell.AddChild(portrait);
+            try
+            {
+                EyeInTheSkyPortrait.Add(portrait, monsters[i], CellWidth);
+            }
+            catch (Exception exception)
+            {
+                portrait.Hide();
+                portrait.QueueFree(); // 清理半建成的 SubViewport / Visual；其余单元继续生成。
+                MainFile.Logger.Warn($"[EyeInTheSky] Portrait failed for {monsters[i].Id}: {exception}");
+            }
         }
     }
     

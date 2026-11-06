@@ -36,7 +36,8 @@ public static class EyeInTheSkyPortrait
             return;
         }
         
-        // 不创建 Creature、不进入 CombatState：预览不会初始化行动或触发任何战斗钩子。
+        // Service 已按原版图鉴方式创建了仅用于展示的 Creature（NullCombatState）。
+        // 不能忽略——幽灵花园鳗的 SetupSkins 会读取 Creature.SlotName。这里仅创建 Visual，不创建 NCreature，不进入真实战斗。
         var viewport = new SubViewport
         {
             Size = Vector2I.One * (int)size,
@@ -47,8 +48,7 @@ public static class EyeInTheSkyPortrait
         cell.AddChild(viewport);
         var visuals = monster.CreateVisuals();
         viewport.AddChild(visuals); // _Ready 设置 Bounds/SpineBody，之后才能配置皮肤。
-        // ToughEgg 等皮肤会读取 Monster.Rng；预览模型没有经过 CreateCreature 初始化，
-        // 给这个独立副本专用的外观 RNG，不借用任何真实怪物或本局的随机数流。
+        // ToughEgg 等皮肤读取 Monster.Rng；Service 同时为副本准备了独立外观 RNG。
         visuals.SetUpSkin(monster);
         visuals.UpdatePhobiaMode(monster);
         if (visuals.SpineBody is { } spine && spine.GetSkeleton() is { } skeleton)
