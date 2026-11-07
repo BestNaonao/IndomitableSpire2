@@ -7,23 +7,39 @@ using MegaCrit.Sts2.Core.Nodes.Combat;
 
 namespace IndomitableSpire2.IndomitableSpire2Code.Nodes;
 
-/// <summary>随角色节点创建和销毁的本地空闲演出，不参与战斗状态或网络同步。</summary>
+/// <summary>随战斗角色或皮肤预览节点创建和销毁的本地空闲演出，不参与战斗状态或网络同步。</summary>
 public partial class IndomitableIdleAnimation : Node
 {
     private const string NodeName = "IndomitableIdleAnimation";
     private const string AnimationName = "motou";
     private readonly IdleAnimationTimer _timer = new();
-    private NCreature _creature = null!;
-    private MegaSprite? _sprite;
+    private NCreature? _creature;
+    private CanvasItem _visual = null!;
+    private MegaSprite _sprite = null!;
     private MegaAnimationState? _animationState;
     private Callable _animationChanged;
     
     internal static void Attach(NCreature creature)
     {
         if (creature.Entity.Player?.Character is not Indomitable || CreatureAnimation.GetAnimator(creature) == null ||
-            creature.Visuals.SpineBody is not { } sprite || !sprite.HasAnimation(AnimationName) ||
-            creature.GetNodeOrNull<IndomitableIdleAnimation>(NodeName) != null) return;
-        creature.AddChild(new IndomitableIdleAnimation { Name = NodeName, _creature = creature });
+            creature.Visuals.SpineBody is not { } sprite) return;
+        AttachToVisual(creature, sprite, creature);
+    }
+    
+    internal static void AttachPreview(Node2D visual, MegaSprite sprite)
+    {
+        if (!sprite.HasAnimation("normal")) return;
+        AttachToVisual(visual, sprite);
+    }
+    
+    private static void AttachToVisual(CanvasItem visual, MegaSprite sprite, NCreature? creature = null)
+    {
+        if (!sprite.HasAnimation(AnimationName) || visual.GetNodeOrNull<IndomitableIdleAnimation>(NodeName) != null)
+            return;
+        visual.AddChild(new IndomitableIdleAnimation
+        {
+            Name = NodeName, _visual = visual, _sprite = sprite, _creature = creature
+        });
     }
     
     internal static bool TryPlay(NCreature creature)
@@ -39,36 +55,53 @@ public partial class IndomitableIdleAnimation : Node
     
     public override void _EnterTree()
     {
-        _sprite = _creature.Visuals.SpineBody;
-        _animationState = _sprite!.GetAnimationState();
+        _animationState = _sprite.GetAnimationState();
         _animationChanged = Callable.From<GodotObject, GodotObject, GodotObject>(OnAnimationChanged);
         _sprite.ConnectAnimationStarted(_animationChanged);
         _sprite.ConnectAnimationEnded(_animationChanged);
-        ObserveCurrentAnimation();
+        _visual.VisibilityChanged += OnVisibilityChanged;
+        OnVisibilityChanged();
     }
     
     private void OnAnimationChanged(GodotObject _, GodotObject __, GodotObject ___) => ObserveCurrentAnimation();
     
     private void ObserveCurrentAnimation() => _timer.ObserveAnimation(_animationState?.GetCurrentAnimationName());
     
+    private void OnVisibilityChanged()
+    {
+        // 面板即使在两帧间隐藏又显示，也不能沿用隐藏前累计的待机时间。
+        if (_visual.IsVisibleInTree()) ObserveCurrentAnimation();
+        else _timer.ObserveAnimation(null);
+    }
+    
     public override void _Process(double delta)
     {
         // 读取真实 Spine 轨道的开始/结束信号，而不是逻辑触发名；自动排队回到 normal 也能被观察到。
         // 不在每帧创建 Spine 包装对象，且不会漏掉两帧间连续触发的非空闲动画。
-        if (_timer.Advance(delta, IndomitableConfiguration.IdleAnimationDelaySeconds,
-                _creature.Entity.IsAlive && _creature.IsVisibleInTree()))
-            TryPlay(_creature);
+        if (!_timer.Advance(delta, IndomitableConfiguration.IdleAnimationDelaySeconds,
+                _visual.IsVisibleInTree() && (_creature?.Entity.IsAlive ?? true))) return;
+        if (_creature != null) TryPlay(_creature);
+        else PlayPreviewAnimation();
+    }
+    
+    private void PlayPreviewAnimation()
+    {
+        // 预览没有 CreatureAnimator，直接排队一次 motou 后恢复 normal；不打断其他动作。
+        if (_animationState?.GetCurrentAnimationName() != "normal") return;
+        _animationState.SetAnimation(AnimationName, loop: false);
+        _animationState.AddAnimation("normal", loop: true);
     }
     
     public override void _ExitTree()
     {
-        if (_sprite != null && IsInstanceValid(_sprite.BoundObject))
+        if (IsInstanceValid(_visual)) _visual.VisibilityChanged -= OnVisibilityChanged;
+        if (IsInstanceValid(_sprite.BoundObject))
         {
             _sprite.DisconnectAnimationStarted(_animationChanged);
             _sprite.DisconnectAnimationEnded(_animationChanged);
         }
         _animationChanged = default;
-        _sprite = null;
+        // 保留所属模型及 Spine 引用，节点重新入树时可重新连接；切换皮肤则随父模型一起销毁。
         _animationState = null;
         _timer.ObserveAnimation(null);
     }

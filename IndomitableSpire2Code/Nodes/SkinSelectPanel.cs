@@ -108,22 +108,19 @@ public partial class SkinSelectPanel : Control
         
         // 2. 动态加载并实例化 CustomVisualPath 对应的场景
         var scene = ResourceLoader.Load<PackedScene>(skin.CustomVisualPath);
-        if (scene != null)
-        {
-            _currentVisualNode = scene.Instantiate<Node2D>();
-            _visualContainer.AddChild(_currentVisualNode);
-            
-            // 【核心修复】：将 Node2D 的位置定在 VisualContainer 的中下方
-            // 容器宽度是 300，高度是 400。X=150 是水平居中，Y=250 是将脚底放在偏下部。
-            _currentVisualNode.Position = new Vector2(150, 250);
-            
-            // 尝试获取模型内的 SpineSprite 并播放待机动画
-            var spineNode = _currentVisualNode.GetNodeOrNull<Node>("%Visuals");
-            if (spineNode != null)
-            {
-                var megaSprite = new MegaSprite((Variant)(GodotObject)spineNode);
-                megaSprite.GetAnimationState().SetAnimation("normal");
-            }
-        }
+        if (scene == null) return;
+        _currentVisualNode = scene.Instantiate<Node2D>();
+        _visualContainer.AddChild(_currentVisualNode);
+        
+        // 【核心修复】：将 Node2D 的位置定在 VisualContainer 的中下方
+        // 容器宽度是 300，高度是 400。X=150 是水平居中，Y=250 是将脚底放在偏下部。
+        _currentVisualNode.Position = new Vector2(150, 250);
+        
+        // 尝试获取模型内的 SpineSprite 并播放待机动画
+        var spineNode = _currentVisualNode.GetNodeOrNull<Node>("%Visuals");
+        if (spineNode == null) return;
+        var megaSprite = new MegaSprite((Variant)(GodotObject)spineNode);
+        megaSprite.GetAnimationState().SetAnimation("normal");
+        IndomitableIdleAnimation.AttachPreview(_currentVisualNode, megaSprite);
     }
 }
