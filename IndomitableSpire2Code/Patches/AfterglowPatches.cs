@@ -1,4 +1,5 @@
 using System.Reflection.Emit;
+using System.Runtime.CompilerServices;
 using HarmonyLib;
 using IndomitableSpire2.IndomitableSpire2Code.Enums;
 using IndomitableSpire2.IndomitableSpire2Code.Hooks;
@@ -16,21 +17,21 @@ public static class AfterglowExhaustPatch
 {
     [HarmonyPrefix]
     public static bool Prefix(PlayerChoiceContext choiceContext, CardModel card, bool causedByEthereal,
-        bool skipVisuals, ref Task __result)
+        bool skipVisuals, ref Task<CardPileAddResult?> __result)
     {
         if (CombatManager.Instance.IsOverOrEnding) return true;
         if (AfterglowContext.ActiveCards.TryGetValue(card, out var active))
         {
             // 即使追加打出期间失去回光，也必须完成原消耗。追加中的消耗请求不能再次嵌套。
             if (active.FinalizingExhaust) return true;
-            __result = Task.CompletedTask;
+            __result = Task.FromResult<CardPileAddResult?>(null);
             return false;
         }
         if (!card.Keywords.Contains(IndomitableKeywords.Afterglow)) return true;
         // 原打出剩余的重放不能再次消耗已经进入消耗堆的牌。
         if (card.Pile?.Type == PileType.Exhaust)
         {
-            __result = Task.CompletedTask;
+            __result = Task.FromResult<CardPileAddResult?>(null);
             return false;
         }
         var data = new AfterglowContext.Data();
@@ -39,9 +40,10 @@ public static class AfterglowExhaustPatch
         return false;
     }
     
-    private static async Task PlayBeforeExhaust(PlayerChoiceContext choiceContext, CardModel card,
+    private static async Task<CardPileAddResult?> PlayBeforeExhaust(PlayerChoiceContext choiceContext, CardModel card,
         AfterglowContext.Data data, bool causedByEthereal, bool skipVisuals)
     {
+        CardPileAddResult? result;
         try
         {
             var target = card.CurrentTarget is { IsAlive: true } current ? current : null;
@@ -51,10 +53,36 @@ public static class AfterglowExhaustPatch
         {
             data.PlayingBeforeExhaust = false;
             data.FinalizingExhaust = true;
-            try { await CardCmd.Exhaust(choiceContext, card, causedByEthereal, skipVisuals); }
+            try { result = await CardCmd.Exhaust(choiceContext, card, causedByEthereal, skipVisuals); }
             finally { AfterglowContext.ActiveCards.Remove(card); }
         }
+        return result;
     }
+}
+
+/// <summary>防止提前编译的回合结束逻辑内联原版消耗入口，绕过稍后安装的回光补丁。</summary>
+[HarmonyPatch(typeof(CombatManager), "DoTurnEnd", MethodType.Async)]
+public static class AfterglowTurnEndExhaustPatch
+{
+    [HarmonyTranspiler]
+    private static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
+    {
+        var code = instructions.ToList();
+        var bridge = AccessTools.Method(typeof(AfterglowTurnEndExhaustPatch), nameof(Exhaust));
+        if (code.Any(instruction => instruction.Calls(bridge))) return code;
+        // RitsuLib 会重编译 DoTurnEnd；只替换消耗调用，保留其他补丁的手牌查询与结算逻辑。
+        return new CodeMatcher(code)
+            .MatchStartForward(CodeMatch.Calls(AccessTools.Method(typeof(CardCmd), nameof(CardCmd.Exhaust))))
+            .ThrowIfInvalid("Afterglow: Exhaust call not found in DoTurnEnd")
+            .Set(OpCodes.Call, bridge)
+            .InstructionEnumeration();
+    }
+    
+    // 无论本补丁和 Exhaust Prefix 谁先安装，都不能在编译调用者时展开原版 Exhaust。
+    [MethodImpl(MethodImplOptions.NoInlining)]
+    private static Task<CardPileAddResult?> Exhaust(PlayerChoiceContext choiceContext, CardModel card,
+        bool causedByEthereal, bool skipVisuals) =>
+        CardCmd.Exhaust(choiceContext, card, causedByEthereal, skipVisuals);
 }
 
 // 回光严格追加一次；不重新消耗复制药水/自拍等次数修正，也不再展开固有重放。
