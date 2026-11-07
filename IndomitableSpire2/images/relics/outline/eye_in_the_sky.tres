@@ -1,0 +1,7 @@
+[gd_resource type="AtlasTexture" load_steps=2 format=3 uid="uid://bjw1we3sd7cgu"]
+
+[ext_resource type="Texture2D" uid="uid://dl3q6yl7vm18o" path="res://IndomitableSpire2/images/relics/outline/eye_in_the_sky.png" id="1"]
+
+[resource]
+atlas = ExtResource("1")
+region = Rect2(0, 0, 90, 90)
