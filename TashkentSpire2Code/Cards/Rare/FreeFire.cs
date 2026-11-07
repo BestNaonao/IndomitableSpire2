@@ -31,7 +31,7 @@ public sealed class FreeFire() : AmmunitionCard(3, CardType.Skill, CardRarity.Ra
     {
         ArgumentNullException.ThrowIfNull(CombatState);
     
-        int shellsLoaded = await GetShellCountcmd.Execute(choiceContext, Owner, (int)CurrentAmmu, this.Keywords.Contains(TashkentKeyword.Barrage));
+        int shellsLoaded = await GetShellCountcmd.Execute(choiceContext, Owner, (int)CurrentAmmu, this.Keywords.Contains(TashkentKeyword.Barrage), this);
         if (shellsLoaded > 0)
         {
             var ammuCards = ModelDb.AllCards.OfType<AmmunitionCard>();

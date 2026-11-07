@@ -9,6 +9,9 @@ public static class TashkentBattleRewardsAssets
     public const string ScenePath = "res://TashkentSpire2/scenes/ui/tashkent_battle_rewards.tscn";
     public const string ButtonPath = "res://TashkentSpire2/images/ui/battle_rewards/proceed_button.svg";
     public const string OutlinePath = "res://TashkentSpire2/images/ui/battle_rewards/proceed_outline.svg";
+    // BaseLib uses this vanilla texture for reward-button highlighting, even
+    // when our optional custom reward presentation is disabled.
+    public const string RewardHighlightPath = "res://images/packed/card_template/card_frame_sdf.exr";
     public const string LocPrefix = "TASHKENTSPIRE2-BATTLE_REWARDS.";
     public static readonly Vector2 RewardOrigin = new(240f, 226f);
     public const float RewardWindowScale = 0.96f;
@@ -25,6 +28,7 @@ public static class TashkentBattleRewardsAssets
         if (!FileAccess.FileExists(path))
             path = "res://TashkentSpire2/localization/eng/gameplay_ui.json";
         return Json.ParseString(FileAccess.GetFileAsString(path)).AsGodotDictionary()
+            .Where(pair => pair.Key.AsString().StartsWith(LocPrefix, StringComparison.Ordinal))
             .ToDictionary(pair => pair.Key.AsString(), pair => pair.Value.AsString());
     }
 }

@@ -1,4 +1,6 @@
 {
+  "TASHKENTSPIRE2-SHELL_SELECTOR.confirm": "確認",
+  "TASHKENTSPIRE2-SHELL_SELECTOR.available": "現在の弾薬：{amount}",
   "TASHKENTSPIRE2-BATTLE_REWARDS.victory": "完全勝利",
   "TASHKENTSPIRE2-BATTLE_REWARDS.result": "戦闘終了",
   "TASHKENTSPIRE2-BATTLE_REWARDS.character": "タシュケント",

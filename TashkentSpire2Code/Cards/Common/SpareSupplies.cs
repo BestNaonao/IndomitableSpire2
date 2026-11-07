@@ -32,7 +32,7 @@ public sealed class SpareSupplies() : AmmunitionCard(0, CardType.Skill, CardRari
     {
         ArgumentNullException.ThrowIfNull(CombatState);
         
-        int shellsLoaded = await GetShellCountcmd.Execute(choiceContext, Owner, (int)CurrentAmmu,this.Keywords.Contains(TashkentKeyword.Barrage));
+        int shellsLoaded = await GetShellCountcmd.Execute(choiceContext, Owner, (int)CurrentAmmu,this.Keywords.Contains(TashkentKeyword.Barrage), this);
         if (shellsLoaded > 0)
         {
             await TryTriggerShotEffectAsync(shellsLoaded, async () => {

@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://bdy0w265b8okt"]
+[gd_scene load_steps=6 format=3 uid="uid://bdy0w265b8okt"]
 
 [ext_resource type="Script" uid="uid://c6n3es6yqskpk" path="res://TashkentSpire2Code/Scripts/NConfirmButtonTashkent.cs" id="1_hma7g"]
 [ext_resource type="Texture2D" uid="uid://v5lcqsu4auji" path="res://TashkentSpire2/images/powers/big/taunt_power.png" id="2_2vfvx"]
 [ext_resource type="Texture2D" uid="uid://bca086igdcwf2" path="res://TashkentSpire2/images/combatui/placeholder_controller_icon.png" id="3_ki7v4"]
+[ext_resource type="Texture2D" path="res://TashkentSpire2/images/ui/shell_selection/confirm_button.png" id="4_caption"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6klvc"]
 
@@ -11,60 +12,96 @@ layout_mode = 3
 anchors_preset = 0
 offset_left = 1760.0
 offset_top = 726.0
-offset_right = 1960.0
-offset_bottom = 836.0
-pivot_offset = Vector2(100, 40)
+offset_right = 2160.0
+offset_bottom = 946.0
+pivot_offset = Vector2(200, 80)
 script = ExtResource("1_hma7g")
 
 [node name="Shadow" type="TextureRect" parent="."]
 modulate = Color(0, 0, 0, 0.15686275)
 layout_mode = 0
-offset_left = -49.0
-offset_top = -15.0
-offset_right = 218.0
-offset_bottom = 135.0
+offset_left = -98.0
+offset_top = -30.0
+offset_right = 436.0
+offset_bottom = 270.0
+mouse_filter = 2
 expand_mode = 2
 stretch_mode = 5
 
 [node name="Outline" type="TextureRect" parent="."]
 modulate = Color(0.8901961, 0.65882355, 1, 0.36862746)
 layout_mode = 0
-offset_left = -49.0
-offset_top = -17.0
-offset_right = 209.0
-offset_bottom = 139.0
+offset_left = -98.0
+offset_top = -34.0
+offset_right = 418.0
+offset_bottom = 278.0
+mouse_filter = 2
 expand_mode = 2
 stretch_mode = 5
 
 [node name="Image" type="TextureRect" parent="."]
 layout_mode = 0
-offset_left = -53.0
-offset_top = -13.0
-offset_right = 214.0
-offset_bottom = 137.0
+offset_left = -106.0
+offset_top = -26.0
+offset_right = 428.0
+offset_bottom = 274.0
+mouse_filter = 2
 expand_mode = 1
 stretch_mode = 5
 
 [node name="Icon" type="TextureRect" parent="Image"]
 layout_mode = 0
-offset_left = 88.0
-offset_top = 28.0
-offset_right = 168.0
-offset_bottom = 108.0
+offset_left = 176.0
+offset_top = 56.0
+offset_right = 336.0
+offset_bottom = 216.0
+mouse_filter = 2
 texture = ExtResource("2_2vfvx")
 expand_mode = 1
-stretch_mode = 3
+stretch_mode = 5
 
 [node name="ControllerIcon" type="TextureRect" parent="Image"]
 unique_name_in_owner = true
+visible = false
 material = SubResource("ShaderMaterial_6klvc")
 layout_mode = 0
-offset_left = -9.0
-offset_top = 11.0
-offset_right = 231.0
-offset_bottom = 131.0
+offset_left = -18.0
+offset_top = 22.0
+offset_right = 462.0
+offset_bottom = 262.0
 scale = Vector2(0.5, 0.5)
-pivot_offset = Vector2(256, 128)
+pivot_offset = Vector2(512, 256)
+mouse_filter = 2
 texture = ExtResource("3_ki7v4")
 expand_mode = 1
 stretch_mode = 5
+
+[node name="ConfirmCaption" type="TextureRect" parent="Image"]
+layout_mode = 0
+offset_left = 146.0
+offset_top = 226.0
+offset_right = 366.0
+offset_bottom = 290.0
+mouse_filter = 2
+texture = ExtResource("4_caption")
+expand_mode = 1
+
+[node name="Text" type="Label" parent="Image/ConfirmCaption"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 12.0
+offset_top = -2.0
+offset_right = -12.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.19, 0.15, 0.08, 1)
+theme_override_colors/font_outline_color = Color(1, 0.94, 0.68, 0.8)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 30
+text = "确认"
+horizontal_alignment = 1
+vertical_alignment = 1

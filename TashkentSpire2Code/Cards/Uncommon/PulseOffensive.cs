@@ -28,7 +28,7 @@ public sealed class PulseOffensive() : AmmunitionCard(2, CardType.Attack, CardRa
     {
         ArgumentNullException.ThrowIfNull(CombatState);
         
-        int shellsLoaded = await GetShellCountcmd.Execute(choiceContext, Owner, (int)CurrentAmmu,this.Keywords.Contains(TashkentKeyword.Barrage));
+        int shellsLoaded = await GetShellCountcmd.Execute(choiceContext, Owner, (int)CurrentAmmu,this.Keywords.Contains(TashkentKeyword.Barrage), this);
         if (shellsLoaded > 0)
         {
             await TryTriggerShotEffectAsync(shellsLoaded, async () => {

@@ -1,4 +1,6 @@
 {
+  "TASHKENTSPIRE2-SHELL_SELECTOR.confirm": "确认",
+  "TASHKENTSPIRE2-SHELL_SELECTOR.available": "现有弹药：{amount}",
   "TASHKENTSPIRE2-BATTLE_REWARDS.victory": "大获全胜",
   "TASHKENTSPIRE2-BATTLE_REWARDS.result": "战斗结束",
   "TASHKENTSPIRE2-BATTLE_REWARDS.character": "塔什干",

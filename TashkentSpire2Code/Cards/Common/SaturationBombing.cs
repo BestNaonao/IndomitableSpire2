@@ -25,7 +25,7 @@ public sealed class SaturationBombing() : AmmunitionCard(2, CardType.Attack, Car
         
         await SaturationBombingcmd.Execute(choiceContext, this.Owner, this);
         
-        int shellsLoaded = await GetShellCountcmd.Execute(choiceContext, Owner, (int)CurrentAmmu,this.Keywords.Contains(TashkentKeyword.Barrage));
+        int shellsLoaded = await GetShellCountcmd.Execute(choiceContext, Owner, (int)CurrentAmmu,this.Keywords.Contains(TashkentKeyword.Barrage), this);
 
         await DamageCmd.Attack(DynamicVars.ExtraDamage.BaseValue * shellsLoaded)
             .FromCard(this, cardPlay)

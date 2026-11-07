@@ -17,7 +17,8 @@ public static class GetShellCountcmd
         PlayerChoiceContext choiceContext, 
         Player player, 
         int maxAmount, 
-        bool canExceed)
+        bool canExceed,
+        CardModel? sourceCard = null)
     {
         var choices = new List<CardModel>();
         var state = player.Creature.CombatState!;
@@ -30,7 +31,11 @@ public static class GetShellCountcmd
         choices.Add(state.CreateCard(ModelDb.Card<Shell5>(), player));
         choices.Add(state.CreateCard(ModelDb.Card<Shell6>(), player));
 
-        int maxToSelect = canExceed ? 6 : Math.Min(6, maxAmount);
+        int availableAmmo = Math.Max(0, maxAmount);
+        int maxToSelect = canExceed ? 6 : Math.Min(6, availableAmmo);
+        int? focusThreshold = sourceCard != null &&
+            sourceCard.DynamicVars.TryGetValue("TashkentSpire2-Shot", out var shot)
+                ? (int)Math.Ceiling(shot.BaseValue) : null;
 
         uint choiceId = RunManager.Instance.PlayerChoiceSynchronizer.ReserveChoiceId(player);
         int finalCount = 0;
@@ -41,10 +46,11 @@ public static class GetShellCountcmd
         {
             var prompt = new LocString("cards", "Tashkent_SelectShellsPrompt");
 
-            prompt.Add("maxamount", (decimal)maxAmount); 
+            prompt.Add("maxamount", (decimal)availableAmmo);
             prompt.Add("max", (decimal)maxToSelect);
 
-            finalCount = await NPlayerHandTashkent.Show(choices, prompt.GetFormattedText(), maxToSelect);
+            finalCount = await NPlayerHandTashkent.Show(choices, prompt.GetFormattedText(), maxToSelect,
+                availableAmmo, focusThreshold, prompt.GetFormattedText);
 
             RunManager.Instance.PlayerChoiceSynchronizer.SyncLocalChoice(
                 player, choiceId, PlayerChoiceResult.FromIndex(finalCount));

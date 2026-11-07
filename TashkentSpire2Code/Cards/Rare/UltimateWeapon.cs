@@ -44,7 +44,7 @@ public sealed class UltimateWeapon() : AmmunitionCard(3, CardType.Attack, CardRa
         ArgumentNullException.ThrowIfNull(cardPlay.Target, nameof(cardPlay.Target));
         ArgumentNullException.ThrowIfNull(CombatState);
 
-        int shellsToFire = await GetShellCountcmd.Execute(choiceContext, Owner, (int)CurrentAmmu, this.Keywords.Contains(TashkentKeyword.Barrage));
+        int shellsToFire = await GetShellCountcmd.Execute(choiceContext, Owner, (int)CurrentAmmu, this.Keywords.Contains(TashkentKeyword.Barrage), this);
     
         if (shellsToFire > 0)
         {

@@ -1,4 +1,6 @@
 {
+  "TASHKENTSPIRE2-SHELL_SELECTOR.confirm": "Confirm",
+  "TASHKENTSPIRE2-SHELL_SELECTOR.available": "Available Ammo: {amount}",
   "TASHKENTSPIRE2-BATTLE_REWARDS.victory": "TOTAL VICTORY",
   "TASHKENTSPIRE2-BATTLE_REWARDS.result": "Battle Complete",
   "TASHKENTSPIRE2-BATTLE_REWARDS.character": "Tashkent",

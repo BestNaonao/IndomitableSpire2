@@ -123,6 +123,8 @@ public class TashkentCharacter : CustomCharacterModel
 			.Concat(NAmmunitionMuzzleVfx.AssetPaths)
 			.Concat(NCardFeedbackVfx.AssetPaths)
 			.Concat(NCoreBreakdownBurstVfx.AssetPaths)
+			.Concat(Scripts.NPlayerHandTashkent.AssetPaths)
+			.Append(TashkentBattleRewardsAssets.RewardHighlightPath)
 			.Concat(TashkentConfig.EnableCustomBattleRewards
 				? new[]
 				{

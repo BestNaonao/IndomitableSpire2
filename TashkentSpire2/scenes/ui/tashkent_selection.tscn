@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://d4fi2l8c52sa5"]
+[gd_scene load_steps=14 format=3 uid="uid://d4fi2l8c52sa5"]
 
 [ext_resource type="Script" uid="uid://bvoy7kphc6pfh" path="res://TashkentSpire2Code/Scripts/NPlayerHandTashkent.cs" id="1_hcre3"]
 [ext_resource type="PackedScene" uid="uid://bdy0w265b8okt" path="res://TashkentSpire2/scenes/ui/tashkent_confirm_button.tscn" id="1_sdu68"]
@@ -7,6 +7,20 @@
 [ext_resource type="Script" uid="uid://dtl4d462n3xg6" path="res://TashkentSpire2Code/Scripts/NSelectedHandCardContainerTashkent.cs" id="2_nk3x8"]
 [ext_resource type="Script" uid="uid://5axhiscqlm43" path="res://TashkentSpire2Code/Scripts/MegaRichTextLabelTashkent.cs" id="4_51b7v"]
 [ext_resource type="Texture2D" uid="uid://cnditq0b2sltc" path="res://TashkentSpire2/images/combatui/upgrade_arrow.png" id="5_ep87x"]
+[ext_resource type="Script" uid="uid://fo2wxa3snth6" path="res://TashkentSpire2/scenes/ui/tashkent_shell_slider.gd" id="8_slider"]
+[ext_resource type="Texture2D" uid="uid://cd81ip6ftolcg" path="res://TashkentSpire2/images/ui/shell_selection/tashkent_handle.png" id="9_handle"]
+
+[sub_resource type="Theme" id="Theme_slider"]
+default_font = ExtResource("2_h50ns")
+default_font_size = 20
+
+[sub_resource type="Gradient" id="Gradient_invisible"]
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_grabber"]
+gradient = SubResource("Gradient_invisible")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_slider"]
 
 [node name="TashkentSelection" type="Control"]
 layout_mode = 3
@@ -47,11 +61,11 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_top = 100.0
-offset_bottom = 100.0
+offset_top = -20.0
+offset_bottom = -20.0
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(1.6, 1.6)
+scale = Vector2(1.5, 1.5)
 script = ExtResource("2_nk3x8")
 
 [node name="SelectModeConfirmButton" parent="." instance=ExtResource("1_sdu68")]
@@ -62,12 +76,13 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -160.0
-offset_top = -354.0
-offset_right = 40.0
-offset_bottom = -244.0
+offset_left = -244.0
+offset_top = -536.0
+offset_right = 156.0
+offset_bottom = -316.0
 grow_horizontal = 0
 grow_vertical = 0
+scale = Vector2(1, 1)
 
 [node name="SelectionHeader" type="RichTextLabel" parent="."]
 unique_name_in_owner = true
@@ -77,9 +92,9 @@ anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
 offset_left = 7.0
-offset_top = -342.0
+offset_top = -400.0
 offset_right = 7.0
-offset_bottom = -292.0
+offset_bottom = -350.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/normal_font = ExtResource("2_h50ns")
@@ -96,24 +111,26 @@ script = ExtResource("4_51b7v")
 [node name="PeekButton" parent="." instance=ExtResource("2_fhca5")]
 unique_name_in_owner = true
 layout_mode = 1
-offset_left = -860.0
-offset_top = -64.0
-offset_right = -732.0
-offset_bottom = 64.0
+offset_left = -930.0
+offset_top = -40.0
+offset_right = -802.0
+offset_bottom = 88.0
+scale = Vector2(0.8, 0.8)
 
 [node name="LeftArrow" type="Control" parent="."]
 unique_name_in_owner = true
 anchors_preset = 0
 offset_left = 520.0
-offset_top = 580.0
-offset_right = 520.0
-offset_bottom = 580.0
+offset_top = 500.0
+offset_right = 585.0
+offset_bottom = 565.0
 scale = Vector2(2, 2)
 
 [node name="TextureRect" type="TextureRect" parent="LeftArrow"]
 layout_mode = 0
 offset_right = 65.0
 offset_bottom = 65.0
+mouse_filter = 2
 texture = ExtResource("5_ep87x")
 flip_h = true
 
@@ -121,13 +138,144 @@ flip_h = true
 unique_name_in_owner = true
 anchors_preset = 0
 offset_left = 1270.0
-offset_top = 580.0
-offset_right = 1270.0
-offset_bottom = 580.0
+offset_top = 500.0
+offset_right = 1310.0
+offset_bottom = 540.0
 scale = Vector2(2, 2)
 
 [node name="TextureRect" type="TextureRect" parent="RightArrow"]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
+mouse_filter = 2
 texture = ExtResource("5_ep87x")
+
+[node name="ShellSelector" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -480.0
+offset_top = -240.0
+offset_right = 480.0
+offset_bottom = -52.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 1
+theme = SubResource("Theme_slider")
+script = ExtResource("8_slider")
+
+[node name="AmmoTag" type="Label" parent="ShellSelector"]
+layout_mode = 0
+offset_left = 18.0
+offset_top = 36.0
+offset_right = 298.0
+offset_bottom = 62.0
+theme_override_colors/font_color = Color(0.51, 0.9, 0.94, 1)
+theme_override_font_sizes/font_size = 18
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Slider" type="HSlider" parent="ShellSelector"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 18.0
+offset_top = 64.0
+offset_right = -18.0
+offset_bottom = 128.0
+grow_horizontal = 2
+focus_neighbor_top = NodePath("../../SelectModeConfirmButton")
+focus_neighbor_bottom = NodePath("../../SelectModeConfirmButton")
+theme_override_icons/grabber = SubResource("GradientTexture2D_grabber")
+theme_override_icons/grabber_highlight = SubResource("GradientTexture2D_grabber")
+theme_override_icons/grabber_disabled = SubResource("GradientTexture2D_grabber")
+theme_override_styles/slider = SubResource("StyleBoxEmpty_slider")
+theme_override_styles/grabber_area = SubResource("StyleBoxEmpty_slider")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxEmpty_slider")
+max_value = 6.0
+rounded = true
+
+[node name="Handle" type="TextureRect" parent="ShellSelector"]
+layout_mode = 0
+offset_left = 18.0
+offset_top = 64.0
+offset_right = 82.0
+offset_bottom = 128.0
+mouse_filter = 2
+texture = ExtResource("9_handle")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Point0" type="Label" parent="ShellSelector"]
+layout_mode = 0
+offset_left = 26.0
+offset_top = 132.0
+offset_right = 74.0
+offset_bottom = 159.0
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Point1" type="Label" parent="ShellSelector"]
+layout_mode = 0
+offset_left = 169.0
+offset_top = 132.0
+offset_right = 217.0
+offset_bottom = 159.0
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Point2" type="Label" parent="ShellSelector"]
+layout_mode = 0
+offset_left = 312.0
+offset_top = 132.0
+offset_right = 360.0
+offset_bottom = 159.0
+text = "2"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Point3" type="Label" parent="ShellSelector"]
+layout_mode = 0
+offset_left = 455.0
+offset_top = 132.0
+offset_right = 503.0
+offset_bottom = 159.0
+text = "3"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Point4" type="Label" parent="ShellSelector"]
+layout_mode = 0
+offset_left = 598.0
+offset_top = 132.0
+offset_right = 646.0
+offset_bottom = 159.0
+text = "4"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Point5" type="Label" parent="ShellSelector"]
+layout_mode = 0
+offset_left = 741.0
+offset_top = 132.0
+offset_right = 789.0
+offset_bottom = 159.0
+text = "5"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Point6" type="Label" parent="ShellSelector"]
+layout_mode = 0
+offset_left = 884.0
+offset_top = 132.0
+offset_right = 932.0
+offset_bottom = 159.0
+text = "6"
+horizontal_alignment = 1
+vertical_alignment = 1

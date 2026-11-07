@@ -3,6 +3,7 @@ using MegaCrit.Sts2.Core.Assets;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Helpers;
 using MegaCrit.Sts2.Core.Nodes.Rooms;
+using MegaCrit.Sts2.Core.Nodes.Vfx.Backgrounds;
 using MegaCrit.Sts2.Core.Rooms;
 using MegaCrit.Sts2.Core.TestSupport;
 using TashkentSpire2.TashkentSpire2Code.Powers;
@@ -22,9 +23,16 @@ public partial class NPoseidonFormVfx : Control
     private TextureRect? _image;
     private ShaderMaterial? _ink;
     private Control? _original;
-    private int _originalZ, _appliedZ;
+    private readonly List<BackgroundLayer> _backgroundLayers = [];
     private float _opacity, _target, _pollTime;
-    private bool _stopped, _hiddenOriginal, _changedZ;
+    private bool _stopped;
+
+    private sealed class BackgroundLayer(CanvasItem node)
+    {
+        public CanvasItem Node { get; } = node;
+        public int OriginalZ, AppliedZ;
+        public bool Hidden, ChangedZ;
+    }
 
     public static void Refresh(NCombatRoom? room = null)
     {
@@ -68,8 +76,8 @@ public partial class NPoseidonFormVfx : Control
                 StretchMode = TextureRect.StretchModeEnum.KeepAspectCovered,
                 Material = _ink, TopLevel = true, ZAsRelative = false,
                 ZIndex = _room.SceneContainer.ZIndex + OceanDepth, Visible = false };
-            // Above the complete original background, below combat actors and
-            // back VFX. Ink holes show the untouched scene, not a dark crossfade.
+            // Above scenery, below combat actors (including background-owned
+            // bosses) and back VFX. Ink holes show the untouched scene.
             _room.SceneContainer.AddChild(_image);
             _room.SceneContainer.MoveChildSafely(_image, 0);
         }
@@ -115,8 +123,19 @@ public partial class NPoseidonFormVfx : Control
             return;
         RestoreOriginal();
         _original = _room.Background;
-        _hiddenOriginal = false;
-        _changedZ = false;
+        if (!GodotObject.IsInstanceValid(_original))
+            return;
+        // KaiserCrab is a live Spine actor, not scenery. Keep its original
+        // parent, depth, visibility and bone/particle links completely intact.
+        // Both supported game versions put it beside Layer_00..04/Foreground.
+        if (_original!.GetNodeOrNull<NKaiserCrabBossBackground>("KaiserCrab") is { } crab)
+        {
+            foreach (Node child in _original.GetChildren())
+                if (child is CanvasItem scenery && child != crab)
+                    _backgroundLayers.Add(new BackgroundLayer(scenery));
+        }
+        else
+            _backgroundLayers.Add(new BackgroundLayer(_original));
     }
 
     private static int HighestRelativeZ(Node parent)
@@ -132,53 +151,74 @@ public partial class NPoseidonFormVfx : Control
 
     private void ApplyOriginalVisibility()
     {
-        if (!GodotObject.IsInstanceValid(_original))
-            return;
+        foreach (BackgroundLayer layer in _backgroundLayers)
+            ApplyLayerVisibility(layer);
+    }
+
+    private void ApplyLayerVisibility(BackgroundLayer layer)
+    {
+        if (!GodotObject.IsInstanceValid(layer.Node)) return;
         // A later depth edit belongs to its author, including edits between two
         // activations of this controller. Remember it before applying our depth.
-        if (_changedZ && _original!.ZIndex != _appliedZ)
-            _changedZ = false;
-        if (_opacity > 0f && !_changedZ)
+        if (layer.ChangedZ && layer.Node.ZIndex != layer.AppliedZ)
+            layer.ChangedZ = false;
+        if (_opacity > 0f && !layer.ChangedZ)
         {
-            _originalZ = _original!.ZIndex;
-            // Move the complete background subtree below the ink without
-            // reparenting nodes or rewriting child materials/color/alpha.
-            _appliedZ = Math.Min(_originalZ, OceanDepth - 1 - HighestRelativeZ(_original));
-            _original!.ZIndex = _appliedZ;
-            _changedZ = true;
+            layer.OriginalZ = layer.Node.ZIndex;
+            // Account for nested scenery parents without lowering the boss's
+            // shared parent. Ordinary encounters still lower their whole root.
+            int parentZ = layer.Node.ZAsRelative ? EffectiveZ(layer.Node) - layer.Node.ZIndex : 0;
+            layer.AppliedZ = Math.Min(layer.OriginalZ, _room.SceneContainer.ZIndex + OceanDepth
+                - 1 - parentZ - HighestRelativeZ(layer.Node));
+            layer.Node.ZIndex = layer.AppliedZ;
+            layer.ChangedZ = true;
         }
         else if (_opacity <= 0f)
-            RestoreDepth();
+            RestoreDepth(layer);
         // Also suppress original lights/shaders after the fade. Alpha alone does
         // not disable a background Light2D or a shader that ignores vertex COLOR.
-        if (_opacity >= 1f && _original!.Visible)
+        if (_opacity >= 1f && layer.Node.Visible)
         {
-            _original.Visible = false;
-            _hiddenOriginal = true;
+            layer.Node.Visible = false;
+            layer.Hidden = true;
         }
-        else if (_opacity < 1f && _hiddenOriginal)
+        else if (_opacity < 1f && layer.Hidden)
         {
-            _original.Visible = true;
-            _hiddenOriginal = false;
+            layer.Node.Visible = true;
+            layer.Hidden = false;
         }
+    }
+
+    private static int EffectiveZ(CanvasItem item)
+    {
+        int depth = item.ZIndex;
+        if (!item.ZAsRelative) return depth;
+        for (Node? parent = item.GetParent(); parent != null; parent = parent.GetParent())
+            if (parent is CanvasItem canvas)
+            {
+                depth += canvas.ZIndex;
+                if (!canvas.ZAsRelative) break;
+            }
+        return depth;
     }
 
     private void RestoreOriginal()
     {
-        if (!GodotObject.IsInstanceValid(_original))
-            return;
-        if (_hiddenOriginal)
-            _original!.Visible = true;
-        _hiddenOriginal = false;
-        RestoreDepth();
+        foreach (BackgroundLayer layer in _backgroundLayers)
+        {
+            if (!GodotObject.IsInstanceValid(layer.Node)) continue;
+            if (layer.Hidden) layer.Node.Visible = true;
+            RestoreDepth(layer);
+        }
+        _backgroundLayers.Clear();
         _original = null;
     }
 
-    private void RestoreDepth()
+    private static void RestoreDepth(BackgroundLayer layer)
     {
-        if (_changedZ && GodotObject.IsInstanceValid(_original) && _original!.ZIndex == _appliedZ)
-            _original.ZIndex = _originalZ;
-        _changedZ = false;
+        if (layer.ChangedZ && GodotObject.IsInstanceValid(layer.Node) && layer.Node.ZIndex == layer.AppliedZ)
+            layer.Node.ZIndex = layer.OriginalZ;
+        layer.ChangedZ = false;
     }
 
     private void OnCombatEnded(CombatRoom _) => Stop();
