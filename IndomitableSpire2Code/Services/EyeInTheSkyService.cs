@@ -91,8 +91,11 @@ public static class EyeInTheSkyService
         state.Act = act; state.Marks.Clear(); state.Plans.Clear(); state.Observed.Clear(); state.Step = 0; state.LastFloor = -1;
         var all = Points(map).ToArray();
         var threshold = Mathf.Lerp(all.Min(p => p.coord.row), all.Max(p => p.coord.row), UpperFraction);
+        // 初始标记避开 Boss（含第二 Boss），避免被前一排休息处隔离而无法扩散。
+        // 仅限制初始候选；Frontier/Mark 仍允许沿其他 Mod 地图的连边正常扩散到 Boss。
         var candidates = RowMajorOrdered(
-            all.Where(p => p.coord.row >= threshold && p.PointType != MapPointType.RestSite)).ToList();
+            all.Where(p => p.coord.row >= threshold &&
+                           p.PointType is not (MapPointType.RestSite or MapPointType.Boss))).ToList();
         if (candidates.Count == 0) return;
         var rng = new Rng(GetSeed(run, act, "initial"));
         Mark(run, map, state, candidates[rng.NextInt(candidates.Count)]);
