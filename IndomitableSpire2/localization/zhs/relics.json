@@ -20,6 +20,9 @@
   "INDOMITABLESPIRE2-IMPLACABLE_VEIL.title": "怨仇之纱",
   "INDOMITABLESPIRE2-IMPLACABLE_VEIL.flavor": "「怨仇小姐说，救赎之前总得先有惩罚。那打扰午睡的罪，也可以请她一并清算吧？……指挥官，我可没说是在告您的状哦。」",
   "INDOMITABLESPIRE2-IMPLACABLE_VEIL.description": "拾起时，将[blue]1[/blue]张[gold]予怨予还的信条[/gold]加入你的[gold]牌组[/gold]。",
+  "INDOMITABLESPIRE2-EYE_IN_THE_SKY.title": "空中之眼",
+  "INDOMITABLESPIRE2-EYE_IN_THE_SKY.flavor": "高空的视野确实能看清敌人的动向，但也容易暴露自己的行踪。",
+  "INDOMITABLESPIRE2-EYE_IN_THE_SKY.description": "每个回合开始时，[gold]侦察[/gold][blue]{Recon}[/blue]。\n每个阶段随机[gold]标记[/gold]一个高层的房间。你可以查看标记的战斗房间中的敌人。进入标记房间时，失去[blue]{MaxHp}[/blue]点[gold]最大生命值[/gold]。\n每进入一个房间，标记会沿路径最多蔓延[blue]{Spread}[/blue]个相邻房间（[gold]休息处[/gold]除外）。",
   
   "INDOMITABLESPIRE2-ROYAL_BOUNTY.title": "皇家赏金",
   "INDOMITABLESPIRE2-ROYAL_BOUNTY.flavor": "“击沉俾斯麦号！”——约翰·托维上将",

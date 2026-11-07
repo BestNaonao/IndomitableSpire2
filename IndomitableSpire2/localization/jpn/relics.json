@@ -20,6 +20,9 @@
   "INDOMITABLESPIRE2-IMPLACABLE_VEIL.title": "インプラカブルのヴェール",
   "INDOMITABLESPIRE2-IMPLACABLE_VEIL.flavor": "「インプラカブルさんは、救済の前には罰が必要だとおっしゃるの。でしたら、お昼寝を邪魔した罪も、まとめて裁いていただけるかしら？……指揮官、あなたの罪を告げ口するとは言っていませんわよ。」",
   "INDOMITABLESPIRE2-IMPLACABLE_VEIL.description": "獲得時、[gold]容赦なき信条[/gold]を[blue]1[/blue]枚[gold]デッキ[/gold]に加える。",
+  "INDOMITABLESPIRE2-EYE_IN_THE_SKY.title": "上空の眼",
+  "INDOMITABLESPIRE2-EYE_IN_THE_SKY.flavor": "高空からなら敵の動きはよく見えるけど、こちらの居場所もバレやすくなるわね。",
+  "INDOMITABLESPIRE2-EYE_IN_THE_SKY.description": "毎ターン開始時、[gold]偵察[/gold][blue]{Recon}[/blue]。\n各層の上部にあるランダムな部屋1つに[gold]印[/gold]を付ける。印のある戦闘部屋の敵を視認できる。印のある部屋に入ると、[gold]最大HP[/gold]を[blue]{MaxHp}[/blue]失う。\n部屋に入るたび、経路に沿って印が最大[blue]{Spread}[/blue]部屋まで伝播する（[gold]休憩所[/gold]を除く）。",
   
   "INDOMITABLESPIRE2-ROYAL_BOUNTY.title": "ロイヤルバウンティ",
   "INDOMITABLESPIRE2-ROYAL_BOUNTY.flavor": "「ビスマルクを撃沈せよ！」 —— ジョン・トーヴィー大将",

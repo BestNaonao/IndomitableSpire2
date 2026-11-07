@@ -20,6 +20,9 @@
   "INDOMITABLESPIRE2-IMPLACABLE_VEIL.title": "Implacable Veil",
   "INDOMITABLESPIRE2-IMPLACABLE_VEIL.flavor": "“Miss Implacable says punishment must come before redemption. Perhaps she could settle the sin of interrupting my nap as well? ...Commander, I never said I was confessing your sins.”",
   "INDOMITABLESPIRE2-IMPLACABLE_VEIL.description": "Upon pickup, add [blue]1[/blue] [gold]Creed of Reprisal[/gold] to your [gold]Deck[/gold].",
+  "INDOMITABLESPIRE2-EYE_IN_THE_SKY.title": "Eye in the Sky",
+  "INDOMITABLESPIRE2-EYE_IN_THE_SKY.flavor": "The view from high above certainly makes it easier to track enemy movements, but it also makes it easier to give away our own position.",
+  "INDOMITABLESPIRE2-EYE_IN_THE_SKY.description": "[gold]Recon[/gold] [blue]{Recon}[/blue] at the start of each turn.\n[gold]Mark[/gold] a random room in the upper third of each Act. Reveal enemies in marked combats. Upon entering a marked room, lose [blue]{MaxHp}[/blue] [gold]Max HP[/gold].\nUpon entering a room, marks spread along paths to up to [blue]{Spread}[/blue] adjacent rooms ([gold]Rest Sites[/gold] excluded).",
   
   "INDOMITABLESPIRE2-ROYAL_BOUNTY.title": "Royal Bounty",
   "INDOMITABLESPIRE2-ROYAL_BOUNTY.flavor": "\"Sink the Bismarck!\" - Admiral John Tovey",
