@@ -8,6 +8,7 @@ using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.ValueProps;
 using TashkentSpire2.TashkentSpire2Code.Powers;
+using TashkentSpire2.TashkentSpire2Code.Nodes.Vfx;
 
 namespace TashkentSpire2.TashkentSpire2Code.Cards.Rare;
 
@@ -29,7 +30,10 @@ public sealed class CoreBreakdown() : TashkentCard(3, CardType.Attack, CardRarit
             .WithHitFx("vfx/vfx_attack_blunt", null, "heavy_attack.mp3")
             .Execute(choiceContext);
         
+        int previousStrength = cardPlay.Target.GetPowerAmount<StrengthPower>();
         await PowerCmd.Apply<CoreBreakdownPower>(choiceContext, cardPlay.Target, attackCommand.Results.SelectMany((List<DamageResult> r) => r).Sum((DamageResult r) => r.TotalDamage + r.OverkillDamage), base.Owner.Creature, this);
+        if (cardPlay.Target.GetPowerAmount<StrengthPower>() < previousStrength)
+            NCoreBreakdownBurstVfx.Play(cardPlay.Target);
     }
     
     protected override void OnUpgrade()

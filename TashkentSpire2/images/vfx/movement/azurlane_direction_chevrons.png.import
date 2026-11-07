@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ckp4x0673gbq0"
-path="res://.godot/imported/poseidon_splash.png-b822656f6106120948efc11c9b0c601a.ctex"
+uid="uid://r1hd8meodq6e"
+path="res://.godot/imported/azurlane_direction_chevrons.png-2df3393f8379690ee8346a44d873e707.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://TashkentSpire2/images/vfx/poseidon_splash.png"
-dest_files=["res://.godot/imported/poseidon_splash.png-b822656f6106120948efc11c9b0c601a.ctex"]
+source_file="res://TashkentSpire2/images/vfx/movement/azurlane_direction_chevrons.png"
+dest_files=["res://.godot/imported/azurlane_direction_chevrons.png-2df3393f8379690ee8346a44d873e707.ctex"]
 
 [params]
 

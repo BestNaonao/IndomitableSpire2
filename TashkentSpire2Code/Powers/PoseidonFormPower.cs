@@ -6,7 +6,6 @@ using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
-using MegaCrit.Sts2.Core.Nodes.GodotExtensions;
 using TashkentSpire2.TashkentSpire2Code.Nodes.Vfx;
 
 namespace TashkentSpire2.TashkentSpire2Code.Powers;
@@ -19,7 +18,6 @@ public sealed class PoseidonFormPower : TashkentPower
     private bool _hasTriggered = false;
 
     private Type? _typeToIgnore;
-    private NPoseidonFormVfx? _vfx;
 
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;
@@ -31,25 +29,15 @@ public sealed class PoseidonFormPower : TashkentPower
     
     protected override IEnumerable<DynamicVar> CanonicalVars => [new DynamicVar(RemainKey, 0m)];
 
-    private NPoseidonFormVfx? Vfx
-    {
-        get => _vfx != null && _vfx.IsValid() ? _vfx : null;
-        set
-        {
-            AssertMutable();
-            _vfx = value;
-        }
-    }
-
     public override Task AfterApplied(Creature? applier, CardModel? cardSource)
     {
-        Vfx = NPoseidonFormVfx.Create(Owner);
+        NPoseidonFormVfx.Refresh();
         return Task.CompletedTask;
     }
 
     public override Task AfterRemoved(Creature oldOwner)
     {
-        Vfx?.SetActive(false);
+        NPoseidonFormVfx.Refresh();
         return Task.CompletedTask;
     }
 
@@ -101,7 +89,6 @@ public sealed class PoseidonFormPower : TashkentPower
             if (_hasTriggered)
             {
                 Flash();
-                Vfx?.OnEffectTriggered();
                 _usedThisTurn++;
                 InvokeDisplayAmountChanged();
             }

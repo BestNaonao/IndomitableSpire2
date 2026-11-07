@@ -1,158 +1,207 @@
 using Godot;
 using MegaCrit.Sts2.Core.Assets;
-using MegaCrit.Sts2.Core.Entities.Creatures;
-using MegaCrit.Sts2.Core.Entities.Players;
+using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Helpers;
-using MegaCrit.Sts2.Core.Nodes.Combat;
-using MegaCrit.Sts2.Core.Nodes.GodotExtensions;
 using MegaCrit.Sts2.Core.Nodes.Rooms;
-using MegaCrit.Sts2.Core.Nodes.Vfx.Forms;
+using MegaCrit.Sts2.Core.Rooms;
 using MegaCrit.Sts2.Core.TestSupport;
+using TashkentSpire2.TashkentSpire2Code.Powers;
 
 namespace TashkentSpire2.TashkentSpire2Code.Nodes.Vfx;
 
-/// <summary>
-/// A lightweight form effect made from two shared tide sprites and six reusable
-/// splash sprites. Cosmetic timing is fixed and never consumes combat RNG.
-/// </summary>
-public partial class NPoseidonFormVfx : NFormVfx
+/// <summary>One shared, nonblocking seascape per combat. No creature form sprites or particles.</summary>
+public partial class NPoseidonFormVfx : Control
 {
-    public const string ScenePath = "res://TashkentSpire2/scenes/vfx/poseidon_form_vfx.tscn";
+    public const string TexturePath = "res://TashkentSpire2/images/backgrounds/poseidon/star_level_bg_598.png";
+    public const string ShaderPath = "res://TashkentSpire2/shaders/poseidon_ink_reveal.gdshader";
+    public static IEnumerable<string> AssetPaths => [TexturePath, ShaderPath];
+    // Nagato's current ink entrance: 1.8 / 1.3 seconds, without its later petals.
+    private const float FadeDuration = 1.8f / 1.3f;
+    private const int OceanDepth = -2; // Below creature bodies AND their -1 shadows.
+    private NCombatRoom _room = null!;
+    private TextureRect? _image;
+    private ShaderMaterial? _ink;
+    private Control? _original;
+    private int _originalZ, _appliedZ;
+    private float _opacity, _target, _pollTime;
+    private bool _stopped, _hiddenOriginal, _changedZ;
 
-    private const float SplashPeriod = 2.4f;
-    private const float SplashLifetime = 0.82f;
-
-    private static readonly Vector2[] SplashPositions =
-    [
-        new(-154f, 2f),
-        new(-104f, -5f),
-        new(-48f, 4f),
-        new(51f, 2f),
-        new(108f, -6f),
-        new(158f, 3f)
-    ];
-
-    private static readonly float[] SplashPhaseOffsets = [0f, 0.8f, 1.6f, 0.4f, 1.2f, 2f];
-
-    private Sprite2D _backTide = null!;
-    private Sprite2D _frontTide = null!;
-    private Sprite2D[] _splashes = [];
-    private float _elapsed;
-    private float _visibility;
-    private float _triggerStrength;
-    private bool _shouldFreeWhenHidden;
-
-    public static IEnumerable<string> AssetPaths => [ScenePath];
-
-    public static NPoseidonFormVfx? Create(Creature target)
+    public static void Refresh(NCombatRoom? room = null)
     {
-        if (TestMode.IsOn)
+        room ??= NCombatRoom.Instance;
+        if (TestMode.IsOn || room == null || !room.IsInsideTree()
+            || room.Mode != CombatRoomMode.ActiveCombat || CombatManager.Instance.IsEnding)
+            return;
+        var controller = room.GetChildren().OfType<NPoseidonFormVfx>()
+            .FirstOrDefault(n => !n.IsQueuedForDeletion());
+        if (controller == null)
         {
-            return null;
+            controller = new NPoseidonFormVfx { Name = "TashkentPoseidonBackground", _room = room,
+                MouseFilter = MouseFilterEnum.Ignore, ZIndex = room.SceneContainer.ZIndex };
+            room.AddChildSafely(controller);
+            // Same depth as the official scene, but before ALL creatures and combat UI.
+            room.MoveChildSafely(controller, room.SceneContainer.GetIndex());
         }
-
-        Player? player = target.Player;
-        NCreature? creatureNode = NCombatRoom.Instance?.GetCreatureNode(target);
-        if (player == null || creatureNode == null || creatureNode.Visuals.FormVfxHolder == null)
-        {
-            return null;
-        }
-
-        NPoseidonFormVfx vfx = PreloadManager.Cache.GetScene(ScenePath)
-            .Instantiate<NPoseidonFormVfx>(PackedScene.GenEditState.Disabled);
-        vfx.Initialize(player);
-        creatureNode.Visuals.AddFormVfx(vfx);
-        vfx.SetActive(true);
-        return vfx;
+        controller.RefreshState();
     }
 
+    public override void _EnterTree() => CombatManager.Instance.CombatEnded += OnCombatEnded;
     public override void _Ready()
     {
-        _backTide = GetNode<Sprite2D>("Tide/BackTide");
-        _frontTide = GetNode<Sprite2D>("Tide/FrontTide");
-        Node splashes = GetNode("Splashes");
-        _splashes = splashes.GetChildren().OfType<Sprite2D>().ToArray();
+        SetAnchorsAndOffsetsPreset(LayoutPreset.FullRect);
+        RefreshState();
+    }
 
-        Modulate = new Color(1f, 1f, 1f, 0f);
-        SetProcess(true);
+    private void RefreshState()
+    {
+        if (_stopped)
+            return;
+        _target = CombatManager.Instance.IsInProgress && !CombatManager.Instance.IsEnding
+            && _room.CreatureNodes.Any(n => n.Entity.Player != null && n.Entity.IsAlive
+                && n.Entity.GetPowerAmount<PoseidonFormPower>() > 0) ? 1f : 0f;
+        if (_target > 0f && _image == null)
+        {
+            _ink = new ShaderMaterial { Shader = PreloadManager.Cache.GetAsset<Shader>(ShaderPath) };
+            _image = new TextureRect { Name = "Seascape", MouseFilter = MouseFilterEnum.Ignore,
+                Texture = PreloadManager.Cache.GetTexture2D(TexturePath),
+                ExpandMode = TextureRect.ExpandModeEnum.IgnoreSize,
+                StretchMode = TextureRect.StretchModeEnum.KeepAspectCovered,
+                Material = _ink, TopLevel = true, ZAsRelative = false,
+                ZIndex = _room.SceneContainer.ZIndex + OceanDepth, Visible = false };
+            // Above the complete original background, below combat actors and
+            // back VFX. Ink holes show the untouched scene, not a dark crossfade.
+            _room.SceneContainer.AddChild(_image);
+            _room.SceneContainer.MoveChildSafely(_image, 0);
+        }
+        CaptureBackground();
     }
 
     public override void _Process(double delta)
     {
-        float frameDelta = (float)delta;
-        _elapsed += frameDelta;
-        _triggerStrength = Mathf.MoveToward(_triggerStrength, 0f, frameDelta * 1.35f);
-        _visibility = Mathf.MoveToward(_visibility, _isActive ? 1f : 0f, frameDelta * 2.8f);
-        Modulate = new Color(1f, 1f, 1f, _visibility);
-
-        AnimateTides();
-        AnimateSplashes();
-
-        if (_shouldFreeWhenHidden && _visibility <= 0.001f)
+        if (_stopped)
+            return;
+        if (CombatManager.Instance.IsEnding || _room.Mode != CombatRoomMode.ActiveCombat)
         {
-            SetProcess(false);
-            this.QueueFreeSafely();
+            Stop();
+            return;
+        }
+        float dt = Math.Max(0f, (float)delta);
+        _pollTime += dt;
+        if (_pollTime >= 0.1f)
+        {
+            _pollTime = 0f;
+            // Covers restored powers, teammate changes, death/revival and late creature nodes.
+            RefreshState();
+        }
+        _opacity = Mathf.MoveToward(_opacity, _target, dt / FadeDuration);
+        if (_image != null)
+        {
+            _image.Visible = _opacity > 0f;
+            _ink!.SetShaderParameter("progress", _opacity);
+            // Stay viewport-fitted despite encounter zoom, offsets and shakes.
+            Transform2D transform = _room.GetGlobalTransform();
+            _image.GlobalPosition = transform.Origin;
+            _image.Scale = transform.Scale;
+            _image.Rotation = transform.Rotation;
+            _image.Size = _room.Size;
+            _image.ZIndex = _room.SceneContainer.ZIndex + OceanDepth;
+        }
+        ApplyOriginalVisibility();
+    }
+
+    private void CaptureBackground()
+    {
+        if (_original == _room.Background)
+            return;
+        RestoreOriginal();
+        _original = _room.Background;
+        _hiddenOriginal = false;
+        _changedZ = false;
+    }
+
+    private static int HighestRelativeZ(Node parent)
+    {
+        int maximum = 0;
+        foreach (Node child in parent.GetChildren())
+        {
+            int z = child is CanvasItem item && item.ZAsRelative ? item.ZIndex : 0;
+            maximum = Math.Max(maximum, z + HighestRelativeZ(child));
+        }
+        return maximum;
+    }
+
+    private void ApplyOriginalVisibility()
+    {
+        if (!GodotObject.IsInstanceValid(_original))
+            return;
+        // A later depth edit belongs to its author, including edits between two
+        // activations of this controller. Remember it before applying our depth.
+        if (_changedZ && _original!.ZIndex != _appliedZ)
+            _changedZ = false;
+        if (_opacity > 0f && !_changedZ)
+        {
+            _originalZ = _original!.ZIndex;
+            // Move the complete background subtree below the ink without
+            // reparenting nodes or rewriting child materials/color/alpha.
+            _appliedZ = Math.Min(_originalZ, OceanDepth - 1 - HighestRelativeZ(_original));
+            _original!.ZIndex = _appliedZ;
+            _changedZ = true;
+        }
+        else if (_opacity <= 0f)
+            RestoreDepth();
+        // Also suppress original lights/shaders after the fade. Alpha alone does
+        // not disable a background Light2D or a shader that ignores vertex COLOR.
+        if (_opacity >= 1f && _original!.Visible)
+        {
+            _original.Visible = false;
+            _hiddenOriginal = true;
+        }
+        else if (_opacity < 1f && _hiddenOriginal)
+        {
+            _original.Visible = true;
+            _hiddenOriginal = false;
         }
     }
 
-    public override void OnEffectTriggered()
+    private void RestoreOriginal()
     {
-        base.OnEffectTriggered();
-        _triggerStrength = 1f;
+        if (!GodotObject.IsInstanceValid(_original))
+            return;
+        if (_hiddenOriginal)
+            _original!.Visible = true;
+        _hiddenOriginal = false;
+        RestoreDepth();
+        _original = null;
     }
 
-    public override void SetActive(bool isActive)
+    private void RestoreDepth()
     {
-        base.SetActive(isActive);
-        _shouldFreeWhenHidden = !isActive;
-        if (isActive)
+        if (_changedZ && GodotObject.IsInstanceValid(_original) && _original!.ZIndex == _appliedZ)
+            _original.ZIndex = _originalZ;
+        _changedZ = false;
+    }
+
+    private void OnCombatEnded(CombatRoom _) => Stop();
+    private void Stop()
+    {
+        if (_stopped)
+            return;
+        _stopped = true;
+        Visible = false;
+        if (GodotObject.IsInstanceValid(_image))
+            _image!.Visible = false;
+        RestoreOriginal();
+        SetProcess(false);
+        this.QueueFreeSafely();
+    }
+    public override void _ExitTree()
+    {
+        CombatManager.Instance.CombatEnded -= OnCombatEnded;
+        RestoreOriginal();
+        if (GodotObject.IsInstanceValid(_image))
         {
-            SetProcess(true);
-        }
-    }
-
-    private void AnimateTides()
-    {
-        float tide = 0.5f + Mathf.Sin(_elapsed * 1.75f) * 0.5f;
-        float counterTide = 1f - tide;
-        float surge = _triggerStrength * 0.035f;
-
-        _backTide.Scale = new Vector2(0.255f + tide * 0.032f + surge, 0.095f + tide * 0.026f);
-        _backTide.Position = new Vector2(Mathf.Sin(_elapsed * 0.68f) * 8f, -16f - tide * 5f);
-        _backTide.Modulate = new Color(0.42f, 0.8f, 1f, 0.25f + tide * 0.17f);
-
-        _frontTide.Scale = new Vector2(0.235f + counterTide * 0.038f + surge, 0.088f + counterTide * 0.024f);
-        _frontTide.Position = new Vector2(Mathf.Sin(_elapsed * 0.61f + 2.1f) * 7f, 5f + tide * 3f);
-        _frontTide.Modulate = new Color(0.68f, 0.94f, 1f, 0.34f + counterTide * 0.22f);
-    }
-
-    private void AnimateSplashes()
-    {
-        int count = Mathf.Min(_splashes.Length, SplashPositions.Length);
-        for (int i = 0; i < count; i++)
-        {
-            Sprite2D splash = _splashes[i];
-            float cycle = Mathf.PosMod(_elapsed + SplashPhaseOffsets[i], SplashPeriod);
-            if (cycle >= SplashLifetime)
-            {
-                splash.Visible = false;
-                continue;
-            }
-
-            splash.Visible = true;
-            float progress = cycle / SplashLifetime;
-            float arc = Mathf.Sin(progress * Mathf.Pi);
-            float side = i < count / 2 ? -1f : 1f;
-            float burst = 1f + _triggerStrength * 0.45f;
-            float baseScale = 0.046f + (i % 3) * 0.006f;
-
-            splash.Position = SplashPositions[i] + new Vector2(
-                side * Mathf.Sin(progress * Mathf.Pi) * (7f + i % 2 * 4f),
-                -arc * (34f + i % 3 * 8f) * burst);
-            splash.Scale = Vector2.One * baseScale * (0.62f + arc * 0.48f) * burst;
-            splash.Rotation = Mathf.DegToRad(side * (8f + arc * 11f));
-            splash.Modulate = new Color(0.72f, 0.94f, 1f,
-                Mathf.Pow(arc, 0.7f) * (0.42f + _triggerStrength * 0.3f));
+            _image!.Visible = false;
+            _image.QueueFreeSafely();
         }
     }
 }

@@ -23,7 +23,7 @@ namespace TashkentSpire2.TashkentSpire2Code.Powers;
 public sealed class DistancePower : TashkentPower, IPersistentPower
 {
     private const string VarKey = "Tashkent_Distance";
-    private const float MovementDuration = 0.25f;
+    private const float MovementDuration = 0.5f;
     private const float MovementDistancePerStack = 40f;
     internal const float VisualMovementSpeed = MovementDistancePerStack / MovementDuration;
     private bool _isSyncing = false;
@@ -356,6 +356,10 @@ public sealed class DistancePower : TashkentPower, IPersistentPower
         ownerNode.SetAnimationTrigger(isAdvancing
             ? TashkentCharacter.AdvanceAnimationTrigger
             : TashkentCharacter.RetreatAnimationTrigger);
+        // Slow only this entry: attacks/idle that interrupt it retain normal speed.
+        using var track = ownerNode.SpineAnimation.GetCurrentTrack();
+        if (track?.GetAnimationName() == animationName)
+            track.SetTimeScale(0.5f);
         return revision;
     }
 
@@ -425,7 +429,7 @@ public sealed class DistancePower : TashkentPower, IPersistentPower
             if (tween == null) tween = NCombatRoom.Instance?.CreateTween().SetParallel().SetEase(Tween.EaseType.Out).SetTrans(Tween.TransitionType.Cubic);
             tween?.TweenProperty(node, "global_position:x", node.GlobalPosition.X + moveDistance, MovementDuration);
             if (tween != null && creature == Owner && Owner.Player?.Character is TashkentCharacter)
-                NWaterFoamVfx.PlayMovement(node, moveDistance, MovementDuration);
+                NDirectionalMovementVfx.Play(node, moveDistance, MovementDuration, advancing: delta > 0);
         }
         try
         {

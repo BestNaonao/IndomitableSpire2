@@ -93,7 +93,7 @@ public partial class NTashkentIdleAnimation : Node
 
     public override void _Process(double delta)
     {
-        if (_state == null || _available.Length == 0)
+        if (_available.Length == 0)
             return;
         // Poll native Spine only five times per second, and don't count long background stalls.
         _pollElapsed += Math.Min(delta, PollSeconds);
@@ -101,6 +101,13 @@ public partial class NTashkentIdleAnimation : Node
             return;
         double elapsed = _pollElapsed;
         _pollElapsed = 0d;
+
+        if (!EnsureAnimationState())
+        {
+            _clock.Reset();
+            _ownedAnimation = null;
+            return;
+        }
 
         if (!CanIdle())
         {
@@ -117,7 +124,7 @@ public partial class NTashkentIdleAnimation : Node
             _creature.SetAnimationTrigger(TriggerPrefix + _ownedAnimation);
         else
         {
-            _state.SetAnimation(_ownedAnimation, loop: false);
+            _state!.SetAnimation(_ownedAnimation, loop: false);
             _state.AddAnimation("normal", loop: true);
         }
     }
@@ -141,9 +148,25 @@ public partial class NTashkentIdleAnimation : Node
 
     private string? CurrentAnimation()
     {
-        if (_state == null || !GodotObject.IsInstanceValid(_spine.BoundObject))
+        if (!EnsureAnimationState())
             return null;
-        using var track = _state.GetCurrent(0);
+        using var track = _state!.GetCurrent(0);
         return track?.GetAnimationName();
+    }
+
+    private bool EnsureAnimationState()
+    {
+        if (!GodotObject.IsInstanceValid(_spine.BoundObject))
+        {
+            _state = null;
+            return false;
+        }
+        // The sprite owns this shared state; never Dispose it. A skin reload or
+        // another component can invalidate the managed wrapper while the sprite
+        // remains alive. Reacquire on the existing 5 Hz poll instead of throwing
+        // every frame or continuing to use a stale cached RefCounted.
+        if (_state == null || !GodotObject.IsInstanceValid(_state.BoundObject))
+            _state = _spine.TryGetAnimationState();
+        return _state != null && GodotObject.IsInstanceValid(_state.BoundObject);
     }
 }

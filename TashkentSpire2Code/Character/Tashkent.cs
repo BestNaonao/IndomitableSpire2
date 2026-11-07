@@ -119,7 +119,10 @@ public class TashkentCharacter : CustomCharacterModel
 			.Concat(NMarkTargetVfx.AssetPaths)
 			.Concat(NIlluminationRoundVfx.AssetPaths)
 			.Concat(NWaterFoamVfx.AssetPaths)
+			.Concat(NDirectionalMovementVfx.AssetPaths)
 			.Concat(NAmmunitionMuzzleVfx.AssetPaths)
+			.Concat(NCardFeedbackVfx.AssetPaths)
+			.Concat(NCoreBreakdownBurstVfx.AssetPaths)
 			.Concat(TashkentConfig.EnableCustomBattleRewards
 				? new[]
 				{

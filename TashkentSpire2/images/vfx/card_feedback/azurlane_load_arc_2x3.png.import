@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c8n3nmk14pm1y"
-path="res://.godot/imported/poseidon_tide_ring.png-3de6250ca524022d94cf85a1429f73bc.ctex"
+uid="uid://cpady3awc6tdi"
+path="res://.godot/imported/azurlane_load_arc_2x3.png-52bf6b7dfc25c18356d497a7ca6b6e61.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://TashkentSpire2/images/vfx/poseidon_tide_ring.png"
-dest_files=["res://.godot/imported/poseidon_tide_ring.png-3de6250ca524022d94cf85a1429f73bc.ctex"]
+source_file="res://TashkentSpire2/images/vfx/card_feedback/azurlane_load_arc_2x3.png"
+dest_files=["res://.godot/imported/azurlane_load_arc_2x3.png-52bf6b7dfc25c18356d497a7ca6b6e61.ctex"]
 
 [params]
 

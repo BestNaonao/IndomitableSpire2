@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://go7q8dgn8ns7"
-path="res://.godot/imported/azurlane_movement_foam_4x4.png-e3ce2f94d20176125f816bdb3d41803e.ctex"
+uid="uid://c1led4w3hfxso"
+path="res://.godot/imported/star_level_bg_598.png-1c971a4dac721db75da9c5ec1df624c6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://TashkentSpire2/images/vfx/water/azurlane_movement_foam_4x4.png"
-dest_files=["res://.godot/imported/azurlane_movement_foam_4x4.png-e3ce2f94d20176125f816bdb3d41803e.ctex"]
+source_file="res://TashkentSpire2/images/backgrounds/poseidon/star_level_bg_598.png"
+dest_files=["res://.godot/imported/star_level_bg_598.png-1c971a4dac721db75da9c5ec1df624c6.ctex"]
 
 [params]
 

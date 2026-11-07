@@ -9,8 +9,7 @@ void vertex() {
 
 void fragment() {
 	vec4 water = texture(TEXTURE, UV);
-	// The source wave has blue water under its white crest. Keep only the foam;
-	// the same material whitens both sequence atlases without modifying originals.
+	// Keep the flying torpedo's original white foam, without modifying its atlas.
 	float foam = water.a * pow(water.r, 1.5);
 	COLOR = vec4(vec3(1.0), foam * draw_tint.a);
 }

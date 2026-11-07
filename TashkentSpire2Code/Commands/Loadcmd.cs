@@ -4,6 +4,7 @@ using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.ValueProps;
 using TashkentSpire2.TashkentSpire2Code.Cards;
 using TashkentSpire2.TashkentSpire2Code.Powers;
+using TashkentSpire2.TashkentSpire2Code.Nodes.Vfx;
 
 namespace TashkentSpire2.TashkentSpire2Code.Commands;
 
@@ -15,12 +16,15 @@ public static class Loadcmd
         
         if (targetCard is IAmmunitionCard ammuCard)
         {
+            int previousAmmu = ammuCard.CurrentAmmu;
             int max = targetCard.DynamicVars.ContainsKey("TashkentSpire2-Ammu-Max") 
                 ? targetCard.DynamicVars["TashkentSpire2-Ammu-Max"].IntValue 
                 : 99;
             
             int newValue = Math.Min(ammuCard.CurrentAmmu + amount, max);
             ammuCard.UpdateAmmuGlobal(newValue);
+            if (ammuCard.CurrentAmmu > previousAmmu)
+                NCardFeedbackVfx.PlayLoad(targetCard);
         }
         
         int blockAmount = (int)(targetCard.Owner?.Creature.GetPower<BarrelModificationPower>()?.Amount ?? 0m);
