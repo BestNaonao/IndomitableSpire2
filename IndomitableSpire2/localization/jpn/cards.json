@@ -44,6 +44,7 @@
   "INDOMITABLESPIRE2-SEAFIRE_FR47.title": "シーファイア FR.47",
   "INDOMITABLESPIRE2-SEAFIRE_FR47.description": "{Damage:diff()}ダメージを{Repeat}回与える。\n[gold]偵察[/gold]{Recon:diff()}。\n偵察で確認したスキル1枚につき、[gold]弱体[/gold][blue]{VulnerablePower}[/blue]と[gold]炎上[/gold][blue]{OnFirePower}[/blue]を与える。",
   "INDOMITABLESPIRE2-TACTICAL_TRAINING.title": "戦術研究",
+  "INDOMITABLESPIRE2-TACTICAL_TRAINING.banter": "強くなったの、隠しておいたほうがいいかしら…",
   "INDOMITABLESPIRE2-TACTICAL_TRAINING.description": "[gold]手札[/gold]にある{aircraftPrefix:carrierAircraftIcons()}カードを1枚選び。その機種に対応する航空[blue]{SpecialPowerAmount:diff()}[/blue]を得る（機種がない場合は通常の[gold]航空[/gold]）。",
   "INDOMITABLESPIRE2-TACTICAL_TRAINING.selectionScreenPrompt": "{aircraftPrefix:carrierAircraftIcons()}カードを1枚選び。",
   "INDOMITABLESPIRE2-INEFFECTIVE_ENERGY_SAVING.title": "無効な省エネ",

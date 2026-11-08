@@ -44,6 +44,7 @@
   "INDOMITABLESPIRE2-SEAFIRE_FR47.title": "海喷火 FR.47",
   "INDOMITABLESPIRE2-SEAFIRE_FR47.description": "造成{Damage:diff()}点伤害{Repeat}次。\n[gold]侦察[/gold]{Recon:diff()}。\n每侦察到一张技能牌，给予[blue]{VulnerablePower}[/blue]层[gold]易伤[/gold]与[blue]{OnFirePower}[/blue]层[gold]起火[/gold]。",
   "INDOMITABLESPIRE2-TACTICAL_TRAINING.title": "战术研习",
+  "INDOMITABLESPIRE2-TACTICAL_TRAINING.banter": "是不是别让人知道我变强了比较好呢…",
   "INDOMITABLESPIRE2-TACTICAL_TRAINING.description": "选择[gold]手牌[/gold]中的一张{aircraftPrefix:carrierAircraftIcons()}牌，获得[blue]{SpecialPowerAmount:diff()}[/blue]层该机种的航空能力（无类型则为通用[gold]航空[/gold]）。",
   "INDOMITABLESPIRE2-TACTICAL_TRAINING.selectionScreenPrompt": "选择一张{aircraftPrefix:carrierAircraftIcons()}牌进行战术研习。",
   "INDOMITABLESPIRE2-INEFFECTIVE_ENERGY_SAVING.title": "无效节能",

@@ -13,7 +13,9 @@ namespace IndomitableSpire2.IndomitableSpire2Code.Cards.Commons;
 
 public sealed class TacticalTraining() : IndomitableCard(0, CardType.Skill, CardRarity.Common, TargetType.Self)
 {
-    // 添加消耗关键字
+    public override string SpecialLineAudioPath => "res://IndomitableSpire2/sfx/characters/indomitable/upgrade.wav";
+    public override string SpecialLineBanterLocKey => $"{Id.Entry}.banter";
+    
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
     
     // 使用 MagicVar 控制层数，基础 20 层，升级 30 层
@@ -27,6 +29,8 @@ public sealed class TacticalTraining() : IndomitableCard(0, CardType.Skill, Card
     
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
+        await Owner.PlayIndomitableCardPresentation(cardPlay, animationTrigger: "Cast", exactDurationSeconds: 5.3d);
+        
         // 创建选择器配置
         var prefs = new CardSelectorPrefs(SelectionScreenPrompt, 1);
         
