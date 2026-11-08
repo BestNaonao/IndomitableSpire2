@@ -15,6 +15,7 @@ using MegaCrit.Sts2.Core.Nodes.Rooms;
 using MegaCrit.Sts2.Core.ValueProps;
 using TashkentSpire2.TashkentSpire2Code.Character;
 using TashkentSpire2.TashkentSpire2Code.Commands;
+using TashkentSpire2.TashkentSpire2Code.Helpers;
 using TashkentSpire2.TashkentSpire2Code.Minion;
 using TashkentSpire2.TashkentSpire2Code.Nodes.Vfx;
 
@@ -181,7 +182,7 @@ public sealed class DistancePower : TashkentPower, IPersistentPower
             return 1m;
         }
         
-        int dist = (int)base.Amount; 
+        int dist = DistanceIntentPreview.ReadDistance(this, target, dealer);
         if (dist == 0) return 1m;
 
         int enemySide = 1;
