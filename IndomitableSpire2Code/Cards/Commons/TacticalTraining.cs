@@ -36,6 +36,15 @@ public sealed class TacticalTraining() : IndomitableCard(0, CardType.Skill, Card
         
         if (selectedCard != null)
         {
+            if (selectedCard is IVersatileCard versatile)
+            {
+                // 只在预览副本上选择机种，保留手牌原有的挂载、关键词和耐久，不执行选项效果。
+                var previews = versatile.CreateVersatileOptions()
+                    .Select(option => option.CreatePreview(selectedCard)).ToArray();
+                if (previews.Length == 0) return;
+                selectedCard = await CardSelectCmd.FromChooseACardScreen(choiceContext, previews, Owner);
+                if (selectedCard == null) return;
+            }
             var amount = DynamicVars["SpecialPowerAmount"].BaseValue;
             // 根据选中的舰载机标签，精准投放对应的航空能力
             if (selectedCard.IsAircraftType(IndomitableTags.StrikeFighter, IndomitableKeywords.StrikeFighter))
