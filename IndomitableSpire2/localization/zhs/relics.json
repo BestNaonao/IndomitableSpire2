@@ -1,10 +1,10 @@
 {
   "INDOMITABLESPIRE2-SHIKIKAN_NUIGURUMI.title": "指挥官玩偶",
   "INDOMITABLESPIRE2-SHIKIKAN_NUIGURUMI.flavor": "只要抱着它，连最让人头疼的出击任务都能在梦里忘得一干二净呢……呼哈……",
-  "INDOMITABLESPIRE2-SHIKIKAN_NUIGURUMI.description": "在你的回合结束时，回复[green]{Heal}[/green]点生命，获得[blue]{MotivationGain}[/blue]点[gold]干劲[/gold]。",
+  "INDOMITABLESPIRE2-SHIKIKAN_NUIGURUMI.description": "在每场战斗开始时，获得[blue]{MotivationGain}[/blue]点[gold]干劲[/gold]。\n在你的回合结束时，回复[green]{Heal}[/green]点生命，获得[blue]{MotivationGain}[/blue]点[gold]干劲[/gold]。",
   "INDOMITABLESPIRE2-SHIKIKAN_DAKIMAKURA.title": "指挥官形抱枕",
   "INDOMITABLESPIRE2-SHIKIKAN_DAKIMAKURA.flavor": "升级版的安抚！现在更是让人根本不想起床了……",
-  "INDOMITABLESPIRE2-SHIKIKAN_DAKIMAKURA.description": "在你的回合开始和结束时，回复[green]{Heal}[/green]点生命，获得[blue]{MotivationGain}[/blue]点[gold]干劲[/gold]。\n到达[gold]休息处[/gold]后的下一场战斗的第一回合额外触发一次。",
+  "INDOMITABLESPIRE2-SHIKIKAN_DAKIMAKURA.description": "在每场战斗开始时，获得[blue]{MotivationGain}[/blue]点[gold]干劲[/gold]。\n在你的回合开始和结束时，回复[green]{Heal}[/green]点生命，获得[blue]{MotivationGain}[/blue]点[gold]干劲[/gold]。\n到达[gold]休息处[/gold]后的下一场战斗的第一回合额外触发一次。",
   "INDOMITABLESPIRE2-ROYAL_VIOLIN.title": "皇家提琴",
   "INDOMITABLESPIRE2-ROYAL_VIOLIN.flavor": "“指挥官，再听一曲吧……小提琴的声音最适合放松了。至于出击的事，等这首听完再说……呼……”",
   "INDOMITABLESPIRE2-ROYAL_VIOLIN.description": "每当你在[gold]休息处[/gold][gold]休息[/gold]后，直到到达下一个[gold]休息处[/gold]为止，在每场战斗的每个回合开始时，额外抽[blue]{Cards}[/blue]张牌。",
