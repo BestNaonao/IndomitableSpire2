@@ -25,13 +25,20 @@ public sealed class ShikikanNuigurumi : IndomitableRelic
     // 核心接口实现：将其升级替换为“抱枕”
     public override RelicModel GetUpgradeReplacement() => ModelDb.Relic<ShikikanDakimakura>();
     
+    public override async Task BeforeCombatStart()
+    {
+        Flash();
+        await PowerCmd.Apply<MotivationPower>(new ThrowingPlayerChoiceContext(), 
+            Owner.Creature, DynamicVars.MotivationGain().BaseValue, Owner.Creature, null);
+    }
+    
     public override async Task AfterSideTurnEnd(
         PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)
     {
         if (side != Owner.Creature.Side || Owner.Creature.IsDead || !participants.Contains(Owner.Creature)) return;
         Flash();
         await CreatureCmd.Heal(Owner.Creature, DynamicVars.Heal.BaseValue);
-        await PowerCmd.Apply<MotivationPower>(
-            choiceContext, Owner.Creature, DynamicVars.MotivationGain().BaseValue, Owner.Creature, null);
+        await PowerCmd.Apply<MotivationPower>(choiceContext, 
+            Owner.Creature, DynamicVars.MotivationGain().BaseValue, Owner.Creature, null);
     }
 }

@@ -40,6 +40,15 @@ public sealed class ShikikanDakimakura : IndomitableRelic
         }
     }
     
+    // 休息处加成也额外触发一次战斗开始效果，保留标记供第一回合的开始和结束使用。
+    public override async Task BeforeCombatStart()
+    {
+        Flash();
+        for (var i = 0; i < (GainExtraInNextCombat ? 2 : 1); i++)
+            await PowerCmd.Apply<MotivationPower>(new ThrowingPlayerChoiceContext(),
+                Owner.Creature, DynamicVars.MotivationGain().BaseValue, Owner.Creature, null);
+    }
+    
     // 监听进入房间：如果是休息处，打上标记
     public override Task AfterRoomEntered(AbstractRoom room)
     {
@@ -52,8 +61,8 @@ public sealed class ShikikanDakimakura : IndomitableRelic
     {
         Flash();
         await CreatureCmd.Heal(Owner.Creature, DynamicVars.Heal.BaseValue);
-        await PowerCmd.Apply<MotivationPower>(
-            choiceContext, Owner.Creature, DynamicVars.MotivationGain().BaseValue, Owner.Creature, null);
+        await PowerCmd.Apply<MotivationPower>(choiceContext, 
+            Owner.Creature, DynamicVars.MotivationGain().BaseValue, Owner.Creature, null);
     }
     
     // 监听回合开始
@@ -78,5 +87,12 @@ public sealed class ShikikanDakimakura : IndomitableRelic
             await TriggerEffect(choiceContext);
             GainExtraInNextCombat = false;
         }
+    }
+    
+    // 首回合结束前获胜时也要消耗休息处加成，不能延续到再下一场战斗。
+    public override Task AfterCombatEnd(CombatRoom room)
+    {
+        GainExtraInNextCombat = false;
+        return Task.CompletedTask;
     }
 }
