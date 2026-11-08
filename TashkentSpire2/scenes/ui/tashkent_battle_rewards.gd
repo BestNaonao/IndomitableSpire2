@@ -6,7 +6,7 @@ const DESIGN_SIZE = Vector2(1920, 900)
 const ENTRANCE_SPEED_SCALE = 0.5
 const ENTRANCE_DURATION = 1.25 / ENTRANCE_SPEED_SCALE
 const LOC_PREFIX = "TASHKENTSPIRE2-BATTLE_REWARDS."
-const PAINTINGS = ["tashigan", "tashigan_2", "tashigan_3", "tashigan_4_full"]
+const PAINTINGS = ["tashigan", "tashigan_2", "tashigan_3", "tashigan_4_full", "tashigan_idol"]
 var _live = false
 var _safe_top = -1.0
 var _header_safe_top = -1.0
@@ -24,9 +24,9 @@ var _nameplate_minimum = 0.0
 	set(value):
 		preview_language = clampi(value, 0, 3)
 		if is_node_ready() and not _live: _refresh_preview()
-@export_range(0, 3, 1) var preview_skin: int = 0:
+@export_range(0, 4, 1) var preview_skin: int = 0:
 	set(value):
-		preview_skin = clampi(value, 0, 3)
+		preview_skin = clampi(value, 0, PAINTINGS.size() - 1)
 		if is_node_ready() and not _live: _refresh_preview()
 
 var layout_scale: float:
@@ -131,7 +131,7 @@ func configure(skin: int, strings: Dictionary, font: Font, character_name: Strin
 
 func _apply(skin: int, strings: Dictionary, font: Font, character_name: String, skin_name: String) -> void:
 	var text = func(key: String) -> String: return str(strings.get(LOC_PREFIX+key, key))
-	_active_skin = clampi(skin,0,3)
+	_active_skin = clampi(skin,0,PAINTINGS.size()-1)
 	$Design/Painting/Image.texture = load("res://TashkentSpire2/images/ui/battle_rewards/"+PAINTINGS[_active_skin]+"_painting.png")
 	# Restore measuring space before switching to a longer skin/language.
 	$Design/CharacterName.size.x = 542
@@ -139,7 +139,7 @@ func _apply(skin: int, strings: Dictionary, font: Font, character_name: String, 
 	_set_label("Design/VictoryTitle", text.call("victory"), font, 76, 34)
 	_set_label("Design/ResultTitle", text.call("result"), font, 34, 22)
 	_set_label("Design/CharacterName", character_name if character_name != "" else text.call("character"), font, 44, 26)
-	_set_label("Design/SkinName", skin_name if skin_name != "" else text.call("previewSkin"+str(clampi(skin,0,3))), font, 23, 16)
+	_set_label("Design/SkinName", skin_name if skin_name != "" else text.call("previewSkin"+str(_active_skin)), font, 23, 16)
 	_set_label("Design/PreviewProceed/Label", text.call("continue"), font, 36, 24)
 	_set_label("Design/PreviewRewards/Header", text.call("loot"), font, 44, 28)
 	_set_label("Design/PreviewRewards/Gold/Label", text.call("previewGold"), font, 28, 22)
@@ -150,6 +150,9 @@ func _apply(skin: int, strings: Dictionary, font: Font, character_name: String, 
 
 func _fit_portrait() -> void:
 	var zoom = 1.18 if _active_skin == 2 else (1.25 if _active_skin == 3 else 1.0)
+	if _active_skin == 4: zoom = 1.4
+	# Mu may extend behind the banner/nameplate instead of hard-cropping its ears.
+	$Design/Painting.clip_contents = _active_skin != 4
 	$Design/Painting/Image.size = $Design/Painting.size * zoom
 	$Design/Painting/Image.position = ($Design/Painting.size - $Design/Painting/Image.size) * Vector2(0.5,0.4)
 

@@ -10,7 +10,8 @@ public enum TashkentSkin
 	Default,
 	VariantTwo,
 	VariantThree,
-	VariantFour
+	VariantFour,
+	Mu
 }
 
 public sealed record TashkentSkinDefinition(
@@ -50,7 +51,12 @@ public static class TashkentSkinManager
 				TashkentSkin.VariantFour,
 				"res://TashkentSpire2/scenes/characters/Tashkent_4.tscn",
 				"res://TashkentSpire2/scenes/characters/tashkent_rest_site_4.tscn",
-				"res://TashkentSpire2/scenes/characters/tashkent_merchant_4.tscn")
+				"res://TashkentSpire2/scenes/characters/tashkent_merchant_4.tscn"),
+			[TashkentSkin.Mu] = new(
+				TashkentSkin.Mu,
+				"res://TashkentSpire2/scenes/characters/Tashkent_mu.tscn",
+				"res://TashkentSpire2/scenes/characters/tashkent_rest_site_mu.tscn",
+				"res://TashkentSpire2/scenes/characters/tashkent_merchant_mu.tscn")
 		};
 
 	public static TashkentSkinDefinition GetDefinition(TashkentSkin skin) => Skins[skin];

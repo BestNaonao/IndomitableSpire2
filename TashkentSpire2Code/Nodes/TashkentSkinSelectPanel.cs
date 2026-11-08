@@ -16,7 +16,8 @@ public partial class TashkentSkinSelectPanel : Control
 		ModelDb.Character<TashkentCharacter>(),
 		ModelDb.Character<TashkentVariantTwo>(),
 		ModelDb.Character<TashkentVariantThree>(),
-		ModelDb.Character<TashkentVariantFour>()
+		ModelDb.Character<TashkentVariantFour>(),
+		ModelDb.Character<TashkentMu>()
 	];
 
 	private TextureButton _leftArrow = null!;

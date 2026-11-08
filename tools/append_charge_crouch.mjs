@@ -1,6 +1,6 @@
 // Append a small, event-free Spine 4.2 overlay. Do NOT re-export the skeleton:
 // a JSON round trip would quantize every original animation/mesh/curve.
-// Usage: node tools/append_charge_crouch.mjs INPUT_DIRECTORY OUTPUT_DIRECTORY
+// Usage: node tools/append_charge_crouch.mjs INPUT_DIRECTORY OUTPUT_DIRECTORY [SKIN]
 import fs from 'node:fs';
 import path from 'node:path';
 import assert from 'node:assert/strict';
@@ -12,6 +12,12 @@ const baselines = [
   {skin:'tashigan_2', pelvis:'char', depth:18, feet:[[-11.513166,.8456421],[13.333812,1.8686237]],sha256:'ed895878b677fdaaf0f00f400136d676ef2bd395430e2cf48051f5cf26dd65d8'},
   {skin:'tashigan_3', pelvis:'bone', depth:18, feet:[[-11.17189,2.1407928],[13.153049,2.3743439]],sha256:'1608cc3c93d69f27ef1dfc59f7b2b6d800bb14accd5eee0ca5fbbacb4552bf16'},
   {skin:'tashigan_4', pelvis:'char', depth:18, feet:[[9.645512,.5530052],[-13.704084,-.10656738]],sha256:'932a447f5e9ac3ef82932d5950048275481c59b556d02e5f460f7c651fd48de2'},
+  // Mu's source has no IK constraints. Bake the same fixed-foot rotations
+  // against its own thigh/shin chains, without changing the original rig.
+  {skin:'tashigan_idol', pelvis:'bone', depth:18, animationCount:22,
+    legs:[['leg_L1','leg_L3'],['leg_R1','leg_R3']],
+    feet:[[-13.87812,5.055639],[11.22825,3.851126]],
+    sha256:'e62b0cab05b830cc379373debbd219bc9cc2610b43958cb4ccc698027ee924fc'},
 ];
 
 const hash = bytes => crypto.createHash('sha256').update(bytes).digest('hex');
@@ -114,29 +120,40 @@ function encodeClip(bones, ik, definition) {
   return Buffer.concat(chunks);
 }
 
-const [inputDir,outputDir]=process.argv.slice(2);
+const [inputDir,outputDir,selectedSkin]=process.argv.slice(2);
 assert.ok(inputDir&&outputDir,'Specify input and output directories. Originals are not overwritten by default.');
+assert.ok(!selectedSkin||baselines.some(d=>d.skin===selectedSkin),'Unknown skin.');
 fs.mkdirSync(outputDir,{recursive:true});
 const manifest=[];
 for(const definition of baselines){
+  if(selectedSkin&&definition.skin!==selectedSkin)continue;
+  // Preserve the existing four-skin directory workflow. Mu's independently
+  // extracted source is authored explicitly with the optional skin argument.
+  if(!selectedSkin&&definition.skin==='tashigan_idol')continue;
   const file=definition.skin+'.skel',input=fs.readFileSync(path.join(inputDir,file));
-  const {bones,ik}=header(input);assert.equal(ik.length,2);
+  const {bones,ik:sourceIk}=header(input);
+  const ik=definition.legs
+    ? definition.legs.map((names,index)=>({name:index===0?'footL':'footR',chain:names.map(name=>bones.find(b=>b.name===name))}))
+    : sourceIk;
+  assert.equal(sourceIk.length,definition.legs?0:2);
+  assert.ok(ik.length===2&&ik.every(c=>c.chain.length===2&&c.chain.every(Boolean)),'Missing leg chains.');
   const clip=encodeClip(bones,ik,definition);
   // This uniquely identifies the original count + first animation header.
   // Refuse unknown layouts instead of guessing a byte offset in a binary file.
-  const originalMarker=Buffer.concat([varint(20),string('attack')]);
+  const animationCount=definition.animationCount??20;
+  const originalMarker=Buffer.concat([varint(animationCount),string('attack')]);
   let original=input,countAt=input.indexOf(originalMarker);
   if(countAt<0){
-    const marker=Buffer.concat([varint(21),string('attack')]);countAt=input.indexOf(marker);
+    const marker=Buffer.concat([varint(animationCount+1),string('attack')]);countAt=input.indexOf(marker);
     assert.ok(countAt>=0&&input.subarray(-clip.length).equals(clip),'Not an original or this tool\'s exact output.');
-    original=Buffer.from(input.subarray(0,-clip.length));original[countAt]=20;
+    original=Buffer.from(input.subarray(0,-clip.length));original[countAt]=animationCount;
   }
   assert.equal(original.indexOf(originalMarker,countAt+1),-1,'ambiguous animation-count offset');
   assert.ok(countAt>1000);
   assert.equal(hash(original),definition.sha256,'Skeleton changed: remeasure foot positions before authoring.');
-  const output=Buffer.concat([original,clip]);output[countAt]=21;
+  const output=Buffer.concat([original,clip]);output[countAt]=animationCount+1;
   // The complete existing binary is preserved, apart from this one count byte.
-  const restored=Buffer.from(output.subarray(0,original.length));restored[countAt]=20;
+  const restored=Buffer.from(output.subarray(0,original.length));restored[countAt]=animationCount;
   assert.ok(restored.equals(original));
   fs.writeFileSync(path.join(outputDir,file),output);
   manifest.push({skin:definition.skin,originalSha256:hash(original),outputSha256:hash(output),countByte:countAt,originalBytes:original.length,appendedBytes:clip.length,depth:definition.depth,descentDuration:.2,clipDuration:.21});

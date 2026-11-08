@@ -61,5 +61,20 @@
   "TASHKENTSPIRE2-TASHKENT_VARIANT_FOUR.goldMonologue": "[sine]이 금화들은 분명 동지쨩에게 도움이 될 거야……[/sine]",
   "TASHKENTSPIRE2-TASHKENT_VARIANT_FOUR.cardsModifierTitle": "타슈켄트 카드",
   "TASHKENTSPIRE2-TASHKENT_VARIANT_FOUR.cardsModifierDescription": "이제 타슈켄트 카드가 보상과 상점에 등장합니다.",
-  "TASHKENTSPIRE2-TASHKENT_VARIANT_FOUR.skinName": "스프라이트의 스냅샷"
+  "TASHKENTSPIRE2-TASHKENT_VARIANT_FOUR.skinName": "스프라이트의 스냅샷",
+  "TASHKENTSPIRE2-TASHKENT_MU.title": "타슈켄트",
+  "TASHKENTSPIRE2-TASHKENT_MU.titleObject": "타슈켄트",
+  "TASHKENTSPIRE2-TASHKENT_MU.pronounObject": "그녀",
+  "TASHKENTSPIRE2-TASHKENT_MU.pronounSubject": "그녀",
+  "TASHKENTSPIRE2-TASHKENT_MU.pronounPossessive": "그녀의",
+  "TASHKENTSPIRE2-TASHKENT_MU.possessiveAdjective": "그녀의",
+  "TASHKENTSPIRE2-TASHKENT_MU.description": "타슈켄트는 노스 유니온 소속의 향도 구축함입니다.\n첨탑에 도착한 그녀는 세바스토폴 전투 때처럼 최선을 다해 싸울 것입니다.\n",
+  "TASHKENTSPIRE2-TASHKENT_MU.banter.alive.endTurnPing": "동지쨩, 아직 안 끝난 거야...? 이런...",
+  "TASHKENTSPIRE2-TASHKENT_MU.banter.dead.endTurnPing": "[sine]타슈켄트는 지지 않았어![/sine]",
+  "TASHKENTSPIRE2-TASHKENT_MU.eventDeathPrevention": "안 돼…! 타슈켄트는 아직 더 싸울 수 있어!",
+  "TASHKENTSPIRE2-TASHKENT_MU.aromaPrinciple": "[sine][blue]동지쨩 곁으로 돌아가야 해……[/blue][/sine]",
+  "TASHKENTSPIRE2-TASHKENT_MU.goldMonologue": "[sine]이 금화들은 분명 동지쨩에게 도움이 될 거야……[/sine]",
+  "TASHKENTSPIRE2-TASHKENT_MU.cardsModifierTitle": "타슈켄트 카드",
+  "TASHKENTSPIRE2-TASHKENT_MU.cardsModifierDescription": "이제 타슈켄트 카드가 보상과 상점에 등장합니다.",
+  "TASHKENTSPIRE2-TASHKENT_MU.skinName": "μ장비"
 }

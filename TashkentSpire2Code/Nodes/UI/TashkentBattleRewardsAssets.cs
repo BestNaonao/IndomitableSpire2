@@ -19,7 +19,8 @@ public static class TashkentBattleRewardsAssets
         "res://TashkentSpire2/images/ui/battle_rewards/tashigan_painting.png",
         "res://TashkentSpire2/images/ui/battle_rewards/tashigan_2_painting.png",
         "res://TashkentSpire2/images/ui/battle_rewards/tashigan_3_painting.png",
-        "res://TashkentSpire2/images/ui/battle_rewards/tashigan_4_full_painting.png"
+        "res://TashkentSpire2/images/ui/battle_rewards/tashigan_4_full_painting.png",
+        "res://TashkentSpire2/images/ui/battle_rewards/tashigan_idol_painting.png"
     ];
 
     public static Dictionary<string, string> LoadPreviewStrings(string language)

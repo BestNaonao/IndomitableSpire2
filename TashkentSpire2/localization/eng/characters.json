@@ -61,5 +61,20 @@
   "TASHKENTSPIRE2-TASHKENT_VARIANT_FOUR.goldMonologue": "[sine]These Gold Coins will definitely be useful to my dear comrade...[/sine]",
   "TASHKENTSPIRE2-TASHKENT_VARIANT_FOUR.cardsModifierTitle": "Tashkent Cards",
   "TASHKENTSPIRE2-TASHKENT_VARIANT_FOUR.cardsModifierDescription": "Tashkent's cards can now appear in rewards and shops.",
-  "TASHKENTSPIRE2-TASHKENT_VARIANT_FOUR.skinName": "The Sprite's Snapshot"
+  "TASHKENTSPIRE2-TASHKENT_VARIANT_FOUR.skinName": "The Sprite's Snapshot",
+  "TASHKENTSPIRE2-TASHKENT_MU.title": "Tashkent",
+  "TASHKENTSPIRE2-TASHKENT_MU.titleObject": "Tashkent",
+  "TASHKENTSPIRE2-TASHKENT_MU.pronounObject": "her",
+  "TASHKENTSPIRE2-TASHKENT_MU.pronounSubject": "she",
+  "TASHKENTSPIRE2-TASHKENT_MU.pronounPossessive": "hers",
+  "TASHKENTSPIRE2-TASHKENT_MU.possessiveAdjective": "her",
+  "TASHKENTSPIRE2-TASHKENT_MU.description": "Tashkent is a flotilla leader destroyer from the Northern Parliament.\nHaving arrived at the Spire, she fights as hard as she did during the Battle of Sevastopol.\n",
+  "TASHKENTSPIRE2-TASHKENT_MU.banter.alive.endTurnPing": "Dear comrade... it's still not over yet...?",
+  "TASHKENTSPIRE2-TASHKENT_MU.banter.dead.endTurnPing": "[sine]Tashkent hasn't lost yet![/sine]",
+  "TASHKENTSPIRE2-TASHKENT_MU.eventDeathPrevention": "No...! Tashkent can still fight!",
+  "TASHKENTSPIRE2-TASHKENT_MU.aromaPrinciple": "[sine][blue]I have to return to my dear comrade's side...[/blue][/sine]",
+  "TASHKENTSPIRE2-TASHKENT_MU.goldMonologue": "[sine]These Gold Coins will definitely be useful to my dear comrade...[/sine]",
+  "TASHKENTSPIRE2-TASHKENT_MU.cardsModifierTitle": "Tashkent Cards",
+  "TASHKENTSPIRE2-TASHKENT_MU.cardsModifierDescription": "Tashkent's cards can now appear in rewards and shops.",
+  "TASHKENTSPIRE2-TASHKENT_MU.skinName": "μ Rigging"
 }

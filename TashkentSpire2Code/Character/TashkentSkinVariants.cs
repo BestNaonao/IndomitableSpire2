@@ -2,6 +2,15 @@ using MegaCrit.Sts2.Core.Models;
 
 namespace TashkentSpire2.TashkentSpire2Code.Character;
 
+public sealed class TashkentMu : TashkentCharacter
+{
+	public override TashkentSkin CurrentSkin => TashkentSkin.Mu;
+	public override bool HideFromVanillaCharacterSelect => true;
+	public override bool HideInCompendium => true;
+	public override bool AllowInVanillaRandomCharacterSelect => false;
+	public override ModelId DefaultCompendiumOpenModelId => ModelDb.Character<TashkentCharacter>().Id;
+}
+
 public sealed class TashkentVariantTwo : TashkentCharacter
 {
 	public override TashkentSkin CurrentSkin => TashkentSkin.VariantTwo;

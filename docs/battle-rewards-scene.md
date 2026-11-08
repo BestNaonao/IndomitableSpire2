@@ -6,7 +6,7 @@
 
 本机另备有不含 C# 或 Spine 的纯预览项目：`D:/GitClone/.codex-build/tashkent-reward-ui-standalone-20261104/project.godot`，已单独导入并运行验证。若完整模组的旧编辑环境有加载告警，可用此项目直接查看同一份场景快照。当前实际渲染图保存为 `docs/reward-ui-preview/tashkent-battle-rewards-scene-zhs.png`。
 
-展示层由 `tashkent_battle_rewards.gd` 驱动，是独立的 `@tool` Godot Control，不依赖游戏 DLL。可打开场景查看；Inspector 中的 `Preview Language` 可选中、英、日、韩，`Preview Skin` 的 0～3 对应四套现有皮肤。预览中的金币／卡牌／药水只是占位内容。
+展示层由 `tashkent_battle_rewards.gd` 驱动，是独立的 `@tool` Godot Control，不依赖游戏 DLL。可打开场景查看；Inspector 中的 `Preview Language` 可选中、英、日、韩，`Preview Skin` 的 0～4 对应五套现有皮肤，第五套为 μ兵装。预览中的金币／卡牌／药水只是占位内容。
 
 `Preview Safe Top` 默认按 1920×1080 的 180 单位预留顶部区域；运行时使用真实 HUD／遗物栏尺寸，不依赖这个预览占位值。
 

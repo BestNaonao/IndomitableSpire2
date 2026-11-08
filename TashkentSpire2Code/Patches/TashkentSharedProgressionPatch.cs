@@ -108,7 +108,8 @@ public static class TashkentSharedProgressionPatch
 	{
 		return characterId == ModelDb.GetId<TashkentVariantTwo>()
 		       || characterId == ModelDb.GetId<TashkentVariantThree>()
-		       || characterId == ModelDb.GetId<TashkentVariantFour>();
+		       || characterId == ModelDb.GetId<TashkentVariantFour>()
+		       || characterId == ModelDb.GetId<TashkentMu>();
 	}
 
 	private static void EnsureExistingStatsAreUnified(ProgressState progress)
@@ -132,7 +133,8 @@ public static class TashkentSharedProgressionPatch
 			[
 				ModelDb.GetId<TashkentVariantTwo>(),
 				ModelDb.GetId<TashkentVariantThree>(),
-				ModelDb.GetId<TashkentVariantFour>()
+				ModelDb.GetId<TashkentVariantFour>(),
+				ModelDb.GetId<TashkentMu>()
 			];
 
 			var existingVariantStats = variantIds

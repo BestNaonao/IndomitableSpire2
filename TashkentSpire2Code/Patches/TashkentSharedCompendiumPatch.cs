@@ -60,7 +60,7 @@ public static class TashkentSharedCompendiumPatch
 
 	/// <summary>
 	/// Starter relics are collected from AllCharacters instead of AllCharacterRelicPools,
-	/// so suppress the three hidden skin models only while that synchronous collection is
+	/// so suppress the hidden skin models only while that synchronous collection is
 	/// being built. The character getter remains unchanged for runs and character select.
 	/// </summary>
 	[HarmonyPatch(typeof(NRelicCollectionCategory), nameof(NRelicCollectionCategory.LoadRelics))]
