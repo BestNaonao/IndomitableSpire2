@@ -15,7 +15,7 @@ public sealed class Navigator() : IndomitableCard(1, CardType.Power, CardRarity.
     public override string SpecialLineAudioPath => "res://IndomitableSpire2/sfx/characters/indomitable/get_2.wav";
     public override string SpecialLineBanterLocKey => $"{Id.Entry}.banter";
     
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<NavigatorPower>(8M)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<NavigatorPower>(10M)];
     
     protected override IEnumerable<IHoverTip> ExtraHoverTips => 
         [CustomHoverTipFactory.FromRecon(), HoverTipFactory.FromPower<MotivationPower>()];
