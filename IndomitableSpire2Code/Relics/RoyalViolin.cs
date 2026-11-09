@@ -1,3 +1,4 @@
+using IndomitableSpire2.IndomitableSpire2Code.Abstracts;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Relics;
 using MegaCrit.Sts2.Core.Localization;
@@ -9,7 +10,7 @@ using MegaCrit.Sts2.Core.Saves.Runs;
 namespace IndomitableSpire2.IndomitableSpire2Code.Relics;
 
 /// <summary>休息后，直到下一个休息处为止，每回合的正常起手抽牌额外增加两张。</summary>
-public sealed class RoyalViolin : IndomitableRelic
+public sealed class RoyalViolin : IndomitableRelic, IMapActiveRelic
 {
     public override RelicRarity Rarity => RelicRarity.Rare;
     protected override IEnumerable<DynamicVar> CanonicalVars => [new CardsVar(2)];
@@ -71,10 +72,9 @@ public sealed class RoyalViolin : IndomitableRelic
         player == Owner && AdditionalRestSiteHealText is { } text ? [..currentExtraText, text] : currentExtraText;
     
     /// <summary>
-    /// 由 RoyalViolinMapStatusPatch 在地图打开/关闭后刷新。IsOpen 区分地图和房间界面；不能用 CurrentRoom 判断当前显示的界面。
-    /// 这是纯展示状态，各端可独立切换地图而不影响已经同步、可保存的 RestedAtFloor。
+    /// 由 MapActiveRelicStatusPatch 在地图打开/关闭后刷新。IsOpen 区分地图和房间界面。这是纯 UI 展示状态，各端可独立切换地图。
     /// </summary>
-    internal void RefreshMapStatus(bool isMapOpen)
+    public void RefreshMapStatus(bool isMapOpen)
     {
         Status = IsMelodyActive && !IsMelted && isMapOpen ? RelicStatus.Active : RelicStatus.Normal;
     }

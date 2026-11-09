@@ -1,6 +1,6 @@
 using System.Reflection;
 using HarmonyLib;
-using IndomitableSpire2.IndomitableSpire2Code.Relics;
+using IndomitableSpire2.IndomitableSpire2Code.Abstracts;
 using MegaCrit.Sts2.Core.Nodes.Screens.Map;
 using MegaCrit.Sts2.Core.Runs;
 
@@ -11,7 +11,7 @@ namespace IndomitableSpire2.IndomitableSpire2Code.Patches;
 /// Close 的动画尚未结束时 IsOpen 已是 false，因而回到房间的过程中就能停止持续脉冲。
 /// </summary>
 [HarmonyPatch]
-public static class RoyalViolinMapStatusPatch
+public static class MapActiveRelicStatusPatch
 {
     private static IEnumerable<MethodBase> TargetMethods() =>
     [
@@ -25,7 +25,7 @@ public static class RoyalViolinMapStatusPatch
         // Harmony 的 ___field 注入读取 NMapScreen._runState；额外的下划线来自原字段名。
         // 更新本机显示的所有玩家遗物，让查看队友背包时也遵循同样的地图/房间显示规则。
         if (____runState == null) return;
-        foreach (var violin in ____runState.Players.SelectMany(player => player.Relics).OfType<RoyalViolin>())
-            violin.RefreshMapStatus(__instance.IsOpen);
+        foreach (var relic in ____runState.Players.SelectMany(player => player.Relics).OfType<IMapActiveRelic>())
+            relic.RefreshMapStatus(__instance.IsOpen);
     }
 }
