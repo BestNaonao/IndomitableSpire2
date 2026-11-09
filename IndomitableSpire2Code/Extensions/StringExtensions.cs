@@ -38,4 +38,7 @@ public static class StringExtensions
     
     public static string AircraftImagePath(this string path) => 
         Path.Join(MainFile.ModId, "images", "vfx", "aircraft", path);
+    
+    public static string MapIconPath(this string path) =>
+        Path.Join(MainFile.ModId, "images", "packed", "map", "icons", path);
 }
