@@ -23,5 +23,7 @@
   "INDOMITABLESPIRE2-LUCKY_BAG_RELIC_RULE.hover.desc": "[gold]自動獲得[/gold]：景品をそのまま獲得します。\n[gold]スキップして戻す[/gold]：スキップ後も景品が残り、後で獲得できます。\n[gold]スキップして破棄[/gold]：景品は消費されますが、レリックもその効果も得られません。\nスキップしても、そのショップでの福袋の発動回数は消費されます。\nマルチプレイではホストの設定が適用されます。",
   "INDOMITABLESPIRE2-LUCKY_BAG_RELIC_RULE.Direct": "自動獲得",
   "INDOMITABLESPIRE2-LUCKY_BAG_RELIC_RULE.SkipAndReturn": "スキップして戻す",
-  "INDOMITABLESPIRE2-LUCKY_BAG_RELIC_RULE.SkipAndDestroy": "スキップして破棄"
+  "INDOMITABLESPIRE2-LUCKY_BAG_RELIC_RULE.SkipAndDestroy": "スキップして破棄",
+  "INDOMITABLESPIRE2-CONFIRM_VACATION_PROPOSAL.title": "休暇企画書で部屋を変更する前に確認",
+  "INDOMITABLESPIRE2-CONFIRM_VACATION_PROPOSAL.hover.desc": "[gold]オン：[/gold]確認画面を表示し、確定時に変更を送信する。\n[gold]オフ：[/gold]選択可能な部屋をクリックすると、すぐに変更を送信する。\n自分の操作画面にのみ適用される。"
 }

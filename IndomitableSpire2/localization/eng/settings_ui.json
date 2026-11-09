@@ -23,5 +23,7 @@
   "INDOMITABLESPIRE2-LUCKY_BAG_RELIC_RULE.hover.desc": "[gold]Collect automatically[/gold]: receive the gift immediately.\n[gold]Allow skipping and return[/gold]: skipped gifts remain available.\n[gold]Allow skipping and destroy[/gold]: the gift is consumed without granting the relic or its effects.\nSkipping still uses Lucky Bag's activation for this shop.\nIn multiplayer, the host's setting applies.",
   "INDOMITABLESPIRE2-LUCKY_BAG_RELIC_RULE.Direct": "Collect automatically",
   "INDOMITABLESPIRE2-LUCKY_BAG_RELIC_RULE.SkipAndReturn": "Allow skipping and return",
-  "INDOMITABLESPIRE2-LUCKY_BAG_RELIC_RULE.SkipAndDestroy": "Allow skipping and destroy"
+  "INDOMITABLESPIRE2-LUCKY_BAG_RELIC_RULE.SkipAndDestroy": "Allow skipping and destroy",
+  "INDOMITABLESPIRE2-CONFIRM_VACATION_PROPOSAL.title": "Confirm Vacation Proposal room changes",
+  "INDOMITABLESPIRE2-CONFIRM_VACATION_PROPOSAL.hover.desc": "[gold]On:[/gold] Show a confirmation before submitting the change.\n[gold]Off:[/gold] Clicking an eligible room submits the change immediately.\nOnly affects your local interface."
 }

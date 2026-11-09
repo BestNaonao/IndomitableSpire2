@@ -74,4 +74,7 @@ public sealed class IndomitableConfiguration : SimpleModConfig
     
     /// <summary>每次福袋触发时读取房主的规则；客户端的本地偏好不会覆盖房主。</summary>
     public static LuckyBagRelicRule LuckyBagRelicRule { get; set; } = LuckyBagRelicRule.Direct;
+    
+    /// <summary>只控制本机确认框；联机确认行动与节点冲突检查始终执行。</summary>
+    public static bool ConfirmVacationProposal { get; set; } = true;
 }

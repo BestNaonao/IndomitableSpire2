@@ -23,5 +23,7 @@
   "INDOMITABLESPIRE2-LUCKY_BAG_RELIC_RULE.hover.desc": "[gold]直接获取[/gold]：自动获得赠品。\n[gold]可跳过并放回[/gold]：跳过后保留赠品，之后仍可获取。\n[gold]可跳过并销毁[/gold]：跳过后按领取处理赠品，但不获得遗物及其效果。\n跳过也会消耗本商店的福袋机会。\n多人游戏以房主的设置为准。",
   "INDOMITABLESPIRE2-LUCKY_BAG_RELIC_RULE.Direct": "直接获取",
   "INDOMITABLESPIRE2-LUCKY_BAG_RELIC_RULE.SkipAndReturn": "可跳过并放回",
-  "INDOMITABLESPIRE2-LUCKY_BAG_RELIC_RULE.SkipAndDestroy": "可跳过并销毁"
+  "INDOMITABLESPIRE2-LUCKY_BAG_RELIC_RULE.SkipAndDestroy": "可跳过并销毁",
+  "INDOMITABLESPIRE2-CONFIRM_VACATION_PROPOSAL.title": "休假计划书变化房间前确认",
+  "INDOMITABLESPIRE2-CONFIRM_VACATION_PROPOSAL.hover.desc": "[gold]开启后：[/gold]选择房间后先显示确认框，确认才提交变化。\n[gold]关闭后：[/gold]点击可选房间即提交变化。\n仅影响本机的操作界面。"
 }
