@@ -3,6 +3,7 @@ using System.Text.Json;
 using BaseLib.Patches.Saves;
 using Godot;
 using HarmonyLib;
+using IndomitableSpire2.IndomitableSpire2Code.Commands;
 using IndomitableSpire2.IndomitableSpire2Code.Extensions;
 using IndomitableSpire2.IndomitableSpire2Code.Relics.Ancients;
 using MegaCrit.Sts2.Core.Combat;
@@ -67,20 +68,12 @@ public static class EyeInTheSkyService
     public static EyeInTheSky[] Holders(IRunState run) => 
         run.Players.OrderBy(p => p.NetId).SelectMany(p => p.Relics.OfType<EyeInTheSky>()).ToArray();
     
-    public static string Key(MapCoord coord) => $"{coord.col},{coord.row}";
-    
-    // 安全地收集地图上所有有效节点，包括可能存在的第二个 Boss 节点，并使用 DistinctBy 去重。
-    public static IEnumerable<MapPoint> Points(ActMap map) => map.GetAllMapPoints()
-        .Append(map.StartingMapPoint).Append(map.BossMapPoint)
-        .Concat(map.SecondBossMapPoint is { } second ? [second] : [])
-        .DistinctBy(p => p.coord);
-    
     private static IEnumerable<MapPoint> RowMajorOrdered(IEnumerable<MapPoint> points) => 
         points.OrderBy(p => p.coord.row).ThenBy(p => p.coord.col);
     
     // 快速判断某节点是否在当前阶段的标记集合中。
     public static bool IsMarked(IRunState run, MapPoint point) => 
-        Surveys.TryGetValue(run, out var s) && s.Act == run.CurrentActIndex && s.Marks.Contains(Key(point.coord));
+        Surveys.TryGetValue(run, out var s) && s.Act == run.CurrentActIndex && s.Marks.Contains(point.CoordKey());
     
     /// <summary>地图初始化与初始标记。</summary>
     public static void EnsureMap(IRunState run, ActMap? map, int act)
@@ -89,7 +82,7 @@ public static class EyeInTheSkyService
         var state = Surveys.GetOrCreateValue(run); // 获取或创建全局状态
         if (state.Act == act) return; // 防止同一阶段重复初始化
         state.Act = act; state.Marks.Clear(); state.Plans.Clear(); state.Observed.Clear(); state.Step = 0; state.LastFloor = -1;
-        var all = Points(map).ToArray();
+        var all = MapCommand.Points(map).ToArray();
         var threshold = Mathf.Lerp(all.Min(p => p.coord.row), all.Max(p => p.coord.row), UpperFraction);
         // 初始标记避开 Boss（含第二 Boss），避免被前一排休息处隔离而无法扩散。
         // 仅限制初始候选；Frontier/Mark 仍允许沿其他 Mod 地图的连边正常扩散到 Boss。
@@ -98,7 +91,7 @@ public static class EyeInTheSkyService
                            p.PointType is not (MapPointType.RestSite or MapPointType.Boss))).ToList();
         if (candidates.Count == 0) return;
         var rng = new Rng(GetSeed(run, act, "initial"));
-        Mark(run, map, state, candidates[rng.NextInt(candidates.Count)]);
+        MapCommand.MarkEyeInTheSky(run, map, candidates[rng.NextInt(candidates.Count)]);
     }
     
     /// <summary>在玩家进入房间前，记录该房间在进入前是否被标记以及当前楼层。如果已存在则复用，确保多遗物实例看到相同的快照。</summary>
@@ -135,11 +128,12 @@ public static class EyeInTheSkyService
         Spread(run, run.Map, state);
     }
     
-    public static MapPoint[] Frontier(ActMap map, IReadOnlySet<string> marks) => RowMajorOrdered(Points(map)
-        .Where(p => marks.Contains(Key(p.coord))) // 过滤标记的节点
-        .SelectMany(p => p.parents.Concat(p.Children)) // 获取父节点和子节点
-        .Where(p => p.PointType != MapPointType.RestSite && !marks.Contains(Key(p.coord))) // 非休息处且未标记
-        .DistinctBy(p => p.coord)).ToArray();
+    public static MapPoint[] Frontier(ActMap map, IReadOnlySet<string> marks) => 
+        RowMajorOrdered(MapCommand.Points(map)
+            .Where(p => marks.Contains(p.CoordKey())) // 过滤标记的节点
+            .SelectMany(p => p.parents.Concat(p.Children)) // 获取父节点和子节点
+            .Where(p => p.PointType != MapPointType.RestSite && !marks.Contains(p.CoordKey())) // 非休息处且未标记
+            .DistinctBy(p => p.coord)).ToArray();
     
     private static void Spread(IRunState run, ActMap map, Survey state)
     {
@@ -151,35 +145,43 @@ public static class EyeInTheSkyService
             var index = rng.NextInt(choices.Count);
             var point = choices[index];
             choices.RemoveAt(index);
-            Mark(run, map, state, point);
+            MapCommand.MarkEyeInTheSky(run, map, point);
         }
     }
     
     private static bool Visited(IRunState run, MapPoint point) => 
         run.CurrentMapPoint == point || run is RunState actual && actual.VisitedMapCoords.Contains(point.coord);
     
-    private static void Mark(IRunState run, ActMap map, Survey state, MapPoint point)
+    internal static void AddMark(IRunState run, ActMap map, MapPoint point)
     {
+        var state = Surveys.GetOrCreateValue(run);
         // 已标记则跳过，然后处理战斗房间的逻辑，已进入的房间不会被新情报替换；进入时恰好扩散到此节点也不会追溯改写正在进行的战斗。
-        if (!state.Marks.Add(Key(point.coord)) || !point.PointType.IsCombat() || Visited(run, point)) return;
+        if (!state.Marks.Add(point.CoordKey()) || !point.PointType.IsCombat() || Visited(run, point)) return;
         var type = point.PointType switch { MapPointType.Elite => RoomType.Elite, MapPointType.Boss => RoomType.Boss, _ => RoomType.Monster };
         // 在原版 RoomSet 的独立副本上取样，绝不推进真实遭遇队列或悬停时消耗游戏 RNG。
         var actCopy = ActModel.FromSave(run.Act.ToSave());
-        var reservations = Points(map)
-            .Count(p => state.Plans.TryGetValue(Key(p.coord), out var plan) && !Visited(run, p) && 
+        var reservations = MapCommand.Points(map)
+            .Count(p => state.Plans.TryGetValue(p.CoordKey(), out var plan) && !Visited(run, p) && 
                         ModelDb.GetById<EncounterModel>(ModelId.Deserialize(plan.Encounter)).RoomType == type);
         // 模拟消耗：之前已经预定的同类型房间，需要在这里预先“MarkRoomVisited”，以保证 PullNextEncounter 抽到的队列顺序与原版完全一致。
         for (var i = 0; i < reservations; i++) actCopy.MarkRoomVisited(type);
         var encounter = type == RoomType.Boss
             ? (point == map.SecondBossMapPoint ? run.Act.SecondBossEncounter : null) ?? run.Act.BossEncounter
             : actCopy.PullNextEncounter(type);
-        state.Plans[Key(point.coord)] = new Plan(encounter.Id.ToString(), GetSeed(run, state.Act, $"monsters:{Key(point.coord)}"));
+        state.Plans[point.CoordKey()] = new Plan(encounter.Id.ToString(), GetSeed(run, state.Act, $"monsters:{point.CoordKey()}"));
+    }
+    
+    internal static void ForgetEncounter(IRunState run, MapPoint point)
+    {
+        if (!Surveys.TryGetValue(run, out var state) || state.Act != run.CurrentActIndex) return;
+        state.Plans.Remove(point.CoordKey());
+        state.Observed.Remove(point.CoordKey());
     }
     
     public static Plan? GetPlan(IRunState run, MapPoint point) =>
         Surveys.TryGetValue(run, out var state) && state.Act == run.CurrentActIndex
-            ? state.Plans.TryGetValue(Key(point.coord), out var plan)
-                ? plan : state.Observed.TryGetValue(Key(point.coord), out var observed)
+            ? state.Plans.TryGetValue(point.CoordKey(), out var plan)
+                ? plan : state.Observed.TryGetValue(point.CoordKey(), out var observed)
                     ? observed : null : null;
     
     public static MonsterModel[] PreviewMonsters(IRunState run, MapPoint point)
@@ -198,7 +200,7 @@ public static class EyeInTheSkyService
         var history = run.GetHistoryEntryFor(new MapLocation(point.coord, run.CurrentActIndex));
         return history?.Rooms.FirstOrDefault(r => r.RoomType.IsCombatRoom())?.MonsterIds
             .Select((id, index) => PreparePreviewMonster(ModelDb.GetById<MonsterModel>(id).ToMutable(), null,
-                GetSeed(run, run.CurrentActIndex, $"history-portrait:{Key(point.coord)}:{index}")))
+                GetSeed(run, run.CurrentActIndex, $"history-portrait:{point.CoordKey()}:{index}")))
             .ToArray() ?? [];
     }
     
@@ -232,7 +234,7 @@ public static class EyeInTheSkyService
         {
             // 读取原版 GenerateMonstersWithSlots 的默认种子。只记录，仍由原版初始化；
             // 如果此次扩散标记了当前战斗，悬停展示实际已生成的遭遇，不预定一场替代战斗。
-            state.Observed[Key(point.coord)] = new Plan(encounter.Id.ToString(),
+            state.Observed[point.CoordKey()] = new Plan(encounter.Id.ToString(),
                 unchecked(run.Rng.Seed + (ulong)run.TotalFloor + StringHelper.GetDeterministicHashCode(encounter.Id.Entry)));
         }
     }
