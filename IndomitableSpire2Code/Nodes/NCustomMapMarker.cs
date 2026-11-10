@@ -1,8 +1,7 @@
 using Godot;
 using HarmonyLib;
-using IndomitableSpire2.IndomitableSpire2Code.Relics.Ancients;
+using IndomitableSpire2.IndomitableSpire2Code.Map;
 using IndomitableSpire2.IndomitableSpire2Code.Services;
-using MegaCrit.Sts2.Core.Context;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Nodes.Screens.Map;
 using MegaCrit.Sts2.Core.Nodes.Screens.ScreenContext;
@@ -14,9 +13,9 @@ namespace IndomitableSpire2.IndomitableSpire2Code.Nodes;
 /// 仿照 NNormalMapPoint 的 QuestIcon 放置独立标记；不占用 Quests，避免覆盖皮草大衣的骷髅。
 /// 此节点只有显示功能：生成预览使用 Encounter 的独立副本，不参与地图/战斗随机序列。
 /// </summary>
-public partial class EyeInTheSkyMarker : TextureRect
+public partial class NCustomMapMarker : TextureRect
 {
-    private const string ImagePath = "res://IndomitableSpire2/images/packed/map/icons/map_eye_in_the_sky_marker.png";
+    private MapMarker _model = null!;
     private const float MarkerSize = 48f;
     private const float CellWidth = 144f;
     private const float CellHeight = 200f; // 为较长的敌人名保留两行（含字体行距），避免文字重叠。
@@ -31,32 +30,41 @@ public partial class EyeInTheSkyMarker : TextureRect
         // 原版皮草大衣渲染的 QuestIcon 的父节点是 IconContainer。
         var iconContainer = point.GetNodeOrNull<Control>("%IconContainer");
         var parent = iconContainer ?? point;
-        if (parent.GetNodeOrNull("EyeInTheSkyMarker") != null) return;
-        var marker = new EyeInTheSkyMarker
+        var run = (IRunState)AccessTools.Field(typeof(NMapPoint), "_runState").GetValue(point)!;
+        foreach (var model in MapMarkerService.CreateMarkers(run, point.Point))
         {
-            Name = "EyeInTheSkyMarker", _point = point,
-            _run = (IRunState)AccessTools.Field(typeof(NMapPoint), "_runState").GetValue(point)!,
-            Texture = ResourceLoader.Load<Texture2D>(ImagePath),
-            ExpandMode = ExpandModeEnum.IgnoreSize, StretchMode = StretchModeEnum.KeepAspectCentered,
-            // 与原版 QuestIcon 一样使用默认相对 Z=0，不能跨过地图上方的暂停/设置遮罩。
-            Size = Vector2.One * MarkerSize, MouseFilter = MouseFilterEnum.Pass
-        };
-        // 普通节点的 QuestIcon 位于 56px 图标容器右上方。Boss/先古无该容器，使用节点中心。
-        parent.AddChild(marker);
-        marker.Position = iconContainer != null ? new Vector2(32, -24)
-            : point.Size / 2f + new Vector2(4, -52);
-        marker.MouseEntered += () => marker._hovered = true;
-        marker.MouseExited += () => { marker._hovered = false; marker.ClosePreview(); };
-        marker.Refresh();
+            var markerId = model.Id + "Marker";
+            if (parent.GetNodeOrNull(markerId) != null) continue;
+            var marker = new NCustomMapMarker
+            {
+                Name = markerId, _point = point, _model = model, _run = run,
+                Texture = ResourceLoader.Load<Texture2D>(model.TexturePath),
+                ExpandMode = ExpandModeEnum.IgnoreSize, StretchMode = StretchModeEnum.KeepAspectCentered,
+                // 与原版 QuestIcon 一样使用默认相对 Z=0，不能跨过地图上方的暂停/设置遮罩。
+                Size = Vector2.One * MarkerSize, MouseFilter = MouseFilterEnum.Pass
+            };
+            // 普通节点的 QuestIcon 位于 56px 图标容器右上方。Boss/先古无该容器，使用节点中心。
+            parent.AddChild(marker);
+            marker.Position = iconContainer != null ? new Vector2(32, -24)
+                : point.Size / 2f + new Vector2(4, -52);
+            marker.MouseEntered += () => marker._hovered = true;
+            marker.MouseExited += () => { marker._hovered = false; marker.ClosePreview(); };
+            marker.Refresh();
+        }
     }
     
     public override void _Process(double delta) => Refresh();
     
-    public override void _EnterTree() => ActiveScreenContext.Instance.Updated += OnActiveScreenChanged;
+    public override void _EnterTree()
+    {
+        ActiveScreenContext.Instance.Updated += OnActiveScreenChanged;
+        MapMarkerService.Changed += OnMarkersChanged;
+    }
     
     public override void _ExitTree()
     {
         ActiveScreenContext.Instance.Updated -= OnActiveScreenChanged;
+        MapMarkerService.Changed -= OnMarkersChanged;
         ClosePreview();
     }
     
@@ -67,21 +75,35 @@ public partial class EyeInTheSkyMarker : TextureRect
         ClosePreview();
     }
     
+    private void OnMarkersChanged(IRunState run)
+    {
+        if (_run != run) return;
+        ClosePreview();
+        _point.RefreshVisualsInstantly();
+        Refresh();
+    }
+    
     private void Refresh()
     {
-        Visible = EyeInTheSkyService.IsMarked(_run, _point.Point);
+        Visible = _model.Visible;
         // 与皮草大衣同时标记时移到左上角，保留两个独立图标。
-        if (_point is NNormalMapPoint)
-            Position = new Vector2(_point.Point.Quests.Count > 0 ? -24 : 32, -24);
+        var visibles = GetParent().GetChildren()
+            .OfType<NCustomMapMarker>().Where(v => v._model.Visible).ToList();
+        var slot = Math.Max(0, visibles.IndexOf(this)) + (_point.Point.Quests.Count > 0 ? 1 : 0);
+        var offset = new Vector2(32 - slot * MarkerSize, -24);
+        Position = _point is NNormalMapPoint ? offset : _point.Size / 2f + offset - new Vector2(28, 28);
         var allowed = IsVisibleInTree() && NMapScreen.Instance is { IsOpen: true, IsTraveling: false } map &&
-            ActiveScreenContext.Instance.IsCurrent(map) &&
-            LocalContext.GetMe(_run.Players)?.Relics.OfType<EyeInTheSky>().Any() == true;
+            ActiveScreenContext.Instance.IsCurrent(map) && _model.CanPreview;
         if (!allowed || !_hovered)
         {
             ClosePreview();
             return;
         }
-        if (_popup == null) OpenPreview(EyeInTheSkyService.PreviewMonsters(_run, _point.Point));
+        if (_popup == null)
+        {
+            if (_model.Description is { } text) OpenDescription(text);
+            else OpenPreview(_model.PreviewMonsters());
+        }
         if (_popup == null) return;
         // 预览弹窗位置右偏，计算最大边界防止超出屏幕右侧和底部，并使用 Clamp 将位置限制在安全区域内。
         var position = GetGlobalTransformWithCanvas().Origin + new Vector2(MarkerSize + Padding, 0);
@@ -154,6 +176,23 @@ public partial class EyeInTheSkyMarker : TextureRect
                 MainFile.Logger.Warn($"[EyeInTheSky] Portrait failed for {monsters[i].Id}: {exception}");
             }
         }
+    }
+    
+    private void OpenDescription(string text)
+    {
+        _popup = new NinePatchRect
+        {
+            Texture = ResourceLoader.Load<Texture2D>("res://images/ui/hover_tip.png"),
+            SelfModulate = new Color(0.08f, 0.08f, 0.08f, 0.90f),
+            PatchMarginLeft = 12, PatchMarginRight = 12, PatchMarginTop = 12, PatchMarginBottom = 12,
+            Size = new Vector2(320, 140), MouseFilter = MouseFilterEnum.Ignore
+        };
+        ((Node?)NMapScreen.Instance ?? this).AddChild(_popup);
+        var label = new Label { Text = text, Position = Vector2.One * Padding,
+            Size = _popup.Size - Vector2.One * Padding * 2, AutowrapMode = TextServer.AutowrapMode.WordSmart,
+            MouseFilter = MouseFilterEnum.Ignore };
+        label.AddThemeFontSizeOverride("font_size", 20);
+        _popup.AddChild(label);
     }
     
     private void ClosePreview()
