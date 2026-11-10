@@ -10,4 +10,7 @@ public static class MapPointExtensions
     
     /// <summary>根据类型判断该地图节点是否为战斗遭遇节点。</summary>
     public static bool IsCombatPoint(this MapPoint point) => point.PointType.IsCombat();
+    
+    /// <summary>给出一个指定地图节点的坐标的格式化键</summary>
+    public static string CoordKey(this MapPoint point) => $"{point.coord.col},{point.coord.row}";
 }
