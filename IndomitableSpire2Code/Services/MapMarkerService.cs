@@ -1,6 +1,7 @@
 using System.Runtime.CompilerServices;
 using System.Text.Json;
 using BaseLib.Patches.Saves;
+using IndomitableSpire2.IndomitableSpire2Code.Commands;
 using IndomitableSpire2.IndomitableSpire2Code.Extensions;
 using IndomitableSpire2.IndomitableSpire2Code.Map;
 using MegaCrit.Sts2.Core.Map;
@@ -40,7 +41,6 @@ public static class MapMarkerService
     public static void Register(string id, Func<IRunState, MapPoint, MapMarker> factory)
     {
         if (!Factories.TryAdd(id, factory)) throw new ArgumentException($"Map marker already registered: {id}");
-        
     }
     
     /// <summary>
@@ -72,8 +72,7 @@ public static class MapMarkerService
         }
     }
     
-    // 订阅者就是 NMapMarkerLayer。
-    public static event Action<IRunState>? Changed;
+    public static event Action<IRunState>? Changed; // 订阅者就是 NMapMarkerLayer。
     
     /// <summary>当前阶段指定节点是否存在特定 ID 的标记</summary>
     public static bool Contains(IRunState run, MapPoint point, string id) =>
@@ -110,7 +109,10 @@ public static class MapMarkerService
     /// <summary>添加一个标记模型，同时保存到全局关系和记录到缓存数据，关系重复则返回 false，成功添加返回 true。</summary>
     internal static bool Add(MapMarker marker)
     {
-        Validate(marker);
+        // 验证是否是合规的标记模型，要求是工厂中记录并且属于当前阶段的。
+        if (!Factories.ContainsKey(marker.Id)) throw new ArgumentException($"Unregistered map marker: {marker.Id}");
+        if (marker.Act != marker.Run.CurrentActIndex) throw new InvalidOperationException("Cannot mark a previous act.");
+        if (!marker.CanMark()) return false;
         if (Contains(marker.Run, marker.Point, marker.Id)) return false; // 保证幂等添加
         ImportLegacy(marker.Run, marker.Act, marker.Id, [marker.Point.CoordKey()]); // 保存到关系
         Runs.GetOrCreateValue(marker.Run).Models.GetOrCreateValue(marker.Point)[marker.Id] = marker; // 记录到缓存
@@ -130,22 +132,31 @@ public static class MapMarkerService
         return true;
     }
     
-    // 验证是否是合规的标记模型，要求是工厂中记录并且属于当前阶段的。
-    private static void Validate(MapMarker marker)
+    // 地图恢复或节点类型改变后，按当前节点状态复查已有标记。GetMarkers 返回快照，允许 OnRemoved 移除关联标记。
+    private static void RemoveIneligible(IRunState run, MapPoint point)
     {
-        if (!Factories.ContainsKey(marker.Id)) throw new ArgumentException($"Unregistered map marker: {marker.Id}");
-        if (marker.Act != marker.Run.CurrentActIndex) throw new InvalidOperationException("Cannot mark a previous act.");
+        foreach (var marker in GetMarkers(run, point))
+            if (!marker.CanMark()) MapCommand.Remove(marker, notifyViews: false);
     }
     
-    /// <summary>设置节点类型，并且通知对应节点的标记，触发其钩子方法。</summary>
+    // 原版先恢复 Run 的扩展字段，稍后才设置实际地图。此时所有客户端都能依实际类型清理旧存档。
+    internal static void RevalidateMap(IRunState run, ActMap map)
+    {
+        if (map is null or NullActMap || !Runs.TryGetValue(run, out var runtime) ||
+            !runtime.Data.Acts.TryGetValue(run.CurrentActIndex, out var markedPoints) ||
+            markedPoints.Count == 0) return;
+        foreach (var point in MapCommand.Points(map))
+            if (markedPoints.ContainsKey(point.CoordKey())) RemoveIneligible(run, point);
+    }
+    
+    /// <summary>节点类型改变后，移除与新类型不兼容的标记，再通知保留的标记。</summary>
     internal static bool SetPointType(IRunState run, MapPoint point, MapPointType type)
     {
         var previous = point.PointType;
-        if (previous == type) return false; // 同类型的刷新不应遗忘/重抽情报。
-        var listeners = GetMarkers(run, point).ToArray();
+        if (previous == type) return false;
         point.PointType = type;
-        // 快照允许钩子移除自身；这里只分发节点事件，不引用任何具体标记服务。
-        foreach (var marker in listeners)
+        RemoveIneligible(run, point);
+        foreach (var marker in GetMarkers(run, point))
             if (Contains(run, point, marker.Id)) marker.OnPointTypeChanged(previous, type);
         return true;
     }
