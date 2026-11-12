@@ -12,6 +12,9 @@ public sealed class EyeInTheSkyMapMarker(IRunState run, MapPoint point, ActMap? 
     public const string MarkerId = "EyeInTheSky";
     public override string Id => MarkerId;
     
+    // 不能标记在休息处上
+    public override bool CanMarkPointType(MapPointType type) => type != MapPointType.RestSite;
+    
     public override MapMarkerViewModel CreateViewModel() => new ViewModel(this);
     
     // 原版先调用 AfterMapGenerated，再赋值 RunState.Map；初始投放必须使用钩子传入的新地图。
@@ -21,7 +24,7 @@ public sealed class EyeInTheSkyMapMarker(IRunState run, MapPoint point, ActMap? 
     
     public override void OnPointTypeChanged(MapPointType previous, MapPointType current)
     {
-        // 普通战斗 -> 精英也必须重新预定；休息处则只遗忘。通用命令不需要认识遭遇缓存。
+        // 只有保留标记才进入此钩子，例如普通战斗变为精英时需要重新预定。移除走 OnRemoved。
         EyeInTheSkyService.ForgetEncounter(Run, Point);
         if (current.IsCombat()) EyeInTheSkyService.ReserveEncounter(Run, generatedMap ?? Run.Map, Point);
     }

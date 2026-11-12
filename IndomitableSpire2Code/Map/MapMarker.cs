@@ -17,10 +17,19 @@ public abstract class MapMarker(IRunState run, MapPoint point)
     
     public abstract string Id { get; }
     
+    /// <summary>类型规则用于初次附着和后续保留。默认允许任意节点类型。</summary>
+    public virtual bool CanMarkPointType(MapPointType type) => true;
+    
+    /// <summary>
+    /// 判断标记能否附着于当前节点，应无副作用。地图恢复或节点类型改变时也用此条件判断能否保留。
+    /// </summary>
+    public virtual bool CanMark() => CanMarkPointType(Point.PointType);
+    
     public abstract MapMarkerViewModel CreateViewModel();
     
     public virtual void OnAdded() { }
     
+    /// <summary>撤销模型自身的效果，业务中应包括它在 OnAdded 中创建并负责管理的依赖标记。</summary>
     public virtual void OnRemoved() { }
     
     public virtual void OnPointTypeChanged(MapPointType previous, MapPointType current) { }
