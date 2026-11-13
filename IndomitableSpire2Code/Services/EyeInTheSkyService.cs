@@ -5,6 +5,7 @@ using Godot;
 using HarmonyLib;
 using IndomitableSpire2.IndomitableSpire2Code.Commands;
 using IndomitableSpire2.IndomitableSpire2Code.Extensions;
+using IndomitableSpire2.IndomitableSpire2Code.Map;
 using IndomitableSpire2.IndomitableSpire2Code.Relics.Ancients;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Entities.Creatures;
@@ -33,7 +34,6 @@ public static class EyeInTheSkyService
     public sealed class Survey
     {
         public int Act { get; set; } = -1;
-        public HashSet<string> Marks { get; init; } = []; // 记录已标记坐标
         public Dictionary<string, Plan> Plans { get; init; } = []; // 记录预定的遭遇
         public Dictionary<string, Plan> Observed { get; init; } = []; // 记录中途拾取遗物时“补票”记录的真实遭遇
         public int Step { get; set; }
@@ -51,18 +51,16 @@ public static class EyeInTheSkyService
         public HashSet<EyeInTheSky> Notified { get; } = new(ReferenceEqualityComparer.Instance);
     }
     
-    public static void RegisterSave()
-    {
-        // BaseLib 同时把扩展 RunState 字段写入本地存档和联机 SerializableRun 数据包。
-        ExtendedSaveTypes.RegisterSavedValue<IRunState, string>("Indomitable.EyeInTheSky.v1",
-            run => Surveys.TryGetValue(run, out var state) ? JsonSerializer.Serialize(state) : null,
-            (run, json) =>
-            {
-                Surveys.Remove(run);
-                if (!string.IsNullOrEmpty(json)) Surveys.Add(run, JsonSerializer.Deserialize<Survey>(json)!);
-            }, 
-            (json, writer) => writer.WriteString(json), reader => reader.ReadString());
-    }
+    // BaseLib 同时把扩展 RunState 字段写入本地存档和联机 SerializableRun 数据包。
+    public static void RegisterSave() => ExtendedSaveTypes.RegisterSavedValue<IRunState, string>(
+        "Indomitable.EyeInTheSky.v1",
+        run => Surveys.TryGetValue(run, out var state) ? JsonSerializer.Serialize(state) : null,
+        (run, json) =>
+        {
+            Surveys.Remove(run);
+            if (!string.IsNullOrEmpty(json)) Surveys.Add(run, JsonSerializer.Deserialize<Survey>(json)!);
+        },
+        (json, writer) => writer.WriteString(json), reader => reader.ReadString());
     
     // 按 NetId 排序获取所有持有者，确保多人游戏中逻辑执行顺序的确定性。
     public static EyeInTheSky[] Holders(IRunState run) => 
@@ -73,7 +71,7 @@ public static class EyeInTheSkyService
     
     // 快速判断某节点是否在当前阶段的标记集合中。
     public static bool IsMarked(IRunState run, MapPoint point) => 
-        Surveys.TryGetValue(run, out var s) && s.Act == run.CurrentActIndex && s.Marks.Contains(point.CoordKey());
+        MapMarkerService.Contains(run, point, EyeInTheSkyMapMarker.MarkerId);
     
     /// <summary>地图初始化与初始标记。</summary>
     public static void EnsureMap(IRunState run, ActMap? map, int act)
@@ -81,17 +79,16 @@ public static class EyeInTheSkyService
         if (map == null || Holders(run).Length == 0) return; // 防卫条件: 传入存在的地图并且当前游戏中有玩家持有遗物
         var state = Surveys.GetOrCreateValue(run); // 获取或创建全局状态
         if (state.Act == act) return; // 防止同一阶段重复初始化
-        state.Act = act; state.Marks.Clear(); state.Plans.Clear(); state.Observed.Clear(); state.Step = 0; state.LastFloor = -1;
+        state.Act = act; state.Plans.Clear(); state.Observed.Clear(); state.Step = 0; state.LastFloor = -1;
         var all = MapCommand.Points(map).ToArray();
         var threshold = Mathf.Lerp(all.Min(p => p.coord.row), all.Max(p => p.coord.row), UpperFraction);
         // 初始标记避开 Boss（含第二 Boss），避免被前一排休息处隔离而无法扩散。
-        // 仅限制初始候选；Frontier/Mark 仍允许沿其他 Mod 地图的连边正常扩散到 Boss。
-        var candidates = RowMajorOrdered(
-            all.Where(p => p.coord.row >= threshold &&
-                           p.PointType is not (MapPointType.RestSite or MapPointType.Boss))).ToList();
+        // 后续扩散可以沿其他 Mod 地图的连边到达 Boss。
+        var candidates = RowMajorOrdered(all.Where(p => p.coord.row >= threshold && p.PointType != MapPointType.Boss))
+            .Select(p => new EyeInTheSkyMapMarker(run, p, map)).Where(marker => marker.CanMark()).ToList();
         if (candidates.Count == 0) return;
         var rng = new Rng(GetSeed(run, act, "initial"));
-        MapCommand.MarkEyeInTheSky(run, map, candidates[rng.NextInt(candidates.Count)]);
+        MapCommand.Mark(candidates[rng.NextInt(candidates.Count)]);
     }
     
     /// <summary>在玩家进入房间前，记录该房间在进入前是否被标记以及当前楼层。如果已存在则复用，确保多遗物实例看到相同的快照。</summary>
@@ -125,38 +122,26 @@ public static class EyeInTheSkyService
         if (!Arrivals.TryGetValue(room, out var arrival) || !arrival.Started || arrival.HasSpread ||
             !Surveys.TryGetValue(run, out var state) || state.Act != run.CurrentActIndex) return;
         arrival.HasSpread = true; // 仿乐观锁的处理方式，以防多遗物重入
-        Spread(run, run.Map, state);
-    }
-    
-    public static MapPoint[] Frontier(ActMap map, IReadOnlySet<string> marks) => 
-        RowMajorOrdered(MapCommand.Points(map)
-            .Where(p => marks.Contains(p.CoordKey())) // 过滤标记的节点
-            .SelectMany(p => p.parents.Concat(p.Children)) // 获取父节点和子节点
-            .Where(p => p.PointType != MapPointType.RestSite && !marks.Contains(p.CoordKey())) // 非休息处且未标记
-            .DistinctBy(p => p.coord)).ToArray();
-    
-    private static void Spread(IRunState run, ActMap map, Survey state)
-    {
-        // 先快照整个旧边界再抽取：同一步新标记不会成为扩散源，多个源共享三个名额。
-        var choices = Frontier(map, state.Marks).ToList();
         var rng = new Rng(GetSeed(run, state.Act, $"spread:{state.Step++}"));
-        for (var i = 0; i < SpreadLimit && choices.Count > 0; i++)
-        {
-            var index = rng.NextInt(choices.Count);
-            var point = choices[index];
-            choices.RemoveAt(index);
-            MapCommand.MarkEyeInTheSky(run, map, point);
-        }
+        MapCommand.Spread(run, MapCommand.Points(run.Map).Where(p => IsMarked(run, p)), SpreadLimit,
+            rng, (r, p) => new EyeInTheSkyMapMarker(r, p, run.Map));
     }
     
     private static bool Visited(IRunState run, MapPoint point) => 
         run.CurrentMapPoint == point || run is RunState actual && actual.VisitedMapCoords.Contains(point.coord);
     
-    internal static void AddMark(IRunState run, ActMap map, MapPoint point)
+    /// <summary>预约指定节点的一场战斗，会提前 Roll 取敌人。通常由关联的 Marker 的钩子调用。</summary>
+    internal static void ReserveEncounter(IRunState run, ActMap map, MapPoint point)
     {
         var state = Surveys.GetOrCreateValue(run);
-        // 已标记则跳过，然后处理战斗房间的逻辑，已进入的房间不会被新情报替换；进入时恰好扩散到此节点也不会追溯改写正在进行的战斗。
-        if (!state.Marks.Add(point.CoordKey()) || !point.PointType.IsCombat() || Visited(run, point)) return;
+        // MapCommand 也可以被其他模型直接调用，不要求调用者先经过遗物的 EnsureMap。
+        if (state.Act != run.CurrentActIndex)
+        {
+            state.Act = run.CurrentActIndex;
+            state.Plans.Clear(); state.Observed.Clear(); state.Step = 0; state.LastFloor = -1;
+        }
+        // 已进入的房间不会被新情报替换；类型变化钩子会先遗忘旧计划，再调用本方法。
+        if (!point.PointType.IsCombat() || Visited(run, point) || state.Plans.ContainsKey(point.CoordKey())) return;
         var type = point.PointType switch { MapPointType.Elite => RoomType.Elite, MapPointType.Boss => RoomType.Boss, _ => RoomType.Monster };
         // 在原版 RoomSet 的独立副本上取样，绝不推进真实遭遇队列或悬停时消耗游戏 RNG。
         var actCopy = ActModel.FromSave(run.Act.ToSave());
@@ -171,6 +156,7 @@ public static class EyeInTheSkyService
         state.Plans[point.CoordKey()] = new Plan(encounter.Id.ToString(), GetSeed(run, state.Act, $"monsters:{point.CoordKey()}"));
     }
     
+    /// <summary>遗忘指定节点的一场战斗，会移除相关记录。通常由关联的 Marker 的 OnRemoved 钩子调用。</summary>
     internal static void ForgetEncounter(IRunState run, MapPoint point)
     {
         if (!Surveys.TryGetValue(run, out var state) || state.Act != run.CurrentActIndex) return;

@@ -1,13 +1,19 @@
 using HarmonyLib;
 using IndomitableSpire2.IndomitableSpire2Code.Nodes;
+using IndomitableSpire2.IndomitableSpire2Code.Services;
 using MegaCrit.Sts2.Core.Nodes.Screens.Map;
+using MegaCrit.Sts2.Core.Runs;
 
 namespace IndomitableSpire2.IndomitableSpire2Code.Patches;
 
-/// <summary>为原版各类地图节点统一挂载已注册的标记视图，不承担遗物生命周期或标记生成。</summary>
+/// <summary>地图就绪时校验已存标记，为原版地图节点挂载标记视图。</summary>
 [HarmonyPatch]
 public static class MapMarkerPatches
 {
+    // 存档可以在无人持有原遗物时仍有标记，校验必须发生在同步模型层。
+    [HarmonyPatch(typeof(RunState), nameof(RunState.Map), MethodType.Setter), HarmonyPostfix]
+    private static void OnMapAssigned(RunState __instance) => MapMarkerService.RevalidateMap(__instance, __instance.Map);
+    
     [HarmonyPatch(typeof(NNormalMapPoint), nameof(NNormalMapPoint._Ready)), HarmonyPostfix]
     private static void Normal(NNormalMapPoint __instance) => NCustomMapMarker.Attach(__instance);
     
