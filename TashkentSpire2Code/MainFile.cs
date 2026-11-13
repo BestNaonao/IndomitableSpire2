@@ -24,6 +24,7 @@ public partial class MainFile : Node
 
 		ScriptManagerBridge.LookupScriptsInAssembly(typeof(MainFile).Assembly);
 		TashkentSkinManager.RegisterAllSceneConversions();
+		Patches.PoseidonFormBackgroundEvents.Initialize();
 		
 		ModConfigRegistry.Register(ModId, new TashkentConfig());
 		
