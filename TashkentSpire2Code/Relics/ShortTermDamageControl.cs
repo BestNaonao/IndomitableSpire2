@@ -45,7 +45,7 @@ public sealed class ShortTermDamageControl : TashkentRelic
             Flash();
             var ctx = new HookPlayerChoiceContext(this, LocalContext.NetId!.Value, combatState, GameActionType.Combat);
             await PlayerCmd.GainEnergy(base.DynamicVars.Energy.BaseValue, base.Owner);
-            await CreatureCmd.LoseMaxHp(ctx, base.Owner.Creature, 1m, isFromCard: false);
+            await CreatureCmd.LoseMaxHp(ctx, base.Owner.Creature, 1m, cardSource: null);
         }
     }
 }

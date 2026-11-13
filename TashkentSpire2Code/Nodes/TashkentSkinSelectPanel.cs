@@ -5,6 +5,7 @@ using MegaCrit.Sts2.Core.Localization;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Nodes.Screens.CharacterSelect;
 using TashkentSpire2.TashkentSpire2Code.Character;
+using TashkentSpire2.TashkentSpire2Code.Config;
 
 namespace TashkentSpire2.TashkentSpire2Code.Nodes;
 
@@ -19,6 +20,9 @@ public partial class TashkentSkinSelectPanel : Control
 		ModelDb.Character<TashkentVariantFour>(),
 		ModelDb.Character<TashkentMu>()
 	];
+
+	internal static TashkentCharacter ResolveLastPlayedSkin(TashkentCharacter fallback)
+		=> Array.Find(Skins, skin => skin.Id.Entry == TashkentConfig.LastPlayedSkinId) ?? fallback;
 
 	private TextureButton _leftArrow = null!;
 	private TextureButton _rightArrow = null!;

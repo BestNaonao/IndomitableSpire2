@@ -4,6 +4,9 @@ namespace TashkentSpire2.TashkentSpire2Code.Config;
 
 public sealed class TashkentConfig : SimpleModConfig
 {
+    [ConfigHideInUI, ConfigIgnoreRestoreDefaults]
+    public static string LastPlayedSkinId { get; set; } = "";
+
     [ConfigHoverTip]
     public static bool EnableSpineModels { get; set; } = true;
 

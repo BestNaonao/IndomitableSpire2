@@ -1,7 +1,6 @@
 using Godot;
 using HarmonyLib;
 using MegaCrit.Sts2.Core.Helpers;
-using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Nodes.Screens.CharacterSelect;
 using TashkentSpire2.TashkentSpire2Code.Character;
 using TashkentSpire2.TashkentSpire2Code.Nodes;
@@ -18,12 +17,12 @@ internal static class TashkentWorkshopVoteButtonPatch
     private static bool Prepare() => MainFile.EnableWorkshopVote;
 
     [HarmonyPostfix, HarmonyPatch(nameof(NCharacterSelectScreen.SelectCharacter))]
-    private static void SelectCharacterPostfix(NCharacterSelectScreen __instance, NCharacterSelectButton charSelectButton, CharacterModel characterModel)
+    private static void SelectCharacterPostfix(NCharacterSelectScreen __instance, NCharacterSelectButton charSelectButton)
     {
         try
         {
             var button = __instance.GetNodeOrNull<TashkentWorkshopVoteButton>(NodePath);
-            bool selected = characterModel is TashkentCharacter && !charSelectButton.IsLocked && !charSelectButton.IsRandom;
+            bool selected = charSelectButton.Character is TashkentCharacter && !charSelectButton.IsLocked && !charSelectButton.IsRandom;
             if (button == null && selected)
             {
                 var panel = __instance.GetNodeOrNull<Control>("InfoPanel");

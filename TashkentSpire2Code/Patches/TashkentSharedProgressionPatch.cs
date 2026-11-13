@@ -34,7 +34,7 @@ public static class TashkentSharedProgressionPatch
 		characterId = GetProgressionId(characterId);
 	}
 
-	[HarmonyPatch(typeof(ProgressState), nameof(ProgressState.GetStatsForCharacter))]
+	[HarmonyPatch(typeof(ProgressState), nameof(ProgressState.GetStatsForCharacter), typeof(ModelId))]
 	[HarmonyPrefix]
 	private static void RedirectStatsLookup(ProgressState __instance, ref ModelId characterId)
 	{
