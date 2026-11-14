@@ -5,13 +5,13 @@ using MegaCrit.Sts2.Core.Multiplayer.Serialization;
 
 namespace IndomitableSpire2.IndomitableSpire2Code.Abstracts;
 
-// 1. 专属上下文：承载谁点的、点了哪个能力、怎么点的（左/右键/手柄）
+// 专属上下文：承载操作玩家、具体模型以及鼠标/手柄来源。
 public record IndomitableClickContext(Player Player, AbstractModel Model, IndomitableClickContext.Payload Extra = default)
 {
     public struct Payload : IPacketSerializable
     {
-        public bool IsController { get; private set; }
-        public string? Meta { get; private set; }
+        public bool IsController { get; private set; } // 输入是否来自手柄
+        public string? Meta { get; private set; } // 备用元数据
         
         public Payload(bool isController = false, string? meta = null)
         {
@@ -26,7 +26,7 @@ public record IndomitableClickContext(Player Player, AbstractModel Model, Indomi
             if (Meta != null)
                 writer.WriteString(Meta);
         }
-
+        
         public void Deserialize(PacketReader reader)
         {
             IsController = reader.ReadBool();
@@ -35,13 +35,20 @@ public record IndomitableClickContext(Player Player, AbstractModel Model, Indomi
     }
 }
 
-// 2. 专属接口：你的 Mod 里所有需要点击响应的能力，都必须实现这个接口！
-// 这是防止与其他 Mod 产生“二次点击碰撞”的核心绝缘层。
-public interface IIndomitableClickablePower
+/// <summary>
+/// 参考 RitsuLib RightClick 的模型分发、本地过滤与执行时复查分层；不依赖 RitsuLib。真正改变玩法的交互通过原版行动队列同步。
+/// </summary>
+public interface IIndomitableClickableModel
 {
-    // 本地判定：是否允许向服务器发送点击请求？（比如：只有当前回合玩家才能点）
+    // 点击操作是否需要在多人游戏中进行网络同步。
+    bool SynchronizeClick => true;
+    
+    // 本地是否需要处理点击事件，用于本地加入网络队列前的预处理检查。
     bool CanHandleClickLocal(IndomitableClickContext context) => true;
     
-    // 全局执行：当所有玩家都收到点击信号后，统一执行的游戏逻辑
-    Task OnClick(PlayerChoiceContext choiceContext, IndomitableClickContext clickContext);
+    // 是否允许执行，用于在网络同步到达客户端后的执行时检查。
+    bool CanExecuteClick(IndomitableClickContext context) => true;
+    
+    // 异步点击的处理逻辑
+    Task OnClick(PlayerChoiceContext? choiceContext, IndomitableClickContext clickContext);
 }

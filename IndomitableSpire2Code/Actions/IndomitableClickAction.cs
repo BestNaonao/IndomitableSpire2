@@ -26,13 +26,13 @@ public class IndomitableClickPowerAction : GameAction
         Player = context.Player;
         Extra = context.Extra;
         ModelId = context.Model.Id;
-
+        
         if (context.Model is PowerModel { Owner.CombatId: not null } power)
         {
             CreatureCombatId = power.Owner.CombatId.Value;
         }
     }
-
+    
     // 构造函数：网络反序列化时还原
     public IndomitableClickPowerAction(Player player, ModelId modelId, uint creatureCombatId, IndomitableClickContext.Payload extra, bool isCombatInProgress)
     {
@@ -42,26 +42,27 @@ public class IndomitableClickPowerAction : GameAction
         Extra = extra;
         WasEnqueuedInCombat = isCombatInProgress;
     }
-
+    
     // 全局同步执行点
     protected override async Task ExecuteAction()
     {
         var combatState = Player.Creature.CombatState;
         if (WasEnqueuedInCombat && combatState is null) return;
-
+        
         // 根据同步过来的 CombatId 和 ModelId 找回那个被点击的能力
-        var model = combatState!.GetCreature(CreatureCombatId)?.Powers.FirstOrDefault(p => p.Id == ModelId);
+        var model = combatState?.GetCreature(CreatureCombatId)?.Powers.FirstOrDefault(p => p.Id == ModelId);
         
         // 极度安全的强转判定
-        if (model is not IIndomitableClickablePower clickable) return;
-
+        if (model is not IIndomitableClickableModel { SynchronizeClick: true } clickable) return;
+        var context = new IndomitableClickContext(Player, model, Extra);
+        if (!clickable.CanExecuteClick(context)) return;
         var choiceContext = new GameActionPlayerChoiceContext(this);
         
         // 触发具体的点击逻辑
-        await clickable.OnClick(choiceContext, new IndomitableClickContext(Player, model, Extra));
+        await clickable.OnClick(choiceContext, context);
         model.InvokeExecutionFinished();
     }
-
+    
     public override INetAction ToNetAction()
     {
         return new NetIndomitableClickPowerAction
@@ -81,7 +82,7 @@ public struct NetIndomitableClickPowerAction : INetAction
     public uint CreatureCombatId;
     public IndomitableClickContext.Payload Extra;
     public bool WasEnqueuedInCombat;
-
+    
     public void Serialize(PacketWriter writer)
     {
         writer.WriteFullModelId(ModelId);
@@ -89,7 +90,7 @@ public struct NetIndomitableClickPowerAction : INetAction
         writer.Write(Extra);
         writer.WriteBool(WasEnqueuedInCombat);
     }
-
+    
     public void Deserialize(PacketReader reader)
     {
         ModelId = reader.ReadFullModelId();
@@ -97,7 +98,7 @@ public struct NetIndomitableClickPowerAction : INetAction
         Extra = reader.Read<IndomitableClickContext.Payload>();
         WasEnqueuedInCombat = reader.ReadBool();
     }
-
+    
     public GameAction ToGameAction(Player player)
     {
         return new IndomitableClickPowerAction(player, ModelId, CreatureCombatId, Extra, WasEnqueuedInCombat);
