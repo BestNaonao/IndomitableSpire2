@@ -22,6 +22,7 @@ public partial class MainFile : Node
     public static void Initialize()
     {
         ModConfigRegistry.Register(ModId, new IndomitableConfiguration());
+        Services.MapMarkerService.RegisterSave();
         Services.EyeInTheSkyService.RegisterSave();
         
         InitializeBlockRetentionProviders();
