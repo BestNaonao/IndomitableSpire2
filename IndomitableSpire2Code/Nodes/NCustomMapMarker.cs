@@ -1,70 +1,37 @@
 using Godot;
-using HarmonyLib;
 using IndomitableSpire2.IndomitableSpire2Code.Map;
-using IndomitableSpire2.IndomitableSpire2Code.Services;
-using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Nodes.HoverTips;
 using MegaCrit.Sts2.Core.Nodes.Screens.Map;
 using MegaCrit.Sts2.Core.Nodes.Screens.ScreenContext;
-using MegaCrit.Sts2.Core.Runs;
 
 namespace IndomitableSpire2.IndomitableSpire2Code.Nodes;
 
-/// <summary>
-/// 仿照 NNormalMapPoint 的 QuestIcon 放置独立标记；不占用 Quests，避免覆盖皮草大衣的骷髅。
-/// 此节点只有显示功能：生成预览使用 Encounter 的独立副本，不参与地图/战斗随机序列。
-/// </summary>
+/// <summary>标记 View：只处理悬停和生命周期。排布交给 NMapMarkerLayer，弹窗交给可扩展工厂。</summary>
 public partial class NCustomMapMarker : TextureRect
 {
-    private MapMarker _model = null!;
-    private const float MarkerSize = 48f;
-    private const float CellWidth = 144f;
-    private const float CellHeight = 200f; // 为较长的敌人名保留两行（含字体行距），避免文字重叠。
-    private const float Padding = 14f;
-    private NMapPoint _point = null!; // 依附的地图节点
-    private IRunState _run = null!; // 游戏运行状态
-    private NinePatchRect? _popup; // 弹出的预览窗口
-    private bool _hovered; // 鼠标是否悬停其上
+    public MapMarkerViewModel Model { get; private set; } = null!;
+    private MapMarkerPopup? _popup;
+    private bool _hovered;
     
-    public static void Attach(NMapPoint point)
+    public static NCustomMapMarker Create(MapMarkerViewModel model) => new()
     {
-        // 原版皮草大衣渲染的 QuestIcon 的父节点是 IconContainer。
-        var iconContainer = point.GetNodeOrNull<Control>("%IconContainer");
-        var parent = iconContainer ?? point;
-        var run = (IRunState)AccessTools.Field(typeof(NMapPoint), "_runState").GetValue(point)!;
-        foreach (var model in MapMarkerService.CreateMarkers(run, point.Point))
-        {
-            var markerId = model.Id + "Marker";
-            if (parent.GetNodeOrNull(markerId) != null) continue;
-            var marker = new NCustomMapMarker
-            {
-                Name = markerId, _point = point, _model = model, _run = run,
-                Texture = ResourceLoader.Load<Texture2D>(model.TexturePath),
-                ExpandMode = ExpandModeEnum.IgnoreSize, StretchMode = StretchModeEnum.KeepAspectCentered,
-                // 与原版 QuestIcon 一样使用默认相对 Z=0，不能跨过地图上方的暂停/设置遮罩。
-                Size = Vector2.One * MarkerSize, MouseFilter = MouseFilterEnum.Pass
-            };
-            // 普通节点的 QuestIcon 位于 56px 图标容器右上方。Boss/先古无该容器，使用节点中心。
-            parent.AddChild(marker);
-            marker.Position = iconContainer != null ? new Vector2(32, -24)
-                : point.Size / 2f + new Vector2(4, -52);
-            marker.MouseEntered += () => marker._hovered = true;
-            marker.MouseExited += () => { marker._hovered = false; marker.ClosePreview(); };
-            marker.Refresh();
-        }
+        Name = model.Id + "Marker", Model = model,
+        Texture = ResourceLoader.Load<Texture2D>(model.TexturePath),
+        ExpandMode = ExpandModeEnum.IgnoreSize, StretchMode = StretchModeEnum.KeepAspectCentered,
+        Size = Vector2.One * MapMarkerLayout.MarkerSize, MouseFilter = MouseFilterEnum.Pass
+    };
+    
+    public override void _Ready()
+    {
+        MouseEntered += () => _hovered = true; // 懒创建
+        MouseExited += () => { _hovered = false; ClosePreview(); }; // 急退出
     }
     
-    public override void _Process(double delta) => Refresh();
-    
-    public override void _EnterTree()
-    {
-        ActiveScreenContext.Instance.Updated += OnActiveScreenChanged;
-        MapMarkerService.Changed += OnMarkersChanged;
-    }
+    public override void _EnterTree() => ActiveScreenContext.Instance.Updated += OnActiveScreenChanged;
     
     public override void _ExitTree()
     {
         ActiveScreenContext.Instance.Updated -= OnActiveScreenChanged;
-        MapMarkerService.Changed -= OnMarkersChanged;
         ClosePreview();
     }
     
@@ -75,133 +42,22 @@ public partial class NCustomMapMarker : TextureRect
         ClosePreview();
     }
     
-    private void OnMarkersChanged(IRunState run)
+    public override void _Process(double delta)
     {
-        if (_run != run) return;
-        ClosePreview();
-        _point.RefreshVisualsInstantly();
-        Refresh();
-    }
-    
-    private void Refresh()
-    {
-        Visible = _model.Visible;
-        // 与皮草大衣同时标记时移到左上角，保留两个独立图标。
-        var visibles = GetParent().GetChildren()
-            .OfType<NCustomMapMarker>().Where(v => v._model.Visible).ToList();
-        var slot = Math.Max(0, visibles.IndexOf(this)) + (_point.Point.Quests.Count > 0 ? 1 : 0);
-        var offset = new Vector2(32 - slot * MarkerSize, -24);
-        Position = _point is NNormalMapPoint ? offset : _point.Size / 2f + offset - new Vector2(28, 28);
-        var allowed = IsVisibleInTree() && NMapScreen.Instance is { IsOpen: true, IsTraveling: false } map &&
-            ActiveScreenContext.Instance.IsCurrent(map) && _model.CanPreview;
-        if (!allowed || !_hovered)
+        var map = NMapScreen.Instance;
+        if (!_hovered || !IsVisibleInTree() || map is not { IsOpen: true, IsTraveling: false } ||
+            !ActiveScreenContext.Instance.IsCurrent(map) || !Model.CanPreview || NHoverTipSet.shouldBlockHoverTips)
         {
             ClosePreview();
             return;
         }
-        if (_popup == null)
-        {
-            if (_model.Description is { } text) OpenDescription(text);
-            else OpenPreview(_model.PreviewMonsters());
-        }
-        if (_popup == null) return;
-        // 预览弹窗位置右偏，计算最大边界防止超出屏幕右侧和底部，并使用 Clamp 将位置限制在安全区域内。
-        var position = GetGlobalTransformWithCanvas().Origin + new Vector2(MarkerSize + Padding, 0);
-        var limit = GetViewportRect().Size - _popup.Size - Vector2.One * Padding;
-        var clamped = position.Clamp(Vector2.One * Padding, limit.Max(Vector2.One * Padding));
-        // 将全局坐标转换回弹窗父节点的局部坐标（AffineInverse），确保无论 UI 层级如何嵌套，弹窗都能准确渲染在正确位置。
-        _popup.Position = ((CanvasItem)_popup.GetParent()).GetGlobalTransformWithCanvas().AffineInverse() * clamped;
+        _popup ??= MapMarkerPopupFactory.Create(this, map, Model.CreateHoverContent());
+        _popup?.Reposition(this); // 跟随父节点重定位
     }
     
-    /// <summary>行列尽量接近正方形，并使 rows + columns 最小。</summary>
-    public static (int Columns, int Rows) GridSize(int count)
+    public void ClosePreview()
     {
-        var columns = Math.Max(1, (int)Math.Ceiling(Math.Sqrt(count)));
-        return (columns, Math.Max(1, (count + columns - 1) / columns));
-    }
-    
-    private void OpenPreview(MonsterModel[] monsters)
-    {
-        if (monsters.Length == 0) return;
-        var (columns, rows) = GridSize(monsters.Length);
-        _popup = new NinePatchRect
-        {
-            Name = "EnemyPreview",
-            Texture = ResourceLoader.Load<Texture2D>("res://images/ui/hover_tip.png"),
-            SelfModulate = new Color(0.08f, 0.08f, 0.08f, 0.90f),
-            PatchMarginLeft = 12, PatchMarginRight = 12, PatchMarginTop = 12, PatchMarginBottom = 12,
-            Size = new Vector2(columns * CellWidth + Padding * 2, rows * CellHeight + Padding * 2),
-            MouseFilter = MouseFilterEnum.Ignore
-        };
-        // 优先挂载到 NMapScreen 实例的末尾上，确保它在地图层级渲染，不会穿透到全局菜单之上。
-        ((Node?)NMapScreen.Instance ?? this).AddChild(_popup);
-        for (var i = 0; i < monsters.Length; i++)
-        {
-            var r = Math.DivRem(i, columns, out var c);
-            var cell = new Control
-            {
-                Position = new Vector2(Padding + c * CellWidth, Padding + r * CellHeight),
-                Size = new Vector2(CellWidth, CellHeight),
-                MouseFilter = MouseFilterEnum.Ignore
-            };
-            _popup.AddChild(cell);
-            // 名称先于画像创建。某个 Mod 怪物的 Visual 失败时仍保留其名称及其他怪物，不让异常留下一个只有背景、此后也不再重建的空弹窗。
-            var label = new Label
-            {
-                Text = monsters[i].Title.GetFormattedText(), ClipText = true,
-                Position = new Vector2(0, CellWidth),
-                Size = new Vector2(CellWidth, CellHeight - CellWidth),
-                HorizontalAlignment = HorizontalAlignment.Center,
-                AutowrapMode = TextServer.AutowrapMode.WordSmart,
-                MouseFilter = MouseFilterEnum.Ignore
-            };
-            label.AddThemeFontSizeOverride("font_size", 16);
-            cell.AddChild(label);
-            // Godot 在设置 Text 时可能按未启用换行前的最小宽度扩张控件；主题与换行就绪后再收回。
-            label.Size = new Vector2(CellWidth, CellHeight - CellWidth);
-            var portrait = new Control
-            {
-                Size = Vector2.One * CellWidth,
-                MouseFilter = MouseFilterEnum.Ignore
-            };
-            cell.AddChild(portrait);
-            try
-            {
-                EyeInTheSkyPortrait.Add(portrait, monsters[i], CellWidth);
-            }
-            catch (Exception exception)
-            {
-                portrait.Hide();
-                portrait.QueueFree(); // 清理半建成的 SubViewport / Visual；其余单元继续生成。
-                MainFile.Logger.Warn($"[EyeInTheSky] Portrait failed for {monsters[i].Id}: {exception}");
-            }
-        }
-    }
-    
-    private void OpenDescription(string text)
-    {
-        _popup = new NinePatchRect
-        {
-            Texture = ResourceLoader.Load<Texture2D>("res://images/ui/hover_tip.png"),
-            SelfModulate = new Color(0.08f, 0.08f, 0.08f, 0.90f),
-            PatchMarginLeft = 12, PatchMarginRight = 12, PatchMarginTop = 12, PatchMarginBottom = 12,
-            Size = new Vector2(320, 140), MouseFilter = MouseFilterEnum.Ignore
-        };
-        ((Node?)NMapScreen.Instance ?? this).AddChild(_popup);
-        var label = new Label { Text = text, Position = Vector2.One * Padding,
-            Size = _popup.Size - Vector2.One * Padding * 2, AutowrapMode = TextServer.AutowrapMode.WordSmart,
-            MouseFilter = MouseFilterEnum.Ignore };
-        label.AddThemeFontSizeOverride("font_size", 20);
-        _popup.AddChild(label);
-    }
-    
-    private void ClosePreview()
-    {
-        if (IsInstanceValid(_popup))
-        {
-            _popup!.Hide();
-            _popup.QueueFree();
-        }
+        _popup?.Dispose();
         _popup = null;
     }
 }
