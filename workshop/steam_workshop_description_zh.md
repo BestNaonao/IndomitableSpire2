@@ -1,6 +1,6 @@
 # VERSION COMPATIBILITY / 版本兼容性
 
-模组现已同时支持《杀戮尖塔 2》正式版与 Beta 版。如果 Steam 提示模组版本与当前游戏版本不匹配，请取消订阅后重新订阅；这通常是 Steam 创意工坊的分发缓存问题。
+此版本的模组需要《杀戮尖塔 2》0.113.0 或更高版本。
 
 ![Azur Lane Tashkent Mod for Slay the Spire 2](https://raw.githubusercontent.com/BestNaonao/IndomitableSpire2/branch_tashkent/workshop/images/tashkent_workshop_hero.png)
 
@@ -8,7 +8,7 @@
 
 让来自《碧蓝航线》的北方联合驱逐舰塔什干加入尖塔。装填弹药、调整距离、锁定标记目标，并让预先布置的鱼雷在最合适的时机命中敌人。
 
-本模组需要前置模组 【BaseLib 3.4.5 或更高版本】。
+本模组需要前置模组 【BaseLib 3.4.8 或更高版本】。
 
 ![Mod Content](https://raw.githubusercontent.com/BestNaonao/IndomitableSpire2/branch_tashkent/workshop/images/tashkent_workshop_content.png)
 

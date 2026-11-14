@@ -1,115 +1,212 @@
+using System.Reflection;
 using Godot;
 using HarmonyLib;
+using MegaCrit.Sts2.Core.Entities.Multiplayer;
 using MegaCrit.Sts2.Core.Helpers;
 using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Models.Characters;
 using MegaCrit.Sts2.Core.Multiplayer.Game.Lobby;
+using MegaCrit.Sts2.Core.Nodes.Screens.Blitz;
 using MegaCrit.Sts2.Core.Nodes.Screens.CharacterSelect;
+using MegaCrit.Sts2.Core.Nodes.Screens.CustomRun;
+using MegaCrit.Sts2.Core.Nodes.Screens.Dread;
 using TashkentSpire2.TashkentSpire2Code.Character;
 using TashkentSpire2.TashkentSpire2Code.Config;
 using TashkentSpire2.TashkentSpire2Code.Nodes;
 
 namespace TashkentSpire2.TashkentSpire2Code.Patches;
 
-[HarmonyPatch(typeof(NCharacterSelectScreen))]
-public static class InjectTashkentSkinSelectPanelPatch
+internal static class TashkentSkinSelection
 {
-	private const string ScenePath = "res://TashkentSpire2/scenes/ui/tashkent_skin_select_panel.tscn";
-	private static TashkentSkinSelectPanel? _panelInstance;
-	[ThreadStatic] private static StartRunLobby? _lobbySelectingSavedSkin;
+    private const string ScenePath = "res://TashkentSpire2/scenes/ui/tashkent_skin_select_panel.tscn";
+    private const string PanelName = "TashkentSkinSelectPanel";
 
-	[HarmonyPatch(nameof(NCharacterSelectScreen.SelectCharacter))]
-	[HarmonyPrefix]
-	public static void SelectCharacterPrefix(NCharacterSelectScreen __instance,
-		NCharacterSelectButton charSelectButton, out StartRunLobby? __state)
-	{
-		__state = _lobbySelectingSavedSkin;
-		_lobbySelectingSavedSkin = null;
-		TashkentCharacterSelectVoice.Stop();
-		if (TashkentConfig.EnableSpineModels
-		    && charSelectButton is { IsLocked: false, IsRandom: false }
-		    && charSelectButton.Character is TashkentCharacter { CurrentSkin: TashkentSkin.Default })
-		{
-			_lobbySelectingSavedSkin = __instance.Lobby;
-		}
-	}
+    internal static readonly Type[] Screens =
+        [typeof(NCharacterSelectScreen), typeof(NBlitzScreen), typeof(NDreadScreen), typeof(NCustomRunScreen)];
 
-	[HarmonyPatch(typeof(StartRunLobby), nameof(StartRunLobby.SetLocalCharacter), typeof(CharacterModel), typeof(bool))]
-	[HarmonyPrefix]
-	private static void ApplySavedSkin(StartRunLobby __instance, ref CharacterModel character)
-	{
-		if (ReferenceEquals(__instance, _lobbySelectingSavedSkin)
-		    && character is TashkentCharacter { CurrentSkin: TashkentSkin.Default } defaultSkin)
-		{
-			_lobbySelectingSavedSkin = null;
-			character = TashkentSkinSelectPanel.ResolveLastPlayedSkin(defaultSkin);
-		}
-	}
+    internal static IEnumerable<MethodBase> ScreenMethods(string name) =>
+        Screens.Select(type => AccessTools.DeclaredMethod(type, name));
 
-	[HarmonyPatch(nameof(NCharacterSelectScreen.SelectCharacter))]
-	[HarmonyFinalizer]
-	private static void RestoreSelectionScope(StartRunLobby? __state) => _lobbySelectingSavedSkin = __state;
+    internal static StartRunLobby? GetLobby(Control screen) => screen switch
+    {
+        NCharacterSelectScreen standard => standard.Lobby,
+        NBlitzScreen blitz => blitz.Lobby,
+        NDreadScreen dread => dread.Lobby,
+        NCustomRunScreen custom => custom.Lobby,
+        _ => null
+    };
 
-	[HarmonyPatch(nameof(NCharacterSelectScreen.SelectCharacter))]
-	[HarmonyPostfix]
-	public static void SelectCharacterPostfix(
-		NCharacterSelectScreen __instance,
-		NCharacterSelectButton charSelectButton)
-	{
-		if (charSelectButton.IsLocked || charSelectButton.IsRandom
-		    || charSelectButton.Character is not TashkentCharacter
-		    || __instance.Lobby.LocalPlayer.character is not TashkentCharacter tashkentSkin)
-		{
-			if (GodotObject.IsInstanceValid(_panelInstance))
-				_panelInstance.Visible = false;
-			return;
-		}
+    private static Control GetPanelParent(Control screen) => screen is NCharacterSelectScreen or NBlitzScreen
+        ? screen.GetNodeOrNull<Control>("InfoPanel") ?? screen
+        : screen;
 
-		if (!TashkentConfig.EnableSpineModels)
-		{
-			if (GodotObject.IsInstanceValid(_panelInstance))
-				_panelInstance.Visible = false;
-			return;
-		}
+    internal static TashkentSkinSelectPanel? GetPanel(Control screen) =>
+        GetPanelParent(screen).GetNodeOrNull<TashkentSkinSelectPanel>(PanelName);
 
-		var infoPanel = __instance.GetNodeOrNull<Control>("%InfoPanel");
-		if (infoPanel is null)
-			return;
+    internal static void ShowPanel(Control screen, NCharacterSelectButton? button)
+    {
+        var panel = GetPanel(screen);
+        var lobby = GetLobby(screen);
+        if (!TashkentConfig.EnableSpineModels || button is not { IsLocked: false, IsRandom: false }
+            || button.Character is not TashkentCharacter || lobby?.LocalPlayer.character is not TashkentCharacter skin)
+        {
+            panel?.Hide();
+            return;
+        }
 
-		if (!GodotObject.IsInstanceValid(_panelInstance) || _panelInstance.GetParent() != infoPanel)
-		{
-			if (GodotObject.IsInstanceValid(_panelInstance))
-				_panelInstance.QueueFreeSafely();
+        if (panel == null)
+        {
+            var scene = ResourceLoader.Load<PackedScene>(ScenePath);
+            if (scene == null)
+                return;
+            panel = scene.Instantiate<TashkentSkinSelectPanel>();
+            panel.Name = PanelName;
+            var parent = GetPanelParent(screen);
+            parent.AddChildSafely(panel);
+            if (parent != screen)
+                panel.Position = new Vector2(400f, 0f);
+        }
 
-			var scene = ResourceLoader.Load<PackedScene>(ScenePath);
-			if (scene is null)
-				return;
+        panel.SetInteractable(!lobby.LocalPlayer.isReady);
+        panel.ShowAndSync(lobby, skin);
+    }
+}
 
-			_panelInstance = scene.Instantiate<TashkentSkinSelectPanel>(PackedScene.GenEditState.Disabled);
-			infoPanel.AddChildSafely(_panelInstance);
-			_panelInstance.Position = new Vector2(400f, 0f);
-		}
+[HarmonyPatch]
+internal static class InjectTashkentSkinSelectPanelPatch
+{
+    [ThreadStatic] private static StartRunLobby? _selectionLobby;
 
-		_panelInstance.SetInteractable(true);
-		_panelInstance.ShowAndSync(__instance, tashkentSkin);
-	}
+    internal static void EnterSelection(StartRunLobby? lobby, out StartRunLobby? previous)
+    {
+        previous = _selectionLobby;
+        _selectionLobby = lobby;
+    }
 
-	[HarmonyPatch(nameof(NCharacterSelectScreen.MethodName.OnEmbarkPressed))]
-	[HarmonyPostfix]
-	public static void OnEmbarkPressedPostfix()
-	{
-		if (GodotObject.IsInstanceValid(_panelInstance))
-			_panelInstance.SetInteractable(false);
-	}
+    internal static void ExitSelection(StartRunLobby? previous) => _selectionLobby = previous;
 
-	[HarmonyPatch(nameof(NCharacterSelectScreen.MethodName.OnUnreadyPressed))]
-	[HarmonyPostfix]
-	public static void OnUnreadyPressedPostfix()
-	{
-		if (GodotObject.IsInstanceValid(_panelInstance))
-			_panelInstance.SetInteractable(true);
-	}
+    [HarmonyTargetMethods]
+    private static IEnumerable<MethodBase> TargetMethods() =>
+        TashkentSkinSelection.ScreenMethods(nameof(NCharacterSelectScreen.SelectCharacter));
 
-	[HarmonyPatch(nameof(NCharacterSelectScreen.OnSubmenuClosed))]
-	[HarmonyPrefix]
-	public static void OnSubmenuClosedPrefix() => TashkentCharacterSelectVoice.Stop();
+    [HarmonyPrefix]
+    private static void BeforeSelect(Control __instance, NCharacterSelectButton charSelectButton,
+        out StartRunLobby? __state)
+    {
+        TashkentCharacterSelectVoice.Stop();
+        EnterSelection(!charSelectButton.IsLocked ? TashkentSkinSelection.GetLobby(__instance) : null,
+            out __state);
+    }
+
+    [HarmonyPostfix]
+    private static void AfterSelect(Control __instance, NCharacterSelectButton charSelectButton) =>
+        TashkentSkinSelection.ShowPanel(__instance, charSelectButton);
+
+    [HarmonyFinalizer]
+    private static void RestoreScope(StartRunLobby? __state) => ExitSelection(__state);
+
+    [HarmonyPatch(typeof(StartRunLobby), nameof(StartRunLobby.SetLocalCharacter), typeof(CharacterModel), typeof(bool))]
+    internal static class ApplySavedSkin
+    {
+        [HarmonyPrefix]
+        private static void Prefix(StartRunLobby __instance, ref CharacterModel character)
+        {
+            if (TashkentConfig.EnableSpineModels
+                && character is TashkentCharacter { CurrentSkin: TashkentSkin.Default } skin
+                && ReferenceEquals(__instance, _selectionLobby))
+                character = TashkentSkinSelectPanel.ResolveLastPlayedSkin(skin);
+        }
+    }
+}
+
+[HarmonyPatch]
+internal static class TashkentSkinPanelReadyPatch
+{
+    [HarmonyTargetMethods]
+    private static IEnumerable<MethodBase> TargetMethods() =>
+        TashkentSkinSelection.ScreenMethods("OnEmbarkPressed")
+            .Concat(TashkentSkinSelection.ScreenMethods("OnUnreadyPressed"));
+
+    [HarmonyPostfix]
+    private static void Postfix(Control __instance)
+    {
+        if (TashkentSkinSelection.GetPanel(__instance) is { } panel
+            && TashkentSkinSelection.GetLobby(__instance) is { } lobby)
+            panel.SetInteractable(!lobby.LocalPlayer.isReady);
+    }
+}
+
+[HarmonyPatch]
+internal static class TashkentSkinPanelClosedPatch
+{
+    [HarmonyTargetMethods]
+    private static IEnumerable<MethodBase> TargetMethods() =>
+        TashkentSkinSelection.ScreenMethods("OnSubmenuClosed");
+
+    [HarmonyPrefix]
+    private static void Prefix(Control __instance)
+    {
+        TashkentCharacterSelectVoice.Stop();
+        TashkentSkinSelection.GetPanel(__instance)?.Hide();
+    }
+}
+
+[HarmonyPatch]
+internal static class TashkentLobbyPortraitPatch
+{
+    [HarmonyTargetMethods]
+    private static IEnumerable<MethodBase> TargetMethods() =>
+        TashkentSkinSelection.ScreenMethods("RefreshButtonSelectionForPlayer")
+            .Concat(TashkentSkinSelection.ScreenMethods("RemotePlayerDisconnected"));
+
+    [HarmonyPrefix]
+    private static void Prefix(ref StartRunLobbyPlayer player)
+    {
+        if (player.character is TashkentCharacter { CurrentSkin: not TashkentSkin.Default })
+            player.character = ModelDb.Character<TashkentCharacter>();
+    }
+}
+
+[HarmonyPatch(typeof(NDreadScreen), nameof(NDreadScreen.BeginRotationTickboxChanged))]
+internal static class TashkentDreadRotationTickboxPatch
+{
+    [HarmonyPrefix]
+    private static void Prefix(NDreadScreen __instance, out StartRunLobby? __state) =>
+        InjectTashkentSkinSelectPanelPatch.EnterSelection(__instance.Lobby, out __state);
+
+    [HarmonyFinalizer]
+    private static void Finalizer(StartRunLobby? __state) =>
+        InjectTashkentSkinSelectPanelPatch.ExitSelection(__state);
+}
+
+[HarmonyPatch(typeof(NDreadScreen), "SetSelectedCharacterVisuals")]
+internal static class TashkentDreadSkinPanelPatch
+{
+    [HarmonyPostfix]
+    private static void Postfix(NDreadScreen __instance, CharacterModel characterModel,
+        NCharacterSelectButton? ____selectedButton)
+    {
+        if (characterModel is RotatingCharacter || ____selectedButton?.Character != characterModel)
+        {
+            TashkentSkinSelection.GetPanel(__instance)?.Hide();
+            return;
+        }
+        TashkentSkinSelection.ShowPanel(__instance, ____selectedButton);
+    }
+}
+
+[HarmonyPatch(typeof(NDreadScreen), "OnEmbarkPressed")]
+internal static class TashkentDreadEmbarkSkinPatch
+{
+    [HarmonyPrefix]
+    private static void Prefix(NDreadScreen __instance, NCharacterSelectButton? ____selectedButton)
+    {
+        if (!TashkentConfig.EnableSpineModels || ____selectedButton?.Character is not RotatingCharacter
+            || __instance.Lobby.LocalPlayer.character is not TashkentCharacter skin)
+            return;
+
+        var saved = TashkentSkinSelectPanel.ResolveLastPlayedSkin(ModelDb.Character<TashkentCharacter>());
+        if (saved != skin)
+            __instance.Lobby.SetLocalCharacter(saved, isRotatingDread: true);
+    }
 }

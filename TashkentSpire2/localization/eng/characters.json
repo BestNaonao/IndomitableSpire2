@@ -1,5 +1,6 @@
 {
   "TASHKENTSPIRE2-TASHKENT_CHARACTER.title": "Tashkent",
+  "TASHKENTSPIRE2-TASHKENT_CHARACTER.shortTitle": "Tashkent",
   "TASHKENTSPIRE2-TASHKENT_CHARACTER.titleObject": "Tashkent",
   "TASHKENTSPIRE2-TASHKENT_CHARACTER.pronounObject": "her",
   "TASHKENTSPIRE2-TASHKENT_CHARACTER.pronounSubject": "she",
@@ -16,6 +17,7 @@
   "TASHKENTSPIRE2-TASHKENT_CHARACTER.skinName": "Default Outfit",
 
   "TASHKENTSPIRE2-TASHKENT_VARIANT_TWO.title": "Tashkent",
+  "TASHKENTSPIRE2-TASHKENT_VARIANT_TWO.shortTitle": "Tashkent",
   "TASHKENTSPIRE2-TASHKENT_VARIANT_TWO.titleObject": "Tashkent",
   "TASHKENTSPIRE2-TASHKENT_VARIANT_TWO.pronounObject": "her",
   "TASHKENTSPIRE2-TASHKENT_VARIANT_TWO.pronounSubject": "she",
@@ -32,6 +34,7 @@
   "TASHKENTSPIRE2-TASHKENT_VARIANT_TWO.skinName": "The Bound Cruiser",
 
   "TASHKENTSPIRE2-TASHKENT_VARIANT_THREE.title": "Tashkent",
+  "TASHKENTSPIRE2-TASHKENT_VARIANT_THREE.shortTitle": "Tashkent",
   "TASHKENTSPIRE2-TASHKENT_VARIANT_THREE.titleObject": "Tashkent",
   "TASHKENTSPIRE2-TASHKENT_VARIANT_THREE.pronounObject": "her",
   "TASHKENTSPIRE2-TASHKENT_VARIANT_THREE.pronounSubject": "she",
@@ -48,6 +51,7 @@
   "TASHKENTSPIRE2-TASHKENT_VARIANT_THREE.skinName": "The Blue Snoozer",
 
   "TASHKENTSPIRE2-TASHKENT_VARIANT_FOUR.title": "Tashkent",
+  "TASHKENTSPIRE2-TASHKENT_VARIANT_FOUR.shortTitle": "Tashkent",
   "TASHKENTSPIRE2-TASHKENT_VARIANT_FOUR.titleObject": "Tashkent",
   "TASHKENTSPIRE2-TASHKENT_VARIANT_FOUR.pronounObject": "her",
   "TASHKENTSPIRE2-TASHKENT_VARIANT_FOUR.pronounSubject": "she",
@@ -63,6 +67,7 @@
   "TASHKENTSPIRE2-TASHKENT_VARIANT_FOUR.cardsModifierDescription": "Tashkent's cards can now appear in rewards and shops.",
   "TASHKENTSPIRE2-TASHKENT_VARIANT_FOUR.skinName": "The Sprite's Snapshot",
   "TASHKENTSPIRE2-TASHKENT_MU.title": "Tashkent",
+  "TASHKENTSPIRE2-TASHKENT_MU.shortTitle": "Tashkent",
   "TASHKENTSPIRE2-TASHKENT_MU.titleObject": "Tashkent",
   "TASHKENTSPIRE2-TASHKENT_MU.pronounObject": "her",
   "TASHKENTSPIRE2-TASHKENT_MU.pronounSubject": "she",

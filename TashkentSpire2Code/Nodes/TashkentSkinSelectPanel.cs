@@ -1,9 +1,10 @@
+using BaseLib.Config;
 using Godot;
 using MegaCrit.Sts2.Core.Bindings.MegaSpine;
 using MegaCrit.Sts2.Core.Helpers;
 using MegaCrit.Sts2.Core.Localization;
 using MegaCrit.Sts2.Core.Models;
-using MegaCrit.Sts2.Core.Nodes.Screens.CharacterSelect;
+using MegaCrit.Sts2.Core.Multiplayer.Game.Lobby;
 using TashkentSpire2.TashkentSpire2Code.Character;
 using TashkentSpire2.TashkentSpire2Code.Config;
 
@@ -28,7 +29,7 @@ public partial class TashkentSkinSelectPanel : Control
 	private TextureButton _rightArrow = null!;
 	private Control _visualContainer = null!;
 	private Label _skinNameLabel = null!;
-	private NCharacterSelectScreen _selectScreen = null!;
+	private StartRunLobby _lobby = null!;
 	private Node2D? _currentVisualNode;
 	private ModelId? _renderedSkinId;
 	private int _currentIndex;
@@ -64,28 +65,27 @@ public partial class TashkentSkinSelectPanel : Control
 		}
 	}
 
-	public void ShowAndSync(NCharacterSelectScreen screen, TashkentCharacter selectedSkin)
+	public void ShowAndSync(StartRunLobby lobby, TashkentCharacter selectedSkin)
 	{
-		_selectScreen = screen;
+		_lobby = lobby;
 		Visible = true;
 
 		var selectedIndex = Array.FindIndex(Skins, skin => skin.Id == selectedSkin.Id);
 		_currentIndex = selectedIndex >= 0 ? selectedIndex : 0;
 
-		// NCharacterSelectScreen.SelectCharacter has already written the selected
-		// character to the lobby before this Harmony postfix runs. Writing it again
-		// would emit a duplicate multiplayer character-change message.
 		RenderSkinVisuals(Skins[_currentIndex]);
 	}
 
 	private void OnLeftPressed()
 	{
+		if (!_interactable || _lobby.LocalPlayer.isReady) return;
 		_currentIndex = (_currentIndex + Skins.Length - 1) % Skins.Length;
 		ApplySelection();
 	}
 
 	private void OnRightPressed()
 	{
+		if (!_interactable || _lobby.LocalPlayer.isReady) return;
 		_currentIndex = (_currentIndex + 1) % Skins.Length;
 		ApplySelection();
 	}
@@ -93,7 +93,9 @@ public partial class TashkentSkinSelectPanel : Control
 	private void ApplySelection()
 	{
 		var skin = Skins[_currentIndex];
-		_selectScreen.Lobby.SetLocalCharacter(skin);
+		_lobby.SetLocalCharacter(skin, _lobby.LocalPlayer.isRotatingDread);
+		TashkentConfig.LastPlayedSkinId = skin.Id.Entry;
+		ModConfig.SaveDebounced<TashkentConfig>(0);
 		RenderSkinVisuals(skin);
 	}
 

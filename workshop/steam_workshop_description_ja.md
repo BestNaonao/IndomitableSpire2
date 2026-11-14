@@ -1,6 +1,6 @@
 # バージョン互換性
 
-このMODは現在、『Slay the Spire 2』の正式版とベータ版の両方に対応しています。Steam上でMODとゲームのバージョンが一致しないと表示された場合は、一度購読を解除してから再度購読してください。通常、これはSteam Workshopのコンテンツ配信キャッシュが原因です。
+このバージョンのMODには『Slay the Spire 2』v0.113.0以降が必要です。
 
 ![Azur Lane Tashkent Mod for Slay the Spire 2](https://raw.githubusercontent.com/BestNaonao/IndomitableSpire2/branch_tashkent/workshop/images/tashkent_workshop_hero.png)
 
@@ -8,7 +8,7 @@
 
 『アズールレーン』の北方連合所属駆逐艦「タシュケント」が尖塔に参戦。弾薬を装填し、距離を調整し、優先目標を標的に定め、最適なタイミングで魚雷を命中させましょう。
 
-このMODを使用するには、【BaseLib 3.4.5以降】が必要です。
+このMODを使用するには、【BaseLib 3.4.8以降】が必要です。
 
 ![Mod Content](https://raw.githubusercontent.com/BestNaonao/IndomitableSpire2/branch_tashkent/workshop/images/tashkent_workshop_content.png)
 

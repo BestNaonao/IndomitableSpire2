@@ -61,6 +61,8 @@
         <!-- Diasble architecture mismatch warning; mods are ideally built for all platforms (MSIL)
              while your local StS2 version will be for your specific platform. -->
         <NoWarn>$(NoWarn);MSB3270</NoWarn>
+        <DeployBaseLib Condition="'$(DeployBaseLib)' == ''">true</DeployBaseLib>
+        <BaseLibRuntimePath Condition="'$(BaseLibRuntimePath)' == ''">$(SteamLibraryPath)/workshop/content/2868840/3737335127/BaseLib</BaseLibRuntimePath>
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(DisableSteamworks)' == 'true'">
@@ -83,7 +85,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Alchyr.Sts2.BaseLib" Version="3.4.8" PrivateAssets="All" GeneratePathProperty="true" />
+        <PackageReference Include="Alchyr.Sts2.BaseLib" Version="3.4.8" PrivateAssets="All" />
         <PackageReference Include="Alchyr.Sts2.ModAnalyzers" Version="0.1.6" />
         <AdditionalFiles Include="TashkentSpire2/localization/**/*.json"/>
     </ItemGroup>
@@ -126,15 +128,19 @@
                 Condition="'$(GodotPath)' == '' or !Exists('$(GodotPath)')"/>
     </Target>
 
-    <Target Name="CopyToModsFolderOnBuild" AfterTargets="PostBuildEvent">
+    <Target Name="CopyToModsFolderOnBuild" AfterTargets="PostBuildEvent" DependsOnTargets="DeployBaseLibRuntime">
         <Message Text="Copying .dll and manifest to mods folder." Importance="high"/>
         <Copy SourceFiles="$(TargetPath)" DestinationFolder="$(ModsPath)$(MSBuildProjectName)/"/>
         <Copy SourceFiles="TashkentSpire2.json" DestinationFolder="$(ModsPath)$(MSBuildProjectName)/"/>
-        <Message Text="Copying BaseLib to mods folder." Importance="high"/>
+    </Target>
+
+    <Target Name="DeployBaseLibRuntime" Condition="'$(DeployBaseLib)' == 'true'">
         <ItemGroup>
-            <BaseLibFiles Include="$(PkgAlchyr_Sts2_BaseLib)/lib/net9.0/BaseLib.dll;$(PkgAlchyr_Sts2_BaseLib)/Content/BaseLib.pck;$(PkgAlchyr_Sts2_BaseLib)/Content/BaseLib.json"/>
+            <BaseLibFiles Include="$(BaseLibRuntimePath)/BaseLib.dll;$(BaseLibRuntimePath)/BaseLib.pck;$(BaseLibRuntimePath)/BaseLib.json;$(BaseLibRuntimePath)/BaseLibCompatibilityHelper.dll;$(BaseLibRuntimePath)/BaseLibCompatibilityHelper.json"/>
         </ItemGroup>
-        <Copy SourceFiles="@(BaseLibFiles)" DestinationFolder="$(ModsPath)BaseLib/"/>
+        <Error Condition="!Exists('%(BaseLibFiles.Identity)')"
+               Text="Missing BaseLib runtime file '%(BaseLibFiles.Identity)'. Set BaseLibRuntimePath to the complete BaseLib runtime folder, or use DeployBaseLib=false when BaseLib and its helper are already installed."/>
+        <Copy SourceFiles="@(BaseLibFiles)" DestinationFolder="$(ModsPath)BaseLib/" SkipUnchangedFiles="true"/>
     </Target>
 
     <Target Name="GodotPublish" AfterTargets="Publish" Condition="'$(GodotPath)' != '' and Exists('$(GodotPath)') and '$(IsInnerGodotExport)' != 'true'">

@@ -1,4 +1,5 @@
 ﻿using BaseLib.Abstracts;
+using BaseLib.Patches.Content;
 using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Acts;
@@ -11,7 +12,7 @@ public sealed class SovetskySoyuz : CustomAncientModel
 {
     public override bool IsValidForAct(ActModel act)
     {
-        if (!TashkentConfig.SpawnAncientsSovetskySoyuz)
+        if (!SovetskySoyuzRunSettings.IsEnabled(CurrentGeneratingRunState.State))
         {
             return false;
         }

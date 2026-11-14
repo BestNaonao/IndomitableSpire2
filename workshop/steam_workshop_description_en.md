@@ -1,6 +1,6 @@
 # VERSION COMPATIBILITY
 
-This mod now supports both the Stable and Beta versions of *Slay the Spire 2*. If Steam reports that the mod does not match your current game version, unsubscribe and subscribe again. This is usually caused by Steam Workshop content distribution caching.
+This version of the mod requires Slay the Spire 2 v0.113.0 or later.
 
 ![Azur Lane Tashkent Mod for Slay the Spire 2](https://raw.githubusercontent.com/BestNaonao/IndomitableSpire2/branch_tashkent/workshop/images/tashkent_workshop_hero.png)
 
@@ -8,7 +8,7 @@ This mod now supports both the Stable and Beta versions of *Slay the Spire 2*. I
 
 The Northern Parliament destroyer Tashkent from *Azur Lane* joins the Spire. Load ammunition, control your Distance, mark priority targets, and launch torpedoes that strike at exactly the right moment.
 
-This mod requires 【BaseLib 3.4.5 or later】.
+This mod requires 【BaseLib 3.4.8 or later】.
 
 ![Mod Content](https://raw.githubusercontent.com/BestNaonao/IndomitableSpire2/branch_tashkent/workshop/images/tashkent_workshop_content.png)
 

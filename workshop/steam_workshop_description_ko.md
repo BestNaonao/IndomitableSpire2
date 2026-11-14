@@ -1,6 +1,6 @@
 # 버전 호환성
 
-이 모드는 현재 『Slay the Spire 2』 정식 버전과 베타 버전을 모두 지원합니다. Steam에서 모드가 현재 게임 버전과 맞지 않는다고 표시될 경우, 구독을 해제한 뒤 다시 구독해 주세요. 일반적으로 Steam 창작마당 콘텐츠 배포 캐시로 인해 발생하는 문제입니다.
+이 버전의 모드를 사용하려면 『Slay the Spire 2』 v0.113.0 이상이 필요합니다.
 
 ![Azur Lane Tashkent Mod for Slay the Spire 2](https://raw.githubusercontent.com/BestNaonao/IndomitableSpire2/branch_tashkent/workshop/images/tashkent_workshop_hero.png)
 
@@ -8,7 +8,7 @@
 
 『벽람항로』 북방연합 소속 구축함 타슈켄트가 첨탑에 합류합니다. 탄약을 장전하고, 거리를 조절하고, 우선 목표에 표식을 남긴 뒤 최적의 순간에 어뢰를 명중시키세요.
 
-이 모드를 사용하려면 【BaseLib 3.4.5 이상】이 필요합니다.
+이 모드를 사용하려면 【BaseLib 3.4.8 이상】이 필요합니다.
 
 ![Mod Content](https://raw.githubusercontent.com/BestNaonao/IndomitableSpire2/branch_tashkent/workshop/images/tashkent_workshop_content.png)
 
