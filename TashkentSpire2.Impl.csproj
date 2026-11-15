@@ -1,10 +1,16 @@
 ﻿<Project Sdk="Godot.NET.Sdk/4.5.1" InitialTargets="CheckDependencyPaths">
     <PropertyGroup>
         <TargetFramework>net9.0</TargetFramework>
+        <AssemblyName>TashkentSpire2.Impl</AssemblyName>
+        <RootNamespace>TashkentSpire2</RootNamespace>
+        <Version>$([System.Text.RegularExpressions.Regex]::Match($([System.IO.File]::ReadAllText('$(MSBuildProjectDirectory)/mod_manifest.json')), '&quot;version&quot;\s*:\s*&quot;v?([0-9.]+)&quot;').Groups[1].Value)</Version>
         <ImplicitUsings>true</ImplicitUsings>
         <Nullable>enable</Nullable> <!--Makes code analysis regarding null values stricter.-->
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-        <DefaultItemExcludes>packages/**</DefaultItemExcludes>
+        <DefaultItemExcludes>$(DefaultItemExcludes);packages/**;.artifacts/**;build/**</DefaultItemExcludes>
+        <BuildBundle Condition="'$(BuildBundle)' == ''">true</BuildBundle>
+        <DeployBundle Condition="'$(DeployBundle)' == ''">true</DeployBundle>
+        <StableSourceRef Condition="'$(StableSourceRef)' == ''">9234a743ea19d750b4adee6ee6c2be1a0295b904</StableSourceRef>
         <AppOutputBase>$(MSBuildProjectDirectory)\</AppOutputBase>
         <PathMap>$(AppOutputBase)=.\</PathMap>
     </PropertyGroup>
@@ -23,46 +29,47 @@
 
     <!-- Windows -->
     <PropertyGroup Condition="'$(IsWindows)' == 'true'">
-        <AutoSteamPath>$(registry:HKEY_CURRENT_USER\Software\Valve\Steam@SteamPath)\steamapps</AutoSteamPath>
+        <PowerShellPath Condition="'$(PowerShellPath)' == ''">$(SystemRoot)/System32/WindowsPowerShell/v1.0/powershell.exe</PowerShellPath>
+        <_BundlePowerShellPolicy>-ExecutionPolicy RemoteSigned</_BundlePowerShellPolicy>
+        <AutoSteamPath Condition="'$(AutoSteamPath)' == '' and '$(SteamLibraryPath)' == '' and !Exists('D:/STEAM/steamapps/common/Slay the Spire 2')">$(registry:HKEY_CURRENT_USER\Software\Valve\Steam@SteamPath)\steamapps</AutoSteamPath>
         <SteamLibraryPath Condition="Exists('$(AutoSteamPath)/common/Slay the Spire 2')">$(AutoSteamPath)</SteamLibraryPath>
 
-        <GodotPath>D:/Godot/Godot_v4.5.1-stable_mono_win64/Godot_v4.5.1-stable_mono_win64.exe</GodotPath>
+        <GodotPath Condition="'$(GodotPath)' == ''">D:/Godot/Godot_v4.5.1-stable_mono_win64/Godot_v4.5.1-stable_mono_win64_console.exe</GodotPath>
         <!-- If on Windows and Slay the Spire 2 is not installed in your default steam library, adjust the following.-->
         <SteamLibraryPath Condition="'$(SteamLibraryPath)' == ''">D:/STEAM/steamapps</SteamLibraryPath>
-        <Sts2Path>$(SteamLibraryPath)/common/Slay the Spire 2</Sts2Path>
-        <ModsPath>$(Sts2Path)/mods/</ModsPath>
-        <Sts2DataDir>$(Sts2Path)/data_sts2_windows_x86_64</Sts2DataDir>
+        <Sts2Path Condition="'$(Sts2Path)' == ''">$(SteamLibraryPath)/common/Slay the Spire 2</Sts2Path>
+        <Sts2DataDir Condition="'$(Sts2DataDir)' == ''">$(Sts2Path)/data_sts2_windows_x86_64</Sts2DataDir>
     </PropertyGroup>
 
     <!-- Linux -->
     <PropertyGroup Condition="'$(IsLinux)' == 'true'">
-        <SteamLibraryPath>$(HOME)/.local/share/Steam/steamapps</SteamLibraryPath>
+        <SteamLibraryPath Condition="'$(SteamLibraryPath)' == ''">$(HOME)/.local/share/Steam/steamapps</SteamLibraryPath>
         <!-- Change the path here if using a downloaded binary instead of the Steam version-->
-        <GodotPath>$(SteamLibraryPath)/common/Godot Engine/godot.x11.opt.tools.64</GodotPath>
+        <GodotPath Condition="'$(GodotPath)' == ''">$(SteamLibraryPath)/common/Godot Engine/godot.x11.opt.tools.64</GodotPath>
 
         <!-- The below should not need to be changed. -->
-        <Sts2Path>$(SteamLibraryPath)/common/Slay the Spire 2</Sts2Path>
-        <ModsPath>$(Sts2Path)/mods/</ModsPath>
-        <Sts2DataDir>$(Sts2Path)/data_sts2_linuxbsd_x86_64</Sts2DataDir>
+        <Sts2Path Condition="'$(Sts2Path)' == ''">$(SteamLibraryPath)/common/Slay the Spire 2</Sts2Path>
+        <Sts2DataDir Condition="'$(Sts2DataDir)' == ''">$(Sts2Path)/data_sts2_linuxbsd_x86_64</Sts2DataDir>
     </PropertyGroup>
 
     <!-- macOS -->
     <PropertyGroup Condition="'$(IsOSX)' == 'true'">
-        <SteamLibraryPath>$(HOME)/Library/Application Support/Steam/steamapps</SteamLibraryPath>
-        <GodotPath>$(HOME)/Applications/Godot_mono.app/Contents/MacOS/Godot</GodotPath>
+        <SteamLibraryPath Condition="'$(SteamLibraryPath)' == ''">$(HOME)/Library/Application Support/Steam/steamapps</SteamLibraryPath>
+        <GodotPath Condition="'$(GodotPath)' == ''">$(HOME)/Applications/Godot_mono.app/Contents/MacOS/Godot</GodotPath>
 
         <!-- The below should not need to be changed. -->
-        <Sts2Path>$(SteamLibraryPath)/common/Slay the Spire 2</Sts2Path>
-        <ModsPath>$(Sts2Path)/SlayTheSpire2.app/Contents/MacOS/mods/</ModsPath>
-        <Sts2DataDir>$(Sts2Path)/SlayTheSpire2.app/Contents/Resources/data_sts2_macos_x86_64</Sts2DataDir>
+        <Sts2Path Condition="'$(Sts2Path)' == ''">$(SteamLibraryPath)/common/Slay the Spire 2</Sts2Path>
+        <Sts2DataDir Condition="'$(Sts2DataDir)' == ''">$(Sts2Path)/SlayTheSpire2.app/Contents/Resources/data_sts2_macos_x86_64</Sts2DataDir>
     </PropertyGroup>
 
     <PropertyGroup>
+        <PowerShellPath Condition="'$(PowerShellPath)' == ''">pwsh</PowerShellPath>
+        <ModsPath Condition="'$(ModsPath)' == '' and '$(IsOSX)' == 'true'">$(Sts2Path)/SlayTheSpire2.app/Contents/MacOS/mods</ModsPath>
+        <ModsPath Condition="'$(ModsPath)' == ''">$(Sts2Path)/mods</ModsPath>
+        <_BundleModsPath Condition="'$(DeployBundle)' == 'true'">$(ModsPath)</_BundleModsPath>
         <!-- Diasble architecture mismatch warning; mods are ideally built for all platforms (MSIL)
              while your local StS2 version will be for your specific platform. -->
         <NoWarn>$(NoWarn);MSB3270</NoWarn>
-        <DeployBaseLib Condition="'$(DeployBaseLib)' == ''">true</DeployBaseLib>
-        <BaseLibRuntimePath Condition="'$(BaseLibRuntimePath)' == ''">$(SteamLibraryPath)/workshop/content/2868840/3737335127/BaseLib</BaseLibRuntimePath>
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(DisableSteamworks)' == 'true'">
@@ -76,7 +83,9 @@
         </Reference>
         <Reference Include="sts2">
             <HintPath>$(Sts2DataDir)/sts2.dll</HintPath>
-            <Private>false</Private>
+            <!-- Godot's editor loads the Debug assembly while exporting resources. -->
+            <Private Condition="'$(Configuration)' == 'Debug'">true</Private>
+            <Private Condition="'$(Configuration)' != 'Debug'">false</Private>
         </Reference>
         <Reference Include="Steamworks.NET" Condition="'$(DisableSteamworks)' != 'true' and Exists('$(Sts2DataDir)/Steamworks.NET.dll')">
             <HintPath>$(Sts2DataDir)/Steamworks.NET.dll</HintPath>
@@ -106,7 +115,7 @@
 
     <ItemGroup>
         <None Include=".gitignore"/>
-        <None Include="TashkentSpire2.json" />
+        <None Update="mod_manifest.json" />
         <None Include="project.godot"/>
         <None Include="TashkentSpire2/**"/>
     </ItemGroup>
@@ -122,35 +131,19 @@
     <Target Name="CheckDependencyPaths">
         <Error
                 Text=" Slay the Spire 2 data not found at path '$(Sts2DataDir)'"
-                Condition="'$(Sts2DataDir)' == '' or !Exists('$(Sts2DataDir)')"/>
+                Condition="'$(Sts2DataDir)' == '' or !Exists('$(Sts2DataDir)/sts2.dll')"/>
         <Error
                 Text=" Godot not found at path '$(GodotPath)'"
-                Condition="'$(GodotPath)' == '' or !Exists('$(GodotPath)')"/>
+                Condition="'$(BuildBundle)' == 'true' and '$(DesignTimeBuild)' != 'true' and ('$(GodotPath)' == '' or !Exists('$(GodotPath)'))"/>
     </Target>
 
-    <Target Name="CopyToModsFolderOnBuild" AfterTargets="PostBuildEvent" DependsOnTargets="DeployBaseLibRuntime">
-        <Message Text="Copying .dll and manifest to mods folder." Importance="high"/>
-        <Copy SourceFiles="$(TargetPath)" DestinationFolder="$(ModsPath)$(MSBuildProjectName)/"/>
-        <Copy SourceFiles="TashkentSpire2.json" DestinationFolder="$(ModsPath)$(MSBuildProjectName)/"/>
-    </Target>
-
-    <Target Name="DeployBaseLibRuntime" Condition="'$(DeployBaseLib)' == 'true'">
-        <ItemGroup>
-            <BaseLibFiles Include="$(BaseLibRuntimePath)/BaseLib.dll;$(BaseLibRuntimePath)/BaseLib.pck;$(BaseLibRuntimePath)/BaseLib.json;$(BaseLibRuntimePath)/BaseLibCompatibilityHelper.dll;$(BaseLibRuntimePath)/BaseLibCompatibilityHelper.json"/>
-        </ItemGroup>
-        <Error Condition="!Exists('%(BaseLibFiles.Identity)')"
-               Text="Missing BaseLib runtime file '%(BaseLibFiles.Identity)'. Set BaseLibRuntimePath to the complete BaseLib runtime folder, or use DeployBaseLib=false when BaseLib and its helper are already installed."/>
-        <Copy SourceFiles="@(BaseLibFiles)" DestinationFolder="$(ModsPath)BaseLib/" SkipUnchangedFiles="true"/>
-    </Target>
-
-    <Target Name="GodotPublish" AfterTargets="Publish" Condition="'$(GodotPath)' != '' and Exists('$(GodotPath)') and '$(IsInnerGodotExport)' != 'true'">
-        <Message Text="Exporting Godot .pck to mods folder" Importance="high"/>
-        <Exec Command="&quot;$(GodotPath)&quot; --headless --export-pack &quot;BasicExport&quot; &quot;$(ModsPath)$(MSBuildProjectName)/$(MSBuildProjectName).pck&quot;"
-              EnvironmentVariables="IsInnerGodotExport=true;MSBUILDDISABLENODEREUSE=1"
-              ContinueOnError="WarnAndContinue"/>
-    </Target>
-
-    <Target Name="GodotPublishSkipped" AfterTargets="Publish" Condition="'$(GodotPath)' == '' or !Exists('$(GodotPath)')">
-        <Message Text="Skipping Godot .pck export because GodotPath is not configured." Importance="high"/>
+    <Target Name="AssembleModBundle" AfterTargets="Build"
+            Condition="'$(BuildBundle)' == 'true' and '$(DesignTimeBuild)' != 'true'">
+        <Error Text="Set StableSts2DataDir in Directory.Build.props to the Slay the Spire 2 0.111.0 data directory."
+               Condition="'$(StableSts2DataDir)' == '' or !Exists('$(StableSts2DataDir)/sts2.dll')" />
+        <Exec Command="&quot;$(PowerShellPath)&quot; -NoProfile -NonInteractive $(_BundlePowerShellPolicy) -File &quot;$(MSBuildProjectDirectory)/build/Build-Bundle.ps1&quot; -Configuration &quot;$(Configuration)&quot; -Godot &quot;$(GodotPath)&quot; -StableDataDir &quot;$(StableSts2DataDir)&quot; -BetaDataDir &quot;$(Sts2DataDir)&quot; -BetaGameDir &quot;$(Sts2Path)&quot; -StableSourceRef &quot;$(StableSourceRef)&quot; -BetaDll &quot;$(TargetPath)&quot;"
+              WorkingDirectory="$(MSBuildProjectDirectory)"
+              EnvironmentVariables="TASHKENT_BUNDLE_MODS_PATH=$(_BundleModsPath)"
+              UseUtf8Encoding="Always" />
     </Target>
 </Project>

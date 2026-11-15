@@ -18,6 +18,8 @@ obj/
 
 # 其他
 /packages/
+/.artifacts/
+/Directory.Build.props
 riderModule.iml
 /_ReSharper.Caches/
 /TASHKENTSPIRE2_DEV_KNOWLEDGE.md

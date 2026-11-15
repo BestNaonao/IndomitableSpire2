@@ -21,7 +21,7 @@ window/size/viewport_height=1080
 
 [dotnet]
 
-project/assembly_name="TashkentSpire2"
+project/assembly_name="TashkentSpire2.Impl"
 
 [editor]
 

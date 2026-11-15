@@ -78,7 +78,7 @@ public sealed class DistancePower : TashkentPower, IPersistentPower
             await PowerCmd.ModifyAmount(new ThrowingPlayerChoiceContext(), this, delta, base.Owner, null);
         }
 
-        await UpdateMinionPositions();
+        UpdateMinionPositions();
         
         _isFlipping = false;
         _isSyncing = false;
@@ -457,7 +457,7 @@ public sealed class DistancePower : TashkentPower, IPersistentPower
         }
     }
     
-    private async Task UpdateMinionPositions()
+    private void UpdateMinionPositions()
     {
         if (base.Owner.Pets == null || !base.Owner.Pets.Any()) return;
 

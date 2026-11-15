@@ -1,6 +1,6 @@
 # VERSION COMPATIBILITY / 版本兼容性
 
-此版本的模组需要《杀戮尖塔 2》0.113.0 或更高版本。
+同一份模组包支持《杀戮尖塔 2》0.111.0 和 0.113.1，启动时自动选择对应实现。
 
 ![Azur Lane Tashkent Mod for Slay the Spire 2](https://raw.githubusercontent.com/BestNaonao/IndomitableSpire2/branch_tashkent/workshop/images/tashkent_workshop_hero.png)
 

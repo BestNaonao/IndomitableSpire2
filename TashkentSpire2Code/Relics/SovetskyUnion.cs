@@ -45,7 +45,7 @@ public sealed class SovetskyUnion : TashkentRelic
         await PlayerCmd.GainEnergy(1m, base.Owner);
     }
     
-    public override async Task AfterShuffle(PlayerChoiceContext choiceContext, Player shuffler)
+    public override Task AfterShuffle(PlayerChoiceContext choiceContext, Player shuffler)
     {
         if (shuffler == base.Owner)
         {
@@ -65,6 +65,7 @@ public sealed class SovetskyUnion : TashkentRelic
                 }
             }
         }
+        return Task.CompletedTask;
     }
     
     public override bool ShouldPlayerResetEnergy(Player player)

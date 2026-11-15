@@ -20,17 +20,18 @@ public sealed class EternalOathPower : TashkentPower
     
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [..HoverTipFactory.FromEnchantment<OathEnchantment>()];
     
-    public override async Task AfterCombatEnd(CombatRoom room)
+    public override Task AfterCombatEnd(CombatRoom room)
     {
-        if (this.Owner.Player == null || this.Owner.IsDead) return;
+        if (this.Owner.Player == null || this.Owner.IsDead) return Task.CompletedTask;
         
         Player? player = room.CombatState.Players.FirstOrDefault(p => p.NetId == this.Owner.Player.NetId);
         
-        if (player == null) return;
+        if (player == null) return Task.CompletedTask;
 
         for (int i = 0; i < base.Amount; i++)
         {
             room.AddExtraReward(base.Owner.Player, new TashkentOathReward(base.Owner.Player));
         }
+        return Task.CompletedTask;
     }
 }

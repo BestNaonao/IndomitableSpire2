@@ -1,0 +1,78 @@
+diff --git a/TashkentSpire2Code/Powers/DistancePower.cs b/TashkentSpire2Code/Powers/DistancePower.cs
+index c143ba1..80c9d88 100644
+--- a/TashkentSpire2Code/Powers/DistancePower.cs
++++ b/TashkentSpire2Code/Powers/DistancePower.cs
+@@ -78,7 +78,7 @@ public sealed class DistancePower : TashkentPower, IPersistentPower
+             await PowerCmd.ModifyAmount(new ThrowingPlayerChoiceContext(), this, delta, base.Owner, null);
+         }
+ 
+-        await UpdateMinionPositions();
++        UpdateMinionPositions();
+         
+         _isFlipping = false;
+         _isSyncing = false;
+@@ -457,7 +457,7 @@ public sealed class DistancePower : TashkentPower, IPersistentPower
+         }
+     }
+     
+-    private async Task UpdateMinionPositions()
++    private void UpdateMinionPositions()
+     {
+         if (base.Owner.Pets == null || !base.Owner.Pets.Any()) return;
+ 
+diff --git a/TashkentSpire2Code/Powers/EternalOathPower.cs b/TashkentSpire2Code/Powers/EternalOathPower.cs
+index 9f2b593..a519c7e 100644
+--- a/TashkentSpire2Code/Powers/EternalOathPower.cs
++++ b/TashkentSpire2Code/Powers/EternalOathPower.cs
+@@ -20,17 +20,18 @@ public sealed class EternalOathPower : TashkentPower
+     
+     protected override IEnumerable<IHoverTip> ExtraHoverTips => [..HoverTipFactory.FromEnchantment<OathEnchantment>()];
+     
+-    public override async Task AfterCombatEnd(CombatRoom room)
++    public override Task AfterCombatEnd(CombatRoom room)
+     {
+-        if (this.Owner.Player == null || this.Owner.IsDead) return;
++        if (this.Owner.Player == null || this.Owner.IsDead) return Task.CompletedTask;
+         
+         Player? player = room.CombatState.Players.FirstOrDefault(p => p.NetId == this.Owner.Player.NetId);
+         
+-        if (player == null) return;
++        if (player == null) return Task.CompletedTask;
+ 
+         for (int i = 0; i < base.Amount; i++)
+         {
+             room.AddExtraReward(base.Owner.Player, new TashkentOathReward(base.Owner.Player));
+         }
++        return Task.CompletedTask;
+     }
+-}
+\ No newline at end of file
++}
+diff --git a/TashkentSpire2Code/Relics/SovetskyUnion.cs b/TashkentSpire2Code/Relics/SovetskyUnion.cs
+index fa69e0a..1707a8a 100644
+--- a/TashkentSpire2Code/Relics/SovetskyUnion.cs
++++ b/TashkentSpire2Code/Relics/SovetskyUnion.cs
+@@ -45,7 +45,7 @@ public sealed class SovetskyUnion : TashkentRelic
+         await PlayerCmd.GainEnergy(1m, base.Owner);
+     }
+     
+-    public override async Task AfterShuffle(PlayerChoiceContext choiceContext, Player shuffler)
++    public override Task AfterShuffle(PlayerChoiceContext choiceContext, Player shuffler)
+     {
+         if (shuffler == base.Owner)
+         {
+@@ -65,6 +65,7 @@ public sealed class SovetskyUnion : TashkentRelic
+                 }
+             }
+         }
++        return Task.CompletedTask;
+     }
+     
+     public override bool ShouldPlayerResetEnergy(Player player)
+@@ -75,4 +76,4 @@ public sealed class SovetskyUnion : TashkentRelic
+         }
+         return false;
+     }
+-}
+\ No newline at end of file
++}

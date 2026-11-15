@@ -1,6 +1,6 @@
 # VERSION COMPATIBILITY
 
-This version of the mod requires Slay the Spire 2 v0.113.0 or later.
+This single mod package supports Slay the Spire 2 v0.111.0 and v0.113.1 and selects the appropriate build automatically at launch.
 
 ![Azur Lane Tashkent Mod for Slay the Spire 2](https://raw.githubusercontent.com/BestNaonao/IndomitableSpire2/branch_tashkent/workshop/images/tashkent_workshop_hero.png)
 

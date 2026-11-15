@@ -1,6 +1,6 @@
 # 버전 호환성
 
-이 버전의 모드를 사용하려면 『Slay the Spire 2』 v0.113.0 이상이 필요합니다.
+하나의 모드 패키지가 『Slay the Spire 2』 v0.111.0과 v0.113.1을 지원하며, 실행 시 해당 버전에 맞는 빌드를 자동으로 선택합니다.
 
 ![Azur Lane Tashkent Mod for Slay the Spire 2](https://raw.githubusercontent.com/BestNaonao/IndomitableSpire2/branch_tashkent/workshop/images/tashkent_workshop_hero.png)
 

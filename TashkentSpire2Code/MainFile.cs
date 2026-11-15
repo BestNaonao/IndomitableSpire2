@@ -2,14 +2,12 @@ using BaseLib.Config;
 using Godot;
 using Godot.Bridge;
 using HarmonyLib;
-using MegaCrit.Sts2.Core.Modding;
 using TashkentSpire2.TashkentSpire2Code.Character;
 using TashkentSpire2.TashkentSpire2Code.Config;
 using TashkentSpire2.TashkentSpire2Code.Rewards;
 
 namespace TashkentSpire2.TashkentSpire2Code;
 
-[ModInitializer(nameof(Initialize))]
 public partial class MainFile : Node
 {
 	public const string ModId = "TashkentSpire2";
@@ -30,7 +28,7 @@ public partial class MainFile : Node
 		
 		new TashkentOathReward(null!).Initialize();
 		
-		harmony.PatchAll();
+		harmony.PatchAll(typeof(MainFile).Assembly);
 		
 		Logger.Info("Tashkent mod loaded");
 	}
