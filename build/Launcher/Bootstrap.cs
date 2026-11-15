@@ -13,6 +13,7 @@ public static class Bootstrap
 {
     private const string ModId = "TashkentSpire2";
     private const string ImplementationName = ModId + ".Impl";
+    private const string BaseResourcesVariant = "g0.111.0";
     private static int _started;
 
     public static void Initialize()
@@ -38,9 +39,12 @@ public static class Bootstrap
         if (entryPoint.ReturnType != typeof(void))
             throw new InvalidOperationException($"[{ModId}] MainFile.Initialize must return void.");
 
-        string pack = Path.Combine(variant, ModId + ".pck");
-        if (!ProjectSettings.LoadResourcePack(pack))
-            throw new InvalidOperationException($"[{ModId}] Godot failed to mount {pack}.");
+        foreach (string pack in GetPackPaths(variant))
+        {
+            Log.Info($"[{ModId}] Mounting {pack}.");
+            if (!ProjectSettings.LoadResourcePack(pack, replaceFiles: true))
+                throw new InvalidOperationException($"[{ModId}] Godot failed to mount {pack}.");
+        }
 
         ModManager.AssociateAssemblyWithMod(ModId, implementation);
         if (!ModManager.Mods.Any(mod => mod.manifest?.id == ModId && mod.assemblies.Contains(implementation)))
@@ -113,9 +117,28 @@ public static class Bootstrap
 
     private static string RequirePair(string directory)
     {
-        if (!File.Exists(Path.Combine(directory, ImplementationName + ".dll"))
-            || !File.Exists(Path.Combine(directory, ModId + ".pck")))
-            throw new InvalidOperationException($"[{ModId}] Incomplete implementation (DLL and PCK required): {directory}.");
+        if (!File.Exists(Path.Combine(directory, ImplementationName + ".dll")))
+            throw new InvalidOperationException($"[{ModId}] Incomplete implementation (missing DLL): {directory}.");
+        _ = GetPackPaths(directory);
         return directory;
+    }
+
+    private static string[] GetPackPaths(string directory)
+    {
+        string patch = Path.Combine(directory, ModId + ".patch.pck");
+        if (File.Exists(patch))
+        {
+            string basePack = Path.GetFullPath(Path.Combine(directory, "..", BaseResourcesVariant, ModId + ".pck"));
+            if (!File.Exists(basePack))
+                throw new InvalidOperationException($"[{ModId}] Missing base resource pack for {patch}: {basePack}.");
+
+            return [basePack, patch];
+        }
+
+        string fullPack = Path.Combine(directory, ModId + ".pck");
+        if (File.Exists(fullPack))
+            return [fullPack];
+
+        throw new InvalidOperationException($"[{ModId}] Incomplete implementation (missing PCK or PCK patch): {directory}.");
     }
 }

@@ -48,13 +48,21 @@ function Invoke-BuildTool([string] $Tool, [string[]] $Arguments) {
     if ($LASTEXITCODE -ne 0) { throw "$Tool failed with exit code $LASTEXITCODE." }
 }
 
-function Export-Pack([string] $Project, [string] $Destination, [string] $Version) {
+function Export-Pack([string] $Project, [string] $Destination, [string] $Version, [string] $BasePack) {
     $log = Join-Path $buildDir "godot-g$Version.log"
-    Write-Host "Exporting g$Version PCK"
+    $arguments = @('--headless', '--editor', '--path', $Project)
+    if ($BasePack) {
+        Write-Host "Exporting g$Version PCK patch"
+        $arguments += @('--patches', $BasePack, '--export-patch', 'BasicExport', $Destination)
+    }
+    else {
+        Write-Host "Exporting g$Version base PCK"
+        $arguments += @('--export-pack', 'BasicExport', $Destination)
+    }
     # Windows PowerShell reports native stderr as error records, including Godot warnings.
     & {
         $ErrorActionPreference = 'Continue'
-        & $Godot --headless --editor --path $Project --export-pack BasicExport $Destination 2>&1
+        & $Godot @arguments 2>&1
     } | ForEach-Object { $_.ToString() } | Set-Content -LiteralPath $log -Encoding UTF8
     if ($LASTEXITCODE -ne 0 -or !(Test-Path -LiteralPath $Destination -PathType Leaf)) {
         throw "Godot export failed. See $log"
@@ -62,9 +70,9 @@ function Export-Pack([string] $Project, [string] $Destination, [string] $Version
     if (Select-String -LiteralPath $log -Quiet -Pattern '^ERROR:|^System\.\w+Exception:') {
         throw "Godot reported export errors. See $log"
     }
-    # A failed Spine importer can yield a PCK that appears to export successfully.
-    if (!(Select-String -LiteralPath $log -Quiet -Pattern 'tashigan_2\.skel\.import') -or
-        !(Select-String -LiteralPath $log -Quiet -Pattern 'tashigan_2\.atlas\.import')) {
+    # The diff omits unchanged files, including the Spine remaps.
+    if (!$BasePack -and (!(Select-String -LiteralPath $log -Quiet -Pattern 'tashigan_2\.skel\.import') -or
+        !(Select-String -LiteralPath $log -Quiet -Pattern 'tashigan_2\.atlas\.import'))) {
         throw "Godot did not pack the Spine resources. Check the editor extension and $log"
     }
 }
@@ -73,46 +81,76 @@ function Install-Bundle([string] $Source, [string] $ModsDirectory) {
     New-Item -ItemType Directory -Force -Path $ModsDirectory | Out-Null
     $mods = (Resolve-Path -LiteralPath $ModsDirectory).ProviderPath
     $destination = Join-Path $mods $modId
+    $gameExecutable = Join-Path (Split-Path -Parent $mods) 'SlayTheSpire2.exe'
+    if ((Test-Path -LiteralPath $gameExecutable -PathType Leaf) -and
+        (Get-Process -Name SlayTheSpire2 -ErrorAction SilentlyContinue | Where-Object { $_.Path -eq $gameExecutable })) {
+        Write-Warning "Bundle built at $Source. Installation skipped because Slay the Spire 2 is running. Close the game and build again to install."
+        return
+    }
 
     # Stage next to mods so the game cannot discover the staged or backup manifest.
     $transaction = New-Item -ItemType Directory -Path (Join-Path (Split-Path -Parent $mods) ".$modId-install-$([guid]::NewGuid().ToString('N'))")
     $staged = Join-Path $transaction.FullName 'new'
     $previous = Join-Path $transaction.FullName 'previous'
-    $installed = $false
+    $savedFiles = [Collections.Generic.List[string]]::new()
+    $installedFiles = [Collections.Generic.List[string]]::new()
+    $canCleanUp = $true
     try {
         Copy-Item -LiteralPath $Source -Destination $staged -Recurse -Force
-        if (Test-Path -LiteralPath $destination) {
-            $installedMod = Get-Item -LiteralPath $destination -Force
-            if (!$installedMod.PSIsContainer -or ($installedMod.Attributes -band [IO.FileAttributes]::ReparsePoint)) {
-                throw "Expected an ordinary mod directory at $destination."
+        $files = @(Get-ChildItem -LiteralPath $staged -Recurse -File |
+            Sort-Object { $_.Name -eq 'mod_manifest.json' } |
+            ForEach-Object { $_.FullName.Substring($staged.Length + 1) })
+        $retiredFiles = @("$modId.json", "$modId.pck", "bin/g$betaVersion/$modId.pck")
+        foreach ($directory in @($destination, (Join-Path $destination 'bin'),
+                (Join-Path $destination "bin/g$stableVersion"), (Join-Path $destination "bin/g$betaVersion"))) {
+            if (Test-Path -LiteralPath $directory) {
+                $item = Get-Item -LiteralPath $directory -Force
+                if (!$item.PSIsContainer -or ($item.Attributes -band [IO.FileAttributes]::ReparsePoint)) {
+                    throw "Expected an ordinary mod directory at $directory."
+                }
             }
-
-            $managedFiles = @('mod_manifest.json', "$modId.dll", "$modId.json", "$modId.pck", 'bin')
-            Get-ChildItem -LiteralPath $destination -Force | Where-Object { $_.Name -notin $managedFiles } |
-                Copy-Item -Destination $staged -Recurse -Force
-            $installedBin = Join-Path $destination 'bin'
-            if (Test-Path -LiteralPath $installedBin -PathType Container) {
-                Get-ChildItem -LiteralPath $installedBin -Force |
-                    Where-Object { $_.Name -notin "g$stableVersion", "g$betaVersion" } |
-                    Copy-Item -Destination (Join-Path $staged 'bin') -Recurse -Force
-            }
-            [IO.Directory]::Move($destination, $previous)
         }
 
-        try {
-            [IO.Directory]::Move($staged, $destination)
-            $installed = $true
-        }
-        catch {
-            if (Test-Path -LiteralPath $previous) {
-                [IO.Directory]::Move($previous, $destination)
+        foreach ($relative in ($files + $retiredFiles)) {
+            $target = Join-Path $destination $relative
+            if (Test-Path -LiteralPath $target) {
+                $backup = Join-Path $previous $relative
+                [IO.Directory]::CreateDirectory((Split-Path -Parent $backup)) | Out-Null
+                [IO.File]::Move($target, $backup)
+                $savedFiles.Add($relative)
             }
-            throw
+        }
+        foreach ($relative in $files) {
+            $target = Join-Path $destination $relative
+            [IO.Directory]::CreateDirectory((Split-Path -Parent $target)) | Out-Null
+            [IO.File]::Move((Join-Path $staged $relative), $target)
+            $installedFiles.Add($relative)
         }
     }
+    catch {
+        $installError = $_
+        $canCleanUp = $false
+        try {
+            foreach ($relative in $installedFiles) {
+                [IO.File]::Delete((Join-Path $destination $relative))
+            }
+            foreach ($relative in $savedFiles) {
+                [IO.File]::Move((Join-Path $previous $relative), (Join-Path $destination $relative))
+            }
+            $canCleanUp = $true
+        }
+        catch {
+            throw "Installation failed and could not be rolled back. Backup is at $previous. $($_.Exception.GetBaseException().Message)"
+        }
+        $failure = $installError.Exception.GetBaseException()
+        if ($env:OS -eq 'Windows_NT' -and ($failure.HResult -band 0xffff) -in 5, 32, 33) {
+            Write-Warning "Bundle built at $Source. Installation skipped: $($failure.Message) Close any program using the mod or check folder permissions, then build again."
+            return
+        }
+        throw $installError
+    }
     finally {
-        # Keep the backup available if both installation and restoration fail.
-        if (($installed -or !(Test-Path -LiteralPath $previous)) -and
+        if ($canCleanUp -and
             (Resolve-Path -LiteralPath $transaction.FullName).ProviderPath -eq $transaction.FullName) {
             Remove-Item -LiteralPath $transaction.FullName -Recurse -Force
         }
@@ -203,9 +241,10 @@ Copy-Item -LiteralPath $BetaDll -Destination $betaOut
 Copy-Item -LiteralPath (Join-Path $launcherOut "$modId.dll"), $manifestPath -Destination $staging
 
 $env:Sts2DataDir = $StableDataDir
-Export-Pack $stable (Join-Path $stableOut "$modId.pck") $stableVersion
+$basePack = Join-Path $stableOut "$modId.pck"
+Export-Pack $stable $basePack $stableVersion
 $env:Sts2DataDir = $BetaDataDir
-Export-Pack $root (Join-Path $betaOut "$modId.pck") $betaVersion
+Export-Pack $root (Join-Path $betaOut "$modId.patch.pck") $betaVersion $basePack
 
 $bundle = Join-Path $buildDir $modId
 if (Test-Path -LiteralPath $bundle) {

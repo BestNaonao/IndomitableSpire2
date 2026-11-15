@@ -8,6 +8,8 @@ dotnet build TashkentSpire2.Impl.sln -c Release
 
 Build 完成后自动把整套双版本包安装到游戏的 `mods/TashkentSpire2/`。构建也会保留一份干净的成品，Release 位于 `.artifacts/Release/TashkentSpire2/`，Debug 位于 `.artifacts/Debug/TashkentSpire2/`，工坊上传时使用这里的成品。可在 `Directory.Build.props` 通过 `ModsPath` 指定其他游戏的 mods 目录，或设置 `DeployBundle=false` 仅打包。两版游戏都需要另外安装各自兼容的 BaseLib 3.4.8 或更高版本。
 
+自动部署只替换模组的打包文件，并保留工坊上传器等本地配置。如果游戏仍在运行，或 Windows 拒绝替换文件，构建会保留成品和原有安装，并提示本次跳过部署。退出游戏或解除文件占用后，再执行一次 Build 即可安装。
+
 ```text
 TashkentSpire2/
 ├── mod_manifest.json
@@ -18,7 +20,7 @@ TashkentSpire2/
     │   └── TashkentSpire2.pck
     └── g0.113.1/
         ├── TashkentSpire2.Impl.dll
-        └── TashkentSpire2.pck
+        └── TashkentSpire2.patch.pck
 ```
 
 ## 构建环境
@@ -48,7 +50,9 @@ TashkentSpire2/
 - **0.111.0** 默认从 Git 提交 `9234a743ea19d750b4adee6ee6c2be1a0295b904` 取源码和资源，并在生成的快照中应用 `build/compat/g0.111.0-sync-hooks.patch`。维护旧版后，在 `Directory.Build.props` 设置 `StableSourceRef`，或在命令行传 `-p:StableSourceRef=<已提交的分支、标签或提交>`。打包会读取该 ref 指向的提交，当前分支无需切换。
 - 修改根目录 `mod_manifest.json` 的 `version` 就能统一启动器和两套实现的程序集版本。`min_game_version` 用于游戏原生加载检查，应保持为包所声明支持的最低游戏版本。
 
-每个 PCK 由对应源码快照的 `BasicExport` 配置通过 Godot `--headless --export-pack` 生成。版本选择使用游戏的 `release_info.json`，依次尝试精确命中、不高于当前游戏的最高版本、`bin/latest`，读取不到游戏版本时再尝试最高的数字版本目录。DLL 和 PCK 始终从同一目录加载，缺文件会报出具体目录。`has_pck` 设为 `false`，由启动器先挂载选中 PCK、再调用实现入口。
+两个版本继续使用各自源码快照的 `BasicExport` 配置。0.111.0 用 Godot `--export-pack` 导出完整底包。0.113.1 用 `--export-patch` 和 `--patches` 从本次构建生成的底包导出新增、修改和删除记录。发布或测试时一起替换整个成品目录，确保差异包与同一次构建的底包配对。
+
+版本选择使用游戏的 `release_info.json`，依次尝试精确命中、不高于当前游戏的最高版本、`bin/latest`，读取不到游戏版本时再尝试最高的数字版本目录。`has_pck` 设为 `false`，启动器在实现初始化前先挂载底包，再为 0.113.1 挂载差异包。选中的目录也可以提供独立的完整 PCK，兼容之前的布局。
 
 当前的两个构建目标是 0.111.0 和 0.113.1。按回退规则，0.113.0 会尝试 `g0.111.0`，这种选择结果只说明加载路径，兼容性需要单独验证。
 
