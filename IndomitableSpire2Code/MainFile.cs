@@ -24,6 +24,7 @@ public partial class MainFile : Node
         ModConfigRegistry.Register(ModId, new IndomitableConfiguration());
         Services.MapMarkerService.RegisterSave();
         Services.EyeInTheSkyService.RegisterSave();
+        Services.VacationProposalService.RegisterSave();
         
         InitializeBlockRetentionProviders();
         Logger.Info("Block Retention Providers registered successfully");
