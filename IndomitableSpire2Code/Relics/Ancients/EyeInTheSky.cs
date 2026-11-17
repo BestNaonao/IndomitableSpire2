@@ -55,7 +55,7 @@ public sealed class EyeInTheSky : ImplacableRelic
         {
             Flash();
             await CreatureCmd.LoseMaxHp(new ThrowingPlayerChoiceContext(), Owner.Creature,
-                DynamicVars.MaxHp.BaseValue, isFromCard: false);
+                DynamicVars.MaxHp.BaseValue, cardSource: null);
         }
         EyeInTheSkyService.SpreadAfterEntry(run, room);
     }

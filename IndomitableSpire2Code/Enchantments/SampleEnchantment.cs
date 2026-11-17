@@ -63,14 +63,14 @@ public sealed class SampleEnchantment : IndomitableEnchantment
         }
     }
     
-    // 参考 CalculatedVar 的 IConvertible 扩展点，让原版 LocString 的 cond 格式化器实时查询历史。
+    // cond 通过 IConvertible.ToDecimal 读取条件，只重实现这一入口以实时查询历史。
     // 不保存“已打出”字段。牌组及其预览都不加条件文本；战斗牌堆及其大图按真实来源查询。
     // 这里只检查这一张战斗牌的使用记录，临时生成牌也能显示“已打出过”，不要求存在 DeckVersion。
     // 使用 Started：CardModel.Play 真正开始执行时才写入，排队尚未打出的牌不算；
     // 即使打出效果令战斗提前结束，也不必等待 Finished 才认定这张牌已使用。
-    private sealed class PlayedThisCombatVar() : DynamicVar("PlayedThisCombat", 0)
+    private sealed class PlayedThisCombatVar() : DynamicVar("PlayedThisCombat", 0), IConvertible
     {
-        protected override decimal GetBaseValueForIConvertible()
+        decimal IConvertible.ToDecimal(IFormatProvider? provider)
         {
             if (_owner is not SampleEnchantment { IsCanonical: false, Card: { } card }) return 0;
             var source = CustomCardPileCmd.GetPreviewSource(card);

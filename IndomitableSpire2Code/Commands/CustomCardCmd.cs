@@ -60,7 +60,7 @@ public static class CustomCardCmd
                 tween.TweenCallback(Callable.From(node.QueueFreeSafely));
             }
             // 等待实际动画而非 Cmd.Wait（快速模式会跳过它），保证下一批不会挤入尚未消失的卡牌。
-            if (lastTween != null && !await lastTween.AwaitFinished(NRun.Instance)) return;
+            if (lastTween != null && await lastTween.AwaitFinished(NRun.Instance) != TweenOutcome.Finished) return;
         }
     }
 }

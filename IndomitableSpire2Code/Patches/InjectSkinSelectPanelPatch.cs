@@ -3,7 +3,6 @@ using HarmonyLib;
 using IndomitableSpire2.IndomitableSpire2Code.Character;
 using IndomitableSpire2.IndomitableSpire2Code.Nodes;
 using MegaCrit.Sts2.Core.Helpers;
-using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Nodes.Screens.CharacterSelect;
 
 namespace IndomitableSpire2.IndomitableSpire2Code.Patches;
@@ -26,9 +25,9 @@ public static class InjectSkinSelectPanelPatch
     /// </summary>
     [HarmonyPatch(nameof(NCharacterSelectScreen.SelectCharacter))]
     [HarmonyPostfix]
-    public static void SelectCharacterPostfix(NCharacterSelectScreen __instance, CharacterModel characterModel)
+    public static void SelectCharacterPostfix(NCharacterSelectScreen __instance, NCharacterSelectButton charSelectButton)
     {
-        if (characterModel is Indomitable selectedSkin)
+        if (charSelectButton.Character is Indomitable selectedSkin)
         {
             // 确保 SkinSelectPanel 挂载在 InfoPanel 下。
             var infoPanel = __instance.GetNodeOrNull<Control>("%InfoPanel");

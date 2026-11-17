@@ -24,7 +24,7 @@ public sealed class DeliveryManjuu : IndomitableSpire2Relic
         HoverTipFactory.FromCardWithCardHoverTips<Dessert>().Concat(HoverTipFactory.FromEnchantment<SampleEnchantment>());
     
     // 直接沿用原版限制，包含单人与多人楼层差异，不另写幕数/楼层常量。
-    public override bool IsAllowed(IRunState runState) => IsBeforeAct3TreasureChest(runState);
+    protected override bool IsAllowedInternal(IRunState runState) => !IsLateInAct3(runState);
     
     public override Task AfterCombatEnd(CombatRoom room)
     {

@@ -26,8 +26,8 @@ internal static class LuckyBagGoldTrace
         Log.Info($"[LuckyBagGoldTrace] local={LocalContext.NetId} {text} players=[{Players()}]");
 }
 
-[HarmonyPatch(typeof(MerchantEntry), nameof(MerchantEntry.OnTryPurchaseWrapper),
-    new[] { typeof(MerchantInventory), typeof(bool) })]
+[HarmonyPatch(typeof(MerchantEntry), nameof(MerchantEntry.OnTryPurchaseUnsynchronized), 
+    typeof(MerchantInventory), typeof(bool))]
 public static class LuckyBagFreePurchaseTrace
 {
     [HarmonyPrefix]

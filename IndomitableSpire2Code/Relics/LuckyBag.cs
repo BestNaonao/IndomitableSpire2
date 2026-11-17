@@ -26,7 +26,7 @@ public sealed class LuckyBag : IndomitableSpire2Relic
     public override int DisplayAmount => _goldSpent;
     
     // 只允许在第三阶段的宝箱房之前出现
-    public override bool IsAllowed(IRunState runState) => IsBeforeAct3TreasureChest(runState);
+    protected override bool IsAllowedInternal(IRunState runState) => !IsLateInAct3(runState);
     
     private int? RecordedGoldSpent => Owner.RunState.CurrentMapPointHistoryEntry?.GetEntry(Owner.NetId).GoldSpent;
     
@@ -63,8 +63,8 @@ public sealed class LuckyBag : IndomitableSpire2Relic
             ? Math.Max(0, recorded - _goldSpentBeforeMerchant)
             : _goldSpent + Math.Max(0, goldSpent);
         InvokeDisplayAmountChanged();
-        if (_goldSpent <= DynamicVars.Gold.IntValue || 
-            room.Inventories.FirstOrDefault(i => i.Player == Owner) is not { } inventory) return;
+        if (_goldSpent <= DynamicVars.Gold.IntValue) return;
+        var inventory = RunManager.Instance.MerchantSynchronizer.GetInventoryFor(Owner);
         
         // 在第一次 await 前锁定：免费领取也会再次调用 AfterItemPurchased。
         _triggered = true;

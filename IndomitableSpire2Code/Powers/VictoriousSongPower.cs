@@ -60,8 +60,8 @@ public sealed class VictoriousSongPower : IndomitablePower, IAfterCreatureEscape
         return Task.CompletedTask;
     }
     
-    public override Task AfterDeath(
-        PlayerChoiceContext choiceContext, Creature creature, bool wasRemovalPrevented, float deathAnimLength)
+    public override Task AfterDeath(PlayerChoiceContext choiceContext, Creature creature, CardModel? source,
+        bool wasRemovalPrevented, float deathAnimLength)
     {
         if (creature.IsEnemy) SyncTarget();
         return Task.CompletedTask;

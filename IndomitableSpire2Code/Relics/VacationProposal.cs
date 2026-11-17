@@ -47,7 +47,10 @@ public sealed class VacationProposal : IndomitableRelic, IMapActiveRelic, IIndom
     
     public override int DisplayAmount => HasOpportunity ? (int)DynamicVars["Uses"].BaseValue : 0;
     
-    public override bool IsAllowed(IRunState runState) => runState.TotalFloor < GenerationFloorLimit;
+    // 使用游戏原生逻辑兼容新的极速模式，其他模式自定义
+    protected override bool IsAllowedInternal(IRunState runState) => runState.GameMode == GameMode.Blitz
+        ? !IsLateInAct3(runState)
+        : runState.TotalFloor < GenerationFloorLimit;
     
     public override Task AfterObtained()
     {

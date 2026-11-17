@@ -4,6 +4,7 @@ using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Relics;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.RelicPools;
 using MegaCrit.Sts2.Core.Rewards;
 using MegaCrit.Sts2.Core.Rooms;
@@ -87,23 +88,19 @@ public sealed class RoyalBounty : IndomitableSpire2Relic
     }
     
     // 只有在怪物确凿死亡时，才将其历史最高生命值兑现为赏金！
-    public override Task AfterDeath(PlayerChoiceContext choiceContext, Creature creature, bool wasRemovalPrevented, float deathAnimLength)
+    public override Task AfterDeath(PlayerChoiceContext choiceContext, Creature creature, CardModel? source, 
+        bool wasRemovalPrevented, float deathAnimLength)
     {
         // 如果死亡被阻止（比如复活），则不发赏金
         if (!creature.IsEnemy) return Task.CompletedTask;
         // 做最后一次更新，捕捉转阶段/复活瞬间可能提升的最大生命值
         UpsertEnemyMaxHpTracker(creature);
-        // 怪物死亡，赏金兑现，通知 UI 更新右上角面板
-        if (_enemyMaxHpTracker.TryGetValue(creature, out var record))
-        {
-            // 计算尚未发放赏金的血量差值
-            if (record.MaxHpSeen - record.MaxHpRewarded is var unrewardedHp and > 0)
-            {
-                Flash();
-                CombatTotalEnemyMaxHp += unrewardedHp; // 累加至右上角赏金池
-                record.MaxHpRewarded += unrewardedHp;  // 更新已兑现记录，防止反复刷钱
-            }
-        }
+        // 怪物死亡，赏金兑现，通知 UI 更新右上角面板，并计算尚未发放赏金的血量差值
+        if (!_enemyMaxHpTracker.TryGetValue(creature, out var record) ||
+            record.MaxHpSeen - record.MaxHpRewarded is not (var unrewardedHp and > 0)) return Task.CompletedTask;
+        Flash();
+        CombatTotalEnemyMaxHp += unrewardedHp; // 累加至右上角赏金池
+        record.MaxHpRewarded += unrewardedHp;  // 更新已兑现记录，防止反复刷钱
         return Task.CompletedTask;
     }
     

@@ -53,7 +53,7 @@ public static class CustomRelicCmd
         // 参考 RelicFactory.PullNextRelicFromFront(player) ，先 roll 稀有度，再用 preview 副本生成，
         // 既不会从玩家的实际 RelicGrabBag 的 availableDeque 中移除，也不会从 SharedRelicGrabBag 中移除，
         // RelicReward 要使用可变实例。转换只准备奖励显示对象，并不代表已获取遗物。
-        var rarityToRoll = RelicFactory.RollRarity(player);
+        var rarityToRoll = RelicFactory.RollRarityForReward(player);
         return (TestRngInjector.ConsumeRelicOverride()
                 ?? preview.PullFromFront(rarityToRoll, player.RunState)
                 ?? RelicFactory.FallbackRelic).ToMutable();
@@ -132,7 +132,7 @@ public static class CustomRelicCmd
         {
             // 直接获取逐步对应原版：RelicFactory 从池抽取并更新共享池，RelicCmd.Obtain
             // 入包并执行 AfterObtained，最后由原版 RewardSynchronizer 通知其他玩家。
-            var relic = RelicFactory.PullNextRelicFromFront(player).ToMutable();
+            var relic = RelicFactory.PullNextRelicForRewardFromFront(player).ToMutable();
             await RelicCmd.Obtain(relic, player);
             RunManager.Instance.RewardSynchronizer.SyncLocalObtainedRelic(relic);
             return;

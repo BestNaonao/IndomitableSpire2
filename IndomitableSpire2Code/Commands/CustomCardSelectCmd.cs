@@ -2,7 +2,6 @@
 using MegaCrit.Sts2.addons.mega_text;
 using MegaCrit.Sts2.Core.Assets;
 using MegaCrit.Sts2.Core.CardSelection;
-using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Context;
 using MegaCrit.Sts2.Core.Entities.Multiplayer;
 using MegaCrit.Sts2.Core.Entities.Players;
@@ -102,8 +101,8 @@ public static class CustomCardSelectCmd
         validCards = validCards.ToArray();
         
         // 与原版 FromSimpleGrid 一样，自动选牌不启动玩家选择和联网界面。
-        if (CardSelectCmd.Selector != null)
-            return await CardSelectCmd.Selector.GetSelectedCards(validCards, prefs.MinSelect, prefs.MaxSelect);
+        if (RunManager.Instance.CardSelectorStack.GetSelector(player) is { } selector)
+            return await selector.GetSelectedCards(validCards, prefs.MinSelect, prefs.MaxSelect);
         
         IReadOnlyList<CardModel> result;
         
@@ -121,9 +120,10 @@ public static class CustomCardSelectCmd
             if (LocalContext.IsMe(player) && RunManager.Instance.NetService.Type != NetGameType.Replay)
             {
                 // 【本地玩家逻辑】
-                if (CardSelectCmd.LocalSelector != null)
+                if (RunManager.Instance.CardSelectorStack.LocalSelector != null)
                 {
-                    result = (await CardSelectCmd.LocalSelector.GetSelectedCards(validCards, prefs.MinSelect, prefs.MaxSelect)).ToList();
+                    result = (await RunManager.Instance.CardSelectorStack.LocalSelector
+                        .GetSelectedCards(validCards, prefs.MinSelect, prefs.MaxSelect)).ToList();
                 }
                 else
                 {

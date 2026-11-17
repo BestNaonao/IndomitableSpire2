@@ -21,10 +21,10 @@ public static class IndomitableSharedProgressionPatch
 		AccessTools.Field(typeof(ProgressState), "_characterStats");
 	private static readonly FieldInfo? LocalPlayerField =
 		AccessTools.Field(typeof(NGameOverScreen), "_localPlayer");
-
+	
 	private static readonly ConditionalWeakTable<ProgressState, MigrationMarker> MigratedStates = new();
 	private static readonly Lock MigrationLock = new();
-
+	
 	[HarmonyPatch(typeof(ProgressState), nameof(ProgressState.GetOrCreateCharacterStats))]
 	[HarmonyPrefix]
 	private static void RedirectMutableStats(ProgressState __instance, ref ModelId characterId)
@@ -32,19 +32,19 @@ public static class IndomitableSharedProgressionPatch
 		EnsureExistingStatsAreUnified(__instance);
 		characterId = GetProgressionId(characterId);
 	}
-
-	[HarmonyPatch(typeof(ProgressState), nameof(ProgressState.GetStatsForCharacter))]
+	
+	[HarmonyPatch(typeof(ProgressState), nameof(ProgressState.GetStatsForCharacter), typeof(ModelId))]
 	[HarmonyPrefix]
 	private static void RedirectStatsLookup(ProgressState __instance, ref ModelId characterId)
 	{
 		EnsureExistingStatsAreUnified(__instance);
 		characterId = GetProgressionId(characterId);
 	}
-
+	
 	[HarmonyPatch(typeof(ProgressState), nameof(ProgressState.ToSerializable))]
 	[HarmonyPrefix]
 	private static void MigrateBeforeSave(ProgressState __instance) => EnsureExistingStatsAreUnified(__instance);
-
+	
 	/// <summary>
 	/// 游戏结算写入徽章时会直接以当前皮肤 ID 索引角色统计字典。
 	/// 在这次同步调用期间临时设置别名，让徽章写入共享进度，并兼容修改同一索引的其他补丁。
