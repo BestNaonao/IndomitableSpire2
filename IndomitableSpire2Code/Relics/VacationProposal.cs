@@ -38,10 +38,13 @@ public sealed class VacationProposal : IndomitableRelic, IMapActiveRelic, IIndom
         set { AssertMutable(); _spentAct = value; }
     }
     
-    public bool HasOpportunity => IsMutable && !IsMelted && SpentAct != Owner.RunState.CurrentActIndex;
+    // 商店待售实例和读档中间状态可能尚未绑定持有者。
+    private Player? OwnerOrNull => IsMutable ? Owner : null;
+    
+    public bool HasOpportunity => OwnerOrNull is { } owner && !IsMelted && SpentAct != owner.RunState.CurrentActIndex;
     
     // 不声明 HasUponPickupEffect：初始化编号不是一次性的拾取奖励；原版 IsTradable 自动读取 IsUsedUp。
-    public override bool IsUsedUp => IsMutable && !HasOpportunity;
+    public override bool IsUsedUp => OwnerOrNull is not null && !HasOpportunity;
     
     public override bool ShowCounter => true;
     
