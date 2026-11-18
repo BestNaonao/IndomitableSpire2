@@ -18,7 +18,7 @@ namespace IndomitableSpire2.IndomitableSpire2Code.Commands;
 /// <summary>
 /// 赠品遗物的通用处理：从池中预览、展示赠品选择、然后提交领取或销毁。
 /// 商店赠品由 <see cref="CustomMerchantCmd"/> 提供已确定的货位遗物和交易回调；
-/// 池赠品由 <see cref="GiveFromPool"/> 先按原版规则预览一个遗物。
+/// 池赠品由 <see cref="PreviewFromPool"/> 先按原版规则预览一个遗物。
 /// </summary>
 public static class CustomRelicCmd
 {
@@ -124,31 +124,13 @@ public static class CustomRelicCmd
     }
     
     /// <summary>
-    /// 从遗物池赠送遗物。直接获取走原版完整路径；另外两种规则先展示可选奖励。
-    /// </summary>
-    public static async Task GiveFromPool(Player player, LuckyBagRelicRule rule)
-    {
-        if (rule == LuckyBagRelicRule.Direct)
-        {
-            // 直接获取逐步对应原版：RelicFactory 从池抽取并更新共享池，RelicCmd.Obtain
-            // 入包并执行 AfterObtained，最后由原版 RewardSynchronizer 通知其他玩家。
-            var relic = RelicFactory.PullNextRelicForRewardFromFront(player).ToMutable();
-            await RelicCmd.Obtain(relic, player);
-            RunManager.Instance.RewardSynchronizer.SyncLocalObtainedRelic(relic);
-            return;
-        }
-        // 非直接模式先只在副本上抽取并显示。领取/销毁/放回都由 OfferGift 处理。
-        await OfferGift(PreviewFromPool(player), player, rule, fromPool: true);
-    }
-    
-    /// <summary>
     /// 打开一个只负责记录选择的原版奖励界面，并在界面关闭后提交领取、放回或销毁。
     /// </summary>
     /// <remarks>
     /// UI 来自 <c>RewardsCmd.OfferCustom</c>，其调用方式参考原版“小型扭蛋”的 AfterObtained；
     /// 标题由 GiftRewardsScreenPatch 调整，遗物图标/跳过按钮沿用 RelicReward。
     /// 传入的 GiftRelicReward 不在选择时立即获取，所以这里统一执行后续操作，避免商店回调和奖励回调各自再获取一次。
-    /// 多人模式先广播同一个赠品，再让原版奖励同步器同步选择。
+    /// 各端已在同一笔商店交易中确定赠品，原版奖励同步器只负责同步选择。
     /// </remarks>
     /// <param name="relic">已经确定并用于展示的遗物。</param>
     /// <param name="player">这份赠品对应的玩家。</param>
@@ -156,22 +138,20 @@ public static class CustomRelicCmd
     /// <param name="fromPool">true 表示赠品先从随机池预览；false 表示它来自当前商店货位。</param>
     /// <param name="claim">商店领取回调；为空时用原版 RelicCmd.Obtain 直接领取。</param>
     /// <param name="discard">商店销毁回调，用于下架货位并按原版规则补货；池赠品不需要它。</param>
-    /// <param name="synchronize">本地发起时广播赠品；网络消息接收端传 false，避免再次广播。</param>
     public static async Task OfferGift(RelicModel relic, Player player, LuckyBagRelicRule rule, bool fromPool,
-        Func<Task<bool>>? claim = null, Func<Task>? discard = null, bool synchronize = true)
+        Func<Task<bool>>? claim = null, Func<Task>? discard = null)
     {
         if (player.Creature.IsDead) return;
-        // 商店交互最初只发生在一端。其他端需先拿到相同遗物和规则，再各自建立相同奖励集，
-        // 后续的选择/跳过由原版 RewardsSetSynchronizer 按奖励集 ID 同步。
-        if (synchronize) LuckyBagGiftMessage.Send(relic, rule, fromPool);
-        // UI 由父类和补丁提供，GiftRelicReward 只记录决定，不调用基类获取/历史逻辑。
         var reward = new GiftRelicReward(relic, player);
-        await RewardsCmd.OfferCustom(player, [reward]);
+        var offer = RewardsCmd.OfferCustom(player, [reward]);
+        // 若切层开始时还在等待规则或排队购买，奖励可能在离店跳过之后才创建。
+        if (LocalContext.IsMe(player) && MerchantTransactionQueue.IsClosing(RunManager.Instance.MerchantSynchronizer))
+            RunManager.Instance.RewardsSetSynchronizer.BeforeLeavingRoom();
+        await offer;
         if (reward.Accepted)
         {
-            // 遗物池抽取只有在玩家确认后才提交，在各端更新镜像池；真正的背包获取只在本地端执行，由原版 RewardSynchronizer 发一次消息。
+            // 选择已由原版同步；各端都提交池、背包、获取钩子及货位变化。
             if (fromPool) ConsumePoolDraw(relic, player);
-            if (!LocalContext.IsMe(player)) return;
             if (claim != null)
             {
                 // 商店遗物必须调用原版免费购买流程，以保留购买钩子、清理/补货和 UI 刷新。
@@ -180,9 +160,8 @@ public static class CustomRelicCmd
             }
             else
             {
-                // 遗物池随机遗物没有商店交易回调，直接使用原版 Obtain 并同步一次获得消息。
+                // 池赠品没有商店货位；各端直接执行 Obtain，不额外发送获得结果。
                 await RelicCmd.Obtain(relic, player);
-                RunManager.Instance.RewardSynchronizer.SyncLocalObtainedRelic(relic);
             }
         }
         else if (reward.Skipped)
@@ -191,9 +170,9 @@ public static class CustomRelicCmd
             if (rule == LuckyBagRelicRule.SkipAndReturn) RecordSkipped(relic, player);
             else
             {
-                // 销毁 = 池赠品提交这次抽取；商店赠品则由 discard 回调执行货位下架/补货。其他端只镜像遗物池与历史状态。
+                // 销毁 = 池赠品提交这次抽取；商店赠品则由 discard 回调执行货位下架/补货。各端执行同一回调。
                 if (fromPool) ConsumePoolDraw(relic, player);
-                if (LocalContext.IsMe(player) && discard != null) await discard();
+                if (discard != null) await discard();
                 else Discard(relic, player);
             }
         }

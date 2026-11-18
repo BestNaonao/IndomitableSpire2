@@ -1,7 +1,5 @@
 using BaseLib.Utils;
-using IndomitableSpire2.IndomitableSpire2Code.Commands;
 using IndomitableSpire2.IndomitableSpire2Code.Multiplayer;
-using MegaCrit.Sts2.Core.Context;
 using MegaCrit.Sts2.Core.Entities.Merchant;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Relics;
@@ -51,8 +49,8 @@ public sealed class LuckyBag : IndomitableSpire2Relic
     public override async Task AfterItemPurchased(Player player, MerchantEntry itemPurchased, int goldSpent)
     {
         // 假商人也使用 MerchantEntry，但它所在的是 EventRoom。
-        // 商店交易仅在本机处理；获得遗物的结果交给原版 RewardSynchronizer 同步。
-        if (player != Owner || !LocalContext.IsMe(Owner) || Owner.RunState.CurrentRoom is not MerchantRoom room) return;
+        // 0.113 的付费交易在各端重放；赠品也必须在同一购买任务内完整结算。
+        if (player != Owner || Owner.RunState.CurrentRoom is not MerchantRoom room) return;
         // 在店内刚买到福袋时没有收到进房钩子；包括本次购买在内的本店消费仍然有效。
         if (room != _merchantRoom) ResetMerchant(room, 0);
         if (_triggered) return;
@@ -72,17 +70,6 @@ public sealed class LuckyBag : IndomitableSpire2Relic
         Status = RelicStatus.Disabled;
         InvokeDisplayAmountChanged();
         
-        var rule = await LuckyBagRuleSynchronizer.GetRule();
-        // 在等待房主响应期间，可能已离店；不能把旧商店的赠品发到下一个房间。
-        if (Owner.RunState.CurrentRoom != room || Owner.Creature.IsDead) return;
-        var stockedRelics = inventory.RelicEntries.Where(e => e.IsStocked).ToList();
-        if (stockedRelics.Count > 0)
-        {
-            var entry = stockedRelics[Owner.PlayerRng.Shops.NextInt(stockedRelics.Count)];
-            await CustomMerchantCmd.GiveRelic(inventory, entry, rule);
-            return;
-        }
-        
-        await CustomRelicCmd.GiveFromPool(Owner, rule);
+        await LuckyBagGiftSynchronizer.Give(inventory, room);
     }
 }

@@ -9,11 +9,6 @@ namespace IndomitableSpire2.IndomitableSpire2Code.Commands;
 
 public static class CustomMerchantCmd
 {
-    // 标记当前是本 Mod 发起的赠品领取
-    private static readonly AsyncLocal<MerchantRelicEntry?> ActiveClaim = new();
-    
-    internal static bool IsGiftClaim(MerchantRelicEntry entry) => ActiveClaim.Value == entry;
-    
     private static readonly Action<MerchantRelicEntry, MerchantInventory?> Restock =
         AccessTools.MethodDelegate<Action<MerchantRelicEntry, MerchantInventory?>>(
             AccessTools.DeclaredMethod(typeof(MerchantRelicEntry), "RestockAfterPurchase"));
@@ -27,25 +22,20 @@ public static class CustomMerchantCmd
         if (rule == LuckyBagRelicRule.Direct)
         {
             if (!await ClaimRelic(inventory, entry))
-                await CustomRelicCmd.GiveFromPool(inventory.Player, rule);
+                throw new InvalidOperationException("同步赠品已不在原商店货位。");
             return;
         }
-        if (entry.Model is not { } relic) return;
+        if (entry.Model is not { } relic)
+            throw new InvalidOperationException("同步赠品已不在原商店货位。");
         await CustomRelicCmd.OfferGift(relic, inventory.Player, rule, fromPool: false,
             claim: () => entry.Model == relic   // 二次判断：执行前的最终状态校验（乐观锁）
                 ? ClaimRelic(inventory, entry) : Task.FromResult(false),
             discard: () => DiscardRelic(inventory, entry, relic));
     }
     
-    private static async Task<bool> ClaimRelic(MerchantInventory inventory, MerchantRelicEntry entry)
-    {
-        // 普通交易由新版 MerchantSynchronizer 同步。赠品保留旧版的本地免费交易与奖励消息，
-        // 由 MerchantGiftSyncPatch 在补货、购买后钩子之前同步入包，保持原来的执行次序。
-        var previous = ActiveClaim.Value;
-        ActiveClaim.Value = entry;
-        try { return await entry.OnTryPurchaseUnsynchronized(inventory, ignoreCost: true); }
-        finally { ActiveClaim.Value = previous; }
-    }
+    // 各端都在父购买任务内执行，不能再发送“获得遗物”消息重复入包。
+    private static Task<bool> ClaimRelic(MerchantInventory inventory, MerchantRelicEntry entry) =>
+        entry.OnTryPurchaseUnsynchronized(inventory, ignoreCost: true);
     
     /// <summary>
     /// 相当于不把遗物交给玩家的免费交易。先记录和消耗池，再按原版顺序进行补货或清空、
@@ -53,7 +43,8 @@ public static class CustomMerchantCmd
     /// </summary>
     public static async Task DiscardRelic(MerchantInventory inventory, MerchantRelicEntry entry, RelicModel relic)
     {
-        if (entry.Model != relic) return;
+        if (entry.Model != relic)
+            throw new InvalidOperationException("待销毁的赠品已不在原商店货位。");
         var player = inventory.Player;
         player.RunState.CurrentMapPointHistoryEntry?.GetEntry(player.NetId).BoughtRelics.Add(relic.Id); // 计入历史
         CustomRelicCmd.Discard(relic, player);  // 自定义丢弃
