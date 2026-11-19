@@ -36,9 +36,12 @@ internal static class TashkentSkinSelection
         _ => null
     };
 
-    private static Control GetPanelParent(Control screen) => screen is NCharacterSelectScreen or NBlitzScreen
-        ? screen.GetNodeOrNull<Control>("InfoPanel") ?? screen
-        : screen;
+    private static Control GetPanelParent(Control screen) => screen switch
+    {
+        NCharacterSelectScreen or NBlitzScreen => screen.GetNodeOrNull<Control>("InfoPanel") ?? screen,
+        NCustomRunScreen => screen.GetNodeOrNull<Control>("LeftContainer") ?? screen,
+        _ => screen
+    };
 
     internal static TashkentSkinSelectPanel? GetPanel(Control screen) =>
         GetPanelParent(screen).GetNodeOrNull<TashkentSkinSelectPanel>(PanelName);
@@ -63,7 +66,9 @@ internal static class TashkentSkinSelection
             panel.Name = PanelName;
             var parent = GetPanelParent(screen);
             parent.AddChildSafely(panel);
-            if (parent != screen)
+            if (screen is NCustomRunScreen && screen.GetNodeOrNull<Control>("%SeedInput") is { } seedInput)
+                panel.PlaceAboveSeed(seedInput);
+            else if (parent != screen)
                 panel.Position = new Vector2(400f, 0f);
         }
 

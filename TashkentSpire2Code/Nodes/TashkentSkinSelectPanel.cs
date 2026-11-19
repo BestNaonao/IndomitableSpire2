@@ -76,6 +76,16 @@ public partial class TashkentSkinSelectPanel : Control
 		RenderSkinVisuals(Skins[_currentIndex]);
 	}
 
+	internal void PlaceAboveSeed(Control seedInput)
+	{
+		var layout = GetNode<VBoxContainer>("VBoxContainer");
+		var size = layout.Size;
+		layout.SetAnchorsAndOffsetsPreset(LayoutPreset.CenterTop, LayoutPresetMode.KeepSize);
+		layout.GrowVertical = GrowDirection.Begin;
+		layout.Position = new Vector2((Size.X - size.X) / 2f,
+			seedInput.GlobalPosition.Y - GlobalPosition.Y - size.Y - 12f);
+	}
+
 	private void OnLeftPressed()
 	{
 		if (!_interactable || _lobby.LocalPlayer.isReady) return;

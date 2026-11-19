@@ -15,6 +15,9 @@ $root = Split-Path -Parent $PSScriptRoot
 $modId = 'TashkentSpire2'
 $stableVersion = '0.111.0'
 $betaVersion = '0.113.1'
+$energyIconDirectory = "$modId/images/packed/sprite_fonts"
+$energyIconNames = @('Tashkent_energy_icon.png', 'Tashkent_energy_icon_original.png')
+$energyIconFiles = $energyIconNames + @($energyIconNames | ForEach-Object { "$_.import" })
 $artifacts = Join-Path $root '.artifacts'
 $buildDir = Join-Path $artifacts $Configuration
 $packages = Join-Path $root 'packages'
@@ -50,6 +53,12 @@ function Invoke-BuildTool([string] $Tool, [string[]] $Arguments) {
 
 function Export-Pack([string] $Project, [string] $Destination, [string] $Version, [string] $BasePack) {
     $log = Join-Path $buildDir "godot-g$Version.log"
+    $iconFileNames = Get-ChildItem -LiteralPath (Join-Path $Project $energyIconDirectory) -File -Name
+    foreach ($icon in $energyIconFiles) {
+        if ($icon -cnotin $iconFileNames) {
+            throw "Incorrect resource casing in $Project. Expected $energyIconDirectory/$icon."
+        }
+    }
     $arguments = @('--headless', '--editor', '--path', $Project)
     if ($BasePack) {
         Write-Host "Exporting g$Version PCK patch"
@@ -70,10 +79,16 @@ function Export-Pack([string] $Project, [string] $Destination, [string] $Version
     if (Select-String -LiteralPath $log -Quiet -Pattern '^ERROR:|^System\.\w+Exception:') {
         throw "Godot reported export errors. See $log"
     }
-    # The diff omits unchanged files, including the Spine remaps.
-    if (!$BasePack -and (!(Select-String -LiteralPath $log -Quiet -Pattern 'tashigan_2\.skel\.import') -or
-        !(Select-String -LiteralPath $log -Quiet -Pattern 'tashigan_2\.atlas\.import'))) {
-        throw "Godot did not pack the Spine resources. Check the editor extension and $log"
+    # The diff omits unchanged remaps.
+    if (!$BasePack) {
+        $requiredImports = @('tashigan_2.skel.import', 'tashigan_2.atlas.import') +
+            @($energyIconNames | ForEach-Object { "$energyIconDirectory/$_.import" })
+        foreach ($import in $requiredImports) {
+            $escaped = [regex]::Escape($import)
+            if (!(Select-String -LiteralPath $log -Quiet -CaseSensitive -Pattern "savepack.*$escaped")) {
+                throw "Godot did not pack $import. See $log"
+            }
+        }
     }
 }
 
@@ -160,29 +175,18 @@ function Install-Bundle([string] $Source, [string] $ModsDirectory) {
 
 New-Item -ItemType Directory -Force -Path $buildDir | Out-Null
 New-Item -ItemType File -Force -Path (Join-Path $artifacts '.gdignore') | Out-Null
-$commit = & git -C $root rev-parse --verify "$StableSourceRef^{commit}"
+$commit = & git -C $root rev-parse --verify --quiet "$StableSourceRef^{commit}"
 if ($LASTEXITCODE -ne 0 -or $commit -notmatch '^[0-9a-f]{40}$') {
-    throw "Cannot resolve the 0.111.0 source ref '$StableSourceRef'."
+    throw "Cannot resolve the 0.111.0 source ref '$StableSourceRef'. Check out the maintenance branch or set StableSourceRef to a Git ref that contains its fixes."
 }
-$stablePatch = $null
-$stableCacheName = "stable-$commit"
-if ($commit -eq '9234a743ea19d750b4adee6ee6c2be1a0295b904') {
-    $stablePatch = Join-Path $PSScriptRoot 'compat/g0.111.0-sync-hooks.patch'
-    $patchHash = & git -C $root hash-object --no-filters -- $stablePatch
-    if ($LASTEXITCODE -ne 0) { throw "Cannot hash $stablePatch." }
-    $stableCacheName += '-' + $patchHash.Substring(0, 12)
-}
-$stable = Join-Path $buildDir $stableCacheName
+Write-Host "g$stableVersion source: $StableSourceRef ($commit)"
+$stable = Join-Path $buildDir "stable-$commit"
 if (!(Test-Path -LiteralPath (Join-Path $stable '.source-ready'))) {
     $archive = Join-Path $buildDir "$commit.tar"
     New-Item -ItemType Directory -Force -Path $stable | Out-Null
     Invoke-BuildTool git @('-C', $root, 'archive', '--format=tar', "--output=$archive", $commit)
     Invoke-BuildTool tar @('-xf', $archive, '-C', $stable)
     Remove-Item -LiteralPath $archive
-    if ($stablePatch) {
-        $stablePrefix = $stable.Substring($root.Length + 1).Replace('\', '/')
-        Invoke-BuildTool git @('-C', $root, 'apply', "--directory=$stablePrefix", $stablePatch)
-    }
     New-Item -ItemType File -Path (Join-Path $stable '.source-ready') | Out-Null
 }
 

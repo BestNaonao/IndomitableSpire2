@@ -47,7 +47,7 @@ TashkentSpire2/
 ## 更新两套实现
 
 - **0.113.1** 使用当前打开的 Git 工作区，包含未提交的源码和资源修改。若另开 `branch_tashkent_beta`，从该分支的工作区执行相同命令。
-- **0.111.0** 默认从 Git 提交 `9234a743ea19d750b4adee6ee6c2be1a0295b904` 取源码和资源，并在生成的快照中应用 `build/compat/g0.111.0-sync-hooks.patch`。维护旧版后，在 `Directory.Build.props` 设置 `StableSourceRef`，或在命令行传 `-p:StableSourceRef=<已提交的分支、标签或提交>`。打包会读取该 ref 指向的提交，当前分支无需切换。
+- **0.111.0** 默认从本地维护分支 `branch_tashkent_0.111.0` 的最新提交取源码和资源。这个分支从 `9234a74` 建立，旧版能量图标修复也记录在该分支。维护旧版时，提交改动后回到主工作区构建。其他工作区需拥有同一个旧版分支，或通过 `Directory.Build.props` 或 `-p:StableSourceRef=<Git 引用>` 指向包含修复的分支、标签或提交。打包日志会显示实际使用的提交。
 - 修改根目录 `mod_manifest.json` 的 `version` 就能统一启动器和两套实现的程序集版本。`min_game_version` 用于游戏原生加载检查，应保持为包所声明支持的最低游戏版本。
 
 两个版本继续使用各自源码快照的 `BasicExport` 配置。0.111.0 用 Godot `--export-pack` 导出完整底包。0.113.1 用 `--export-patch` 和 `--patches` 从本次构建生成的底包导出新增、修改和删除记录。发布或测试时一起替换整个成品目录，确保差异包与同一次构建的底包配对。

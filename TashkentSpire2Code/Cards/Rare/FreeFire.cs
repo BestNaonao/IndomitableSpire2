@@ -38,7 +38,7 @@ public sealed class FreeFire() : AmmunitionCard(3, CardType.Skill, CardRarity.Ra
         
             List<CardModel> cardsToPlay = CardFactory.GetDistinctForCombat(
                 base.Owner, ammuCards, shellsLoaded, base.Owner.RunState.Rng.CombatCardGeneration
-            ).ToList();
+            ).Where(card => card?.Owner != null).ToList();
 
             foreach (var card in cardsToPlay)
             {
@@ -48,13 +48,17 @@ public sealed class FreeFire() : AmmunitionCard(3, CardType.Skill, CardRarity.Ra
                 }
             }
 
+            IReadOnlyList<CardPileAddResult> generatedCards = Array.Empty<CardPileAddResult>();
             if (cardsToPlay.Count > 0)
             {
-                await CardPileCmd.AddGeneratedCardsToCombat(cardsToPlay, PileType.Play, base.Owner);
+                generatedCards = await CardPileCmd.AddGeneratedCardsToCombat(cardsToPlay, PileType.Play, base.Owner);
             }
 
-            foreach (CardModel item in cardsToPlay)
+            foreach (CardPileAddResult result in generatedCards)
             {
+                if (!result.success || result.cardAdded is not { } item || item.Pile?.Type != PileType.Play)
+                    continue;
+
                 if (!base.Owner.Creature.IsDead)
                 {
                     item.ExhaustOnNextPlay = true; 

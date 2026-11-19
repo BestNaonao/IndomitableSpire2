@@ -10,7 +10,7 @@
         <DefaultItemExcludes>$(DefaultItemExcludes);packages/**;.artifacts/**;build/**</DefaultItemExcludes>
         <BuildBundle Condition="'$(BuildBundle)' == ''">true</BuildBundle>
         <DeployBundle Condition="'$(DeployBundle)' == ''">true</DeployBundle>
-        <StableSourceRef Condition="'$(StableSourceRef)' == ''">9234a743ea19d750b4adee6ee6c2be1a0295b904</StableSourceRef>
+        <StableSourceRef Condition="'$(StableSourceRef)' == ''">refs/heads/branch_tashkent_0.111.0</StableSourceRef>
         <AppOutputBase>$(MSBuildProjectDirectory)\</AppOutputBase>
         <PathMap>$(AppOutputBase)=.\</PathMap>
     </PropertyGroup>

@@ -9,6 +9,7 @@ using MegaCrit.Sts2.Core.Nodes.Screens.Blitz;
 using MegaCrit.Sts2.Core.Nodes.Screens.CharacterSelect;
 using MegaCrit.Sts2.Core.Nodes.Screens.CustomRun;
 using MegaCrit.Sts2.Core.Nodes.Screens.Dread;
+using MegaCrit.Sts2.Core.Nodes.Screens.MainMenu;
 using MegaCrit.Sts2.Core.Saves;
 using MegaCrit.Sts2.Core.Saves.Managers;
 using TashkentSpire2.TashkentSpire2Code.Character;
@@ -33,7 +34,10 @@ internal static class TashkentCharacterRosterScopePatch
         [
             AccessTools.DeclaredMethod(typeof(ProgressSaveManager), "UpdateEpochsPostRun"),
             AccessTools.DeclaredMethod(typeof(StartRunLobby), "BeginRunLocally"),
-            AccessTools.DeclaredMethod(typeof(AscensionHelper), nameof(AscensionHelper.GetRotatingCharacterIdForStreak))
+            AccessTools.DeclaredMethod(typeof(AscensionHelper), nameof(AscensionHelper.GetRotatingCharacterIdForStreak)),
+            AccessTools.DeclaredMethod(typeof(NCustomRunScreen), "InitCharacterButtons"),
+            AccessTools.DeclaredMethod(typeof(NCustomRunModifiersList), nameof(NCustomRunModifiersList._Ready)),
+            AccessTools.DeclaredMethod(typeof(NCustomRunScreen), "OnRandomizePressed")
         ];
 
     [HarmonyPrefix]
@@ -81,25 +85,21 @@ internal static class TashkentHideSkinButtonsPatch
     private static void Postfix(NCharacterSelectButton __instance, CharacterModel character,
         ICharacterSelectButtonDelegate del)
     {
-        if (del is NBlitzScreen or NDreadScreen or NCustomRunScreen
+        if (del is NBlitzScreen or NDreadScreen
             && TashkentCharacterRoster.IsSkinVariant(character))
             __instance.Hide();
     }
 }
 
-[HarmonyPatch(typeof(NCustomRunScreen), "InitCharacterButtons")]
-internal static class TashkentCustomRunFocusPatch
+[HarmonyPatch(typeof(ModifierModel), nameof(ModifierModel.Pick2Good1Bad))]
+internal static class TashkentCustomRunRandomModifiersPatch
 {
-    [HarmonyPostfix]
-    private static void Postfix(Control ____charButtonContainer)
+    [HarmonyPrefix]
+    private static void Prefix(ref IEnumerable<CharacterModel> excludedCharacters)
     {
-        var buttons = ____charButtonContainer.GetChildren().OfType<NCharacterSelectButton>()
-            .Where(button => button.Visible).ToArray();
-        for (int index = 0; index < buttons.Length; index++)
-        {
-            buttons[index].FocusNeighborLeft = buttons[Math.Max(0, index - 1)].GetPath();
-            buttons[index].FocusNeighborRight = buttons[Math.Min(buttons.Length - 1, index + 1)].GetPath();
-        }
+        if (TashkentCharacterRosterScopePatch.HideVariants)
+            excludedCharacters = excludedCharacters.Select(character => TashkentCharacterRoster.IsSkinVariant(character)
+                ? ModelDb.Character<TashkentCharacter>() : character);
     }
 }
 
