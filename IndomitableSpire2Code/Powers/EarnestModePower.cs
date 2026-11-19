@@ -91,7 +91,7 @@ public sealed class EarnestModePower : IndomitablePower
     }
     
     private bool IsThisEarnestModeTurn(Player player) => 
-        GetInternalData<EarnestModeState>().IsActive &&
+        player == Owner.Player && GetInternalData<EarnestModeState>().IsActive &&
         CombatManager.Instance.IsInProgress && CombatManager.Instance.PlayersTakingExtraTurn.Contains(player);
     
     private sealed class EarnestModeState
