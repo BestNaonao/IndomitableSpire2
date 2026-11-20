@@ -12,7 +12,7 @@ public sealed class Dynorphin() : VersatileCardOption(OptionId, durabilityCost: 
 {
     public const string OptionId = "dynorphin";
     
-    public override IEnumerable<DynamicVar> CreateVars() => [new PowerVar<DynorphinPower>(2M)];
+    public override IEnumerable<DynamicVar> CreateVars() => [new PowerVar<DynorphinPower>(3M)];
     
     public override void Upgrade(CardModel source) => source.DynamicVars["DynorphinPower"].UpgradeValueBy(1M);
     

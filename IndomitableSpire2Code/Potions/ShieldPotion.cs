@@ -23,7 +23,7 @@ public sealed class ShieldPotion : IndomitableSpire2Potion
     
     public override TargetType TargetType => TargetType.AnyPlayer;
     
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new ShieldVar(10M, ValueProp.Unpowered)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new ShieldVar(12M, ValueProp.Unpowered)];
     
     public override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<ShieldPower>()];
     
@@ -31,7 +31,6 @@ public sealed class ShieldPotion : IndomitableSpire2Potion
     {
         ArgumentNullException.ThrowIfNull(target);
         
-        // 护盾需同时给予真实格挡及对应的跨回合保留能力。
         await CustomCreatureCmd.GainShield(
             choiceContext: choiceContext,
             target: target,
