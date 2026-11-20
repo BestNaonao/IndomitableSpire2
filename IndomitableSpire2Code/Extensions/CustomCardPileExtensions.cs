@@ -22,7 +22,7 @@ public static class CustomCardPileExtensions
         player.GetCards(sortDrawPile, mixPiles: false, piles);
     
     /// <summary>
-    /// 收集卡牌；启用混合时，将所有牌堆的卡牌按稀有度、卡牌 ID 统一排序。
+    /// 收集卡牌；启用混合时，将所有牌堆的卡牌按原版抽牌堆展示规则统一排序。
     /// </summary>
     public static IReadOnlyList<CardModel> GetCards(
         this Player player, bool sortDrawPile, bool mixPiles, params PileType[] piles) => 
@@ -33,7 +33,7 @@ public static class CustomCardPileExtensions
     /// 所有排序均稳定：比较结果相同的卡牌保留此前的相对顺序。
     /// </summary>
     /// <param name="player">牌堆所属玩家。</param>
-    /// <param name="sortDrawPile">是否按原版查看抽牌堆的规则（稀有度、卡牌 ID）排序抽牌堆。</param>
+    /// <param name="sortDrawPile">是否按原版查看抽牌堆的规则（稀有度、卡牌自身比较）排序抽牌堆。</param>
     /// <param name="mixPiles">false 时逐堆拼接；true 时对合并结果调用 comparison 排序。</param>
     /// <param name="comparison">混合后的比较函数；mixPiles 为 false 时不调用。</param>
     /// <param name="piles">要收集的牌堆，顺序决定混合前各牌堆的排列顺序。</param>
@@ -57,7 +57,8 @@ public static class CustomCardPileExtensions
             : cards;
     }
     
+    // 与 NCardPileScreen.OnPileContentsChanged 的 orderby card.Rarity, card 一致。
     private static int CompareForDisplay(CardModel a, CardModel b) => a.Rarity != b.Rarity 
         ? a.Rarity.CompareTo(b.Rarity) 
-        : string.Compare(a.Id.Entry, b.Id.Entry, StringComparison.Ordinal);
+        : a.CompareTo(b);
 }
