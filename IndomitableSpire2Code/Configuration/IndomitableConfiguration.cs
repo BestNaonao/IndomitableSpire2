@@ -1,4 +1,5 @@
 using BaseLib.Config;
+using IndomitableSpire2.IndomitableSpire2Code.Character;
 using IndomitableSpire2.IndomitableSpire2Code.Patches;
 using IndomitableSpire2.IndomitableSpire2Code.Registries;
 
@@ -10,6 +11,9 @@ namespace IndomitableSpire2.IndomitableSpire2Code.Configuration;
 [ConfigHoverTipsByDefault]
 public sealed class IndomitableConfiguration : SimpleModConfig
 {
+    [ConfigHideInUI, ConfigIgnoreRestoreDefaults]
+    public static IndomitableSkin PreferredSkin { get; set; } = IndomitableSkin.Default;
+    
     /// <summary>
     /// 特殊卡牌展示对话开关
     /// </summary>

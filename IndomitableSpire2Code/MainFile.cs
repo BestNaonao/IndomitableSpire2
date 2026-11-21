@@ -22,6 +22,7 @@ public partial class MainFile : Node
     public static void Initialize()
     {
         ModConfigRegistry.Register(ModId, new IndomitableConfiguration());
+        MegaCrit.Sts2.Core.Runs.RunManager.Instance.RunStarted += Character.SkinPreference.OnRunStarted;
         Services.MapMarkerService.RegisterSave();
         Services.EyeInTheSkyService.RegisterSave();
         Services.VacationProposalService.RegisterSave();
