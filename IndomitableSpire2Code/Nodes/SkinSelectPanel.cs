@@ -1,10 +1,11 @@
-﻿using Godot;
+using Godot;
 using IndomitableSpire2.IndomitableSpire2Code.Character;
 using MegaCrit.Sts2.addons.mega_text;
 using MegaCrit.Sts2.Core.Bindings.MegaSpine;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Localization;
 using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Multiplayer.Game.Lobby;
 using MegaCrit.Sts2.Core.Nodes.Screens.CharacterSelect;
 
 namespace IndomitableSpire2.IndomitableSpire2Code.Nodes;
@@ -16,19 +17,14 @@ public partial class SkinSelectPanel : Control
     private TextureButton _rightArrow = null!;
     private Control _visualContainer = null!;   // 替换为占位的 Control 容器
     private MegaLabel _skinNameLabel = null!;
-    private NCharacterSelectScreen _selectScreen = null!;
+    private StartRunLobby _lobby = null!;
+    private NCharacterSelectButton _button = null!;
     
     private Node2D? _currentVisualNode;  // 记录当前实例化的模型节点，用于在切换时销毁
     private int _currentIndex;
     private ModelId? _renderedSkinId;
     
-    // 直接使用角色模型列表
-    private static readonly List<Indomitable> Skins = 
-    [
-        ModelDb.Character<IndomitableDefault>(),
-        ModelDb.Character<IndomitableMaid>(),
-        ModelDb.Character<IndomitableRaceQueen>()
-    ];
+    private static readonly IndomitableSkin[] Skins = Enum.GetValues<IndomitableSkin>();
     
     public override void _Ready()
     {
@@ -41,7 +37,7 @@ public partial class SkinSelectPanel : Control
         _rightArrow.Pressed += OnRightPressed;
     }
     
-    public void SetInteractable(bool interactable)
+    private void SetInteractable(bool interactable)
     {
         // 直接控制左和右箭头的可见性（或者设置 Disabled 属性也可以）
         if (IsInstanceValid(_leftArrow))
@@ -57,35 +53,35 @@ public partial class SkinSelectPanel : Control
     }
     
     // 每次选中该角色时被调用（包括重进界面）
-    public void ShowAndSync(NCharacterSelectScreen screen, Indomitable selectedSkin)
+    public void ShowSelection(StartRunLobby lobby, NCharacterSelectButton button, Indomitable skin)
     {
-        _selectScreen = screen; // 及时更新为当前最新的角色选择屏幕（大厅对象可能已重建）
+        _lobby = lobby;
+        _button = button;
+        _currentIndex = Array.IndexOf(Skins, skin.CurrentSkin);
+        SetInteractable(button.IsEnabled);
         Visible = true;
-        var selectedIndex = Skins.FindIndex(skin => skin.Id == selectedSkin.Id);
-        _currentIndex = selectedIndex >= 0 ? selectedIndex : 0;
-        
-        // SelectCharacter 已经把选择的角色写入大厅。
-        RenderSkinVisuals(Skins[_currentIndex]);
-    }
-    
-    private void OnLeftPressed()
-    {
-        _currentIndex = (_currentIndex + Skins.Count - 1) % Skins.Count;
-        OnSelection();
-    }
-    
-    private void OnRightPressed()
-    {
-        _currentIndex = (_currentIndex + 1) % Skins.Count;
-        OnSelection();
-    }
-    
-    private void OnSelection()
-    {
-        var skin = Skins[_currentIndex];
-        _selectScreen.Lobby.SetLocalCharacter(skin);
         RenderSkinVisuals(skin);
-        
+    }
+    
+    // 每帧同步回调，与按钮状态不同时同步状态
+    public override void _Process(double delta)
+    {
+        if (IsVisibleInTree() && IsInstanceValid(_button) && _leftArrow.Disabled == _button.IsEnabled)
+            SetInteractable(_button.IsEnabled);
+    }
+    
+    private void OnLeftPressed() => ChangeSkin(-1);
+    
+    private void OnRightPressed() => ChangeSkin(1);
+    
+    private void ChangeSkin(int direction)
+    {
+        if (!_button.IsEnabled || !IsVisibleInTree()) return;
+        _currentIndex = (_currentIndex + direction + Skins.Length) % Skins.Length;
+        var skin = SkinPreference.Model(Skins[_currentIndex]);
+        _lobby.SetLocalCharacter(skin, _lobby.LocalPlayer.isRotatingDread);
+        SkinPreference.Remember(skin.CurrentSkin);
+        RenderSkinVisuals(skin);
         // 播放当前皮肤的专属选人音效
         SfxCmd.Play(skin.CharacterSelectSfx);
     }
