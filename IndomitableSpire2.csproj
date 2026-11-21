@@ -117,6 +117,7 @@
 
     <ItemGroup>
         <Folder Include="IndomitableSpire2Code\Deprecated\Providers\" />
+        <Folder Include="IndomitableSpire2Code\Patches\Character\Skin\" />
         <Folder Include="IndomitableSpire2\images\card_portraits\beta\" />
         <Folder Include="IndomitableSpire2\images\card_portraits\big\"/>
         <Folder Include="IndomitableSpire2\images\enchantments\" />

@@ -4,7 +4,7 @@ using MegaCrit.Sts2.Core.Entities.Relics;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Nodes.Screens.RelicCollection;
 
-namespace IndomitableSpire2.IndomitableSpire2Code.Patches;
+namespace IndomitableSpire2.IndomitableSpire2Code.Patches.Character.Skin;
 
 /// <summary>
 /// ModelDb 为每个角色模型公开一个角色池的记录，但是不移除重复的角色池实例。
