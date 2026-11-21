@@ -7,7 +7,7 @@ using MegaCrit.Sts2.Core.Nodes;
 using MegaCrit.Sts2.Core.Nodes.Combat;
 using MegaCrit.Sts2.Core.Nodes.Rooms;
 
-namespace IndomitableSpire2.IndomitableSpire2Code.Patches;
+namespace IndomitableSpire2.IndomitableSpire2Code.Patches.Character;
 
 [HarmonyPatch]
 public static class IndomitableIdleAnimationPatch

@@ -4,7 +4,7 @@ using IndomitableSpire2.IndomitableSpire2Code.Extensions;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Hooks;
 
-namespace IndomitableSpire2.IndomitableSpire2Code.Patches;
+namespace IndomitableSpire2.IndomitableSpire2Code.Patches.Character;
 
 [HarmonyPatch(typeof(Hook), nameof(Hook.AfterCombatVictory))]
 public static class IndomitableVictoryAnimationPatch

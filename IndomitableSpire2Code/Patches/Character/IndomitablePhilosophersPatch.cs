@@ -3,7 +3,7 @@ using IndomitableSpire2.IndomitableSpire2Code.Character;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Events;
 
-namespace IndomitableSpire2.IndomitableSpire2Code.Patches;
+namespace IndomitableSpire2.IndomitableSpire2Code.Patches.Character;
 
 [HarmonyPatch(typeof(ColorfulPhilosophers), "CardPoolColorOrder", MethodType.Getter)]
 public sealed class IndomitablePhilosophersPatch

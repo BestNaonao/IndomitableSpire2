@@ -4,7 +4,7 @@ using IndomitableSpire2.IndomitableSpire2Code.Cards.Abstracts;
 using IndomitableSpire2.IndomitableSpire2Code.Character;
 using IndomitableSpire2.IndomitableSpire2Code.Commands;
 using IndomitableSpire2.IndomitableSpire2Code.Configuration;
-using IndomitableSpire2.IndomitableSpire2Code.Patches;
+using IndomitableSpire2.IndomitableSpire2Code.Patches.Character;
 using IndomitableSpire2.IndomitableSpire2Code.Powers;
 using IndomitableSpire2.IndomitableSpire2Code.Registries;
 using MegaCrit.Sts2.Core.Animation;

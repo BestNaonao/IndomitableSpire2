@@ -6,10 +6,9 @@ using IndomitableSpire2.IndomitableSpire2Code.Configuration;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Helpers;
 using MegaCrit.Sts2.Core.Nodes.Audio;
-using MegaCrit.Sts2.Core.Nodes.Screens.CharacterSelect;
 using MegaCrit.Sts2.Core.TestSupport;
 
-namespace IndomitableSpire2.IndomitableSpire2Code.Patches;
+namespace IndomitableSpire2.IndomitableSpire2Code.Patches.Character;
 
 internal static class IndomitableVoice
 {
@@ -133,12 +132,4 @@ public static class IndomitableVoicePatch
         IndomitableVoice.Play(path, volume);
         return false;
     }
-}
-
-// 多人读档界面会直接播放存档角色的选人语音，退出时也要清理该语音。
-[HarmonyPatch(typeof(NMultiplayerLoadGameScreen), nameof(NMultiplayerLoadGameScreen.OnSubmenuClosed))]
-public static class MultiplayerLoadVoicePatch
-{
-    [HarmonyPrefix]
-    public static void OnSubmenuClosedPrefix() => IndomitableVoice.Stop();
 }

@@ -1,6 +1,6 @@
 using BaseLib.Config;
 using IndomitableSpire2.IndomitableSpire2Code.Character;
-using IndomitableSpire2.IndomitableSpire2Code.Patches;
+using IndomitableSpire2.IndomitableSpire2Code.Patches.Character;
 using IndomitableSpire2.IndomitableSpire2Code.Registries;
 
 namespace IndomitableSpire2.IndomitableSpire2Code.Configuration;
