@@ -1,5 +1,6 @@
 using Godot;
 using IndomitableSpire2.IndomitableSpire2Code.Character;
+using IndomitableSpire2.IndomitableSpire2Code.Patches.Character.Skin;
 using MegaCrit.Sts2.addons.mega_text;
 using MegaCrit.Sts2.Core.Bindings.MegaSpine;
 using MegaCrit.Sts2.Core.Commands;
@@ -79,8 +80,9 @@ public partial class SkinSelectPanel : Control
         if (!_button.IsEnabled || !IsVisibleInTree()) return;
         _currentIndex = (_currentIndex + direction + Skins.Length) % Skins.Length;
         var skin = SkinPreference.Model(Skins[_currentIndex]);
-        _lobby.SetLocalCharacter(skin, _lobby.LocalPlayer.isRotatingDread);
         SkinPreference.Remember(skin.CurrentSkin);
+        SkinLobbyHelper.RefreshSkinButtons(_button.GetParent(), skin);
+        _lobby.SetLocalCharacter(skin, _lobby.LocalPlayer.isRotatingDread);
         RenderSkinVisuals(skin);
         // 播放当前皮肤的专属选人音效
         SfxCmd.Play(skin.CharacterSelectSfx);
