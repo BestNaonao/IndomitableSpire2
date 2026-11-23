@@ -23,6 +23,8 @@ public abstract class Indomitable : CustomCharacterModel, IHypnotizedAnimationPr
     internal static readonly Color TopicColor = new("FFFFFF");
     
     public abstract IndomitableSkin CurrentSkin { get; }
+    public override bool HideFromVanillaCharacterSelect => CurrentSkin != SkinPreference.PreferredSkin;
+    public override bool AllowInVanillaRandomCharacterSelect => true;
     protected SkinDefinition CurrentSkinDefinition => SkinManager.GetDefinition(CurrentSkin);
     
     // 角色名称等的颜色，STS2 使用 Godot 的 Color 结构体
@@ -57,8 +59,6 @@ public abstract class Indomitable : CustomCharacterModel, IHypnotizedAnimationPr
     // 全局通用的皮肤资产
     public override string CustomCharacterSelectBg =>               // 选择界面背景
         $"res://IndomitableSpire2/scenes/characters/char_select_bg_indomitable_{new Random().Next(1, 6)}.tscn";
-    public override string CustomCharacterSelectIconPath =>         // 选择界面图标
-        "res://IndomitableSpire2/images/charui/char_select_indomitable.png";
     public override string CustomCharacterSelectLockedIconPath =>   // 选择锁定图标
         "res://IndomitableSpire2/images/charui/char_select_indomitable_locked.png";
     public override string CustomCharacterSelectTransitionPath =>   // 选择专场素材
@@ -83,6 +83,7 @@ public abstract class Indomitable : CustomCharacterModel, IHypnotizedAnimationPr
     public override string CustomArmRockTexturePath => CurrentSkinDefinition.ArmRockTexturePath;
     public override string CustomArmScissorsTexturePath => CurrentSkinDefinition.ArmScissorsTexturePath;
     public override string CharacterSelectSfx => CurrentSkinDefinition.CharacterSelectSfx;
+    public override string CustomCharacterSelectIconPath => CurrentSkinDefinition.CharacterSelectIconPath;
     public override RelicIconData CustomYummyCookie => CurrentSkinDefinition.YummyCookieIconData;
     
     // 原版逻辑构建动作映射，传入 Spine 文件中实际命名的动作字符串

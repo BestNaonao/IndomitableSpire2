@@ -16,7 +16,12 @@ internal static class SkinPreference
         ModConfig.SaveDebounced<IndomitableConfiguration>(0);
     }
     
-    internal static Indomitable PreferredModel => Model(IndomitableConfiguration.PreferredSkin);
+    // 对 IndomitableConfiguration.PreferredSkin 的安全访问包装。
+    internal static IndomitableSkin PreferredSkin => Enum.IsDefined(IndomitableConfiguration.PreferredSkin)
+        ? IndomitableConfiguration.PreferredSkin
+        : IndomitableSkin.Default;
+    
+    internal static Indomitable PreferredModel => Model(PreferredSkin);
     
     internal static Indomitable Model(IndomitableSkin skin) => skin switch
     {

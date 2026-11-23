@@ -1,6 +1,5 @@
 ﻿using BaseLib.Patches.UI;
 using Godot;
-using MegaCrit.Sts2.Core.Context;
 
 namespace IndomitableSpire2.IndomitableSpire2Code.Character;
 
@@ -28,6 +27,7 @@ public class SkinDefinition
     public string ArmRockTexturePath { get; init; } = "";
     public string ArmScissorsTexturePath { get; init; } = "";
     public string CharacterSelectSfx { get; init; } = "";
+    public string CharacterSelectIconPath { get; init; } = "";
     public Func<string> ArmPointingTexturePathFunc { get; init; } = () => "";
     public RelicIconData YummyCookieIconData { get; init; } = new(
         "res://IndomitableSpire2/images/relics/big/yummy_cookie_indomitable_default.png",
@@ -54,6 +54,7 @@ public static class SkinManager
             ArmRockTexturePath = "res://IndomitableSpire2/images/charui/hands/multiplayer_hand_indomitable_rock.png",
             ArmScissorsTexturePath = "res://IndomitableSpire2/images/charui/hands/multiplayer_hand_indomitable_scissors.png",
             CharacterSelectSfx = "res://IndomitableSpire2/sfx/characters/indomitable/chumotaici_ex.wav",
+            CharacterSelectIconPath = "res://IndomitableSpire2/images/charui/char_select_indomitable.png",
             ArmPointingTexturePathFunc = () => $"res://IndomitableSpire2/images/charui/hands/multiplayer_hand_indomitable_point{new Random().Next(1, 4)}.png", 
             YummyCookieIconData = new RelicIconData(
                 "res://IndomitableSpire2/images/relics/big/yummy_cookie_indomitable_default.png",
@@ -74,6 +75,7 @@ public static class SkinManager
             ArmRockTexturePath = "res://IndomitableSpire2/images/charui/hands/multiplayer_hand_indomitable_maid_rock.png",
             ArmScissorsTexturePath = "res://IndomitableSpire2/images/charui/hands/multiplayer_hand_indomitable_maid_scissors.png",
             CharacterSelectSfx = "res://IndomitableSpire2/sfx/characters/indomitable/maid_pifumiaoshu.wav",
+            CharacterSelectIconPath = "res://IndomitableSpire2/images/charui/char_select_indomitable_maid.png",
             ArmPointingTexturePathFunc = () => $"res://IndomitableSpire2/images/charui/hands/multiplayer_hand_indomitable_maid_point{new Random().Next(1, 4)}.png",
             YummyCookieIconData = new RelicIconData(
                 "res://IndomitableSpire2/images/relics/big/yummy_cookie_indomitable_maid.png",
@@ -94,6 +96,7 @@ public static class SkinManager
             ArmRockTexturePath = "res://IndomitableSpire2/images/charui/hands/multiplayer_hand_indomitable_rock.png",
             ArmScissorsTexturePath = "res://IndomitableSpire2/images/charui/hands/multiplayer_hand_indomitable_scissors.png",
             CharacterSelectSfx = "res://IndomitableSpire2/sfx/characters/indomitable/login_2.wav",
+            CharacterSelectIconPath = "res://IndomitableSpire2/images/charui/char_select_indomitable_race_queen.png",
             ArmPointingTexturePathFunc = () => $"res://IndomitableSpire2/images/charui/hands/multiplayer_hand_indomitable_point{new Random().Next(1, 4)}.png",
             YummyCookieIconData = new RelicIconData(
                 "res://IndomitableSpire2/images/relics/big/yummy_cookie_indomitable_race_queen.png",
@@ -108,31 +111,10 @@ public static class SkinManager
     // 2. 本地状态管理 (阶段二的核心)
     // ==========================================
     
-    // 记录每个玩家 (NetId) 正在使用的皮肤
-    public static readonly Dictionary<ulong, IndomitableSkin> PlayerSkins = new();
-    
-    // 获取特定玩家的皮肤
-    public static IndomitableSkin GetPlayerSkin(ulong? netId)
-    {
-        if (!netId.HasValue) return IndomitableSkin.Default;
-        return PlayerSkins.GetValueOrDefault(netId.Value, IndomitableSkin.Default);
-    }
-    
-    // 设置特定玩家的皮肤
-    public static void SetPlayerSkin(ulong? netId, IndomitableSkin skin)
-    {
-        if (!netId.HasValue) return;
-        PlayerSkins[netId.Value] = skin;
-        
-        // 【修改点】：如果修改的是本地玩家，触发网络广播
-        if (LocalContext.NetId.HasValue && netId.Value == LocalContext.NetId.Value)
-        {
-            // 广播给房间里的其他人
-            // SkinNetworkManager.BroadcastLocalSkin();
-            // 可选：这里可以将 skin 写入你自己的 Mod Settings 进行本地持久化
-        }
-    }
-    
-    // 获取本地玩家当前的皮肤配置 (过渡期供 Indomitable.cs 读取用)
-    public static SkinDefinition GetLocalSkinDef() => Skins[GetPlayerSkin(LocalContext.NetId)];
+    // // 记录每个玩家 (NetId) 正在使用的皮肤
+    // public static readonly Dictionary<ulong, IndomitableSkin> PlayerSkins = new();
+    //
+    // // 获取特定玩家的皮肤
+    // public static IndomitableSkin GetPlayerSkin(ulong? netId) => !netId.HasValue
+    //     ? IndomitableSkin.Default : PlayerSkins.GetValueOrDefault(netId.Value, IndomitableSkin.Default);
 }
