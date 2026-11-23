@@ -3,6 +3,7 @@ using Godot;
 using HarmonyLib;
 using IndomitableSpire2.IndomitableSpire2Code.Character;
 using IndomitableSpire2.IndomitableSpire2Code.Nodes;
+using MegaCrit.Sts2.Core.Models.Characters;
 using MegaCrit.Sts2.Core.Multiplayer.Game.Lobby;
 using MegaCrit.Sts2.Core.Nodes.Screens.CharacterSelect;
 using MegaCrit.Sts2.Core.Nodes.Screens.CustomRun;
@@ -16,10 +17,9 @@ public static class InjectSkinSelectPanelPatch
 {
     private const string ScenePath = "res://IndomitableSpire2/scenes/screens/char_select/skin_select_panel.tscn";
     
-    // 目标是四个模式界面的原版的角色选择方法。
     [HarmonyTargetMethods]
     private static IEnumerable<MethodBase> TargetMethods() =>
-        SkinLobbyScreens.Methods(nameof(ICharacterSelectButtonDelegate.SelectCharacter));
+        SkinLobbyHelper.ScreenMethods(nameof(ICharacterSelectButtonDelegate.SelectCharacter));
     
     // 完成原版选择角色（包括同步）之后再插入皮肤选择面板。
     [HarmonyPostfix]
@@ -30,8 +30,8 @@ public static class InjectSkinSelectPanelPatch
         var overlay = compact || __instance is NDreadScreen;
         var host = overlay ? __instance : __instance.GetNode<Control>("%InfoPanel");
         var panel = host.GetNodeOrNull<SkinSelectPanel>("SkinSelectPanel"); // 没有面板就创建，否则复用旧面板。
-        // 守卫条件，按钮锁定或者角色不是不挠时隐藏面板。
-        if (charSelectButton.IsLocked || charSelectButton.Character is not Indomitable ||
+        // 守卫条件，按钮锁定或者角色不是不挠时隐藏面板。轮换角色是不挠时也打开皮肤选择面板。
+        if (charSelectButton.IsLocked || charSelectButton.Character is not (Indomitable or RotatingCharacter) ||
             ____lobby.LocalPlayer.character is not Indomitable selected)
         {
             panel?.Hide();
