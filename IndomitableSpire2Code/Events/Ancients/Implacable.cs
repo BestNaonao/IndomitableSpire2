@@ -31,7 +31,7 @@ public sealed class Implacable : CustomAncientModel
     public override IEnumerable<EventOption> AllPossibleOptions => 
         ModelDb.RelicPool<ImplacableRelicPool>().AllRelics.Select(relic => RelicOption(relic.ToMutable()));
     
-    protected override IReadOnlyList<EventOption> GenerateInitialOptions() => AllPossibleOptions.ToList();
+    protected override IReadOnlyList<EventOption> GenerateInitialOptions() => AllowedOptions(AllPossibleOptions);
     
     // TODO:占位阶段无需音频文件；完整对话未来再设计。
     protected override AncientDialogueSet DefineDialogues() => new()

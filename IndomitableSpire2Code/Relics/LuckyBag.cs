@@ -11,7 +11,7 @@ using MegaCrit.Sts2.Core.Runs;
 namespace IndomitableSpire2.IndomitableSpire2Code.Relics;
 
 [Pool(typeof(SharedRelicPool))]
-public sealed class LuckyBag : IndomitableSpire2Relic
+public sealed class LuckyBag : IndomitableSpire2Relic, IExcludedFromBlitz
 {
     private MerchantRoom? _merchantRoom;    // 当前商店
     private int _goldSpentBeforeMerchant;   

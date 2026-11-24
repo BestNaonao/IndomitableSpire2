@@ -12,7 +12,7 @@ using MegaCrit.Sts2.Core.Saves.Runs;
 
 namespace IndomitableSpire2.IndomitableSpire2Code.Relics;
 
-public sealed class VacationProposal : IndomitableRelic, IMapActiveRelic, IIndomitableClickableModel
+public sealed class VacationProposal : IndomitableRelic, IMapActiveRelic, IIndomitableClickableModel, IExcludedFromBlitz
 {
     private const int GenerationFloorLimit = 45;
     private int _spentAct = -1;
@@ -50,10 +50,7 @@ public sealed class VacationProposal : IndomitableRelic, IMapActiveRelic, IIndom
     
     public override int DisplayAmount => HasOpportunity ? (int)DynamicVars["Uses"].BaseValue : 0;
     
-    // 使用游戏原生逻辑兼容新的极速模式，其他模式自定义
-    protected override bool IsAllowedInternal(IRunState runState) => runState.GameMode == GameMode.Blitz
-        ? !IsLateInAct3(runState)
-        : runState.TotalFloor < GenerationFloorLimit;
+    protected override bool IsAllowedInternal(IRunState runState) => runState.TotalFloor < GenerationFloorLimit;
     
     public override Task AfterObtained()
     {

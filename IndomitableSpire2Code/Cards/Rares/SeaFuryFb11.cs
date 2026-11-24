@@ -25,6 +25,7 @@ public sealed class SeaFuryFb11() : VersatileAircraftCard(0, CardRarity.Rare), I
     protected override int UpgradeDurabilityAmount { get; set; } = 3;
     
     public override CardMultiplayerConstraint MultiplayerConstraint => CardMultiplayerConstraint.MultiplayerOnly;
+    public override bool IsAllowedInBlitz => false;
     
     protected override (CardTag Tag, CardKeyword Keyword) TypeForOption(string id) => id == SeaFuryFighter.OptionId
         ? (IndomitableTags.StrikeFighter, IndomitableKeywords.StrikeFighter)

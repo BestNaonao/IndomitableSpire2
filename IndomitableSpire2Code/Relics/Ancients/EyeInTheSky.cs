@@ -12,7 +12,7 @@ using MegaCrit.Sts2.Core.Rooms;
 
 namespace IndomitableSpire2.IndomitableSpire2Code.Relics.Ancients;
 
-public sealed class EyeInTheSky : ImplacableRelic
+public sealed class EyeInTheSky : ImplacableRelic, IExcludedFromBlitz
 {
     public override RelicRarity Rarity => RelicRarity.Ancient;
     

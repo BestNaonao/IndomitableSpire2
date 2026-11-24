@@ -15,6 +15,9 @@ namespace IndomitableSpire2.IndomitableSpire2Code.Cards.Others;
 
 public sealed class EscortCommission() : CommissionCard(TargetType.Self)
 {
+    // 极速模式没有金币
+    public override bool IsAllowedInBlitz => false;
+    
     protected override int InitialMaxProgressAmount => 30;
     
     protected override IEnumerable<DynamicVar> CanonicalVars => [..base.CanonicalVars, new GoldVar(20)];

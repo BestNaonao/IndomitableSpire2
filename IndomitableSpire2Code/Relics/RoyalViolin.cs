@@ -10,7 +10,7 @@ using MegaCrit.Sts2.Core.Saves.Runs;
 namespace IndomitableSpire2.IndomitableSpire2Code.Relics;
 
 /// <summary>休息后，直到下一个休息处为止，每回合的正常起手抽牌额外增加两张。</summary>
-public sealed class RoyalViolin : IndomitableRelic, IMapActiveRelic
+public sealed class RoyalViolin : IndomitableRelic, IMapActiveRelic, IExcludedFromBlitz
 {
     public override RelicRarity Rarity => RelicRarity.Rare;
     protected override IEnumerable<DynamicVar> CanonicalVars => [new CardsVar(2)];

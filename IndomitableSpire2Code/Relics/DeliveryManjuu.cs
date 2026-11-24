@@ -16,7 +16,7 @@ using MegaCrit.Sts2.Core.Runs;
 namespace IndomitableSpire2.IndomitableSpire2Code.Relics;
 
 [Pool(typeof(SharedRelicPool))]
-public sealed class DeliveryManjuu : IndomitableSpire2Relic
+public sealed class DeliveryManjuu : IndomitableSpire2Relic, IExcludedFromBlitz
 {
     public override RelicRarity Rarity => RelicRarity.Shop;
     protected override IEnumerable<DynamicVar> CanonicalVars => [new MaxHpVar(3)];

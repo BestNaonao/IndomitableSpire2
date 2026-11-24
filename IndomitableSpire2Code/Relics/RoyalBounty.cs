@@ -15,7 +15,7 @@ namespace IndomitableSpire2.IndomitableSpire2Code.Relics;
 /// ！！！需要测试：组装师，偷窃草蜢，地精佣兵，门扉缔造者，瀑布巨兽，千足虫，胧光兽、实验体！！！
 /// </summary>
 [Pool(typeof(SharedRelicPool))]
-public sealed class RoyalBounty : IndomitableSpire2Relic
+public sealed class RoyalBounty : IndomitableSpire2Relic, IExcludedFromBlitz
 {
     public override RelicRarity Rarity => RelicRarity.Uncommon;
     
