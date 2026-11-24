@@ -36,7 +36,12 @@ public partial class SkinSelectPanel : Control
         
         _leftArrow.Pressed += OnLeftPressed;
         _rightArrow.Pressed += OnRightPressed;
+        VisibilityChanged += SyncPreviewProcessing; // 隐藏时取消可处理性，可见时继承可处理性，以节省性能。
+        SyncPreviewProcessing();
     }
+    
+    private void SyncPreviewProcessing() =>
+        _visualContainer.ProcessMode = IsVisibleInTree() ? ProcessModeEnum.Inherit : ProcessModeEnum.Disabled;
     
     private void SetInteractable(bool interactable)
     {
@@ -60,8 +65,8 @@ public partial class SkinSelectPanel : Control
         _button = button;
         _currentIndex = Array.IndexOf(Skins, skin.CurrentSkin);
         SetInteractable(button.IsEnabled);
-        Visible = true;
         RenderSkinVisuals(skin);
+        Show(); // 先准备再渲染，确保视觉平滑过渡
     }
     
     // 每帧同步回调，与按钮状态不同时同步状态
@@ -77,7 +82,7 @@ public partial class SkinSelectPanel : Control
     
     private void ChangeSkin(int direction)
     {
-        if (!_button.IsEnabled || !IsVisibleInTree()) return;
+        if (!IsVisibleInTree() || !_button.IsEnabled) return;
         _currentIndex = (_currentIndex + direction + Skins.Length) % Skins.Length;
         var skin = SkinPreference.Model(Skins[_currentIndex]);
         SkinPreference.Remember(skin.CurrentSkin);
@@ -92,6 +97,12 @@ public partial class SkinSelectPanel : Control
     private void RenderSkinVisuals(Indomitable skin)
     {
         _skinNameLabel.SetTextAutoSize(new LocString("characters", $"{skin.Id.Entry}.skinName").GetFormattedText());
+        PreparePreview(skin);
+    }
+    
+    // 可在面板隐藏时提前装入模型。正式显示时按当前皮肤核对并复用同一实例。
+    internal void PreparePreview(Indomitable skin)
+    {
         if (_renderedSkinId == skin.Id && IsInstanceValid(_currentVisualNode))
             return;
         

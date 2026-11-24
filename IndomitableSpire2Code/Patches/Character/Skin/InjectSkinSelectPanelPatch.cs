@@ -35,8 +35,7 @@ public static class InjectSkinSelectPanelPatch
         var panel = host.GetNodeOrNull<SkinSelectPanel>("SkinSelectPanel"); // 没有面板就创建，否则复用旧面板。
         // 守卫条件，按钮锁定或者角色不是不挠时隐藏面板。轮换角色是不挠时也打开皮肤选择面板。
         if (button == null || button.IsLocked || button.Character is not (Indomitable or RotatingCharacter) ||
-            lobby?.LocalPlayer.character is not Indomitable selected ||
-            (screen is NDreadScreen dread && SkinLobbyHelper.IsWaitingForRotationVisuals(dread, button)))
+            lobby?.LocalPlayer.character is not Indomitable selected)
         {
             panel?.Hide();
             return;
@@ -44,6 +43,7 @@ public static class InjectSkinSelectPanelPatch
         if (panel == null)
         {
             panel = GD.Load<PackedScene>(ScenePath).Instantiate<SkinSelectPanel>(); // 面板的懒加载
+            panel.Hide(); // 先隐藏再展示
             panel.MouseFilter = Control.MouseFilterEnum.Ignore;
             host.AddChild(panel);
             if (overlay)
@@ -59,6 +59,14 @@ public static class InjectSkinSelectPanelPatch
             else
                 panel.Position = new Vector2(400, 0);
         }
+        if (screen is NDreadScreen dread && SkinLobbyHelper.IsWaitingForRotationVisuals(dread, button))
+        {
+            // 大厅已选定下一位，背景和头像仍显示上一位。先利用加载的时间准备本次预览的角色模型，背景与按钮换图后再展示。
+            panel.Hide();
+            panel.PreparePreview(selected);
+            return;
+        }
+        // 非恐惧模式或完成轮换动画的播放后，再展示角色面板，以提高恐惧轮换模式下的渲染流畅性。
         panel.ShowSelection(lobby, button, selected);
     }
 }
