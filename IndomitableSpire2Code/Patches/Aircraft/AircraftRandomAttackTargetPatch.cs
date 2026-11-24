@@ -6,7 +6,7 @@ using MegaCrit.Sts2.Core.Commands.Builders;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Random;
 
-namespace IndomitableSpire2.IndomitableSpire2Code.Patches;
+namespace IndomitableSpire2.IndomitableSpire2Code.Patches.Aircraft;
 
 /// <summary>
 /// 原版在 AfterAttackerAnim/HitSfx 后才随机选目标，只为显式 ExecuteWithAircraftFlight

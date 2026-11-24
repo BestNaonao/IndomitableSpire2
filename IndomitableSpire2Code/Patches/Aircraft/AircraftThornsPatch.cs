@@ -3,7 +3,7 @@ using IndomitableSpire2.IndomitableSpire2Code.Extensions;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Powers;
 
-namespace IndomitableSpire2.IndomitableSpire2Code.Patches;
+namespace IndomitableSpire2.IndomitableSpire2Code.Patches.Aircraft;
 
 [HarmonyPatch(typeof(ThornsPower), nameof(ThornsPower.BeforeDamageReceived))]
 public static class AircraftThornsPatch

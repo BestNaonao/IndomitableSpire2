@@ -9,7 +9,7 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
 
-namespace IndomitableSpire2.IndomitableSpire2Code.Patches;
+namespace IndomitableSpire2.IndomitableSpire2Code.Patches.Keywords;
 
 /// <summary>拦截已经确定要执行的消耗，不靠攻击前的耐久预算猜测是否会被消耗。</summary>
 [HarmonyPatch(typeof(CardCmd), nameof(CardCmd.Exhaust))]
