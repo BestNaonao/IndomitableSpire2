@@ -23,16 +23,20 @@ public static class InjectSkinSelectPanelPatch
     
     // 完成原版选择角色（包括同步）之后再插入皮肤选择面板。
     [HarmonyPostfix]
-    private static void ShowPanel(Control __instance, NCharacterSelectButton charSelectButton, StartRunLobby ____lobby)
+    private static void ShowPanel(Control __instance, NCharacterSelectButton charSelectButton, StartRunLobby ____lobby) =>
+        RefreshPanel(__instance, charSelectButton, ____lobby);
+    
+    internal static void RefreshPanel(Control screen, NCharacterSelectButton? button, StartRunLobby? lobby)
     {
-        var compact = __instance is NCustomRunScreen; // 自定义模式采用迷你布局。
+        var compact = screen is NCustomRunScreen; // 自定义模式采用迷你布局。
         // 自定义模式和恐惧模式没有 InfoPanel，直接覆盖在界面本体上的空闲区域中。
-        var overlay = compact || __instance is NDreadScreen;
-        var host = overlay ? __instance : __instance.GetNode<Control>("%InfoPanel");
+        var overlay = compact || screen is NDreadScreen;
+        var host = overlay ? screen : screen.GetNode<Control>("%InfoPanel");
         var panel = host.GetNodeOrNull<SkinSelectPanel>("SkinSelectPanel"); // 没有面板就创建，否则复用旧面板。
         // 守卫条件，按钮锁定或者角色不是不挠时隐藏面板。轮换角色是不挠时也打开皮肤选择面板。
-        if (charSelectButton.IsLocked || charSelectButton.Character is not (Indomitable or RotatingCharacter) ||
-            ____lobby.LocalPlayer.character is not Indomitable selected)
+        if (button == null || button.IsLocked || button.Character is not (Indomitable or RotatingCharacter) ||
+            lobby?.LocalPlayer.character is not Indomitable selected ||
+            (screen is NDreadScreen dread && SkinLobbyHelper.IsWaitingForRotationVisuals(dread, button)))
         {
             panel?.Hide();
             return;
@@ -55,6 +59,6 @@ public static class InjectSkinSelectPanelPatch
             else
                 panel.Position = new Vector2(400, 0);
         }
-        panel.ShowSelection(____lobby, charSelectButton, selected);
+        panel.ShowSelection(lobby, button, selected);
     }
 }

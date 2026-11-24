@@ -38,6 +38,10 @@ internal static class SkinLobbyHelper
     internal static NCharacterSelectButton? FindFamilyButton(Node container) =>
         container.GetChildren().OfType<NCharacterSelectButton>().FirstOrDefault(button => button.Character is Indomitable);
     
+    // 有待切换的目标时，轮换按钮仍可能显示上一位。断链还会在清除展示覆盖后提前选中普通按钮。这两条路径均须等 InitRotatingCharacterButton 完成。
+    internal static bool IsWaitingForRotationVisuals(NDreadScreen screen, NCharacterSelectButton button) =>
+        AfterAnimation(screen) != null && (button == RotationButton(screen) || DuringAnimation(screen) == null);
+    
     /// <summary>原地替换普通按钮的模型，保留位置、焦点、选中状态和队友标记。</summary>
     internal static void RefreshFamilyButton(Node container, Indomitable skin)
     {
