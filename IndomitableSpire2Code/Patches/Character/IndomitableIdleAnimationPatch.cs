@@ -14,7 +14,8 @@ public static class IndomitableIdleAnimationPatch
 {
     [HarmonyPatch(typeof(NCreature), nameof(NCreature._Ready))]
     [HarmonyPostfix]
-    private static void AttachTimer(NCreature __instance) => IndomitableIdleAnimation.Attach(__instance);
+    private static void AttachTimer(NCreature __instance) =>
+        IndomitableIdleAnimation.Attach(__instance, enableModelInput: false);
     
     [HarmonyPatch(typeof(FlavorSynchronizer), "CreateEndTurnPingDialogueIfNecessary")]
     [HarmonyPostfix]

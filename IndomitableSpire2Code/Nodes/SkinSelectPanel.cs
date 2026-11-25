@@ -130,6 +130,6 @@ public partial class SkinSelectPanel : Control
         if (spineNode == null) return;
         var megaSprite = new MegaSprite((Variant)(GodotObject)spineNode);
         megaSprite.GetAnimationState().SetAnimation("normal");
-        IndomitableIdleAnimation.AttachPreview(_currentVisualNode, megaSprite);
+        IndomitableIdleAnimation.AttachPreview(_currentVisualNode, megaSprite, enableModelInput: true);
     }
 }
