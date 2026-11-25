@@ -1,13 +1,12 @@
 using System.Reflection;
-using Godot;
 using HarmonyLib;
 using MegaCrit.Sts2.Core.Helpers;
 using MegaCrit.Sts2.Core.Models;
-using MegaCrit.Sts2.Core.Multiplayer.Game;
 using MegaCrit.Sts2.Core.Multiplayer.Game.Lobby;
 using MegaCrit.Sts2.Core.Nodes.Screens.Blitz;
 using MegaCrit.Sts2.Core.Nodes.Screens.CharacterSelect;
 using MegaCrit.Sts2.Core.Nodes.Screens.CustomRun;
+using MegaCrit.Sts2.Core.Nodes.Screens.DailyRun;
 using MegaCrit.Sts2.Core.Nodes.Screens.Dread;
 using MegaCrit.Sts2.Core.Nodes.Screens.MainMenu;
 using MegaCrit.Sts2.Core.Saves;
@@ -22,8 +21,6 @@ internal static class TashkentCharacterRoster
         character is TashkentCharacter { CurrentSkin: not TashkentSkin.Default };
 }
 
-// BaseLib supplies these models through its AllCharacters postfix. Scope the
-// filter to the consumers that count characters or roll a random character.
 [HarmonyPatch]
 internal static class TashkentCharacterRosterScopePatch
 {
@@ -35,9 +32,16 @@ internal static class TashkentCharacterRosterScopePatch
             AccessTools.DeclaredMethod(typeof(ProgressSaveManager), "UpdateEpochsPostRun"),
             AccessTools.DeclaredMethod(typeof(StartRunLobby), "BeginRunLocally"),
             AccessTools.DeclaredMethod(typeof(AscensionHelper), nameof(AscensionHelper.GetRotatingCharacterIdForStreak)),
+            AccessTools.DeclaredMethod(typeof(NCharacterSelectScreen), "InitCharacterButtons"),
+            AccessTools.DeclaredMethod(typeof(NCharacterSelectScreen), "UpdateRandomCharacterVisibility"),
+            AccessTools.DeclaredMethod(typeof(NBlitzScreen), "InitCharacterButtons"),
+            AccessTools.DeclaredMethod(typeof(NBlitzScreen), "UpdateRandomCharacterVisibility"),
+            AccessTools.DeclaredMethod(typeof(NDreadScreen), "InitCharacterButtons"),
+            AccessTools.DeclaredMethod(typeof(NCharacterSelectButton), nameof(NCharacterSelectButton.InitAsRandom)),
             AccessTools.DeclaredMethod(typeof(NCustomRunScreen), "InitCharacterButtons"),
             AccessTools.DeclaredMethod(typeof(NCustomRunModifiersList), nameof(NCustomRunModifiersList._Ready)),
-            AccessTools.DeclaredMethod(typeof(NCustomRunScreen), "OnRandomizePressed")
+            AccessTools.DeclaredMethod(typeof(NCustomRunScreen), "OnRandomizePressed"),
+            AccessTools.DeclaredMethod(typeof(NDailyRunScreen), "SetupLobbyParams")
         ];
 
     [HarmonyPrefix]
@@ -51,21 +55,14 @@ internal static class TashkentCharacterRosterScopePatch
     private static void Finalizer(bool __state) => HideVariants = __state;
 }
 
-[HarmonyPatch]
+[HarmonyPatch(typeof(ModelDb), nameof(ModelDb.AllCharacters), MethodType.Getter)]
+[HarmonyAfter("BaseLib")]
 internal static class TashkentBaseLibCharacterRosterPatch
 {
-    private static MethodInfo? BaseLibRosterPostfix() => AccessTools.DeclaredMethod(
-        AccessTools.TypeByName("BaseLib.Patches.Content.AddCustomCharacters"), "Patch");
-
-    [HarmonyPrepare]
-    private static bool Prepare() => BaseLibRosterPostfix() != null;
-
-    [HarmonyTargetMethod]
-    private static MethodBase? TargetMethod() => BaseLibRosterPostfix();
-
     [HarmonyPostfix]
+    [HarmonyPriority(Priority.Last)]
     private static IEnumerable<CharacterModel> Postfix(IEnumerable<CharacterModel> __result) =>
-        TashkentCharacterRosterScopePatch.HideVariants
+        !TashkentCharacterCatalogPatch.IncludeSkinModels || TashkentCharacterRosterScopePatch.HideVariants
             ? __result.Where(character => !TashkentCharacterRoster.IsSkinVariant(character)).ToArray()
             : __result;
 }
@@ -85,7 +82,7 @@ internal static class TashkentHideSkinButtonsPatch
     private static void Postfix(NCharacterSelectButton __instance, CharacterModel character,
         ICharacterSelectButtonDelegate del)
     {
-        if (del is NBlitzScreen or NDreadScreen
+        if (del is NCharacterSelectScreen or NBlitzScreen or NDreadScreen or NCustomRunScreen
             && TashkentCharacterRoster.IsSkinVariant(character))
             __instance.Hide();
     }
@@ -112,14 +109,29 @@ internal static class TashkentDreadProgressPatch
         if (embarkingCharacter is TashkentCharacter)
             embarkingCharacter = ModelDb.Character<TashkentCharacter>();
     }
+}
 
-    [HarmonyPrefix, HarmonyPatch(nameof(NDreadScreen.OnSubmenuOpened))]
-    private static void NormalizeOldPreference(NDreadScreen __instance)
+[HarmonyPatch]
+internal static class TashkentCharacterPreferencePatch
+{
+    [HarmonyTargetMethods]
+    private static IEnumerable<MethodBase> TargetMethods() =>
+    [
+        AccessTools.DeclaredMethod(typeof(NCharacterSelectScreen), nameof(NCharacterSelectScreen.OnSubmenuOpened)),
+        AccessTools.DeclaredMethod(typeof(NBlitzScreen), nameof(NBlitzScreen.OnSubmenuOpened)),
+        AccessTools.DeclaredMethod(typeof(NDreadScreen), nameof(NDreadScreen.OnSubmenuOpened))
+    ];
+
+    [HarmonyPrefix]
+    private static void NormalizeOldPreferences()
     {
         var progress = SaveManager.Instance.Progress;
-        if (__instance.Lobby.NetService.Type == NetGameType.Singleplayer)
-            progress.PreferredDreadCharacter = TashkentSharedProgressionPatch.GetProgressionId(progress.PreferredDreadCharacter);
-        else
-            progress.PreferredMultiplayerDreadCharacter = TashkentSharedProgressionPatch.GetProgressionId(progress.PreferredMultiplayerDreadCharacter);
+        progress.PendingCharacterUnlock = TashkentSharedProgressionPatch.GetProgressionId(progress.PendingCharacterUnlock);
+        progress.PreferredStandardCharacter = TashkentSharedProgressionPatch.GetProgressionId(progress.PreferredStandardCharacter);
+        progress.PreferredMultiplayerStandardCharacter = TashkentSharedProgressionPatch.GetProgressionId(progress.PreferredMultiplayerStandardCharacter);
+        progress.PreferredBlitzCharacter = TashkentSharedProgressionPatch.GetProgressionId(progress.PreferredBlitzCharacter);
+        progress.PreferredMultiplayerBlitzCharacter = TashkentSharedProgressionPatch.GetProgressionId(progress.PreferredMultiplayerBlitzCharacter);
+        progress.PreferredDreadCharacter = TashkentSharedProgressionPatch.GetProgressionId(progress.PreferredDreadCharacter);
+        progress.PreferredMultiplayerDreadCharacter = TashkentSharedProgressionPatch.GetProgressionId(progress.PreferredMultiplayerDreadCharacter);
     }
 }

@@ -46,12 +46,15 @@ internal static class TashkentSkinSelection
     internal static TashkentSkinSelectPanel? GetPanel(Control screen) =>
         GetPanelParent(screen).GetNodeOrNull<TashkentSkinSelectPanel>(PanelName);
 
-    internal static void ShowPanel(Control screen, NCharacterSelectButton? button)
+    internal static void ShowPanel(Control screen, NCharacterSelectButton? button, CharacterModel? displayedCharacter = null)
     {
         var panel = GetPanel(screen);
         var lobby = GetLobby(screen);
-        if (!TashkentConfig.EnableSpineModels || button is not { IsLocked: false, IsRandom: false }
-            || button.Character is not TashkentCharacter || lobby?.LocalPlayer.character is not TashkentCharacter skin)
+        bool isDreadRotation = screen is NDreadScreen && button?.Character is RotatingCharacter;
+        if (!TashkentConfig.EnableSpineModels || button is not { IsLocked: false }
+            || (button.IsRandom && !isDreadRotation)
+            || (displayedCharacter ?? button.Character) is not TashkentCharacter
+            || lobby?.LocalPlayer.character is not TashkentCharacter skin)
         {
             panel?.Hide();
             return;
@@ -66,7 +69,9 @@ internal static class TashkentSkinSelection
             panel.Name = PanelName;
             var parent = GetPanelParent(screen);
             parent.AddChildSafely(panel);
-            if (screen is NCustomRunScreen && screen.GetNodeOrNull<Control>("%SeedInput") is { } seedInput)
+            if (screen is NDreadScreen)
+                panel.SetScreenLayout(new Vector2(0.5f, 0.5f), centerOffset: new Vector2(613f, 22f));
+            else if (screen is NCustomRunScreen && screen.GetNodeOrNull<Control>("%SeedInput") is { } seedInput)
                 panel.PlaceAboveSeed(seedInput);
             else if (parent != screen)
                 panel.Position = new Vector2(400f, 0f);
@@ -104,8 +109,11 @@ internal static class InjectTashkentSkinSelectPanelPatch
     }
 
     [HarmonyPostfix]
-    private static void AfterSelect(Control __instance, NCharacterSelectButton charSelectButton) =>
-        TashkentSkinSelection.ShowPanel(__instance, charSelectButton);
+    private static void AfterSelect(Control __instance, NCharacterSelectButton charSelectButton)
+    {
+        if (__instance is not NDreadScreen)
+            TashkentSkinSelection.ShowPanel(__instance, charSelectButton);
+    }
 
     [HarmonyFinalizer]
     private static void RestoreScope(StartRunLobby? __state) => ExitSelection(__state);
@@ -184,19 +192,31 @@ internal static class TashkentDreadRotationTickboxPatch
         InjectTashkentSkinSelectPanelPatch.ExitSelection(__state);
 }
 
-[HarmonyPatch(typeof(NDreadScreen), "SetSelectedCharacterVisuals")]
+[HarmonyPatch]
 internal static class TashkentDreadSkinPanelPatch
 {
+    [HarmonyTargetMethods]
+    private static IEnumerable<MethodBase> TargetMethods() =>
+    [
+        AccessTools.DeclaredMethod(typeof(NDreadScreen), nameof(NDreadScreen.SelectCharacter)),
+        AccessTools.DeclaredMethod(typeof(NDreadScreen), "SetSelectedCharacterVisuals")
+    ];
+
     [HarmonyPostfix]
-    private static void Postfix(NDreadScreen __instance, CharacterModel characterModel,
-        NCharacterSelectButton? ____selectedButton)
+    private static void Postfix(NDreadScreen __instance, NCharacterSelectButton? ____selectedButton,
+        CharacterModel? ____rotatingDisplayCharacterOverride, CharacterModel? ____rotatingCharacter,
+        bool ____doingChainAnimation)
     {
-        if (characterModel is RotatingCharacter || ____selectedButton?.Character != characterModel)
+        var selected = ____selectedButton?.Character;
+        var displayed = selected is RotatingCharacter
+            ? ____rotatingDisplayCharacterOverride ?? ____rotatingCharacter
+            : selected;
+        if (selected is RotatingCharacter && ____doingChainAnimation)
         {
             TashkentSkinSelection.GetPanel(__instance)?.Hide();
             return;
         }
-        TashkentSkinSelection.ShowPanel(__instance, ____selectedButton);
+        TashkentSkinSelection.ShowPanel(__instance, ____selectedButton, displayed);
     }
 }
 

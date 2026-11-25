@@ -76,6 +76,17 @@ public partial class TashkentSkinSelectPanel : Control
 		RenderSkinVisuals(Skins[_currentIndex]);
 	}
 
+	internal void SetScreenLayout(Vector2 anchor, Vector2 centerOffset = default)
+	{
+		var content = GetNode<Control>("VBoxContainer");
+		content.AnchorLeft = content.AnchorRight = anchor.X;
+		content.AnchorTop = content.AnchorBottom = anchor.Y;
+		content.OffsetLeft = centerOffset.X - 350f;
+		content.OffsetTop = centerOffset.Y - 180f;
+		content.OffsetRight = content.OffsetLeft + 700f;
+		content.OffsetBottom = content.OffsetTop + 360f;
+	}
+
 	internal void PlaceAboveSeed(Control seedInput)
 	{
 		var layout = GetNode<VBoxContainer>("VBoxContainer");
