@@ -12,6 +12,34 @@ namespace IndomitableSpire2.IndomitableSpire2Code.Hooks;
 
 public static class CustomHook
 {
+    /// <summary>每次伤害的预运行之前触发一次广播。分 early 和非 early 两批先后触发。</summary>
+    public static async Task BeforeDamageResults(PlayerChoiceContext choiceContext, PendingHit hit)
+    {
+        if (hit.Target.CombatState is not { } combat) return;
+        await Dispatch(early: true);
+        await Dispatch(early: false);
+        return;
+        
+        async Task Dispatch(bool early)
+        {
+            foreach (var model in combat.RunState.IterateHookListeners(combat))
+            {
+                if (model is not IBeforeDamageResultsSubscriber subscriber || subscriber.BeforeDamageResultsEarly != early)
+                    continue;
+                choiceContext.PushModel(model);
+                try
+                {
+                    await subscriber.BeforeDamageResults(choiceContext, hit);
+                }
+                finally
+                {
+                    choiceContext.PopModel(model);
+                }
+                model.InvokeExecutionFinished();
+            }
+        }
+    }
+    
     /// <summary>一次侦察选择全部结束后广播一次；不按查看或选择的牌数重复触发。</summary>
     public static async Task AfterRecon(ICombatState combatState, PlayerChoiceContext choiceContext, Player player)
     {
@@ -97,8 +125,7 @@ public static class CustomHook
     }
     
     /// <summary>沿用 ModifyCardPlayCount 的顺序，收集实际修改总次数的模型。</summary>
-    public static int ModifyPowerApplyCount(
-        ICombatState combatState, PowerModel power, Creature target, decimal amount,
+    public static int ModifyPowerApplyCount(ICombatState combatState, PowerModel power, Creature target, decimal amount,
         Creature? applier, CardModel? cardSource, int applyCount, out List<AbstractModel> modifyingModels)
     {
         modifyingModels = [];
