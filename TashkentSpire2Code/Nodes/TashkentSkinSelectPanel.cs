@@ -76,37 +76,80 @@ public partial class TashkentSkinSelectPanel : Control
 		RenderSkinVisuals(Skins[_currentIndex]);
 	}
 
-	internal void SetScreenLayout(Vector2 anchor, Vector2 centerOffset = default)
+	internal void SetScreenLayout(Vector2 anchor, Vector2 centerOffset = default, float scale = 1f,
+		Vector2? contentSize = null)
 	{
+		var size = contentSize ?? new Vector2(700f, 360f);
 		var content = GetNode<Control>("VBoxContainer");
 		content.AnchorLeft = content.AnchorRight = anchor.X;
 		content.AnchorTop = content.AnchorBottom = anchor.Y;
-		content.OffsetLeft = centerOffset.X - 350f;
-		content.OffsetTop = centerOffset.Y - 180f;
-		content.OffsetRight = content.OffsetLeft + 700f;
-		content.OffsetBottom = content.OffsetTop + 360f;
+		content.OffsetLeft = centerOffset.X - size.X * scale / 2f;
+		content.OffsetTop = centerOffset.Y - size.Y * scale / 2f;
+		content.OffsetRight = content.OffsetLeft + size.X;
+		content.OffsetBottom = content.OffsetTop + size.Y;
+		content.Scale = Vector2.One * scale;
 	}
 
 	internal void PlaceAboveSeed(Control seedInput)
 	{
+		const float scale = 0.8f;
+		SetNarrowContent(false);
+		GetNode<Control>("VBoxContainer").Scale = Vector2.One * scale;
+		var labelContainer = GetNode<MarginContainer>("VBoxContainer/LabelContainer");
+		labelContainer.AddThemeConstantOverride("margin_left", -20);
+		labelContainer.AddThemeConstantOverride("margin_right", -20);
+		labelContainer.AddThemeConstantOverride("margin_top", -10);
+		labelContainer.AddThemeConstantOverride("margin_bottom", -10);
+		_skinNameLabel.CustomMinimumSize = new Vector2(420f, 100f);
+		_skinNameLabel.AutowrapMode = TextServer.AutowrapMode.Off;
+		_skinNameLabel.MaxLinesVisible = -1;
+		_skinNameLabel.ClipText = false;
 		var layout = GetNode<VBoxContainer>("VBoxContainer");
-		var size = layout.Size;
+		layout.Size = layout.GetCombinedMinimumSize();
+		var size = layout.Size * scale;
 		layout.SetAnchorsAndOffsetsPreset(LayoutPreset.CenterTop, LayoutPresetMode.KeepSize);
 		layout.GrowVertical = GrowDirection.Begin;
-		layout.Position = new Vector2((Size.X - size.X) / 2f,
-			seedInput.GlobalPosition.Y - GlobalPosition.Y - size.Y - 12f);
+		layout.Position = new Vector2((Size.X - size.X) / 2f + 12f,
+			seedInput.GlobalPosition.Y - GlobalPosition.Y - size.Y - 20f);
+	}
+
+	internal void SetCompactScreenLayout(Vector2 anchor, Vector2 centerOffset, bool narrow = false)
+	{
+		SetNarrowContent(narrow);
+		var labelContainer = GetNode<MarginContainer>("VBoxContainer/LabelContainer");
+		foreach (string edge in new[] { "left", "top", "right", "bottom" })
+			labelContainer.AddThemeConstantOverride("margin_" + edge, 0);
+		_skinNameLabel.CustomMinimumSize = new Vector2(narrow ? 420f : 660f, 128f);
+		_skinNameLabel.AutowrapMode = TextServer.AutowrapMode.WordSmart;
+		_skinNameLabel.MaxLinesVisible = 2;
+		_skinNameLabel.ClipText = true;
+		SetScreenLayout(anchor, centerOffset, 0.5f, new Vector2(narrow ? 440f : 700f, 432f));
+	}
+
+	private void SetNarrowContent(bool narrow)
+	{
+		GetNode<Control>("VBoxContainer").CustomMinimumSize = new Vector2(narrow ? 440f : 700f, 360f);
+		_skinNameLabel.AddThemeFontSizeOverride("font_size", narrow ? 36 : 42);
+		foreach (var arrow in new[] { _leftArrow, _rightArrow })
+		{
+			arrow.IgnoreTextureSize = narrow;
+			arrow.CustomMinimumSize = narrow ? new Vector2(64f, 64f) : new Vector2(128f, 0f);
+			arrow.StretchMode = narrow ? TextureButton.StretchModeEnum.KeepAspectCentered : TextureButton.StretchModeEnum.KeepCentered;
+		}
 	}
 
 	private void OnLeftPressed()
 	{
-		if (!_interactable || _lobby.LocalPlayer.isReady) return;
+		if (!_interactable || !IsVisibleInTree() || _lobby.LocalPlayer.isReady
+			|| _lobby.LocalPlayer.character is not TashkentCharacter) return;
 		_currentIndex = (_currentIndex + Skins.Length - 1) % Skins.Length;
 		ApplySelection();
 	}
 
 	private void OnRightPressed()
 	{
-		if (!_interactable || _lobby.LocalPlayer.isReady) return;
+		if (!_interactable || !IsVisibleInTree() || _lobby.LocalPlayer.isReady
+			|| _lobby.LocalPlayer.character is not TashkentCharacter) return;
 		_currentIndex = (_currentIndex + 1) % Skins.Length;
 		ApplySelection();
 	}

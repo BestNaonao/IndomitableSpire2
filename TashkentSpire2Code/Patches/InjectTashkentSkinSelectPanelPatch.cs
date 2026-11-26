@@ -5,11 +5,14 @@ using MegaCrit.Sts2.Core.Entities.Multiplayer;
 using MegaCrit.Sts2.Core.Helpers;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Characters;
+using MegaCrit.Sts2.Core.Multiplayer.Game;
 using MegaCrit.Sts2.Core.Multiplayer.Game.Lobby;
 using MegaCrit.Sts2.Core.Nodes.Screens.Blitz;
 using MegaCrit.Sts2.Core.Nodes.Screens.CharacterSelect;
 using MegaCrit.Sts2.Core.Nodes.Screens.CustomRun;
+using MegaCrit.Sts2.Core.Nodes.Screens.DailyRun;
 using MegaCrit.Sts2.Core.Nodes.Screens.Dread;
+using MegaCrit.Sts2.Core.Runs;
 using TashkentSpire2.TashkentSpire2Code.Character;
 using TashkentSpire2.TashkentSpire2Code.Config;
 using TashkentSpire2.TashkentSpire2Code.Nodes;
@@ -20,6 +23,8 @@ internal static class TashkentSkinSelection
 {
     private const string ScenePath = "res://TashkentSpire2/scenes/ui/tashkent_skin_select_panel.tscn";
     private const string PanelName = "TashkentSkinSelectPanel";
+    private static readonly AccessTools.FieldRef<NDailyRunScreen, StartRunLobby?> DailyLobby =
+        AccessTools.FieldRefAccess<NDailyRunScreen, StartRunLobby?>("_lobby");
 
     internal static readonly Type[] Screens =
         [typeof(NCharacterSelectScreen), typeof(NBlitzScreen), typeof(NDreadScreen), typeof(NCustomRunScreen)];
@@ -27,12 +32,16 @@ internal static class TashkentSkinSelection
     internal static IEnumerable<MethodBase> ScreenMethods(string name) =>
         Screens.Select(type => AccessTools.DeclaredMethod(type, name));
 
+    internal static IEnumerable<MethodBase> LifecycleMethods(string name) =>
+        Screens.Append(typeof(NDailyRunScreen)).Select(type => AccessTools.DeclaredMethod(type, name));
+
     internal static StartRunLobby? GetLobby(Control screen) => screen switch
     {
         NCharacterSelectScreen standard => standard.Lobby,
         NBlitzScreen blitz => blitz.Lobby,
         NDreadScreen dread => dread.Lobby,
         NCustomRunScreen custom => custom.Lobby,
+        NDailyRunScreen daily => DailyLobby(daily),
         _ => null
     };
 
@@ -60,6 +69,22 @@ internal static class TashkentSkinSelection
             return;
         }
 
+        ShowPanel(screen, lobby, skin);
+    }
+
+    internal static void ShowDailyPanel(NDailyRunScreen screen, StartRunLobby? lobby)
+    {
+        if (!TashkentConfig.EnableSpineModels || lobby?.LocalPlayer.character is not TashkentCharacter skin)
+        {
+            GetPanel(screen)?.Hide();
+            return;
+        }
+        ShowPanel(screen, lobby, skin);
+    }
+
+    private static void ShowPanel(Control screen, StartRunLobby lobby, TashkentCharacter skin)
+    {
+        var panel = GetPanel(screen);
         if (panel == null)
         {
             var scene = ResourceLoader.Load<PackedScene>(ScenePath);
@@ -71,10 +96,18 @@ internal static class TashkentSkinSelection
             parent.AddChildSafely(panel);
             if (screen is NDreadScreen)
                 panel.SetScreenLayout(new Vector2(0.5f, 0.5f), centerOffset: new Vector2(613f, 22f));
-            else if (screen is NCustomRunScreen && screen.GetNodeOrNull<Control>("%SeedInput") is { } seedInput)
-                panel.PlaceAboveSeed(seedInput);
-            else if (parent != screen)
+            else if (screen is not NCustomRunScreen && parent != screen)
                 panel.Position = new Vector2(400f, 0f);
+        }
+
+        if (screen is NDailyRunScreen)
+            panel.SetCompactScreenLayout(new Vector2(0.5f, 0.5f), new Vector2(10f, -90f));
+        else if (screen is NCustomRunScreen)
+        {
+            if (lobby.NetService.Type.IsMultiplayer())
+                panel.SetCompactScreenLayout(Vector2.Zero, new Vector2(135f, 365f), narrow: true);
+            else if (screen.GetNodeOrNull<Control>("%SeedInput") is { } seedInput)
+                panel.PlaceAboveSeed(seedInput);
         }
 
         panel.SetInteractable(!lobby.LocalPlayer.isReady);
@@ -127,7 +160,8 @@ internal static class InjectTashkentSkinSelectPanelPatch
             if (TashkentConfig.EnableSpineModels
                 && character is TashkentCharacter { CurrentSkin: TashkentSkin.Default } skin
                 && ReferenceEquals(__instance, _selectionLobby))
-                character = TashkentSkinSelectPanel.ResolveLastPlayedSkin(skin);
+                character = __instance.GameMode == GameMode.Daily && __instance.LocalPlayer.character is TashkentCharacter selected
+                    ? selected : TashkentSkinSelectPanel.ResolveLastPlayedSkin(skin);
         }
     }
 }
@@ -137,8 +171,8 @@ internal static class TashkentSkinPanelReadyPatch
 {
     [HarmonyTargetMethods]
     private static IEnumerable<MethodBase> TargetMethods() =>
-        TashkentSkinSelection.ScreenMethods("OnEmbarkPressed")
-            .Concat(TashkentSkinSelection.ScreenMethods("OnUnreadyPressed"));
+        TashkentSkinSelection.LifecycleMethods("OnEmbarkPressed")
+            .Concat(TashkentSkinSelection.LifecycleMethods("OnUnreadyPressed"));
 
     [HarmonyPostfix]
     private static void Postfix(Control __instance)
@@ -154,7 +188,7 @@ internal static class TashkentSkinPanelClosedPatch
 {
     [HarmonyTargetMethods]
     private static IEnumerable<MethodBase> TargetMethods() =>
-        TashkentSkinSelection.ScreenMethods("OnSubmenuClosed");
+        TashkentSkinSelection.LifecycleMethods("OnSubmenuClosed");
 
     [HarmonyPrefix]
     private static void Prefix(Control __instance)
