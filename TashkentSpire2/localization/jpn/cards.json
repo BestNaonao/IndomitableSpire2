@@ -179,7 +179,7 @@
   "TASHKENTSPIRE2-WINTER_RESOLVE.title": "凛冬の意志",
   "TASHKENTSPIRE2-WINTER_RESOLVE.description": "ターン開始時に{WinterResolvePower:diff()}枚引き、{WinterResolvePower:diff()}枚の[gold]手札[/gold]を選んで[gold]ウォッカ[/gold]に[gold]変化[/gold]させる。",
   "TASHKENTSPIRE2-ADVANCE_TOGETHER.title": "並んで前進",
-  "TASHKENTSPIRE2-ADVANCE_TOGETHER.description": "他のプレイヤー全員が[gold]突撃[/gold]{TashkentSpire2-Charge:diff()}する。\nそれぞれのターン終了時、そのプレイヤーは[gold]後退[/gold]{TashkentSpire2-Retreat:diff()}する。",
+  "TASHKENTSPIRE2-ADVANCE_TOGETHER.description": "他のプレイヤー全員が[gold]突撃[/gold]{TashkentSpire2-Charge:diff()}する。\nそれぞれのターン終了時、そのプレイヤーの[gold]距離[/gold]が[blue]0[/blue]に戻る。",
   "TASHKENTSPIRE2-RUSSIAN_ROULETTE.title": "北方連合ルーレット",
   "TASHKENTSPIRE2-RUSSIAN_ROULETTE.description": "[red]発射[/red]：[gold]1/6[/gold]の確率で{Damage:diff()}ダメージを受け、[gold]5/6[/gold]の確率で{VigorPower:diff()}[gold]活力[/gold]と{RegenPower:diff()}[gold]再生[/gold]を得る。\nランダムな[gold]味方[/gold]に渡し、[gold]装填[/gold]{TashkentSpire2-Load:diff()}[gold]弾薬[/gold]。\nターン終了時に手札にある場合、[purple]羞恥[/purple]に変化する。",
   "TASHKENTSPIRE2-SPECIAL_SERVICES.title": "特別サービス",

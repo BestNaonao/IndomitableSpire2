@@ -12,8 +12,7 @@ public sealed class AdvanceTogether() : TashkentCard(1, CardType.Skill, CardRari
     public override CardMultiplayerConstraint MultiplayerConstraint => CardMultiplayerConstraint.MultiplayerOnly;
     
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new ChargeDynamicVar(3m),
-        new RetreatDynamicVar(3m)
+        new ChargeDynamicVar(3m)
     ];
     
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
@@ -25,13 +24,12 @@ public sealed class AdvanceTogether() : TashkentCard(1, CardType.Skill, CardRari
         foreach (Creature item in enumerable)
         {
             await PowerCmd.Apply<DistancePower>(choiceContext, item, base.DynamicVars["TashkentSpire2-Charge"].BaseValue, base.Owner.Creature, this);
-            await PowerCmd.Apply<BackAfterTurnPower>(choiceContext, item, base.DynamicVars["TashkentSpire2-Retreat"].BaseValue, base.Owner.Creature, this);
+            await PowerCmd.Apply<TauntEndTurnPower>(choiceContext, item, 1m, base.Owner.Creature, this);
         }
     }
     
     protected override void OnUpgrade()
     {
         base.DynamicVars["TashkentSpire2-Charge"].UpgradeValueBy(2M);
-        base.DynamicVars["TashkentSpire2-Retreat"].UpgradeValueBy(2M);
     }
 }

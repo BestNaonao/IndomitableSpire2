@@ -179,7 +179,7 @@
   "TASHKENTSPIRE2-WINTER_RESOLVE.title": "凛冬之志",
   "TASHKENTSPIRE2-WINTER_RESOLVE.description": "回合开始时，抽{WinterResolvePower:diff()}张牌，选择{WinterResolvePower:diff()}张[gold]手牌[/gold]将其[gold]变化[/gold]为[gold]伏特加[/gold]。",
   "TASHKENTSPIRE2-ADVANCE_TOGETHER.title": "齐头并进",
-  "TASHKENTSPIRE2-ADVANCE_TOGETHER.description": "其他玩家各[gold]突进[/gold]{TashkentSpire2-Charge:diff()}，并在各自回合结束时[gold]后撤[/gold]{TashkentSpire2-Retreat:diff()}。",
+  "TASHKENTSPIRE2-ADVANCE_TOGETHER.description": "其他玩家各[gold]突进[/gold]{TashkentSpire2-Charge:diff()}，并在其各自回合结束时，将[gold]距离[/gold]回归为[blue]0[/blue]。",
   "TASHKENTSPIRE2-RUSSIAN_ROULETTE.title": "北联轮盘",
   "TASHKENTSPIRE2-RUSSIAN_ROULETTE.description": "[red]发射[/red]：[gold]1/6[/gold]概率受到{Damage:diff()}点伤害，[gold]5/6[/gold]概率获得{VigorPower:diff()}[gold]活力[/gold]和{RegenPower:diff()}[gold]再生[/gold]。\n交给随机[gold]盟友[/gold]，[gold]装填[/gold]{TashkentSpire2-Load:diff()}[gold]弹药[/gold]。\n回合结束时在手牌中则变化为[purple]羞耻[/purple]。",
   "TASHKENTSPIRE2-SPECIAL_SERVICES.title": "特别服务",

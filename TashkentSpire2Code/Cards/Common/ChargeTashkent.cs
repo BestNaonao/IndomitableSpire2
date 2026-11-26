@@ -1,5 +1,7 @@
 ﻿using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
+using BaseLib.Utils.Attributes;
+using System.Diagnostics.CodeAnalysis;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.ValueProps;
@@ -7,7 +9,9 @@ using TashkentSpire2.TashkentSpire2Code.Powers;
 
 namespace TashkentSpire2.TashkentSpire2Code.Cards.Common;
 
-public sealed class Charged() : TashkentCard(1, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
+[CustomID("TASHKENTSPIRE2-CHARGED")]
+[SuppressMessage("Localization", "STS001", Justification = "CustomID preserves the existing localization keys.")]
+public sealed class ChargeTashkent() : TashkentCard(1, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new DamageVar(9M, ValueProp.Move),

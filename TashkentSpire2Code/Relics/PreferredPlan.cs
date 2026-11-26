@@ -38,10 +38,10 @@ public sealed class PreferredPlan : TashkentRelic
                 return Task.CompletedTask;
             }
 
-            int maxCost = handPile.Cards.Max(c => c.EnergyCost.GetWithModifiers(CostModifiers.None));
+            int maxCost = handPile.Cards.Max(c => c.EnergyCost.GetWithModifiers(CostModifiers.All));
 
             List<CardModel> maxCostCards = handPile.Cards
-                .Where(c => c.EnergyCost.GetWithModifiers(CostModifiers.None) == maxCost)
+                .Where(c => c.EnergyCost.GetWithModifiers(CostModifiers.All) == maxCost)
                 .ToList();
 
             CardModel? cardModel = base.Owner.RunState.Rng.CombatCardSelection.NextItem(maxCostCards);

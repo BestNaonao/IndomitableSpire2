@@ -1,12 +1,16 @@
 ﻿using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
+using BaseLib.Utils.Attributes;
+using System.Diagnostics.CodeAnalysis;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using TashkentSpire2.TashkentSpire2Code.Powers;
 
 namespace TashkentSpire2.TashkentSpire2Code.Cards.Uncommon;
 
-public sealed class Taunt() : TashkentCard(0, CardType.Skill, CardRarity.Uncommon, TargetType.Self)
+[CustomID("TASHKENTSPIRE2-TAUNT")]
+[SuppressMessage("Localization", "STS001", Justification = "CustomID preserves the existing localization keys.")]
+public sealed class TauntTashkent() : TashkentCard(0, CardType.Skill, CardRarity.Uncommon, TargetType.Self)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new DynamicVar("TauntPower", 1m),
