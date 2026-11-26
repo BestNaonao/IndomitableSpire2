@@ -10,25 +10,13 @@ using MegaCrit.Sts2.Core.Models;
 
 namespace IndomitableSpire2.IndomitableSpire2Code.Patches;
 
-/// <summary>集中定位当前原版的最终重载和异步状态机字段；结构不符时明确报错。</summary>
+/// <summary>集中定位牌堆命令的最终重载。</summary>
 internal static class HandCapacityPatchTargets
 {
     internal static MethodInfo Add => AccessTools.Method(typeof(CardPileCmd), nameof(CardPileCmd.Add),
         [typeof(IEnumerable<CardModel>), typeof(CardPile), typeof(CardPilePosition), typeof(AbstractModel), typeof(bool), typeof(bool)]);
     internal static MethodInfo Draw => AccessTools.Method(typeof(CardPileCmd), "DrawInternal",
         [typeof(PlayerChoiceContext), typeof(decimal), typeof(Player), typeof(bool)]);
-    
-    /// <summary>同时按字段类型和原局部变量名定位，避免把不同循环或状态字段误认成目标。</summary>
-    internal static FieldInfo StateField(MethodBase original, string name, Type type) =>
-        original.DeclaringType!.GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic)
-            .Single(field => field.FieldType == type && (field.Name == name || field.Name.StartsWith($"<{name}>")));
-    
-    /// <summary>生成从当前 MoveNext 状态机读取字段的 IL，不缓存可变指令实例。</summary>
-    internal static IEnumerable<CodeInstruction> Load(FieldInfo field)
-    {
-        yield return new CodeInstruction(OpCodes.Ldarg_0);
-        yield return new CodeInstruction(OpCodes.Ldfld, field);
-    }
 }
 
 /// <summary>所有单张/批量、生成/移动 API 汇入唯一的最终 Add；只在这一层结算。</summary>
@@ -75,9 +63,9 @@ public static class HandCapacityAddCapturePatch
         var sites = code.Select((instruction, index) => (instruction, index))
             .Where(site => site.instruction.Calls(add)).ToArray();
         if (sites.Length != 1) throw new InvalidOperationException($"手牌容量补丁：预期一个 AddInternal 调用，实际找到 {sites.Length} 个。");
-        var resultField = HandCapacityPatchTargets.StateField(original, "results", typeof(List<CardPileAddResult>));
-        var indexField = HandCapacityPatchTargets.StateField(original, "i", typeof(int));
-        var fullField = HandCapacityPatchTargets.StateField(original, "isFullHandAdd", typeof(bool));
+        var resultField = AsyncStateFields.StateField(original, "results", typeof(List<CardPileAddResult>));
+        var indexField = AsyncStateFields.StateField(original, "i", typeof(int));
+        var fullField = AsyncStateFields.StateField(original, "isFullHandAdd", typeof(bool));
         var fullAssignments = code.Select((instruction, index) => (instruction, index)).Where(site =>
             site.instruction.opcode == OpCodes.Stfld && Equals(site.instruction.operand, fullField)).ToArray();
         if (fullAssignments.Length != 1)
@@ -86,14 +74,14 @@ public static class HandCapacityAddCapturePatch
         if (fullAssignments[0].index >= site.index)
             throw new InvalidOperationException("手牌容量补丁：满手判断必须位于实际添加之前。");
         // 栈上已有 pile、card、index、silent；只追加命令标识，将插入调用替换成记录包装器。
-        var replacement = HandCapacityPatchTargets.Load(resultField).Concat(HandCapacityPatchTargets.Load(indexField))
+        var replacement = AsyncStateFields.Load(resultField).Concat(AsyncStateFields.Load(indexField))
             .Append(new CodeInstruction(OpCodes.Call, capture)).ToList();
         replacement[0].MoveLabelsFrom(site.instruction).MoveBlocksFrom(site.instruction);
         code.RemoveAt(site.index);
         code.InsertRange(site.index, replacement);
         // 判断后立即记录原牌堆和回合信息；后续移牌不能改写被拒绝入手的原因，监听者留到广播时枚举。
-        var attempt = HandCapacityPatchTargets.Load(resultField).Concat(HandCapacityPatchTargets.Load(indexField))
-            .Concat(HandCapacityPatchTargets.Load(fullField)).Append(new CodeInstruction(OpCodes.Call,
+        var attempt = AsyncStateFields.Load(resultField).Concat(AsyncStateFields.Load(indexField))
+            .Concat(AsyncStateFields.Load(fullField)).Append(new CodeInstruction(OpCodes.Call,
                 AccessTools.Method(typeof(HandCapacityCapture), nameof(HandCapacityCapture.CaptureHandAttempt))));
         code.InsertRange(fullAssignments[0].index + 1, attempt);
         return code;
@@ -138,11 +126,11 @@ public static class HandCapacityDrawCapturePatch
         var code = instructions.ToList();
         var capacity = AccessTools.Method(typeof(HandCapacityCapture), nameof(HandCapacityCapture.RecordComputedCapacity));
         if (code.Any(instruction => instruction.Calls(capacity))) return code;
-        var result = HandCapacityPatchTargets.StateField(original, "result", typeof(List<CardModel>));
-        var player = HandCapacityPatchTargets.StateField(original, "player", typeof(Player));
-        var requested = HandCapacityPatchTargets.StateField(original, "drawsRequested", typeof(int));
-        var fromHandDraw = HandCapacityPatchTargets.StateField(original, "fromHandDraw", typeof(bool));
-        var choiceContext = HandCapacityPatchTargets.StateField(original, "choiceContext", typeof(PlayerChoiceContext));
+        var result = AsyncStateFields.StateField(original, "result", typeof(List<CardModel>));
+        var player = AsyncStateFields.StateField(original, "player", typeof(Player));
+        var requested = AsyncStateFields.StateField(original, "drawsRequested", typeof(int));
+        var fromHandDraw = AsyncStateFields.StateField(original, "fromHandDraw", typeof(bool));
+        var choiceContext = AsyncStateFields.StateField(original, "choiceContext", typeof(PlayerChoiceContext));
         var check = AccessTools.Method(typeof(CardPileCmd), "CheckIfDrawIsPossibleAndShowThoughtBubbleIfNot");
         var max = AccessTools.Method(typeof(Math), nameof(Math.Max), [typeof(int), typeof(int)]);
         var computedSites = code.Select((instruction, index) => (instruction, index))
@@ -154,24 +142,20 @@ public static class HandCapacityDrawCapturePatch
             .Where(site => site.instruction.opcode == OpCodes.Bge || site.instruction.opcode == OpCodes.Bge_S)
             .Where(site => code.Take(site.index).Skip(Math.Max(0, site.index - 12)).Any(instruction =>
                 instruction.opcode == OpCodes.Ldfld && Equals(instruction.operand,
-                    HandCapacityPatchTargets.StateField(original, "hand", typeof(CardPile)))))
+                    AsyncStateFields.StateField(original, "hand", typeof(CardPile)))))
             .ToArray();
         if (computedSites.Length != 2 || checkSites.Length != 3 || compareSites.Length != 1)
             throw new InvalidOperationException($"手牌容量补丁：DrawInternal 结构不符（容量计算={computedSites.Length}，可抽检查={checkSites.Length}，满手比较={compareSites.Length}）。");
         
-        IEnumerable<CodeInstruction> DrawArguments() => HandCapacityPatchTargets.Load(result)
-            .Concat(HandCapacityPatchTargets.Load(player)).Concat(HandCapacityPatchTargets.Load(requested))
-            .Concat(HandCapacityPatchTargets.Load(fromHandDraw)).Concat(HandCapacityPatchTargets.Load(choiceContext));
-        
-        var replacements = new List<(int Index, int Remove, List<CodeInstruction> Code)>();
         // 第一次容量计算和每次成功抽牌后的容量计算均保留原值，记录方法只旁观停止原因。
+        var replacements = new List<(int Index, int Remove, List<CodeInstruction> Code)>();
         foreach (var site in computedSites)
             replacements.Add((site.index + 1, 0, DrawArguments().Append(new CodeInstruction(OpCodes.Call, capacity)).ToList()));
         foreach (var site in checkSites)
         {
             // 原 player 已在栈上，再加载抽牌信息及原选择上下文。
-            var replacement = HandCapacityPatchTargets.Load(result).Concat(HandCapacityPatchTargets.Load(requested))
-                .Concat(HandCapacityPatchTargets.Load(fromHandDraw)).Concat(HandCapacityPatchTargets.Load(choiceContext))
+            var replacement = AsyncStateFields.Load(result).Concat(AsyncStateFields.Load(requested))
+                .Concat(AsyncStateFields.Load(fromHandDraw)).Concat(AsyncStateFields.Load(choiceContext))
                 .Append(new CodeInstruction(OpCodes.Call,
                     AccessTools.Method(typeof(HandCapacityCapture), nameof(HandCapacityCapture.CheckDrawPossible)))).ToList();
             replacement[0].MoveLabelsFrom(site.instruction).MoveBlocksFrom(site.instruction);
@@ -197,6 +181,10 @@ public static class HandCapacityDrawCapturePatch
             code.InsertRange(replacement.Index, replacement.Code);
         }
         return code;
+        
+        IEnumerable<CodeInstruction> DrawArguments() => AsyncStateFields.Load(result)
+            .Concat(AsyncStateFields.Load(player)).Concat(AsyncStateFields.Load(requested))
+            .Concat(AsyncStateFields.Load(fromHandDraw)).Concat(AsyncStateFields.Load(choiceContext));
     }
 }
 
