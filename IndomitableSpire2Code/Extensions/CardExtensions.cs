@@ -89,7 +89,7 @@ public static class CardExtensions
         card.ClearEnchantmentInternal();
         // 3. 调整升级等级。先降级回基础无升级，再升级至相同等级。
         if (card.CurrentUpgradeLevel > upgradeLevel)
-            card.DowngradeInternal();
+            card.RemoveAllUpgradesInternal();
         while (card.CurrentUpgradeLevel < upgradeLevel && card.IsUpgradable)
             card.UpgradeInternal();
         // 4. 如果来源有附魔，则给目标卡牌施加该附魔。

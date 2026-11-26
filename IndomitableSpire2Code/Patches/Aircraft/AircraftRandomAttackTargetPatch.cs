@@ -13,7 +13,7 @@ namespace IndomitableSpire2.IndomitableSpire2Code.Patches.Aircraft;
 /// 登记的随机命令提前同一次抽取。普通命令与未登记的随机命令保持原逻辑；不自动安装演出。
 /// 两处调用点仍需适配，避免复制原版 Execute 的伤害、钩子与多段实现。
 /// </summary>
-[HarmonyPatch(typeof(AttackCommand), nameof(AttackCommand.Execute), MethodType.Async)]
+[HarmonyPatch(typeof(AttackCommand), "ExecuteInternal", MethodType.Async)]
 public static class AircraftRandomAttackTargetPatch
 {
     [HarmonyTranspiler]
