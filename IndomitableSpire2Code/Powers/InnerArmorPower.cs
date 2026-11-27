@@ -10,7 +10,7 @@ using MegaCrit.Sts2.Core.ValueProps;
 namespace IndomitableSpire2.IndomitableSpire2Code.Powers;
 
 // 继承监听接口 IAfterShieldBrokenSubscriber
-public sealed class InnerArmorPower : IndomitablePower, IAfterShieldBrokenSubscriber
+public sealed class InnerArmorPower : IndomitablePower, IAfterShieldBrokenSubscriber, IBeforeDamageResultsSubscriber
 {
     // 自身的标志位，用于记录是否因为护盾受击破碎，以及是否触发（防重入）
     private bool _shieldBrokenDuringDamage;
@@ -19,11 +19,11 @@ public sealed class InnerArmorPower : IndomitablePower, IAfterShieldBrokenSubscr
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;
     
-    public override Task BeforeDamageReceived(
-        PlayerChoiceContext choiceContext, Creature target, decimal amount,
-        ValueProp props, Creature? dealer, CardModel? cardSource)
+    public bool BeforeDamageResultsEarly => true;
+    
+    public Task BeforeDamageResults(PlayerChoiceContext choiceContext, PendingHit hit)
     {
-        if (target == Owner) _shieldBrokenDuringDamage = false;
+        if (hit.Target == Owner) _shieldBrokenDuringDamage = false;
         return Task.CompletedTask;
     }
     
