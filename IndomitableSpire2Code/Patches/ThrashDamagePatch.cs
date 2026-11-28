@@ -1,13 +1,14 @@
 using System.Reflection.Emit;
 using HarmonyLib;
-using IndomitableSpire2.IndomitableSpire2Code.Cards.Abstracts;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Logging;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Cards;
+using ModCard = IndomitableSpire2.IndomitableSpire2Code.Cards.Abstracts.IndomitableSpire2Card;
 
 namespace IndomitableSpire2.IndomitableSpire2Code.Patches;
 
+/// <summary>其他 Mod 可复制本文件到自己的命名空间，并将 ModCard 指向自己的卡牌基类。</summary>
 [HarmonyPatch(typeof(Thrash), "OnPlay", MethodType.Async)]
 internal static class ThrashDamagePatch
 {
@@ -30,18 +31,19 @@ internal static class ThrashDamagePatch
             .ThrowIfInvalid("Thrash: could not locate the damage assignment.")
             .Advance().CreateLabel(out var storeDamage);
         
-        matcher.Start().Advance(lookup).CreateLabel(out var vanillaLookup);
-        // 1. 复制栈顶的 cardModel 引用。因为无论后续分支如何，原版逻辑可能仍需要这个引用。
-        // 2. 检查复制的引用是否是 Mod 自定义的 IndomitableSpire2Card 类型。如果是，栈顶变为该类型的引用；如果不是，栈顶变为 null。
-        // 3. 如果栈顶为 null（即不是 Mod 的卡牌），则弹出 null，并跳转到 vanillaLookup，执行原版的 if-else 逻辑。
-        // 4. 如果是 Mod 的卡牌，则调用下方的 GetHighestDamage 静态方法，传入 cardModel。该方法会返回一个 decimal 类型的伤害值，并将其压入栈顶。
-        // 5. 此时栈顶正好是 GetHighestDamage 返回的 decimal 值，完美衔接原版的 StoresLocal 指令，将值赋给 damage1，从而跳过了原版的 if-else 链。
+        matcher.Start().Advance(lookup);
+        // 旧版补丁可能直接跳到 get_DynamicVars。把已有入口标签移到 dup，让它也能进入本段判断。
+        // 假设第二个 Mod 尝试用相同的方法移动标签，会因为第一个 Mod 已经将标签移走而没有标签，此后插入到原版指令上面、第一个 Mod 后面才是正确的。
+        var entry = new CodeInstruction(OpCodes.Dup).MoveLabelsFrom(matcher.Instruction);
+        var next = generator.DefineLabel();
+        // 类型不匹配时，原卡牌仍在栈顶。从本段末尾的 nop 顺序进入下一份补丁或原版取值逻辑。
         return matcher.Insert(
-                new CodeInstruction(OpCodes.Dup),
-                new CodeInstruction(OpCodes.Isinst, typeof(IndomitableSpire2Card)),
-                new CodeInstruction(OpCodes.Brfalse, vanillaLookup),
-                CodeInstruction.Call(typeof(ThrashDamagePatch), nameof(GetHighestDamage)),
-                new CodeInstruction(OpCodes.Br, storeDamage))
+                entry,
+                new CodeInstruction(OpCodes.Isinst, typeof(ModCard)), // 消耗 Dup 复制的栈顶，做出类型判断
+                new CodeInstruction(OpCodes.Brfalse, next), // 类型不匹配，跳转到 next 标签对应的行
+                CodeInstruction.Call(typeof(ThrashDamagePatch), nameof(GetHighestDamage)), // 类型匹配，消耗原栈顶做自定义计算
+                new CodeInstruction(OpCodes.Br, storeDamage), // 跳转到原版赋值语句
+                new CodeInstruction(OpCodes.Nop).WithLabels(next)) // 添加标签，作为放行落脚点，栈顶: cardModel
             .InstructionEnumeration();
     }
     
@@ -54,6 +56,7 @@ internal static class ThrashDamagePatch
             _ => null
         });
         if (highest.HasValue) return highest.Value;
+        // 类型匹配失败，复用原版告警逻辑。
         Log.Warn($"Thrash exhausted attack card {card.Id.Entry} that did not have an appropriate damage var!");
         return 0m;
     }
