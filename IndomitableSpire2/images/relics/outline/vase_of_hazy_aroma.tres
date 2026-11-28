@@ -1,0 +1,7 @@
+[gd_resource type="AtlasTexture" load_steps=2 format=3 uid="uid://6wxe6hv7rqlh"]
+
+[ext_resource type="Texture2D" uid="uid://dh2ciweddcq5b" path="res://IndomitableSpire2/images/relics/outline/vase_of_hazy_aroma.png" id="1_743p7"]
+
+[resource]
+atlas = ExtResource("1_743p7")
+region = Rect2(0, 0, 90, 90)
